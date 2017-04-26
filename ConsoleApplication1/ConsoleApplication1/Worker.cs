@@ -58,7 +58,7 @@ namespace ConsoleApplication1
                     var line = reader.ReadLine();
                     var values = line.Split(';');
                     worker = workers.Find(byId(values[0]));
-                    Ratio ratio = new Ratio(values[1], values[2], values[3], double.Parse(values[4]));
+                    Ratio ratio = new Ratio(int.Parse(values[1]), int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
                     worker.addRatio(ratio);
                 }
             }
