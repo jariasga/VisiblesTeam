@@ -8,37 +8,45 @@ namespace ConsoleApplication1
 {
     class Instance
     {
-        public int num_workers;
-        public List<Worker> workers;        
-        public int num_processes;        
-        public string[] processes_names;
-        public int[] processes_positions;
-        public int[] processes_assignments;
-        public int painting_positions;
-        public int baking_positions;
-        public int carving_positions;
+        public List<Worker> workers;
 
-        public Instance(int painting, int baking, int carving)
+        // processes
+        public int processes_num;        
+        public int[] processes_positions;
+        
+        // products
+        public int product_num;
+        public float[] products_weights;
+
+        // solution
+        public int[] processes_products;
+
+        // ratios
+        public int breakage_weight;
+        public int time_weight;
+
+        public Instance()
         {
-            num_processes = 4; // incluye al no asignado
-            processes_positions = new int[num_processes];
-            processes_positions[0] = carving;
-            processes_positions[1] = painting;
-            processes_positions[2] = baking;
-            processes_assignments = new int[num_processes];
-            processes_assignments[0] = 0;
-            processes_assignments[1] = 0;
-            processes_assignments[2] = 0;
-            processes_assignments[3] = 0;
-            processes_names = new string[num_processes];
-            processes_names[0] = "Tallado";
-            processes_names[1] = "Pintado";
-            processes_names[2] = "Horneado";
-            processes_names[3] = "No asignado";
+            // processes
+            processes_num = 4;
+            processes_positions = new int[4];
+            processes_positions = [10, 10, 10, 10];
+
+            // products
+            product_num = 3;
+            products_weights = new float[3];
+            products_weights = [1, 1, 1];
+
+            // solution
+            processes_products = new int[7];
+            processes_products = [0, 10, 11, 12, 20, 21, 30];
+
+            // ratios
+            breakage_weight = 1;
+            time_weight = 1;
 
             workers = Worker.read("Workers.csv");
             Worker.readRatios("Ratios.csv", workers);
-            num_workers = workers.Count;
         }
 
         public bool isAvailable(int process)

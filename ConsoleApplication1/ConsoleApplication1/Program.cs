@@ -17,8 +17,11 @@ namespace ConsoleApplication1
             int baking = 10;
             int carving = 10;
 
-            Instance instance = new Instance(painting, baking, carving);
+            Instance instance = new Instance();
             instance.print();
+            TabuSearch tabu = new TabuSearch(instance);
+            tabu.run();
+
             Console.Read();
         }
     }

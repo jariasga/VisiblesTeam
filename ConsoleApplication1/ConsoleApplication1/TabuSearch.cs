@@ -8,12 +8,37 @@ namespace ConsoleApplication1
 {
     class TabuSearch
     {
+        public Instance instance;
+
+        // reactive tabu list
         public int tabu_list_length;
+        public double tabu_list_growth;
+        public int max_no_growth;
+
+        // neighbor
         public int neighbor_checks;
+
+        // solutions
         public double best_fitness;
         public int[] best_solution;
 
-        public static int[] InitialSolution(Instance instance)
+        public TabuSearch(Instance instance)
+        {
+            /* Se inicializan los parametros a calibrar */
+
+            // reactive tabu list
+            this.tabu_list_length = 10;
+            this.tabu_list_growth = 10;
+            this.max_no_growth = 10;
+
+            // neighbor
+            this.neighbor_checks = 10;
+
+            // instance parameters
+            this.instance = instance;
+        }
+
+        public static int[] getInitialSolution(Instance instance)
         {
             int[] assignment = new int[instance.num_workers];
 
@@ -36,16 +61,32 @@ namespace ConsoleApplication1
             return assignment;
         }
 
-        public static double Fitness(int[] solution, List<Worker> workers)
+        public static double getFitness(int[] solution, List<Worker> workers)
         {
-            int fitness = 0;
+            double fitness = 0;
 
             for(int i = 0; i < solution.Length; i++)
-            {
-                Worker worker = workers[i];
+            {/*
+                List<Ratio> ratios = workers[i].ratios.FindAll(Ratio.byProcess(solution[i]));
+                double breakage = Ratio.getAverageBreakage(ratios);
+                double time = Ratio.getAverageTime(ratios); */
 
             }
 
+            return fitness;
+        }
+
+        public int[] getNeighbor(int[] solution)
+        {
+            int[] neighbor = new int[solution.Length];
+
+            return neighbor;
+        }
+
+        public Tuple<int, int> getMove(int[] solution, int[] neighbor)
+        {
+            Tuple<int, int> move = new Tuple<int, int> (0, 0);
+            return move;
         }
 
         public void run()
@@ -58,11 +99,6 @@ namespace ConsoleApplication1
             int painting = 10;
             int baking = 10;
             int carving = 10;
-            Instance instance = new Instance(painting, baking, carving);
-
-            // params
-            tabu_list_length = 10;
-            neighbor_checks = 10;
 
             // solutions
             int[] initial_solution = null;            
@@ -74,14 +110,14 @@ namespace ConsoleApplication1
             int[] neighbor = null;
             double neighbor_fitness = 0;
             // initialS = currentS
-            current_solution = InitialSolution(instance);
+            current_solution = getInitialSolution(instance);
             initial_solution = new int[current_solution.Length];
             current_solution.CopyTo(initial_solution, 0);
-
+            /*
             // fitness
             double initial_fitness = 0;
             double current_fitness = 0;
-            current_fitness = Fitness(current_solution);
+            current_fitness = getFitness(current_solution);
             // currentFitness is the initial BestFitness (the smallest the better)
             best_fitness = current_fitness;
             best_solution = current_solution;
@@ -106,11 +142,11 @@ namespace ConsoleApplication1
                 while (count < neighbor_checks)
                 {
                     count++;
-                    neighbor = GetNeighbor(current_solution); // neightbor function
-                    tabu = GetTabu(current_solution, neighbor); // move
+                    neighbor = getNeighbor(current_solution); // neightbor function
+                    tabu = GetMove(current_solution, neighbor); // move
                     if (!tabuList.Contains(tabu) && tabu != lastTabu)
                     { // valid move: not tabu, not last(?)
-                        neighbor_fitness = Fitness(neighbor); // fitness function - objective function 
+                        neighbor_fitness = getFitness(neighbor); // fitness function - objective function 
                         if (next_fitness > neighbor_fitness)
                         {
                             next_solution = neighbor;
@@ -144,6 +180,7 @@ namespace ConsoleApplication1
                 current_fitness = next_fitness;
                 
             }
+            */
         }
     
     }
