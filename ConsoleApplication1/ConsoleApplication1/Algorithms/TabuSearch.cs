@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace Algorithms
 {
     class TabuSearch
     {
@@ -45,7 +45,7 @@ namespace ConsoleApplication1
                 Worker worker = workers[i];
 
             }
-
+            return fitness;
         }
 
         public void run()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.IO;
 
-namespace ConsoleApplication1
+namespace Algorithms
 {
     class Worker
     {
