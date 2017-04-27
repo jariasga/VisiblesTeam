@@ -17,8 +17,11 @@ namespace ConsoleApplication1
             int baking = 10;
             int carving = 10;
 
-            Instance instance = new Instance(painting, baking, carving);
-            instance.print();
+            //Instance instance = new Instance(painting, baking, carving);
+            //instance.print();
+            GeneticAlgorithm genetic = new GeneticAlgorithm();
+            genetic.CreateFirstGen();
+            genetic.Print();
             Console.Read();
         }
     }

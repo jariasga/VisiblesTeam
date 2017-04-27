@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
+
+    class TabuSearch { }
+    /*
+
+    
     class TabuSearch
     {
         public int tabu_list_length;
@@ -147,4 +152,8 @@ namespace ConsoleApplication1
         }
     
     }
+
+    */
+
+
 }

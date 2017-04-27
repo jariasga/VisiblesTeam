@@ -58,8 +58,8 @@ namespace ConsoleApplication1
                     var line = reader.ReadLine();
                     var values = line.Split(';');
                     worker = workers.Find(byId(values[0]));
-                    Ratio ratio = new Ratio(int.Parse(values[1]), int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
-                    worker.addRatio(ratio);
+                    //Ratio ratio = new Ratio(int.Parse(values[1]), int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
+                    //worker.addRatio(ratio);
                 }
             }
             Console.WriteLine("ratios listos!");
@@ -83,7 +83,7 @@ namespace ConsoleApplication1
             Console.WriteLine(getFullName());
             foreach (Ratio ratio in ratios)
             {
-                ratio.print();
+                //ratio.print();
             }
             Console.WriteLine();
         }

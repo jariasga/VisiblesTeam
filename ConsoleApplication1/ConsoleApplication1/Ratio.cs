@@ -21,9 +21,9 @@ namespace ConsoleApplication1
             this.time = time;
         }
 
-        public void print()
-        {
+        /*public void print()
+         {
             Console.WriteLine(type + " - " + process + " - " + product + " - " + value.ToString());
-        }
+         }*/
     }
 }
