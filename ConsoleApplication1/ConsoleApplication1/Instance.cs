@@ -8,65 +8,61 @@ namespace Algorithms
 {
     class Instance
     {
-        public int num_workers;
-        public List<Worker> workers;        
-        public int num_processes;        
-        public string[] processes_names;
-        public int[] processes_positions;
-        public int[] processes_assignments;
-        public int painting_positions;
-        public int baking_positions;
-        public int carving_positions;
+        public List<Worker> workers;
+        public List<Ratio> ratios;
 
-        public Instance(int painting, int baking, int carving)
+        // processes
+        public int processes_num;        
+        public List<int> processes_positions;       // puestos de trabajo por proceso
+        
+        // products
+        public int products_num;
+        public List<float>  products_weights;        // pesos de productos para la funcion objetivo
+
+        // processes x products
+        public int processes_products_num;
+        public List<int> processes_products;        // los ids de procesos productos
+
+        // ratios
+        public int breakage_weight;                 // para los indices de perdida
+        public int time_weight;
+
+        public Instance()
         {
-            num_processes = 4; // incluye al no asignado
-            processes_positions = new int[num_processes];
-            processes_positions[0] = carving;
-            processes_positions[1] = painting;
-            processes_positions[2] = baking;
-            processes_assignments = new int[num_processes];
-            processes_assignments[0] = 0;
-            processes_assignments[1] = 0;
-            processes_assignments[2] = 0;
-            processes_assignments[3] = 0;
-            processes_names = new string[num_processes];
-            processes_names[0] = "Tallado";
-            processes_names[1] = "Pintado";
-            processes_names[2] = "Horneado";
-            processes_names[3] = "No asignado";
+            // processes
+            processes_num = 4;
+            processes_positions = new List<int>(4);
+            processes_positions.Add(10);            // tallado
+            processes_positions.Add(10);            // modelado
+            processes_positions.Add(10);            // horneado
+            processes_positions.Add(10);            // pintado
+
+            // products
+            products_num = 3;
+            products_weights = new List<float>(products_num);
+            products_weights.Add(1);                // huacos
+            products_weights.Add(1);                // piedras
+            products_weights.Add(1);                // retablos
+
+            // processes products
+            processes_products_num = 7;
+            processes_products = new List<int>(processes_products_num);
+            processes_products.Add(0);              // no asignado
+            processes_products.Add(10);             // modelado de huacos
+            processes_products.Add(11);             // pintado de huacos
+            processes_products.Add(12);             // horneado de huacos
+            processes_products.Add(20);             // tallado de piedras
+            processes_products.Add(30);             // tallado de retablos
+            processes_products.Add(31);             // pintado de retablos
+
+            // ratios
+            breakage_weight = 1;
+            time_weight = 1;
 
             workers = Worker.read("Workers.csv");
-            Worker.readRatios("Ratios.csv", workers);
-            num_workers = workers.Count;
+            ratios = Ratio.read("Ratios.csv", workers);
         }
 
-        public bool isAvailable(int process)
-        {
-            if (process == 3) return false;
-            return processes_positions[process] > processes_assignments[process];
-        }
-
-        public bool hasAvailablePositions()
-        {
-            return processes_positions.Sum() > processes_assignments.Sum();
-        }
-
-        public void assignWorker(int process)
-        {
-            processes_assignments[process]++;
-        }
-
-        public void print()
-        {
-            Console.WriteLine("Pintado: " + painting_positions);
-            Console.WriteLine("Horneado: " + baking_positions);
-            Console.WriteLine("Tallado: " + carving_positions);
-            foreach (Worker worker in workers)
-            {
-                worker.print();
-            }
-            Console.WriteLine();
-        }
+        
     }
 }

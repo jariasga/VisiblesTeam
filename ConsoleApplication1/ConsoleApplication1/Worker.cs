@@ -44,25 +44,8 @@ namespace Algorithms
                 }
             }
             Console.WriteLine("workers listos!");
-            return workers;
-        }
 
-        static public void readRatios(string filename, List<Worker> workers)
-        {
-            Worker worker;
-            using (var fs = File.OpenRead(filename))
-            using (var reader = new StreamReader(fs))
-            {
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(';');
-                    worker = workers.Find(byId(values[0]));
-                    Ratio ratio = new Ratio(int.Parse(values[1]), int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
-                    worker.addRatio(ratio);
-                }
-            }
-            Console.WriteLine("ratios listos!");
+            return workers;
         }
 
         public void addRatio(Ratio ratio)
@@ -70,7 +53,7 @@ namespace Algorithms
             this.ratios.Add(ratio);
         }
 
-        static Predicate<Worker> byId(string id)
+        public static Predicate<Worker> byId(string id)
         {
             return delegate (Worker worker)
             {

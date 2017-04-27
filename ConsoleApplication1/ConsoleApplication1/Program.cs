@@ -10,15 +10,14 @@ namespace Algorithms
 {
     class Program
     {
-        //public Worker first_worker { get; protected set; }
         static void Main(string[] args)
         {
-            int painting = 10;
-            int baking = 10;
-            int carving = 10;
+            Instance instance = new Instance();
 
-            Instance instance = new Instance(painting, baking, carving);
-            instance.print();
+            // tabu
+            TabuSearch tabu = new TabuSearch(instance);
+            tabu.run();
+
             Console.Read();
         }
     }
