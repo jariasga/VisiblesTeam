@@ -9,6 +9,7 @@ namespace ConsoleApplication1
     class Instance
     {
         public List<Worker> workers;
+        public List<Ratio> ratios;
 
         // processes
         public int processes_num;        
@@ -59,7 +60,7 @@ namespace ConsoleApplication1
             time_weight = 1;
 
             workers = Worker.read("Workers.csv");
-            Worker.readRatios("Ratios.csv", workers);
+            ratios = Ratio.read("Ratios.csv", workers);
         }
 
         

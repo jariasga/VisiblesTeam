@@ -42,9 +42,9 @@ namespace ConsoleApplication1
         }
 
         /* Solucion inicial aleatoria (temporal) */
-        public static int[] getInitialSolution(Instance instance)
+        public static List<int> getInitialSolution(Instance instance)
         {
-            int[] assignment = new int[instance.workers.Count];
+            List<int> assignment = new List<int>(instance.workers.Count);
 
             for (int worker_index = 0; worker_index < instance.workers.Count; worker_index++)
             {
@@ -65,11 +65,11 @@ namespace ConsoleApplication1
             return assignment;
         }
 
-        public static double getFitness(int[] solution, List<Worker> workers)
+        public static double getFitness(List<int> solution, List<Worker> workers)
         {
             double fitness = 0;
 
-            for(int i = 0; i < solution.Length; i++)
+            for(int i = 0; i < solution.Count; i++)
             {/*
                 List<Ratio> ratios = workers[i].ratios.FindAll(Ratio.byProcess(solution[i]));
                 double breakage = Ratio.getAverageBreakage(ratios);
@@ -80,9 +80,9 @@ namespace ConsoleApplication1
             return fitness;
         }
 
-        public int[] getNeighbor(int[] solution)
+        public List<int> getNeighbor(List<int> solution)
         {
-            int[] neighbor = new int[solution.Length];
+            List<int> neighbor = new List<int>(solution.Count);
 
             return neighbor;
         }
@@ -95,24 +95,24 @@ namespace ConsoleApplication1
 
         public void run()
         {
-            //// time
-            //int start_time = Environment.TickCount;
-            //int limit_time = 5;
-            
-            //// solutions
-            //List<int> initial_solution = null;
-            //List<int> current_solution = null;
-            //List<int> next_solution = null;
-            //List<int> neighbor = null;
+            // time
+            int start_time = Environment.TickCount;
+            int limit_time = 5;
 
-            //// moves
-            //Tuple<int, int> next_tabu = null;
-            
-            //// initialS = currentS
+            // solutions
+            List<int> initial_solution = null;
+            List<int> current_solution = null;
+            List<int> next_solution = null;
+            List<int> neighbor = null;
+
+            // moves
+            Tuple<int, int> next_tabu = null;
+
+            // initialS = currentS
             //current_solution = getInitialSolution(instance);
-            //initial_solution = new int[current_solution.Length];
+            //initial_solution = new List<int>(current_solution.Count);
             //current_solution.CopyTo(initial_solution, 0);
-            
+
             //// fitness
             //double initial_fitness = 0;
             //double current_fitness = 0;
@@ -126,10 +126,10 @@ namespace ConsoleApplication1
             //// tabu
             //// initialize empty tuple queue
             //Queue<Tuple<int, int>> tabuList = new Queue<Tuple<int, int>>(tabu_list_length); // se puede implementar FixedSizeQueue
-            
+
             //// inicio
             //while (Environment.TickCount - start_time < limit_time)
-            //{                
+            //{
             //    int count = 0;
             //    next_solution = null;
             //    next_fitness = int.MaxValue;     // like best fitness and neightbor fitness
@@ -179,9 +179,9 @@ namespace ConsoleApplication1
             //    tabuList.Enqueue(next_tabu); // si el movimiento fue bueno, se agrega a la lista tabu
             //    current_solution = next_solution;
             //    current_fitness = next_fitness;
-                
-            }
-            
+
+            //}
+
         }
     
     }
