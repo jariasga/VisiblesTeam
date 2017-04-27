@@ -12,13 +12,14 @@ namespace ConsoleApplication1
 
         // processes
         public int processes_num;        
-        public List<int> processes_positions;   // puestos de trabajo por proceso
+        public List<int> processes_positions;       // puestos de trabajo por proceso
         
         // products
-        public int product_num;
+        public int products_num;
         public List<float>  products_weights;        // pesos de productos para la funcion objetivo
 
-        // solution
+        // processes x products
+        public int processes_products_num;
         public List<int> processes_products;        // los ids de procesos productos
 
         // ratios
@@ -36,14 +37,15 @@ namespace ConsoleApplication1
             processes_positions.Add(10);            // pintado
 
             // products
-            product_num = 3;
-            products_weights = new List<float>(3);
+            products_num = 3;
+            products_weights = new List<float>(products_num);
             products_weights.Add(1);                // huacos
             products_weights.Add(1);                // piedras
             products_weights.Add(1);                // retablos
 
-            // solution
-            processes_products = new List<int>(7);
+            // processes products
+            processes_products_num = 7;
+            processes_products = new List<int>(processes_products_num);
             processes_products.Add(0);              // no asignado
             processes_products.Add(10);             // modelado de huacos
             processes_products.Add(11);             // pintado de huacos
