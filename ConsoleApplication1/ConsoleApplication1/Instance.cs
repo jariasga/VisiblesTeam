@@ -12,34 +12,45 @@ namespace ConsoleApplication1
 
         // processes
         public int processes_num;        
-        public int[] processes_positions;
+        public List<int> processes_positions;   // puestos de trabajo por proceso
         
         // products
         public int product_num;
-        public float[] products_weights;
+        public List<float>  products_weights;        // pesos de productos para la funcion objetivo
 
         // solution
-        public int[] processes_products;
+        public List<int> processes_products;        // los ids de procesos productos
 
         // ratios
-        public int breakage_weight;
+        public int breakage_weight;                 // para los indices de perdida
         public int time_weight;
 
         public Instance()
         {
             // processes
             processes_num = 4;
-            processes_positions = new int[4];
-            processes_positions = [10, 10, 10, 10];
+            processes_positions = new List<int>(4);
+            processes_positions.Add(10);            // tallado
+            processes_positions.Add(10);            // modelado
+            processes_positions.Add(10);            // horneado
+            processes_positions.Add(10);            // pintado
 
             // products
             product_num = 3;
-            products_weights = new float[3];
-            products_weights = [1, 1, 1];
+            products_weights = new List<float>(3);
+            products_weights.Add(1);                // huacos
+            products_weights.Add(1);                // piedras
+            products_weights.Add(1);                // retablos
 
             // solution
-            processes_products = new int[7];
-            processes_products = [0, 10, 11, 12, 20, 21, 30];
+            processes_products = new List<int>(7);
+            processes_products.Add(0);              // no asignado
+            processes_products.Add(10);             // modelado de huacos
+            processes_products.Add(11);             // pintado de huacos
+            processes_products.Add(12);             // horneado de huacos
+            processes_products.Add(20);             // tallado de piedras
+            processes_products.Add(30);             // tallado de retablos
+            processes_products.Add(31);             // pintado de retablos
 
             // ratios
             breakage_weight = 1;
@@ -49,32 +60,6 @@ namespace ConsoleApplication1
             Worker.readRatios("Ratios.csv", workers);
         }
 
-        public bool isAvailable(int process)
-        {
-            if (process == 3) return false;
-            return processes_positions[process] > processes_assignments[process];
-        }
-
-        public bool hasAvailablePositions()
-        {
-            return processes_positions.Sum() > processes_assignments.Sum();
-        }
-
-        public void assignWorker(int process)
-        {
-            processes_assignments[process]++;
-        }
-
-        public void print()
-        {
-            Console.WriteLine("Pintado: " + painting_positions);
-            Console.WriteLine("Horneado: " + baking_positions);
-            Console.WriteLine("Tallado: " + carving_positions);
-            foreach (Worker worker in workers)
-            {
-                worker.print();
-            }
-            Console.WriteLine();
-        }
+        
     }
 }

@@ -8,22 +8,21 @@ namespace ConsoleApplication1
 {
     class Ratio
     {
-        public int process;
-        public int product;
+        public int process_product_id;
+        public string process_product_name;
         public double breakage;
         public double time;
 
-        public Ratio(int process, int product, double breakage, double time)
+        public Ratio(string process_product_name, int process_product, double breakage, double time)
         {
-            this.process = process;
-            this.product = product;
+            this.process_product_name = process_product_name;
+            this.process_product_id = process_product;            
             this.breakage = breakage;
             this.time = time;
         }
 
         public void print()
         {
-            Console.WriteLine(process + " - " + product);
         }
 
         public static double getAverageBreakage(List<Ratio> ratios)
@@ -44,19 +43,11 @@ namespace ConsoleApplication1
             return (sum / ratios.Count);
         }
 
-        public static Predicate<Ratio> byProcess(int process)
+        public static Predicate<Ratio> byProcessProductId(int process_product)
         {
             return delegate (Ratio ratio)
             {
-                return ratio.process == process;
-            };
-        }
-
-        static Predicate<Ratio> byProduct(int product)
-        {
-            return delegate (Ratio ratio)
-            {
-                return ratio.product == product;
+                return ratio.process_product_id == process_product;
             };
         }
     }
