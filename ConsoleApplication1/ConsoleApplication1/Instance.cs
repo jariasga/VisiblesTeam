@@ -17,7 +17,7 @@ namespace Algorithms
         
         // products
         public int products_num;
-        public List<float>  products_weights;        // pesos de productos para la funcion objetivo
+        public List<float>  products_weights;       // pesos de productos para la funcion objetivo
 
         // processes x products
         public int processes_products_num;

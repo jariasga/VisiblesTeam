@@ -13,7 +13,6 @@ namespace Algorithms
         public string id;
         public string name;
         public string lastname;
-        public List<Ratio> ratios;
 
         public Worker(string id, string name, string lastname)
         {

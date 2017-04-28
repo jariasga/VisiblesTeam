@@ -21,7 +21,7 @@ namespace Algorithms
         // solutions
         public int max_iterations;
         public double best_fitness;
-        public int[] best_solution;
+        public List<int> best_solution;
 
         /* Se inicializan los parametros a calibrar */
         public TabuSearch(Instance instance)
@@ -65,31 +65,67 @@ namespace Algorithms
             return assignment;
         }
 
-        public static double getFitness(List<int> solution, List<Worker> workers)
+        /* Busca el ratio de cada trabajadorxprocesoxproducto, lo multiplica por los pesos y lo suma */
+        public double getFitness(List<int> solution)
         {
             double fitness = 0;
+            int assigned_workers = 0;
 
             for(int i = 0; i < solution.Count; i++)
-            {/*
-                List<Ratio> ratios = workers[i].ratios.FindAll(Ratio.byProcess(solution[i]));
-                double breakage = Ratio.getAverageBreakage(ratios);
-                double time = Ratio.getAverageTime(ratios); */
-
+            {
+                Ratio ratio = instance.ratios.Find(Ratio.byWorkerAndProcessProduct(i, solution[i]));
+                // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
+                if (ratio != null)       
+                {
+                    assigned_workers++;
+                    fitness += (ratio.breakage * instance.breakage_weight + ratio.time * instance.time_weight);
+                    // agregar pesos de producto
+                    // int index = (int)(solution[i]/10);
+                    // float product_weight = instance.products_weights[index];
+                    // fitness += product_weight * (ratio.breakage * instance.breakage_weight + ratio.time * instance.time_weight);
+                }
             }
 
-            return fitness;
+            return fitness/assigned_workers;
         }
 
+        /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
         public List<int> getNeighbor(List<int> solution)
         {
-            List<int> neighbor = new List<int>(solution.Count);
+            List<int> neighbor = new List<int>(solution);
+            Random rnd = new Random();
+            int temp;
+
+            // buscamos trabajadores
+            int worker1 = rnd.Next(solution.Count);             
+            int worker2 = rnd.Next(solution.Count);
+            // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
+            while (solution.Count > 1 && worker1 == worker2)    
+                worker2 = rnd.Next(solution.Count);
+            // intercambiamos valores
+            temp = solution[worker1];
+            solution[worker1] = solution[worker2];
+            solution[worker2] = temp;
 
             return neighbor;
         }
 
-        public Tuple<int, int> getMove(int[] solution, int[] neighbor)
+        /* Obtiene el intercambio de trabajadores */
+        public Move getMove(List<int> solution, List<int> neighbor)
         {
-            Tuple<int, int> move = new Tuple<int, int> (0, 0);
+            Move move = new Move();
+            int worker_num = 0;
+
+            for (int i = 0; i < solution.Count; i++)
+            {
+                if (solution[i] != neighbor[i])
+                {
+                    worker_num++;
+                    move.setWorker(worker_num, i, neighbor[i]);     // i = worker_id, neighbor[i] = procesoxproducto
+                    if (worker_num == 2) break;                     // siempre se intercambian dos trabajadores
+                }
+            }
+
             return move;
         }
 
@@ -104,85 +140,99 @@ namespace Algorithms
             List<int> current_solution = null;
             List<int> next_solution = null;
             List<int> neighbor = null;
+            current_solution = getInitialSolution(instance);
+            initial_solution = new List<int>(current_solution);
 
-            // moves
-            Tuple<int, int> next_tabu = null;
+            // condicion de meseta: contador de iteraciones sin mejora en best_solution
+            int iter_count = 0;
 
-            // initialS = currentS
-            //current_solution = getInitialSolution(instance);
-            //initial_solution = new List<int>(current_solution.Count);
-            //current_solution.CopyTo(initial_solution, 0);
+            // tabu
+            Move next_move = null;
+            Queue<Move> tabu_list = new Queue<Move>(tabu_list_length);  // se puede implementar FixedSizeQueue
+            int no_growth_count = 0;
+            
+            // fitness
+            double initial_fitness = 0;
+            double current_fitness = 0;
+            double next_fitness = 0;
+            double neighbor_fitness = 0;
+            current_fitness = getFitness(current_solution);
+            best_fitness = current_fitness;
+            best_solution = current_solution;
 
-            //// fitness
-            //double initial_fitness = 0;
-            //double current_fitness = 0;
-            //double next_fitness = 0;
-            //double neighbor_fitness = 0;
-            //current_fitness = getFitness(current_solution);
-            //// currentFitness is the initial BestFitness (the smallest the better)
-            //best_fitness = current_fitness;
-            //best_solution = current_solution;
+            // inicio
+            // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
+            while (Environment.TickCount - start_time < limit_time && iter_count < max_iterations)
+            {
+                int count = 0;
+                iter_count++;                   // condicion de meseta: contara iteraciones 
+                next_solution = null;
+                next_fitness = int.MaxValue;    
+                next_move = null;
+                bool success = false;
 
-            //// tabu
-            //// initialize empty tuple queue
-            //Queue<Tuple<int, int>> tabuList = new Queue<Tuple<int, int>>(tabu_list_length); // se puede implementar FixedSizeQueue
+                // Finding the next movement
+                Move move = new Move();
+                Move last_move = new Move();
 
-            //// inicio
-            //while (Environment.TickCount - start_time < limit_time)
-            //{
-            //    int count = 0;
-            //    next_solution = null;
-            //    next_fitness = int.MaxValue;     // like best fitness and neightbor fitness
-            //    next_tabu = null;
-            //    bool success = false; // a better solution
+                // Buscaremos un numero maximo de vecinos (eficiencia)
+                while (count < neighbor_checks)
+                {
+                    count++;
+                    neighbor = getNeighbor(current_solution);           // se crea un vecino con un intercambio aleatorio
+                    move = getMove(current_solution, neighbor);         // luego guardamos como se llego al vecino
+                    // el movimiento no puede estar en la lista tabu y el vecino debe ser distinto de la solucion
+                    if (!tabu_list.Contains(move) && move != last_move) 
+                    {
+                        neighbor_fitness = getFitness(neighbor);
+                        if (next_fitness > neighbor_fitness)
+                        {
+                            next_solution = neighbor;
+                            next_fitness = neighbor_fitness;
+                            next_move = move;
+                            success = true;
+                        }
+                        // best improved: a penas encuentre un vecino que supere a la solucion actual, salimos
+                        if (current_fitness > next_fitness)
+                            break;
+                    }
+                }
+                
+                if (!success)
+                {
+                    next_solution = initial_solution;
+                    next_fitness = initial_fitness;
+                }
+                
+                if (best_fitness > next_fitness)
+                {
+                    tabu_list.Clear();
+                    best_solution = next_solution;
+                    best_fitness = next_fitness;
 
-            //    // Finding the next movement.
-            //    Tuple<int, int> tabu = new Tuple<int, int>(-1, -1);
-            //    Tuple<int, int> lastTabu = new Tuple<int, int>(-1, -1);
+                    // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
+                    iter_count = 0;
 
-            //    while (count < neighbor_checks)
-            //    {
-            //        count++;
-            //        neighbor = getNeighbor(current_solution); // neightbor function
-            //        tabu = GetMove(current_solution, neighbor); // move
-            //        if (!tabuList.Contains(tabu) && tabu != lastTabu)
-            //        { // valid move: not tabu, not last(?)
-            //            neighbor_fitness = getFitness(neighbor); // fitness function - objective function 
-            //            if (next_fitness > neighbor_fitness)
-            //            {
-            //                next_solution = neighbor;
-            //                next_fitness = neighbor_fitness;
-            //                next_tabu = tabu;
-            //                success = true;
-            //            }
-            //            if (current_fitness > next_fitness)
-            //            { // better fitness (first improved) (si es una solucion peor que la anterior se va)
-            //                break;
-            //            }
-            //        }
-            //    }
-            //    // si no se encuentra nada se regresa al inicio 
-            //    if (!success)
-            //    {
-            //        next_solution = initial_solution;
-            //        next_fitness = initial_fitness;
-            //    }
+                    // reactive tabu: como es una buena solucion, no se agranda la lista
+                    no_growth_count++;
+                }
+                else
+                {
+                    // reactive tabu: si no se supera la mejor solucion, se incrementa el tama;o de la lista
+                    // incrementar el tama;o de la lista tabu
+                    no_growth_count = 0;
+                }
 
-            //    // Aspiration. 
-            //    if (best_fitness > next_fitness)
-            //    {
-            //        tabuList.Clear();
-            //        best_solution = next_solution;
-            //        best_fitness = next_fitness;
-            //    }
+                // reactive tabu: si se super max_no_growth sin que el tama;o se increimente, se reduce
+                if (no_growth_count >= max_no_growth)
+                {
+                    // decrementar el tama;o de la lista tabu
+                }
+                tabu_list.Enqueue(next_move);
 
-            //    tabuList.Enqueue(next_tabu); // si el movimiento fue bueno, se agrega a la lista tabu
-            //    current_solution = next_solution;
-            //    current_fitness = next_fitness;
-
-            //}
-
+                current_solution = next_solution;
+                current_fitness = next_fitness;                
+            }
         }
-    
     }
 }
