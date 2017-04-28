@@ -40,55 +40,7 @@ namespace ConsoleApplication1
             // instance parameters
             this.instance = instance;   // la instancia tiene datos del problema
         }
-
-        /* Solucion inicial aleatoria (temporal) */
-        public static List<int> getInitialSolution(Instance instance)
-        {
-            List<int> assignment = new List<int>(instance.workers.Count);
-
-            for (int worker_index = 0; worker_index < instance.workers.Count; worker_index++)
-            {
-                // process
-                Random rnd = new Random();
-                int process_index = rnd.Next(instance.processes_num);
-                //while (instance.hasAvailablePositions() && !instance.isAvailable(process_index))
-                //{
-                //    process_index = rnd.Next(instance.processes_num);
-                //}
-                //if (!instance.hasAvailablePositions()) process_index = instance.processes_num;
-                
-                //// assign
-                //assignment[worker_index] = process_index;
-                //instance.assignWorker(process_index);
-            }
-
-            return assignment;
-        }
-
-        /* Busca el ratio de cada trabajadorxprocesoxproducto, lo multiplica por los pesos y lo suma */
-        public double getFitness(List<int> solution)
-        {
-            double fitness = 0;
-            int assigned_workers = 0;
-
-            for(int i = 0; i < solution.Count; i++)
-            {
-                Ratio ratio = instance.ratios.Find(Ratio.byWorkerAndProcessProduct(i, solution[i]));
-                // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
-                if (ratio != null)       
-                {
-                    assigned_workers++;
-                    fitness += (ratio.breakage * instance.breakage_weight + ratio.time * instance.time_weight);
-                    // agregar pesos de producto
-                    // int index = (int)(solution[i]/10);
-                    // float product_weight = instance.products_weights[index];
-                    // fitness += product_weight * (ratio.breakage * instance.breakage_weight + ratio.time * instance.time_weight);
-                }
-            }
-
-            return fitness/assigned_workers;
-        }
-
+        
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
         public List<int> getNeighbor(List<int> solution)
         {
@@ -140,7 +92,7 @@ namespace ConsoleApplication1
             List<int> current_solution = null;
             List<int> next_solution = null;
             List<int> neighbor = null;
-            current_solution = getInitialSolution(instance);
+            current_solution = instance.getInitialSolution();
             initial_solution = new List<int>(current_solution);
 
             // condicion de meseta: contador de iteraciones sin mejora en best_solution
@@ -156,7 +108,7 @@ namespace ConsoleApplication1
             double current_fitness = 0;
             double next_fitness = 0;
             double neighbor_fitness = 0;
-            current_fitness = getFitness(current_solution);
+            current_fitness = instance.getFitness(current_solution);
             best_fitness = current_fitness;
             best_solution = current_solution;
 
@@ -184,7 +136,7 @@ namespace ConsoleApplication1
                     // el movimiento no puede estar en la lista tabu y el vecino debe ser distinto de la solucion
                     if (!tabu_list.Contains(move) && move != last_move) 
                     {
-                        neighbor_fitness = getFitness(neighbor);
+                        neighbor_fitness = instance.getFitness(neighbor);
                         if (next_fitness > neighbor_fitness)
                         {
                             next_solution = neighbor;

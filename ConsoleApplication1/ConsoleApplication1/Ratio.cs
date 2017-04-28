@@ -37,7 +37,7 @@ namespace ConsoleApplication1
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(';');
-                    worker = workers.Find(Worker.byId(values[0]));
+                    worker = workers.Find(Worker.byId(int.Parse(values[0])));
                     Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
                     ratios.Add(ratio);
                 }
@@ -81,7 +81,7 @@ namespace ConsoleApplication1
         {
             return delegate (Ratio ratio)
             {
-                return int.Parse(ratio.worker.id) == worker_id && ratio.process_product_id == process_product_id;
+                return ratio.worker.id == worker_id && ratio.process_product_id == process_product_id;
             };
         }
         
