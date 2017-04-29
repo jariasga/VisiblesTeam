@@ -14,12 +14,14 @@ namespace ConsoleApplication1
         public List<List<int>> FirstGen;
         Instance actualIns;
         int maxGenerations;
+        double acceptablePersentaje;
 
 
         public GeneticAlgorithm(Instance inst) {
             FirstGen = new List<List<int>>();
             actualIns = inst;
             maxGenerations = 200;
+            acceptablePersentaje = 0.01;
         }
         public void CreateFirstGen() //Cargar la primera generacion
         { 
@@ -89,6 +91,7 @@ namespace ConsoleApplication1
             {
                 bestInGen.Add(Generation[pos][i]);
             }
+            Console.WriteLine("fitness parcial: " + actualIns.getFitness(bestInGen));
 
         }
 
@@ -130,6 +133,8 @@ namespace ConsoleApplication1
             //tiempo de ejecucion
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
+            
+
             //0 carving 1 painting 2 kaking 3 molding
 
             int start_time = Environment.TickCount;
@@ -152,6 +157,8 @@ namespace ConsoleApplication1
 
             double fitnessValue;
             int bestPos=0;
+
+            fitnessValue = evaluateFitness(FirstGen, ref bestPos);
 
             //1. DONE contar los puestos en general (tallar, moldear, pintar, hornear) se podria usar instance 
             //cambiar por numWorkersInJob
@@ -218,7 +225,7 @@ namespace ConsoleApplication1
                     //limpiar child
                     //REVISAR el if
                     double result = evaluateFitnessInChild(child);
-                    if (true)
+                    if (evaluateFitnessInChild(child)<fitnessValue*(1+ acceptablePersentaje))
                         NewGeneration.Add(child);
                     else
                         child = null; //"clear memory" garbage collection
@@ -463,7 +470,7 @@ namespace ConsoleApplication1
             double ratio = bestRatios[0];
             for (int i = 0; i < bestRatios.Count()-1; i++)
             {
-                if (bestRatios[i + 1] > ratio)
+                if (bestRatios[i + 1] < ratio)
                 {
                     value = i + 1;
                     ratio = bestRatios[i + 1];
