@@ -17,7 +17,7 @@ namespace ConsoleApplication1
             //  Tabu
             TabuSearch tabu = new TabuSearch(instance);
 
-            List<int> tabu_solution = tabu.run();*/
+            List<int> tabu_solution = tabu.run();
 
             //  Genetic
             GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
