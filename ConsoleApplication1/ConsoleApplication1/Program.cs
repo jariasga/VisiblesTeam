@@ -14,9 +14,14 @@ namespace ConsoleApplication1
         {
             Instance instance = new Instance();
 
-            // tabu
+            /* tabu
             TabuSearch tabu = new TabuSearch(instance);
-            tabu.run();
+            List<int> tabu_solution = tabu.run();*/
+
+            /*genetic*/
+            GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
+            genetic.CreateFirstGen();
+            List<int> genetic = genetic.RunGenetic();
 
             Console.Read();
         }
