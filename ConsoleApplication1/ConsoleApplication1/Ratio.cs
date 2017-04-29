@@ -41,7 +41,8 @@ namespace ConsoleApplication1
                     worker = workers.Find(Worker.byId(int.Parse(values[0])));
                     if (worker != null)
                     {
-                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
+                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]),
+                            double.Parse(values[3]), double.Parse(values[4]));
                         ratios.Add(ratio);
 
                     }
@@ -52,8 +53,13 @@ namespace ConsoleApplication1
             return ratios;
         }
 
-        public void print()
+        public void Print()
         {
+            this.worker.Print();
+            Console.WriteLine("Proceso: {0} (id {1})", this.process_product_name,
+                this.process_product_id);
+            Console.WriteLine("Ind. rotura = {0}, Ind. tiempo = {1}, Ind. pérdida = {2}",
+                this.breakage, this.time, this.loss_index);
         }
 
         public static double getAverageBreakage(List<Ratio> ratios)

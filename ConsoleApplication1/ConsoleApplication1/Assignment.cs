@@ -45,6 +45,13 @@ namespace ConsoleApplication1
             return number_of_jobs;
         }
 
+        public void Print()
+        {
+            this.worker.Print();
+            Console.WriteLine("Proceso por producto: id {0}", this.process_product_id);
+            Console.WriteLine("Indice de pérdida = {0}, costo actual = {1}", index_loss, cost);
+        }
+
         //Funciones de comparación
 
         public static Predicate<Assignment> byWorker(Worker worker)

@@ -10,7 +10,7 @@ namespace ConsoleApplication1
     {
         //Parámetros del algoritmo
         private static double Alpha = 0.2;
-        private static int Iterations = 100;
+        private static int Iterations = 10;
 
         //Atributos
         private List<Worker> workers;
@@ -34,17 +34,22 @@ namespace ConsoleApplication1
             Process horneado = new Process(3, "Horneado", 10);
             Process pintado = new Process(4, "Pintado", 10);
             process_product = new List<ProcessProduct>();
-            process_product.Add(new ProcessProduct(10, modelado, 0));
-            process_product.Add(new ProcessProduct(11, pintado, 0));
-            process_product.Add(new ProcessProduct(12, horneado, 0));
-            process_product.Add(new ProcessProduct(20, tallado, 1));
-            process_product.Add(new ProcessProduct(30, tallado, 2));
-            process_product.Add(new ProcessProduct(31, pintado, 2));
+            process_product.Add(new ProcessProduct(10, "Modelado de huacos", modelado, 0));
+            process_product.Add(new ProcessProduct(11, "Pintado de huacos", pintado, 0));
+            process_product.Add(new ProcessProduct(12, "Horneado de huacos", horneado, 0));
+            process_product.Add(new ProcessProduct(20, "Tallado de piedras", tallado, 1));
+            process_product.Add(new ProcessProduct(30, "Tallado de retablos", tallado, 2));
+            process_product.Add(new ProcessProduct(31, "Pintado de retablos", pintado, 2));
 
             //ESTO YA SE TENÍA QUE HACER EN RATIO!!!
             for (int i = 0; i < ratios.Count; i++)
+            {
                 ratios[i].loss_index = instance.breakage_weight * ratios[i].breakage
                     + instance.time_weight * ratios[i].time;
+                //Console.WriteLine("---------------- RATIO # {0} ---------------", i + 1);
+                //ratios[i].Print();
+            }
+            //Console.WriteLine("------------------------------------------");
         }
 
         public List<int[]> GraspAlgorithm()
@@ -60,6 +65,8 @@ namespace ConsoleApplication1
 
                 //Obtener solución y colocarla en la lista
                 solution_list.Add(GenerateSolution(candidates));
+
+                Console.WriteLine("Iteración {0} completada.", i);
             }
 
             //Convertir lista a soluciones
@@ -68,6 +75,15 @@ namespace ConsoleApplication1
             {
                 int[] solution = GraspOutput.ToArray(solution_list[i], workers.Count);
                 solution_list_array.Add(solution);
+
+                Console.WriteLine("Solución {0} de GRASP:", i + 1);
+                Console.Write("Trabajador  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 ");
+                Console.Write("21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 ");
+                Console.WriteLine("41 42 43 44 45 46 47 48 49 50");
+                Console.Write("ProcXProd. ");
+                for (int k = 0; k < workers.Count; k++)
+                    Console.Write("{0} ", solution[k]);
+                Console.WriteLine();
             }
 
             return solution_list_array;
@@ -108,7 +124,10 @@ namespace ConsoleApplication1
 
         public List<Assignment> GenerateRCL(List<Assignment> candidates)
         {
+            //Inicializar la RCL como vacía
             List <Assignment> rcl = new List<Assignment>();
+
+            //Calculo el máximo y el mínimo costo de los candidatos
             double min = double.MaxValue;
             double max = double.MinValue;
             for (int i = 0; i < candidates.Count; i++)
@@ -116,12 +135,27 @@ namespace ConsoleApplication1
                 if (candidates[i].Cost < min) min = candidates[i].Cost;
                 if (candidates[i].Cost > max) max = candidates[i].Cost;
             }
+
+            //Obtener el rango del RCL y agregar los valores
             double max_rcl = min + Alpha * (max - min);
             for (int i = 0; i < candidates.Count; i++)
             {
                 if (candidates[i].Cost >= min && candidates[i].Cost <= max_rcl)
                     rcl.Add(candidates[i]);
             }
+
+            //Imprimir
+            Console.WriteLine("=========== RCL ===========");
+            Console.WriteLine("Min = {0}, Max = {1}, Rango = [{2}, {3}]", min, max,
+                min, max_rcl);
+            for (int i = 0; i < rcl.Count; i++)
+            {
+                Console.WriteLine("------------------------");
+                rcl[i].Print();
+            }
+            Console.WriteLine("-----------------------------");
+            Console.WriteLine("Cantidad de elementos en el RCL: " + rcl.Count);
+
             return rcl;
         }
     }

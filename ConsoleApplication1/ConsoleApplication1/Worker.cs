@@ -54,8 +54,9 @@ namespace ConsoleApplication1
             };
         }
 
-        public void print()
+        public void Print()
         {
+            Console.WriteLine("Trabajador: {0} (id {1})", this.getFullName(), this.id);
         }
     }
 }

@@ -9,14 +9,22 @@ namespace ConsoleApplication1
     class ProcessProduct
     {
         public int id;
+        public string name;
         public Process process;
         public int product;
 
-        public ProcessProduct(int id, Process process, int product)
+        public ProcessProduct(int id, string name, Process process, int product)
         {
             this.id = id;
+            this.name = name;
             this.process = process;
             this.product = product;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine("Proceso por producto: {0} (id {1}, proceso {2}, producto {3})",
+                this.name, this.id, this.process.id, this.product);
         }
 
         public static ProcessProduct GetByID(List<ProcessProduct> list, int id)
