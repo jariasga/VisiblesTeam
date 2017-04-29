@@ -14,13 +14,14 @@ namespace ConsoleApplication1
         {
             Instance instance = new Instance();
 
-            int[] l = new int[3];
-            Console.WriteLine(l[0]);
-            Console.WriteLine("no");
-
             // tabu
             TabuSearch tabu = new TabuSearch(instance);
-            tabu.run();
+            List<int> tabu_solution = tabu.run();
+
+            foreach(int i in tabu_solution)
+            {
+                Console.WriteLine(i);
+            }
 
             Console.Read();
         }

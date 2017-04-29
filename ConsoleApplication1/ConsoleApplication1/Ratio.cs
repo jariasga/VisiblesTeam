@@ -38,8 +38,11 @@ namespace ConsoleApplication1
                     var line = reader.ReadLine();
                     var values = line.Split(';');
                     worker = workers.Find(Worker.byId(int.Parse(values[0])));
-                    Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
-                    ratios.Add(ratio);
+                    if (worker != null)
+                    {
+                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
+                        ratios.Add(ratio);
+                    }                    
                 }
             }
             Console.WriteLine("ratios listos!");

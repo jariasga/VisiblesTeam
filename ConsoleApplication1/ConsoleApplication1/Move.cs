@@ -17,13 +17,10 @@ namespace ConsoleApplication1
             this.worker2 = null;
         }
 
-        public void setWorker(int worker_num, int worker_id, int worker_pp)
+        public Move(List<int> solution, int worker1, int worker2)
         {
-            if (worker_num == 1) 
-                this.worker1 = new Tuple<int, int>(worker_id, worker_pp);
-            else if (worker_num == 2)
-                this.worker2 = new Tuple<int, int>(worker_id, worker_pp);
+            this.worker1 = new Tuple<int, int>(worker1, solution[worker1]);
+            this.worker2 = new Tuple<int, int>(worker2, solution[worker2]);
         }
-
     }
 }

@@ -42,11 +42,10 @@ namespace ConsoleApplication1
         }
         
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
-        public List<int> getNeighbor(List<int> solution)
+        public List<int> getNeighbor(List<int> solution, Move move)
         {
             List<int> neighbor = new List<int>(solution);
             Random rnd = new Random();
-            int temp;
 
             // buscamos trabajadores
             int worker1 = rnd.Next(solution.Count);             
@@ -55,37 +54,18 @@ namespace ConsoleApplication1
             while (solution.Count > 1 && worker1 == worker2)    
                 worker2 = rnd.Next(solution.Count);
             // intercambiamos valores
-            temp = solution[worker1];
-            solution[worker1] = solution[worker2];
-            solution[worker2] = temp;
-
+            neighbor[worker1] = solution[worker2];
+            neighbor[worker2] = solution[worker1];
+            move = new Move(neighbor, worker1, worker2);
+            
             return neighbor;
         }
 
-        /* Obtiene el intercambio de trabajadores */
-        public Move getMove(List<int> solution, List<int> neighbor)
-        {
-            Move move = new Move();
-            int worker_num = 0;
-
-            for (int i = 0; i < solution.Count; i++)
-            {
-                if (solution[i] != neighbor[i])
-                {
-                    worker_num++;
-                    move.setWorker(worker_num, i, neighbor[i]);     // i = worker_id, neighbor[i] = procesoxproducto
-                    if (worker_num == 2) break;                     // siempre se intercambian dos trabajadores
-                }
-            }
-
-            return move;
-        }
-
-        public void run()
+        public List<int> run()
         {
             // time
-            int start_time = Environment.TickCount;
-            int limit_time = 5;
+            int start_time = Environment.TickCount; // milisegundos
+            int limit_time = 300000;                // 1 000 * 60 * 5 (maximo 5 miutos)
 
             // solutions
             List<int> initial_solution = null;
@@ -94,29 +74,28 @@ namespace ConsoleApplication1
             List<int> neighbor = null;
             current_solution = instance.getInitialSolution();
             initial_solution = new List<int>(current_solution);
+            best_solution = current_solution;
 
             // condicion de meseta: contador de iteraciones sin mejora en best_solution
             int iter_count = 0;
 
-            // tabu
+            // lista tabu
             Move next_move = null;
             Queue<Move> tabu_list = new Queue<Move>(tabu_list_length);  // se puede implementar FixedSizeQueue
             int no_growth_count = 0;
             
             // fitness
             double initial_fitness = 0;
-            double current_fitness = 0;
+            double current_fitness = instance.getFitness(current_solution);
             double next_fitness = 0;
             double neighbor_fitness = 0;
-            current_fitness = instance.getFitness(current_solution);
-            best_fitness = current_fitness;
-            best_solution = current_solution;
+            best_fitness = current_fitness;            
 
             // inicio
-            // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (Environment.TickCount - start_time < limit_time && iter_count < max_iterations)
+            // condiciones de salida: tiempo || meseta (que no se supere max_iterations sin actualizar la mejor solucion)
+            while (Environment.TickCount - start_time < limit_time || iter_count < max_iterations)
             {
-                int count = 0;
+                int neighbor_count = 0;                  // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 
                 next_solution = null;
                 next_fitness = int.MaxValue;    
@@ -128,11 +107,10 @@ namespace ConsoleApplication1
                 Move last_move = new Move();
 
                 // Buscaremos un numero maximo de vecinos (eficiencia)
-                while (count < neighbor_checks)
+                while (neighbor_count < neighbor_checks)
                 {
-                    count++;
-                    neighbor = getNeighbor(current_solution);           // se crea un vecino con un intercambio aleatorio
-                    move = getMove(current_solution, neighbor);         // luego guardamos como se llego al vecino
+                    neighbor_count++;
+                    neighbor = getNeighbor(current_solution, move);     // se crea un vecino con un intercambio aleatorio y se guarda el movimiento
                     // el movimiento no puede estar en la lista tabu y el vecino debe ser distinto de la solucion
                     if (!tabu_list.Contains(move) && move != last_move) 
                     {
@@ -185,6 +163,8 @@ namespace ConsoleApplication1
                 current_solution = next_solution;
                 current_fitness = next_fitness;                
             }
+
+            return best_solution;
         }
     }
 }
