@@ -47,7 +47,7 @@ namespace ConsoleApplication1
                     + instance.time_weight * ratios[i].time;
         }
 
-        public void GraspAlgorithm()
+        public List<int[]> GraspAlgorithm()
         {
             //Inicializar conjunto de soluciones como vacío
             List<GraspOutput> solution_list = new List<GraspOutput>();
@@ -69,6 +69,8 @@ namespace ConsoleApplication1
                 int[] solution = GraspOutput.ToArray(solution_list[i], workers.Count);
                 solution_list_array.Add(solution);
             }
+
+            return solution_list_array;
         }
 
         private GraspOutput GenerateSolution(List<Assignment> candidates)

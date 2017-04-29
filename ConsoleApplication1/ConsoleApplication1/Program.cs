@@ -16,7 +16,7 @@ namespace ConsoleApplication1
 
             //GRASP
             Grasp grasp = new Grasp(instance);
-            grasp.GraspAlgorithm();
+            List<int[]> solutions = grasp.GraspAlgorithm();
 
             // tabu
             TabuSearch tabu = new TabuSearch(instance);
