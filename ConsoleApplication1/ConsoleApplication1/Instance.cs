@@ -96,7 +96,7 @@ namespace ConsoleApplication1
             return solution;
         }
 
-        /* devuelve la lista de procesos productos que existen para un proceso */
+        /* Devuelve la lista de procesos productos que existen para un proceso */
         public List<int> getProcessProducts(int i)
         {
             List<int> list = new List<int>();

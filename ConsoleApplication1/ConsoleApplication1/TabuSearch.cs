@@ -62,6 +62,7 @@ namespace ConsoleApplication1
             return neighbor;
         }
 
+        /* Flujo del algoritmo */
         public List<int> run()
         {
             // time
@@ -130,10 +131,10 @@ namespace ConsoleApplication1
                             break;
                     }
                 }
-                
+
+                // cambia el espacio de busqueda si no encuentra buenas soluciones
                 if (!success)
-                {
-                    // cambia el espacio de busqueda si no encuentra buenas soluciones
+                {                    
                     next_solution = initial_solution;
                     next_fitness = initial_fitness;
                 }
