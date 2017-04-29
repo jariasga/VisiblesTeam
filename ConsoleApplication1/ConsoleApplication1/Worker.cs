@@ -57,6 +57,5 @@ namespace ConsoleApplication1
         public void print()
         {
         }
-
     }
 }

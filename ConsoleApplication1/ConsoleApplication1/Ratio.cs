@@ -20,7 +20,7 @@ namespace ConsoleApplication1
         {
             this.worker = worker;
             this.process_product_name = process_product_name;
-            this.process_product_id = process_product;            
+            this.process_product_id = process_product;
             this.breakage = breakage;
             this.time = time;
         }
@@ -37,9 +37,12 @@ namespace ConsoleApplication1
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(';');
-                    worker = workers.Find(Worker.byId(values[0]));
-                    Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
-                    ratios.Add(ratio);
+                    worker = workers.Find(Worker.byId(int.Parse(values[0])));
+                    if (worker != null)
+                    {
+                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
+                        ratios.Add(ratio);
+                    }
                 }
             }
             Console.WriteLine("ratios listos!");
@@ -81,9 +84,9 @@ namespace ConsoleApplication1
         {
             return delegate (Ratio ratio)
             {
-                return int.Parse(ratio.worker.id) == worker_id && ratio.process_product_id == process_product_id;
+                return ratio.worker.id == worker_id && ratio.process_product_id == process_product_id;
             };
         }
-        
+
     }
 }
