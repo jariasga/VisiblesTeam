@@ -10,12 +10,12 @@ namespace ConsoleApplication1
 {
     class Worker
     {
-        public string id;
+        public int id;
         public string name;
         public string lastname;
         public List<Ratio> ratios;
 
-        public Worker(string id, string name, string lastname)
+        public Worker(int id, string name, string lastname)
         {
             this.id = id;
             this.name = name;
@@ -53,7 +53,7 @@ namespace ConsoleApplication1
             this.ratios.Add(ratio);
         }
 
-        public static Predicate<Worker> byId(string id)
+        public static Predicate<Worker> byId(int id)
         {
             return delegate (Worker worker)
             {

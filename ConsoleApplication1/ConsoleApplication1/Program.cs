@@ -14,6 +14,10 @@ namespace ConsoleApplication1
         {
             Instance instance = new Instance();
 
+            //GRASP
+            Grasp grasp = new Grasp(instance);
+            grasp.GraspAlgorithm();
+
             // tabu
             TabuSearch tabu = new TabuSearch(instance);
             tabu.run();

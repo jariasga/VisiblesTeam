@@ -15,6 +15,7 @@ namespace ConsoleApplication1
         public string process_product_name;
         public double breakage;
         public double time;
+        public double loss_index;
 
         public Ratio(Worker worker, string process_product_name, int process_product, double breakage, double time)
         {
@@ -76,5 +77,14 @@ namespace ConsoleApplication1
                 return ratio.process_product_id == process_product;
             };
         }
+
+        public static Predicate<Ratio> byWorkerAndProcessProduct(int worker_id, int process_product_id)
+        {
+            return delegate (Ratio ratio)
+            {
+                return int.Parse(ratio.worker.id) == worker_id && ratio.process_product_id == process_product_id;
+            };
+        }
+        
     }
 }
