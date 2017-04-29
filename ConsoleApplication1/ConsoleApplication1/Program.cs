@@ -26,6 +26,9 @@ namespace ConsoleApplication1
                 Console.Write(genetic_solution[i] + ", ");
             Console.WriteLine();
 
+            double fitness = instance.getFitness(genetic_solution);
+            Console.WriteLine("Fitness de la solucion final " + fitness);
+
             Console.Read();
         }
     }

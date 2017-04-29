@@ -42,11 +42,38 @@ namespace ConsoleApplication1
         }
 
         public void ParentsSelection(ref int parent1, ref int parent2, int cantidad) {
+            //TO DO hacer ruleta
+            
             Random rnd = new Random();
             parent1 = rnd.Next(0, cantidad);
             parent2 = rnd.Next(0, cantidad);
             while (parent1 == parent2)
+            {
                 parent2 = rnd.Next(0, cantidad);
+            }
+            /*
+            parent1 = randomRoulette(parent1);
+            parent2 = randomRoulette(parent2);
+            while (parent1 == parent2)
+                parent2 = randomRoulette(parent2);*/
+        }
+
+        public int randomRoulette(int parent)
+        {
+            Random rnd = new Random();
+
+            int value = 0;
+            List<int> auxList = new List<int>();
+            for (int i = 0; i < FirstGen.Count(); i++)
+            {
+                int fit = (int)actualIns.getFitness(FirstGen[i]);
+                for (int j = 0; j < fit; j++)
+                    auxList.Add(i);
+            }
+
+            value = rnd.Next(0, auxList.Count());
+
+            return value;
         }
 
         //DONE
@@ -255,7 +282,7 @@ namespace ConsoleApplication1
             {
                 //DONE llena los arreglos
                 fillBest(assignedWorkersAux, job, bestRatioPerWorker, bestJobPerWorker);
-                //REVISAR Forcer mutation
+                //REVISAR Forced mutation
                 if (bestJobPerWorker.Count() < assignedWorkersAux.Count())
                 {
                     bestRatioPerWorker.Add(bestRatioPerWorker[0]);
@@ -286,8 +313,6 @@ namespace ConsoleApplication1
             double best1=0, best2=0;
             int id1=0;
             int id2=-1;
-            int bestId;
-            double bestRatio;
             //busco en la clase workers y agrego el mejor ratio y puestoxtrabajo de cada uno de los posibles trabajadores para un puesto
             //if (job == 0)//tallado 20 o 30
             //{
