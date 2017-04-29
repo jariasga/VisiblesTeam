@@ -97,7 +97,7 @@ namespace ConsoleApplication1
             // condiciones de salida: tiempo || meseta (que no se supere max_iterations sin actualizar la mejor solucion)
             while (Environment.TickCount - start_time < limit_time || iter_count < max_iterations)
             {
-                int neighbor_count = 0;                  // cuenta de vecinos evaluados
+                int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 
                 next_solution = null;
                 next_fitness = int.MaxValue;    
@@ -133,14 +133,13 @@ namespace ConsoleApplication1
                 
                 if (!success)
                 {
+                    // cambia el espacio de busqueda si no encuentra buenas soluciones
                     next_solution = initial_solution;
                     next_fitness = initial_fitness;
                 }
                 
                 if (best_fitness > next_fitness)
                 {
-                    // se limpia la lista si se mejoro la solucion
-                    tabu_list.Clear();
                     best_solution = next_solution;
                     best_fitness = next_fitness;
                     // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
@@ -162,9 +161,12 @@ namespace ConsoleApplication1
                 {
                     // decrementar el tama;o de la lista tabu
                     tabu_list.Limit = (int)((double)tabu_list.Limit * (1 - tabu_list_growth));
+                    no_growth_count = 0;
                 }
+                // guardamos el movimiento
                 tabu_list.Enqueue(next_move);
 
+                // siguiente iteracion
                 current_solution = next_solution;
                 current_fitness = next_fitness;                
             }

@@ -18,11 +18,6 @@ namespace ConsoleApplication1
             TabuSearch tabu = new TabuSearch(instance);
             List<int> tabu_solution = tabu.run();
 
-            foreach(int i in tabu_solution)
-            {
-                Console.WriteLine(i);
-            }
-
             Console.Read();
         }
     }
