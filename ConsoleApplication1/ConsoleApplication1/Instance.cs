@@ -24,8 +24,8 @@ namespace ConsoleApplication1
         public List<int> processes_products;        // los ids de procesos productos
 
         // ratios
-        public int breakage_weight;                 // para los indices de perdida
-        public int time_weight;
+        public double breakage_weight;                 // para los indices de perdida
+        public double time_weight;
 
         public Instance()
         {
@@ -56,8 +56,8 @@ namespace ConsoleApplication1
             processes_products.Add(31);             // pintado de retablos
 
             // ratios
-            breakage_weight = 1;
-            time_weight = 1;
+            breakage_weight = 0.5;
+            time_weight = 0.5;
 
             workers = Worker.read("Workers.csv");
             ratios = Ratio.read("Ratios.csv", workers);

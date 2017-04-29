@@ -21,7 +21,7 @@ namespace ConsoleApplication1
             FirstGen = new List<List<int>>();
             actualIns = inst;
             maxGenerations = 200;
-            acceptablePersentaje = 0.01;
+            acceptablePersentaje = 0.02;
         }
         public void CreateFirstGen() //Cargar la primera generacion
         { 
@@ -189,7 +189,7 @@ namespace ConsoleApplication1
 
                 //WHILE condicion del while
                 //3.1 DONE si el numero de elementos en la generacion es 200 (ya esta llena la generacion) -> salir
-                while (NewGeneration.Count() < actualIns.workers.Count())
+                while (NewGeneration.Count() < /*actualIns.workers.Count()*/maxGenerations)
                 {
                     generalJobs.Add(0); //carving
                     generalJobs.Add(1); //molding
@@ -288,13 +288,13 @@ namespace ConsoleApplication1
             else //no existe mutacion
             {
                 //DONE llena los arreglos
-                fillBest(assignedWorkersAux, job, bestRatioPerWorker, bestJobPerWorker);
+                fillBest2(assignedWorkersAux, job, bestRatioPerWorker, bestJobPerWorker);
                 //REVISAR Forced mutation
-                if (bestJobPerWorker.Count() < assignedWorkersAux.Count())
+               /* if (bestJobPerWorker.Count() < assignedWorkersAux.Count())
                 {
                     bestRatioPerWorker.Add(bestRatioPerWorker[0]);
                     bestJobPerWorker.Add(bestJobPerWorker[0]);
-                }
+                }*/
                 //halla a los n mejores
                 for (int i = 0; i < numWorkers; i++)
                 {
@@ -314,6 +314,136 @@ namespace ConsoleApplication1
                 }
             }
         }
+
+        public void fillBest2(List<int> assignedWorkers, int job, List<double> ratios, List<int> jobPerWork)
+        {
+            double best1=0, best2 = 0;
+            int id1 = -1;
+            int id2 = -1;
+
+            //todos los posibles trabajadores
+            for (int i = 0; i < assignedWorkers.Count(); i++)
+            {
+                //reviso todos los procesos por cada trabjador para hallar sus ratios
+                for (int j = 0; j < actualIns.ratios.Count(); j++)
+                {
+                    if (job == 0)//tallado 20 0 30
+                    {
+                        if(actualIns.ratios[j].worker.id -1 == assignedWorkers[i])//si es el trabajador
+                        {
+                            if(actualIns.ratios[j].process_product_id == 20)
+                            {
+                                id1 = 20;
+                                 
+                                if (actualIns.breakage_weight > actualIns.time_weight)
+                                    best1 = actualIns.ratios[j].breakage;
+                                else
+                                    best1 = actualIns.ratios[j].time;
+
+                            }
+
+                            if (actualIns.ratios[j].process_product_id == 30)
+                            {
+                                id1 = 30;
+
+                                if (actualIns.breakage_weight > actualIns.time_weight)
+                                    best2 = actualIns.ratios[j].breakage;
+                                else
+                                    best2 = actualIns.ratios[j].time;
+
+                            }
+
+                        }
+                    }
+
+                    if (job == 1)//moldeado 10
+                    {
+                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])//si es el trabajador
+                        {
+                            if (actualIns.ratios[j].process_product_id == 10)
+                            {
+                                id1 = 10;
+
+                                if (actualIns.breakage_weight > actualIns.time_weight)
+                                    best1 = actualIns.ratios[j].breakage;
+                                else
+                                    best1 = actualIns.ratios[j].time;
+
+                            }
+
+                        }
+                    }
+
+                    if (job == 3)//pintado 11 0 31
+                    {
+                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])//si es el trabajador
+                        {
+                            if (actualIns.ratios[j].process_product_id == 11)
+                            {
+                                id1 = 11;
+
+                                if (actualIns.breakage_weight > actualIns.time_weight)
+                                    best1 = actualIns.ratios[j].breakage;
+                                else
+                                    best1 = actualIns.ratios[j].time;
+
+                            }
+
+                            if (actualIns.ratios[j].process_product_id == 31)
+                            {
+                                id1 = 31;
+
+                                if (actualIns.breakage_weight > actualIns.time_weight)
+                                    best2 = actualIns.ratios[j].breakage;
+                                else
+                                    best2 = actualIns.ratios[j].time;
+
+                            }
+
+                        }
+                    }
+
+                    if (job == 2)//horneado 12
+                    {
+                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])//si es el trabajador
+                        {
+                            if (actualIns.ratios[j].process_product_id == 12)
+                            {
+                                id1 = 12;
+
+                                if (actualIns.breakage_weight > actualIns.time_weight)
+                                    best1 = actualIns.ratios[j].breakage;
+                                else
+                                    best1 = actualIns.ratios[j].time;
+
+                            }
+ 
+                        }
+                    }
+                }
+                //agrego a ratios y jobperwork
+                if (id1 != -1 && id2 != -1)//caso que tenga dos ratios
+                {
+                    if (best1 > best1)
+                    {
+                        best1 = best2;
+                        id1 = id2;
+                    }
+
+                }
+                ratios.Add(best1);
+                jobPerWork.Add(id1);
+
+                best1 = 0; best2 = 0;
+                id1 = -1;
+                id2 = -1;
+
+            }
+
+        }
+
+
+
 
         public void fillBest(List<int> assignedWorkers, int job, List<double> ratios, List<int> jobPerWork)
         {
@@ -458,7 +588,9 @@ namespace ConsoleApplication1
                     }
                 }
                 best1 = 0;
-                best2 = -1;
+                best2 = 0;//-1
+                id1 = 0;
+                id2 = -1;
                 }
             //}
         }
@@ -577,7 +709,7 @@ namespace ConsoleApplication1
                 }
             }
 
-            if (typejob == 2)//pintado 11 0 31
+            if (typejob == 3)//pintado 11 0 31
             {
                 for (int i = 0; i < FirstGen[parent1].Count(); i++)
                 {
@@ -600,7 +732,7 @@ namespace ConsoleApplication1
                 }
             }
 
-            if (typejob == 3)//horneado 12
+            if (typejob == 2)//horneado 12
             {
                 for (int i = 0; i < FirstGen[parent1].Count(); i++)
                 {
