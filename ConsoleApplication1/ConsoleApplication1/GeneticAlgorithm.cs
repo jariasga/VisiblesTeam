@@ -19,7 +19,7 @@ namespace ConsoleApplication1
         public GeneticAlgorithm(Instance inst) {
             FirstGen = new List<List<int>>();
             actualIns = inst;
-            maxGenerations = 100;
+            maxGenerations = 200;
         }
         public void CreateFirstGen() //Cargar la primera generacion
         { 
@@ -106,17 +106,13 @@ namespace ConsoleApplication1
             //0 carving 1 painting 2 kaking 3 molding
 
             int start_time = Environment.TickCount;
-            int limit_time = 5;
 
             int numWorkersPerMember = 50; //numero de trabajadores en una solucion (individuo)
             List<List<int>>  NewGeneration; //mejor solucion hasta ahora (deberia ser por generacion)
             List<int> bestSolution = new List<int>(); ;
             int generationCount = 0;  //contador de cuantas generacion la mejor solucion se ha mantenido sin cambiar
             List<int> generalJobs = new List<int>();
-            generalJobs.Add(0); //carving
-            generalJobs.Add(1); //molding
-            generalJobs.Add(2); //painting
-            generalJobs.Add(3); //baking
+            
 
             List<int> assignedWorkersAux = new List<int>(); //lista auxiliar de trabajadores asignados a un puesto
             List<int> nonAssignWorkersAux = new List<int>(); //lista auxiliar de trabajadores no asignados
@@ -136,6 +132,7 @@ namespace ConsoleApplication1
             //WHILE DONE poner tiempo en el while
             while (/*Environment.TickCount - start_time < limit_time && */generationCount < maxGenerations)
             {
+                
                 generationCount++;
                 //2. hallar fitness de la solucion
                 if (NewGeneration.Count() > 0)
@@ -160,6 +157,10 @@ namespace ConsoleApplication1
                 //3.1 DONE si el numero de elementos en la generacion es 200 (ya esta llena la generacion) -> salir
                 while (NewGeneration.Count() < actualIns.workers.Count())
                 {
+                    generalJobs.Add(0); //carving
+                    generalJobs.Add(1); //molding
+                    generalJobs.Add(2); //painting
+                    generalJobs.Add(3); //baking
                     //3.2 DONE crear individuo contrabajadores sin asignar
                     List<int> child = new List<int>();
                     for (int i = 0; i < numWorkersPerMember; i++)
@@ -178,6 +179,7 @@ namespace ConsoleApplication1
                         addWorkersToCertainJob(parent1, parent2, puestoActual, assignedWorkersAux, nonAssignWorkersAux);
                         //4.1.1 DONE comparar con child para editar los ya asignados
                         checkWithChild(assignedWorkersAux, child);
+                        checkWithChild(nonAssignWorkersAux, child);
                         //4.2 DONE random de 1 a 100 si sale 1 elegir al azar
                         //4.2.1 DONE si no, sacar a los  n mejores (ya estan revisados los que posiblemente ya estan asignados en child)
                         //para ocuparlos (podria ser ruleta)
@@ -253,6 +255,12 @@ namespace ConsoleApplication1
             {
                 //DONE llena los arreglos
                 fillBest(assignedWorkersAux, job, bestRatioPerWorker, bestJobPerWorker);
+                //REVISAR Forcer mutation
+                if (bestJobPerWorker.Count() < assignedWorkersAux.Count())
+                {
+                    bestRatioPerWorker.Add(bestRatioPerWorker[0]);
+                    bestJobPerWorker.Add(bestJobPerWorker[0]);
+                }
                 //halla a los n mejores
                 for (int i = 0; i < numWorkers; i++)
                 {
@@ -290,7 +298,7 @@ namespace ConsoleApplication1
                     {
                         if (job == 0)//tallado 20 o 30
                         {
-                            if (actualIns.ratios[j].worker.id-1 == assignedWorkers[i])
+                            if (actualIns.ratios[j].worker.id -1 == assignedWorkers[i])
                             {
                                 if(actualIns.ratios[j].process_product_id == 20)
                                 {
@@ -323,7 +331,7 @@ namespace ConsoleApplication1
 
                         if (job == 1)//moldeado 10
                         {
-                            if (actualIns.ratios[j].worker.id -1== assignedWorkers[i])
+                            if (actualIns.ratios[j].worker.id -1 == assignedWorkers[i])
                             {
                                 if (actualIns.ratios[j].process_product_id == 10)
                                 {
@@ -423,7 +431,7 @@ namespace ConsoleApplication1
             //}
         }
 
-        
+
         public int findBest(List<double> bestRatios)
         {
             int value = 0;
