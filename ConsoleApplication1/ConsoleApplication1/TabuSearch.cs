@@ -44,6 +44,7 @@ namespace ConsoleApplication1
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
         public List<int> getNeighbor(List<int> solution, Move move)
         {
+
             List<int> neighbor = new List<int>(solution);
             Random rnd = new Random();
 
@@ -85,6 +86,7 @@ namespace ConsoleApplication1
             Move next_move = null;
             //Queue<Move> tabu_list = new Queue<Move>(tabu_list_length);  // se puede implementar FixedSizeQueue
             TabuQueue tabu_list = new TabuQueue(tabu_list_length);
+
             int no_growth_count = 0;
             
             // fitness
@@ -119,6 +121,7 @@ namespace ConsoleApplication1
                     {
                         // evalua el vecindario con la funcion objetivo
                         neighbor_fitness = instance.getFitness(neighbor);
+
                         if (next_fitness > neighbor_fitness)
                         {
                             next_solution = neighbor;

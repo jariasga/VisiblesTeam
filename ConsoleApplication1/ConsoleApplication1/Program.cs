@@ -14,9 +14,12 @@ namespace ConsoleApplication1
         {
             Instance instance = new Instance();
 
+            //GRASP
+            Grasp grasp = new Grasp(instance);
+            List<int[]> solutions = grasp.GraspAlgorithm();
+
             //  Tabu
             TabuSearch tabu = new TabuSearch(instance);
-
             List<int> tabu_solution = tabu.run();
 
             //  Genetic
