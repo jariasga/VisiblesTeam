@@ -100,11 +100,7 @@ namespace ConsoleApplication1
         public List<int> getProcessProducts(int i)
         {
             List<int> list = new List<int>();
-<<<<<<< HEAD
-            
-=======
 
->>>>>>> 9c85b281f00c43309a7ad68bb249f42dc4742364
             if (i == 0)
             {
                 list.Add(20);       // tallado de piedras
