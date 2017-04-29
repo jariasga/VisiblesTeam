@@ -19,20 +19,6 @@ namespace ConsoleApplication1
             List<int[]> solutions = grasp.GraspAlgorithm();
             Console.WriteLine("Grasp terminó correctamente.");
 
-            return;
-            //  Tabu
-            TabuSearch tabu = new TabuSearch(instance);
-            List<int> tabu_solution = tabu.run();
-
-            //  Genetic
-            GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
-            genetic.CreateFirstGen();
-            List<int> genetic_solution = genetic.RunGenetic();
-            for (int i = 0; i < genetic_solution.Count(); i++)
-                Console.Write(genetic_solution[i] + ", ");
-            Console.WriteLine();
-
-            Console.Read();
         }
     }
 }

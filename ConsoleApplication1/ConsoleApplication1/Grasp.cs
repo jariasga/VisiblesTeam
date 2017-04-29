@@ -18,6 +18,9 @@ namespace ConsoleApplication1
         private Random random;
         private List<ProcessProduct> process_product;
 
+        //Constantes de otros lados
+        private int num_processes = 4;
+
         public Grasp(Instance instance)
         {
             this.workers = instance.workers;
@@ -95,24 +98,46 @@ namespace ConsoleApplication1
             List<Assignment> solution = new List<Assignment>();
             double value_o_f = 0;
 
+            int[] control_product = { 0, 0, 0, 0 };
+
             for (int iteration_construction = 1; candidates.Count > 0; iteration_construction++)
             {
                 //Obtener una lista de los trabajadores más eficientes
-                List<Assignment> rcl = GenerateRCL(candidates);
+                int sum = ControlProductSum(control_product);
+                List<Assignment> rcl = null;
+                if (sum == 0)
+                    rcl = GenerateRCL(candidates);
+                else
+                {
+                    List<Assignment> filtered_candidates = FilterCandidates(candidates,
+                        control_product);
+                    rcl = GenerateRCL(filtered_candidates);
+                }
 
                 //Escoger un trabajador al azar e incorporarlo en la solución
-                Assignment chosen = rcl[random.Next(0, rcl.Count - 1)];
+                Assignment chosen = rcl[random.Next(0, rcl.Count)];
                 solution.Add(chosen);
                 value_o_f += chosen.Cost;
-                
+
                 //Remover todos los candidatos que involucren al trabajador
                 candidates.RemoveAll(Assignment.byWorker(chosen.Worker));
                 //Si se agotaron los puestos de trabajo por proceso, quitar todos los relacionados
                 if (Assignment.NumberOfProcessProducts(solution, chosen.ProcessProduct) >=
                     ProcessProduct.GetByID(process_product, chosen.ProcessProduct).process.number_jobs)
                 {
-                    candidates.RemoveAll(Assignment.byProcessProductId(chosen.ProcessProduct));
+                    for (int i = 0; i < num_processes; i++)
+                    {
+                        if (control_product[i] != 0)
+                            candidates.RemoveAll(Assignment.byProcessProductId(
+                                control_product[i]));
+                    }
                 }
+
+                //Indicamos que ya hicimos 
+                sum = ControlProductSum(control_product);
+                //Si la suma es cero, quiere decir que terminamos el producto anterior y
+                //comenzaremos otro. Entonces, debemos controlar que este se termine. 
+                if (sum == 0) control_product = getProcesses(chosen.ProcessProduct);
 
                 //Recalcular los costos para la función objetivo
                 for (int k = 0; k < candidates.Count; k++)
@@ -157,6 +182,57 @@ namespace ConsoleApplication1
             Console.WriteLine("Cantidad de elementos en el RCL: " + rcl.Count);
 
             return rcl;
+        }
+
+        public List<Assignment> FilterCandidates(List<Assignment> candidates,
+            int[] control_product)
+        {
+            List<Assignment> filtered_candidates = new List<Assignment>();
+            for (int i = 0; i < candidates.Count; i++)
+            {
+                for (int j = 0; j < num_processes; j++)
+                {
+                    if (control_product[j] == 0) continue;
+                    if (control_product[j] == candidates[i].ProcessProduct)
+                        filtered_candidates.Add(candidates[i]);
+                }
+            }
+            return filtered_candidates;
+        }
+
+        //Funciones auxiliares
+
+        public int ControlProductSum(int[] control_product)
+        {
+            int sum = 0;
+            for (int i = 0; i < num_processes; i++)
+                sum += control_product[i];
+            return sum;
+        }
+
+        public int ControlProductChangeSum(int[] control_product, Assignment chosen)
+        {
+            int sum = 0;
+            for (int i = 0; i < num_processes; i++)
+            {
+                //Indicamos que hemos hecho el producto
+                if (control_product[i] == chosen.ProcessProduct)
+                    control_product[i] = 0;
+                //Sumar el valor
+                sum += control_product[i];
+            }
+            return sum;
+        }
+        public int[] getProcesses(int process_product_id)
+        {
+            int[] altarpiece = { 0, 30, 0, 31 };
+            if (process_product_id >= 30) return altarpiece;
+            int[] huamanga_stones = { 0, 20, 0, 0};
+            if (process_product_id >= 20) return huamanga_stones;
+            int[] huaco = { 10, 0, 11, 12 };
+            if (process_product_id >= 10) return huaco;
+            int[] nothing = { 0, 0, 0, 0 };
+            return nothing;
         }
     }
 }
