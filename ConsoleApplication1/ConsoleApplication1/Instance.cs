@@ -12,9 +12,9 @@ namespace ConsoleApplication1
         public List<Ratio> ratios;
 
         // processes
-        public int processes_num;        
+        public int processes_num;
         public List<int> processes_positions;       // puestos de trabajo por proceso
-        
+
         // products
         public int products_num;
         public List<float> products_weights;        // pesos de productos para la funcion objetivo
@@ -100,7 +100,11 @@ namespace ConsoleApplication1
         public List<int> getProcessProducts(int i)
         {
             List<int> list = new List<int>();
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 9c85b281f00c43309a7ad68bb249f42dc4742364
             if (i == 0)
             {
                 list.Add(20);       // tallado de piedras

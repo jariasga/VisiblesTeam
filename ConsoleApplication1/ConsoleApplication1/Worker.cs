@@ -45,7 +45,7 @@ namespace ConsoleApplication1
 
             return workers;
         }
-        
+
         public static Predicate<Worker> byId(int id)
         {
             return delegate (Worker worker)
@@ -57,6 +57,5 @@ namespace ConsoleApplication1
         public void print()
         {
         }
-
     }
 }
