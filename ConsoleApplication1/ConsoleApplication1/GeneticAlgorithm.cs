@@ -290,7 +290,7 @@ namespace ConsoleApplication1
                     {
                         if (job == 0)//tallado 20 o 30
                         {
-                            if (int.Parse(actualIns.ratios[j].worker.id)-1 == assignedWorkers[i])
+                            if (actualIns.ratios[j].worker.id-1 == assignedWorkers[i])
                             {
                                 if(actualIns.ratios[j].process_product_id == 20)
                                 {
@@ -323,7 +323,7 @@ namespace ConsoleApplication1
 
                         if (job == 1)//moldeado 10
                         {
-                            if (int.Parse(actualIns.ratios[j].worker.id) == assignedWorkers[i])
+                            if (actualIns.ratios[j].worker.id -1== assignedWorkers[i])
                             {
                                 if (actualIns.ratios[j].process_product_id == 10)
                                 {
@@ -344,7 +344,7 @@ namespace ConsoleApplication1
 
                         if (job == 2)//pintado 11 o 31
                         {
-                            if (int.Parse(actualIns.ratios[j].worker.id) == assignedWorkers[i])
+                            if (actualIns.ratios[j].worker.id -1 == assignedWorkers[i])
                             {
                                 if (actualIns.ratios[j].process_product_id == 11)
                                 {
@@ -377,7 +377,7 @@ namespace ConsoleApplication1
 
                         if (job == 3)//horneado 12
                         {
-                            if (int.Parse(actualIns.ratios[j].worker.id) == assignedWorkers[i])
+                            if (actualIns.ratios[j].worker.id -1 == assignedWorkers[i])
                             {
                                 if (actualIns.ratios[j].process_product_id == 12)
                                 {

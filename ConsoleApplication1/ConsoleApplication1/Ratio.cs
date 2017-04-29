@@ -20,7 +20,7 @@ namespace ConsoleApplication1
         {
             this.worker = worker;
             this.process_product_name = process_product_name;
-            this.process_product_id = process_product;            
+            this.process_product_id = process_product;
             this.breakage = breakage;
             this.time = time;
         }
@@ -42,7 +42,8 @@ namespace ConsoleApplication1
                     {
                         Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
                         ratios.Add(ratio);
-                    }                    
+
+                    }
                 }
             }
             Console.WriteLine("ratios listos!");
@@ -87,6 +88,6 @@ namespace ConsoleApplication1
                 return ratio.worker.id == worker_id && ratio.process_product_id == process_product_id;
             };
         }
-        
+
     }
 }

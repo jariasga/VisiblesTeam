@@ -22,7 +22,10 @@ namespace ConsoleApplication1
             //  Genetic
             GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
             genetic.CreateFirstGen();
-            List<int> genetic = genetic.RunGenetic();
+            List<int> genetic_solution = genetic.RunGenetic();
+            for (int i = 0; i < genetic_solution.Count(); i++)
+                Console.Write(genetic_solution[i] + ", ");
+            Console.WriteLine();
 
             Console.Read();
         }
