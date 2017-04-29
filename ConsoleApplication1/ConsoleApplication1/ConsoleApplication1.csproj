@@ -50,6 +50,7 @@
     <Compile Include="Move.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomExtensions.cs" />
     <Compile Include="Ratio.cs" />
     <Compile Include="TabuSearch.cs" />
     <Compile Include="Worker.cs" />

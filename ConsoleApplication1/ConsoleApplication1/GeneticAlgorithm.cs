@@ -12,16 +12,21 @@ namespace ConsoleApplication1
     class GeneticAlgorithm
     {
         public List<List<int>> FirstGen;
+        List<double> fitnessList = new List<double>();
+        List<double> fitnessSortedList = new List<double>();
+        List<double> invFitnessList = new List<double>();
+        List<double> invFitnessSortedList = new List<double>();
+
         Instance actualIns;
         int maxGenerations;
         double acceptablePersentaje;
-
+        double totalFitness;
 
         public GeneticAlgorithm(Instance inst) {
             FirstGen = new List<List<int>>();
             actualIns = inst;
             maxGenerations = 200;
-            acceptablePersentaje = 0.01;
+            acceptablePersentaje = 0.1;
         }
         public void CreateFirstGen() //Cargar la primera generacion
         { 
@@ -45,37 +50,65 @@ namespace ConsoleApplication1
 
         public void ParentsSelection(ref int parent1, ref int parent2, int cantidad) {
             //TO DO hacer ruleta
-            
             Random rnd = new Random();
-            parent1 = rnd.Next(0, cantidad);
-            parent2 = rnd.Next(0, cantidad);
+            double father1, father2;
+            
+            createRoulette();
+            father1 = rnd.NextDouble(0, totalFitness);
+            father2 = rnd.NextDouble(0, totalFitness);
+
+            parent1 = closestChoice(father1);
+            parent2 = closestChoice(father2);
+
             while (parent1 == parent2)
             {
                 parent2 = rnd.Next(0, cantidad);
             }
-            /*
-            parent1 = randomRoulette(parent1);
-            parent2 = randomRoulette(parent2);
-            while (parent1 == parent2)
-                parent2 = randomRoulette(parent2);*/
+        }
+        
+
+        private int closestChoice(double value)
+        {
+            int i = 0, indexInvSor;
+            double aux = 0, sum = 0, fitnessValue;
+
+            while (sum < value)
+            {
+                aux = invFitnessSortedList[i];
+                sum += aux;
+                i++;
+            }
+            indexInvSor = invFitnessSortedList.IndexOf(aux);
+            fitnessValue = fitnessSortedList[indexInvSor];
+            return fitnessList.IndexOf(fitnessValue);
         }
 
-        public int randomRoulette(int parent)
+        public int createRoulette()
         {
             Random rnd = new Random();
+            totalFitness = 0;
+            double fitnessActual;
 
-            int value = 0;
-            List<int> auxList = new List<int>();
+            fitnessList.Clear();
+            fitnessSortedList.Clear();
+            invFitnessList.Clear();
+            invFitnessSortedList.Clear();
+
             for (int i = 0; i < FirstGen.Count(); i++)
             {
-                int fit = (int)actualIns.getFitness(FirstGen[i]);
-                for (int j = 0; j < fit; j++)
-                    auxList.Add(i);
+                fitnessActual = actualIns.getFitness(FirstGen[i]);
+                
+                totalFitness += 1/fitnessActual;
+
+                fitnessList.Add(fitnessActual);
+                fitnessSortedList.Add(fitnessActual);
+                invFitnessList.Add(1 / fitnessActual);
+                invFitnessSortedList.Add(1 / fitnessActual);
             }
+            invFitnessSortedList.Reverse();
+            fitnessSortedList.Sort();
 
-            value = rnd.Next(0, auxList.Count());
-
-            return value;
+            return 0;
         }
 
         //DONE
@@ -114,15 +147,13 @@ namespace ConsoleApplication1
         public void newGenToFirstGen(List<List<int>> FirstGen, List<List<int>> NewGeneration)
         {
             //limpiar first generation
-            while (FirstGen.Count() > 0)
-                FirstGen.RemoveAt(0);
+            FirstGen.Clear();
 
-            while (NewGeneration.Count() > 0)
+            for(int i = 0; i < maxGenerations; i++)
             {
-                FirstGen.Add(NewGeneration[0]);
-                NewGeneration.RemoveAt(0);
+                FirstGen.Add(NewGeneration[i]);
             }
-            
+            NewGeneration.Clear();
         }
 
         public List<int> RunGenetic() //Inicio del programa Genetico
@@ -189,7 +220,7 @@ namespace ConsoleApplication1
 
                 //WHILE condicion del while
                 //3.1 DONE si el numero de elementos en la generacion es 200 (ya esta llena la generacion) -> salir
-                while (NewGeneration.Count() < actualIns.workers.Count())
+                while (NewGeneration.Count() < maxGenerations)
                 {
                     generalJobs.Add(0); //carving
                     generalJobs.Add(1); //molding
@@ -230,7 +261,6 @@ namespace ConsoleApplication1
                     else
                         child = null; //"clear memory" garbage collection
                 }
-
             }
             Console.WriteLine("acabo genetico");
             watch.Stop();
@@ -529,9 +559,9 @@ namespace ConsoleApplication1
 
         public void addWorkersToCertainJob(int parent1, int parent2, int typejob, List<int>jobAux,List<int> nonJob) //jobaux lista con ids de numero de trabajador
         {
-            int flagParent1=0; //0 no esta, 1 esta
+            int flagParent1=0;  //0 no esta, 1 esta
             int flagParent2=0;
-            if(typejob ==0)//tallado 20 0 30
+            if(typejob ==0)     //tallado 20 0 30
             {
                 for(int i = 0; i < FirstGen[parent1].Count(); i++)
                 {
@@ -663,8 +693,6 @@ namespace ConsoleApplication1
             }
 
         }
-
-
-
+        
     }
 }
