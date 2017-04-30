@@ -43,11 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\AssignmentManager.cs" />
     <Compile Include="Controller\Grasp.cs" />
     <Compile Include="Controller\DailyJobManager.cs" />
+    <Compile Include="Controller\ProcessManager.cs" />
+    <Compile Include="Controller\ProcessProductManager.cs" />
+    <Compile Include="Controller\ProductManager.cs" />
+    <Compile Include="Controller\RatioManager.cs" />
+    <Compile Include="Controller\SolutionList.cs" />
     <Compile Include="Controller\WorkerManager.cs" />
+    <Compile Include="Model\Assignment.cs" />
+    <Compile Include="Model\Process.cs" />
+    <Compile Include="Model\ProcessProduct.cs" />
+    <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Ratio.cs" />
     <Compile Include="Model\DailyJob.cs" />
+    <Compile Include="Model\Solution.cs" />
     <Compile Include="Model\Worker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

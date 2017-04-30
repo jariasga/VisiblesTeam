@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using InkaArt.Model;
+
+namespace InkaArt.Controller
+{
+    class AssignmentManager
+    {
+        //Funciones para el control de listas de asignaciones
+
+        public static void PrintRCL(List<Assignment> rcl, double min, double max,
+            double max_rcl)
+        {
+            Console.WriteLine("RCL: Min = {0}, Max = {1}, Rango = [{2}, {3}]", min, max,
+                min, max_rcl);
+            for (int i = 0; i < rcl.Count; i++)
+            {
+                Console.Write("Elemento del RCL {0}: ", i + 1);
+                rcl[i].Print();
+            }
+        }
+
+        public static List<Assignment> RemoveWorker(List<Assignment> candidates,
+            Worker chosen_worker)
+        {
+            //Remueve de los candidatos todas las asignaciones cuyo trabajador sea
+            //el descrito por chosen_worker.
+            for (int i = 0; i < candidates.Count; i++)
+            {
+                if (candidates[i].worker.id == chosen_worker.id)
+                    candidates.Remove(candidates[i--]);
+            }
+            return candidates;
+        }
+
+        public static bool ExceededJobsInProcess(List<Assignment> solution,
+            Process chosen_process)
+        {
+            //Verifica si la cantidad de puestos de trabajo ocupadas en la solución haya
+            //legado o no al límite de puestos de trabajo admitidos por cada proceso
+            int number_of_jobs_occuppied = 0;
+            for (int i = 0; i < solution.Count; i++)
+            {
+                if (solution[i].process_product.process.id == chosen_process.id)
+                    number_of_jobs_occuppied++;
+            }
+            return number_of_jobs_occuppied >= chosen_process.number_of_jobs;
+        }
+
+        public static List<Assignment> RemoveProcess(List<Assignment> candidates,
+            Process chosen_process)
+        {
+            //Remueve de los candidatos todas las asignaciones cuyo proceso sea
+            //el descrito por chosen_process.
+            for (int i = 0; i < candidates.Count; i++)
+            {
+                if (candidates[i].process_product.process.id == chosen_process.id)
+                    candidates.Remove(candidates[i--]);
+            }
+            return candidates;
+        }
+
+        public static List<Assignment> FilterCandidates(List<Assignment> candidates,
+            List<ProcessProduct> processes_products)
+        {
+            List<Assignment> filtered_candidates = new List<Assignment>();
+
+            //Filtrar los candidatos de manera que solo las asignaciones cuyo
+            //proceso x producto esté en la lista para el producto a preparar
+            //puedan formar parte del RCL.
+            for (int i = 0; i < candidates.Count; i++)
+            {
+                for (int j = 0; j < processes_products.Count; j++)
+                {
+                    if (candidates[i].process_product.id == processes_products[j].id)
+                        filtered_candidates.Add(candidates[i]);
+                }
+            }
+
+            return filtered_candidates;
+        }
+        
+    }
+}

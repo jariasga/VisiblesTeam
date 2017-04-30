@@ -6,35 +6,31 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Model
 {
-    class Worker
+    class Process
     {
         //Atributos
         public int id;
         public string name;
-        public string lastname;
+        public int number_of_jobs;
 
         //Constructor
-        public Worker(int id, string name, string lastname)
+        public Process(int id, string name, int number_of_jobs)
         {
             this.id = id;
             this.name = name;
-            this.lastname = lastname;
-        }
-        
-        //Métodos
-        public string GetFullName()
-        {
-            return name + " " + lastname;
+            this.number_of_jobs = number_of_jobs;
         }
 
+        //Métodos
         public void Print()
         {
-            Console.WriteLine("Trabajador #{0}: {1}", this.id, this.GetFullName());
+            Console.WriteLine("Proceso #{0}: {1} (# trabajos = {2})", this.id, this.name,
+                this.number_of_jobs);
         }
 
         public new string ToString()
         {
-            return GetFullName() + " (id " + id + ")";
+            return name + " (id " + id + ")";
         }
     }
 }

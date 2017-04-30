@@ -18,7 +18,7 @@ namespace InkaArt.Controller
             workers = new List<Worker>();
         }
 
-        public void LoadWorkers(string filename)
+        public void Load(string filename)
         {
             FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(file);
@@ -47,11 +47,11 @@ namespace InkaArt.Controller
             }
         }
 
-        public Worker GetWorkerByID(int id)
+        public Worker GetByID(int id)
         {
             for (int i = 0; i < workers.Count; i++)
             {
-                if (workers[i].ID == id) return workers[i];
+                if (workers[i].id == id) return workers[i];
             }
             return null;
         }
