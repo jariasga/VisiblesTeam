@@ -27,24 +27,23 @@ namespace ConsoleApplication1
         public TabuSearch(Instance instance)
         {
             // reactive tabu list
-            this.tabu_list_length = 10; // largo inicial
-            this.tabu_list_growth = 10; // porcentaje de crecimiento, alfa
-            this.max_no_growth = 10;    // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
+            this.tabu_list_length = 10;     // largo inicial
+            this.tabu_list_growth = 0.1;    // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
+            this.max_no_growth = 3;         // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
 
             // neighbor
-            this.neighbor_checks = 10;  // cantidad maxima de vecinos a evaluar
+            this.neighbor_checks = 500;      // cantidad maxima de vecinos a evaluar
 
             // solutions
-            this.max_iterations = 10;   // cantidad maxima de iteraciones sin una mejora en la mejor solucion
+            this.max_iterations = 10000;    // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
 
             // instance parameters
-            this.instance = instance;   // la instancia tiene datos del problema
+            this.instance = instance;       // la instancia tiene datos del problema
         }
         
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
         public List<int> getNeighbor(List<int> solution, Move move)
         {
-
             List<int> neighbor = new List<int>(solution);
             Random rnd = new Random();
 
@@ -64,16 +63,14 @@ namespace ConsoleApplication1
         }
 
         /* Flujo del algoritmo */
-        public List<int> run()
+        public void run(List<int> initial_solution)
         {
             // time
             int start_time = Environment.TickCount; // milisegundos
             int limit_time = 300000;                // 1 000 * 60 * 5 (maximo 5 miutos)
 
             // soluciones
-            List<int> initial_solution = null;
             List<int> current_solution = null;
-            List<int> next_solution = null;
             List<int> neighbor = null;
             current_solution = instance.getInitialSolution();
             initial_solution = new List<int>(current_solution);
@@ -83,29 +80,26 @@ namespace ConsoleApplication1
             int iter_count = 0;
 
             // lista tabu
-            Move next_move = null;
-            //Queue<Move> tabu_list = new Queue<Move>(tabu_list_length);  // se puede implementar FixedSizeQueue
-            TabuQueue tabu_list = new TabuQueue(tabu_list_length);
-
+            //Move next_move = null;
+            TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
             int no_growth_count = 0;
             
             // fitness
-            double initial_fitness = 0;
-            double current_fitness = instance.getFitness(current_solution);
-            double next_fitness = 0;
+            double initial_fitness = instance.getFitness(current_solution);
+            double current_fitness = initial_fitness;
             double neighbor_fitness = 0;
-            best_fitness = current_fitness;            
+            best_fitness = current_fitness;
+
+            bool improvement;
 
             // inicio
-            // condiciones de salida: tiempo || meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (Environment.TickCount - start_time < limit_time || iter_count < max_iterations)
+            // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
+            while (Environment.TickCount - start_time < limit_time && iter_count < max_iterations)
             {
                 int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 
-                next_solution = null;
-                next_fitness = int.MaxValue;    
-                next_move = null;
                 bool success = false;
+                improvement = false;
 
                 // variables para movimientos
                 Move move = new Move();
@@ -117,65 +111,72 @@ namespace ConsoleApplication1
                     neighbor_count++;
                     neighbor = getNeighbor(current_solution, move);     // se crea un vecino con un intercambio aleatorio y se guarda el movimiento
                     // el movimiento no puede estar en la lista tabu y el vecino debe ser distinto de la solucion
-                    if (!tabu_list.Contains(move) && move != last_move) 
+                    if (!tabu_list.Contains(move) && move != last_move)
                     {
+                        success = true;
                         // evalua el vecindario con la funcion objetivo
                         neighbor_fitness = instance.getFitness(neighbor);
-
-                        if (next_fitness > neighbor_fitness)
-                        {
-                            next_solution = neighbor;
-                            next_fitness = neighbor_fitness;
-                            next_move = move;
-                            success = true;
-                        }
                         // best improved: a penas encuentre un vecino que supere a la solucion actual, salimos
-                        if (current_fitness > next_fitness)
+                        if (current_fitness > neighbor_fitness)
                             break;
                     }
                 }
 
-                // cambia el espacio de busqueda si no encuentra buenas soluciones
+                // Evaluamos lo encontrado:
+
+                // si no encontro un vecino
                 if (!success)
-                {                    
-                    next_solution = initial_solution;
-                    next_fitness = initial_fitness;
-                }
-                
-                if (best_fitness > next_fitness)
                 {
-                    best_solution = next_solution;
-                    best_fitness = next_fitness;
-                    // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
-                    iter_count = 0;
+                    // cambia el espacio de busqueda si no encuentra buenas soluciones
+                    neighbor = initial_solution;
+                    neighbor_fitness = initial_fitness;                    
+                }
 
-                    // reactive tabu: como es una buena solucion, no se agranda la lista
-                    no_growth_count++;
-                }
-                else
-                {
+                // si se encontro un vecino
+                else {                    
+
+                    // si encontro un vecino superior al best_fitness actual
+                    if (best_fitness > neighbor_fitness)
+                    {
+                        // actualizamos
+                        best_solution = neighbor;
+                        best_fitness = neighbor_fitness;
+                        // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
+                        iter_count = 0;
+                        // reactive tabu: como es una buena solucion, no se agranda la lista
+                        no_growth_count++;
+
+                        improvement = true;
+                    }
+
+                    // si encontro un vecino menor al best_fitness y la lista tabu no ha crecido                
                     // reactive tabu: si no se supera la mejor solucion, se incrementa el tama;o de la lista
-                    // incrementar el tama;o de la lista tabu
-                    tabu_list.Limit = (int)((double)tabu_list.Limit * (1 + tabu_list_growth));
-                    no_growth_count = 0;
-                }
+                    else
+                    {
+                        tabu_list.Increase();
+                        no_growth_count = 0;
+                    }
+                }                 
 
-                // reactive tabu: si se super max_no_growth sin que el tama;o se increimente, se reduce
+                // reactive tabu: si se supero max_no_growth sin que el tama;o se increimente, se reduce
                 if (no_growth_count >= max_no_growth)
                 {
-                    // decrementar el tama;o de la lista tabu
-                    tabu_list.Limit = (int)((double)tabu_list.Limit * (1 - tabu_list_growth));
-                    no_growth_count = 0;
+                    tabu_list.Decrease();
+                    no_growth_count = 0;                    
                 }
+
                 // guardamos el movimiento
-                tabu_list.Enqueue(next_move);
+                tabu_list.Enqueue(move);
 
                 // siguiente iteracion
-                current_solution = next_solution;
-                current_fitness = next_fitness;                
+                current_solution = neighbor;
+                current_fitness = neighbor_fitness;
+                
+                Console.WriteLine("Funcion Objetivo: " + best_fitness.ToString() + " " + improvement.ToString() + " Lista Tabu: " + tabu_list.limit.ToString() + " " + tabu_list.Count());
             }
 
-            return best_solution;
+            Console.WriteLine("Funcion Objetivo Inicial: " + initial_fitness.ToString());
+            Console.WriteLine("acabo tabu");
         }
     }
 }

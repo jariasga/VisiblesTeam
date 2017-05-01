@@ -216,7 +216,6 @@ namespace ConsoleApplication1
                 
         }
 
-
         public void chooseAndAddWorkersInChild(List<int> assignedWorkersAux, List<int> nonAssignWorkersAux, List<int> child, int numWorkers, int job)
         {
             int mutation;

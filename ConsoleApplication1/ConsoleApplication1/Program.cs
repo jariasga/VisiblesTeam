@@ -12,23 +12,49 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Instance instance = new Instance();
+            /* todo esto debe repetirse 30 veces con 30 entradas distintas*/
+            // for(int i = 0; i < 30; i++){
 
-            //GRASP
-            Grasp grasp = new Grasp(instance);
-            List<int[]> solutions = grasp.GraspAlgorithm();
+                Instance instance = new Instance();
 
-            //  Tabu
-            TabuSearch tabu = new TabuSearch(instance);
-            List<int> tabu_solution = tabu.run();
+                /* GRASP */
+                Grasp grasp = new Grasp(instance);
+                List<int[]> solutions = grasp.GraspAlgorithm();
 
-            //  Genetic
-            GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
-            genetic.CreateFirstGen();
-            List<int> genetic_solution = genetic.RunGenetic();
-            for (int i = 0; i < genetic_solution.Count(); i++)
-                Console.Write(genetic_solution[i] + ", ");
-            Console.WriteLine();
+                /* Tabu */
+                //List<int> initial_solution = instance.getBestSolution(solutions);
+                List<int> initial_solution = instance.getInitialSolution();
+
+                TabuSearch tabu = new TabuSearch(instance);
+                tabu.run(initial_solution);
+
+                foreach (int i in tabu.best_solution)
+                    Console.Write(i + ", ");
+                Console.WriteLine();
+                Console.WriteLine("Funcion Objetivo Final: " + tabu.best_fitness.ToString());
+
+                List<int> production = instance.getProduction(tabu.best_solution);
+                Console.WriteLine("Huacos, Piedras, Retablos: ");
+                foreach (int i in production)
+                    Console.Write(i + ", ");
+                Console.WriteLine();
+
+                /* Genetic */
+                //GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
+                //genetic.CreateFirstGen();
+                //List<int> genetic_solution = genetic.RunGenetic();
+                //for (int i = 0; i < genetic_solution.Count(); i++)
+                //    Console.Write(genetic_solution[i] + ", ");
+                //Console.WriteLine();
+
+                //List<int> production = instance.getProduction(genetic_solution);
+                //Console.WriteLine("Huacos, Piedras, Retablos: ");
+                //foreach (int i in production)
+                //    Console.Write(i + ", ");
+                //Console.WriteLine();
+
+
+            //}
 
             Console.Read();
         }
