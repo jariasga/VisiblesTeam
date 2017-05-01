@@ -40,6 +40,7 @@ namespace ConsoleApplication1
             for (int i = 0; i < genetic_solution.Count(); i++)
                 Console.Write(genetic_solution[i] + ", ");
             Console.WriteLine();
+            Console.WriteLine("Fitness de la mejor solucion: " + instance.getFitness(genetic_solution));
 
             //List<int> production = instance.getProduction(genetic_solution);
             //instance.printProduction(production);
