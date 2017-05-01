@@ -24,7 +24,10 @@ namespace ConsoleApplication1
         public List<int> processes_products;        // los ids de procesos productos
 
         // ratios
+
         public double breakage_weight;                 // para los indices de perdida
+
+
         public double time_weight;
 
         public Instance()
@@ -123,30 +126,136 @@ namespace ConsoleApplication1
             return list;
         }
 
-        /* Busca el ratio de cada trabajadorxprocesoxproducto, lo multiplica por los pesos y lo suma */
+        /* Busca el ratio de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
+           Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
+        */
         public double getFitness(List<int> solution)
         {
             double fitness = 0;
             int assigned_workers = 0;
+            int index;
+            float product_weight;
 
             for (int i = 0; i < solution.Count; i++)
             {
-                Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(i+1, solution[i]));
+
+                Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(i + 1, solution[i]));
                 // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
                 if (ratio != null)
                 {
                     assigned_workers++;
-                    fitness += (ratio.breakage * breakage_weight + ratio.time * time_weight);
-                    // agregar pesos de producto
-                    // int index = (int)(solution[i]/10);
-                    // float product_weight = instance.products_weights[index];
-                    // fitness += product_weight * (ratio.breakage * instance.breakage_weight + ratio.time * instance.time_weight);
+                    // buscamos el peso del producto (producto = primer digito del procesoxproducto id)
+                    index = solution[i]/10 - 1;
+                    product_weight = products_weights[index];
+                    // sumamos el indice de perdida
+                    fitness += (ratio.breakage * breakage_weight + ratio.time * time_weight) / product_weight;
                 }
             }
 
+            // dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
         }
 
+        public List<int> getBestSolution(List<int[]> solutions)
+        {
+            int best_fitness = int.MaxValue;
+            List<int> temp;
+            List<int> best = new List<int>();
 
+            foreach(int[] solution in solutions)
+            {
+                temp = new List<int>(solution);
+                if (best_fitness > getFitness(temp))
+                    best = temp;
+            }
+
+            return best;
+        }
+
+        /* Predicado de solucion */
+        public static Predicate<int> byProcessProduct(int process_product_id)
+        {
+            return delegate (int assignment)
+            {
+                return assignment == process_product_id;
+            };
+        }
+
+        /* Predicado de solucion */
+        public static Predicate<int> byProduct(int product_id)
+        {
+            // ids: 0 Huacos, 1 piedras, 2 retablos
+            return delegate (int assignment)
+            {
+                return (assignment / 10) == (product_id + 1);
+            };
+        }
+
+        /* obtener la produccion de acuerdo  una asignacion de trabajadores */
+        public List<int> getProduction(List<int> solution)
+        {
+            // produccion por cada trabajador
+            List<int> workers_production = new List<int>(solution);
+            
+            for (int i = 0; i < solution.Count; i++)
+            {
+                Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(i + 1, solution[i]));
+                // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
+                if (ratio != null)
+                {
+                    // buscamos el indice del producto
+                    int index = solution[i] / 10 - 1;
+                    // obtenemos la produccion
+                    int produced = 0;
+                    // produced = tiempo_turno/tiempo_promedio_trabajador - rotura_promedio_trabajador   para ese proceso producto
+                    // 8 horas/ 5 minutos por huaco - 3 huacos rotos en un turno
+                    // produced = turn_time/ratio.time_avg - ratio.breakage_avg
+
+                    //por ahora
+                    produced = ratios[i].production;
+                     
+                    workers_production[i] = produced;
+                }
+            }
+
+            // produccion en cada proceso producto
+            List<int> processes_products_production = new List<int>(processes_products);
+
+            for (int i = 0; i < processes_products.Count; i++)
+            {
+                processes_products_production[i] = 0;
+                List<int> process_product = solution.FindAll(byProcessProduct(processes_products[i]));
+                foreach(int assignment in process_product)
+                {
+                    int worker_index = solution.IndexOf(assignment);
+                    processes_products_production[i] += workers_production[worker_index];
+                }
+            }
+
+            // produccion en cada producto: sera igual al minimo producido en la linea de produccion de cada producto
+            List<int> products_production = new List<int>(products_num);
+
+            for (int i = 0; i < products_num; i++)
+            {
+                List<int> processes = processes_products.FindAll(byProduct(i));
+                int min = int.MaxValue;
+                foreach(int process in processes)
+                {
+                    int process_index = processes_products.IndexOf(process);
+                    min = Math.Min(processes_products_production[process_index], min);
+                }
+                products_production.Add(min);
+            }
+
+            return products_production;
+        }
+
+        public void printProduction(List<int> production)
+        {
+            Console.WriteLine("Huacos, Piedras, Retablos: ");
+            foreach (int i in production)
+                Console.Write(i + ", ");
+            Console.WriteLine();
+        }
     }
 }

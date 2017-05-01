@@ -21,12 +21,33 @@ namespace ConsoleApplication1
         public GeneticAlgorithm(Instance inst) {
             FirstGen = new List<List<int>>();
             actualIns = inst;
-            maxGenerations = 200;
-            acceptablePersentaje = 0.05;
+            maxGenerations = 300;
+            acceptablePersentaje = 1;
             rnd = new Random();
         }
         public void CreateFirstGen() //Cargar la primera generacion
-        { 
+        {
+            /*
+            List<int> auxOneSol;
+
+            for(int i = 0; i < grasp.Count(); i++)
+            {
+                auxOneSol = new List<int>();
+                for (int j = 0; j < grasp[i].Count(); j++)
+                    auxOneSol.Add(grasp[i][j]);
+                FirstGen.Add(auxOneSol);
+            }
+
+
+            return;*/
+            List<int> auxSol;
+            for(int i = 0; i < maxGenerations; i++)
+            {
+                auxSol = new List<int>();
+                auxSol = actualIns.getInitialSolution();
+                FirstGen.Add(auxSol);
+            }
+            return;
 
             using (var fs = File.OpenRead("vi.csv"))
             using (var reader = new StreamReader(fs))
@@ -198,8 +219,8 @@ namespace ConsoleApplication1
                 {
                     generalJobs.Add(0); //carving
                     generalJobs.Add(1); //molding
-                    generalJobs.Add(2); //painting
-                    generalJobs.Add(3); //baking
+                    generalJobs.Add(3); //painting
+                    generalJobs.Add(2); //baking
                     //3.2 DONE crear individuo contrabajadores sin asignar
                     List<int> child = new List<int>();
                     for (int i = 0; i < numWorkersPerMember; i++)
@@ -221,7 +242,7 @@ namespace ConsoleApplication1
                         checkWithChild(nonAssignWorkersAux, child);
                         //4.2 DONE random de 1 a 100 si sale 1 elegir al azar
                         //4.2.1 DONE si no, sacar a los  n mejores (ya estan revisados los que posiblemente ya estan asignados en child)
-                        //para ocuparlos (podria ser ruleta)
+                        //para ocuparlos
                         //4.3 DONE actualizar a child con los nuevos puestos
                         //4.4 DONE agregar a los que quedaron en generaljobs a los no asignados (general job quedaria vacio para la nueva corrida)
                         chooseAndAddWorkersInChild(assignedWorkersAux, nonAssignWorkersAux, child, actualIns.processes_positions[puestoActual], puestoActual);
@@ -240,8 +261,12 @@ namespace ConsoleApplication1
                 //tambien deshechar las generaciones
                 int aux=0;
                 double testNewGen = evaluateFitness(NewGeneration,ref aux);
-                if (fitnessValue<=testNewGen)
+                if (fitnessValue <= testNewGen)
+                {
                     NewGeneration.Clear();
+                    generationCount--;
+                }
+                    
 
             }
             Console.WriteLine("acabo genetico");
@@ -262,7 +287,6 @@ namespace ConsoleApplication1
                 
         }
 
-
         public void chooseAndAddWorkersInChild(List<int> assignedWorkersAux, List<int> nonAssignWorkersAux, List<int> child, int numWorkers, int job)
         {
             int mutation;
@@ -273,37 +297,37 @@ namespace ConsoleApplication1
             //DONE que existen suficientes en assignedWorkersAux
             if (assignedWorkersAux.Count() < numWorkers)
             {
-                while (nonAssignWorkersAux.Count() > 0)
-                {
-                    assignedWorkersAux.Add(nonAssignWorkersAux[0]);
-                    nonAssignWorkersAux.RemoveAt(0);
-                }
+                for (int i = 0; i < nonAssignWorkersAux.Count(); i++)
+                    assignedWorkersAux.Add(nonAssignWorkersAux[i]);
+                nonAssignWorkersAux.Clear();
+                DeleteRepeated(assignedWorkersAux);
+                checkWithChild(assignedWorkersAux, child);
             }
 
 
             //MUTACION
             mutation = rnd.Next(1, 101);
-            int workerIndex;
-            if (mutation == 0)// Ocurre la mutacion, random
+            int mutationFlag =0;
+            if (mutation == 1)// Ocurre la mutacion, random
             {
-                for (int i = 0; i < numWorkers; i++)
-                {
-                    workerIndex = rnd.Next(0, assignedWorkersAux.Count());
-                    //random producto del proceso
-                    int process = giveMeRandomProcess(job);
-                    child[assignedWorkersAux[workerIndex]] = process;
-                    assignedWorkersAux.RemoveAt(workerIndex);
-
-                }
+                for (int i = 0; i < nonAssignWorkersAux.Count(); i++)
+                    assignedWorkersAux.Add(nonAssignWorkersAux[i]);
+                nonAssignWorkersAux.Clear();
+                mutationFlag = 1;
             }
-            else //no existe mutacion
-            {
+            //else //no existe mutacion
+            //{
                 //DONE llena los arreglos
                 fillBest2(assignedWorkersAux, job, bestRatioPerWorker, bestJobPerWorker);
 
                 for (int i = 0; i < numWorkers; i++)
                 {
-                    int index = findBest(bestRatioPerWorker);
+                    int index;
+                    if (mutationFlag == 1)
+                    {
+                        index = rnd.Next(0, assignedWorkersAux.Count());
+                    }else
+                        index = findBest(bestRatioPerWorker);
                     //actualizar child
                     child[assignedWorkersAux[index]] = bestJobPerWorker[index];
                     assignedWorkersAux.RemoveAt(index);
@@ -314,8 +338,9 @@ namespace ConsoleApplication1
                 for (int i = 0; i < assignedWorkersAux.Count(); i++)
                     nonAssignWorkersAux.Add(assignedWorkersAux[i]);
                 assignedWorkersAux.Clear();
+                DeleteRepeated(nonAssignWorkersAux);
                 checkWithChild(nonAssignWorkersAux, child);
-            }
+            //}
         }
 
         public void fillBest2(List<int> assignedWorkers, int job, List<double> ratios, List<int> jobPerWork)

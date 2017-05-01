@@ -12,22 +12,45 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Instance instance = new Instance();
+            /* todo esto debe repetirse 30 veces con 30 entradas distintas*/
+            // for(int i = 0; i < 30; i++){
 
-            /* tabu
+                Instance instance = new Instance();
+
+                /* GRASP */
+                Grasp grasp = new Grasp(instance);
+                List<int[]> solutions = grasp.GraspAlgorithm();
+
+                
+
+            /* Tabu 
+            //List<int> initial_solution = instance.getBestSolution(solutions);
+            List<int> initial_solution = instance.getInitialSolution();
             TabuSearch tabu = new TabuSearch(instance);
-            List<int> tabu_solution = tabu.run();*/
 
-            /*genetic*/
+            tabu.run(initial_solution);
+
+            tabu.print();                
+            List<int> production = instance.getProduction(tabu.best_solution);
+            instance.printProduction(production);*/
+
+            /* Genetic */
             GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
             genetic.CreateFirstGen();
             List<int> genetic_solution = genetic.RunGenetic();
             for (int i = 0; i < genetic_solution.Count(); i++)
                 Console.Write(genetic_solution[i] + ", ");
             Console.WriteLine();
-
             double fitness = instance.getFitness(genetic_solution);
             Console.WriteLine("Fitness de la solucion final " + fitness);
+
+            List<int> production = instance.getProduction(genetic_solution);
+            instance.printProduction(production);
+
+
+            //}
+
+
 
             Console.Read();
         }

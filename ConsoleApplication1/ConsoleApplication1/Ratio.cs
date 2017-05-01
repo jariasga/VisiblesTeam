@@ -15,14 +15,17 @@ namespace ConsoleApplication1
         public string process_product_name;
         public double breakage;
         public double time;
+        public double loss_index;
+        public int production;
 
-        public Ratio(Worker worker, string process_product_name, int process_product, double breakage, double time)
+        public Ratio(Worker worker, string process_product_name, int process_product, double breakage, double time,int production)
         {
             this.worker = worker;
             this.process_product_name = process_product_name;
             this.process_product_id = process_product;
             this.breakage = breakage;
             this.time = time;
+            this.production = production;
         }
 
         static public List<Ratio> read(string filename, List<Worker> workers)
@@ -40,8 +43,9 @@ namespace ConsoleApplication1
                     worker = workers.Find(Worker.byId(int.Parse(values[0])));
                     if (worker != null)
                     {
-                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
+                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]),int.Parse(values[5]));
                         ratios.Add(ratio);
+
                     }
                 }
             }
@@ -87,6 +91,5 @@ namespace ConsoleApplication1
                 return ratio.worker.id == worker_id && ratio.process_product_id == process_product_id;
             };
         }
-
     }
 }
