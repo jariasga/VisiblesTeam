@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using InkaArt.Controller;
 
 namespace ConsoleApplication1
 {
@@ -15,11 +16,12 @@ namespace ConsoleApplication1
             /* todo esto debe repetirse 30 veces con 30 entradas distintas*/
             // for(int i = 0; i < 30; i++){
 
-                Instance instance = new Instance();
+                Instance instance = new Instance("Workers_60.csv", "Ratios_60.csv");
 
                 /* GRASP */
-                Grasp grasp = new Grasp(instance);
+                Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
                 List<int[]> solutions = grasp.GraspAlgorithm();
+            return;
 
                 /* Tabu */
                 //List<int> initial_solution = instance.getBestSolution(solutions);

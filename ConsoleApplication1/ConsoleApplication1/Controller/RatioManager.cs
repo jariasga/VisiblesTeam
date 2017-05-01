@@ -36,7 +36,7 @@ namespace InkaArt.Controller
                 Worker worker = workers.GetByID(int.Parse(values[0]));
                 Job job = jobs.GetByID(int.Parse(values[2]));
                 double breakage_index = double.Parse(values[3]);
-                double time_index = double.Parse(values[3]);
+                double time_index = double.Parse(values[4]);
                 //Añadir ratio histórico a la lista
                 ratios.Add(new Ratio(worker, job, breakage_index, time_index));
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace ConsoleApplication1
         public double breakage_weight;              // para los indices de perdida
         public double time_weight;
 
-        public Instance()
+        public Instance(string workers_filename, string ratios_filename)
         {
             // processes
             processes_num = 4;
@@ -59,8 +60,15 @@ namespace ConsoleApplication1
             breakage_weight = 0.5;
             time_weight = 0.5;
 
-            workers = Worker.read("Workers.csv");
-            ratios = Ratio.read("Ratios.csv", workers);
+            try {
+                workers = Worker.read(workers_filename);
+                ratios = Ratio.read(ratios_filename, workers);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Error: No se pudieron encontrar los archivos.");
+                Environment.Exit(1);
+            }
         }
 
         /* Solucion inicial aleatoria (temporal) */

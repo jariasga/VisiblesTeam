@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using InkaArt.Model;
+using System.IO;
 
 namespace InkaArt.Controller
 {
@@ -16,15 +17,42 @@ namespace InkaArt.Controller
 
         //Atributos
         private WorkerManager workers;
-        private JobManager processes_products;
+        private JobManager jobs;
         private RatioManager ratios;
         private Random random;
 
-        public Grasp(WorkerManager workers, JobManager processes_products,
-            RatioManager ratios)
+        public Grasp(string workers_filename, string ratios_filename)
+        {
+            workers = new WorkerManager();
+            try
+            {
+                workers.Load(workers_filename);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.Error.WriteLine("Error: No se pudo encontrar el archivo "
+                    + workers_filename);
+                Environment.Exit(10);
+            }
+            jobs = new JobManager(new ProcessManager(), new ProductManager());
+            ratios = new RatioManager(workers, jobs);
+            try
+            {
+                ratios.Load(ratios_filename);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.Error.WriteLine("Error: No se pudo encontrar el archivo "
+                    + ratios_filename);
+                Environment.Exit(11);
+            }
+            random = new Random();
+        }
+
+        public Grasp(WorkerManager workers, JobManager jobs, RatioManager ratios)
         {
             this.workers = workers;
-            this.processes_products = processes_products;
+            this.jobs = jobs;
             this.ratios = ratios;
             this.random = new Random();
         }
@@ -84,7 +112,7 @@ namespace InkaArt.Controller
                 if (rcl.Count <= 0)
                 {
                     solution =  AssignmentManager.RemoveLastAssignments(solution,
-                        current_product, processes_products);
+                        current_product, jobs);
                     break;
                 }
 
@@ -110,7 +138,7 @@ namespace InkaArt.Controller
                 //Si current_product está vacío, entonces estamos ante un nuevo producto,
                 //por lo que hay que agregar los procesos asociados
                 if (current_product.Count == 0)
-                    current_product = processes_products.GetOtherProcessesByProduct(
+                    current_product = jobs.GetOtherProcessesByProduct(
                         current_product, chosen.process_product);
                 //Si no está vacío, entonces quitamos el proceso x producto que se escogió
                 //en esta iteración
