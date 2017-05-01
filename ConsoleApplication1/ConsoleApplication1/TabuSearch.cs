@@ -178,5 +178,13 @@ namespace ConsoleApplication1
             Console.WriteLine("Funcion Objetivo Inicial: " + initial_fitness.ToString());
             Console.WriteLine("acabo tabu");
         }
+
+        public void print()
+        {
+            foreach (int i in best_solution)
+                Console.Write(i + ", ");
+            Console.WriteLine();
+            Console.WriteLine("Funcion Objetivo Final: " + best_fitness.ToString());
+        }
     }
 }

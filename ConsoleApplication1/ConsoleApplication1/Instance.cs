@@ -241,5 +241,13 @@ namespace ConsoleApplication1
 
             return products_production;
         }
+
+        public void printProduction(List<int> production)
+        {
+            Console.WriteLine("Huacos, Piedras, Retablos: ");
+            foreach (int i in production)
+                Console.Write(i + ", ");
+            Console.WriteLine();
+        }
     }
 }

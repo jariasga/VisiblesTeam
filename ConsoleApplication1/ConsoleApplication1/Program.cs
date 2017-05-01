@@ -24,20 +24,13 @@ namespace ConsoleApplication1
                 /* Tabu */
                 //List<int> initial_solution = instance.getBestSolution(solutions);
                 List<int> initial_solution = instance.getInitialSolution();
-
                 TabuSearch tabu = new TabuSearch(instance);
+
                 tabu.run(initial_solution);
 
-                foreach (int i in tabu.best_solution)
-                    Console.Write(i + ", ");
-                Console.WriteLine();
-                Console.WriteLine("Funcion Objetivo Final: " + tabu.best_fitness.ToString());
-
+                tabu.print();                
                 List<int> production = instance.getProduction(tabu.best_solution);
-                Console.WriteLine("Huacos, Piedras, Retablos: ");
-                foreach (int i in production)
-                    Console.Write(i + ", ");
-                Console.WriteLine();
+                instance.printProduction(production);
 
                 /* Genetic */
                 //GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
@@ -48,10 +41,7 @@ namespace ConsoleApplication1
                 //Console.WriteLine();
 
                 //List<int> production = instance.getProduction(genetic_solution);
-                //Console.WriteLine("Huacos, Piedras, Retablos: ");
-                //foreach (int i in production)
-                //    Console.Write(i + ", ");
-                //Console.WriteLine();
+                //instance.printProduction(production);
 
 
             //}
