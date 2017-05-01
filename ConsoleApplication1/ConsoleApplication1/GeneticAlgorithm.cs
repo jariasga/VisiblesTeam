@@ -15,13 +15,15 @@ namespace ConsoleApplication1
         Instance actualIns;
         int maxGenerations;
         double acceptablePersentaje;
+        Random rnd;
 
 
         public GeneticAlgorithm(Instance inst) {
             FirstGen = new List<List<int>>();
             actualIns = inst;
             maxGenerations = 200;
-            acceptablePersentaje = 0.02;
+            acceptablePersentaje = 0.05;
+            rnd = new Random();
         }
         public void CreateFirstGen() //Cargar la primera generacion
         { 
@@ -46,23 +48,16 @@ namespace ConsoleApplication1
         public void ParentsSelection(ref int parent1, ref int parent2, int cantidad) {
             //TO DO hacer ruleta
             
-            Random rnd = new Random();
             parent1 = rnd.Next(0, cantidad);
             parent2 = rnd.Next(0, cantidad);
             while (parent1 == parent2)
             {
                 parent2 = rnd.Next(0, cantidad);
             }
-            /*
-            parent1 = randomRoulette(parent1);
-            parent2 = randomRoulette(parent2);
-            while (parent1 == parent2)
-                parent2 = randomRoulette(parent2);*/
         }
 
         public int randomRoulette(int parent)
         {
-            Random rnd = new Random();
 
             int value = 0;
             List<int> auxList = new List<int>();
@@ -79,7 +74,7 @@ namespace ConsoleApplication1
         }
 
         //DONE
-        public void saveBestInGen(List<List<int>> Generation, List<int> bestInGen, int pos)
+        public void saveBestInGen(List<List<int>> Generation, List<int> bestInGen, int pos,List<int>bestSolGenetic)
         {
             //primero limpiar bestingen y luego agregar
             while (bestInGen.Count()>0)
@@ -92,6 +87,21 @@ namespace ConsoleApplication1
                 bestInGen.Add(Generation[pos][i]);
             }
             Console.WriteLine("fitness parcial: " + actualIns.getFitness(bestInGen));
+
+            if ((actualIns.getFitness(bestInGen) < actualIns.getFitness(bestSolGenetic)) && (bestSolGenetic.Count() > 0))
+            {
+                bestSolGenetic.Clear();
+                for (int i = 0; i < bestInGen.Count(); i++)
+                    bestSolGenetic.Add(bestInGen[i]);
+            }
+            else
+            {
+                if (bestSolGenetic.Count() == 0)
+                {
+                    for (int i = 0; i < bestInGen.Count(); i++)
+                        bestSolGenetic.Add(bestInGen[i]);
+                }
+            }
 
         }
 
@@ -114,14 +124,13 @@ namespace ConsoleApplication1
         public void newGenToFirstGen(List<List<int>> FirstGen, List<List<int>> NewGeneration)
         {
             //limpiar first generation
-            while (FirstGen.Count() > 0)
-                FirstGen.RemoveAt(0);
+            FirstGen.Clear();
 
-            while (NewGeneration.Count() > 0)
-            {
-                FirstGen.Add(NewGeneration[0]);
-                NewGeneration.RemoveAt(0);
-            }
+            for (int i = 0; i < NewGeneration.Count(); i++)
+                FirstGen.Add(NewGeneration[i]);
+
+            //limpiar new generation
+            NewGeneration.Clear();
             
         }
 
@@ -142,6 +151,7 @@ namespace ConsoleApplication1
             int numWorkersPerMember = 50; //numero de trabajadores en una solucion (individuo)
             List<List<int>>  NewGeneration; //mejor solucion hasta ahora (deberia ser por generacion)
             List<int> bestSolution = new List<int>(); ;
+            List<int> bestSolGenetic = new List<int>(); ;
             int generationCount = 0;  //contador de cuantas generacion la mejor solucion se ha mantenido sin cambiar
             List<int> generalJobs = new List<int>();
             
@@ -151,7 +161,6 @@ namespace ConsoleApplication1
 
             int parent1 = 0, parent2 = 0;       //indices de los padres seleccionados
 
-            Random rnd = new Random();
 
             NewGeneration = new List<List<int>>();
 
@@ -163,33 +172,29 @@ namespace ConsoleApplication1
             //1. DONE contar los puestos en general (tallar, moldear, pintar, hornear) se podria usar instance 
             //cambiar por numWorkersInJob
 
-            //WHILE DONE poner tiempo en el while
+            //WHILE general del algoritmo
             while (/*Environment.TickCount - start_time < limit_time && */generationCount < maxGenerations)
             {
                 
                 generationCount++;
-                //2. hallar fitness de la solucion
+                //2. hallar fitness de la solucion, >0 se usa como flag para la primera generacion
                 if (NewGeneration.Count() > 0)
                 {
-                    fitnessValue = evaluateFitness(NewGeneration, ref bestPos);//bestPos-> el mejor de la solucion
-                //2.1 si bestSolution se ha mantenido mucho tiempo ->salir (bestSolutionCount)
-                //2.2 DONE nueva generacion pasa a ser firstgen y se actualiza la mejor solucion con la mejor de la gen
-                //2.3 DONE limpiar newgeneracion (vacia)
-               
-                    newGenToFirstGen(FirstGen, NewGeneration); //tambien vacia la lista newGeneration
-                    saveBestInGen(FirstGen, bestSolution, bestPos);
+                    //bestPos-> el mejor de la solucion
+                    fitnessValue = evaluateFitness(NewGeneration, ref bestPos);
+
+                    //2.2 DONE nueva generacion pasa a ser firstgen y se actualiza la mejor solucion con la mejor de la gen
+                    //2.3 DONE limpiar newgeneracion (vacia)
+                    newGenToFirstGen(FirstGen, NewGeneration);  //tambien vacia la lista newGeneration
+                    saveBestInGen(FirstGen, bestSolution, bestPos,bestSolGenetic);
                 }
 
                 //limpiar nonassigned
-                if (nonAssignWorkersAux.Count() > 0)
-                {
-                    while (nonAssignWorkersAux.Count() > 0)
-                        nonAssignWorkersAux.RemoveAt(0);
-                }
+                nonAssignWorkersAux.Clear();
 
-                //WHILE condicion del while
+                //WHILE para la creacion de una generacion
                 //3.1 DONE si el numero de elementos en la generacion es 200 (ya esta llena la generacion) -> salir
-                while (NewGeneration.Count() < /*actualIns.workers.Count()*/maxGenerations)
+                while (NewGeneration.Count() < maxGenerations)
                 {
                     generalJobs.Add(0); //carving
                     generalJobs.Add(1); //molding
@@ -226,10 +231,17 @@ namespace ConsoleApplication1
                     //REVISAR el if
                     double result = evaluateFitnessInChild(child);
                     if (evaluateFitnessInChild(child)<fitnessValue*(1+ acceptablePersentaje))
+                       // if(true)
                         NewGeneration.Add(child);
                     else
                         child = null; //"clear memory" garbage collection
                 }
+
+                //tambien deshechar las generaciones
+                int aux=0;
+                double testNewGen = evaluateFitness(NewGeneration,ref aux);
+                if (fitnessValue<=testNewGen)
+                    NewGeneration.Clear();
 
             }
             Console.WriteLine("acabo genetico");
@@ -239,7 +251,7 @@ namespace ConsoleApplication1
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}:{3:00}", ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds/10);
             Console.WriteLine("Runtime " + elapsedTime);
-            return bestSolution;
+            return bestSolGenetic;
         }
 
         //DONE
@@ -268,12 +280,11 @@ namespace ConsoleApplication1
                 }
             }
 
-            Random rnd = new Random();
 
             //MUTACION
             mutation = rnd.Next(1, 101);
             int workerIndex;
-            if (mutation == 1)// Ocurre la mutacion, random
+            if (mutation == 0)// Ocurre la mutacion, random
             {
                 for (int i = 0; i < numWorkers; i++)
                 {
@@ -289,13 +300,7 @@ namespace ConsoleApplication1
             {
                 //DONE llena los arreglos
                 fillBest2(assignedWorkersAux, job, bestRatioPerWorker, bestJobPerWorker);
-                //REVISAR Forced mutation
-               /* if (bestJobPerWorker.Count() < assignedWorkersAux.Count())
-                {
-                    bestRatioPerWorker.Add(bestRatioPerWorker[0]);
-                    bestJobPerWorker.Add(bestJobPerWorker[0]);
-                }*/
-                //halla a los n mejores
+
                 for (int i = 0; i < numWorkers; i++)
                 {
                     int index = findBest(bestRatioPerWorker);
@@ -306,12 +311,10 @@ namespace ConsoleApplication1
                     bestRatioPerWorker.RemoveAt(index);
                 }
                 //agregar a los que sobran a nonassignjob
-                while (assignedWorkersAux.Count() > 0)
-                {
-                    nonAssignWorkersAux.Add(assignedWorkersAux[0]);
-                    assignedWorkersAux.RemoveAt(0);
-
-                }
+                for (int i = 0; i < assignedWorkersAux.Count(); i++)
+                    nonAssignWorkersAux.Add(assignedWorkersAux[i]);
+                assignedWorkersAux.Clear();
+                checkWithChild(nonAssignWorkersAux, child);
             }
         }
 
@@ -598,6 +601,11 @@ namespace ConsoleApplication1
 
         public int findBest(List<double> bestRatios)
         {
+            //mutacion
+            int mutationValue = rnd.Next(1, 101);
+            if (mutationValue == 1)
+                return rnd.Next(0, bestRatios.Count());
+
             int value = 0;
             double ratio = bestRatios[0];
             for (int i = 0; i < bestRatios.Count()-1; i++)
@@ -614,7 +622,6 @@ namespace ConsoleApplication1
         public int giveMeRandomProcess(int job)
         {
             int returnValue=0;
-            Random rnd = new Random();
             if (job == 0)
             {
                 int value = rnd.Next(0, 2);
@@ -626,7 +633,7 @@ namespace ConsoleApplication1
 
             if (job == 1)
                 returnValue = 10;
-            if (job == 2)
+            if (job == 3)
             {
                 int value = rnd.Next(0, 2);
                 if (value == 0)
@@ -635,7 +642,7 @@ namespace ConsoleApplication1
                     returnValue = 31;
             }
 
-            if (job == 3)
+            if (job == 2)
                 returnValue = 12;
 
 
