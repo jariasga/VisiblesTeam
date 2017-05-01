@@ -5,23 +5,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using InkaArt.Controller;
 
 namespace ConsoleApplication1
 {
     class Program
     {
-        //public Worker first_worker { get; protected set; }
         static void Main(string[] args)
         {
-            int painting = 10;
-            int baking = 10;
-            int carving = 10;
+            /* todo esto debe repetirse 30 veces con 30 entradas distintas*/
+            // for(int i = 0; i < 30; i++){
 
-            //Instance instance = new Instance(painting, baking, carving);
-            //instance.print();
-            GeneticAlgorithm genetic = new GeneticAlgorithm();
-            genetic.CreateFirstGen();
-            genetic.Print();
+                Instance instance = new Instance("Workers_60.csv", "Ratios_60.csv");
+
+                /* GRASP */
+                Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
+                List<int[]> solutions = grasp.GraspAlgorithm();
+
+            /* Tabu 
+            //List<int> initial_solution = instance.getBestSolution(solutions);
+            List<int> initial_solution = instance.getInitialSolution();
+            TabuSearch tabu = new TabuSearch(instance);
+
+            tabu.run(initial_solution);
+
+            tabu.print();                
+            List<int> production = instance.getProduction(tabu.best_solution);
+            instance.printProduction(production);*/
+
+            /* Genetic */
+            GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
+            genetic.CreateFirstGen(solutions);
+            List<int> genetic_solution = genetic.RunGenetic();
+            for (int i = 0; i < genetic_solution.Count(); i++)
+                Console.Write(genetic_solution[i] + ", ");
+            Console.WriteLine();
+
+            //List<int> production = instance.getProduction(genetic_solution);
+            //instance.printProduction(production);
+
+
+            //}
+
             Console.Read();
         }
     }
