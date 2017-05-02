@@ -27,14 +27,14 @@ namespace ConsoleApplication1
             /* Tabu */
             //List<int> initial_solution = instance.getBestSolution(solutions);
             Console.WriteLine("\tTABU running ....");
-            List<int> initial_solution = instance.getInitialSolution();
+            /*List<int> initial_solution = instance.getInitialSolution();
             TabuSearch tabu = new TabuSearch(instance);
 
             tabu.run(initial_solution);
 
             tabu.print();                
             List<int> production = instance.getProduction(tabu.best_solution);
-            instance.printProduction(production);
+            instance.printProduction(production);*/
             
             /* Genetic */
             Console.WriteLine("\tGENETIC running ....");
@@ -45,6 +45,9 @@ namespace ConsoleApplication1
                 Console.Write(genetic_solution[i] + ", ");
             Console.WriteLine();
             Console.WriteLine("Fitness de la mejor solucion: " + instance.getFitness(genetic_solution));
+
+            List<int> productionGenetic = instance.getProduction(genetic_solution);
+            instance.printProduction(productionGenetic);
 
             //List<int> production = instance.getProduction(genetic_solution);
             //instance.printProduction(production);

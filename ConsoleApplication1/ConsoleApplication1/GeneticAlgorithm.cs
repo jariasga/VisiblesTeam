@@ -22,7 +22,6 @@ namespace ConsoleApplication1
         List<double> invFitnessList = new List<double>();
         List<double> invFitnessSortedList = new List<double>();
         private int generationCount = 0;
-        Random rnd;
 
         public GeneticAlgorithm(Instance inst)//constructor
         {
@@ -31,7 +30,6 @@ namespace ConsoleApplication1
 
             maxGenerations = 100;
             acceptablePercentaje = 10;
-            rnd = new Random();
         }
 
         public void CreateFirstGen(List<int[]>grasp) //cargar la primera generacion
@@ -52,8 +50,8 @@ namespace ConsoleApplication1
         public List<int> RunGenetic() //inicio del programa Genetico
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();//tiempo de ejecucion        
-
             int start_time = Environment.TickCount;
+            int limit_time = 300000; //1000 ms * 60s *5m
 
             int numWorkersPerMember = FirstGen[0].Count(); //numero de trabajadores en una solucion (individuo)
             List<List<int>> NewGeneration; //mejor solucion hasta ahora
@@ -74,9 +72,12 @@ namespace ConsoleApplication1
             int bestPos = 0;
 
             fitnessValue = evaluateFitness(FirstGen, ref bestPos);
-            Console.WriteLine("Gen 1 fitness: " + fitnessValue);
+            //Console.WriteLine("Gen 1 fitness: " + fitnessValue);
 
-            fitnessValue = evaluateFitness(FirstGen, ref bestPos);
+            for (int i = 0; i < FirstGen[bestPos].Count(); i++)
+                bestSolGenetic.Add(FirstGen[bestPos][i]);
+
+            //fitnessValue = evaluateFitness(FirstGen, ref bestPos);
 
             //WHILE general del algoritmo
             while (generationCount < maxGenerations)/*Environment.TickCount - start_time < limit_time && */
@@ -110,11 +111,11 @@ namespace ConsoleApplication1
                     ParentsSelection(ref parent1, ref parent2, FirstGen.Count());//seleccion de padres
 
                     //WHILE para asignar puestos de trabajo a una solucion
-                    while (generalJobs.Count() != 0)
+                    while (generalJobs.Count() != 0 && Environment.TickCount - start_time < limit_time)
                     {
-
-                        int puestoActual = generalJobs[0];//primer puesto a asignar
-                        generalJobs.RemoveAt(0);// se usa para que en el siguiente loop cambie al siguiente trabajo
+                        int iJob = RandomExtensions.getRandom(0, generalJobs.Count());
+                        int puestoActual = generalJobs[iJob];//primer puesto a asignar
+                        generalJobs.RemoveAt(iJob);// se usa para que en el siguiente loop cambie al siguiente trabajo
 
                         //agregar a la lista correspondiente los trabajadores
                         addWorkersToCertainJob(parent1, parent2, puestoActual, assignedWorkersAux, nonAssignWorkersAux);
@@ -127,6 +128,9 @@ namespace ConsoleApplication1
                         chooseAndAddWorkersInChild(assignedWorkersAux, nonAssignWorkersAux, child, actualIns.processes_positions[puestoActual], puestoActual);
                     }
 
+                    if (Environment.TickCount - start_time > limit_time)
+                        break;
+
                     double result = evaluateFitnessInChild(child);//evaluar fitness del hijo
 
                     //si es mejor se agrega a la solucion
@@ -135,6 +139,10 @@ namespace ConsoleApplication1
                     else
                         child = null; 
                 }
+
+                if (Environment.TickCount - start_time > limit_time)
+                    break;
+                PrintTime(start_time,limit_time);
 
                 //deshechar las generaciones <to test>
                 int aux = 0;
@@ -159,14 +167,14 @@ namespace ConsoleApplication1
         //ROULETTE------------------------------------------------------------------------------------------------------------------------
         public void ParentsSelection(ref int parent1, ref int parent2, int cantidad)
         {
-            Random rnd = new Random();
+            Random ran = new Random();
             double father1, father2;
 
             createRoulette();//crea una lista ordenada con el fitness de todos los posibles padres
 
             //elige los mejores fitnes, a menor fitness mas probabilidad a ser elegidos
-            father1 = rnd.NextDouble(0, totalFitness);
-            father2 = rnd.NextDouble(0, totalFitness);
+            father1 = ran.NextDouble(0, totalFitness);
+            father2 = ran.NextDouble(0, totalFitness);
 
             //elige al padre mas cercano a la solucion
             parent1 = closestChoice(father1);
@@ -175,7 +183,7 @@ namespace ConsoleApplication1
             //control para no elegir al mismo padre 2 veces
             while (parent1 == parent2)
             {
-                parent2 = rnd.Next(0, cantidad);
+                parent2 = ran.Next(0, cantidad);
             }
         }
 
@@ -197,7 +205,6 @@ namespace ConsoleApplication1
 
         public int createRoulette()
         {
-            Random rnd = new Random();
             totalFitness = 0;
             double fitnessActual;
 
@@ -234,7 +241,7 @@ namespace ConsoleApplication1
                 for (int j = 0; j < fit; j++)
                     auxList.Add(i);
             }
-            value = rnd.Next(0, auxList.Count());
+            value = RandomExtensions.getRandom(0, auxList.Count());
             return value;
         }
 
@@ -268,9 +275,9 @@ namespace ConsoleApplication1
         public int findBest(List<double> bestRatios)// encuentra el mejor ratio
         {
             //mutacion
-            int mutationValue = rnd.Next(1, 101);
+            int mutationValue = RandomExtensions.getRandom(1, 101);
             if (mutationValue == 1)
-                return rnd.Next(0, bestRatios.Count());
+                return RandomExtensions.getRandom(0, bestRatios.Count());
 
             int value = 0;
             double ratio = bestRatios[0];
@@ -323,7 +330,7 @@ namespace ConsoleApplication1
 
 
             //MUTACION
-            mutation = rnd.Next(1, 101);
+            mutation = RandomExtensions.getRandom(1, 101);
             int mutationFlag = 0;
             if (mutation == 1)// Ocurre la mutacion, random
             {
@@ -342,7 +349,7 @@ namespace ConsoleApplication1
                 int index;
                 if (mutationFlag == 1)
                 {
-                    index = rnd.Next(0, assignedWorkersAux.Count());
+                    index = RandomExtensions.getRandom(0, assignedWorkersAux.Count());
                 }
                 else
                     index = findBest(bestRatioPerWorker);
@@ -389,7 +396,7 @@ namespace ConsoleApplication1
             int returnValue = 0;
             if (job == 0)
             {
-                int value = rnd.Next(0, 2);
+                int value = RandomExtensions.getRandom(0, 2);
                 if (value == 0)
                     returnValue = 20;
                 if (value == 1)
@@ -400,7 +407,7 @@ namespace ConsoleApplication1
                 returnValue = 10;
             if (job == 3)
             {
-                int value = rnd.Next(0, 2);
+                int value = RandomExtensions.getRandom(0, 2);
                 if (value == 0)
                     returnValue = 11;
                 if (value == 1)
@@ -430,6 +437,18 @@ namespace ConsoleApplication1
             for (int i = 0; i < fitnessList.Count(); i++)
                 Console.WriteLine("El trabajador: " + i + " es asignado al puesto: " + PrintPosition(fitnessList[i]));
 
+        }
+
+        public void PrintTime(int currentTime, int limitTime)
+        {
+            if (currentTime > 60000 && currentTime < 120000)
+                Console.WriteLine("...20%");
+            if (currentTime > 120000 && currentTime < 180000)
+                Console.WriteLine("...40%");
+            if (currentTime > 180000 && currentTime < 240000)
+                Console.WriteLine("...60%");
+            if (currentTime > 240000 && currentTime < 300000)
+                Console.WriteLine("...80%");
         }
 
         public string PrintPosition(int i)
@@ -467,7 +486,7 @@ namespace ConsoleApplication1
             {
                 bestInGen.Add(Generation[pos][i]);
             }
-            Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + Math.Round(actualIns.getFitness(bestInGen), 3));
+            //Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + Math.Round(actualIns.getFitness(bestInGen), 3));
 
             if ((actualIns.getFitness(bestInGen) < actualIns.getFitness(bestSolGenetic)) && (bestSolGenetic.Count() > 0))
             {
@@ -483,7 +502,7 @@ namespace ConsoleApplication1
                         bestSolGenetic.Add(bestInGen[i]);
                 }
             }
-            Console.WriteLine("\t//Best: " + Math.Round(actualIns.getFitness(bestSolGenetic), 3));
+            //Console.WriteLine("\t//Best: " + Math.Round(actualIns.getFitness(bestSolGenetic), 3));
         }
 
         //la nueva generacion pasa a ser la actual (FirstGen) para el siguiente loop

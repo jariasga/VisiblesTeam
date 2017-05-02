@@ -15,5 +15,12 @@ namespace ConsoleApplication1
         {
             return random.NextDouble() * (maxValue - minValue) + minValue;
         }
+
+        public static int getRandom(int min, int max)
+        {
+            Random ran = new Random(Guid.NewGuid().GetHashCode());
+            return ran.Next(min, max);
+        }
     }
+
 }
