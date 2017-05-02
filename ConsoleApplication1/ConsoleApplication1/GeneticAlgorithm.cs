@@ -29,8 +29,8 @@ namespace ConsoleApplication1
             FirstGen = new List<List<int>>();
             actualIns = inst;
 
-            maxGenerations = 20;
-            acceptablePercentaje = 100;
+            maxGenerations = 100;
+            acceptablePercentaje = 10;
             rnd = new Random();
         }
 
@@ -136,7 +136,7 @@ namespace ConsoleApplication1
             {
                 bestInGen.Add(Generation[pos][i]);
             }
-            Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + actualIns.getFitness(bestInGen));
+            Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + Math.Round(actualIns.getFitness(bestInGen),3));
 
             if ((actualIns.getFitness(bestInGen) < actualIns.getFitness(bestSolGenetic)) && (bestSolGenetic.Count() > 0))
             {
@@ -152,7 +152,7 @@ namespace ConsoleApplication1
                         bestSolGenetic.Add(bestInGen[i]);
                 }
             }
-            Console.WriteLine("\t//Best: " + actualIns.getFitness(bestSolGenetic));
+            Console.WriteLine("\t//Best: " + Math.Round(actualIns.getFitness(bestSolGenetic),3));
         }
 
         public double evaluateFitness(List<List<int>> NewGeneration, ref int bestPos)
@@ -217,7 +217,6 @@ namespace ConsoleApplication1
             /*List<int> numWorkersInJob;     //numer de trabajadores necesitados por puesto
             numWorkersInJob = new List<int>();*/
             //tiempo de ejecucion
-            Console.WriteLine("inicio genetico");
             var watch = System.Diagnostics.Stopwatch.StartNew();            
 
             //0 carving 1 painting 2 kaking 3 molding
@@ -242,7 +241,7 @@ namespace ConsoleApplication1
             int bestPos = 0;
 
             fitnessValue = evaluateFitness(FirstGen, ref bestPos);
-            Console.WriteLine("Gen 0 fitness : " + fitnessValue);
+            Console.WriteLine("Gen 1 fitness: " + fitnessValue);
 
             //impresion de salida trabajador-> puesto
             //PrintWorkerAndPosition(FirstGen[bestPos]);
