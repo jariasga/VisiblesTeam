@@ -23,6 +23,7 @@ namespace ConsoleApplication1
         public double best_fitness;
         public List<int> best_solution;
 
+        
         /* Se inicializan los parametros a calibrar */
         public TabuSearch(Instance instance)
         {
@@ -36,7 +37,7 @@ namespace ConsoleApplication1
 
             // solutions
             this.max_iterations = 10000;    // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
-
+            
             // instance parameters
             this.instance = instance;       // la instancia tiene datos del problema
         }
@@ -65,15 +66,9 @@ namespace ConsoleApplication1
         /* Flujo del algoritmo */
         public void run(List<int> initial_solution)
         {
-            // time
-            int start_time = Environment.TickCount; // milisegundos
-            int limit_time = 300000;                // 1 000 * 60 * 5 (maximo 5 miutos)
-
             // soluciones
-            List<int> current_solution = null;
+            List<int> current_solution = new List<int>(initial_solution);
             List<int> neighbor = null;
-            current_solution = instance.getInitialSolution();
-            initial_solution = new List<int>(current_solution);
             best_solution = current_solution;
 
             // condicion de meseta: contador de iteraciones sin mejora en best_solution
@@ -94,7 +89,7 @@ namespace ConsoleApplication1
 
             // inicio
             // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (Environment.TickCount - start_time < limit_time && iter_count < max_iterations)
+            while (Environment.TickCount - instance.start_time < instance.limit_time && iter_count < max_iterations)
             {
                 int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 
