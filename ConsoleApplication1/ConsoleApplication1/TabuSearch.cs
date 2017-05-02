@@ -173,7 +173,7 @@ namespace ConsoleApplication1
                 current_solution = neighbor;
                 current_fitness = neighbor_fitness;
 
-                Console.WriteLine("Funcion Objetivo: " + best_fitness.ToString() + " " + improvement.ToString() + " Lista Tabu: " + tabu_list.limit.ToString() + " " + tabu_list.Count());
+                if (ConsoleApplication1.Program.debugStatus) Console.WriteLine("Funcion Objetivo: " + best_fitness.ToString() + " " + improvement.ToString() + " Lista Tabu: " + tabu_list.limit.ToString() + " " + tabu_list.Count());
             }
 
             Console.WriteLine("Funcion Objetivo Inicial: " + initial_fitness.ToString());

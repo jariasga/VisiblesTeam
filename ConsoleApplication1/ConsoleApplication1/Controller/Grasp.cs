@@ -69,7 +69,7 @@ namespace InkaArt.Controller
             for (int i = 0; (((end = Environment.TickCount) - start) <= max_time_value)
                 && i < Iterations; i++)
             {
-                Console.WriteLine("========= Iteración GRASP #{0} =========", i + 1);
+                if (ConsoleApplication1.Program.debugStatus) Console.WriteLine("========= Iteración GRASP #{0} =========", i + 1);
 
                 //Obtener la lista de candidatos y calcular la función de costo para
                 //cada trabajador
@@ -79,14 +79,14 @@ namespace InkaArt.Controller
                 Solution solution = GenerateSolution(candidates);
                 solutions.Add(solution);
             }
-            Console.WriteLine("===================================");
+            if (ConsoleApplication1.Program.debugStatus) Console.WriteLine("===================================");
 
             end = Environment.TickCount;
-            Console.Error.WriteLine("Tiempo total de ejecución: {0}.{1} segundos",
+            if (ConsoleApplication1.Program.debugStatus) Console.Error.WriteLine("Tiempo total de ejecución: {0}.{1} segundos",
                 (end - start) / 1000, (end-start) % 1000);
 
             List<int[]> array_list = solutions.ToArrayList();
-            solutions.PrintSolutionList(array_list);
+            if (ConsoleApplication1.Program.debugStatus) solutions.PrintSolutionList(array_list);
             return array_list;
         }
 
@@ -128,9 +128,9 @@ namespace InkaArt.Controller
                 solution.Add(chosen);
                 objective_function_value += chosen.cost_value;
 
-                Console.Write("En la iteración {0} se escogio la asignación: ",
+                if (ConsoleApplication1.Program.debugStatus) Console.Write("En la iteración {0} se escogio la asignación: ",
                     construction_iteration);
-                chosen.Print();
+                if (ConsoleApplication1.Program.debugStatus) chosen.Print();
 
                 //Remover los candidatos relacionados al trabajador escogido
                 candidates = AssignmentManager.RemoveWorker(candidates, chosen.worker);
@@ -168,13 +168,13 @@ namespace InkaArt.Controller
                     break;
                 } */
 
-                Console.WriteLine("Fin de la iteración {0}. Nos quedamos con {1} candidatos "
+                /*Console.WriteLine("Fin de la iteración {0}. Nos quedamos con {1} candidatos "
                     + "del set original de {2}.", construction_iteration, candidates.Count,
-                    ratios.NumberOfRatios());
+                    ratios.NumberOfRatios());*/
             }
 
             Solution solution_object = new Solution(solution, objective_function_value);
-            solution_object.Print();
+            if (ConsoleApplication1.Program.debugStatus) solution_object.Print();
             return solution_object;
         }
 

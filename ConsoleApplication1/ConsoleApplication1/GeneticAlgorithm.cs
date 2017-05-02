@@ -21,6 +21,7 @@ namespace ConsoleApplication1
         List<double> fitnessSortedList = new List<double>();
         List<double> invFitnessList = new List<double>();
         List<double> invFitnessSortedList = new List<double>();
+        private int generationCount = 0;
         Random rnd;
 
         public GeneticAlgorithm(Instance inst)
@@ -28,11 +29,11 @@ namespace ConsoleApplication1
             FirstGen = new List<List<int>>();
             actualIns = inst;
 
-            maxGenerations = 500;
-            acceptablePercentaje = 10;
+            maxGenerations = 20;
+            acceptablePercentaje = 100;
             rnd = new Random();
-
         }
+
         public void CreateFirstGen(List<int[]>grasp) //Cargar la primera generacion
         {
             
@@ -48,7 +49,6 @@ namespace ConsoleApplication1
         }
 
         public void ParentsSelection(ref int parent1, ref int parent2, int cantidad) {
-            //TO DO hacer ruleta
             Random rnd = new Random();
             double father1, father2;
             
@@ -96,7 +96,6 @@ namespace ConsoleApplication1
             {
                 fitnessActual = actualIns.getFitness(FirstGen[i]);
 
-
                 totalFitness += 1 / fitnessActual;
 
                 fitnessList.Add(fitnessActual);
@@ -109,7 +108,6 @@ namespace ConsoleApplication1
 
             return 0;
         }
-
         
         public int randomRoulette(int parent)
         {
@@ -122,13 +120,10 @@ namespace ConsoleApplication1
                 for (int j = 0; j < fit; j++)
                     auxList.Add(i);
             }
-
             value = rnd.Next(0, auxList.Count());
-
             return value;
         }
-
-        //DONE
+        
         public void saveBestInGen(List<List<int>> Generation, ref List<int> bestInGen,ref int pos,ref  List<int> bestSolGenetic)
         {
             //primero limpiar bestingen y luego agregar
@@ -141,8 +136,7 @@ namespace ConsoleApplication1
             {
                 bestInGen.Add(Generation[pos][i]);
             }
-            Console.WriteLine("fitness parcial: " + actualIns.getFitness(bestInGen));
-
+            Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + actualIns.getFitness(bestInGen));
 
             if ((actualIns.getFitness(bestInGen) < actualIns.getFitness(bestSolGenetic)) && (bestSolGenetic.Count() > 0))
             {
@@ -158,7 +152,7 @@ namespace ConsoleApplication1
                         bestSolGenetic.Add(bestInGen[i]);
                 }
             }
-
+            Console.WriteLine("\t//Best: " + actualIns.getFitness(bestSolGenetic));
         }
 
         public double evaluateFitness(List<List<int>> NewGeneration, ref int bestPos)
@@ -233,7 +227,6 @@ namespace ConsoleApplication1
             List<List<int>> NewGeneration; //mejor solucion hasta ahora (deberia ser por generacion)
             List<int> bestSolution = new List<int>(); ;
             List<int> bestSolGenetic = new List<int>(); ;
-            int generationCount = 0;  //contador de cuantas generacion la mejor solucion se ha mantenido sin cambiar
             List<int> generalJobs = new List<int>();
 
 
@@ -328,13 +321,13 @@ namespace ConsoleApplication1
                 //tambien deshechar las generaciones
                 int aux = 0;
                 double testNewGen = evaluateFitness(NewGeneration, ref aux);
-                if (testNewGen >10000)
+                if (testNewGen > 10000)
                 {
                     NewGeneration.Clear();
                     generationCount--;
                 }
             }
-            Console.WriteLine("acabo genetico");
+            Console.WriteLine("Acabó Genetico");
             watch.Stop();
             TimeSpan ts = watch.Elapsed;
 
@@ -531,9 +524,7 @@ namespace ConsoleApplication1
                 best1 = 0; best2 = 0;
                 id1 = -1;
                 id2 = -1;
-
             }
-
         }
 
 
@@ -738,9 +729,7 @@ namespace ConsoleApplication1
             if (job == 2)
                 returnValue = 12;
 
-
             return returnValue;
-
         }
 
 
@@ -857,7 +846,6 @@ namespace ConsoleApplication1
             }
             DeleteRepeated(jobAux);
             DeleteRepeated(nonJob);
-
         }
 
         public void DeleteRepeated(List<int> jobAux)
@@ -882,7 +870,6 @@ namespace ConsoleApplication1
                 }
             }
         }
-
 
         public void Print() //imprime los resultados
         {

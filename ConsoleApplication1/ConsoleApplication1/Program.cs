@@ -11,19 +11,22 @@ namespace ConsoleApplication1
 {
     class Program
     {
+        public static bool debugStatus = false;
         static void Main(string[] args)
         {
             /* todo esto debe repetirse 30 veces con 30 entradas distintas*/
             // for(int i = 0; i < 30; i++){
 
-                Instance instance = new Instance("Workers_60.csv", "Ratios_60.csv");
+            Instance instance = new Instance("Workers_60.csv", "Ratios_60.csv");
 
-                /* GRASP */
-                Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
-                List<int[]> solutions = grasp.GraspAlgorithm();
+            /* GRASP */
+            Console.WriteLine("  GRASP running ....");
+            Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
+            List<int[]> solutions = grasp.GraspAlgorithm();
 
-            /* Tabu 
+            /* Tabu */
             //List<int> initial_solution = instance.getBestSolution(solutions);
+            Console.WriteLine("  TABU running ....");
             List<int> initial_solution = instance.getInitialSolution();
             TabuSearch tabu = new TabuSearch(instance);
 
@@ -31,9 +34,10 @@ namespace ConsoleApplication1
 
             tabu.print();                
             List<int> production = instance.getProduction(tabu.best_solution);
-            instance.printProduction(production);*/
-
+            instance.printProduction(production);
+            
             /* Genetic */
+            Console.WriteLine("  GENETIC running ....");
             GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
             genetic.CreateFirstGen(solutions);
             List<int> genetic_solution = genetic.RunGenetic();
@@ -44,12 +48,6 @@ namespace ConsoleApplication1
 
             //List<int> production = instance.getProduction(genetic_solution);
             //instance.printProduction(production);
-
-
-            //}
-
-            double fitness = instance.getFitness(genetic_solution);
-            Console.WriteLine("Fitness de la solucion final " + fitness);
 
             Console.Read();
         }
