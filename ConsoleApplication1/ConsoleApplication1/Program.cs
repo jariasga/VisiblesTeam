@@ -20,14 +20,14 @@ namespace ConsoleApplication1
             Instance instance = new Instance("Workers_60.csv", "Ratios_60.csv");
 
             /* GRASP */
-            Console.WriteLine("  GRASP running ....");
+            Console.WriteLine("\tGRASP running ....");
             Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
             List<int[]> solutions = grasp.GraspAlgorithm();
 
             /* Tabu */
             //List<int> initial_solution = instance.getBestSolution(solutions);
-            Console.WriteLine("  TABU running ....");
-            /*List<int> initial_solution = instance.getInitialSolution();
+            Console.WriteLine("\tTABU running ....");
+            List<int> initial_solution = instance.getInitialSolution();
             TabuSearch tabu = new TabuSearch(instance);
 
             tabu.run(initial_solution);
@@ -35,9 +35,9 @@ namespace ConsoleApplication1
             tabu.print();                
             List<int> production = instance.getProduction(tabu.best_solution);
             instance.printProduction(production);
-            */
+            
             /* Genetic */
-            Console.WriteLine("  GENETIC running ....");
+            Console.WriteLine("\tGENETIC running ....");
             GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
             genetic.CreateFirstGen(solutions);
             List<int> genetic_solution = genetic.RunGenetic();
