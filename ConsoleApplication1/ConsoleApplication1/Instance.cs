@@ -143,7 +143,9 @@ namespace ConsoleApplication1
 
             for (int i = 0; i < solution.Count; i++)
             {
+
                 Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(i + 1, solution[i]));
+
                 // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
                 if (ratio != null)
                 {
