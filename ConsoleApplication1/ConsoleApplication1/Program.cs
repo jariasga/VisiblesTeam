@@ -23,12 +23,9 @@ namespace ConsoleApplication1
                 List<int[]> solutions = grasp.GraspAlgorithm();
 
                 /* Tabu */
-                //List<int> initial_solution = instance.getBestSolution(solutions);
-                List<int> initial_solution = instance.getInitialSolution();
+                List<int> initial_solution = instance.getBestSolution(solutions);
                 TabuSearch tabu = new TabuSearch(instance);
-
                 tabu.run(initial_solution);
-
                 tabu.print();                
                 List<int> production = instance.getProduction(tabu.best_solution);
                 instance.printProduction(production);

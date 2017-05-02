@@ -70,10 +70,8 @@ namespace ConsoleApplication1
             int limit_time = 300000;                // 1 000 * 60 * 5 (maximo 5 miutos)
 
             // soluciones
-            List<int> current_solution = null;
+            List<int> current_solution = new List<int>(initial_solution);
             List<int> neighbor = null;
-            current_solution = instance.getInitialSolution();
-            initial_solution = new List<int>(current_solution);
             best_solution = current_solution;
 
             // condicion de meseta: contador de iteraciones sin mejora en best_solution
