@@ -28,7 +28,7 @@ namespace ConsoleApplication1
             FirstGen = new List<List<int>>();
             actualIns = inst;
 
-            maxGenerations = 100;
+            maxGenerations = 500;
             acceptablePercentaje = 10;
             rnd = new Random();
 
