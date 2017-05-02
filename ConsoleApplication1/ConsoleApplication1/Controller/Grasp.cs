@@ -95,13 +95,16 @@ namespace InkaArt.Controller
             List<Assignment> solution = new List<Assignment>();
             double objective_function_value = 0;
 
-            List<Job> current_product = new List<Job>();
+            //List<Job> current_product = new List<Job>();
 
-            for (int construction_iteration = 0; candidates.Count > 0;
+            for (int construction_iteration = 1; candidates.Count > 0;
                 construction_iteration++)
             {
                 //Obtener una lista de los trabajadores más eficientes
-                List<Assignment> rcl;
+                List<Assignment> rcl = GenerateRCL(candidates);
+
+                /*
+
                 //Si la lista current_product está vacía, estamos ante un nuevo producto
                 if (current_product.Count == 0) rcl = GenerateRCL(candidates);
                 //Si no está vacía, entonces para el RCL solo se considerarán los
@@ -111,17 +114,22 @@ namespace InkaArt.Controller
                 //Si el RCL sale vacío, hemos tenido un error en algún lado :S
                 if (rcl.Count <= 0)
                 {
-                    solution =  AssignmentManager.RemoveLastAssignments(solution,
+                    Console.Error.WriteLine("El RCL llegó a cero en la iteración {0}.",
+                        construction_iteration);
+                    solution = AssignmentManager.RemoveLastAssignments(solution,
                         current_product, jobs);
                     break;
                 }
+
+                */
 
                 //Escoger un trabajador al azar e incorporarlo en la solución
                 Assignment chosen = rcl[random.Next(0, rcl.Count - 1)];
                 solution.Add(chosen);
                 objective_function_value += chosen.cost_value;
 
-                Console.Write("Se escogio la asignación: ");
+                Console.Write("En la iteración {0} se escogio la asignación: ",
+                    construction_iteration);
                 chosen.Print();
 
                 //Remover los candidatos relacionados al trabajador escogido
@@ -137,18 +145,32 @@ namespace InkaArt.Controller
 
                 //Si current_product está vacío, entonces estamos ante un nuevo producto,
                 //por lo que hay que agregar los procesos asociados
-                if (current_product.Count == 0)
+                /* if (current_product.Count == 0)
                     current_product = jobs.GetOtherProcessesByProduct(
                         current_product, chosen.process_product);
                 //Si no está vacío, entonces quitamos el proceso x producto que se escogió
                 //en esta iteración
-                else
-                    current_product.Remove(chosen.process_product);
+                else current_product.Remove(chosen.process_product); */
 
                 //Recalcular los costos para la función objetivo
                 for (int k = 0; k < candidates.Count; k++)
+                {
                     candidates[k].CalculateNextCostValue(objective_function_value,
                         construction_iteration);
+                }
+
+                /* if (candidates.Count <= 0)
+                {
+                    Console.Error.WriteLine("La lista de candidatos llegó a cero en la "
+                        + "iteración {0}.", construction_iteration);
+                    solution = AssignmentManager.RemoveLastAssignments(solution,
+                        current_product, jobs);
+                    break;
+                } */
+
+                Console.WriteLine("Fin de la iteración {0}. Nos quedamos con {1} candidatos "
+                    + "del set original de {2}.", construction_iteration, candidates.Count,
+                    ratios.NumberOfRatios());
             }
 
             Solution solution_object = new Solution(solution, objective_function_value);

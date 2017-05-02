@@ -21,7 +21,7 @@ namespace ConsoleApplication1
                 /* GRASP */
                 Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
                 List<int[]> solutions = grasp.GraspAlgorithm();
-            return;
+                return;
 
                 /* Tabu */
                 //List<int> initial_solution = instance.getBestSolution(solutions);
