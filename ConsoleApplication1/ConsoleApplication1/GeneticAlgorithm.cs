@@ -22,16 +22,14 @@ namespace ConsoleApplication1
         List<double> invFitnessList = new List<double>();
         List<double> invFitnessSortedList = new List<double>();
         private int generationCount = 0;
-        Random rnd;
 
         public GeneticAlgorithm(Instance inst)
         {
             FirstGen = new List<List<int>>();
             actualIns = inst;
 
-            maxGenerations = 100;
+            maxGenerations = 200;
             acceptablePercentaje = 10;
-            rnd = new Random();
         }
 
         public void CreateFirstGen(List<int[]>grasp) //Cargar la primera generacion
@@ -49,19 +47,19 @@ namespace ConsoleApplication1
         }
 
         public void ParentsSelection(ref int parent1, ref int parent2, int cantidad) {
-            Random rnd = new Random();
+            Random ran = new Random();
             double father1, father2;
             
             createRoulette();
-            father1 = rnd.NextDouble(0, totalFitness);
-            father2 = rnd.NextDouble(0, totalFitness);
+            father1 = ran.NextDouble(0, totalFitness);
+            father2 = ran.NextDouble(0, totalFitness);
 
             parent1 = closestChoice(father1);
             parent2 = closestChoice(father2);
 
             while (parent1 == parent2)
             {
-                parent2 = rnd.Next(0, cantidad);
+                parent2 = ran.Next(0, cantidad);
             }
         }
 
@@ -83,7 +81,6 @@ namespace ConsoleApplication1
 
         public int createRoulette()
         {
-            Random rnd = new Random();
             totalFitness = 0;
             double fitnessActual;
 
@@ -120,7 +117,7 @@ namespace ConsoleApplication1
                 for (int j = 0; j < fit; j++)
                     auxList.Add(i);
             }
-            value = rnd.Next(0, auxList.Count());
+            value = RandomExtensions.getRandom(0, auxList.Count());
             return value;
         }
         
@@ -363,7 +360,7 @@ namespace ConsoleApplication1
 
 
             //MUTACION
-            mutation = rnd.Next(1, 101);
+            mutation = RandomExtensions.getRandom(1, 101);
             int mutationFlag = 0;
             if (mutation == 1)// Ocurre la mutacion, random
             {
@@ -382,7 +379,7 @@ namespace ConsoleApplication1
                 int index;
                 if (mutationFlag == 1)
                 {
-                    index = rnd.Next(0, assignedWorkersAux.Count());
+                    index = RandomExtensions.getRandom(0, assignedWorkersAux.Count());
                 }
                 else
                     index = findBest(bestRatioPerWorker);
@@ -685,9 +682,9 @@ namespace ConsoleApplication1
         public int findBest(List<double> bestRatios)
         {
             //mutacion
-            int mutationValue = rnd.Next(1, 101);
+            int mutationValue = RandomExtensions.getRandom(1, 101);
             if (mutationValue == 1)
-                return rnd.Next(0, bestRatios.Count());
+                return RandomExtensions.getRandom(0, bestRatios.Count());
 
             int value = 0;
             double ratio = bestRatios[0];
@@ -707,7 +704,7 @@ namespace ConsoleApplication1
             int returnValue = 0;
             if (job == 0)
             {
-                int value = rnd.Next(0, 2);
+                int value = RandomExtensions.getRandom(0, 2);
                 if (value == 0)
                     returnValue = 20;
                 if (value == 1)
@@ -718,7 +715,7 @@ namespace ConsoleApplication1
                 returnValue = 10;
             if (job == 3)
             {
-                int value = rnd.Next(0, 2);
+                int value = RandomExtensions.getRandom(0, 2);
                 if (value == 0)
                     returnValue = 11;
                 if (value == 1)
