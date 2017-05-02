@@ -40,7 +40,7 @@ namespace ConsoleApplication1
             // instance parameters
             this.instance = instance;       // la instancia tiene datos del problema
         }
-        
+
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
         public List<int> getNeighbor(List<int> solution, Move move)
         {
@@ -48,17 +48,17 @@ namespace ConsoleApplication1
             Random rnd = new Random();
 
             // buscamos trabajadores
-            int worker1 = rnd.Next(solution.Count);             
+            int worker1 = rnd.Next(solution.Count);
             int worker2 = rnd.Next(solution.Count);
             // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-            while (solution.Count > 1 && worker1 == worker2)    
+            while (solution.Count > 1 && worker1 == worker2)
                 worker2 = rnd.Next(solution.Count);
             // intercambiamos valores
             neighbor[worker1] = solution[worker2];
             neighbor[worker2] = solution[worker1];
             // guardamos movimiento
             move = new Move(neighbor, worker1, worker2);
-            
+
             return neighbor;
         }
 
@@ -81,7 +81,7 @@ namespace ConsoleApplication1
             //Move next_move = null;
             TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
             int no_growth_count = 0;
-            
+
             // fitness
             double initial_fitness = instance.getFitness(current_solution);
             double current_fitness = initial_fitness;
@@ -127,11 +127,12 @@ namespace ConsoleApplication1
                 {
                     // cambia el espacio de busqueda si no encuentra buenas soluciones
                     neighbor = initial_solution;
-                    neighbor_fitness = initial_fitness;                    
+                    neighbor_fitness = initial_fitness;
                 }
 
                 // si se encontro un vecino
-                else {                    
+                else
+                {
 
                     // si encontro un vecino superior al best_fitness actual
                     if (best_fitness > neighbor_fitness)
@@ -154,13 +155,13 @@ namespace ConsoleApplication1
                         tabu_list.Increase();
                         no_growth_count = 0;
                     }
-                }                 
+                }
 
                 // reactive tabu: si se supero max_no_growth sin que el tama;o se increimente, se reduce
                 if (no_growth_count >= max_no_growth)
                 {
                     tabu_list.Decrease();
-                    no_growth_count = 0;                    
+                    no_growth_count = 0;
                 }
 
                 // guardamos el movimiento
@@ -169,8 +170,8 @@ namespace ConsoleApplication1
                 // siguiente iteracion
                 current_solution = neighbor;
                 current_fitness = neighbor_fitness;
-                
-                Console.WriteLine("Funcion Objetivo: " + best_fitness.ToString() + " " + improvement.ToString() + " Lista Tabu: " + tabu_list.limit.ToString() + " " + tabu_list.Count());
+
+                if (ConsoleApplication1.Program.debugStatus) Console.WriteLine("Funcion Objetivo: " + best_fitness.ToString() + " " + improvement.ToString() + " Lista Tabu: " + tabu_list.limit.ToString() + " " + tabu_list.Count());
             }
 
             Console.WriteLine("Funcion Objetivo Inicial: " + initial_fitness.ToString());

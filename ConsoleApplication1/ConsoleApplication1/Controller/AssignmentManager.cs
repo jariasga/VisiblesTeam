@@ -88,19 +88,47 @@ namespace InkaArt.Controller
             List<Job> current_product, JobManager processes_products)
         {
             //Si la lista está vacía, no editar nada
-            if (current_product.Count <= 0) return solution;
+            if (current_product.Count <= 0)
+            {
+                Console.WriteLine("Llegó aquí pero no hay nada en la lista :o");
+                return solution;
+            }
 
             //Obtener los procesos x productos del producto current_product.product
             //que no están en la lista current_product.
+            Console.Write("El último producto fue: {0}. ",
+                current_product[0].product.ToString());
+            Console.Write("Tenemos pendientes los puestos de trabajo: ");
+            for (int i = 0; i < current_product.Count; i++)
+            {
+                Console.Write(current_product[i].ToString());
+            }
+            Console.WriteLine();
+
             List<Job> last_processes_products = new List<Job>();
             last_processes_products = processes_products.GetOtherProcessesByProduct(
                 last_processes_products, current_product[0]);
             for (int i = 1; i < current_product.Count; i++)
+            {
                 last_processes_products.Remove(current_product[i]);
+            }
+
+            Console.Write("Entonces la lista restante debe tener los puestos de trabajo: ");
+            for (int i = 0; i < last_processes_products.Count; i++)
+            {
+                Console.Write(last_processes_products[i].ToString());
+            }
+            Console.WriteLine();
 
             //Quitamos las últimas (last_processes_products) asignaciones de la solución
             for (int i = 1; i <= last_processes_products.Count; i++)
-                solution.RemoveAt(solution.Count - i);
+            {
+                Console.WriteLine("Se quitó de la solución la asignación #{0} ({1}), " +
+                    "antes teníamos {2} ", solution.Count - 1,
+                    solution[solution.Count-1].ToString(), solution.Count);
+                solution.RemoveAt(solution.Count - 1);
+                Console.WriteLine("y ahora tenemos {0} asignaciones.", solution.Count);
+            }
 
             return solution;
         }

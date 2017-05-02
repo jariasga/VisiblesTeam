@@ -62,5 +62,10 @@ namespace InkaArt.Controller
                     new Assignment(ratio.worker, ratio.process_product, ratio.loss_index));
             return candidates;
         }
+
+        public int NumberOfRatios()
+        {
+            return ratios.Count;
+        }
     }
 }

@@ -143,7 +143,9 @@ namespace ConsoleApplication1
 
             for (int i = 0; i < solution.Count; i++)
             {
+
                 Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(i + 1, solution[i]));
+
                 // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
                 if (ratio != null)
                 {
@@ -207,14 +209,11 @@ namespace ConsoleApplication1
                 // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
                 if (ratio != null)
                 {
-                    // buscamos el indice del producto
-                    int index = solution[i] / 10 - 1;
                     // obtenemos la produccion
-                    int produced = 0;                   
                     // produced = tiempo_turno/tiempo_promedio_trabajador - rotura_promedio_trabajador   para ese proceso producto
                     // 8 horas/ 5 minutos por huaco - 3 huacos rotos en un turno
                     // produced = turn_time/ratio.time_avg - ratio.breakage_avg
-                    workers_production[i] = produced;
+                    workers_production[i] = ratio.production;
                 }
             }
 
@@ -256,6 +255,32 @@ namespace ConsoleApplication1
             foreach (int i in production)
                 Console.Write(i + ", ");
             Console.WriteLine();
+        }
+
+        public void printResults(List<int> tabu, List<int> genetic, string path)
+        {
+            using (var w = new StreamWriter(path))
+            {
+                foreach (Worker worker in workers)
+                {
+                    string tabu_name =  "No asignado";
+                    Ratio tabu_ratio = ratios.Find(Ratio.byProcessProductId(tabu[worker.id]));
+                    if (tabu_ratio != null) tabu_name = tabu_ratio.process_product_name;
+
+                    string genetic_name = "No asignado";
+                    Ratio genetic_ratio = ratios.Find(Ratio.byProcessProductId(genetic[worker.id]));                    
+                    if (genetic_ratio != null) genetic_name = genetic_ratio.process_product_name;
+
+                    var line = string.Format("{0};{1};{3}", worker.id, tabu_name, genetic_name);
+                    w.WriteLine(line);
+                    w.Flush();
+                }
+                // fitness
+                var line_fitness = string.Format("Funcion Objetivo;{0};{1}",getFitness(tabu), getFitness(genetic));
+                w.WriteLine(line_fitness);
+                // production                
+                // losses
+            }
         }
     }
 }

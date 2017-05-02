@@ -50,14 +50,35 @@ namespace InkaArt.Controller
                     Console.Write("{0,2} ", solution_list[i][j]);
                 }
                 Console.WriteLine();
-                for (int j = 1; j <= 3; j++)
+
+                /*for (int j = 1; j <= 3; j++)
                 {
                     int sum = solution_list[i].Count(value => (value >= 10*j) &&
                     ( value < (10+10*j)));
-                    Console.WriteLine("Producto {0} tiene en total {1} procesos", j, sum);
-                }
+                    int quotient = sum / ((j == 1) ? 3 : (j == 2) ? 1 : 2);
+                    int residue = sum % ((j == 1) ? 3 : (j == 2) ? 1 : 2);
+                    Console.WriteLine("Producto {0} tiene en total {1} procesos, de los cuales "
+                        + "{2} están terminados y {3} sin terminar.", j, sum, quotient, residue);
+                }*/
 
+                PrintProcessesCount(solution_list[i]);
             }
+        }
+
+        private void PrintProcessesCount(int[] array_list)
+        {
+            int moldeado = 0, tallado = 0, pintado = 0, horneado = 0, not_assigned = 0;
+            for (int i = 0; i < number_of_workers; i++)
+            {
+                if (array_list[i] == 0) not_assigned++;
+                if (array_list[i] == 10) moldeado++;
+                if (array_list[i] == 20 || array_list[i] == 30) tallado++;
+                if (array_list[i] == 11 || array_list[i] == 31) pintado++;
+                if (array_list[i] == 12) horneado++;
+            }
+            Console.WriteLine("Procesos ocupados: moldeado = {0}, tallado = {1}, pintado "
+                + "= {2}, horneado = {3}, sin asignar = {4}.", moldeado, tallado, pintado,
+                horneado, not_assigned);
         }
 
     }
