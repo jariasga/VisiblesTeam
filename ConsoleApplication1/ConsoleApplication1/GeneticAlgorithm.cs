@@ -24,7 +24,7 @@ namespace ConsoleApplication1
         private int generationCount = 0;
         Random rnd;
 
-        public GeneticAlgorithm(Instance inst)
+        public GeneticAlgorithm(Instance inst)//constructor
         {
             FirstGen = new List<List<int>>();
             actualIns = inst;
@@ -34,7 +34,7 @@ namespace ConsoleApplication1
             rnd = new Random();
         }
 
-        public void CreateFirstGen(List<int[]>grasp) //Cargar la primera generacion
+        public void CreateFirstGen(List<int[]>grasp) //cargar la primera generacion
         {
             
             List<int> auxOneSol;
@@ -47,18 +47,132 @@ namespace ConsoleApplication1
             }
             return;
         }
+        
 
-        public void ParentsSelection(ref int parent1, ref int parent2, int cantidad) {
+        public List<int> RunGenetic() //inicio del programa Genetico
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();//tiempo de ejecucion        
+
+            int start_time = Environment.TickCount;
+
+            int numWorkersPerMember = FirstGen[0].Count(); //numero de trabajadores en una solucion (individuo)
+            List<List<int>> NewGeneration; //mejor solucion hasta ahora
+            List<int> bestSolution = new List<int>(); ;
+            List<int> bestSolGenetic = new List<int>(); ;
+            List<int> generalJobs = new List<int>();
+
+
+            List<int> assignedWorkersAux = new List<int>(); //lista auxiliar de trabajadores asignados a un puesto
+            List<int> nonAssignWorkersAux = new List<int>(); //lista auxiliar de trabajadores no asignados
+
+            int parent1 = 0, parent2 = 0;//indices de los padres seleccionados
+
+
+            NewGeneration = new List<List<int>>();
+
+            double fitnessValue;
+            int bestPos = 0;
+
+            fitnessValue = evaluateFitness(FirstGen, ref bestPos);
+            Console.WriteLine("Gen 1 fitness: " + fitnessValue);
+
+            fitnessValue = evaluateFitness(FirstGen, ref bestPos);
+
+            //WHILE general del algoritmo
+            while (generationCount < maxGenerations)/*Environment.TickCount - start_time < limit_time && */
+            {
+
+                generationCount++;
+                //la condicion del if se usa como flag para la primera generacion
+                if (NewGeneration.Count() > 0)
+                {
+                    fitnessValue = evaluateFitness(NewGeneration, ref bestPos);//bestPos-> el mejor de la solucion
+
+                    newGenToFirstGen(ref FirstGen, ref NewGeneration);  //tambien vacia la lista NewGeneration
+                    saveBestInGen(FirstGen, ref bestSolution,ref bestPos, ref bestSolGenetic); //guarda el mejor hasta el momento
+                }
+
+                nonAssignWorkersAux.Clear();//limpiar nonassigned
+
+                //WHILE para la creacion de una generacion
+                while (NewGeneration.Count() < maxGenerations)//hasta que se tengan todos los elementos de una generacion
+                {
+                    generalJobs.Add(0); //carving
+                    generalJobs.Add(1); //molding
+                    generalJobs.Add(3); //painting
+                    generalJobs.Add(2); //baking
+
+                    //3.2 DONE crear individuo contrabajadores sin asignar
+                    List<int> child = new List<int>();
+                    for (int i = 0; i < numWorkersPerMember; i++)
+                        child.Add(0);// 0 -> sin asignar
+
+                    ParentsSelection(ref parent1, ref parent2, FirstGen.Count());//seleccion de padres
+
+                    //WHILE para asignar puestos de trabajo a una solucion
+                    while (generalJobs.Count() != 0)
+                    {
+
+                        int puestoActual = generalJobs[0];//primer puesto a asignar
+                        generalJobs.RemoveAt(0);// se usa para que en el siguiente loop cambie al siguiente trabajo
+
+                        //agregar a la lista correspondiente los trabajadores
+                        addWorkersToCertainJob(parent1, parent2, puestoActual, assignedWorkersAux, nonAssignWorkersAux);
+
+                        //comparar con child para editar los ya asignados
+                        checkWithChild(assignedWorkersAux, child);
+                        checkWithChild(nonAssignWorkersAux, child);
+
+                        //elegir a los trabajadores asignados y luego actualizar a la nueva solucion (child)
+                        chooseAndAddWorkersInChild(assignedWorkersAux, nonAssignWorkersAux, child, actualIns.processes_positions[puestoActual], puestoActual);
+                    }
+
+                    double result = evaluateFitnessInChild(child);//evaluar fitness del hijo
+
+                    //si es mejor se agrega a la solucion
+                    if (evaluateFitnessInChild(child) < fitnessValue * (1 + acceptablePercentaje))
+                        NewGeneration.Add(child);
+                    else
+                        child = null; 
+                }
+
+                //deshechar las generaciones <to test>
+                int aux = 0;
+                double testNewGen = evaluateFitness(NewGeneration, ref aux);
+                if (testNewGen > 10000)
+                {
+                    NewGeneration.Clear();
+                    generationCount--;
+                }
+            }
+            Console.WriteLine("Acabó Genetico");
+            watch.Stop();
+            TimeSpan ts = watch.Elapsed;
+
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}:{3:00}", ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Console.WriteLine("Runtime " + elapsedTime);
+            return bestSolGenetic;
+        }
+
+
+        //ROULETTE------------------------------------------------------------------------------------------------------------------------
+        public void ParentsSelection(ref int parent1, ref int parent2, int cantidad)
+        {
             Random rnd = new Random();
             double father1, father2;
-            
-            createRoulette();
+
+            createRoulette();//crea una lista ordenada con el fitness de todos los posibles padres
+
+            //elige los mejores fitnes, a menor fitness mas probabilidad a ser elegidos
             father1 = rnd.NextDouble(0, totalFitness);
             father2 = rnd.NextDouble(0, totalFitness);
 
+            //elige al padre mas cercano a la solucion
             parent1 = closestChoice(father1);
             parent2 = closestChoice(father2);
 
+            //control para no elegir al mismo padre 2 veces
             while (parent1 == parent2)
             {
                 parent2 = rnd.Next(0, cantidad);
@@ -108,7 +222,7 @@ namespace ConsoleApplication1
 
             return 0;
         }
-        
+
         public int randomRoulette(int parent)
         {
 
@@ -123,39 +237,11 @@ namespace ConsoleApplication1
             value = rnd.Next(0, auxList.Count());
             return value;
         }
-        
-        public void saveBestInGen(List<List<int>> Generation, ref List<int> bestInGen,ref int pos,ref  List<int> bestSolGenetic)
-        {
-            //primero limpiar bestingen y luego agregar
-            while (bestInGen.Count() > 0)
-            {
-                bestInGen.RemoveAt(0);
-            }
 
-            for (int i = 0; i < Generation[pos].Count(); i++)
-            {
-                bestInGen.Add(Generation[pos][i]);
-            }
-            Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + Math.Round(actualIns.getFitness(bestInGen),3));
 
-            if ((actualIns.getFitness(bestInGen) < actualIns.getFitness(bestSolGenetic)) && (bestSolGenetic.Count() > 0))
-            {
-                bestSolGenetic.Clear();
-                for (int i = 0; i < bestInGen.Count(); i++)
-                    bestSolGenetic.Add(bestInGen[i]);
-            }
-            else
-            {
-                if (bestSolGenetic.Count() == 0)
-                {
-                    for (int i = 0; i < bestInGen.Count(); i++)
-                        bestSolGenetic.Add(bestInGen[i]);
-                }
-            }
-            Console.WriteLine("\t//Best: " + Math.Round(actualIns.getFitness(bestSolGenetic),3));
-        }
+        //EVALUATION------------------------------------------------------------------------------------------------------------------------
 
-        public double evaluateFitness(List<List<int>> NewGeneration, ref int bestPos)
+        public double evaluateFitness(List<List<int>> NewGeneration, ref int bestPos)//evalua fitness en toda la generacion
         {
             double value = 1000;
             for (int i = 0; i < NewGeneration.Count(); i++)
@@ -171,178 +257,52 @@ namespace ConsoleApplication1
             return value;
         }
 
-        public void newGenToFirstGen(ref List<List<int>> FirstGen, ref List<List<int>> NewGeneration)
-        {
-            //limpiar first generation
-            FirstGen.Clear();
 
-            for (int i = 0; i < NewGeneration.Count(); i++)
-                FirstGen.Add(NewGeneration[i]);
-
-            //limpiar new generation
-            NewGeneration.Clear();
-
-        }
-
-        public void PrintWorkerAndPosition(List<int> fitnessList)
-        {
-            for(int i = 0; i < fitnessList.Count(); i++)
-                Console.WriteLine("El trabajador: " + i + " es asignado al puesto: " + PrintPosition(fitnessList[i]));
-            
-        }
-
-        public string PrintPosition(int i)
-        {
-            
-            if (i == 0)
-                return "sin asignar";
-            if (i == 10)
-                return "modelado de huacos";
-            if (i == 11)
-                return "pintado de huacos";
-            if (i == 12)
-                return "horneado de huacos";
-            if (i == 20)
-                return "tallado de piedra";
-            if (i == 30)
-                return "tallado de retablo";
-            if (i == 31)
-                return "pintado de retablo";
-            return "";
-        }
-
-        public List<int> RunGenetic() //Inicio del programa Genetico
-        {
-            //DONE
-            /*List<int> numWorkersInJob;     //numer de trabajadores necesitados por puesto
-            numWorkersInJob = new List<int>();*/
-            //tiempo de ejecucion
-            var watch = System.Diagnostics.Stopwatch.StartNew();            
-
-            //0 carving 1 painting 2 kaking 3 molding
-            int start_time = Environment.TickCount;
-
-            int numWorkersPerMember = FirstGen[0].Count(); //numero de trabajadores en una solucion (individuo)
-            List<List<int>> NewGeneration; //mejor solucion hasta ahora (deberia ser por generacion)
-            List<int> bestSolution = new List<int>(); ;
-            List<int> bestSolGenetic = new List<int>(); ;
-            List<int> generalJobs = new List<int>();
-
-
-            List<int> assignedWorkersAux = new List<int>(); //lista auxiliar de trabajadores asignados a un puesto
-            List<int> nonAssignWorkersAux = new List<int>(); //lista auxiliar de trabajadores no asignados
-
-            int parent1 = 0, parent2 = 0;       //indices de los padres seleccionados
-
-
-            NewGeneration = new List<List<int>>();
-
-            double fitnessValue;
-            int bestPos = 0;
-
-            fitnessValue = evaluateFitness(FirstGen, ref bestPos);
-            Console.WriteLine("Gen 1 fitness: " + fitnessValue);
-
-            //impresion de salida trabajador-> puesto
-            //PrintWorkerAndPosition(FirstGen[bestPos]);
-
-            fitnessValue = evaluateFitness(FirstGen, ref bestPos);
-
-            //1. DONE contar los puestos en general (tallar, moldear, pintar, hornear) se podria usar instance 
-            //cambiar por numWorkersInJob
-
-            //WHILE general del algoritmo
-            while (/*Environment.TickCount - start_time < limit_time && */generationCount < maxGenerations)
-            {
-
-                generationCount++;
-                //2. hallar fitness de la solucion, >0 se usa como flag para la primera generacion
-                if (NewGeneration.Count() > 0)
-                {
-                    //bestPos-> el mejor de la solucion
-                    fitnessValue = evaluateFitness(NewGeneration, ref bestPos);
-
-                    //2.2 DONE nueva generacion pasa a ser firstgen y se actualiza la mejor solucion con la mejor de la gen
-                    //2.3 DONE limpiar newgeneracion (vacia)
-                    newGenToFirstGen(ref FirstGen, ref NewGeneration);  //tambien vacia la lista newGeneration
-                    saveBestInGen(FirstGen, ref bestSolution,ref bestPos, ref bestSolGenetic);
-                }
-
-                //limpiar nonassigned
-                nonAssignWorkersAux.Clear();
-
-                //WHILE para la creacion de una generacion
-                //3.1 DONE si el numero de elementos en la generacion es 200 (ya esta llena la generacion) -> salir
-                while (NewGeneration.Count() < maxGenerations)
-                {
-                    generalJobs.Add(0); //carving
-                    generalJobs.Add(1); //molding
-                    generalJobs.Add(3); //painting
-                    generalJobs.Add(2); //baking
-                    //3.2 DONE crear individuo contrabajadores sin asignar
-                    List<int> child = new List<int>();
-                    for (int i = 0; i < numWorkersPerMember; i++)
-                        child.Add(0);
-                    //3.3 DONE Ruleta para seleccion de padres
-                    ParentsSelection(ref parent1, ref parent2, FirstGen.Count());
-
-                    //WHILE DONE
-                    while (generalJobs.Count() != 0)
-                    {
-
-                        //4. DONE elegir un puesto (podria ir aca la seleccion por prioridad de productos)
-                        int puestoActual = generalJobs[0];
-                        generalJobs.RemoveAt(0);
-                        //4.1 DONE agregar a la lista correspondiente los trabajadores
-                        addWorkersToCertainJob(parent1, parent2, puestoActual, assignedWorkersAux, nonAssignWorkersAux);
-                        //4.1.1 DONE comparar con child para editar los ya asignados
-                        checkWithChild(assignedWorkersAux, child);
-                        checkWithChild(nonAssignWorkersAux, child);
-                        //4.2 DONE random de 1 a 100 si sale 1 elegir al azar
-                        //4.2.1 DONE si no, sacar a los  n mejores (ya estan revisados los que posiblemente ya estan asignados en child)
-                        //para ocuparlos
-                        //4.3 DONE actualizar a child con los nuevos puestos
-                        //4.4 DONE agregar a los que quedaron en generaljobs a los no asignados (general job quedaria vacio para la nueva corrida)
-                        chooseAndAddWorkersInChild(assignedWorkersAux, nonAssignWorkersAux, child, actualIns.processes_positions[puestoActual], puestoActual);
-                    }
-                    //4.5 DONE evaluar fitness del hijo (child) si no es mejor, no se agrega a la generacion
-                    //limpiar child
-                    //REVISAR el if
-                    double result = evaluateFitnessInChild(child);
-
-                    if (evaluateFitnessInChild(child) < fitnessValue * (1 + acceptablePercentaje))
-                        //if(true)
-                        NewGeneration.Add(child);
-                    else
-                        child = null; //"clear memory" garbage collection
-                }
-
-                //tambien deshechar las generaciones
-                int aux = 0;
-                double testNewGen = evaluateFitness(NewGeneration, ref aux);
-                if (testNewGen > 10000)
-                {
-                    NewGeneration.Clear();
-                    generationCount--;
-                }
-            }
-            Console.WriteLine("Acabó Genetico");
-            watch.Stop();
-            TimeSpan ts = watch.Elapsed;
-
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}:{3:00}", ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            Console.WriteLine("Runtime " + elapsedTime);
-            return bestSolGenetic;
-        }
-
-        //DONE
-        public double evaluateFitnessInChild(List<int> child)
+        public double evaluateFitnessInChild(List<int> child)//evalua fitness en solo un hijo
         {
             double value = actualIns.getFitness(child);
             return value;
 
         }
+
+        public int findBest(List<double> bestRatios)// encuentra el mejor ratio
+        {
+            //mutacion
+            int mutationValue = rnd.Next(1, 101);
+            if (mutationValue == 1)
+                return rnd.Next(0, bestRatios.Count());
+
+            int value = 0;
+            double ratio = bestRatios[0];
+            for (int i = 0; i < bestRatios.Count() - 1; i++)
+            {
+                if (bestRatios[i + 1] < ratio)
+                {
+                    value = i + 1;
+                    ratio = bestRatios[i + 1];
+                }
+            }
+            return value;
+        }
+
+
+        public void checkWithChild(List<int> assignedWorkers, List<int> child)//elimina los trabajadores que ya esten asignados en la solucion hijo
+        {
+            int i = 0;
+            while (i < assignedWorkers.Count())
+            {
+                if (child[assignedWorkers[i]] != 0)
+                    assignedWorkers.RemoveAt(i);
+                else
+                {
+                    i++;
+                }
+            }
+        }
+
+
+        
+        //MANAGEMENT-----------------------------------------------------------------------------------------------------------------------
 
         public void chooseAndAddWorkersInChild(List<int> assignedWorkersAux, List<int> nonAssignWorkersAux, List<int> child, int numWorkers, int job)
         {
@@ -401,6 +361,146 @@ namespace ConsoleApplication1
             //}
         }
 
+        public void DeleteRepeated(List<int> jobAux)//elimina los trabajadores repetidos en la lista
+        {
+            int count = 0;
+            for (int i = 0; i < jobAux.Count(); i++)
+            {
+                count = 0;
+                int j = 0;
+                while (j < jobAux.Count())
+                {
+                    if (jobAux[i] == jobAux[j])
+                    {
+                        if (count > 0)
+                            jobAux.RemoveAt(j);
+                        else { count++; j++; }
+                    }
+                    else
+                    {
+                        j++;
+                    }
+                }
+            }
+        }
+
+        public int giveMeRandomProcess(int job)// regresa un proceso_por_producto dado un proceso
+        {
+            int returnValue = 0;
+            if (job == 0)
+            {
+                int value = rnd.Next(0, 2);
+                if (value == 0)
+                    returnValue = 20;
+                if (value == 1)
+                    returnValue = 30;
+            }
+
+            if (job == 1)
+                returnValue = 10;
+            if (job == 3)
+            {
+                int value = rnd.Next(0, 2);
+                if (value == 0)
+                    returnValue = 11;
+                if (value == 1)
+                    returnValue = 31;
+            }
+
+            if (job == 2)
+                returnValue = 12;
+
+            return returnValue;
+        }
+
+        public void Print() //imprime los resultados
+        {
+            for (int i = 0; i < FirstGen.Count(); i++)
+            {
+                for (int j = 0; j < FirstGen[i].Count(); j++)
+                {
+                    Console.Write(FirstGen[i][j] + ", ");
+                }
+                Console.WriteLine(i);
+            }
+        }
+
+        public void PrintWorkerAndPosition(List<int> fitnessList)
+        {
+            for (int i = 0; i < fitnessList.Count(); i++)
+                Console.WriteLine("El trabajador: " + i + " es asignado al puesto: " + PrintPosition(fitnessList[i]));
+
+        }
+
+        public string PrintPosition(int i)
+        {
+
+            if (i == 0)
+                return "sin asignar";
+            if (i == 10)
+                return "modelado de huacos";
+            if (i == 11)
+                return "pintado de huacos";
+            if (i == 12)
+                return "horneado de huacos";
+            if (i == 20)
+                return "tallado de piedra";
+            if (i == 30)
+                return "tallado de retablo";
+            if (i == 31)
+                return "pintado de retablo";
+            return "";
+        }
+
+
+        //SAVE-----------------------------------------------------------------------------------------------------------------------------
+        //guarda al mejor de la generacion
+        public void saveBestInGen(List<List<int>> Generation, ref List<int> bestInGen, ref int pos, ref List<int> bestSolGenetic)
+        {
+            //primero limpiar bestingen y luego agregar
+            while (bestInGen.Count() > 0)
+            {
+                bestInGen.RemoveAt(0);
+            }
+
+            for (int i = 0; i < Generation[pos].Count(); i++)
+            {
+                bestInGen.Add(Generation[pos][i]);
+            }
+            Console.Write("Generacion: " + generationCount + "\t-- fitness parcial: " + Math.Round(actualIns.getFitness(bestInGen), 3));
+
+            if ((actualIns.getFitness(bestInGen) < actualIns.getFitness(bestSolGenetic)) && (bestSolGenetic.Count() > 0))
+            {
+                bestSolGenetic.Clear();
+                for (int i = 0; i < bestInGen.Count(); i++)
+                    bestSolGenetic.Add(bestInGen[i]);
+            }
+            else
+            {
+                if (bestSolGenetic.Count() == 0)
+                {
+                    for (int i = 0; i < bestInGen.Count(); i++)
+                        bestSolGenetic.Add(bestInGen[i]);
+                }
+            }
+            Console.WriteLine("\t//Best: " + Math.Round(actualIns.getFitness(bestSolGenetic), 3));
+        }
+
+        //la nueva generacion pasa a ser la actual (FirstGen) para el siguiente loop
+        public void newGenToFirstGen(ref List<List<int>> FirstGen, ref List<List<int>> NewGeneration)
+        {
+            //limpiar FirstGen
+            FirstGen.Clear();
+
+            for (int i = 0; i < NewGeneration.Count(); i++)
+                FirstGen.Add(NewGeneration[i]);
+
+            //limpiar NewGeneration
+            NewGeneration.Clear();
+
+        }
+
+        //llena los arreglos auxiliares de ratios y procesos_por_produto de cada trabajador en la lista (assignedWorkers)
         public void fillBest2(List<int> assignedWorkers, int job, List<double> ratios, List<int> jobPerWork)
         {
             double best1 = 0, best2 = 0;
@@ -526,227 +626,7 @@ namespace ConsoleApplication1
             }
         }
 
-
-
-
-        public void fillBest(List<int> assignedWorkers, int job, List<double> ratios, List<int> jobPerWork)
-        {
-
-            double best1 = 0, best2 = 0;
-            int id1 = 0;
-            int id2 = -1;
-
-            //busco en la clase workers y agrego el mejor ratio y puestoxtrabajo de cada uno de los posibles trabajadores para un puesto
-            //if (job == 0)//tallado 20 o 30
-            //{
-            for (int i = 0; i < assignedWorkers.Count(); i++)
-            {
-                //DONE con la posicion del worker voy a su posicion y saco los jobxproduct de ahi saco el mejor y pongo el valor y tipo
-                for (int j = 0; j < actualIns.ratios.Count(); j++) //busqueda para cada trabajador
-                {
-                    if (job == 0)//tallado 20 o 30
-                    {
-                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])
-                        {
-                            if (actualIns.ratios[j].process_product_id == 20)
-                            {
-                                id1 = 20;
-                                if (actualIns.breakage_weight > actualIns.time_weight)
-                                {
-                                    best1 = actualIns.ratios[j].breakage;
-                                }
-                                else
-                                {
-                                    best1 = actualIns.ratios[j].time;
-                                }
-
-                            }
-                            if (actualIns.ratios[j].process_product_id == 30)
-                            {
-                                id2 = 30;
-                                if (actualIns.breakage_weight > actualIns.time_weight)
-                                {
-                                    best2 = actualIns.ratios[j].breakage;
-                                }
-                                else
-                                {
-                                    best2 = actualIns.ratios[j].time;
-                                }
-                            }
-
-                        }
-                    }
-
-                    if (job == 1)//moldeado 10
-                    {
-                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])
-                        {
-                            if (actualIns.ratios[j].process_product_id == 10)
-                            {
-                                id1 = 10;
-                                if (actualIns.breakage_weight > actualIns.time_weight)
-                                {
-                                    best1 = actualIns.ratios[j].breakage;
-                                }
-                                else
-                                {
-                                    best1 = actualIns.ratios[j].time;
-                                }
-
-                            }
-
-                        }
-                    }
-
-                    if (job == 2)//pintado 11 o 31
-                    {
-                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])
-                        {
-                            if (actualIns.ratios[j].process_product_id == 11)
-                            {
-                                id1 = 11;
-                                if (actualIns.breakage_weight > actualIns.time_weight)
-                                {
-                                    best1 = actualIns.ratios[j].breakage;
-                                }
-                                else
-                                {
-                                    best1 = actualIns.ratios[j].time;
-                                }
-
-                            }
-                            if (actualIns.ratios[j].process_product_id == 31)
-                            {
-                                id2 = 31;
-                                if (actualIns.breakage_weight > actualIns.time_weight)
-                                {
-                                    best2 = actualIns.ratios[j].breakage;
-                                }
-                                else
-                                {
-                                    best2 = actualIns.ratios[j].time;
-                                }
-                            }
-
-                        }
-                    }
-
-                    if (job == 3)//horneado 12
-                    {
-                        if (actualIns.ratios[j].worker.id - 1 == assignedWorkers[i])
-                        {
-                            if (actualIns.ratios[j].process_product_id == 12)
-                            {
-                                id1 = 12;
-                                if (actualIns.breakage_weight > actualIns.time_weight)
-                                {
-                                    best1 = actualIns.ratios[j].breakage;
-                                }
-                                else
-                                {
-                                    best1 = actualIns.ratios[j].time;
-                                }
-
-                            }
-
-                        }
-                    }
-
-
-                }
-                //Ver si es el mejor, si lo es, cambiar mejor de la solucion
-                if (best1 != 0 && best2 != -1)
-                {
-                    if (best2 > best1)
-                    {
-                        best1 = best2;
-                        id1 = id2;
-                    }
-                    ratios.Add(best1);
-                    jobPerWork.Add(id1);
-                }
-                else
-                {
-                    if (best1 != 0)
-                    {
-                        ratios.Add(best1);
-                        jobPerWork.Add(id1);
-                    }
-                }
-                best1 = 0;
-                best2 = 0;//-1
-                id1 = 0;
-                id2 = -1;
-            }
-            //}
-        }
-
-
-        public int findBest(List<double> bestRatios)
-        {
-            //mutacion
-            int mutationValue = rnd.Next(1, 101);
-            if (mutationValue == 1)
-                return rnd.Next(0, bestRatios.Count());
-
-            int value = 0;
-            double ratio = bestRatios[0];
-            for (int i = 0; i < bestRatios.Count() - 1; i++)
-            {
-                if (bestRatios[i + 1] < ratio)
-                {
-                    value = i + 1;
-                    ratio = bestRatios[i + 1];
-                }
-            }
-            return value;
-        }
-
-        public int giveMeRandomProcess(int job)
-        {
-            int returnValue = 0;
-            if (job == 0)
-            {
-                int value = rnd.Next(0, 2);
-                if (value == 0)
-                    returnValue = 20;
-                if (value == 1)
-                    returnValue = 30;
-            }
-
-            if (job == 1)
-                returnValue = 10;
-            if (job == 3)
-            {
-                int value = rnd.Next(0, 2);
-                if (value == 0)
-                    returnValue = 11;
-                if (value == 1)
-                    returnValue = 31;
-            }
-
-            if (job == 2)
-                returnValue = 12;
-
-            return returnValue;
-        }
-
-
-        public void checkWithChild(List<int> assignedWorkers, List<int> child)
-        {
-            int i = 0;
-            while (i < assignedWorkers.Count())
-            {
-                if (child[assignedWorkers[i]] != 0)
-                    assignedWorkers.RemoveAt(i);
-                else
-                {
-                    i++;
-                }
-            }
-        }
-
-
+        //elige a los trabajadores para la solucion
         public void addWorkersToCertainJob(int parent1, int parent2, int typejob, List<int> jobAux, List<int> nonJob) //jobaux lista con ids de numero de trabajador
         {
             int flagParent1 = 0; //0 no esta, 1 esta
@@ -846,40 +726,6 @@ namespace ConsoleApplication1
             DeleteRepeated(jobAux);
             DeleteRepeated(nonJob);
         }
-
-        public void DeleteRepeated(List<int> jobAux)
-        {
-            int count = 0;
-            for (int i = 0; i < jobAux.Count(); i++)
-            {
-                count = 0;
-                int j = 0;
-                while (j < jobAux.Count())
-                {
-                    if (jobAux[i] == jobAux[j])
-                    {
-                        if (count > 0)
-                            jobAux.RemoveAt(j);
-                        else { count++; j++; }
-                    }
-                    else
-                    {
-                        j++;
-                    }
-                }
-            }
-        }
-
-        public void Print() //imprime los resultados
-        {
-            for (int i = 0; i < FirstGen.Count(); i++)
-            {
-                for (int j = 0; j < FirstGen[i].Count(); j++)
-                {
-                    Console.Write(FirstGen[i][j] + ", ");
-                }
-                Console.WriteLine(i);
-            }
-        }        
+          
     }
 }
