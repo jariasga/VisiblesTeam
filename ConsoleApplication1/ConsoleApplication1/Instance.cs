@@ -11,6 +11,11 @@ namespace ConsoleApplication1
     {
         public List<Worker> workers;
         public List<Ratio> ratios;
+        public double shift_duration;               // minutos en un turno
+
+        // time
+        public int start_time;                      // milisegundos
+        public int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
 
         // processes
         public int processes_num;
@@ -30,6 +35,10 @@ namespace ConsoleApplication1
 
         public Instance(string workers_filename, string ratios_filename)
         {
+            // time
+            start_time = Environment.TickCount;
+            limit_time = 300000;                    // 1 000 * 60 * 5 (maximo 5 miutos)
+
             // processes
             processes_num = 4;
             processes_positions = new List<int>(4);
@@ -59,6 +68,7 @@ namespace ConsoleApplication1
             // ratios
             breakage_weight = 0.5;
             time_weight = 0.5;
+            shift_duration = 8*60;            
 
             try {
                 workers = Worker.read(workers_filename);
@@ -210,10 +220,8 @@ namespace ConsoleApplication1
                 if (ratio != null)
                 {
                     // obtenemos la produccion
-                    // produced = tiempo_turno/tiempo_promedio_trabajador - rotura_promedio_trabajador   para ese proceso producto
-                    // 8 horas/ 5 minutos por huaco - 3 huacos rotos en un turno
-                    // produced = turn_time/ratio.time_avg - ratio.breakage_avg
-                    workers_production[i] = ratio.production;
+                    int produced = (int)((shift_duration / ratio.time_avg)*(1 - ratio.breakage_avg)); //   para ese proceso producto
+                    workers_production[i] = produced;
                 }
             }
 
@@ -249,6 +257,66 @@ namespace ConsoleApplication1
             return products_production;
         }
 
+        /* obtener la produccion de acuerdo  una asignacion de trabajadores */
+        public int getTime(List<int> solution, List<int> production)
+        {
+            // tiempo en cada proceso producto
+            List<int> processes_products_time = new List<int>(processes_products);            
+
+            for (int i = 0; i < processes_products.Count; i++)
+            {
+                double max = 0;
+                List<int> process_product = solution.FindAll(byProcessProduct(processes_products[i]));
+                foreach (int assignment in process_product)
+                {
+                    int worker_index = solution.IndexOf(assignment);
+                    Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(worker_index + 1, assignment));
+                    // tomamos al trabajador mas lento
+                    if (ratio != null) max = Math.Max(max, ratio.time_avg);
+                }
+                // tiempo unitario maximo * numero de unidades producidas
+                processes_products_time[i] = (int)max;
+            }
+
+            // produccion en cada producto
+            List<int> products_time = new List<int>(products_num);
+            int max_time = 0;
+
+            for (int i = 0; i < products_num; i++)
+            {
+                List<int> processes = processes_products.FindAll(byProduct(i));
+                int product_time = 0;
+                foreach (int process in processes)
+                {
+                    int process_index = processes_products.IndexOf(process);
+                    product_time += processes_products_time[process_index];
+                }
+                // tomaremos el producto que tarde mas en finalizar
+                max_time = Math.Max(max_time,  product_time * production[i]);
+            }
+
+            return max_time;
+        }
+
+        public int getBreakage(List<int> solution, List<int> production)
+        {
+            // produccion por cada trabajador
+            int total_breakage = 0;
+
+            for (int i = 0; i < solution.Count; i++)
+            {
+                Ratio ratio = ratios.Find(Ratio.byWorkerAndProcessProduct(i + 1, solution[i]));
+                // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
+                if (ratio != null)
+                {
+                    // obtenemos la produccion
+                    total_breakage += (int)(production[ratio.getProductIndex()] * ratio.breakage_avg / (1 - ratio.breakage_avg));
+                }
+            }
+
+            return total_breakage;
+        }
+
         public void printProduction(List<int> production)
         {
             Console.WriteLine("Huacos, Piedras, Retablos: ");
@@ -264,23 +332,43 @@ namespace ConsoleApplication1
                 foreach (Worker worker in workers)
                 {
                     string tabu_name =  "No asignado";
-                    Ratio tabu_ratio = ratios.Find(Ratio.byProcessProductId(tabu[worker.id]));
+                    Ratio tabu_ratio = ratios.Find(Ratio.byProcessProductId(tabu[worker.id-1]));
                     if (tabu_ratio != null) tabu_name = tabu_ratio.process_product_name;
 
                     string genetic_name = "No asignado";
-                    Ratio genetic_ratio = ratios.Find(Ratio.byProcessProductId(genetic[worker.id]));                    
+                    Ratio genetic_ratio = ratios.Find(Ratio.byProcessProductId(genetic[worker.id-1]));                    
                     if (genetic_ratio != null) genetic_name = genetic_ratio.process_product_name;
 
-                    var line = string.Format("{0};{1};{3}", worker.id, tabu_name, genetic_name);
+                    var line = string.Format("{0};{1};{2}", worker.id, tabu_name, genetic_name);
                     w.WriteLine(line);
                     w.Flush();
                 }
                 // fitness
                 var line_fitness = string.Format("Funcion Objetivo;{0};{1}",getFitness(tabu), getFitness(genetic));
                 w.WriteLine(line_fitness);
-                // production                
+
+                // production       
+                List<int> tabu_production = getProduction(tabu);
+                List<int> genetic_production = getProduction(genetic);
+                var line_huacos = string.Format("Huacos;{0};{1}", tabu_production[0], genetic_production[0]);
+                w.WriteLine(line_huacos);
+                var line_piedras = string.Format("Piedras;{0};{1}", tabu_production[1], genetic_production[1]);
+                w.WriteLine(line_piedras);
+                var line_retablos = string.Format("Retablos;{0};{1}", tabu_production[2], genetic_production[2]);
+                w.WriteLine(line_retablos);
+
                 // losses
+                int tabu_breakage = getBreakage(tabu, tabu_production);
+                int genetic_breakage = getBreakage(genetic, genetic_production);
+                var line_breakage = string.Format("Rotura;{0};{1}", tabu_breakage, genetic_breakage);
+                w.WriteLine(line_breakage);
+
+                int tabu_time = getTime(tabu, tabu_production);
+                int genetic_time = getTime(genetic, genetic_production);
+                var line_time = string.Format("Tiempo;{0};{1}", tabu_time, genetic_time);
+                w.WriteLine(line_time);
             }
+            Console.WriteLine("Outputs listos!");
         }
     }
 }
