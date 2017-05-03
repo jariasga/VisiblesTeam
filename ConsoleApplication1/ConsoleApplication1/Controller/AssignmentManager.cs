@@ -132,5 +132,32 @@ namespace InkaArt.Controller
 
             return solution;
         }
+
+        public static bool NumberOfProducts(List<Assignment> solution, Assignment chosen,
+            JobManager jobs)
+        {
+            //Obtener lista de puestos de trabajo asociados a ese producto
+            List<Job> aux = new List<Job>();
+            jobs.GetOtherProcessesByProduct(aux, chosen.process_product);
+            aux.Add(chosen.process_product);
+
+            //Contar cuántos puestos de trabajo asociados a la solución están en la solución
+            int[] jobs_in_product = new int[aux.Count];
+            for (int i = 0; i < solution.Count; i++)
+            {
+                for (int process_index = 0; process_index < aux.Count; process_index++)
+                {
+                    if (solution[i].process_product.id == aux[process_index].id)
+                        jobs_in_product[process_index]++;
+                }
+            }
+
+            //Si alguno de estos sale cero, falta un proceso
+            for (int process_index = 0; process_index < aux.Count; process_index++)
+            {
+                if (jobs_in_product[process_index] == 0) return true;
+            }
+            return false;
+        }
     }
 }
