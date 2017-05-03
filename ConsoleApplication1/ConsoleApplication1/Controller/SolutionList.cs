@@ -62,6 +62,7 @@ namespace InkaArt.Controller
                 }*/
 
                 PrintProcessesCount(solution_list[i]);
+                PrintJobsCount(solution_list[i]);
             }
         }
 
@@ -79,6 +80,23 @@ namespace InkaArt.Controller
             Console.WriteLine("Procesos ocupados: moldeado = {0}, tallado = {1}, pintado "
                 + "= {2}, horneado = {3}, sin asignar = {4}.", moldeado, tallado, pintado,
                 horneado, not_assigned);
+        }
+
+        private void PrintJobsCount(int[] array_list)
+        {
+            int ten = 0, eleven = 0, twelve = 0, twenty = 0, thirty = 0, thirtyone = 0;
+            for (int i = 0; i < number_of_workers; i++)
+            {
+                if (array_list[i] == 10) ten++;
+                if (array_list[i] == 11) eleven++;
+                if (array_list[i] == 12) twelve++;
+                if (array_list[i] == 20) twenty++;
+                if (array_list[i] == 30) thirty++;
+                if (array_list[i] == 31) thirtyone++;
+            }
+            Console.WriteLine("Puestos de trabajo ocupados: 10 = {0}, 11 = {1}, 12 = "
+                + "{2}, 20 = {3}, 30 = {4}, 31 = {5}.", ten, eleven, twelve, twenty,
+                thirty, thirtyone);
         }
 
     }

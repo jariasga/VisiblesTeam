@@ -13,8 +13,8 @@ namespace InkaArt.Model
     class Ratio
     {
         //Parámetros de la función objetivo
-        public static double BreakageWeight = 0.6;
-        public static double TimeWeight = 0.6;
+        public static double BreakageWeight = 0.5;
+        public static double TimeWeight = 0.5;
 
         //Atributos
         public Worker worker;

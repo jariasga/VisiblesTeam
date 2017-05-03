@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using InkaArt.Model;
 using System.IO;
+using ConsoleApplication1;
 
 namespace InkaArt.Controller
 {
@@ -19,7 +20,7 @@ namespace InkaArt.Controller
         private WorkerManager workers;
         private JobManager jobs;
         private RatioManager ratios;
-        private Random random;
+        //private Random random;
 
         public Grasp(string workers_filename, string ratios_filename)
         {
@@ -46,7 +47,7 @@ namespace InkaArt.Controller
                     + ratios_filename);
                 Environment.Exit(11);
             }
-            random = new Random();
+            //random = new Random();
         }
 
         public Grasp(WorkerManager workers, JobManager jobs, RatioManager ratios)
@@ -54,7 +55,7 @@ namespace InkaArt.Controller
             this.workers = workers;
             this.jobs = jobs;
             this.ratios = ratios;
-            this.random = new Random();
+            //this.random = new Random();
         }
 
         public List<int[]> GraspAlgorithm()
@@ -69,7 +70,7 @@ namespace InkaArt.Controller
             for (int i = 0; (((end = Environment.TickCount) - start) <= max_time_value)
                 && i < Iterations; i++)
             {
-                Console.WriteLine("========= Iteración GRASP #{0} =========", i + 1);
+                if (ConsoleApplication1.Program.debugStatus) Console.WriteLine("========= Iteración GRASP #{0} =========", i + 1);
 
                 //Obtener la lista de candidatos y calcular la función de costo para
                 //cada trabajador
@@ -79,14 +80,14 @@ namespace InkaArt.Controller
                 Solution solution = GenerateSolution(candidates);
                 solutions.Add(solution);
             }
-            Console.WriteLine("===================================");
+            if (ConsoleApplication1.Program.debugStatus) Console.WriteLine("===================================");
 
             end = Environment.TickCount;
-            Console.Error.WriteLine("Tiempo total de ejecución: {0}.{1} segundos",
+            if (ConsoleApplication1.Program.debugStatus) Console.Error.WriteLine("Tiempo total de ejecución: {0}.{1} segundos",
                 (end - start) / 1000, (end-start) % 1000);
 
             List<int[]> array_list = solutions.ToArrayList();
-            solutions.PrintSolutionList(array_list);
+            if (ConsoleApplication1.Program.debugStatus) solutions.PrintSolutionList(array_list);
             return array_list;
         }
 
@@ -95,42 +96,40 @@ namespace InkaArt.Controller
             List<Assignment> solution = new List<Assignment>();
             double objective_function_value = 0;
 
-            //List<Job> current_product = new List<Job>();
+            List<Job> current_product = new List<Job>();
 
             for (int construction_iteration = 1; candidates.Count > 0;
                 construction_iteration++)
             {
                 //Obtener una lista de los trabajadores más eficientes
-                List<Assignment> rcl = GenerateRCL(candidates);
-
-                /*
+                List<Assignment> rcl; //= GenerateRCL(candidates);
 
                 //Si la lista current_product está vacía, estamos ante un nuevo producto
                 if (current_product.Count == 0) rcl = GenerateRCL(candidates);
                 //Si no está vacía, entonces para el RCL solo se considerarán los
                 //ProcesosxProductos que le sigan al primer procesoxproducto escogido
                 else rcl = GenerateRCL(AssignmentManager.FilterCandidates(
-                    candidates, current_product));
+                    candidates, current_product));                
+                
                 //Si el RCL sale vacío, hemos tenido un error en algún lado :S
                 if (rcl.Count <= 0)
                 {
                     Console.Error.WriteLine("El RCL llegó a cero en la iteración {0}.",
                         construction_iteration);
-                    solution = AssignmentManager.RemoveLastAssignments(solution,
-                        current_product, jobs);
+                    //solution = AssignmentManager.RemoveLastAssignments(solution,
+                    //    current_product, jobs);
                     break;
                 }
 
-                */
-
                 //Escoger un trabajador al azar e incorporarlo en la solución
-                Assignment chosen = rcl[random.Next(0, rcl.Count - 1)];
+                Assignment chosen = rcl[RandomExtensions.getRandom(0, rcl.Count - 1)];
                 solution.Add(chosen);
                 objective_function_value += chosen.cost_value;
 
-                Console.Write("En la iteración {0} se escogio la asignación: ",
+                if (ConsoleApplication1.Program.debugStatus)
+                    Console.Write("En la iteración {0} se escogio la asignación: ",
                     construction_iteration);
-                chosen.Print();
+                if (ConsoleApplication1.Program.debugStatus) chosen.Print();
 
                 //Remover los candidatos relacionados al trabajador escogido
                 candidates = AssignmentManager.RemoveWorker(candidates, chosen.worker);
@@ -145,12 +144,12 @@ namespace InkaArt.Controller
 
                 //Si current_product está vacío, entonces estamos ante un nuevo producto,
                 //por lo que hay que agregar los procesos asociados
-                /* if (current_product.Count == 0)
+                if (current_product.Count == 0 && AssignmentManager.NumberOfProducts(solution, chosen, jobs))
                     current_product = jobs.GetOtherProcessesByProduct(
                         current_product, chosen.process_product);
                 //Si no está vacío, entonces quitamos el proceso x producto que se escogió
                 //en esta iteración
-                else current_product.Remove(chosen.process_product); */
+                else current_product.Remove(chosen.process_product);
 
                 //Recalcular los costos para la función objetivo
                 for (int k = 0; k < candidates.Count; k++)
@@ -168,13 +167,13 @@ namespace InkaArt.Controller
                     break;
                 } */
 
-                Console.WriteLine("Fin de la iteración {0}. Nos quedamos con {1} candidatos "
+                /*Console.WriteLine("Fin de la iteración {0}. Nos quedamos con {1} candidatos "
                     + "del set original de {2}.", construction_iteration, candidates.Count,
-                    ratios.NumberOfRatios());
+                    ratios.NumberOfRatios());*/
             }
 
             Solution solution_object = new Solution(solution, objective_function_value);
-            solution_object.Print();
+            if (ConsoleApplication1.Program.debugStatus) solution_object.Print();
             return solution_object;
         }
 
@@ -199,8 +198,9 @@ namespace InkaArt.Controller
                 if (candidates[i].cost_value >= min && candidates[i].cost_value <= max_rcl)
                     rcl.Add(candidates[i]);
             }
-            
-            //AssignmentManager.PrintRCL(rcl, min, max, max_rcl);
+
+            //if (ConsoleApplication1.Program.debugStatus)
+            //    AssignmentManager.PrintRCL(rcl, min, max, max_rcl);
             return rcl;
         }
     }

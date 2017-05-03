@@ -45,7 +45,7 @@ namespace ConsoleApplication1
 
         public void Decrease()
         {
-            Console.Write("Down! " + limit.ToString());
+            if (ConsoleApplication1.Program.debugStatus) Console.Write("Down! " + limit.ToString());
             int new_limit = (int) (limit * (1 - growth));
             // verificamos no tener un tama;o de lista negativo
             if (new_limit > 0)
@@ -55,23 +55,23 @@ namespace ConsoleApplication1
                     Dequeue();
                 // actualizamos
                 limit = (int)(limit * (1 - growth));
-                Console.Write(" " + limit);
+                if (ConsoleApplication1.Program.debugStatus) Console.Write(" " + limit);
             }
-            Console.WriteLine();
+            if (ConsoleApplication1.Program.debugStatus) Console.WriteLine();
         }
 
         public void Increase()
         {
-            Console.Write("Up! " + limit.ToString());
+            if (ConsoleApplication1.Program.debugStatus) Console.Write("Up! " + limit.ToString());
             if (limit * (1 + growth) <= int.MaxValue)
             {
                 // evitamos que se estanque cuando el largo es 1 y aproximamos al mayor valor
                 double diff = limit*growth;
                 if (diff < 1) diff = 1;
                 limit = limit + (int) diff;
-                Console.Write(" " + limit);                
+                if (ConsoleApplication1.Program.debugStatus) Console.Write(" " + limit);                
             }
-            Console.WriteLine();
+            if (ConsoleApplication1.Program.debugStatus) Console.WriteLine();
         }
 
         public int Count()

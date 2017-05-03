@@ -13,16 +13,19 @@ namespace ConsoleApplication1
         public Worker worker;
         public int process_product_id;
         public string process_product_name;
-        public double breakage;
-        public double time;
-        public double loss_index;
+        public double breakage_avg;         // % de rotura del trabajador
+        public double breakage;             // indice de rotura del trabajador: breakage_avg/promedio de todos los breake_avg trabajadores de ese producto proceso
+        public double time_avg;             // minutos para una unidad
+        public double time;                 // indice de tiempo del trabajador: time_avg/promedio de todos los time_avg trabajadores de ese producto proceso
 
-        public Ratio(Worker worker, string process_product_name, int process_product, double breakage, double time)
+        public Ratio(Worker worker, string process_product_name, int process_product, double breakage_avg, double breakage, double time_avg, double time)
         {
             this.worker = worker;
             this.process_product_name = process_product_name;
             this.process_product_id = process_product;
+            this.breakage_avg = breakage_avg;
             this.breakage = breakage;
+            this.time_avg = time_avg;
             this.time = time;
         }
 
@@ -41,15 +44,19 @@ namespace ConsoleApplication1
                     worker = workers.Find(Worker.byId(int.Parse(values[0])));
                     if (worker != null)
                     {
-                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]));
+                        Ratio ratio = new Ratio(worker, values[1], int.Parse(values[2]), double.Parse(values[3]), double.Parse(values[4]), double.Parse(values[5]), double.Parse(values[6]));
                         ratios.Add(ratio);
-
                     }
                 }
             }
             Console.WriteLine("ratios listos!");
 
             return ratios;
+        }
+
+        public int getProductIndex()
+        {
+            return (process_product_id / 10) - 1;
         }
 
         public void print()

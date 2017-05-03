@@ -11,41 +11,40 @@ namespace ConsoleApplication1
 {
     class Program
     {
+        public static bool debugStatus = false;
+        public static int test_num = 1;
+
         static void Main(string[] args)
         {
-            /* todo esto debe repetirse 30 veces con 30 entradas distintas*/
-            // for(int i = 0; i < 30; i++){
-
-                Instance instance = new Instance("Workers_60.csv", "Ratios_60.csv");
+            for (int i = 0; i < test_num; i++)
+            {
+                Instance instance = new Instance("Workers.csv", "Ratios_" + i + ".csv");
 
                 /* GRASP */
-                Grasp grasp = new Grasp("Workers_60.csv", "Ratios_60.csv");
+                Console.WriteLine("\tGRASP running ....");
+                Grasp grasp = new Grasp("Workers.csv", "Ratios_" + i + ".csv");
                 List<int[]> solutions = grasp.GraspAlgorithm();
 
                 /* Tabu */
-                //List<int> initial_solution = instance.getBestSolution(solutions);
-                List<int> initial_solution = instance.getInitialSolution();
+                Console.WriteLine("\tTABU running ....");
+                List<int> initial_solution = instance.getBestSolution(solutions);
+                List<int> production_grasp = instance.getProduction(initial_solution);
+                instance.printProduction(production_grasp);
                 TabuSearch tabu = new TabuSearch(instance);
-
                 tabu.run(initial_solution);
 
-                tabu.print();                
-                List<int> production = instance.getProduction(tabu.best_solution);
-                instance.printProduction(production);
-
                 /* Genetic */
-                //GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
-                //genetic.CreateFirstGen();
-                //List<int> genetic_solution = genetic.RunGenetic();
-                //for (int i = 0; i < genetic_solution.Count(); i++)
-                //    Console.Write(genetic_solution[i] + ", ");
-                //Console.WriteLine();
+                Console.WriteLine("\tGENETIC running ....");
+                GeneticAlgorithm genetic = new GeneticAlgorithm(instance);
+                genetic.CreateFirstGen(solutions);
+                List<int> genetic_solution = genetic.RunGenetic();
+                for (int j = 0; j < genetic_solution.Count(); j++)
+                    Console.Write(genetic_solution[j] + ", ");
+                Console.WriteLine();
+                Console.WriteLine("Fitness de la mejor solucion: " + instance.getFitness(genetic_solution));                
 
-                //List<int> production = instance.getProduction(genetic_solution);
-                //instance.printProduction(production);
-
-
-            //}
+                instance.printResults(tabu.best_solution, genetic_solution, "Test_" + i + ".csv");
+            }           
 
             Console.Read();
         }
