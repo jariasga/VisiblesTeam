@@ -31,6 +31,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -45,12 +51,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,38 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(668, 207);
             this.dataGridView1.TabIndex = 24;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "ID";
+            this.Producto.Name = "Producto";
+            // 
+            // cost
+            // 
+            this.cost.HeaderText = "Nombre Cliente";
+            this.cost.Name = "cost";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "RUC Cliente";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // delete
+            // 
+            this.delete.HeaderText = "Fecha de Entrega";
+            this.delete.Name = "delete";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Estado";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Eliminar";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button5
             // 
@@ -233,38 +265,7 @@
             this.button1.TabIndex = 37;
             this.button1.Text = "🗑 Eliminar";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "ID";
-            this.Producto.Name = "Producto";
-            // 
-            // cost
-            // 
-            this.cost.HeaderText = "Nombre Cliente";
-            this.cost.Name = "cost";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "RUC Cliente";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // delete
-            // 
-            this.delete.HeaderText = "Fecha de Entrega";
-            this.delete.Name = "delete";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Estado";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Eliminar";
-            this.Column2.Name = "Column2";
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ClientOrderIndex
             // 

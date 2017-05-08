@@ -52,7 +52,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(138, 39);
             this.button3.TabIndex = 10;
-            this.button3.Text = "Eliminar";
+            this.button3.Text = "🗑 Eliminar";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -71,6 +71,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -140,7 +142,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 38);
             this.button1.TabIndex = 6;
-            this.button1.Text = "Buscar";
+            this.button1.Text = "🔎 Buscar";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // PurchaseOrder

@@ -152,6 +152,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -167,7 +169,7 @@
             this.precio});
             this.dataGridView1.Location = new System.Drawing.Point(282, 121);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(383, 186);
+            this.dataGridView1.Size = new System.Drawing.Size(383, 200);
             this.dataGridView1.TabIndex = 13;
             // 
             // id
@@ -206,7 +208,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 42);
             this.button1.TabIndex = 15;
-            this.button1.Text = "Guardar";
+            this.button1.Text = "🖫 Guardar";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // groupBox1
@@ -227,7 +229,7 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos básicos";
             // 
-            // Detalle_Materia_Prima
+            // RawMaterialDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -239,7 +241,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label4);
-            this.Name = "Detalle_Materia_Prima";
+            this.Name = "RawMaterialDetail";
             this.Text = "Detalle de materia prima";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
