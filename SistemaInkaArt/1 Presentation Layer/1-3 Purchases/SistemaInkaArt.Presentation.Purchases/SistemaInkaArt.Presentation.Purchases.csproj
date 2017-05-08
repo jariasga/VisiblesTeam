@@ -46,14 +46,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetalleOrdenDeCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetalleOrdenDeCompra.Designer.cs">
+      <DependentUpon>DetalleOrdenDeCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Detalle_Proveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detalle_Proveedor.Designer.cs">
+      <DependentUpon>Detalle_Proveedor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Detalle_Materia_Prima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Detalle_Materia_Prima.Designer.cs">
+      <DependentUpon>Detalle_Materia_Prima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Materia_Prima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Materia_Prima.Designer.cs">
+      <DependentUpon>Mant_Materia_Prima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Orden_Compra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Orden_Compra.Designer.cs">
+      <DependentUpon>Mant_Orden_Compra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mant_Proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mant_Proveedores.Designer.cs">
+      <DependentUpon>Mant_Proveedores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DetalleOrdenDeCompra.resx">
+      <DependentUpon>DetalleOrdenDeCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detalle_Materia_Prima.resx">
+      <DependentUpon>Detalle_Materia_Prima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detalle_Proveedor.resx">
+      <DependentUpon>Detalle_Proveedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Materia_Prima.resx">
+      <DependentUpon>Mant_Materia_Prima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Orden_Compra.resx">
+      <DependentUpon>Mant_Orden_Compra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mant_Proveedores.resx">
+      <DependentUpon>Mant_Proveedores.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
