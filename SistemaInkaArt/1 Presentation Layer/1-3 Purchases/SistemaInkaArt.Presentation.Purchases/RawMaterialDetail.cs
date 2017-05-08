@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Purchases
 {
-    public partial class Mant_Materia_Prima : Form
+    public partial class RawMaterialDetail : Form
     {
-        public Mant_Materia_Prima()
+        public RawMaterialDetail()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

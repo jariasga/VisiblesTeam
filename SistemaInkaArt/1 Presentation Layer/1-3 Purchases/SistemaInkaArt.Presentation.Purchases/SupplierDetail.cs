@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Purchases
 {
-    public partial class Mant_Orden_Compra : Form
+    public partial class SupplierDetail : Form
     {
-        public Mant_Orden_Compra()
+        public SupplierDetail()
         {
             InitializeComponent();
         }

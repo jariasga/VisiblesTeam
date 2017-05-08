@@ -1,6 +1,6 @@
 ﻿namespace SistemaInkaArt.Presentation.Purchases
 {
-    partial class Detalle_Proveedor
+    partial class SupplierDetail
     {
         /// <summary>
         /// Required designer variable.

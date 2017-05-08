@@ -1,6 +1,6 @@
 ﻿namespace SistemaInkaArt.Presentation.Purchases
 {
-    partial class Detalle_Materia_Prima
+    partial class RawMaterialDetail
     {
         /// <summary>
         /// Required designer variable.
