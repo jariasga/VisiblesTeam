@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientCreate.Designer.cs">
+      <DependentUpon>ClientCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientOrderDevolution.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,12 @@
     </Compile>
     <Compile Include="ClientOrderShow.Designer.cs">
       <DependentUpon>ClientOrderShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientShow.Designer.cs">
+      <DependentUpon>ClientShow.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientsIndex.cs">
       <SubType>Form</SubType>
@@ -84,6 +96,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ClientCreate.resx">
+      <DependentUpon>ClientCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClientOrderCreate.resx">
       <DependentUpon>ClientOrderCreate.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientOrderShow.resx">
       <DependentUpon>ClientOrderShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientShow.resx">
+      <DependentUpon>ClientShow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClientsIndex.resx">
       <DependentUpon>ClientsIndex.cs</DependentUpon>

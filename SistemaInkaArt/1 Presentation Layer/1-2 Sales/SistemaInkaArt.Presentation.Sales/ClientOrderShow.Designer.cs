@@ -132,7 +132,7 @@
             this.groupBox1.Size = new System.Drawing.Size(334, 156);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos del Cliente";
+            this.groupBox1.Text = "Cliente";
             // 
             // textBox3
             // 
@@ -188,7 +188,7 @@
             this.groupBox3.Size = new System.Drawing.Size(334, 281);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Datos del Pedido";
+            this.groupBox3.Text = "Pedido";
             // 
             // label7
             // 
