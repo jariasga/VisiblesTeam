@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Warehouse
 {
-    public partial class Form1 : Form
+    public partial class FormGenerateKardex : Form
     {
-        public Form1()
+        public FormGenerateKardex()
         {
             InitializeComponent();
         }
