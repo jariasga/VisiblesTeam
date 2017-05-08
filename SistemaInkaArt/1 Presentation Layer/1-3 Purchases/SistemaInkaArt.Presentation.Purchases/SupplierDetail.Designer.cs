@@ -47,16 +47,16 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Insumo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Acción = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox9 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -237,57 +237,22 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Controls.Add(this.textBox9);
-            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Location = new System.Drawing.Point(305, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(413, 535);
+            this.groupBox2.Size = new System.Drawing.Size(413, 482);
             this.groupBox2.TabIndex = 21;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de insumos";
             // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.Gray;
-            this.button4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(44, 468);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 51);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "Regresar a lista";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Firebrick;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(264, 468);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 51);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(154, 468);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 51);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "+ Agregar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -295,7 +260,7 @@
             this.Acción});
             this.dataGridView1.Location = new System.Drawing.Point(23, 76);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(370, 384);
+            this.dataGridView1.Size = new System.Drawing.Size(370, 326);
             this.dataGridView1.TabIndex = 10;
             // 
             // Id
@@ -324,36 +289,75 @@
             this.textBox9.Size = new System.Drawing.Size(206, 24);
             this.textBox9.TabIndex = 9;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(296, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 38);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.SteelBlue;
             this.button5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(318, 563);
+            this.button5.Location = new System.Drawing.Point(406, 513);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(103, 42);
             this.button5.TabIndex = 22;
-            this.button5.Text = "Guardar";
+            this.button5.Text = "🖫 Guardar";
             this.button5.UseVisualStyleBackColor = false;
             // 
-            // Detalle_Proveedor
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Gray;
+            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(305, 25);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(88, 39);
+            this.button3.TabIndex = 41;
+            this.button3.Text = "🔎 Buscar";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Firebrick;
+            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(209, 419);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(107, 41);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "🗑 Eliminar";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.SteelBlue;
+            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(106, 419);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(98, 41);
+            this.button2.TabIndex = 42;
+            this.button2.Text = "＋ Agregar";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.Gray;
+            this.button4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(514, 513);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(104, 42);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "⟲ Regresar";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // SupplierDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(741, 619);
+            this.ClientSize = new System.Drawing.Size(741, 566);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -370,7 +374,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Detalle_Proveedor";
+            this.Name = "SupplierDetail";
             this.Text = "Detalle de proveedor";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -409,10 +413,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Insumo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Acción;
         private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button4;
     }
 }
