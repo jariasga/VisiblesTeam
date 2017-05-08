@@ -16,5 +16,11 @@ namespace SistemaInkaArt.Presentation.Sales
         {
             InitializeComponent();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ClientOrderCreate form = new ClientOrderCreate();
+            form.Show();
+        }
     }
 }
