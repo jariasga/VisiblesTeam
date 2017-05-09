@@ -151,7 +151,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormGenerateKardex";
-            this.Text = "Generar reporte kardex";
+            this.Text = "Generar Reporte Kardex";
             this.ResumeLayout(false);
             this.PerformLayout();
 

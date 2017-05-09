@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Sales
 {
-    public partial class SalesReport : Form
+    public partial class GenerateSalesReport : Form
     {
-        public SalesReport()
+        public GenerateSalesReport()
         {
             InitializeComponent();
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

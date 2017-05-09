@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SistemaInkaArt.Presentation.Sales
+namespace SistemaInkaArt.Presentation.Warehouse
 {
-    public partial class SalesReport : Form
+    public partial class GenerateStockReport : Form
     {
-        public SalesReport()
+        public GenerateStockReport()
         {
             InitializeComponent();
         }
