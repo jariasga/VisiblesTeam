@@ -43,8 +43,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -60,14 +58,12 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Nombre,
-            this.StockActual,
-            this.StockVirtual,
             this.Estado,
             this.VerDetalle,
             this.Eliminar});
             this.dataGridView1.Location = new System.Drawing.Point(15, 185);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(761, 208);
+            this.dataGridView1.Size = new System.Drawing.Size(663, 208);
             this.dataGridView1.TabIndex = 3;
             // 
             // button2
@@ -75,7 +71,7 @@
             this.button2.BackColor = System.Drawing.Color.Firebrick;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(405, 414);
+            this.button2.Location = new System.Drawing.Point(353, 414);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 39);
             this.button2.TabIndex = 39;
@@ -88,7 +84,7 @@
             this.button5.BackColor = System.Drawing.Color.SteelBlue;
             this.button5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(272, 414);
+            this.button5.Location = new System.Drawing.Point(215, 414);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(124, 39);
@@ -111,7 +107,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(15, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(761, 158);
+            this.groupBox1.Size = new System.Drawing.Size(663, 158);
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -121,7 +117,7 @@
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(240, 110);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(381, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(292, 26);
             this.dateTimePicker1.TabIndex = 28;
             // 
             // comboBox1
@@ -177,7 +173,7 @@
             this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(240, 50);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(502, 26);
+            this.textBox4.Size = new System.Drawing.Size(404, 26);
             this.textBox4.TabIndex = 17;
             // 
             // label1
@@ -194,7 +190,7 @@
             this.button1.BackColor = System.Drawing.Color.Gray;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(654, 97);
+            this.button1.Location = new System.Drawing.Point(556, 97);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 39);
@@ -213,17 +209,7 @@
             // 
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 200;
-            // 
-            // StockActual
-            // 
-            this.StockActual.HeaderText = "Stock Actual";
-            this.StockActual.Name = "StockActual";
-            // 
-            // StockVirtual
-            // 
-            this.StockVirtual.HeaderText = "Stock Virtual";
-            this.StockVirtual.Name = "StockVirtual";
+            this.Nombre.Width = 300;
             // 
             // Estado
             // 
@@ -249,7 +235,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(793, 465);
+            this.ClientSize = new System.Drawing.Size(700, 465);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button5);
@@ -269,13 +255,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StockActual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StockVirtual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -286,5 +265,10 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }
