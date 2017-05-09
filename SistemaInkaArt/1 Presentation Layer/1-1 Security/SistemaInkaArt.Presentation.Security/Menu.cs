@@ -129,6 +129,20 @@ namespace Presentation.Security
             reporte_ventas.Show();
         }
 
+        private void salidasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form salidas_productos = new ProductOut();
+            salidas_productos.MdiParent = this;
+            salidas_productos.Show();
+        }
+
+        private void ingresosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form ingresos_productos = new ProductIn();
+            ingresos_productos.MdiParent = this;
+            ingresos_productos.Show();
+        }
+
         /* Warehouse */
         private void kardexToolStripMenuItem_Click(object sender, EventArgs e)
         {
