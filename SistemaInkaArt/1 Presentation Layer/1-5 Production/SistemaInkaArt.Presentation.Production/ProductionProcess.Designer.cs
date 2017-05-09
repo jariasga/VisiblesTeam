@@ -141,9 +141,9 @@
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(19, 96);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 18);
+            this.label2.Size = new System.Drawing.Size(71, 18);
             this.label2.TabIndex = 18;
-            this.label2.Text = "Nombre";
+            this.label2.Text = "Producto";
             // 
             // label1
             // 
