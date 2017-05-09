@@ -220,6 +220,7 @@
             this.asignaciónDeTrabajadoresToolStripMenuItem.Name = "asignaciónDeTrabajadoresToolStripMenuItem";
             this.asignaciónDeTrabajadoresToolStripMenuItem.Size = new System.Drawing.Size(391, 26);
             this.asignaciónDeTrabajadoresToolStripMenuItem.Text = "Asignación de Trabajadores";
+            this.asignaciónDeTrabajadoresToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeTrabajadoresToolStripMenuItem_Click);
             // 
             // calendarioDeToolStripMenuItem
             // 
