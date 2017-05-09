@@ -11,6 +11,7 @@ using Presentation;
 using SistemaInkaArt.Presentation.Purchases;
 using SistemaInkaArt.Presentation.Sales;
 using SistemaInkaArt.Presentation.Production;
+using SistemaInkaArt.Presentation.Warehouse;
 
 namespace Presentation.Security
 {
@@ -36,14 +37,7 @@ namespace Presentation.Security
         }
 
         /* Purchases */
-
-        private void materiaPrimaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Form stocks = new FormKardex();
-            //stocks.MdiParent = this;
-            //stocks.Show();
-        }
-
+      
         private void parámetrosGeneralesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form parameters_form = new GeneralParameters();
@@ -93,6 +87,13 @@ namespace Presentation.Security
 
         }
 
+        private void productividadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form reporte_productividad = new GenerateProductivityReport();
+            reporte_productividad.MdiParent = this;
+            reporte_productividad.Show();
+        }
+
         /* Sales */
 
         private void verClientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -120,5 +121,29 @@ namespace Presentation.Security
         {
 
         }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form reporte_ventas = new GenerateSalesReport();
+            reporte_ventas.MdiParent = this;
+            reporte_ventas.Show();
+        }
+
+        /* Warehouse */
+        private void kardexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form reporte_kardex = new GenerateKardexReport();
+            reporte_kardex.MdiParent = this;
+            reporte_kardex.Show();
+        }
+
+        private void stockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form reporte_stocks = new GenerateStockReport();
+            reporte_stocks.MdiParent = this;
+            reporte_stocks.Show();
+        }
+
+       
     }
 }
