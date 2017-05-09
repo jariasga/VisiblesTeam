@@ -30,6 +30,8 @@ namespace Presentation.Security {
         
         private UserDataTable tableUser;
         
+        private global::System.Data.DataRelation relationPerson_User;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -242,6 +244,7 @@ namespace Presentation.Security {
                     this.tableUser.InitVars();
                 }
             }
+            this.relationPerson_User = this.Relations["Person_User"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +261,10 @@ namespace Presentation.Security {
             base.Tables.Add(this.tableTurn);
             this.tableUser = new UserDataTable();
             base.Tables.Add(this.tableUser);
+            this.relationPerson_User = new global::System.Data.DataRelation("Person_User", new global::System.Data.DataColumn[] {
+                        this.tablePerson.userColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUser.idUserColumn}, false);
+            this.Relations.Add(this.relationPerson_User);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1444,6 +1451,17 @@ namespace Presentation.Security {
             public void SetuserNull() {
                 this[this.tablePerson.userColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public UserRow[] GetUserRows() {
+                if ((this.Table.ChildRelations["Person_User"] == null)) {
+                    return new UserRow[0];
+                }
+                else {
+                    return ((UserRow[])(base.GetChildRows(this.Table.ChildRelations["Person_User"])));
+                }
+            }
         }
         
         /// <summary>
@@ -1621,6 +1639,17 @@ namespace Presentation.Security {
                 }
                 set {
                     this[this.tableUser.usernameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PersonRow PersonRow {
+                get {
+                    return ((PersonRow)(this.GetParentRow(this.Table.ParentRelations["Person_User"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Person_User"]);
                 }
             }
             
