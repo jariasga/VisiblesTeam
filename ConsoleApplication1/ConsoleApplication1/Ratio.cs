@@ -8,7 +8,7 @@ namespace ConsoleApplication1
 {
     class Ratio
     {
-        public string type; // time or roture
+        public string type; // tiempo o rotura
         public string process;
         public string product;
         public double value;
@@ -19,11 +19,6 @@ namespace ConsoleApplication1
             this.process = process;
             this.product = product;
             this.value = value;
-        }
-
-        public void print()
-        {
-            Console.WriteLine(type + " - " + process + " - " + product + " - " + value.ToString());
         }
     }
 }
