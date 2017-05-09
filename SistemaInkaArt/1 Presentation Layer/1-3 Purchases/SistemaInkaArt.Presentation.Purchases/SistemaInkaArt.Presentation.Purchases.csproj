@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddSupply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSupply.Designer.cs">
+      <DependentUpon>AddSupply.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddSupplyForOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSupplyForOrder.Designer.cs">
+      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="PurchaseOrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +102,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddSupply.resx">
+      <DependentUpon>AddSupply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSupplyForOrder.resx">
+      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PurchaseOrderDetail.resx">
       <DependentUpon>PurchaseOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
