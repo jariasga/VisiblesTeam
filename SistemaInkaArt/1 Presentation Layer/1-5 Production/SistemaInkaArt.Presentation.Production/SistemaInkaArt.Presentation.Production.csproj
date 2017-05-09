@@ -54,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmLoad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgorithmLoad.Designer.cs">
+      <DependentUpon>AlgorithmLoad.cs</DependentUpon>
+    </Compile>
     <Compile Include="FinalProducts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,15 @@
     <Compile Include="TurnManagement.Designer.cs">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorkersAssignment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkersAssignment.Designer.cs">
+      <DependentUpon>WorkersAssignment.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AlgorithmLoad.resx">
+      <DependentUpon>AlgorithmLoad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FinalProducts.resx">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TurnManagement.resx">
       <DependentUpon>TurnManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkersAssignment.resx">
+      <DependentUpon>WorkersAssignment.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
