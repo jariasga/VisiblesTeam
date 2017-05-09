@@ -16,5 +16,12 @@ namespace SistemaInkaArt.Presentation.Production
         {
             InitializeComponent();
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Form job_details = new JobDetails();
+            job_details.Show();
+
+        }
     }
 }
