@@ -175,7 +175,7 @@
             this.groupBox4.Size = new System.Drawing.Size(247, 184);
             this.groupBox4.TabIndex = 29;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Piedra Tallada";
+            this.groupBox4.Text = "Piedra de Huamanga";
             // 
             // textBox5
             // 
