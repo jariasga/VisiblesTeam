@@ -22,5 +22,10 @@ namespace SistemaInkaArt.Presentation.Sales
             ClientOrderCreate form = new ClientOrderCreate();
             form.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

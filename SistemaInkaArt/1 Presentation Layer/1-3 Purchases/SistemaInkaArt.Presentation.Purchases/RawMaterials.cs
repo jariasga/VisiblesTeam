@@ -17,24 +17,19 @@ namespace SistemaInkaArt.Presentation.Purchases
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             RawMaterialDetail rawMaterialDet = new RawMaterialDetail();
             rawMaterialDet.Show();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[0].Value); //added this line
+                bool s = Convert.ToBoolean(row.Cells[0].Value);
 
                 if (s == true)
                 {
@@ -46,6 +41,11 @@ namespace SistemaInkaArt.Presentation.Purchases
             {
                 dataGridView1.Rows.Remove(row);
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
