@@ -19,7 +19,7 @@ namespace Presentation.Security
             //Application.Run(new UserMaintenance());
             //Application.Run(new UserRolesPermissions());
             //Application.Run(new GeneralParameters());
-            Application.Run(new Menu());
+            Application.Run(new LogIn());
         }
     }
 }
