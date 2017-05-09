@@ -16,7 +16,9 @@ namespace Presentation.Security
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserMaintenance());
+            //Application.Run(new UserMaintenance());
+            //Application.Run(new UserRolesPermissions());
+            Application.Run(new GeneralParameters());
         }
     }
 }

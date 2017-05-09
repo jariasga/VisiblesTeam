@@ -32,5 +32,15 @@ namespace Presentation.Security
         {
 
         }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
     }
 }
