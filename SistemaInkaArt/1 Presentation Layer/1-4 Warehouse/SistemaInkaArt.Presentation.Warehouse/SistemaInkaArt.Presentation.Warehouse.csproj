@@ -54,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertLackSupplies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertLackSupplies.Designer.cs">
+      <DependentUpon>AlertLackSupplies.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerateKardexReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     <Compile Include="StockReport.Designer.cs">
       <DependentUpon>StockReport.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AlertLackSupplies.resx">
+      <DependentUpon>AlertLackSupplies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GenerateKardexReport.resx">
       <DependentUpon>GenerateKardexReport.cs</DependentUpon>
     </EmbeddedResource>
