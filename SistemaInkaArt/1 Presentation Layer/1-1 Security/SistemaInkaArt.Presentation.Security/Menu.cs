@@ -77,14 +77,15 @@ namespace Presentation.Security
 
         private void listaDeProcesosDeProducciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form processes_form = new ProductionProcess();
+            Form processes_form = new Jobs();
             processes_form.MdiParent = this;
             processes_form.Show();
         }
 
         private void listaDeTurnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form turn_management = new TurnManagement();
+            turn_management.Show();
         }
 
         private void productividadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,13 +109,6 @@ namespace Presentation.Security
             Form client_orders_form = new ClientOrderIndex();
             client_orders_form.MdiParent = this;
             client_orders_form.Show();
-        }
-
-        private void generarBoletaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form registrarVenta = new ClientOrderCreate();
-            registrarVenta.MdiParent = this;
-            registrarVenta.Show();
         }
 
         private void status_strip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -144,6 +138,11 @@ namespace Presentation.Security
             reporte_stocks.Show();
         }
 
-       
+        private void añadirInformeDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form job_report = new RegisterAsignedJob();
+            job_report.MdiParent = this;
+            job_report.Show();
+        }
     }
 }
