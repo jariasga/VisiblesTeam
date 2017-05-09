@@ -17,9 +17,11 @@ namespace Presentation.Security
 {
     public partial class Menu : Form
     {
-        public Menu()
+        private Form login;
+        public Menu(Form login)
         {
             InitializeComponent();
+            this.login = login;
         }
 
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,6 +159,12 @@ namespace Presentation.Security
             Form job_report = new RegisterAsignedJob();
             job_report.MdiParent = this;
             job_report.Show();
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            login.Show();
+            this.Close();
         }
     }
 }
