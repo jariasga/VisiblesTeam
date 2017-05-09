@@ -10,26 +10,22 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Warehouse
 {
-    public partial class FormKardex : Form
+    public partial class GenerateKardexReport : Form
     {
-        public FormKardex()
+        public GenerateKardexReport()
         {
             InitializeComponent();
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void button_generate_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void grid_out_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            KardexReport kardex_form = new KardexReport();
+            kardex_form.Show();
         }
     }
 }

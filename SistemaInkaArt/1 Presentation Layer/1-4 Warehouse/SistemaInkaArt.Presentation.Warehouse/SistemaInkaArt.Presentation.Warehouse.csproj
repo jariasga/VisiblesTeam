@@ -33,8 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql, Version=3.2.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.3.2.2\lib\net451\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,17 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormGenerateKardex.cs">
+    <Compile Include="GenerateKardexReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormGenerateKardex.Designer.cs">
-      <DependentUpon>FormGenerateKardex.cs</DependentUpon>
+    <Compile Include="GenerateKardexReport.Designer.cs">
+      <DependentUpon>GenerateKardexReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormKardex.cs">
+    <Compile Include="KardexReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormKardex.Designer.cs">
-      <DependentUpon>FormKardex.cs</DependentUpon>
+    <Compile Include="KardexReport.Designer.cs">
+      <DependentUpon>KardexReport.cs</DependentUpon>
     </Compile>
     <Compile Include="GenerateStockReport.cs">
       <SubType>Form</SubType>
@@ -72,11 +80,11 @@
     <Compile Include="StockReport.Designer.cs">
       <DependentUpon>StockReport.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormGenerateKardex.resx">
-      <DependentUpon>FormGenerateKardex.cs</DependentUpon>
+    <EmbeddedResource Include="GenerateKardexReport.resx">
+      <DependentUpon>GenerateKardexReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormKardex.resx">
-      <DependentUpon>FormKardex.cs</DependentUpon>
+    <EmbeddedResource Include="KardexReport.resx">
+      <DependentUpon>KardexReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerateStockReport.resx">
       <DependentUpon>GenerateStockReport.cs</DependentUpon>
@@ -93,6 +101,7 @@
     <EmbeddedResource Include="StockReport.resx">
       <DependentUpon>StockReport.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

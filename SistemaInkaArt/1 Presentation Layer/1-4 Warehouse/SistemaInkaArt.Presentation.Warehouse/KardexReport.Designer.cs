@@ -1,6 +1,6 @@
 ﻿namespace SistemaInkaArt.Presentation.Warehouse
 {
-    partial class FormKardex
+    partial class KardexReport
     {
         /// <summary>
         /// Required designer variable.

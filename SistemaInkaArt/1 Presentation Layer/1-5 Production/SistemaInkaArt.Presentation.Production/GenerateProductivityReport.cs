@@ -16,5 +16,11 @@ namespace SistemaInkaArt.Presentation.Production
         {
             InitializeComponent();
         }
+
+        private void button_generate_Click(object sender, EventArgs e)
+        {
+            ProductivityReport productivity_form = new ProductivityReport();
+            productivity_form.Show();
+        }
     }
 }

@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button_generate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,16 +47,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros para el reporte";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(44, 48);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(121, 27);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Productos";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
@@ -69,38 +58,36 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // button1
+            // checkBox1
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(219, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 51);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Generar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(44, 48);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(121, 27);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Productos";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // button_generate
             // 
-            this.button4.BackColor = System.Drawing.Color.Gray;
-            this.button4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(49, 227);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(141, 51);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "⟲ Regresar";
-            this.button4.UseVisualStyleBackColor = false;
+            this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_generate.ForeColor = System.Drawing.Color.White;
+            this.button_generate.Location = new System.Drawing.Point(143, 211);
+            this.button_generate.Name = "button_generate";
+            this.button_generate.Size = new System.Drawing.Size(138, 51);
+            this.button_generate.TabIndex = 22;
+            this.button_generate.Text = "Generar";
+            this.button_generate.UseVisualStyleBackColor = false;
+            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
             // 
             // GenerateStockReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(414, 311);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button4);
+            this.ClientSize = new System.Drawing.Size(414, 286);
+            this.Controls.Add(this.button_generate);
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerateStockReport";
             this.Text = "Generar Reporte de Stocks";
@@ -115,7 +102,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_generate;
     }
 }

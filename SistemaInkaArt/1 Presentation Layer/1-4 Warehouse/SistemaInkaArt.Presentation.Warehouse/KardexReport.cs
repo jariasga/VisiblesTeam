@@ -10,22 +10,26 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Warehouse
 {
-    public partial class GenerateStockReport : Form
+    public partial class KardexReport : Form
     {
-        public GenerateStockReport()
+        public KardexReport()
         {
             InitializeComponent();
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button_generate_Click(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
-            StockReport stock_form = new StockReport();
-            stock_form.Show();
+
+        }
+
+        private void grid_out_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

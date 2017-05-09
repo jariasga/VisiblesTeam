@@ -21,5 +21,11 @@ namespace SistemaInkaArt.Presentation.Sales
         {
 
         }
+
+        private void button_generate_Click(object sender, EventArgs e)
+        {
+            SalesReport sales_form = new SalesReport();
+            sales_form.Show();
+        }
     }
 }

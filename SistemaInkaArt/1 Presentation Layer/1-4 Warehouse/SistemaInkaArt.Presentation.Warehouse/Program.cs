@@ -16,7 +16,7 @@ namespace SistemaInkaArt.Presentation.Warehouse
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormKardex());
+            Application.Run(new KardexReport());
         }
     }
 }
