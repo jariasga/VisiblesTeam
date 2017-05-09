@@ -17,17 +17,28 @@ namespace SistemaInkaArt.Presentation.Sales
             InitializeComponent();
         }
 
+        public ClientCreate(string text)
+        {
+            InitializeComponent();
+            Text = text;
+        }
+
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void button_back_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
         {
 
         }

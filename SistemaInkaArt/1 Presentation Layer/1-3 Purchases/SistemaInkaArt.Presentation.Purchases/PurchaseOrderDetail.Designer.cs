@@ -40,21 +40,21 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button_delete = new System.Windows.Forms.Button();
+            this.button_add = new System.Windows.Forms.Button();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.button_search = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -178,16 +178,42 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button_delete);
+            this.groupBox2.Controls.Add(this.button_add);
             this.groupBox2.Controls.Add(this.textBox9);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button_search);
             this.groupBox2.Location = new System.Drawing.Point(249, 23);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(654, 377);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de insumos pedidos";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Location = new System.Drawing.Point(196, 54);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(325, 24);
+            this.textBox4.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(193, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(140, 18);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Nombre de insumo";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(73, 18);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Id Insumo";
             // 
             // dataGridView1
             // 
@@ -205,65 +231,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(620, 213);
             this.dataGridView1.TabIndex = 17;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Firebrick;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(329, 315);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 41);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "🗑 Eliminar";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(214, 315);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 41);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "+ Agregar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox9.Location = new System.Drawing.Point(16, 54);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(160, 24);
-            this.textBox9.TabIndex = 11;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(540, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 38);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "🔎 Buscar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.SteelBlue;
-            this.button5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(413, 412);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 42);
-            this.button5.TabIndex = 23;
-            this.button5.Text = "🖫 Guardar";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Id
             // 
@@ -303,31 +270,65 @@
             this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Acción.Width = 62;
             // 
-            // label6
+            // button_delete
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 33);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 18);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Id Insumo";
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(329, 315);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(104, 41);
+            this.button_delete.TabIndex = 15;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label7
+            // button_add
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(193, 33);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(140, 18);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Nombre de insumo";
+            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_add.ForeColor = System.Drawing.Color.White;
+            this.button_add.Location = new System.Drawing.Point(214, 315);
+            this.button_add.Name = "button_add";
+            this.button_add.Size = new System.Drawing.Size(104, 41);
+            this.button_add.TabIndex = 14;
+            this.button_add.Text = "+ Agregar";
+            this.button_add.UseVisualStyleBackColor = false;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
-            // textBox4
+            // textBox9
             // 
-            this.textBox4.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(196, 54);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(325, 24);
-            this.textBox4.TabIndex = 18;
+            this.textBox9.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox9.Location = new System.Drawing.Point(16, 54);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(160, 24);
+            this.textBox9.TabIndex = 11;
+            // 
+            // button_search
+            // 
+            this.button_search.BackColor = System.Drawing.Color.Gray;
+            this.button_search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_search.ForeColor = System.Drawing.Color.White;
+            this.button_search.Location = new System.Drawing.Point(540, 40);
+            this.button_search.Name = "button_search";
+            this.button_search.Size = new System.Drawing.Size(96, 38);
+            this.button_search.TabIndex = 10;
+            this.button_search.Text = "🔎 Buscar";
+            this.button_search.UseVisualStyleBackColor = false;
+            this.button_search.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button_save
+            // 
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(413, 412);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(104, 42);
+            this.button_save.TabIndex = 23;
+            this.button_save.Text = "🖫 Guardar";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.button5_Click);
             // 
             // PurchaseOrderDetail
             // 
@@ -335,7 +336,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(924, 463);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -366,10 +367,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button_search;
+        private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.Button button_add;
+        private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;

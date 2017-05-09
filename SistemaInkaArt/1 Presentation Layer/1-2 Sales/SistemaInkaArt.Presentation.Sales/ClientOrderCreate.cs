@@ -17,26 +17,33 @@ namespace SistemaInkaArt.Presentation.Sales
             InitializeComponent();
         }
 
+        public ClientOrderCreate(string text)
+        {
+            InitializeComponent();
+            Text = text;
+        }
+
         private void clients_index_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void label8_Click(object sender, EventArgs e)
         {
 
         }
 
         private void ClientOrderCreate_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_back_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
         {
 
         }

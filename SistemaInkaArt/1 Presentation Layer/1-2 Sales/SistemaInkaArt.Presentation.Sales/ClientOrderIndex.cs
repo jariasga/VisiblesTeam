@@ -16,16 +16,27 @@ namespace SistemaInkaArt.Presentation.Sales
         {
             InitializeComponent();
         }
+        
+        private void button_search_Click(object sender, EventArgs e)
+        {            
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            ClientOrderCreate form = new ClientOrderCreate();
-            form.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_create_Click(object sender, EventArgs e)
+        {
+            ClientOrderCreate create_form = new ClientOrderCreate();
+            create_form.Show();
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void grid_orders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClientOrderShow show_form = new ClientOrderShow();
+            show_form.Show();
         }
     }
 }
