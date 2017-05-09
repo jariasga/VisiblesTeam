@@ -17,20 +17,31 @@ namespace SistemaInkaArt.Presentation.Sales
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ClientOrderShow_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button_delete_Click(object sender, EventArgs e)
         {
-            ClientOrderDevolution form = new ClientOrderDevolution();
-            form.Show();
+
+        }
+
+        private void button_devolution_Click(object sender, EventArgs e)
+        {
+            ClientOrderDevolution dev_form = new ClientOrderDevolution();
+            dev_form.Show();
+        }
+
+        private void button_edit_Click(object sender, EventArgs e)
+        {
+            ClientOrderCreate edit_form = new ClientOrderCreate("Editar Cliente");
+            Close();
+            edit_form.Show();
+        }
+
+        private void button_doc_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -27,9 +27,16 @@ namespace SistemaInkaArt.Presentation.Sales
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button_delete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_edit_Click(object sender, EventArgs e)
+        {
+            ClientCreate edit_form = new ClientCreate("Editar Cliente");
+            Close();
+            edit_form.Show();            
         }
     }
 }

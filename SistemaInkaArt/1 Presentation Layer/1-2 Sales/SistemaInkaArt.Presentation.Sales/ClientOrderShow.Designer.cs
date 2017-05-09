@@ -47,12 +47,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_devolution = new System.Windows.Forms.Button();
+            this.button_doc = new System.Windows.Forms.Button();
+            this.button_delete = new System.Windows.Forms.Button();
+            this.button_edit = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -175,13 +176,14 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Controls.Add(this.textBox5);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.comboBox3);
             this.groupBox3.Controls.Add(this.dateTimePicker2);
             this.groupBox3.Controls.Add(this.textBox1);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.comboBox2);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox3.Location = new System.Drawing.Point(28, 29);
@@ -248,16 +250,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Documento de pago";
             // 
-            // comboBox2
-            // 
-            this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(25, 166);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(277, 26);
-            this.comboBox2.TabIndex = 5;
-            this.comboBox2.Text = "Boleta";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -267,57 +259,84 @@
             this.label8.TabIndex = 4;
             this.label8.Text = "Identificador";
             // 
-            // button3
+            // button_devolution
             // 
-            this.button3.BackColor = System.Drawing.Color.Gray;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(678, 383);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 39);
-            this.button3.TabIndex = 26;
-            this.button3.Text = "Devolución";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button_devolution.BackColor = System.Drawing.Color.Gray;
+            this.button_devolution.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_devolution.ForeColor = System.Drawing.Color.White;
+            this.button_devolution.Location = new System.Drawing.Point(678, 383);
+            this.button_devolution.Margin = new System.Windows.Forms.Padding(2);
+            this.button_devolution.Name = "button_devolution";
+            this.button_devolution.Size = new System.Drawing.Size(106, 39);
+            this.button_devolution.TabIndex = 26;
+            this.button_devolution.Text = "Devolución";
+            this.button_devolution.UseVisualStyleBackColor = false;
+            this.button_devolution.Click += new System.EventHandler(this.button_devolution_Click);
             // 
-            // button4
+            // button_doc
             // 
-            this.button4.BackColor = System.Drawing.Color.Gray;
-            this.button4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(486, 383);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(176, 39);
-            this.button4.TabIndex = 27;
-            this.button4.Text = "Generar Documento";
-            this.button4.UseVisualStyleBackColor = false;
+            this.button_doc.BackColor = System.Drawing.Color.Gray;
+            this.button_doc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_doc.ForeColor = System.Drawing.Color.White;
+            this.button_doc.Location = new System.Drawing.Point(486, 383);
+            this.button_doc.Margin = new System.Windows.Forms.Padding(2);
+            this.button_doc.Name = "button_doc";
+            this.button_doc.Size = new System.Drawing.Size(176, 39);
+            this.button_doc.TabIndex = 27;
+            this.button_doc.Text = "Generar Documento";
+            this.button_doc.UseVisualStyleBackColor = false;
+            this.button_doc.Click += new System.EventHandler(this.button_doc_Click);
             // 
-            // button1
+            // button_delete
             // 
-            this.button1.BackColor = System.Drawing.Color.Firebrick;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(636, 433);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 39);
-            this.button1.TabIndex = 38;
-            this.button1.Text = "🗑 Eliminar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(636, 433);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(107, 39);
+            this.button_delete.TabIndex = 38;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
-            // button2
+            // button_edit
             // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(524, 433);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 39);
-            this.button2.TabIndex = 37;
-            this.button2.Text = "🖉 Editar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.button_edit.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_edit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_edit.ForeColor = System.Drawing.Color.White;
+            this.button_edit.Location = new System.Drawing.Point(524, 433);
+            this.button_edit.Margin = new System.Windows.Forms.Padding(2);
+            this.button_edit.Name = "button_edit";
+            this.button_edit.Size = new System.Drawing.Size(107, 39);
+            this.button_edit.TabIndex = 37;
+            this.button_edit.Text = "🖉 Editar";
+            this.button_edit.UseVisualStyleBackColor = false;
+            this.button_edit.Click += new System.EventHandler(this.button_edit_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Boleta",
+            "Factura"});
+            this.comboBox2.Location = new System.Drawing.Point(25, 164);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(105, 26);
+            this.comboBox2.TabIndex = 36;
+            this.comboBox2.Text = "Boleta";
+            // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox5.Enabled = false;
+            this.textBox5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox5.Location = new System.Drawing.Point(139, 164);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(163, 26);
+            this.textBox5.TabIndex = 37;
+            this.textBox5.Text = "000000001";
             // 
             // ClientOrderShow
             // 
@@ -325,10 +344,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(902, 505);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button_delete);
+            this.Controls.Add(this.button_edit);
+            this.Controls.Add(this.button_doc);
+            this.Controls.Add(this.button_devolution);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
@@ -360,18 +379,19 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_devolution;
+        private System.Windows.Forms.Button button_doc;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.Button button_edit;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textBox5;
     }
 }
