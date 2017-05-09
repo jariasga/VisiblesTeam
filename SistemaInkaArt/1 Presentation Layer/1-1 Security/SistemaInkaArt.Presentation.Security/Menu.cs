@@ -144,6 +144,11 @@ namespace Presentation.Security
             reporte_stocks.Show();
         }
 
-       
+        private void asignaciónDeTrabajadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form workers_assignment = new WorkersAssignment();
+            workers_assignment.MdiParent = this;
+            workers_assignment.Show();
+        }
     }
 }
