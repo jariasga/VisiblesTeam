@@ -16,5 +16,22 @@ namespace SistemaInkaArt.Presentation.Production
         {
             InitializeComponent();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form production_process = new ProductionProcess();
+            production_process.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form recipe = new Recipe();
+            recipe.Show();
+        }
     }
 }
