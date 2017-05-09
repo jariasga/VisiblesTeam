@@ -15,11 +15,12 @@ namespace SistemaInkaArt.Presentation.Purchases
         public PurchaseOrderDetail()
         {
             InitializeComponent();
-            button3.Enabled = true;
-            button2.Enabled = false;
-            button4.Enabled = false;
+            button_add.Enabled = true;
+            button_delete.Enabled = false;
+            button_save.Enabled = false;
         }
 
+        /* delete */
         private void button3_Click(object sender, EventArgs e)
         {
             List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
@@ -39,17 +40,24 @@ namespace SistemaInkaArt.Presentation.Purchases
             }
         }
 
+        /* search */
         private void button1_Click(object sender, EventArgs e)
         {
-            button3.Enabled = false;
-            button2.Enabled = true;
-            button4.Enabled = true;
+            button_delete.Enabled = false;
+            button_add.Enabled = true;
+            button_delete.Enabled = true;
         }
 
+        /* save */
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
 
+        private void button_add_Click(object sender, EventArgs e)
+        {
+            button_delete.Enabled = true;
+            button_save.Enabled = true;
         }
     }
 }

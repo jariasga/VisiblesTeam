@@ -18,7 +18,8 @@ namespace Presentation.Security
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new UserMaintenance());
             //Application.Run(new UserRolesPermissions());
-            Application.Run(new GeneralParameters());
+            //Application.Run(new GeneralParameters());
+            Application.Run(new Menu());
         }
     }
 }

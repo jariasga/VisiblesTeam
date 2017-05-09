@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -50,8 +50,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_edit = new System.Windows.Forms.Button();
+            this.button_delete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -75,47 +75,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contacto";
             // 
-            // textBox6
+            // textBox8
             // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(23, 64);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(281, 26);
-            this.textBox6.TabIndex = 27;
-            this.textBox6.Text = "Calle Re 333, Urbuanización Tablos";
+            this.textBox8.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox8.Enabled = false;
+            this.textBox8.Location = new System.Drawing.Point(23, 252);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(281, 26);
+            this.textBox8.TabIndex = 33;
+            this.textBox8.Text = "retablos@gmail.com";
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 42);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 18);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Dirección";
-            // 
-            // textBox7
-            // 
-            this.textBox7.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox7.Enabled = false;
-            this.textBox7.Location = new System.Drawing.Point(23, 127);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(281, 26);
-            this.textBox7.TabIndex = 29;
-            this.textBox7.Text = "333 88902";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 105);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 18);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "Teléfono";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 230);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 18);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Correo";
             // 
             // textBox4
             // 
@@ -138,26 +117,47 @@
             this.label3.TabIndex = 30;
             this.label3.Text = "Contacto";
             // 
-            // textBox8
+            // textBox7
             // 
-            this.textBox8.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox8.Enabled = false;
-            this.textBox8.Location = new System.Drawing.Point(23, 252);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(281, 26);
-            this.textBox8.TabIndex = 33;
-            this.textBox8.Text = "retablos@gmail.com";
+            this.textBox7.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox7.Enabled = false;
+            this.textBox7.Location = new System.Drawing.Point(23, 127);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(281, 26);
+            this.textBox7.TabIndex = 29;
+            this.textBox7.Text = "333 88902";
             // 
-            // label9
+            // label7
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 230);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 18);
-            this.label9.TabIndex = 32;
-            this.label9.Text = "Correo";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(20, 105);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(66, 18);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "Teléfono";
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox6.Enabled = false;
+            this.textBox6.Location = new System.Drawing.Point(23, 64);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(281, 26);
+            this.textBox6.TabIndex = 27;
+            this.textBox6.Text = "Calle Re 333, Urbuanización Tablos";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 42);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 18);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Dirección";
             // 
             // groupBox2
             // 
@@ -303,31 +303,32 @@
             this.label8.TabIndex = 21;
             this.label8.Text = "Identificador";
             // 
-            // button2
+            // button_edit
             // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(435, 387);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 39);
-            this.button2.TabIndex = 35;
-            this.button2.Text = "🖉 Editar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.button_edit.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_edit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_edit.ForeColor = System.Drawing.Color.White;
+            this.button_edit.Location = new System.Drawing.Point(435, 387);
+            this.button_edit.Margin = new System.Windows.Forms.Padding(2);
+            this.button_edit.Name = "button_edit";
+            this.button_edit.Size = new System.Drawing.Size(107, 39);
+            this.button_edit.TabIndex = 35;
+            this.button_edit.Text = "🖉 Editar";
+            this.button_edit.UseVisualStyleBackColor = false;
+            this.button_edit.Click += new System.EventHandler(this.button_edit_Click);
             // 
-            // button3
+            // button_delete
             // 
-            this.button3.BackColor = System.Drawing.Color.Firebrick;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(547, 387);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(107, 39);
-            this.button3.TabIndex = 36;
-            this.button3.Text = "🗑 Eliminar";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(547, 387);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(107, 39);
+            this.button_delete.TabIndex = 36;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
             // ClientShow
             // 
@@ -335,12 +336,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(766, 483);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_delete);
+            this.Controls.Add(this.button_edit);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ClientShow";
             this.Text = "Vista de Cliente";
             this.Load += new System.EventHandler(this.ClientShow_Load);
@@ -377,7 +378,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_edit;
+        private System.Windows.Forms.Button button_delete;
     }
 }
