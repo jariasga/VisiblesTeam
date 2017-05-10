@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Presentation Layer", "1 Presentation Layer", "{0652AE19-3778-4B7A-9B38-640B6D42C947}"
 EndProject
@@ -18,6 +18,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-4 Warehouse", "1-4 Warehouse", "{098CEA23-3AED-4064-8284-DA1F35906D64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-5 Production", "1-5 Production", "{49D8A99F-6B56-486D-9D56-4836EE47DBF4}"
+	ProjectSection(SolutionItems) = preProject
+		1 Presentation Layer\1-1 Security\SistemaInkaArt.Presentation.Security\AlgorithmLoad.cs = 1 Presentation Layer\1-1 Security\SistemaInkaArt.Presentation.Security\AlgorithmLoad.cs
+		1 Presentation Layer\1-1 Security\SistemaInkaArt.Presentation.Security\AlgorithmLoad.Designer.cs = 1 Presentation Layer\1-1 Security\SistemaInkaArt.Presentation.Security\AlgorithmLoad.Designer.cs
+		1 Presentation Layer\1-1 Security\SistemaInkaArt.Presentation.Security\AlgorithmLoad.resx = 1 Presentation Layer\1-1 Security\SistemaInkaArt.Presentation.Security\AlgorithmLoad.resx
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-1 Security", "2-1 Security", "{2BB866B2-C9A6-489D-AC2F-47B65704B9A1}"
 EndProject
