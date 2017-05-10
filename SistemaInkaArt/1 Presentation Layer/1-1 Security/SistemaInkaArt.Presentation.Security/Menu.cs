@@ -165,5 +165,12 @@ namespace Presentation.Security
             job_report.MdiParent = this;
             job_report.Show();
         }
+
+        private void ingresarInformeDeTrabajadorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form job_form = new RegisterAsignedJob();
+            job_form.MdiParent = this;
+            job_form.Show();
+        }
     }
 }

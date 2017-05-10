@@ -127,9 +127,9 @@
             this.label4.Location = new System.Drawing.Point(28, 232);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 18);
+            this.label4.Size = new System.Drawing.Size(73, 18);
             this.label4.TabIndex = 28;
-            this.label4.Text = "Nombre";
+            this.label4.Text = "Prioridad";
             // 
             // trackBar1
             // 

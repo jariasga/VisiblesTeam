@@ -55,5 +55,11 @@ namespace SistemaInkaArt.Presentation.Purchases
         {
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SupplierDetail detail = new SupplierDetail();
+            detail.Show();
+        }
     }
 }
