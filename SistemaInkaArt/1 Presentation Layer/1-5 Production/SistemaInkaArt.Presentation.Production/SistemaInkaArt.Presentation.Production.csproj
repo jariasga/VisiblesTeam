@@ -33,8 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql, Version=3.2.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Npgsql.3.2.2\lib\net451\Npgsql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +66,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerateProductivityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateProductivityReport.Designer.cs">
+      <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="JobDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +83,12 @@
     </Compile>
     <Compile Include="Jobs.Designer.cs">
       <DependentUpon>Jobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductivityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductivityReport.Designer.cs">
+      <DependentUpon>ProductivityReport.cs</DependentUpon>
     </Compile>
     <Compile Include="ProductionProcess.cs">
       <SubType>Form</SubType>
@@ -105,11 +125,17 @@
     <EmbeddedResource Include="FinalProducts.resx">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GenerateProductivityReport.resx">
+      <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Jobs.resx">
       <DependentUpon>Jobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductivityReport.resx">
+      <DependentUpon>ProductivityReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductionProcess.resx">
       <DependentUpon>ProductionProcess.cs</DependentUpon>
@@ -135,6 +161,7 @@
     <EmbeddedResource Include="TurnManagement.resx">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
