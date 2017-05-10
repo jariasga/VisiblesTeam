@@ -72,11 +72,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseOrderIndex.cs">
+    <Compile Include="RawMaterialsIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PurchaseOrderIndex.Designer.cs">
-      <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    <Compile Include="RawMaterialsIn.Designer.cs">
+      <DependentUpon>RawMaterialsIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RawMaterialsInCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RawMaterialsInCreate.Designer.cs">
+      <DependentUpon>RawMaterialsInCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RawMaterialsInShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RawMaterialsInShow.Designer.cs">
+      <DependentUpon>RawMaterialsInShow.cs</DependentUpon>
     </Compile>
     <Compile Include="StockReport.cs">
       <SubType>Form</SubType>
@@ -105,8 +117,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="PurchaseOrderIndex.resx">
-      <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    <EmbeddedResource Include="RawMaterialsIn.resx">
+      <DependentUpon>RawMaterialsIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RawMaterialsInShow.resx">
+      <DependentUpon>RawMaterialsInShow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockReport.resx">
       <DependentUpon>StockReport.cs</DependentUpon>

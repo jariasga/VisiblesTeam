@@ -38,16 +38,14 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grid_orders = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaDeEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MontoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.VerDetalle = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_orders)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -155,34 +153,22 @@
             this.button1.Text = "🔎 Buscar";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // grid_orders
             // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(285, 490);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 39);
-            this.button2.TabIndex = 44;
-            this.button2.Text = "+ Agregar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_orders.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_orders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Proveedor,
             this.FechaDeEntrega,
             this.MontoTotal,
-            this.VerDetalle,
-            this.Eliminar});
-            this.dataGridView1.Location = new System.Drawing.Point(22, 194);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(665, 272);
-            this.dataGridView1.TabIndex = 43;
+            this.VerDetalle});
+            this.grid_orders.Location = new System.Drawing.Point(22, 194);
+            this.grid_orders.Name = "grid_orders";
+            this.grid_orders.Size = new System.Drawing.Size(665, 276);
+            this.grid_orders.TabIndex = 43;
+            this.grid_orders.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grid_orders_CellMouseDoubleClick);
             // 
             // Id
             // 
@@ -210,30 +196,23 @@
             // 
             this.VerDetalle.HeaderText = "Ver detalle";
             this.VerDetalle.Name = "VerDetalle";
+            this.VerDetalle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.VerDetalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.VerDetalle.Width = 81;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.Width = 80;
             // 
             // PurchaseOrderIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(725, 541);
+            this.ClientSize = new System.Drawing.Size(715, 509);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.grid_orders);
             this.Name = "PurchaseOrderIndex";
-            this.Text = "PurchaseOrdersIndex";
+            this.Text = "Ingreso de Materia Prima";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_orders)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -250,13 +229,11 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView grid_orders;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaDeEntrega;
         private System.Windows.Forms.DataGridViewTextBoxColumn MontoTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.DataGridViewButtonColumn VerDetalle;
     }
 }

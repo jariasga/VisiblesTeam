@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SistemaInkaArt.Presentation.Warehouse
 {
-    public partial class PurchaseOrderIndex : Form
+    public partial class RawMaterialsInShow : Form
     {
-        public PurchaseOrderIndex()
+        public RawMaterialsInShow()
         {
             InitializeComponent();
         }
