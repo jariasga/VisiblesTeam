@@ -46,9 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs" />
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AlertLackSupplies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertLackSupplies.Designer.cs">
+      <DependentUpon>AlertLackSupplies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateKardexReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateKardexReport.Designer.cs">
+      <DependentUpon>GenerateKardexReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateStockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateStockReport.Designer.cs">
+      <DependentUpon>GenerateStockReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KardexReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KardexReport.Designer.cs">
+      <DependentUpon>KardexReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,6 +78,24 @@
     <Compile Include="PurchaseOrderIndex.Designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="StockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockReport.Designer.cs">
+      <DependentUpon>StockReport.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AlertLackSupplies.resx">
+      <DependentUpon>AlertLackSupplies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateKardexReport.resx">
+      <DependentUpon>GenerateKardexReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateStockReport.resx">
+      <DependentUpon>GenerateStockReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KardexReport.resx">
+      <DependentUpon>KardexReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -69,6 +107,9 @@
     </Compile>
     <EmbeddedResource Include="PurchaseOrderIndex.resx">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockReport.resx">
+      <DependentUpon>StockReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
