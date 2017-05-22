@@ -54,6 +54,204 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Production\FinalProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\FinalProducts.Designer.cs">
+      <DependentUpon>FinalProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\GenerateProductivityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\GenerateProductivityReport.Designer.cs">
+      <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\JobDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\JobDetails.Designer.cs">
+      <DependentUpon>JobDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\Jobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\Jobs.Designer.cs">
+      <DependentUpon>Jobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\ProductionProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\ProductionProcess.Designer.cs">
+      <DependentUpon>ProductionProcess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\ProductivityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\ProductivityReport.Designer.cs">
+      <DependentUpon>ProductivityReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\Recipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\Recipe.Designer.cs">
+      <DependentUpon>Recipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\RegisterAsignedJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\RegisterAsignedJob.Designer.cs">
+      <DependentUpon>RegisterAsignedJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\SimulationConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\SimulationConfig.Designer.cs">
+      <DependentUpon>SimulationConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Production\TurnManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Production\TurnManagement.Designer.cs">
+      <DependentUpon>TurnManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\AddSupply.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\AddSupply.Designer.cs">
+      <DependentUpon>AddSupply.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\AddSupplyForOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\AddSupplyForOrder.Designer.cs">
+      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\PurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\PurchaseOrder.Designer.cs">
+      <DependentUpon>PurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\PurchaseOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\PurchaseOrderDetail.Designer.cs">
+      <DependentUpon>PurchaseOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\RawMaterialDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\RawMaterialDetail.Designer.cs">
+      <DependentUpon>RawMaterialDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\RawMaterials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\RawMaterials.Designer.cs">
+      <DependentUpon>RawMaterials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\SupplierDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\SupplierDetail.Designer.cs">
+      <DependentUpon>SupplierDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Purchases\Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Purchases\Suppliers.Designer.cs">
+      <DependentUpon>Suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientCreate.Designer.cs">
+      <DependentUpon>ClientCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderCreate.Designer.cs">
+      <DependentUpon>ClientOrderCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderDevolution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderDevolution.Designer.cs">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderIndex.Designer.cs">
+      <DependentUpon>ClientOrderIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientOrderShow.Designer.cs">
+      <DependentUpon>ClientOrderShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientShow.Designer.cs">
+      <DependentUpon>ClientShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\ClientsIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\ClientsIndex.Designer.cs">
+      <DependentUpon>ClientsIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\GenerateSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\GenerateSalesReport.Designer.cs">
+      <DependentUpon>GenerateSalesReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\SalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Sales\SalesReport.Designer.cs">
+      <DependentUpon>SalesReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Warehouse\AlertLackSupplies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Warehouse\AlertLackSupplies.Designer.cs">
+      <DependentUpon>AlertLackSupplies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Warehouse\GenerateKardexReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Warehouse\GenerateKardexReport.Designer.cs">
+      <DependentUpon>GenerateKardexReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Warehouse\GenerateStockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Warehouse\GenerateStockReport.Designer.cs">
+      <DependentUpon>GenerateStockReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Warehouse\KardexReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Warehouse\KardexReport.Designer.cs">
+      <DependentUpon>KardexReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Warehouse\PurchaseOrderIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Warehouse\PurchaseOrderIndex.Designer.cs">
+      <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Warehouse\StockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Warehouse\StockReport.Designer.cs">
+      <DependentUpon>StockReport.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -66,6 +264,105 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Production\FinalProducts.resx">
+      <DependentUpon>FinalProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\GenerateProductivityReport.resx">
+      <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\JobDetails.resx">
+      <DependentUpon>JobDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\Jobs.resx">
+      <DependentUpon>Jobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\ProductionProcess.resx">
+      <DependentUpon>ProductionProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\ProductivityReport.resx">
+      <DependentUpon>ProductivityReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\Recipe.resx">
+      <DependentUpon>Recipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\RegisterAsignedJob.resx">
+      <DependentUpon>RegisterAsignedJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\SimulationConfig.resx">
+      <DependentUpon>SimulationConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Production\TurnManagement.resx">
+      <DependentUpon>TurnManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\AddSupply.resx">
+      <DependentUpon>AddSupply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\AddSupplyForOrder.resx">
+      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\PurchaseOrder.resx">
+      <DependentUpon>PurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\PurchaseOrderDetail.resx">
+      <DependentUpon>PurchaseOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\RawMaterialDetail.resx">
+      <DependentUpon>RawMaterialDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\RawMaterials.resx">
+      <DependentUpon>RawMaterials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\SupplierDetail.resx">
+      <DependentUpon>SupplierDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Purchases\Suppliers.resx">
+      <DependentUpon>Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientCreate.resx">
+      <DependentUpon>ClientCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientOrderCreate.resx">
+      <DependentUpon>ClientOrderCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientOrderDevolution.resx">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientOrderIndex.resx">
+      <DependentUpon>ClientOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientOrderShow.resx">
+      <DependentUpon>ClientOrderShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientShow.resx">
+      <DependentUpon>ClientShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\ClientsIndex.resx">
+      <DependentUpon>ClientsIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\GenerateSalesReport.resx">
+      <DependentUpon>GenerateSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Sales\SalesReport.resx">
+      <DependentUpon>SalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Warehouse\AlertLackSupplies.resx">
+      <DependentUpon>AlertLackSupplies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Warehouse\GenerateKardexReport.resx">
+      <DependentUpon>GenerateKardexReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Warehouse\GenerateStockReport.resx">
+      <DependentUpon>GenerateStockReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Warehouse\KardexReport.resx">
+      <DependentUpon>KardexReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Warehouse\PurchaseOrderIndex.resx">
+      <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Warehouse\StockReport.resx">
+      <DependentUpon>StockReport.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -79,12 +376,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Production\" />
-    <Folder Include="Views\Purchases\" />
-    <Folder Include="Views\Sales\" />
-    <Folder Include="Views\Warehouse\" />
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Dp1.SistemaInkaArt.Business\Dp1.SistemaInkaArt.Business.csproj">
       <Project>{9131df99-7b6d-4a26-b0b6-769604e8c5f9}</Project>
