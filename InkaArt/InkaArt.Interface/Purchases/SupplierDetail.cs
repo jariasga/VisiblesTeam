@@ -16,11 +16,54 @@ namespace InkaArt.Interface.Purchases
         {
             InitializeComponent();
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        
+        private void button_add(object sender, EventArgs e)
         {
-            AddSupply pageAddSupply = new AddSupply();
+            Form pageAddSupply = new AddSupply();
             pageAddSupply.Show();
+        }
+
+        private void button_delete(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                bool s = Convert.ToBoolean(row.Cells[0].Value);
+
+                if (s == true)
+                {
+                    toDelete.Add(row);
+                }
+            }
+
+            foreach (DataGridViewRow row in toDelete)
+            {
+                dataGridView1.Rows.Remove(row);
+            }
+        }
+
+        private void button_save_click(object sender, EventArgs e)
+        {
+            /*Closing*/
+            this.textBox_idSupplier.Text = "";
+            this.textBox_name.Text = "";
+            this.textBox_ruc.Text = "";
+            this.textBox_address.Text = "";
+            this.textBox_contactName.Text = "";
+            this.textBox_telephone.Text = "";
+            this.comboBox_status.Text = "";
+            this.textBox_email.Text = "";
+            this.textBox_priority.Text = "0";
+            this.textBox_idRawMaterial.Text = "";
+            this.textBox_nameRawMaterial.Text = "";
+            this.dataGridView1.Rows.Clear();
+            this.Close();
+        }
+
+        private void trackBar_priority_Scroll(object sender, EventArgs e)
+        {
+            this.textBox_priority.Text = trackBar_priority.Value.ToString();
         }
     }
 }

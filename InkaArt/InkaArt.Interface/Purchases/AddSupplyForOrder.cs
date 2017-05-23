@@ -21,5 +21,21 @@ namespace InkaArt.Interface.Purchases
         {
 
         }
+
+        private void button_return(object sender, EventArgs e)
+        {
+            this.textBox_id.Text = "";
+            this.textBox_name.Text = "";
+            this.dataGridView1.Rows.Clear();
+            this.Close();
+        }
+
+        private void button_add(object sender, EventArgs e)
+        {
+            this.textBox_id.Text = "";
+            this.textBox_name.Text = "";
+            this.dataGridView1.Rows.Clear();
+            this.Close();
+        }
     }
 }
