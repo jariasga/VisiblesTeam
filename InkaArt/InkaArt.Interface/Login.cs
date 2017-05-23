@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using encription_SHA256;
 
 namespace InkaArt.Interface
 {
@@ -19,12 +13,35 @@ namespace InkaArt.Interface
 
         private void button_Login_Click(object sender, EventArgs e)
         {
-            Form menu = new Menu(this);
-            this.Hide();
-            this.textbox_user.Clear();
-            this.textbox_password.Clear();
-            menu.Show();
+            bool pass;
+            pass = checkCredentials();
+
+            if (pass)
+            {
+                this.textbox_user.Clear();
+                this.textbox_password.Clear();
+
+                Form menu = new Menu(this);
+                this.Hide();
+                menu.Show();
+            }
         }
-        
+
+        private bool checkCredentials()
+        {
+            bool verified = false;
+            SHA_2 sha = new SHA_2();
+            string key = sha.encrypt(textbox_password.Text);
+
+            //  Read data from DB
+            string userDB = "admin";
+            string keyDB = "e00dd57436b2905f5c424528dc2e8bbc08e04a61ef20b13e6765c4ff7f6134c";
+
+            if (string.Equals(key, keyDB) & string.Equals(textbox_user.Text, userDB)){
+                //  GRANT ACCESS
+                verified = true;
+            }
+            return verified;
+        }
     }
 }
