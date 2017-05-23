@@ -10,6 +10,7 @@ namespace ConsoleApplication1
 {
     class Program
     {
+<<<<<<< HEAD
         //public Worker first_worker { get; protected set; }
         static void Main(string[] args)
         {
@@ -19,6 +20,20 @@ namespace ConsoleApplication1
 
             Instance instance = new Instance(painting, baking, carving);
             instance.print();
+=======
+        static void Main(string[] args)
+        {
+            Instance instance = new Instance();
+
+            //GRASP
+            Grasp grasp = new Grasp(instance);
+            grasp.GraspAlgorithm();
+
+            // tabu
+            TabuSearch tabu = new TabuSearch(instance);
+            tabu.run();
+
+>>>>>>> 92598514377fd1d5448cca76b1d5482221e68e1e
             Console.Read();
         }
     }

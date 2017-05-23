@@ -44,6 +44,7 @@ namespace ConsoleApplication1
                 }
             }
             Console.WriteLine("workers listos!");
+<<<<<<< HEAD
             return workers;
         }
 
@@ -63,6 +64,10 @@ namespace ConsoleApplication1
                 }
             }
             Console.WriteLine("ratios listos!");
+=======
+
+            return workers;
+>>>>>>> 92598514377fd1d5448cca76b1d5482221e68e1e
         }
 
         public void addRatio(Ratio ratio)
@@ -70,7 +75,11 @@ namespace ConsoleApplication1
             this.ratios.Add(ratio);
         }
 
+<<<<<<< HEAD
         static Predicate<Worker> byId(string id)
+=======
+        public static Predicate<Worker> byId(string id)
+>>>>>>> 92598514377fd1d5448cca76b1d5482221e68e1e
         {
             return delegate (Worker worker)
             {

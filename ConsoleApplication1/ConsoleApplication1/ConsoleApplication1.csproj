@@ -43,10 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Assignment.cs" />
     <Compile Include="GeneticAlgorithm.cs" />
     <Compile Include="Grasp.cs" />
     <Compile Include="Instance.cs" />
+=======
+    <Compile Include="GeneticAlgorithm.cs" />
+    <Compile Include="Grasp.cs" />
+    <Compile Include="Assignment.cs" />
+    <Compile Include="GraspOutput.cs" />
+    <Compile Include="Instance.cs" />
+    <Compile Include="Move.cs" />
+    <Compile Include="Process.cs" />
+    <Compile Include="ProcessProduct.cs" />
+>>>>>>> 92598514377fd1d5448cca76b1d5482221e68e1e
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ratio.cs" />
