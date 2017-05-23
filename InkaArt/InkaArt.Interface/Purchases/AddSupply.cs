@@ -16,25 +16,38 @@ namespace InkaArt.Interface.Purchases
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button_return(object sender, EventArgs e)
         {
+            this.textBox_idFilter.Text = "";
+            this.textBox_nameFilter.Text = "";
+            this.dataGridView1.Rows.Clear();
             this.Close();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button_add(object sender, EventArgs e)
         {
-            RawMaterialDetail newRawMaterialWindow =new RawMaterialDetail();
+            /*Closing*/
+            this.textBox_idFilter.Text = "";
+            this.textBox_nameFilter.Text = "";
+            this.dataGridView1.Rows.Clear();
+            this.Close();
+        }
+
+        private void button_create(object sender, EventArgs e)
+        {
+            Form newRawMaterialWindow = new RawMaterialDetail();
+            newRawMaterialWindow.Show();
+        }
+
+        private void button_search(object sender, EventArgs e)
+        {
+
         }
     }
 }

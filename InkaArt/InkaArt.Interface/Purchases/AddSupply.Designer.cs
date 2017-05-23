@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_idFilter = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox_nameFilter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Agregar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.buttonReturn = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonCreate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textBox_idFilter);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox4);
+            this.groupBox1.Controls.Add(this.textBox_nameFilter);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -60,15 +60,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // textBox2
+            // textBox_idFilter
             // 
-            this.textBox2.BackColor = System.Drawing.Color.White;
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox2.Location = new System.Drawing.Point(20, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(135, 24);
-            this.textBox2.TabIndex = 26;
+            this.textBox_idFilter.BackColor = System.Drawing.Color.White;
+            this.textBox_idFilter.Enabled = false;
+            this.textBox_idFilter.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_idFilter.Location = new System.Drawing.Point(20, 50);
+            this.textBox_idFilter.Name = "textBox_idFilter";
+            this.textBox_idFilter.Size = new System.Drawing.Size(135, 24);
+            this.textBox_idFilter.TabIndex = 26;
             // 
             // label5
             // 
@@ -79,15 +79,15 @@
             this.label5.TabIndex = 25;
             this.label5.Text = "ID Materia prima";
             // 
-            // textBox4
+            // textBox_nameFilter
             // 
-            this.textBox4.BackColor = System.Drawing.Color.White;
-            this.textBox4.Enabled = false;
-            this.textBox4.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox4.Location = new System.Drawing.Point(172, 50);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(287, 24);
-            this.textBox4.TabIndex = 17;
+            this.textBox_nameFilter.BackColor = System.Drawing.Color.White;
+            this.textBox_nameFilter.Enabled = false;
+            this.textBox_nameFilter.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_nameFilter.Location = new System.Drawing.Point(172, 50);
+            this.textBox_nameFilter.Name = "textBox_nameFilter";
+            this.textBox_nameFilter.Size = new System.Drawing.Size(287, 24);
+            this.textBox_nameFilter.TabIndex = 17;
             // 
             // label1
             // 
@@ -97,20 +97,20 @@
             this.label1.Size = new System.Drawing.Size(203, 18);
             this.label1.TabIndex = 16;
             this.label1.Text = "Nombre de la materia prima";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button1
+            // buttonSearch
             // 
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(473, 35);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 39);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "🔎 Buscar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonSearch.BackColor = System.Drawing.Color.Gray;
+            this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.ForeColor = System.Drawing.Color.White;
+            this.buttonSearch.Location = new System.Drawing.Point(473, 35);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(88, 39);
+            this.buttonSearch.TabIndex = 15;
+            this.buttonSearch.Text = "🔎 Buscar";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
             // dataGridView1
             // 
@@ -146,44 +146,45 @@
             this.Agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Agregar.Width = 80;
             // 
-            // button4
+            // buttonReturn
             // 
-            this.button4.BackColor = System.Drawing.Color.Gray;
-            this.button4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(245, 312);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 42);
-            this.button4.TabIndex = 46;
-            this.button4.Text = "⟲ Regresar";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.buttonReturn.BackColor = System.Drawing.Color.Gray;
+            this.buttonReturn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReturn.ForeColor = System.Drawing.Color.White;
+            this.buttonReturn.Location = new System.Drawing.Point(245, 312);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(104, 42);
+            this.buttonReturn.TabIndex = 46;
+            this.buttonReturn.Text = "⟲ Regresar";
+            this.buttonReturn.UseVisualStyleBackColor = false;
+            this.buttonReturn.Click += new System.EventHandler(this.button_return);
             // 
-            // button2
+            // buttonAdd
             // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(135, 313);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 41);
-            this.button2.TabIndex = 49;
-            this.button2.Text = "+ Agregar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdd.ForeColor = System.Drawing.Color.White;
+            this.buttonAdd.Location = new System.Drawing.Point(135, 313);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(104, 41);
+            this.buttonAdd.TabIndex = 49;
+            this.buttonAdd.Text = "+ Agregar";
+            this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.button_add);
             // 
-            // button5
+            // buttonCreate
             // 
-            this.button5.BackColor = System.Drawing.Color.SteelBlue;
-            this.button5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(354, 312);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 41);
-            this.button5.TabIndex = 50;
-            this.button5.Text = "＋ Crear";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.buttonCreate.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonCreate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreate.ForeColor = System.Drawing.Color.White;
+            this.buttonCreate.Location = new System.Drawing.Point(354, 312);
+            this.buttonCreate.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCreate.Name = "buttonCreate";
+            this.buttonCreate.Size = new System.Drawing.Size(104, 41);
+            this.buttonCreate.TabIndex = 50;
+            this.buttonCreate.Text = "＋ Crear";
+            this.buttonCreate.UseVisualStyleBackColor = false;
+            this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
             // AddSupply
             // 
@@ -191,9 +192,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(599, 363);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.buttonReturn);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -210,17 +211,17 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_idFilter;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox_nameFilter;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Agregar;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonCreate;
     }
 }

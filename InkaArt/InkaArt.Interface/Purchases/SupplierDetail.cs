@@ -42,5 +42,28 @@ namespace InkaArt.Interface.Purchases
                 dataGridView1.Rows.Remove(row);
             }
         }
+
+        private void button_save_click(object sender, EventArgs e)
+        {
+            /*Closing*/
+            this.textBox_idSupplier.Text = "";
+            this.textBox_name.Text = "";
+            this.textBox_ruc.Text = "";
+            this.textBox_address.Text = "";
+            this.textBox_contactName.Text = "";
+            this.textBox_telephone.Text = "";
+            this.comboBox_status.Text = "";
+            this.textBox_email.Text = "";
+            this.textBox_priority.Text = "0";
+            this.textBox_idRawMaterial.Text = "";
+            this.textBox_nameRawMaterial.Text = "";
+            this.dataGridView1.Rows.Clear();
+            this.Close();
+        }
+
+        private void trackBar_priority_Scroll(object sender, EventArgs e)
+        {
+            this.textBox_priority.Text = trackBar_priority.Value.ToString();
+        }
     }
 }

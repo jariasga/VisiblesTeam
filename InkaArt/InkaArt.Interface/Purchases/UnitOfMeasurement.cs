@@ -19,20 +19,21 @@ namespace InkaArt.Interface.Purchases
         
         private void button_cancel(object sender, EventArgs e)
         {
-
+            this.cleaningWindow();
             /*Closing the window*/
-            nameUnit.Text = "";
-            abbreviation.Text = "";
             this.Close();
         }
 
         private void button_save(object sender, EventArgs e)
         {
-
+            this.cleaningWindow();
             /*Closing the window*/
+            this.Close();
+        }
+        private void cleaningWindow()
+        {
             nameUnit.Text = "";
             abbreviation.Text = "";
-            this.Close();
         }
     }
 }

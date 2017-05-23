@@ -25,6 +25,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_save(object sender, EventArgs e)
         {
+            /*closing*/
             this.textBox_id.Text = "";
             this.textBox_name.Text = "";
             this.textBox_description.Text = "";

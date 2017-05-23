@@ -35,25 +35,35 @@ namespace InkaArt.Interface.Purchases
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            SupplierDetail supplierDet = new SupplierDetail();
-            supplierDet.Show();
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void button_add(object sender, EventArgs e)
         {
+            Form supplierDet = new SupplierDetail();
+            supplierDet.Show();
+        }
 
+        private void button_delete(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                bool s = Convert.ToBoolean(row.Cells[0].Value);
+
+                if (s == true)
+                {
+                    toDelete.Add(row);
+                }
+            }
+
+            foreach (DataGridViewRow row in toDelete)
+            {
+                dataGridView1.Rows.Remove(row);
+            }
         }
     }
 }

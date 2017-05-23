@@ -15,17 +15,15 @@ namespace InkaArt.Interface.Purchases
         public PurchaseOrderDetail()
         {
             InitializeComponent();
-            button_add.Enabled = true;
-            buttonDelete.Enabled = false;
-            button_save.Enabled = false;
+            button_add.Enabled = false;
+            buttonDelete.Enabled = true;
+            buttonSave.Enabled = true;
         }
 
         /* search */
         private void button1_Click(object sender, EventArgs e)
         {
-            buttonDelete.Enabled = false;
-            button_add.Enabled = true;
-            buttonDelete.Enabled = true;
+
         }
 
         /* save */
@@ -36,20 +34,10 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            buttonDelete.Enabled = true;
-            button_save.Enabled = true;
+            Form new_supply_window = new AddSupplyForOrder();
+            new_supply_window.Show();
         }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox2.Text.Equals(""))
-            {
-                button_add.Enabled=true;
-            }
-            else button_add.Enabled = false;
-        }
-
-
+        
         /* delete */
         private void button_delete(object sender, EventArgs e)
         {
@@ -69,6 +57,30 @@ namespace InkaArt.Interface.Purchases
             {
                 dataGridView1.Rows.Remove(row);
             }
+        }
+
+        private void textBox_supplier_TextChanged(object sender, EventArgs e)
+        {
+            if (this.textBox_supplier.Text == "")
+            {
+                this.button_add.Enabled = false;
+            }
+            else this.button_add.Enabled = true;
+        }
+
+        private void button_save(object sender, EventArgs e)
+        {
+            /*closing*/
+            this.textBox_id.Text = "";
+            this.textBox_supplier.Text = "";
+            this.textBox_total.Text = "";
+            this.comboBox_status.Text = "";
+            this.dataGridView1.Rows.Clear();
+            this.textBox_idRawMaterial.Text = "";
+            this.textBox_nameRawMaterial.Text = "";
+            this.dateTimePicker_creation.Value = DateTime.Today;
+            this.dateTimePicker_delivery.Value = DateTime.Today;
+            this.Close();
         }
     }
 }

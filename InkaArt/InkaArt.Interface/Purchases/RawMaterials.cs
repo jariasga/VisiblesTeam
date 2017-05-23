@@ -17,12 +17,6 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            RawMaterialDetail rawMaterialDet = new RawMaterialDetail();
-            rawMaterialDet.Show();
-        }
-
         private void button_search(object sender, EventArgs e)
         {
 

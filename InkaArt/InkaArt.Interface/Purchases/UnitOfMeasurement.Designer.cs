@@ -32,8 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nameUnit = new System.Windows.Forms.TextBox();
             this.abbreviation = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -72,31 +72,31 @@
             this.abbreviation.Size = new System.Drawing.Size(212, 24);
             this.abbreviation.TabIndex = 16;
             // 
-            // button1
+            // buttonSave
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(15, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 42);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "🖫 Guardar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button_save);
+            this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSave.ForeColor = System.Drawing.Color.White;
+            this.buttonSave.Location = new System.Drawing.Point(15, 141);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(103, 42);
+            this.buttonSave.TabIndex = 17;
+            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.UseVisualStyleBackColor = false;
+            this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 
-            // button3
+            // buttonCancel
             // 
-            this.button3.BackColor = System.Drawing.Color.Firebrick;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(124, 143);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(103, 39);
-            this.button3.TabIndex = 41;
-            this.button3.Text = "🗑 Cancelar";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button_cancel);
+            this.buttonCancel.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.Location = new System.Drawing.Point(124, 143);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(103, 39);
+            this.buttonCancel.TabIndex = 41;
+            this.buttonCancel.Text = "🗑 Cancelar";
+            this.buttonCancel.UseVisualStyleBackColor = false;
+            this.buttonCancel.Click += new System.EventHandler(this.button_cancel);
             // 
             // UnitOfMeasurement
             // 
@@ -104,8 +104,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(240, 201);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.abbreviation);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -126,7 +126,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nameUnit;
         private System.Windows.Forms.TextBox abbreviation;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonCancel;
     }
 }
