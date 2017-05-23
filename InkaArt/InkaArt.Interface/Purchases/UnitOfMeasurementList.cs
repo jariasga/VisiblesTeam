@@ -10,26 +10,20 @@ using System.Windows.Forms;
 
 namespace InkaArt.Interface.Purchases
 {
-    public partial class RawMaterials : Form
+    public partial class UnitOfMeasurementList : Form
     {
-        public RawMaterials()
+        public UnitOfMeasurementList()
         {
             InitializeComponent();
         }
 
-        private void button_search(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_delete(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 bool s = Convert.ToBoolean(row.Cells[0].Value);
-
                 if (s == true)
                 {
                     toDelete.Add(row);
@@ -44,8 +38,13 @@ namespace InkaArt.Interface.Purchases
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_raw_material = new RawMaterialDetail();
-            new_raw_material.Show();
+            Form new_unit_of_measurement = new UnitOfMeasurement();
+            new_unit_of_measurement.Show();
+        }
+
+        private void button_search(object sender, EventArgs e)
+        {
+
         }
     }
 }

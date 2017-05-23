@@ -46,7 +46,7 @@
             this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generate.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(305, 350);
+            this.button_generate.Location = new System.Drawing.Point(326, 294);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(138, 51);
             this.button_generate.TabIndex = 20;
@@ -67,7 +67,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(21, 28);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(696, 303);
+            this.groupBox1.Size = new System.Drawing.Size(742, 249);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros para el reporte";
@@ -76,17 +76,17 @@
             // 
             this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(284, 233);
+            this.dateTimePicker2.Location = new System.Drawing.Point(360, 173);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(367, 28);
+            this.dateTimePicker2.Size = new System.Drawing.Size(334, 28);
             this.dateTimePicker2.TabIndex = 32;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(284, 169);
+            this.dateTimePicker1.Location = new System.Drawing.Point(360, 80);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(367, 28);
+            this.dateTimePicker1.Size = new System.Drawing.Size(334, 28);
             this.dateTimePicker1.TabIndex = 31;
             // 
             // comboBox2
@@ -97,9 +97,9 @@
             "Piedra de Huamanga",
             "Retablos",
             "Todos"});
-            this.comboBox2.Location = new System.Drawing.Point(284, 107);
+            this.comboBox2.Location = new System.Drawing.Point(49, 170);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(367, 31);
+            this.comboBox2.Size = new System.Drawing.Size(212, 31);
             this.comboBox2.TabIndex = 30;
             // 
             // comboBox1
@@ -109,9 +109,9 @@
             "Nacional",
             "Internacional",
             "Todos"});
-            this.comboBox1.Location = new System.Drawing.Point(284, 47);
+            this.comboBox1.Location = new System.Drawing.Point(51, 77);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(367, 31);
+            this.comboBox1.Size = new System.Drawing.Size(210, 31);
             this.comboBox1.TabIndex = 29;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -119,7 +119,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(47, 241);
+            this.label4.Location = new System.Drawing.Point(356, 145);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(208, 22);
             this.label4.TabIndex = 28;
@@ -129,7 +129,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(47, 177);
+            this.label3.Location = new System.Drawing.Point(356, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(220, 22);
             this.label3.TabIndex = 27;
@@ -139,7 +139,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(47, 112);
+            this.label2.Location = new System.Drawing.Point(47, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(194, 22);
             this.label2.TabIndex = 26;
@@ -155,15 +155,15 @@
             this.label1.TabIndex = 25;
             this.label1.Text = "Tipo de producto:";
             // 
-            // FormGenerateKardex
+            // GenerateKardexReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(748, 430);
+            this.ClientSize = new System.Drawing.Size(799, 364);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_generate);
-            this.Name = "FormGenerateKardex";
+            this.Name = "GenerateKardexReport";
             this.Text = "Generar Reporte Kardex";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -49,101 +49,167 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneralParameters.cs" />
+    <Compile Include="GeneralParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GeneralParameters.designer.cs">
       <DependentUpon>GeneralParameters.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu.cs" />
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Menu.designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\FinalProducts.cs" />
+    <Compile Include="Production\FinalProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\FinalProducts.designer.cs">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\GenerateProductivityReport.cs" />
+    <Compile Include="Production\GenerateProductivityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\GenerateProductivityReport.designer.cs">
       <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\JobDetails.cs" />
+    <Compile Include="Production\GenerateSimulationReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\GenerateSimulationReport.Designer.cs">
+      <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Production\JobDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\JobDetails.designer.cs">
       <DependentUpon>JobDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\Jobs.cs" />
+    <Compile Include="Production\Jobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\Jobs.designer.cs">
       <DependentUpon>Jobs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\NewSimulation.cs" />
+    <Compile Include="Production\NewSimulation.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\NewSimulation.Designer.cs">
       <DependentUpon>NewSimulation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\ProductionProcess.cs" />
+    <Compile Include="Production\ProductionProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\ProductionProcess.designer.cs">
       <DependentUpon>ProductionProcess.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\ProductivityReport.cs" />
+    <Compile Include="Production\ProductivityReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\ProductivityReport.designer.cs">
       <DependentUpon>ProductivityReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\Recipe.cs" />
+    <Compile Include="Production\Recipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\Recipe.designer.cs">
       <DependentUpon>Recipe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\RegisterAssignedJob.cs" />
+    <Compile Include="Production\RegisterAssignedJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\RegisterAssignedJob.designer.cs">
       <DependentUpon>RegisterAssignedJob.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\SimulationConfig.cs" />
+    <Compile Include="Production\SimulationConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\SimulationConfig.designer.cs">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\TurnManagement.cs" />
+    <Compile Include="Production\TurnManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\TurnManagement.designer.cs">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\WorkersAssignment.cs" />
+    <Compile Include="Production\WorkersAssignment.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Production\WorkersAssignment.designer.cs">
       <DependentUpon>WorkersAssignment.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Purchases\AddSupply.cs" />
+    <Compile Include="Purchases\AddSupply.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\AddSupply.designer.cs">
       <DependentUpon>AddSupply.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\AddSupplyForOrder.cs" />
+    <Compile Include="Purchases\AddSupplyForOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\AddSupplyForOrder.designer.cs">
       <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\PurchaseOrder.cs" />
+    <Compile Include="Purchases\PurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\PurchaseOrder.designer.cs">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\PurchaseOrderDetail.cs" />
+    <Compile Include="Purchases\PurchaseOrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\PurchaseOrderDetail.designer.cs">
       <DependentUpon>PurchaseOrderDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\RawMaterialDetail.cs" />
-    <Compile Include="Purchases\RawMaterialDetail.designer.cs">
+    <Compile Include="Purchases\RawMaterialDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\RawMaterialDetail.Designer.cs">
       <DependentUpon>RawMaterialDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\RawMaterials.cs" />
+    <Compile Include="Purchases\RawMaterials.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\RawMaterials.designer.cs">
       <DependentUpon>RawMaterials.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\SupplierDetail.cs" />
+    <Compile Include="Purchases\SupplierDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\SupplierDetail.designer.cs">
       <DependentUpon>SupplierDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\Suppliers.cs" />
+    <Compile Include="Purchases\Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Purchases\Suppliers.designer.cs">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ClientCreate.cs" />
+    <Compile Include="Purchases\UnitOfMeasurement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\UnitOfMeasurement.Designer.cs">
+      <DependentUpon>UnitOfMeasurement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchases\UnitOfMeasurementList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\UnitOfMeasurementList.Designer.cs">
+      <DependentUpon>UnitOfMeasurementList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\ClientCreate.designer.cs">
       <DependentUpon>ClientCreate.cs</DependentUpon>
     </Compile>
@@ -165,67 +231,99 @@
     <Compile Include="Sales\ClientOrderShow.designer.cs">
       <DependentUpon>ClientOrderShow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ClientShow.cs" />
+    <Compile Include="Sales\ClientShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\ClientShow.designer.cs">
       <DependentUpon>ClientShow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ClientsIndex.cs" />
+    <Compile Include="Sales\ClientsIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\ClientsIndex.designer.cs">
       <DependentUpon>ClientsIndex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\DevolutionCreate.cs" />
+    <Compile Include="Sales\DevolutionCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\DevolutionCreate.Designer.cs">
       <DependentUpon>DevolutionCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\DevolutionShow.cs" />
+    <Compile Include="Sales\DevolutionShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\DevolutionShow.Designer.cs">
       <DependentUpon>DevolutionShow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\GenerateSalesReport.cs" />
+    <Compile Include="Sales\GenerateSalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\GenerateSalesReport.designer.cs">
       <DependentUpon>GenerateSalesReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\SalesReport.cs" />
+    <Compile Include="Sales\SalesReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\AlertLackSupplies.cs" />
+    <Compile Include="Warehouse\AlertLackSupplies.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\AlertLackSupplies.designer.cs">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\GenerateKardexReport.cs" />
+    <Compile Include="Warehouse\GenerateKardexReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\GenerateKardexReport.designer.cs">
       <DependentUpon>GenerateKardexReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\GenerateStockReport.cs" />
+    <Compile Include="Warehouse\GenerateStockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\GenerateStockReport.designer.cs">
       <DependentUpon>GenerateStockReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\KardexReport.cs" />
+    <Compile Include="Warehouse\KardexReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\KardexReport.designer.cs">
       <DependentUpon>KardexReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\ProductIn.cs" />
+    <Compile Include="Warehouse\ProductIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\ProductIn.designer.cs">
       <DependentUpon>ProductIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\ProductOut.cs" />
+    <Compile Include="Warehouse\ProductOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\ProductOut.designer.cs">
       <DependentUpon>ProductOut.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\ProductRegisterOut.cs" />
+    <Compile Include="Warehouse\ProductRegisterOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\ProductRegisterOut.designer.cs">
       <DependentUpon>ProductRegisterOut.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\ProductRegisterOutTotal.cs" />
+    <Compile Include="Warehouse\ProductRegisterOutTotal.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\ProductRegisterOutTotal.designer.cs">
       <DependentUpon>ProductRegisterOutTotal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\PurchaseOrderIndex.cs" />
+    <Compile Include="Warehouse\PurchaseOrderIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\PurchaseOrderIndex.designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\StockReport.cs" />
+    <Compile Include="Warehouse\StockReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Warehouse\StockReport.designer.cs">
       <DependentUpon>StockReport.cs</DependentUpon>
     </Compile>
@@ -243,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Production\GenerateProductivityReport.resx">
       <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Production\GenerateSimulationReport.resx">
+      <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
@@ -307,6 +408,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchases\Suppliers.resx">
       <DependentUpon>Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\UnitOfMeasurement.resx">
+      <DependentUpon>UnitOfMeasurement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\UnitOfMeasurementList.resx">
+      <DependentUpon>UnitOfMeasurementList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ClientCreate.resx">
       <DependentUpon>ClientCreate.cs</DependentUpon>

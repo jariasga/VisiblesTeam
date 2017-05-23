@@ -88,6 +88,13 @@ namespace InkaArt.Interface
             purchase_order_form.Show();
         }
 
+        private void unidadesDeMedidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form unit_of_measurement = new UnitOfMeasurementList();
+            unit_of_measurement.MdiParent = this;
+            unit_of_measurement.Show();
+        }
+
         /* Production */
 
         private void listaDeProductosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -183,6 +190,6 @@ namespace InkaArt.Interface
             reporte_stocks.MdiParent = this;
             reporte_stocks.Show();
         }
-        
+
     }
 }
