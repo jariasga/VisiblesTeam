@@ -16,36 +16,16 @@ namespace InkaArt.Interface.Purchases
         {
             InitializeComponent();
             button_add.Enabled = true;
-            button_delete.Enabled = false;
+            buttonDelete.Enabled = false;
             button_save.Enabled = false;
-        }
-
-        /* delete */
-        private void button3_Click(object sender, EventArgs e)
-        {
-            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                bool s = Convert.ToBoolean(row.Cells[0].Value);
-                if (s == true)
-                {
-                    toDelete.Add(row);
-                }
-            }
-
-            foreach (DataGridViewRow row in toDelete)
-            {
-                dataGridView1.Rows.Remove(row);
-            }
         }
 
         /* search */
         private void button1_Click(object sender, EventArgs e)
         {
-            button_delete.Enabled = false;
+            buttonDelete.Enabled = false;
             button_add.Enabled = true;
-            button_delete.Enabled = true;
+            buttonDelete.Enabled = true;
         }
 
         /* save */
@@ -56,7 +36,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            button_delete.Enabled = true;
+            buttonDelete.Enabled = true;
             button_save.Enabled = true;
         }
 
@@ -67,6 +47,28 @@ namespace InkaArt.Interface.Purchases
                 button_add.Enabled=true;
             }
             else button_add.Enabled = false;
+        }
+
+
+        /* delete */
+        private void button_delete(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                bool s = Convert.ToBoolean(row.Cells[0].Value);
+
+                if (s == true)
+                {
+                    toDelete.Add(row);
+                }
+            }
+
+            foreach (DataGridViewRow row in toDelete)
+            {
+                dataGridView1.Rows.Remove(row);
+            }
         }
     }
 }

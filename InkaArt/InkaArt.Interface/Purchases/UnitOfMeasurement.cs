@@ -16,5 +16,23 @@ namespace InkaArt.Interface.Purchases
         {
             InitializeComponent();
         }
+        
+        private void button_cancel(object sender, EventArgs e)
+        {
+
+            /*Closing the window*/
+            nameUnit.Text = "";
+            abbreviation.Text = "";
+            this.Close();
+        }
+
+        private void button_save(object sender, EventArgs e)
+        {
+
+            /*Closing the window*/
+            nameUnit.Text = "";
+            abbreviation.Text = "";
+            this.Close();
+        }
     }
 }

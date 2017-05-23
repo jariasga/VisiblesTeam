@@ -16,11 +16,31 @@ namespace InkaArt.Interface.Purchases
         {
             InitializeComponent();
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        
+        private void button_add(object sender, EventArgs e)
         {
-            AddSupply pageAddSupply = new AddSupply();
+            Form pageAddSupply = new AddSupply();
             pageAddSupply.Show();
+        }
+
+        private void button_delete(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                bool s = Convert.ToBoolean(row.Cells[0].Value);
+
+                if (s == true)
+                {
+                    toDelete.Add(row);
+                }
+            }
+
+            foreach (DataGridViewRow row in toDelete)
+            {
+                dataGridView1.Rows.Remove(row);
+            }
         }
     }
 }

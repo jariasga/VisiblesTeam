@@ -23,7 +23,12 @@ namespace InkaArt.Interface.Purchases
             rawMaterialDet.Show();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button_search(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_delete(object sender, EventArgs e)
         {
             List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
 
@@ -43,9 +48,10 @@ namespace InkaArt.Interface.Purchases
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button_create(object sender, EventArgs e)
         {
-
+            Form new_raw_material = new RawMaterialDetail();
+            new_raw_material.Show();
         }
     }
 }

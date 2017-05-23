@@ -69,6 +69,7 @@
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.unidadesDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -132,6 +133,7 @@
             this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listaDeProveedoresToolStripMenuItem,
             this.listaDeMateriasPrimasToolStripMenuItem,
+            this.unidadesDeMedidaToolStripMenuItem,
             this.toolStripSeparator7,
             this.verMateriasPrimasToolStripMenuItem});
             this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
@@ -390,6 +392,13 @@
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
+            // unidadesDeMedidaToolStripMenuItem
+            // 
+            this.unidadesDeMedidaToolStripMenuItem.Name = "unidadesDeMedidaToolStripMenuItem";
+            this.unidadesDeMedidaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.unidadesDeMedidaToolStripMenuItem.Text = "Unidades de Medida";
+            this.unidadesDeMedidaToolStripMenuItem.Click += new System.EventHandler(this.unidadesDeMedidaToolStripMenuItem_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -458,5 +467,6 @@
         private System.Windows.Forms.ToolStripMenuItem productosFinalesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ingresosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem salidadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unidadesDeMedidaToolStripMenuItem;
     }
 }

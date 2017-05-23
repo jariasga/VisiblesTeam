@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -50,13 +52,11 @@
             this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.button_delete = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.button_search = new System.Windows.Forms.Button();
             this.button_save = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -82,6 +82,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de la orden";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(13, 208);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(183, 24);
+            this.dateTimePicker2.TabIndex = 11;
+            this.dateTimePicker2.Value = new System.DateTime(2017, 5, 8, 1, 26, 23, 0);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 187);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(133, 18);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Fecha de emisión";
             // 
             // comboBox1
             // 
@@ -183,7 +202,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Controls.Add(this.button_delete);
+            this.groupBox2.Controls.Add(this.buttonDelete);
             this.groupBox2.Controls.Add(this.button_add);
             this.groupBox2.Controls.Add(this.textBox9);
             this.groupBox2.Controls.Add(this.button_search);
@@ -275,18 +294,18 @@
             this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Acción.Width = 62;
             // 
-            // button_delete
+            // buttonDelete
             // 
-            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
-            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(329, 384);
-            this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(104, 41);
-            this.button_delete.TabIndex = 15;
-            this.button_delete.Text = "🗑 Eliminar";
-            this.button_delete.UseVisualStyleBackColor = false;
-            this.button_delete.Click += new System.EventHandler(this.button3_Click);
+            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.White;
+            this.buttonDelete.Location = new System.Drawing.Point(329, 384);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(104, 41);
+            this.buttonDelete.TabIndex = 15;
+            this.buttonDelete.Text = "🗑 Eliminar";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.button_delete);
             // 
             // button_add
             // 
@@ -335,25 +354,6 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button5_Click);
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(13, 208);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(183, 24);
-            this.dateTimePicker2.TabIndex = 11;
-            this.dateTimePicker2.Value = new System.DateTime(2017, 5, 8, 1, 26, 23, 0);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 187);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(133, 18);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Fecha de emisión";
-            // 
             // PurchaseOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -392,7 +392,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Button button_search;
-        private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.DataGridView dataGridView1;

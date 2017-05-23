@@ -17,8 +17,21 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button_create(object sender, EventArgs e)
         {
+            Form new_unit_of_measurement = new UnitOfMeasurement();
+            new_unit_of_measurement.Show();
+        }
+
+        private void button_save(object sender, EventArgs e)
+        {
+            this.textBox_id.Text = "";
+            this.textBox_name.Text = "";
+            this.textBox_description.Text = "";
+            this.textBox_averagePrice.Text = "0";
+            this.comboBox_unit.Text = "";
+            this.comboBox_status.Text = "";
+            this.Close();
 
         }
     }
