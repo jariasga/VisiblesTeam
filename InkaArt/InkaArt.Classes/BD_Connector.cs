@@ -11,28 +11,28 @@ namespace InkaArt.Classes
 
     public class BD_Connector
     {
-        protected NpgsqlConnection connection;
-        public static NpgsqlConnectionStringBuilder connectionString;
+        private NpgsqlConnection connection;
+        private static NpgsqlConnectionStringBuilder connectionString;
         private string serverAddress;
         private string databaseName;
         private string uid, pwd;
         private int port;
         public BD_Connector()
         {
-            connectionString = new NpgsqlConnectionStringBuilder();
+            ConnectionString = new NpgsqlConnectionStringBuilder();
 
-            connectionString.Host = "skeletpiece.homeip.net";
-            connectionString.Database = "desarrolloprogramas1";
-            connectionString.Username = "admin";
-            connectionString.Password = "fae48";
-            connectionString.Pooling = true;
+            ConnectionString.Host = "skeletpiece.homeip.net";
+            ConnectionString.Database = "desarrolloprogramas1";
+            ConnectionString.Username = "admin";
+            ConnectionString.Password = "fae48";
+            ConnectionString.Pooling = true;
         }
 
         public void connect()
         {
             try
             {
-                Connection = new NpgsqlConnection(connectionString.ConnectionString);
+                Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
                 Connection.Open();
             }
             catch (Exception msg)
@@ -76,11 +76,100 @@ namespace InkaArt.Classes
         }        
 
 
-        public string ServerAddress { get => serverAddress; set => serverAddress = value; }
-        public int Port { get => port; set => port = value; }
-        public string DatabaseName { get => databaseName; set => databaseName = value; }
-        private string Uid { get => uid; set => uid = value; }
-        private string Pwd { get => pwd; set => pwd = value; }
-        protected NpgsqlConnection Connection { get => connection; set => connection = value; }
+        public string ServerAddress {
+            get { return ServerAddress1; }
+            set { ServerAddress1 = value; }
+        }
+
+        protected NpgsqlConnection Connection
+        {
+            get
+            {
+                return connection;
+            }
+
+            set
+            {
+                connection = value;
+            }
+        }
+
+        public static NpgsqlConnectionStringBuilder ConnectionString
+        {
+            get
+            {
+                return connectionString;
+            }
+
+            set
+            {
+                connectionString = value;
+            }
+        }
+
+        public string ServerAddress1
+        {
+            get
+            {
+                return serverAddress;
+            }
+
+            set
+            {
+                serverAddress = value;
+            }
+        }
+
+        public string DatabaseName
+        {
+            get
+            {
+                return databaseName;
+            }
+
+            set
+            {
+                databaseName = value;
+            }
+        }
+
+        public string Uid
+        {
+            get
+            {
+                return uid;
+            }
+
+            set
+            {
+                uid = value;
+            }
+        }
+
+        public string Pwd
+        {
+            get
+            {
+                return pwd;
+            }
+
+            set
+            {
+                pwd = value;
+            }
+        }
+
+        public int Port
+        {
+            get
+            {
+                return port;
+            }
+
+            set
+            {
+                port = value;
+            }
+        }
     }
 }
