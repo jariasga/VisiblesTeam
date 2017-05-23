@@ -197,5 +197,12 @@ namespace InkaArt.Interface
             almacenes.MdiParent = this;
             almacenes.Show();
         }
+
+        private void gestionarMovimientosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form movements = new Movements();
+            movements.MdiParent = this;
+            movements.Show();
+        }
     }
 }

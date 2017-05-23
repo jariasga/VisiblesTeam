@@ -314,6 +314,12 @@
     <Compile Include="Warehouse\KardexReport.designer.cs">
       <DependentUpon>KardexReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\Movements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Movements.Designer.cs">
+      <DependentUpon>Movements.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\ProductIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\KardexReport.resx">
       <DependentUpon>KardexReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\Movements.resx">
+      <DependentUpon>Movements.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ProductIn.resx">
       <DependentUpon>ProductIn.cs</DependentUpon>

@@ -62,6 +62,7 @@
             this.productosFinalesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ingresosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.salidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionarMovimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.verStocksFísicosYLógicosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -282,6 +283,7 @@
             this.listaDeAlmacenesToolStripMenuItem,
             this.materiaPrimaToolStripMenuItem2,
             this.productosFinalesToolStripMenuItem1,
+            this.gestionarMovimientosToolStripMenuItem,
             this.toolStripSeparator9,
             this.verStocksFísicosYLógicosToolStripMenuItem,
             this.kardexToolStripMenuItem});
@@ -340,6 +342,13 @@
             this.salidadToolStripMenuItem.Text = "Salidas";
             this.salidadToolStripMenuItem.Click += new System.EventHandler(this.salidasToolStripMenuItem_Click);
             // 
+            // gestionarMovimientosToolStripMenuItem
+            // 
+            this.gestionarMovimientosToolStripMenuItem.Name = "gestionarMovimientosToolStripMenuItem";
+            this.gestionarMovimientosToolStripMenuItem.Size = new System.Drawing.Size(319, 26);
+            this.gestionarMovimientosToolStripMenuItem.Text = "Gestión de Movimientos";
+            this.gestionarMovimientosToolStripMenuItem.Click += new System.EventHandler(this.gestionarMovimientosToolStripMenuItem_Click);
+            // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
@@ -380,7 +389,7 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 30);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(5);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(4, 639);
             this.splitter1.TabIndex = 3;
@@ -397,7 +406,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menu_strip;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Menu";
             this.Text = "Inka Art";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
@@ -453,5 +462,6 @@
         private System.Windows.Forms.ToolStripMenuItem ingresosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem salidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unidadesDeMedidaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionarMovimientosToolStripMenuItem;
     }
 }
