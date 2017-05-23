@@ -29,6 +29,11 @@ namespace InkaArt.Interface
                 this.Hide();
                 menu.Show();
             }
+            else
+            {
+                DialogResult badPassword = MessageBox.Show("El usuario/password ingresado es incorrecto", "Inka Art",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private bool checkCredentials()
@@ -48,8 +53,20 @@ namespace InkaArt.Interface
             data = user.getData(adap);
 
             //  Read data from DB
-            string userDB = "admin";
-            string keyDB = "e00dd57436b2905f5c424528dc2e8bbc08e04a61ef20b13e6765c4ff7f6134c";   //  SHA256 for "admin" password
+            int rows = data.Tables[0].Rows.Count;
+            string userDB, keyDB;
+
+            if (rows > 0)
+            {
+                userDB = data.Tables[0].Rows[0][3].ToString();
+                keyDB = data.Tables[0].Rows[0][4].ToString(); ;
+            }
+            else
+            {
+                userDB = "wrongUsername";
+                keyDB = "badPassword";
+            }
+            
 
             if (string.Equals(key, keyDB) & string.Equals(textbox_user.Text, userDB)){
                 //  ToDo - GET ROLES
