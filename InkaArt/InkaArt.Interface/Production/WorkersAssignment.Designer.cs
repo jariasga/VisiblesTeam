@@ -37,21 +37,34 @@
             this.TotalStones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalAltarpiece = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalProduced = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupbox_assignments = new System.Windows.Forms.GroupBox();
-            this.simulation_grid = new System.Windows.Forms.DataGridView();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Worker1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Worker2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Worker3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Worker4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Worker5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label_select = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button_generate = new System.Windows.Forms.Button();
+            this.simulation_grid = new System.Windows.Forms.DataGridView();
+            this.simulation_tab_control = new System.Windows.Forms.TabControl();
+            this.simulation_tab_general = new System.Windows.Forms.TabPage();
+            this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
+            this.general_grid = new System.Windows.Forms.DataGridView();
+            this.grid_assignment_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_worker_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_worker_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_worker_3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_worker_4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_worker_5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_general_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_huacos_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_huacos_left = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_stones_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_stones_left = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_altarpiece_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_altarpiece_left = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupbox_summary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.summary_grid)).BeginInit();
-            this.groupbox_assignments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
+            this.simulation_tab_control.SuspendLayout();
+            this.simulation_tab_general.SuspendLayout();
+            this.simulation_tab_assignment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.general_grid)).BeginInit();
             this.SuspendLayout();
             // 
             // button_config
@@ -59,7 +72,7 @@
             this.button_config.BackColor = System.Drawing.Color.Gray;
             this.button_config.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_config.ForeColor = System.Drawing.Color.White;
-            this.button_config.Location = new System.Drawing.Point(43, 451);
+            this.button_config.Location = new System.Drawing.Point(31, 451);
             this.button_config.Name = "button_config";
             this.button_config.Size = new System.Drawing.Size(265, 43);
             this.button_config.TabIndex = 32;
@@ -72,7 +85,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(339, 451);
+            this.button_delete.Location = new System.Drawing.Point(327, 451);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(193, 43);
             this.button_delete.TabIndex = 39;
@@ -85,9 +98,9 @@
             this.button_start.BackColor = System.Drawing.Color.SteelBlue;
             this.button_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_start.ForeColor = System.Drawing.Color.White;
-            this.button_start.Location = new System.Drawing.Point(563, 451);
+            this.button_start.Location = new System.Drawing.Point(552, 451);
             this.button_start.Name = "button_start";
-            this.button_start.Size = new System.Drawing.Size(145, 43);
+            this.button_start.Size = new System.Drawing.Size(171, 43);
             this.button_start.TabIndex = 40;
             this.button_start.Text = "Iniciar simulación";
             this.button_start.UseVisualStyleBackColor = false;
@@ -119,7 +132,7 @@
             this.summary_grid.Name = "summary_grid";
             this.summary_grid.ReadOnly = true;
             this.summary_grid.RowHeadersVisible = false;
-            this.summary_grid.Size = new System.Drawing.Size(851, 61);
+            this.summary_grid.Size = new System.Drawing.Size(880, 61);
             this.summary_grid.TabIndex = 2;
             // 
             // TotalHuacos
@@ -150,84 +163,12 @@
             this.TotalProduced.ReadOnly = true;
             this.TotalProduced.Width = 150;
             // 
-            // groupbox_assignments
-            // 
-            this.groupbox_assignments.Controls.Add(this.simulation_grid);
-            this.groupbox_assignments.Location = new System.Drawing.Point(12, 57);
-            this.groupbox_assignments.Name = "groupbox_assignments";
-            this.groupbox_assignments.Size = new System.Drawing.Size(907, 267);
-            this.groupbox_assignments.TabIndex = 41;
-            this.groupbox_assignments.TabStop = false;
-            this.groupbox_assignments.Text = "Asignaciones";
-            // 
-            // simulation_grid
-            // 
-            this.simulation_grid.AllowUserToAddRows = false;
-            this.simulation_grid.AllowUserToDeleteRows = false;
-            this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Date,
-            this.Worker1,
-            this.Worker2,
-            this.Worker3,
-            this.Worker4,
-            this.Worker5});
-            this.simulation_grid.Location = new System.Drawing.Point(9, 27);
-            this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.simulation_grid.Name = "simulation_grid";
-            this.simulation_grid.ReadOnly = true;
-            this.simulation_grid.RowHeadersVisible = false;
-            this.simulation_grid.Size = new System.Drawing.Size(851, 227);
-            this.simulation_grid.TabIndex = 1;
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Fecha";
-            this.Date.Name = "Date";
-            this.Date.ReadOnly = true;
-            // 
-            // Worker1
-            // 
-            this.Worker1.HeaderText = "Trabajador 1";
-            this.Worker1.Name = "Worker1";
-            this.Worker1.ReadOnly = true;
-            this.Worker1.Width = 150;
-            // 
-            // Worker2
-            // 
-            this.Worker2.HeaderText = "Trabajador 2";
-            this.Worker2.Name = "Worker2";
-            this.Worker2.ReadOnly = true;
-            this.Worker2.Width = 150;
-            // 
-            // Worker3
-            // 
-            this.Worker3.HeaderText = "Trabajador 3";
-            this.Worker3.Name = "Worker3";
-            this.Worker3.ReadOnly = true;
-            this.Worker3.Width = 150;
-            // 
-            // Worker4
-            // 
-            this.Worker4.HeaderText = "Trabajador 4";
-            this.Worker4.Name = "Worker4";
-            this.Worker4.ReadOnly = true;
-            this.Worker4.Width = 150;
-            // 
-            // Worker5
-            // 
-            this.Worker5.HeaderText = "Trabajador 5";
-            this.Worker5.Name = "Worker5";
-            this.Worker5.ReadOnly = true;
-            this.Worker5.Width = 150;
-            // 
             // label_select
             // 
             this.label_select.AutoSize = true;
             this.label_select.Location = new System.Drawing.Point(12, 20);
             this.label_select.Name = "label_select";
-            this.label_select.Size = new System.Drawing.Size(214, 23);
+            this.label_select.Size = new System.Drawing.Size(173, 18);
             this.label_select.TabIndex = 43;
             this.label_select.Text = "Seleccionar simulación:";
             // 
@@ -240,7 +181,7 @@
             "Simulación 3"});
             this.comboBox1.Location = new System.Drawing.Point(191, 17);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(212, 31);
+            this.comboBox1.Size = new System.Drawing.Size(212, 26);
             this.comboBox1.TabIndex = 44;
             // 
             // button_generate
@@ -248,25 +189,185 @@
             this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(727, 451);
+            this.button_generate.Location = new System.Drawing.Point(755, 451);
             this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(145, 43);
+            this.button_generate.Size = new System.Drawing.Size(146, 43);
             this.button_generate.TabIndex = 45;
-            this.button_generate.Text = "Reporte";
+            this.button_generate.Text = "Generar reporte";
             this.button_generate.UseVisualStyleBackColor = false;
             this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
             // 
+            // simulation_grid
+            // 
+            this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_assignment_date,
+            this.grid_worker_1,
+            this.grid_worker_2,
+            this.grid_worker_3,
+            this.grid_worker_4,
+            this.grid_worker_5});
+            this.simulation_grid.Location = new System.Drawing.Point(9, 8);
+            this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.simulation_grid.Name = "simulation_grid";
+            this.simulation_grid.RowHeadersVisible = false;
+            this.simulation_grid.Size = new System.Drawing.Size(873, 227);
+            this.simulation_grid.TabIndex = 1;
+            // 
+            // simulation_tab_control
+            // 
+            this.simulation_tab_control.Controls.Add(this.simulation_tab_general);
+            this.simulation_tab_control.Controls.Add(this.simulation_tab_assignment);
+            this.simulation_tab_control.Location = new System.Drawing.Point(15, 59);
+            this.simulation_tab_control.Name = "simulation_tab_control";
+            this.simulation_tab_control.SelectedIndex = 0;
+            this.simulation_tab_control.Size = new System.Drawing.Size(904, 277);
+            this.simulation_tab_control.TabIndex = 46;
+            // 
+            // simulation_tab_general
+            // 
+            this.simulation_tab_general.Controls.Add(this.general_grid);
+            this.simulation_tab_general.Location = new System.Drawing.Point(4, 27);
+            this.simulation_tab_general.Name = "simulation_tab_general";
+            this.simulation_tab_general.Padding = new System.Windows.Forms.Padding(3);
+            this.simulation_tab_general.Size = new System.Drawing.Size(896, 246);
+            this.simulation_tab_general.TabIndex = 0;
+            this.simulation_tab_general.Text = "General";
+            this.simulation_tab_general.UseVisualStyleBackColor = true;
+            // 
+            // simulation_tab_assignment
+            // 
+            this.simulation_tab_assignment.Controls.Add(this.simulation_grid);
+            this.simulation_tab_assignment.Location = new System.Drawing.Point(4, 27);
+            this.simulation_tab_assignment.Name = "simulation_tab_assignment";
+            this.simulation_tab_assignment.Padding = new System.Windows.Forms.Padding(3);
+            this.simulation_tab_assignment.Size = new System.Drawing.Size(896, 246);
+            this.simulation_tab_assignment.TabIndex = 1;
+            this.simulation_tab_assignment.Text = "Asignaciones";
+            this.simulation_tab_assignment.UseVisualStyleBackColor = true;
+            // 
+            // general_grid
+            // 
+            this.general_grid.AllowUserToAddRows = false;
+            this.general_grid.AllowUserToDeleteRows = false;
+            this.general_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.general_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.general_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_general_date,
+            this.grid_huacos_produced,
+            this.grid_huacos_left,
+            this.grid_stones_produced,
+            this.grid_stones_left,
+            this.grid_altarpiece_produced,
+            this.grid_altarpiece_left});
+            this.general_grid.Location = new System.Drawing.Point(9, 8);
+            this.general_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.general_grid.Name = "general_grid";
+            this.general_grid.ReadOnly = true;
+            this.general_grid.RowHeadersVisible = false;
+            this.general_grid.Size = new System.Drawing.Size(873, 230);
+            this.general_grid.TabIndex = 3;
+            // 
+            // grid_assignment_date
+            // 
+            this.grid_assignment_date.HeaderText = "Fecha";
+            this.grid_assignment_date.Name = "grid_assignment_date";
+            this.grid_assignment_date.ReadOnly = true;
+            // 
+            // grid_worker_1
+            // 
+            this.grid_worker_1.HeaderText = "Trabajador 1";
+            this.grid_worker_1.Name = "grid_worker_1";
+            this.grid_worker_1.ReadOnly = true;
+            this.grid_worker_1.Width = 150;
+            // 
+            // grid_worker_2
+            // 
+            this.grid_worker_2.HeaderText = "Trabajador 2";
+            this.grid_worker_2.Name = "grid_worker_2";
+            this.grid_worker_2.ReadOnly = true;
+            this.grid_worker_2.Width = 150;
+            // 
+            // grid_worker_3
+            // 
+            this.grid_worker_3.HeaderText = "Trabajador 3";
+            this.grid_worker_3.Name = "grid_worker_3";
+            this.grid_worker_3.ReadOnly = true;
+            this.grid_worker_3.Width = 150;
+            // 
+            // grid_worker_4
+            // 
+            this.grid_worker_4.HeaderText = "Trabajador 4";
+            this.grid_worker_4.Name = "grid_worker_4";
+            this.grid_worker_4.ReadOnly = true;
+            this.grid_worker_4.Width = 150;
+            // 
+            // grid_worker_5
+            // 
+            this.grid_worker_5.HeaderText = "Trabajador 5";
+            this.grid_worker_5.Name = "grid_worker_5";
+            this.grid_worker_5.ReadOnly = true;
+            this.grid_worker_5.Width = 150;
+            // 
+            // grid_general_date
+            // 
+            this.grid_general_date.HeaderText = "Fecha";
+            this.grid_general_date.Name = "grid_general_date";
+            this.grid_general_date.ReadOnly = true;
+            // 
+            // grid_huacos_produced
+            // 
+            this.grid_huacos_produced.HeaderText = "Huacos producidos";
+            this.grid_huacos_produced.Name = "grid_huacos_produced";
+            this.grid_huacos_produced.ReadOnly = true;
+            // 
+            // grid_huacos_left
+            // 
+            this.grid_huacos_left.HeaderText = "Huacos por producir";
+            this.grid_huacos_left.Name = "grid_huacos_left";
+            this.grid_huacos_left.ReadOnly = true;
+            this.grid_huacos_left.Width = 120;
+            // 
+            // grid_stones_produced
+            // 
+            this.grid_stones_produced.HeaderText = "Piedras de Huamanga producidas";
+            this.grid_stones_produced.Name = "grid_stones_produced";
+            this.grid_stones_produced.ReadOnly = true;
+            this.grid_stones_produced.Width = 200;
+            // 
+            // grid_stones_left
+            // 
+            this.grid_stones_left.HeaderText = "Piedras de Huamanga por producir";
+            this.grid_stones_left.Name = "grid_stones_left";
+            this.grid_stones_left.ReadOnly = true;
+            this.grid_stones_left.Width = 200;
+            // 
+            // grid_altarpiece_produced
+            // 
+            this.grid_altarpiece_produced.HeaderText = "Retablos producidos";
+            this.grid_altarpiece_produced.Name = "grid_altarpiece_produced";
+            this.grid_altarpiece_produced.ReadOnly = true;
+            this.grid_altarpiece_produced.Width = 120;
+            // 
+            // grid_altarpiece_left
+            // 
+            this.grid_altarpiece_left.HeaderText = "Retablos por producir";
+            this.grid_altarpiece_left.Name = "grid_altarpiece_left";
+            this.grid_altarpiece_left.ReadOnly = true;
+            this.grid_altarpiece_left.Width = 120;
+            // 
             // WorkersAssignment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(972, 516);
+            this.Controls.Add(this.simulation_tab_control);
             this.Controls.Add(this.button_generate);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label_select);
             this.Controls.Add(this.groupbox_summary);
-            this.Controls.Add(this.groupbox_assignments);
             this.Controls.Add(this.button_start);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_config);
@@ -277,8 +378,11 @@
             this.Load += new System.EventHandler(this.WorkersAssignment_Load);
             this.groupbox_summary.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.summary_grid)).EndInit();
-            this.groupbox_assignments.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).EndInit();
+            this.simulation_tab_control.ResumeLayout(false);
+            this.simulation_tab_general.ResumeLayout(false);
+            this.simulation_tab_assignment.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.general_grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,16 +398,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalStones;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAltarpiece;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalProduced;
-        private System.Windows.Forms.GroupBox groupbox_assignments;
-        private System.Windows.Forms.DataGridView simulation_grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Worker1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Worker2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Worker3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Worker4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Worker5;
         private System.Windows.Forms.Label label_select;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button_generate;
+        private System.Windows.Forms.DataGridView simulation_grid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_assignment_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_5;
+        private System.Windows.Forms.TabControl simulation_tab_control;
+        private System.Windows.Forms.TabPage simulation_tab_general;
+        private System.Windows.Forms.DataGridView general_grid;
+        private System.Windows.Forms.TabPage simulation_tab_assignment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_general_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_huacos_produced;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_huacos_left;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_stones_produced;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_stones_left;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_altarpiece_produced;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_altarpiece_left;
     }
 }

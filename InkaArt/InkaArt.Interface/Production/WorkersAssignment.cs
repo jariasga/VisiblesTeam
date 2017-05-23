@@ -26,7 +26,9 @@ namespace InkaArt.Interface.Production
 
         private void button_delete_Click(object sender, EventArgs e)
         {
+            general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
+            summary_grid.Rows.Clear();
         }
 
         private void WorkersAssignment_Load(object sender, EventArgs e)

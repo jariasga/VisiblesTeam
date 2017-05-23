@@ -69,6 +69,7 @@
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.informeDeTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -181,6 +182,7 @@
             this.listaDeTurnosToolStripMenuItem,
             this.toolStripSeparator4,
             this.asignaciónDeTrabajadoresToolStripMenuItem,
+            this.informeDeTurnoToolStripMenuItem,
             this.toolStripSeparator5,
             this.generarReporteDeProductividadToolStripMenuItem});
             this.producciónToolStripMenuItem.Font = new System.Drawing.Font("Arial", 11F);
@@ -395,6 +397,13 @@
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
+            // informeDeTurnoToolStripMenuItem
+            // 
+            this.informeDeTurnoToolStripMenuItem.Name = "informeDeTurnoToolStripMenuItem";
+            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.informeDeTurnoToolStripMenuItem.Text = "Informe de Turno";
+            this.informeDeTurnoToolStripMenuItem.Click += new System.EventHandler(this.informeDeTurnoToolStripMenuItem_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -463,5 +472,6 @@
         private System.Windows.Forms.ToolStripMenuItem salidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unidadesDeMedidaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionarMovimientosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informeDeTurnoToolStripMenuItem;
     }
 }
