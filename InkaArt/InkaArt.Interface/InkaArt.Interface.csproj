@@ -356,6 +356,18 @@
     <Compile Include="Warehouse\StockReport.designer.cs">
       <DependentUpon>StockReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\WarehouseDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseDetail.Designer.cs">
+      <DependentUpon>WarehouseDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseIndex.Designer.cs">
+      <DependentUpon>WarehouseIndex.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="GeneralParameters.resx">
       <DependentUpon>GeneralParameters.cs</DependentUpon>
     </EmbeddedResource>
@@ -506,6 +518,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\StockReport.resx">
       <DependentUpon>StockReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseDetail.resx">
+      <DependentUpon>WarehouseDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseIndex.resx">
+      <DependentUpon>WarehouseIndex.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
