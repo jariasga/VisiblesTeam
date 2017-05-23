@@ -46,6 +46,7 @@
             this.listaDeTurnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignaciónDeTrabajadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informeDeTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.generarReporteDeProductividadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,12 +57,6 @@
             this.generarReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.almacénToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeAlmacenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materiaPrimaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salidasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productosFinalesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.salidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarMovimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.verStocksFísicosYLógicosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +64,6 @@
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.informeDeTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -224,6 +218,13 @@
             this.asignaciónDeTrabajadoresToolStripMenuItem.Text = "Asignación de Trabajadores";
             this.asignaciónDeTrabajadoresToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeTrabajadoresToolStripMenuItem_Click);
             // 
+            // informeDeTurnoToolStripMenuItem
+            // 
+            this.informeDeTurnoToolStripMenuItem.Name = "informeDeTurnoToolStripMenuItem";
+            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(391, 26);
+            this.informeDeTurnoToolStripMenuItem.Text = "Informe de Turno";
+            this.informeDeTurnoToolStripMenuItem.Click += new System.EventHandler(this.informeDeTurnoToolStripMenuItem_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
@@ -283,8 +284,6 @@
             // 
             this.almacénToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listaDeAlmacenesToolStripMenuItem,
-            this.materiaPrimaToolStripMenuItem2,
-            this.productosFinalesToolStripMenuItem1,
             this.gestionarMovimientosToolStripMenuItem,
             this.toolStripSeparator9,
             this.verStocksFísicosYLógicosToolStripMenuItem,
@@ -299,50 +298,6 @@
             this.listaDeAlmacenesToolStripMenuItem.Size = new System.Drawing.Size(319, 26);
             this.listaDeAlmacenesToolStripMenuItem.Text = "Almacenes";
             this.listaDeAlmacenesToolStripMenuItem.Click += new System.EventHandler(this.listaDeAlmacenesToolStripMenuItem_Click);
-            // 
-            // materiaPrimaToolStripMenuItem2
-            // 
-            this.materiaPrimaToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ingresosToolStripMenuItem,
-            this.salidasToolStripMenuItem});
-            this.materiaPrimaToolStripMenuItem2.Name = "materiaPrimaToolStripMenuItem2";
-            this.materiaPrimaToolStripMenuItem2.Size = new System.Drawing.Size(319, 26);
-            this.materiaPrimaToolStripMenuItem2.Text = "Materia Prima";
-            // 
-            // ingresosToolStripMenuItem
-            // 
-            this.ingresosToolStripMenuItem.Name = "ingresosToolStripMenuItem";
-            this.ingresosToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
-            this.ingresosToolStripMenuItem.Text = "Ingresos";
-            // 
-            // salidasToolStripMenuItem
-            // 
-            this.salidasToolStripMenuItem.Name = "salidasToolStripMenuItem";
-            this.salidasToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
-            this.salidasToolStripMenuItem.Text = "Salidas";
-            // 
-            // productosFinalesToolStripMenuItem1
-            // 
-            this.productosFinalesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ingresosToolStripMenuItem1,
-            this.salidadToolStripMenuItem});
-            this.productosFinalesToolStripMenuItem1.Name = "productosFinalesToolStripMenuItem1";
-            this.productosFinalesToolStripMenuItem1.Size = new System.Drawing.Size(319, 26);
-            this.productosFinalesToolStripMenuItem1.Text = "Productos Finales";
-            // 
-            // ingresosToolStripMenuItem1
-            // 
-            this.ingresosToolStripMenuItem1.Name = "ingresosToolStripMenuItem1";
-            this.ingresosToolStripMenuItem1.Size = new System.Drawing.Size(161, 26);
-            this.ingresosToolStripMenuItem1.Text = "Ingresos";
-            this.ingresosToolStripMenuItem1.Click += new System.EventHandler(this.ingresosToolStripMenuItem1_Click);
-            // 
-            // salidadToolStripMenuItem
-            // 
-            this.salidadToolStripMenuItem.Name = "salidadToolStripMenuItem";
-            this.salidadToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
-            this.salidadToolStripMenuItem.Text = "Salidas";
-            this.salidadToolStripMenuItem.Click += new System.EventHandler(this.salidasToolStripMenuItem_Click);
             // 
             // gestionarMovimientosToolStripMenuItem
             // 
@@ -396,13 +351,6 @@
             this.splitter1.Size = new System.Drawing.Size(4, 639);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
-            // 
-            // informeDeTurnoToolStripMenuItem
-            // 
-            this.informeDeTurnoToolStripMenuItem.Name = "informeDeTurnoToolStripMenuItem";
-            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.informeDeTurnoToolStripMenuItem.Text = "Informe de Turno";
-            this.informeDeTurnoToolStripMenuItem.Click += new System.EventHandler(this.informeDeTurnoToolStripMenuItem_Click);
             // 
             // Menu
             // 
@@ -464,12 +412,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem verStocksFísicosYLógicosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parámetrosGeneralesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem materiaPrimaToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem ingresosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salidasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem productosFinalesToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem ingresosToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem salidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unidadesDeMedidaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionarMovimientosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informeDeTurnoToolStripMenuItem;
