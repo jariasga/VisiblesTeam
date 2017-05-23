@@ -50,7 +50,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(30, 39);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(579, 225);
+            this.groupBox1.Size = new System.Drawing.Size(407, 346);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros para el reporte";
@@ -58,32 +58,38 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(192, 154);
+            this.comboBox1.Items.AddRange(new object[] {
+            "Ricardo Vente",
+            "Anthony Gutierrez",
+            "Camila Chavez",
+            "Natalia Palomares",
+            "Flor de Maria Noriega"});
+            this.comboBox1.Location = new System.Drawing.Point(34, 288);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(346, 31);
+            this.comboBox1.Size = new System.Drawing.Size(336, 31);
             this.comboBox1.TabIndex = 5;
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(192, 109);
+            this.dateTimePicker2.Location = new System.Drawing.Point(34, 184);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(346, 28);
+            this.dateTimePicker2.Size = new System.Drawing.Size(336, 28);
             this.dateTimePicker2.TabIndex = 4;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(192, 62);
+            this.dateTimePicker1.Location = new System.Drawing.Point(34, 88);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(346, 28);
+            this.dateTimePicker1.Size = new System.Drawing.Size(336, 28);
             this.dateTimePicker1.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(30, 158);
+            this.label3.Location = new System.Drawing.Point(30, 263);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 22);
             this.label3.TabIndex = 2;
@@ -93,7 +99,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(30, 109);
+            this.label2.Location = new System.Drawing.Point(30, 159);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 22);
             this.label2.TabIndex = 1;
@@ -114,7 +120,7 @@
             this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(249, 294);
+            this.button_generate.Location = new System.Drawing.Point(150, 412);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(138, 51);
             this.button_generate.TabIndex = 24;
@@ -127,7 +133,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(644, 373);
+            this.ClientSize = new System.Drawing.Size(477, 486);
             this.Controls.Add(this.button_generate);
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerateProductivityReport";

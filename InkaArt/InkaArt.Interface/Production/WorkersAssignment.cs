@@ -48,5 +48,11 @@ namespace InkaArt.Interface.Production
             new_simultation.MdiParent = this.MdiParent;
             new_simultation.Show();
         }
+
+        private void button_generate_Click(object sender, EventArgs e)
+        {
+            GenerateSimulationReport simulation_report = new GenerateSimulationReport();
+            simulation_report.Show();
+        }
     }
 }
