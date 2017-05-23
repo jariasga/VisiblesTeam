@@ -73,7 +73,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(400, 29);
+            this.groupBox2.Location = new System.Drawing.Point(393, 29);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(472, 388);
             this.groupBox2.TabIndex = 25;
@@ -252,7 +252,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(629, 441);
+            this.button_delete.Location = new System.Drawing.Point(622, 441);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(107, 39);
             this.button_delete.TabIndex = 38;
@@ -265,7 +265,7 @@
             this.button_edit.BackColor = System.Drawing.Color.SteelBlue;
             this.button_edit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_edit.ForeColor = System.Drawing.Color.White;
-            this.button_edit.Location = new System.Drawing.Point(517, 441);
+            this.button_edit.Location = new System.Drawing.Point(510, 441);
             this.button_edit.Margin = new System.Windows.Forms.Padding(2);
             this.button_edit.Name = "button_edit";
             this.button_edit.Size = new System.Drawing.Size(107, 39);
