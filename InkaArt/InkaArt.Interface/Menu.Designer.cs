@@ -37,6 +37,7 @@
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeMateriasPrimasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unidadesDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.verMateriasPrimasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.producciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.unidadesDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -153,6 +153,13 @@
             this.listaDeMateriasPrimasToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.listaDeMateriasPrimasToolStripMenuItem.Text = "Materias Primas";
             this.listaDeMateriasPrimasToolStripMenuItem.Click += new System.EventHandler(this.listaDeMateriasPrimasToolStripMenuItem_Click);
+            // 
+            // unidadesDeMedidaToolStripMenuItem
+            // 
+            this.unidadesDeMedidaToolStripMenuItem.Name = "unidadesDeMedidaToolStripMenuItem";
+            this.unidadesDeMedidaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.unidadesDeMedidaToolStripMenuItem.Text = "Unidades de Medida";
+            this.unidadesDeMedidaToolStripMenuItem.Click += new System.EventHandler(this.unidadesDeMedidaToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -302,6 +309,7 @@
             this.listaDeAlmacenesToolStripMenuItem.Name = "listaDeAlmacenesToolStripMenuItem";
             this.listaDeAlmacenesToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.listaDeAlmacenesToolStripMenuItem.Text = "Almacenes";
+            this.listaDeAlmacenesToolStripMenuItem.Click += new System.EventHandler(this.listaDeAlmacenesToolStripMenuItem_Click);
             // 
             // materiaPrimaToolStripMenuItem2
             // 
@@ -391,13 +399,6 @@
             this.splitter1.Size = new System.Drawing.Size(3, 517);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
-            // 
-            // unidadesDeMedidaToolStripMenuItem
-            // 
-            this.unidadesDeMedidaToolStripMenuItem.Name = "unidadesDeMedidaToolStripMenuItem";
-            this.unidadesDeMedidaToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.unidadesDeMedidaToolStripMenuItem.Text = "Unidades de Medida";
-            this.unidadesDeMedidaToolStripMenuItem.Click += new System.EventHandler(this.unidadesDeMedidaToolStripMenuItem_Click);
             // 
             // Menu
             // 

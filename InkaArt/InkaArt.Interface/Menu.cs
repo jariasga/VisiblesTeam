@@ -191,5 +191,12 @@ namespace InkaArt.Interface
             reporte_stocks.MdiParent = this;
             reporte_stocks.Show();
         }
+
+        private void listaDeAlmacenesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form almacenes = new WarehouseIndex();
+            almacenes.MdiParent = this;
+            almacenes.Show();
+        }
     }
 }
