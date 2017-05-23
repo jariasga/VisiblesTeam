@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Interface Layer", "1 Interface Layer", "{0B2F5818-90C6-43BC-9068-FF0AE9E9E1B5}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Data Layer", "3 Data Layer", "{4721B5A8-89CD-400F-A008-EC55F2949D59}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Common", "4 Common", "{F2A9AE53-8761-4852-A5B9-01157F2735B3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 Libraries", "5 Libraries", "{5A8DF41F-B86D-4CD5-8B73-C43FC4080947}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Data", "InkaArt.Data\InkaArt.Data.csproj", "{28DD7710-8F67-4401-AEC4-CD8C3E135B82}"
 EndProject
