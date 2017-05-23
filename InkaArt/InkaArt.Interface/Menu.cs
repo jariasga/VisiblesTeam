@@ -197,5 +197,12 @@ namespace InkaArt.Interface
             almacenes.MdiParent = this;
             almacenes.Show();
         }
+
+        private void informeDeTurnoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form inform = new RegisterAssignedJob();
+            inform.MdiParent = this;
+            inform.Show();
+        }
     }
 }
