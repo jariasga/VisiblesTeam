@@ -32,6 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,13 +41,15 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaDeEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEmision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MontoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +59,7 @@
             this.button3.BackColor = System.Drawing.Color.Firebrick;
             this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(359, 473);
+            this.button3.Location = new System.Drawing.Point(415, 473);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(138, 39);
             this.button3.TabIndex = 10;
@@ -69,7 +72,7 @@
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(204, 473);
+            this.button2.Location = new System.Drawing.Point(263, 473);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(138, 39);
             this.button2.TabIndex = 9;
@@ -86,16 +89,19 @@
             this.Id,
             this.Proveedor,
             this.FechaDeEntrega,
+            this.FechaEmision,
             this.MontoTotal,
             this.VerDetalle,
             this.Eliminar});
             this.dataGridView1.Location = new System.Drawing.Point(23, 186);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(665, 272);
+            this.dataGridView1.Size = new System.Drawing.Size(774, 272);
             this.dataGridView1.TabIndex = 8;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.textBox2);
@@ -108,10 +114,18 @@
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(23, 16);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(665, 158);
+            this.groupBox1.Size = new System.Drawing.Size(774, 158);
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(240, 110);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(190, 26);
+            this.dateTimePicker1.TabIndex = 28;
             // 
             // comboBox1
             // 
@@ -147,9 +161,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(237, 89);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(131, 18);
+            this.label4.Size = new System.Drawing.Size(133, 18);
             this.label4.TabIndex = 24;
-            this.label4.Text = "Fecha de entrega";
+            this.label4.Text = "Fecha de emisión";
             // 
             // label3
             // 
@@ -166,7 +180,7 @@
             this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(240, 50);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(410, 26);
+            this.textBox4.Size = new System.Drawing.Size(515, 26);
             this.textBox4.TabIndex = 17;
             // 
             // label1
@@ -183,13 +197,30 @@
             this.button1.BackColor = System.Drawing.Color.Gray;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(562, 97);
+            this.button1.Location = new System.Drawing.Point(667, 97);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(88, 39);
             this.button1.TabIndex = 15;
             this.button1.Text = "🔎 Buscar";
             this.button1.UseVisualStyleBackColor = false;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(456, 110);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(190, 26);
+            this.dateTimePicker2.TabIndex = 29;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(453, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(131, 18);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Fecha de entrega";
             // 
             // Id
             // 
@@ -201,12 +232,17 @@
             // 
             this.Proveedor.HeaderText = "Proveedor";
             this.Proveedor.Name = "Proveedor";
-            this.Proveedor.Width = 200;
+            this.Proveedor.Width = 210;
             // 
             // FechaDeEntrega
             // 
             this.FechaDeEntrega.HeaderText = "Fecha de entrega";
             this.FechaDeEntrega.Name = "FechaDeEntrega";
+            // 
+            // FechaEmision
+            // 
+            this.FechaEmision.HeaderText = "Fecha de emisión";
+            this.FechaEmision.Name = "FechaEmision";
             // 
             // MontoTotal
             // 
@@ -227,20 +263,12 @@
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Eliminar.Width = 80;
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(240, 110);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(299, 26);
-            this.dateTimePicker1.TabIndex = 28;
-            // 
             // PurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(712, 524);
+            this.ClientSize = new System.Drawing.Size(819, 524);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -270,12 +298,15 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaDeEntrega;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEmision;
         private System.Windows.Forms.DataGridViewTextBoxColumn MontoTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

@@ -59,5 +59,14 @@ namespace InkaArt.Interface.Purchases
             button_delete.Enabled = true;
             button_save.Enabled = true;
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox2.Text.Equals(""))
+            {
+                button_add.Enabled=true;
+            }
+            else button_add.Enabled = false;
+        }
     }
 }

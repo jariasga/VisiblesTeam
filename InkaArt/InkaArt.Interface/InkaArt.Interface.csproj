@@ -189,6 +189,18 @@
     <Compile Include="Purchases\Suppliers.designer.cs">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Purchases\UnitOfMeasurement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\UnitOfMeasurement.Designer.cs">
+      <DependentUpon>UnitOfMeasurement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purchases\UnitOfMeasurementList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purchases\UnitOfMeasurementList.Designer.cs">
+      <DependentUpon>UnitOfMeasurementList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\ClientCreate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,6 +393,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Purchases\Suppliers.resx">
       <DependentUpon>Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\UnitOfMeasurement.resx">
+      <DependentUpon>UnitOfMeasurement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\UnitOfMeasurementList.resx">
+      <DependentUpon>UnitOfMeasurementList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ClientCreate.resx">
       <DependentUpon>ClientCreate.cs</DependentUpon>

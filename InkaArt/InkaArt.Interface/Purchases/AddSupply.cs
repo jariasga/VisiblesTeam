@@ -31,5 +31,10 @@ namespace InkaArt.Interface.Purchases
         {
             this.Close();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            RawMaterialDetail newRawMaterialWindow =new RawMaterialDetail();
+        }
     }
 }
