@@ -34,9 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -44,6 +41,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -51,6 +54,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -116,35 +121,21 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
             this.Nombre,
-            this.Cantidad});
+            this.Cantidad,
+            this.Unidad});
             this.dataGridView1.Location = new System.Drawing.Point(280, 112);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(342, 211);
+            this.dataGridView1.Size = new System.Drawing.Size(446, 211);
             this.dataGridView1.TabIndex = 17;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.Gray;
             this.button5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(525, 43);
+            this.button5.Location = new System.Drawing.Point(629, 41);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(97, 39);
@@ -155,15 +146,15 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(281, 50);
+            this.comboBox1.Location = new System.Drawing.Point(326, 48);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(103, 26);
+            this.comboBox1.Size = new System.Drawing.Size(128, 26);
             this.comboBox1.TabIndex = 22;
             this.comboBox1.Text = "Piedra";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(420, 51);
+            this.numericUpDown1.Location = new System.Drawing.Point(524, 49);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(68, 26);
             this.numericUpDown1.TabIndex = 25;
@@ -171,7 +162,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(416, 28);
+            this.label4.Location = new System.Drawing.Point(520, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 18);
             this.label4.TabIndex = 24;
@@ -180,7 +171,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(277, 28);
+            this.label3.Location = new System.Drawing.Point(322, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 18);
             this.label3.TabIndex = 23;
@@ -212,12 +203,54 @@
             this.button1.Text = "🖫 Guardar";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Unidad
+            // 
+            this.Unidad.HeaderText = "Unidad";
+            this.Unidad.Name = "Unidad";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Versión 1",
+            "Version 2"});
+            this.comboBox2.Location = new System.Drawing.Point(32, 174);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(171, 26);
+            this.comboBox2.TabIndex = 24;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(29, 153);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 18);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Versión";
+            // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(646, 412);
+            this.ClientSize = new System.Drawing.Size(739, 412);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button5);
@@ -248,9 +281,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
@@ -258,5 +288,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

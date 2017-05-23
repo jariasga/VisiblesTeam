@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +51,14 @@
     <StartupObject>InkaArt.Interface.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="encription-SHA256">
+      <HintPath>..\InkaArt.Libraries\encription-SHA256.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -174,7 +197,7 @@
     <Compile Include="Purchases\RawMaterialDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchases\RawMaterialDetail.designer.cs">
+    <Compile Include="Purchases\RawMaterialDetail.Designer.cs">
       <DependentUpon>RawMaterialDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchases\RawMaterials.cs">
@@ -219,12 +242,6 @@
     <Compile Include="Sales\ClientOrderCreate.designer.cs">
       <DependentUpon>ClientOrderCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ClientOrderDevolution.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\ClientOrderDevolution.designer.cs">
-      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sales\ClientOrderIndex.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +266,18 @@
     <Compile Include="Sales\ClientsIndex.designer.cs">
       <DependentUpon>ClientsIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\DevolutionCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\DevolutionCreate.Designer.cs">
+      <DependentUpon>DevolutionCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\DevolutionShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\DevolutionShow.Designer.cs">
+      <DependentUpon>DevolutionShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\GenerateSalesReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,18 +289,6 @@
     </Compile>
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Security\UserMaintenance.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Security\UserMaintenance.designer.cs">
-      <DependentUpon>UserMaintenance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Security\UserRolesPermissions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Security\UserRolesPermissions.designer.cs">
-      <DependentUpon>UserRolesPermissions.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\AlertLackSupplies.cs">
       <SubType>Form</SubType>
@@ -332,6 +349,18 @@
     </Compile>
     <Compile Include="Warehouse\StockReport.designer.cs">
       <DependentUpon>StockReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseDetail.Designer.cs">
+      <DependentUpon>WarehouseDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseIndex.Designer.cs">
+      <DependentUpon>WarehouseIndex.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="GeneralParameters.resx">
       <DependentUpon>GeneralParameters.cs</DependentUpon>
@@ -427,9 +456,6 @@
     <EmbeddedResource Include="Sales\ClientOrderCreate.resx">
       <DependentUpon>ClientOrderCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ClientOrderDevolution.resx">
-      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sales\ClientOrderIndex.resx">
       <DependentUpon>ClientOrderIndex.cs</DependentUpon>
     </EmbeddedResource>
@@ -442,17 +468,17 @@
     <EmbeddedResource Include="Sales\ClientsIndex.resx">
       <DependentUpon>ClientsIndex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\DevolutionCreate.resx">
+      <DependentUpon>DevolutionCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\DevolutionShow.resx">
+      <DependentUpon>DevolutionShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\GenerateSalesReport.resx">
       <DependentUpon>GenerateSalesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Security\UserMaintenance.resx">
-      <DependentUpon>UserMaintenance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Security\UserRolesPermissions.resx">
-      <DependentUpon>UserRolesPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\AlertLackSupplies.resx">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
@@ -484,6 +510,12 @@
     <EmbeddedResource Include="Warehouse\StockReport.resx">
       <DependentUpon>StockReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseDetail.resx">
+      <DependentUpon>WarehouseDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseIndex.resx">
+      <DependentUpon>WarehouseIndex.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -508,6 +540,18 @@
       <Project>{28dd7710-8f67-4401-aec4-cd8c3e135b82}</Project>
       <Name>InkaArt.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

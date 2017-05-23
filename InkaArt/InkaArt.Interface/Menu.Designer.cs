@@ -294,6 +294,7 @@
             this.listaDeAlmacenesToolStripMenuItem.Name = "listaDeAlmacenesToolStripMenuItem";
             this.listaDeAlmacenesToolStripMenuItem.Size = new System.Drawing.Size(319, 26);
             this.listaDeAlmacenesToolStripMenuItem.Text = "Almacenes";
+            this.listaDeAlmacenesToolStripMenuItem.Click += new System.EventHandler(this.listaDeAlmacenesToolStripMenuItem_Click);
             // 
             // materiaPrimaToolStripMenuItem2
             // 

@@ -47,5 +47,21 @@ namespace InkaArt.Interface.Sales
         {
 
         }
+
+        private void button_create_Click(object sender, EventArgs e)
+        {
+            Form client_form = new ClientCreate();
+            client_form.Show();
+        }
+        
+        private void documentCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (documentCombo.Text.Equals("Boleta"))
+                clientIdentifierLabel.Text = "DNI";
+            else
+                clientIdentifierLabel.Text = "RUC";
+
+        }
+        
     }
 }

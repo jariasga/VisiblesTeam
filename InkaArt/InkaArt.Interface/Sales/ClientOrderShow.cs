@@ -26,13 +26,7 @@ namespace InkaArt.Interface.Sales
         {
 
         }
-
-        private void button_devolution_Click(object sender, EventArgs e)
-        {
-            ClientOrderDevolution dev_form = new ClientOrderDevolution();
-            dev_form.Show();
-        }
-
+        
         private void button_edit_Click(object sender, EventArgs e)
         {
             ClientOrderCreate edit_form = new ClientOrderCreate("Editar Cliente");
