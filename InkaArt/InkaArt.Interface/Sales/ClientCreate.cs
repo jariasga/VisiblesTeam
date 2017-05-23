@@ -33,14 +33,21 @@ namespace InkaArt.Interface.Sales
 
         }
 
-        private void button_back_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void button_save_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void personRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (naturalRadio.Checked)
+                documentLabel.Text = "DNI";
+        }
+
+        private void juridicRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (juridicRadio.Checked)
+                documentLabel.Text = "RUC";
         }
     }
 }

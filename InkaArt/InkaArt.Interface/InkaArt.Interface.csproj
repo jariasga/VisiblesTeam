@@ -197,7 +197,7 @@
     <Compile Include="Purchases\RawMaterialDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Purchases\RawMaterialDetail.designer.cs">
+    <Compile Include="Purchases\RawMaterialDetail.Designer.cs">
       <DependentUpon>RawMaterialDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchases\RawMaterials.cs">
@@ -242,12 +242,6 @@
     <Compile Include="Sales\ClientOrderCreate.designer.cs">
       <DependentUpon>ClientOrderCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sales\ClientOrderDevolution.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Sales\ClientOrderDevolution.designer.cs">
-      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sales\ClientOrderIndex.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +266,18 @@
     <Compile Include="Sales\ClientsIndex.designer.cs">
       <DependentUpon>ClientsIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\DevolutionCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\DevolutionCreate.Designer.cs">
+      <DependentUpon>DevolutionCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\DevolutionShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\DevolutionShow.Designer.cs">
+      <DependentUpon>DevolutionShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\GenerateSalesReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,18 +289,6 @@
     </Compile>
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Security\UserMaintenance.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Security\UserMaintenance.designer.cs">
-      <DependentUpon>UserMaintenance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Security\UserRolesPermissions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Security\UserRolesPermissions.designer.cs">
-      <DependentUpon>UserRolesPermissions.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\AlertLackSupplies.cs">
       <SubType>Form</SubType>
@@ -462,9 +456,6 @@
     <EmbeddedResource Include="Sales\ClientOrderCreate.resx">
       <DependentUpon>ClientOrderCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sales\ClientOrderDevolution.resx">
-      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Sales\ClientOrderIndex.resx">
       <DependentUpon>ClientOrderIndex.cs</DependentUpon>
     </EmbeddedResource>
@@ -477,17 +468,17 @@
     <EmbeddedResource Include="Sales\ClientsIndex.resx">
       <DependentUpon>ClientsIndex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\DevolutionCreate.resx">
+      <DependentUpon>DevolutionCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\DevolutionShow.resx">
+      <DependentUpon>DevolutionShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\GenerateSalesReport.resx">
       <DependentUpon>GenerateSalesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Security\UserMaintenance.resx">
-      <DependentUpon>UserMaintenance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Security\UserRolesPermissions.resx">
-      <DependentUpon>UserRolesPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\AlertLackSupplies.resx">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>

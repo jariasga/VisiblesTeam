@@ -21,13 +21,7 @@ namespace InkaArt.Interface.Sales
         {            
 
         }
-
-        private void button_create_Click(object sender, EventArgs e)
-        {
-            ClientOrderCreate create_form = new ClientOrderCreate();
-            create_form.Show();
-        }
-
+        
         private void button_delete_Click(object sender, EventArgs e)
         {
 
@@ -37,6 +31,18 @@ namespace InkaArt.Interface.Sales
         {
             ClientOrderShow show_form = new ClientOrderShow();
             show_form.Show();
+        }
+
+        private void button_create_dev_Click(object sender, EventArgs e)
+        {
+            DevolutionCreate create_form = new DevolutionCreate();
+            create_form.Show();
+        }
+
+        private void button_create_Click(object sender, EventArgs e)
+        {
+            ClientOrderCreate create_form = new ClientOrderCreate();
+            create_form.Show();
         }
     }
 }

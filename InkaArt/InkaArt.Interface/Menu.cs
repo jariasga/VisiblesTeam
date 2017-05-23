@@ -12,7 +12,6 @@ using InkaArt.Interface.Purchases;
 using InkaArt.Interface.Sales;
 using InkaArt.Interface.Production;
 using InkaArt.Interface.Warehouse;
-using InkaArt.Interface.Security;
 
 namespace InkaArt.Interface
 {
@@ -28,9 +27,9 @@ namespace InkaArt.Interface
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form userList = new UserMaintenance();
-            userList.MdiParent = this;
-            userList.Show();
+            //Form userList = new UserMaintenance();
+            //userList.MdiParent = this;
+            //userList.Show();
         }
 
         private void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
