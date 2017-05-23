@@ -1,7 +1,9 @@
 ﻿using encription_SHA256;
 using System;
 using System.Windows.Forms;
-
+using InkaArt.Data.Security;
+using Npgsql;
+using System.Data;
 
 namespace InkaArt.Interface
 {
@@ -34,6 +36,16 @@ namespace InkaArt.Interface
             bool verified = false;
             SHA_2 sha = new SHA_2();
             string key = sha.encrypt(textbox_password.Text);
+
+            UserData user = new UserData();
+            NpgsqlDataAdapter adap = new NpgsqlDataAdapter();
+            DataSet data = new DataSet();
+
+            user.connect();
+            adap = user.userAdapter();
+            adap.SelectCommand.Parameters[0].NpgsqlValue = textbox_user.Text;
+            
+            data = user.getData(adap);
 
             //  Read data from DB
             string userDB = "admin";

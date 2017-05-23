@@ -28,7 +28,7 @@ namespace InkaArt.Classes
             connectionString.Pooling = true;
         }
 
-        private void connect()
+        public void connect()
         {
             try
             {
@@ -46,6 +46,7 @@ namespace InkaArt.Classes
             DataSet data = new DataSet();
 
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adapter);
+            
             adapter.Fill(data, Connection.ConnectionString);
 
             Connection.Close();
@@ -53,7 +54,7 @@ namespace InkaArt.Classes
             return data;
         }
 
-        public void execute(string command)
+        private void execute(string command)
         {
             NpgsqlCommand cmd = new NpgsqlCommand();
             cmd.CommandText = command;

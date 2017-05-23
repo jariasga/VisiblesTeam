@@ -53,8 +53,11 @@
   <ItemGroup>
     <Reference Include="encription-SHA256">
       <HintPath>..\InkaArt.Libraries\encription-SHA256.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

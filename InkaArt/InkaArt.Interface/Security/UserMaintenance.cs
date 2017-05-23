@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Data;
 
 namespace InkaArt.Interface.Security
 {
@@ -20,6 +21,10 @@ namespace InkaArt.Interface.Security
         private void button5_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
+        }
+
+        private void begin() {
+
         }
     }
 }
