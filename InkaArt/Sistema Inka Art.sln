@@ -11,11 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Data Layer", "3 Data Laye
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Common", "4 Common", "{F2A9AE53-8761-4852-A5B9-01157F2735B3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 Libraries", "5 Libraries", "{5A8DF41F-B86D-4CD5-8B73-C43FC4080947}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Visual Studio 2017\Projects\encription-SHA256\encription-SHA256\bin\Debug\encription-SHA256.dll = ..\..\..\Visual Studio 2017\Projects\encription-SHA256\encription-SHA256\bin\Debug\encription-SHA256.dll
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Data", "InkaArt.Data\InkaArt.Data.csproj", "{28DD7710-8F67-4401-AEC4-CD8C3E135B82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Classes", "InkaArt.Classes\InkaArt.Classes.csproj", "{5615D3B3-9283-4141-B935-CBD59627EC0A}"
