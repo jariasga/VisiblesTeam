@@ -12,6 +12,7 @@ using InkaArt.Interface.Purchases;
 using InkaArt.Interface.Sales;
 using InkaArt.Interface.Production;
 using InkaArt.Interface.Warehouse;
+using InkaArt.Interface.Security;
 
 namespace InkaArt.Interface
 {
@@ -27,9 +28,9 @@ namespace InkaArt.Interface
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Form userList = new UserMaintenance();
-            //userList.MdiParent = this;
-            //userList.Show();
+            Form userList = new UserMaintenance();
+            userList.MdiParent = this;
+            userList.Show();
         }
 
         private void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,6 +87,13 @@ namespace InkaArt.Interface
             Form purchase_order_form = new PurchaseOrder();
             purchase_order_form.MdiParent = this;
             purchase_order_form.Show();
+        }
+
+        private void unidadesDeMedidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form unit_of_measurement = new UnitOfMeasurementList();
+            unit_of_measurement.MdiParent = this;
+            unit_of_measurement.Show();
         }
 
         /* Production */
@@ -183,6 +191,5 @@ namespace InkaArt.Interface
             reporte_stocks.MdiParent = this;
             reporte_stocks.Show();
         }
-        
     }
 }
