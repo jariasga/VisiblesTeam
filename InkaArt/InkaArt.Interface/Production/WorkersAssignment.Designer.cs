@@ -47,6 +47,7 @@
             this.Worker5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label_select = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button_generate = new System.Windows.Forms.Button();
             this.groupbox_summary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.summary_grid)).BeginInit();
             this.groupbox_assignments.SuspendLayout();
@@ -97,7 +98,7 @@
             this.groupbox_summary.Controls.Add(this.summary_grid);
             this.groupbox_summary.Location = new System.Drawing.Point(12, 342);
             this.groupbox_summary.Name = "groupbox_summary";
-            this.groupbox_summary.Size = new System.Drawing.Size(792, 105);
+            this.groupbox_summary.Size = new System.Drawing.Size(907, 105);
             this.groupbox_summary.TabIndex = 42;
             this.groupbox_summary.TabStop = false;
             this.groupbox_summary.Text = "Resumen";
@@ -118,7 +119,7 @@
             this.summary_grid.Name = "summary_grid";
             this.summary_grid.ReadOnly = true;
             this.summary_grid.RowHeadersVisible = false;
-            this.summary_grid.Size = new System.Drawing.Size(774, 61);
+            this.summary_grid.Size = new System.Drawing.Size(851, 61);
             this.summary_grid.TabIndex = 2;
             // 
             // TotalHuacos
@@ -154,7 +155,7 @@
             this.groupbox_assignments.Controls.Add(this.simulation_grid);
             this.groupbox_assignments.Location = new System.Drawing.Point(12, 57);
             this.groupbox_assignments.Name = "groupbox_assignments";
-            this.groupbox_assignments.Size = new System.Drawing.Size(792, 267);
+            this.groupbox_assignments.Size = new System.Drawing.Size(907, 267);
             this.groupbox_assignments.TabIndex = 41;
             this.groupbox_assignments.TabStop = false;
             this.groupbox_assignments.Text = "Asignaciones";
@@ -177,7 +178,7 @@
             this.simulation_grid.Name = "simulation_grid";
             this.simulation_grid.ReadOnly = true;
             this.simulation_grid.RowHeadersVisible = false;
-            this.simulation_grid.Size = new System.Drawing.Size(774, 227);
+            this.simulation_grid.Size = new System.Drawing.Size(851, 227);
             this.simulation_grid.TabIndex = 1;
             // 
             // Date
@@ -226,7 +227,7 @@
             this.label_select.AutoSize = true;
             this.label_select.Location = new System.Drawing.Point(12, 20);
             this.label_select.Name = "label_select";
-            this.label_select.Size = new System.Drawing.Size(173, 18);
+            this.label_select.Size = new System.Drawing.Size(214, 23);
             this.label_select.TabIndex = 43;
             this.label_select.Text = "Seleccionar simulación:";
             // 
@@ -239,15 +240,29 @@
             "Simulación 3"});
             this.comboBox1.Location = new System.Drawing.Point(191, 17);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(212, 26);
+            this.comboBox1.Size = new System.Drawing.Size(212, 31);
             this.comboBox1.TabIndex = 44;
+            // 
+            // button_generate
+            // 
+            this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_generate.ForeColor = System.Drawing.Color.White;
+            this.button_generate.Location = new System.Drawing.Point(727, 451);
+            this.button_generate.Name = "button_generate";
+            this.button_generate.Size = new System.Drawing.Size(145, 43);
+            this.button_generate.TabIndex = 45;
+            this.button_generate.Text = "Reporte";
+            this.button_generate.UseVisualStyleBackColor = false;
+            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
             // 
             // WorkersAssignment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(839, 516);
+            this.ClientSize = new System.Drawing.Size(972, 516);
+            this.Controls.Add(this.button_generate);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label_select);
             this.Controls.Add(this.groupbox_summary);
@@ -256,7 +271,7 @@
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_config);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WorkersAssignment";
             this.Text = "Asignación de trabajadores";
             this.Load += new System.EventHandler(this.WorkersAssignment_Load);
@@ -289,5 +304,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Worker5;
         private System.Windows.Forms.Label label_select;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button_generate;
     }
 }

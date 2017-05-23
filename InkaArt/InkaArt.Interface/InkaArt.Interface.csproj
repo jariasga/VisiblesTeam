@@ -79,6 +79,12 @@
     <Compile Include="Production\GenerateProductivityReport.designer.cs">
       <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Production\GenerateSimulationReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\GenerateSimulationReport.Designer.cs">
+      <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Production\JobDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -317,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Production\GenerateProductivityReport.resx">
       <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Production\GenerateSimulationReport.resx">
+      <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
