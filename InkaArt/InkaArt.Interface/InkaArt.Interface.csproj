@@ -290,6 +290,18 @@
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\UserMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\UserMaintenance.designer.cs">
+      <DependentUpon>UserMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Security\UserRolesPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\UserRolesPermissions.designer.cs">
+      <DependentUpon>UserRolesPermissions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\AlertLackSupplies.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +503,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\UserMaintenance.resx">
+      <DependentUpon>UserMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\UserRolesPermissions.resx">
+      <DependentUpon>UserRolesPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\AlertLackSupplies.resx">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
