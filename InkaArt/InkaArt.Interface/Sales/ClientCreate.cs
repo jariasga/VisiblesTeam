@@ -40,13 +40,13 @@ namespace InkaArt.Interface.Sales
 
         private void personRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if (naturalRadio.Checked)
+            if (radio_natural.Checked)
                 documentLabel.Text = "DNI";
         }
 
         private void juridicRadio_CheckedChanged(object sender, EventArgs e)
         {
-            if (juridicRadio.Checked)
+            if (radio_juridic.Checked)
                 documentLabel.Text = "RUC";
         }
     }

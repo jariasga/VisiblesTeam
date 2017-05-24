@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InkaArt.Data.Security;
+using InkaArt.Business.Model.Security;
 using System.Data;
-using Npgsql;
 
 namespace InkaArt.Business.Security
 {
@@ -19,14 +19,8 @@ namespace InkaArt.Business.Security
             string key = sha.encrypt(password);
 
             UserData user = new UserData();
-            NpgsqlDataAdapter adap = new NpgsqlDataAdapter();
             DataSet data = new DataSet();
-
-            user.connect();
-            adap = user.userAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = username;
-
-            data = user.getData(adap);
+            data = user.getDataset(user, username);
 
             //  Read data from DB
             int rows = data.Tables[0].Rows.Count;

@@ -72,5 +72,13 @@ namespace InkaArt.Data.Security
 
             return userAdapter;
         }
+        public DataSet getDataset(UserData user, string username)
+        {
+            NpgsqlDataAdapter adap = new NpgsqlDataAdapter();
+            user.connect();
+            adap = user.userAdapter();
+            adap.SelectCommand.Parameters[0].NpgsqlValue = username;
+            return user.getData(adap);
+        }
     }
 }
