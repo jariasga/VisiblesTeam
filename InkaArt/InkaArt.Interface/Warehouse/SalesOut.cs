@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace InkaArt.Interface.Warehouse
 {
-    public partial class Movements : Form
+    public partial class SalesOut : Form
     {
-        public Movements()
+        public SalesOut()
         {
             InitializeComponent();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Form sales_out = new InkaArt.Interface.Warehouse.SalesOut();
-            sales_out.Show();
         }
     }
 }

@@ -350,6 +350,12 @@
     <Compile Include="Warehouse\PurchaseOrderIndex.designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\SalesOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\SalesOut.Designer.cs">
+      <DependentUpon>SalesOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\StockReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -515,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseOrderIndex.resx">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\SalesOut.resx">
+      <DependentUpon>SalesOut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\StockReport.resx">
       <DependentUpon>StockReport.cs</DependentUpon>
