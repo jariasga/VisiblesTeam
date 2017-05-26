@@ -290,6 +290,12 @@
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\ChangePassword.designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\UserMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -503,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\UserMaintenance.resx">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
