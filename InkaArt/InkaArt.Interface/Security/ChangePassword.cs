@@ -1,7 +1,5 @@
-﻿using encription_SHA256;
-using System;
+﻿using System;
 using System.Windows.Forms;
-using InkaArt.Data.Security;
 using Npgsql;
 using System.Data;
 
