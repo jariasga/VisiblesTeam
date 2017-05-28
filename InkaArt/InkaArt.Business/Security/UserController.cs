@@ -60,7 +60,7 @@ namespace InkaArt.Business.Security
             }
 
             // TEST LINE TO INSERT DATA
-            insertData();
+            //insertData();
 
             return verified;
         }
@@ -87,6 +87,8 @@ namespace InkaArt.Business.Security
             table.Rows.Add(row);
             
             int rowsAffected = adap.Update(data, "User");
+
+            user.closeConnection();
         }
     }
 }
