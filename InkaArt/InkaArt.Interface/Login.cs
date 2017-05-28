@@ -35,5 +35,10 @@ namespace InkaArt.Interface
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

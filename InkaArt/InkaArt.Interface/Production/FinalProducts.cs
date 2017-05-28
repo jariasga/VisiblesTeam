@@ -33,5 +33,10 @@ namespace InkaArt.Interface.Production
             Form recipe = new Recipe();
             recipe.Show();
         }
+
+        private void FinalProducts_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

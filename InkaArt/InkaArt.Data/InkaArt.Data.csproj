@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Production\FinalProductData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\UserData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Production\" />
     <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
     <Folder Include="Warehouse\" />

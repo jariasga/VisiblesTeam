@@ -50,6 +50,7 @@
             this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -58,6 +59,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.comboBox2);
             this.groupBox1.Controls.Add(this.textBox2);
@@ -286,6 +288,16 @@
             this.groupBox2.Text = "Receta";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(32, 235);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(128, 22);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Nueva Version";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -334,5 +346,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Borrar;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
