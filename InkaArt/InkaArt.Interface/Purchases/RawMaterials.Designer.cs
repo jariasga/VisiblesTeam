@@ -28,12 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridView_rawMaterialsList = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
@@ -44,56 +39,34 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.idRawMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.averagePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterialsList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView_rawMaterialsList
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Nombre,
-            this.Estado,
-            this.VerDetalle,
+            this.dataGridView_rawMaterialsList.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_rawMaterialsList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rawMaterialsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_rawMaterialsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idRawMaterial,
+            this.name,
+            this.description,
+            this.unit,
+            this.status,
+            this.averagePrice,
             this.Eliminar});
-            this.dataGridView1.Location = new System.Drawing.Point(15, 185);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(663, 208);
-            this.dataGridView1.TabIndex = 3;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Width = 60;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 300;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            // 
-            // VerDetalle
-            // 
-            this.VerDetalle.HeaderText = "Ver detalle";
-            this.VerDetalle.Name = "VerDetalle";
-            this.VerDetalle.Width = 78;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.Width = 80;
+            this.dataGridView_rawMaterialsList.Location = new System.Drawing.Point(15, 185);
+            this.dataGridView_rawMaterialsList.Name = "dataGridView_rawMaterialsList";
+            this.dataGridView_rawMaterialsList.Size = new System.Drawing.Size(663, 208);
+            this.dataGridView_rawMaterialsList.TabIndex = 3;
             // 
             // groupBox1
             // 
@@ -212,6 +185,49 @@
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
+            // idRawMaterial
+            // 
+            this.idRawMaterial.HeaderText = "Id";
+            this.idRawMaterial.Name = "idRawMaterial";
+            this.idRawMaterial.Width = 60;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Nombre";
+            this.name.Name = "name";
+            this.name.Width = 300;
+            // 
+            // description
+            // 
+            this.description.HeaderText = "Descripción";
+            this.description.Name = "description";
+            this.description.Visible = false;
+            // 
+            // unit
+            // 
+            this.unit.HeaderText = "Unidad";
+            this.unit.Name = "unit";
+            this.unit.Width = 80;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            // 
+            // averagePrice
+            // 
+            this.averagePrice.HeaderText = "Precio promedio";
+            this.averagePrice.Name = "averagePrice";
+            this.averagePrice.Visible = false;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.Width = 80;
+            // 
             // RawMaterials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -221,12 +237,12 @@
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_rawMaterialsList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RawMaterials";
             this.Text = "Mantenimiento de materia prima";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterialsList)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -234,7 +250,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_rawMaterialsList;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.TextBox textBox_id;
@@ -242,13 +258,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idRawMaterial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn averagePrice;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }
