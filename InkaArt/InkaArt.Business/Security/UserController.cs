@@ -33,16 +33,16 @@ namespace InkaArt.Business.Security
             adap.SelectCommand.Parameters[0].NpgsqlValue = loginUsername;
 
             data.Reset();
-            data = user.getData(adap);
+            data = user.getData(adap, "User");
 
             //  Read data from DB
             int rows = data.Tables[0].Rows.Count;
             string userDB, keyDB;
 
-            if (rows > 0)
+            if (rows > 0)   //Encontro un usuario
             {
-                userDB = data.Tables[0].Rows[0][3].ToString();
-                keyDB = data.Tables[0].Rows[0][4].ToString(); ;
+                userDB = data.Tables["User"].Rows[0]["username"].ToString();
+                keyDB = data.Tables["User"].Rows[0]["password"].ToString(); ;
             }
             else
             {
@@ -59,16 +59,17 @@ namespace InkaArt.Business.Security
                 verified = true;
             }
 
-            //updateData();
+            // TEST LINE TO INSERT DATA
+            insertData();
 
             return verified;
         }
 
-        public void updateData()
+        public void insertData()
         {
             user.connect();
-
-            adap.TableMappings.Add("User", "User");
+            
+            table = data.Tables["User"];
 
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
 
@@ -76,10 +77,16 @@ namespace InkaArt.Business.Security
             adap.InsertCommand = builder.GetInsertCommand();
             adap.DeleteCommand = builder.GetDeleteCommand();
 
-            //DataRow row = data.Tables[0];
+            row = table.NewRow();
+            
+            row["username"] = "test1";
+            row["password"] = "test1";
+            row["status"] = 1;
+            row["description"] = "descrip";
 
-
-            int rowsAffected = adap.UpdateCommand.ExecuteNonQuery();
+            table.Rows.Add(row);
+            
+            int rowsAffected = adap.Update(data, "User");
         }
     }
 }

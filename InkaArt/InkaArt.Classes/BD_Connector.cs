@@ -41,13 +41,11 @@ namespace InkaArt.Classes
             }
         }
 
-        public DataSet getData(NpgsqlDataAdapter adapter)
+        public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
             DataSet data = new DataSet();
-
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adapter);
             
-            adapter.Fill(data, Connection.ConnectionString);
+            adapter.Fill(data, srcTable);
 
             Connection.Close();
 
