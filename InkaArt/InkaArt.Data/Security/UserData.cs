@@ -10,7 +10,7 @@ using System.Data;
 namespace InkaArt.Data.Security
 {
     public class UserData : BD_Connector
-    {
+    {        
         public NpgsqlDataAdapter userAdapter()
         {
             NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();

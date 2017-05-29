@@ -52,25 +52,29 @@ namespace InkaArt.Classes
             return data;
         }
 
-        private void execute(string command)
+        public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            NpgsqlCommand cmd = new NpgsqlCommand();
-            cmd.CommandText = command;
-            cmd.Connection = Connection;
-            try
-            {
-                cmd.ExecuteNonQuery();
-                Connection.Close();
-            }
-            catch (Exception msg)
-            {
-                Console.WriteLine(msg.ToString());
-            }
+            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.UpdateCommand = builder.GetUpdateCommand();
+            int rowsAffected = adap.Update(data, srcTable);
+            return rowsAffected;
         }
 
-        public void commit()
+        public int insertData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            execute("COMMIT;");
+            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.InsertCommand = builder.GetInsertCommand();
+            int rowsAffected = adap.Update(data, srcTable);
+            return rowsAffected;
+
+        }
+
+        public int deleteData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
+        {
+            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.DeleteCommand = builder.GetDeleteCommand();
+            int rowsAffected = adap.Update(data, srcTable);
+            return rowsAffected;
         }
 
         public void closeConnection()

@@ -53,9 +53,6 @@ namespace InkaArt.Business.Security
                 verified = true;
             }
 
-            // TEST LINE TO INSERT DATA
-            //insertData();
-
             return verified;
         }
     }

@@ -291,10 +291,16 @@
     <Compile Include="Security\ChangePassword.designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\PersonalData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\PersonalData.designer.cs">
+      <DependentUpon>PersonalData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\UserMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Security\UserMaintenance.designer.cs">
+    <Compile Include="Security\UserMaintenance.Designer.cs">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
     </Compile>
     <Compile Include="Security\UserRolesPermissions.cs">
@@ -507,6 +513,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Security\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\PersonalData.resx">
+      <DependentUpon>PersonalData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\UserMaintenance.resx">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
