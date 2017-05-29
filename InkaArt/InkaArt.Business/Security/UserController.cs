@@ -59,36 +59,37 @@ namespace InkaArt.Business.Security
                 verified = true;
             }
 
-            // TEST LINE TO INSERT DATA
-            //insertData();
-
+            /*
+             * ================================================
+             * TEST LINE TO INSERT DATA
+            insertData();
+             * ================================================
+            */
             return verified;
         }
 
         public void insertData()
         {
+            //  Get connection string and connect to the database
             user.connect();
             
+            //  Get the dataset table to modify
             table = data.Tables["User"];
 
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-
-            adap.UpdateCommand = builder.GetUpdateCommand();
-            adap.InsertCommand = builder.GetInsertCommand();
-            adap.DeleteCommand = builder.GetDeleteCommand();
-
+            //  Create a new row for the table (Users)
             row = table.NewRow();
-            
+
+            //  Add the necesary fields
             row["username"] = "test1";
             row["password"] = "test1";
             row["status"] = 1;
             row["description"] = "descrip";
 
+            //  Add the row created into the table
             table.Rows.Add(row);
-            
-            int rowsAffected = adap.Update(data, "User");
 
-            user.closeConnection();
+            //  Push the data to the database (Will only work once, as the DB only accepts unique users, please delete the user created)
+            int rowsAffected = user.insertData(data, adap, "User");
         }
     }
 }
