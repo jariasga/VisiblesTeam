@@ -389,6 +389,7 @@
             // 
             // comboBoxUserTurn
             // 
+            this.comboBoxUserTurn.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBoxUserTurn.FormattingEnabled = true;
             this.comboBoxUserTurn.Location = new System.Drawing.Point(11, 83);
             this.comboBoxUserTurn.Name = "comboBoxUserTurn";

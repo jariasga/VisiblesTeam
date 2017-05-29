@@ -44,11 +44,8 @@ namespace InkaArt.Classes
         public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
             DataSet data = new DataSet();
-            
             adapter.Fill(data, srcTable);
-
-            Connection.Close();
-
+            closeConnection();
             return data;
         }
 
@@ -57,6 +54,7 @@ namespace InkaArt.Classes
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
             adap.UpdateCommand = builder.GetUpdateCommand();
             int rowsAffected = adap.Update(data, srcTable);
+            closeConnection();
             return rowsAffected;
         }
 
@@ -65,8 +63,8 @@ namespace InkaArt.Classes
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
             adap.InsertCommand = builder.GetInsertCommand();
             int rowsAffected = adap.Update(data, srcTable);
+            closeConnection();
             return rowsAffected;
-
         }
 
         public int deleteData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
@@ -74,6 +72,7 @@ namespace InkaArt.Classes
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
             adap.DeleteCommand = builder.GetDeleteCommand();
             int rowsAffected = adap.Update(data, srcTable);
+            closeConnection();
             return rowsAffected;
         }
 

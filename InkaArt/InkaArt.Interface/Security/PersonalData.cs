@@ -12,7 +12,6 @@ namespace InkaArt.Interface.Security
 {
     public partial class PersonalData : Form
     {
-        DataGridView data;
         public PersonalData(DataGridView dataGridV)
         {
             InitializeComponent();
@@ -23,7 +22,11 @@ namespace InkaArt.Interface.Security
             textBoxAddress.Text = dataGridV.SelectedRows[0].Cells["address"].Value.ToString();
             textBoxEmail.Text = dataGridV.SelectedRows[0].Cells["email"].Value.ToString();
 
-            
+            textBoxUsername.Enabled = false;
+            comboBoxUserStatus.Enabled = false;
+            comboBoxRoles.Enabled = false;
+
+            buttonSave.Text = "Guardar";
         }
         public PersonalData()
         {
@@ -41,8 +44,9 @@ namespace InkaArt.Interface.Security
             comboBoxUserStatus.Text = "";
             comboBoxRoles.Enabled = true;
             comboBoxRoles.Text = "";
+
+            buttonSave.Text = "Crear";
         }
-       
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
@@ -52,12 +56,6 @@ namespace InkaArt.Interface.Security
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void buttonModifyRole_Click(object sender, EventArgs e)
-        {
-            Form roles = new UserRolesPermissions();
-            roles.ShowDialog();
         }
     }
 }
