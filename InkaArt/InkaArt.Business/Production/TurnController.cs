@@ -10,28 +10,28 @@ using Npgsql;
 
 namespace InkaArt.Business.Production
 {
-    public class ProcessController
+    public class TurnController
     {
-        private ProcessData process;
+        private TurnData turn;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
 
         public DataTable getData()
         {
-            process = new ProcessData();
+            turn = new TurnData();
             adapt = new NpgsqlDataAdapter();
             data = new DataSet();
 
-            process.connect();
-            adapt = process.processAdapter();
+            turn.connect();
+            adapt = turn.turnAdapter();
 
             data.Reset();
-            data = process.getData(adapt, "Process");
+            data = turn.getData(adapt, "Turn");
 
-            DataTable processList = new DataTable();
-            processList = data.Tables[0];
+            DataTable turnList = new DataTable();
+            turnList = data.Tables[0];
 
-            return processList;
+            return turnList;
         }
     }
 }

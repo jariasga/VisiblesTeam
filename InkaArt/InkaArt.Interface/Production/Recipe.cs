@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using NpgsqlTypes;
+using System.Diagnostics;
+using InkaArt.Business.Production;
 namespace InkaArt.Interface.Production
 {
     public partial class Recipe : Form
@@ -24,7 +26,17 @@ namespace InkaArt.Interface.Production
             textBox_id.Text = id;
             textBox_product.Text = name;
 
-            //llenar comboBox version
+            RecipeController control = new RecipeController();
+            DataTable recipeList = control.getData();
+
+            //agregar datos a combobox version
+            for(int i =0; i<recipeList.Rows.Count;i++)
+            {
+                if (String.Compare(recipeList.Rows[i]["idProduct"].ToString(), id) == 0)
+                {
+                    comboBox_version.Items.Add(recipeList.Rows[i]["version"].ToString());
+                }
+            }
                 //llenar datagrid de materias prima dependiendo de la seleccion del comboBox version
             //llanar comboBox materia prima
 
