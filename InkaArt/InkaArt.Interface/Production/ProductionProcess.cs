@@ -7,11 +7,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using NpgsqlTypes;
+using System.Diagnostics;
+using InkaArt.Business.Production;
 namespace InkaArt.Interface.Production
 {
     public partial class ProductionProcess : Form
     {
+        public ProductionProcess(string id, string name, string count, string localPrice, string exportPrice)
+        {
+            InitializeComponent();
+            textBox_id.Text = id;
+            textBox_product.Text = name;
+            textBox_stock.Text = count;
+            textBox_localPrice.Text = localPrice;
+            textBox_exportPrice.Text = exportPrice;
+
+            ProcessProductController control = new ProcessProductController();
+            ProcessController controlProcess = new ProcessController();
+            DataTable productProcessesList = control.getData();
+            DataTable processList = controlProcess.getData();
+            
+            for(int i=0; i< productProcessesList.Rows.Count; i++)
+            {
+                if (String.Compare(productProcessesList.Rows[i]["idProduct"].ToString(),id)==0)
+                {
+                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"]);
+                    for(int j=0;j<processList.Rows.Count;j++)
+                    {
+                        if(String.Compare(processList.Rows[j]["idProcess"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
+                        {
+                            dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"], processList.Rows[j]["description"]);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
         public ProductionProcess()
         {
             InitializeComponent();
@@ -28,6 +62,11 @@ namespace InkaArt.Interface.Production
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductionProcess_Load(object sender, EventArgs e)
         {
 
         }

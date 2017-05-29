@@ -15,7 +15,7 @@ namespace InkaArt.Data.Production
         {
             NpgsqlDataAdapter finalProductAdapter = new NpgsqlDataAdapter();
 
-            finalProductAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Product\" WHERE username = :user;", Connection);
+            finalProductAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Product\";", Connection);
 
             return finalProductAdapter;
         }

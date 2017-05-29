@@ -29,13 +29,21 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textbox_roture = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboBox_version = new System.Windows.Forms.ComboBox();
+            this.textBox_product = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_id = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -43,14 +51,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -59,21 +61,52 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textbox_roture);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.comboBox_version);
+            this.groupBox1.Controls.Add(this.textBox_product);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBox_id);
             this.groupBox1.Location = new System.Drawing.Point(13, 28);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(227, 295);
+            this.groupBox1.Size = new System.Drawing.Size(227, 356);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Basicos";
+            // 
+            // textbox_roture
+            // 
+            this.textbox_roture.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_roture.Location = new System.Drawing.Point(31, 299);
+            this.textbox_roture.Name = "textbox_roture";
+            this.textbox_roture.Size = new System.Drawing.Size(172, 24);
+            this.textbox_roture.TabIndex = 28;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(29, 277);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(169, 18);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Nombre Nueva Version";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(32, 235);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(128, 22);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Nueva Version";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -86,27 +119,28 @@
             this.label5.TabIndex = 25;
             this.label5.Text = "Versión";
             // 
-            // comboBox2
+            // comboBox_version
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBox_version.FormattingEnabled = true;
+            this.comboBox_version.Items.AddRange(new object[] {
             "Versión 1",
             "Version 2"});
-            this.comboBox2.Location = new System.Drawing.Point(32, 174);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(171, 26);
-            this.comboBox2.TabIndex = 24;
+            this.comboBox_version.Location = new System.Drawing.Point(32, 174);
+            this.comboBox_version.Name = "comboBox_version";
+            this.comboBox_version.Size = new System.Drawing.Size(171, 26);
+            this.comboBox_version.TabIndex = 24;
+            this.comboBox_version.SelectedIndexChanged += new System.EventHandler(this.comboBox_version_SelectedIndexChanged);
             // 
-            // textBox2
+            // textBox_product
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(31, 106);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(174, 24);
-            this.textBox2.TabIndex = 23;
+            this.textBox_product.Enabled = false;
+            this.textBox_product.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_product.Location = new System.Drawing.Point(31, 106);
+            this.textBox_product.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_product.Name = "textBox_product";
+            this.textBox_product.ReadOnly = true;
+            this.textBox_product.Size = new System.Drawing.Size(174, 24);
+            this.textBox_product.TabIndex = 23;
             // 
             // label2
             // 
@@ -130,16 +164,16 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Id";
             // 
-            // textBox1
+            // textBox_id
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(31, 45);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(172, 24);
-            this.textBox1.TabIndex = 14;
+            this.textBox_id.Enabled = false;
+            this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_id.Location = new System.Drawing.Point(31, 45);
+            this.textBox_id.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_id.Name = "textBox_id";
+            this.textBox_id.ReadOnly = true;
+            this.textBox_id.Size = new System.Drawing.Size(172, 24);
+            this.textBox_id.TabIndex = 14;
             // 
             // dataGridView1
             // 
@@ -158,6 +192,31 @@
             this.dataGridView1.Size = new System.Drawing.Size(538, 184);
             this.dataGridView1.TabIndex = 17;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Unidad
+            // 
+            this.Unidad.HeaderText = "Unidad";
+            this.Unidad.Name = "Unidad";
+            // 
+            // Borrar
+            // 
+            this.Borrar.HeaderText = "Borrar";
+            this.Borrar.Name = "Borrar";
             // 
             // button5
             // 
@@ -232,31 +291,6 @@
             this.button1.Text = "🖫 Guardar";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Unidad
-            // 
-            this.Unidad.HeaderText = "Unidad";
-            this.Unidad.Name = "Unidad";
-            // 
-            // Borrar
-            // 
-            this.Borrar.HeaderText = "Borrar";
-            this.Borrar.Name = "Borrar";
-            // 
             // buttonDelete
             // 
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
@@ -288,16 +322,6 @@
             this.groupBox2.Text = "Receta";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(32, 235);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(128, 22);
-            this.checkBox1.TabIndex = 26;
-            this.checkBox1.Text = "Nueva Version";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -312,6 +336,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Recipe";
             this.Text = "Receta";
+            this.Load += new System.EventHandler(this.Recipe_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -325,10 +350,10 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_product;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_id;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -338,7 +363,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox_version;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
@@ -347,5 +372,7 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textbox_roture;
     }
 }
