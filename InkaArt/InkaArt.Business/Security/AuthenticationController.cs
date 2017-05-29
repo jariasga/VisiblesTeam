@@ -38,7 +38,7 @@ namespace InkaArt.Business.Security
             }
 
 
-            if (string.Equals(key, keyDB) & string.Equals(user, userDB))
+            if (string.Equals(key, keyDB) & string.Equals(username, userDB))
             {
                 //  ToDo - GET ROLES
 
