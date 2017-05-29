@@ -15,7 +15,7 @@ namespace InkaArt.Interface
 
         private void button_Login_Click(object sender, EventArgs e)
         {
-            UserController control = new UserController();
+            loginController control = new loginController();
             bool pass;
             pass = control.checkCredentials(textbox_user.Text, textbox_password.Text);
 

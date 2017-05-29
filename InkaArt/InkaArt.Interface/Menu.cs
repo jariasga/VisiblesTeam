@@ -61,6 +61,7 @@ namespace InkaArt.Interface
             if (logout == DialogResult.No) e.Cancel = true;
         }
 
+
         private void Menu_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.login.Show();
