@@ -19,7 +19,14 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
             RawMaterialController control = new RawMaterialController();
             DataTable rawMaterialList = control.getData();
-            dataGridView_rawMaterialsList.DataSource=rawMaterialList;
+            dataGridView_rawMaterialsList.DataSource = rawMaterialList;
+
+            dataGridView_rawMaterialsList.Columns["idRawMaterial"].HeaderText = "ID";
+            dataGridView_rawMaterialsList.Columns["name"].HeaderText = "Nombre";
+            dataGridView_rawMaterialsList.Columns["unit"].HeaderText = "Unidad";
+            dataGridView_rawMaterialsList.Columns["status"].HeaderText = "Estado";
+            dataGridView_rawMaterialsList.Columns["description"].HeaderText = "Descripción";
+            dataGridView_rawMaterialsList.Columns["averagePrice"].HeaderText = "Precio Promedio";
         }
 
         private void button_search(object sender, EventArgs e)
@@ -51,6 +58,13 @@ namespace InkaArt.Interface.Purchases
         private void button_create(object sender, EventArgs e)
         {
             Form new_raw_material = new RawMaterialDetail();
+            new_raw_material.Show();
+        }
+
+        private void editRawMaterialDetail(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow currentRawMaterial = dataGridView_rawMaterialsList.CurrentRow;
+            Form new_raw_material = new RawMaterialDetail(currentRawMaterial);
             new_raw_material.Show();
         }
     }

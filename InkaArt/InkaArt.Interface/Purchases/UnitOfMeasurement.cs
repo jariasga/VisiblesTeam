@@ -12,11 +12,22 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class UnitOfMeasurement : Form
     {
+        int mode;
         public UnitOfMeasurement()
         {
-            InitializeComponent();
+            mode = 1; //Crear unitOfMeasurement
+            InitializeComponent();   
         }
-        
+
+        public UnitOfMeasurement(DataGridViewRow currentUnitOfMeasurement)
+        {
+            mode = 2; //Editar unitOfMeasurement
+            InitializeComponent();
+            textBox_id.Text = currentUnitOfMeasurement.Cells[1].Value.ToString();
+            textBox_nameUnit.Text = currentUnitOfMeasurement.Cells[2].Value.ToString();
+            textBox_abbreviation.Text = currentUnitOfMeasurement.Cells[3].Value.ToString();
+        }
+
         private void button_cancel(object sender, EventArgs e)
         {
             this.cleaningWindow();
@@ -32,8 +43,8 @@ namespace InkaArt.Interface.Purchases
         }
         private void cleaningWindow()
         {
-            nameUnit.Text = "";
-            abbreviation.Text = "";
+            textBox_nameUnit.Text = "";
+            textBox_abbreviation.Text = "";
         }
     }
 }

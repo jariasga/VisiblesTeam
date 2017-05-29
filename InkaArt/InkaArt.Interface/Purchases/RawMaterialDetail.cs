@@ -12,9 +12,23 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class RawMaterialDetail : Form
     {
+        int mode;
         public RawMaterialDetail()
         {
+            mode = 1; // crearRawMaterial
             InitializeComponent();
+        }
+
+        public RawMaterialDetail(DataGridViewRow currentRawMaterial)
+        {
+            mode = 2; //editarRawMaterial
+            InitializeComponent();
+            textBox_id.Text = currentRawMaterial.Cells[1].Value.ToString();
+            textBox_name.Text = currentRawMaterial.Cells[2].Value.ToString();
+            comboBox_unit.Text = currentRawMaterial.Cells[4].Value.ToString();
+            comboBox_status.Text = currentRawMaterial.Cells[5].Value.ToString();
+            textBox_description.Text = currentRawMaterial.Cells[3].Value.ToString();
+            textBox_averagePrice.Text = currentRawMaterial.Cells[6].Value.ToString();
         }
 
         private void button_create(object sender, EventArgs e)

@@ -12,11 +12,29 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class SupplierDetail : Form
     {
+        int mode;
         public SupplierDetail()
         {
+            mode = 1; //crear Supplier
             InitializeComponent();
         }
-        
+
+        public SupplierDetail(DataGridViewRow currentSupplier)
+        {
+            mode = 2; //editar Supplier
+            InitializeComponent();
+            textBox_idSupplier.Text = currentSupplier.Cells[1].Value.ToString();
+            textBox_name.Text = currentSupplier.Cells[2].Value.ToString();
+            textBox_ruc.Text = currentSupplier.Cells[3].Value.ToString();
+            textBox_address.Text = currentSupplier.Cells[8].Value.ToString();
+            trackBar_priority.Value = (int) currentSupplier.Cells[9].Value;
+            textBox_priority.Text = trackBar_priority.Value.ToString();
+            comboBox_status.Text = currentSupplier.Cells[7].Value.ToString();
+            textBox_contactName.Text = currentSupplier.Cells[4].Value.ToString();
+            textBox_email.Text = currentSupplier.Cells[6].Value.ToString();
+            textBox_telephone.Text = currentSupplier.Cells[5].Value.ToString();
+        }
+
         private void button_add(object sender, EventArgs e)
         {
             Form pageAddSupply = new AddSupply();

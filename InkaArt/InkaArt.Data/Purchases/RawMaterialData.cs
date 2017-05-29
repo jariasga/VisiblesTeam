@@ -16,6 +16,7 @@ namespace InkaArt.Data.Purchases
             NpgsqlDataAdapter rawMaterialAdapter = new NpgsqlDataAdapter();
             
             rawMaterialAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial\";", Connection);
+            
             //rawMaterialAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"MateriaPrima\" WHERE idMateria = :idmateria;", Connection);
             //rawMaterialAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("idmateria", DbType.AnsiStringFixedLength));
             //rawMaterialAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
