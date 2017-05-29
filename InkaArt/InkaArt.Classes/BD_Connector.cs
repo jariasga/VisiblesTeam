@@ -44,7 +44,7 @@ namespace InkaArt.Classes
         public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
             DataSet data = new DataSet();
-            
+
             adapter.Fill(data, srcTable);
 
             Connection.Close();

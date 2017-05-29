@@ -35,5 +35,21 @@ namespace InkaArt.Business.Purchases
 
             return supplierList;
         }
+/*        public DataTable getDataWithFilters()
+        {
+            supplier = new SupplierData();
+            adap = new NpgsqlDataAdapter();
+            data = new DataSet();
+
+            supplier.connect();
+            adap = supplier.supplierAdapter();
+            data.Reset();
+            adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"User\" WHERE username = :user;";
+            //            userAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"User\" WHERE username = :user;", Connection);
+            //            userAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("user", DbType.AnsiStringFixedLength));
+            //            userAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            //            userAdapter.SelectCommand.Parameters[0].SourceColumn = "username";
+            return supplierList;
+        }*/
     }
 }

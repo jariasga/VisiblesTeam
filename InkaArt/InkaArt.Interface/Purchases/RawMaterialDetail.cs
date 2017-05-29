@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
 namespace InkaArt.Interface.Purchases
@@ -29,6 +31,13 @@ namespace InkaArt.Interface.Purchases
             comboBox_status.Text = currentRawMaterial.Cells[5].Value.ToString();
             textBox_description.Text = currentRawMaterial.Cells[3].Value.ToString();
             textBox_averagePrice.Text = currentRawMaterial.Cells[6].Value.ToString();
+
+            RawMaterial_SupplierController control = new RawMaterial_SupplierController();
+            DataTable priceList=control.getDataSuppliers(1);
+            dataGridView_suppliersPrice.DataSource = priceList;
+            dataGridView_suppliersPrice.Columns["idSupplier"].HeaderText = "ID";
+            dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";
+
         }
 
         private void button_create(object sender, EventArgs e)
