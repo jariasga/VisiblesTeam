@@ -32,11 +32,11 @@ namespace InkaArt.Interface.Purchases
             textBox_description.Text = currentRawMaterial.Cells[3].Value.ToString();
             textBox_averagePrice.Text = currentRawMaterial.Cells[6].Value.ToString();
 
-            RawMaterial_SupplierController control = new RawMaterial_SupplierController();
+            /*RawMaterial_SupplierController control = new RawMaterial_SupplierController();
             DataTable priceList=control.getDataSuppliers(1);
             dataGridView_suppliersPrice.DataSource = priceList;
             dataGridView_suppliersPrice.Columns["idSupplier"].HeaderText = "ID";
-            dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";
+            dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";*/
 
         }
 
@@ -49,12 +49,6 @@ namespace InkaArt.Interface.Purchases
         private void button_save(object sender, EventArgs e)
         {
             /*closing*/
-            this.textBox_id.Text = "";
-            this.textBox_name.Text = "";
-            this.textBox_description.Text = "";
-            this.textBox_averagePrice.Text = "0";
-            this.comboBox_unit.Text = "";
-            this.comboBox_status.Text = "";
             this.Close();
 
         }
