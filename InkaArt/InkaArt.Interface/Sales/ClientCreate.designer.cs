@@ -31,13 +31,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radio_natural = new System.Windows.Forms.RadioButton();
             this.radio_juridic = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
             this.inter_radio = new System.Windows.Forms.RadioButton();
             this.radio_national = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
             this.radio_inactive = new System.Windows.Forms.RadioButton();
             this.radio_active = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
             this.textbox_priority = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.trackbar_priority = new System.Windows.Forms.TrackBar();
@@ -55,22 +52,22 @@
             this.textbox_address = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radio_natural);
-            this.groupBox2.Controls.Add(this.radio_juridic);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.inter_radio);
-            this.groupBox2.Controls.Add(this.radio_national);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.radio_inactive);
-            this.groupBox2.Controls.Add(this.radio_active);
-            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.groupBox6);
+            this.groupBox2.Controls.Add(this.groupBox4);
+            this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.textbox_priority);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.trackbar_priority);
@@ -90,7 +87,7 @@
             // radio_natural
             // 
             this.radio_natural.AutoSize = true;
-            this.radio_natural.Location = new System.Drawing.Point(169, 57);
+            this.radio_natural.Location = new System.Drawing.Point(139, 24);
             this.radio_natural.Name = "radio_natural";
             this.radio_natural.Size = new System.Drawing.Size(93, 27);
             this.radio_natural.TabIndex = 38;
@@ -102,7 +99,7 @@
             // 
             this.radio_juridic.AutoSize = true;
             this.radio_juridic.Checked = true;
-            this.radio_juridic.Location = new System.Drawing.Point(35, 57);
+            this.radio_juridic.Location = new System.Drawing.Point(6, 24);
             this.radio_juridic.Name = "radio_juridic";
             this.radio_juridic.Size = new System.Drawing.Size(100, 27);
             this.radio_juridic.TabIndex = 37;
@@ -111,19 +108,10 @@
             this.radio_juridic.UseVisualStyleBackColor = true;
             this.radio_juridic.CheckedChanged += new System.EventHandler(this.juridicRadio_CheckedChanged);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 34);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(154, 23);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Tipo de Persona";
-            // 
             // inter_radio
             // 
             this.inter_radio.AutoSize = true;
-            this.inter_radio.Location = new System.Drawing.Point(165, 235);
+            this.inter_radio.Location = new System.Drawing.Point(137, 25);
             this.inter_radio.Name = "inter_radio";
             this.inter_radio.Size = new System.Drawing.Size(142, 27);
             this.inter_radio.TabIndex = 35;
@@ -134,7 +122,7 @@
             // 
             this.radio_national.AutoSize = true;
             this.radio_national.Checked = true;
-            this.radio_national.Location = new System.Drawing.Point(31, 235);
+            this.radio_national.Location = new System.Drawing.Point(7, 25);
             this.radio_national.Name = "radio_national";
             this.radio_national.Size = new System.Drawing.Size(105, 27);
             this.radio_national.TabIndex = 34;
@@ -142,19 +130,10 @@
             this.radio_national.Text = "Nacional";
             this.radio_national.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 214);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(141, 23);
-            this.label10.TabIndex = 33;
-            this.label10.Text = "Tipo de Cliente";
-            // 
             // radio_inactive
             // 
             this.radio_inactive.AutoSize = true;
-            this.radio_inactive.Location = new System.Drawing.Point(165, 357);
+            this.radio_inactive.Location = new System.Drawing.Point(140, 22);
             this.radio_inactive.Name = "radio_inactive";
             this.radio_inactive.Size = new System.Drawing.Size(98, 27);
             this.radio_inactive.TabIndex = 32;
@@ -165,7 +144,7 @@
             // 
             this.radio_active.AutoSize = true;
             this.radio_active.Checked = true;
-            this.radio_active.Location = new System.Drawing.Point(31, 357);
+            this.radio_active.Location = new System.Drawing.Point(11, 22);
             this.radio_active.Name = "radio_active";
             this.radio_active.Size = new System.Drawing.Size(84, 27);
             this.radio_active.TabIndex = 31;
@@ -173,19 +152,9 @@
             this.radio_active.Text = "Activo";
             this.radio_active.UseVisualStyleBackColor = true;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 336);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 23);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "Estado";
-            // 
             // textbox_priority
             // 
             this.textbox_priority.BackColor = System.Drawing.Color.White;
-            this.textbox_priority.Enabled = false;
             this.textbox_priority.Location = new System.Drawing.Point(197, 292);
             this.textbox_priority.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_priority.Name = "textbox_priority";
@@ -209,17 +178,17 @@
             this.trackbar_priority.Name = "trackbar_priority";
             this.trackbar_priority.Size = new System.Drawing.Size(159, 56);
             this.trackbar_priority.TabIndex = 27;
+            this.trackbar_priority.Scroll += new System.EventHandler(this.trackbar_priority_Scroll);
+            this.trackbar_priority.ValueChanged += new System.EventHandler(this.trackbar_priority_ValueChanged);
             // 
             // textbox_name
             // 
             this.textbox_name.BackColor = System.Drawing.Color.White;
-            this.textbox_name.Enabled = false;
             this.textbox_name.Location = new System.Drawing.Point(31, 174);
             this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_name.Name = "textbox_name";
             this.textbox_name.Size = new System.Drawing.Size(258, 30);
             this.textbox_name.TabIndex = 26;
-            this.textbox_name.Text = "Retablos Lovers S.A.";
             // 
             // label2
             // 
@@ -234,13 +203,11 @@
             // textbox_ruc
             // 
             this.textbox_ruc.BackColor = System.Drawing.Color.White;
-            this.textbox_ruc.Enabled = false;
             this.textbox_ruc.Location = new System.Drawing.Point(31, 111);
             this.textbox_ruc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_ruc.Name = "textbox_ruc";
             this.textbox_ruc.Size = new System.Drawing.Size(258, 30);
             this.textbox_ruc.TabIndex = 24;
-            this.textbox_ruc.Text = "000000001";
             // 
             // documentLabel
             // 
@@ -274,13 +241,11 @@
             // textbox_email
             // 
             this.textbox_email.BackColor = System.Drawing.Color.White;
-            this.textbox_email.Enabled = false;
             this.textbox_email.Location = new System.Drawing.Point(23, 244);
             this.textbox_email.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_email.Name = "textbox_email";
             this.textbox_email.Size = new System.Drawing.Size(281, 30);
             this.textbox_email.TabIndex = 33;
-            this.textbox_email.Text = "retablos@gmail.com";
             // 
             // label9
             // 
@@ -295,13 +260,11 @@
             // textbox_contact
             // 
             this.textbox_contact.BackColor = System.Drawing.Color.White;
-            this.textbox_contact.Enabled = false;
             this.textbox_contact.Location = new System.Drawing.Point(23, 182);
             this.textbox_contact.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_contact.Name = "textbox_contact";
             this.textbox_contact.Size = new System.Drawing.Size(281, 30);
             this.textbox_contact.TabIndex = 31;
-            this.textbox_contact.Text = "Maria del pilar";
             // 
             // label3
             // 
@@ -316,13 +279,11 @@
             // textbox_phone
             // 
             this.textbox_phone.BackColor = System.Drawing.Color.White;
-            this.textbox_phone.Enabled = false;
             this.textbox_phone.Location = new System.Drawing.Point(23, 119);
             this.textbox_phone.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_phone.Name = "textbox_phone";
             this.textbox_phone.Size = new System.Drawing.Size(281, 30);
             this.textbox_phone.TabIndex = 29;
-            this.textbox_phone.Text = "333 88902";
             // 
             // label7
             // 
@@ -337,13 +298,11 @@
             // textbox_address
             // 
             this.textbox_address.BackColor = System.Drawing.Color.White;
-            this.textbox_address.Enabled = false;
             this.textbox_address.Location = new System.Drawing.Point(23, 56);
             this.textbox_address.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_address.Name = "textbox_address";
             this.textbox_address.Size = new System.Drawing.Size(281, 30);
             this.textbox_address.TabIndex = 27;
-            this.textbox_address.Text = "Calle Re 333, Urbuanización Tablos";
             // 
             // label6
             // 
@@ -360,14 +319,49 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(485, 368);
+            this.button_save.Location = new System.Drawing.Point(475, 370);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(107, 39);
+            this.button_save.Size = new System.Drawing.Size(121, 39);
             this.button_save.TabIndex = 38;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radio_juridic);
+            this.groupBox3.Controls.Add(this.radio_natural);
+            this.groupBox3.Location = new System.Drawing.Point(31, 29);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(278, 57);
+            this.groupBox3.TabIndex = 39;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Tipo de Persona";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radio_national);
+            this.groupBox4.Controls.Add(this.inter_radio);
+            this.groupBox4.Location = new System.Drawing.Point(30, 205);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(285, 58);
+            this.groupBox4.TabIndex = 40;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Tipo de Cliente";
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.radio_active);
+            this.groupBox6.Controls.Add(this.radio_inactive);
+            this.groupBox6.Location = new System.Drawing.Point(30, 329);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(285, 56);
+            this.groupBox6.TabIndex = 40;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Estado";
             // 
             // ClientCreate
             // 
@@ -387,6 +381,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackbar_priority)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -395,7 +395,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton radio_inactive;
         private System.Windows.Forms.RadioButton radio_active;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textbox_priority;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar trackbar_priority;
@@ -415,9 +414,10 @@
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.RadioButton radio_natural;
         private System.Windows.Forms.RadioButton radio_juridic;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton inter_radio;
         private System.Windows.Forms.RadioButton radio_national;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }

@@ -51,11 +51,6 @@
     <StartupObject>InkaArt.Interface.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="encription-SHA256">
-      <HintPath>..\InkaArt.Libraries\encription-SHA256.dll</HintPath>
-      <Private>True</Private>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
     </Reference>
@@ -290,6 +285,12 @@
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\ChangePassword.designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\UserMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -504,6 +505,9 @@
     <EmbeddedResource Include="Sales\SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Security\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Security\UserMaintenance.resx">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
     </EmbeddedResource>
@@ -571,10 +575,6 @@
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>
       <Name>InkaArt.Classes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InkaArt.Data\InkaArt.Data.csproj">
-      <Project>{28dd7710-8f67-4401-aec4-cd8c3e135b82}</Project>
-      <Name>InkaArt.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

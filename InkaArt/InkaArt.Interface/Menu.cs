@@ -211,5 +211,12 @@ namespace InkaArt.Interface
             inform.MdiParent = this;
             inform.Show();
         }
+
+        private void modificarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form change_password = new ChangePassword();
+            change_password.MdiParent = this;
+            change_password.Show();
+        }
     }
 }

@@ -41,135 +41,52 @@ namespace InkaArt.Classes
             }
         }
 
-        public DataSet getData(NpgsqlDataAdapter adapter)
+        public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
             DataSet data = new DataSet();
-
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adapter);
-            
-            adapter.Fill(data, Connection.ConnectionString);
-
-            Connection.Close();
-
+            adapter.Fill(data, srcTable);
+            closeConnection();
             return data;
         }
 
-        private void execute(string command)
+        public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            NpgsqlCommand cmd = new NpgsqlCommand();
-            cmd.CommandText = command;
-            cmd.Connection = Connection;
-            try
-            {
-                cmd.ExecuteNonQuery();
-                Connection.Close();
-            }
-            catch (Exception msg)
-            {
-                Console.WriteLine(msg.ToString());
-            }
+            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.UpdateCommand = builder.GetUpdateCommand();
+            int rowsAffected = adap.Update(data, srcTable);
+            closeConnection();
+            return rowsAffected;
         }
 
-        public void commit()
+        public int insertData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            execute("COMMIT;");
-        }        
-
-
-        public string ServerAddress {
-            get { return ServerAddress1; }
-            set { ServerAddress1 = value; }
+            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.InsertCommand = builder.GetInsertCommand();
+            int rowsAffected = adap.Update(data, srcTable);
+            closeConnection();
+            return rowsAffected;
         }
 
-        protected NpgsqlConnection Connection
+        public int deleteData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            get
-            {
-                return connection;
-            }
-
-            set
-            {
-                connection = value;
-            }
+            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.DeleteCommand = builder.GetDeleteCommand();
+            int rowsAffected = adap.Update(data, srcTable);
+            closeConnection();
+            return rowsAffected;
         }
 
-        public static NpgsqlConnectionStringBuilder ConnectionString
+        public void closeConnection()
         {
-            get
-            {
-                return connectionString;
-            }
-
-            set
-            {
-                connectionString = value;
-            }
+            Connection.Close();
         }
 
-        public string ServerAddress1
-        {
-            get
-            {
-                return serverAddress;
-            }
-
-            set
-            {
-                serverAddress = value;
-            }
-        }
-
-        public string DatabaseName
-        {
-            get
-            {
-                return databaseName;
-            }
-
-            set
-            {
-                databaseName = value;
-            }
-        }
-
-        public string Uid
-        {
-            get
-            {
-                return uid;
-            }
-
-            set
-            {
-                uid = value;
-            }
-        }
-
-        public string Pwd
-        {
-            get
-            {
-                return pwd;
-            }
-
-            set
-            {
-                pwd = value;
-            }
-        }
-
-        public int Port
-        {
-            get
-            {
-                return port;
-            }
-
-            set
-            {
-                port = value;
-            }
-        }
+        public string ServerAddress { get { return serverAddress; } set { serverAddress = value; } }
+        protected NpgsqlConnection Connection { get { return connection; } set { connection = value; } }
+        public static NpgsqlConnectionStringBuilder ConnectionString { get { return connectionString; } set { connectionString = value; } }
+        public string DatabaseName { get { return databaseName; } set { databaseName = value; } }
+        public string Uid { get { return uid; } set { uid = value; } }
+        public string Pwd { get { return pwd; } set { pwd = value; } }
+        public int Port { get { return port; } set { port = value; } }
     }
 }
