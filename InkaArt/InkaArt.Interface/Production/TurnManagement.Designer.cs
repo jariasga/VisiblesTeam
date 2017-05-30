@@ -32,12 +32,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_horaFin = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_guardar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox_turn = new System.Windows.Forms.ComboBox();
             this.textBox_desc = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox_nuevoTurno = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SuspendLayout();
             // 
@@ -77,17 +77,18 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "Hora Fin";
             // 
-            // button1
+            // button_guardar
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(272, 298);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 42);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "🖫 Guardar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_guardar.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_guardar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_guardar.ForeColor = System.Drawing.Color.White;
+            this.button_guardar.Location = new System.Drawing.Point(272, 298);
+            this.button_guardar.Name = "button_guardar";
+            this.button_guardar.Size = new System.Drawing.Size(103, 42);
+            this.button_guardar.TabIndex = 27;
+            this.button_guardar.Text = "🖫 Guardar";
+            this.button_guardar.UseVisualStyleBackColor = false;
+            this.button_guardar.Click += new System.EventHandler(this.button_guardar_Click);
             // 
             // label3
             // 
@@ -127,15 +128,15 @@
             this.label4.TabIndex = 30;
             this.label4.Text = "Descripcion";
             // 
-            // checkBox1
+            // checkBox_nuevoTurno
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(32, 175);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 22);
-            this.checkBox1.TabIndex = 32;
-            this.checkBox1.Text = "Nuevo Turno";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox_nuevoTurno.AutoSize = true;
+            this.checkBox_nuevoTurno.Location = new System.Drawing.Point(32, 175);
+            this.checkBox_nuevoTurno.Name = "checkBox_nuevoTurno";
+            this.checkBox_nuevoTurno.Size = new System.Drawing.Size(113, 22);
+            this.checkBox_nuevoTurno.TabIndex = 32;
+            this.checkBox_nuevoTurno.Text = "Nuevo Turno";
+            this.checkBox_nuevoTurno.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -152,12 +153,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(577, 367);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkBox_nuevoTurno);
             this.Controls.Add(this.textBox_desc);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox_turn);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_guardar);
             this.Controls.Add(this.textBox_horaFin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_horaIni);
@@ -179,12 +180,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_horaFin;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_guardar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox_turn;
         private System.Windows.Forms.TextBox textBox_desc;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox_nuevoTurno;
         private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -56,5 +56,21 @@ namespace InkaArt.Interface.Production
         {
 
         }
+
+        private void button_guardar_Click(object sender, EventArgs e)
+        {
+            //nuevo turno
+            if (checkBox_nuevoTurno.Checked)
+            {
+                TurnController control = new TurnController();
+
+                string ini, fin, desc;
+                ini = textBox_horaIni.Text.ToString();
+                fin = textBox_horaFin.Text.ToString();
+                desc = textBox_desc.Text.ToString();
+
+                control.insertData(ini,fin,desc);
+            }
+        }
     }
 }
