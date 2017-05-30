@@ -31,9 +31,10 @@ namespace InkaArt.Interface.Purchases
             textBox_averagePrice.Text = "0";
         }
 
-        public RawMaterialDetail(DataGridViewRow currentRawMaterial)
+        public RawMaterialDetail(DataGridViewRow currentRawMaterial, RawMaterialController controlForm)
         {
             mode = 2; //editarRawMaterial
+            control = controlForm;
             InitializeComponent();
             textBox_id.Text = currentRawMaterial.Cells[1].Value.ToString();
             textBox_name.Text = currentRawMaterial.Cells[2].Value.ToString();
@@ -64,7 +65,7 @@ namespace InkaArt.Interface.Purchases
             }
             else
             {
-                mode = 2;
+                control.updateData(textBox_id.Text,textBox_name.Text, textBox_description.Text, comboBox_unit.Text, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
             }
             /*closing*/
             this.Close();

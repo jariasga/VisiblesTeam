@@ -29,9 +29,10 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();   
         }
 
-        public UnitOfMeasurement(DataGridViewRow currentUnitOfMeasurement)
+        public UnitOfMeasurement(DataGridViewRow currentUnitOfMeasurement,UnitOfMeasurementController control)
         {
             mode = 2; //Editar unitOfMeasurement
+            controlForm = control;
             InitializeComponent();
             textBox_id.Text = currentUnitOfMeasurement.Cells[1].Value.ToString();
             textBox_nameUnit.Text = currentUnitOfMeasurement.Cells[2].Value.ToString();
@@ -55,6 +56,7 @@ namespace InkaArt.Interface.Purchases
             else
             {
                 //hacer el update
+                controlForm.updateData(textBox_id.Text,textBox_nameUnit.Text, textBox_abbreviation.Text);
             }
             /*Closing the window*/
             this.Close();
