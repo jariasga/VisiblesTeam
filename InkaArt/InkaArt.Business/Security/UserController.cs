@@ -1,7 +1,6 @@
 ﻿using encription_SHA256;
 using InkaArt.Data.Security;
 using Npgsql;
-using System;
 using System.Data;
 using System.IO;
 
@@ -55,7 +54,6 @@ namespace InkaArt.Business.Security
             row["idRole"] = role;
             
             int rowsAffected = user.updateData(data, adap, "User");
-            Console.WriteLine(rowsAffected.ToString());
 
             return rowsAffected;
             /*
