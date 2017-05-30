@@ -47,6 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Production\FinalProductData.cs" />
+    <Compile Include="Production\ProcessData.cs" />
+    <Compile Include="Production\ProcessProductData.cs" />
+    <Compile Include="Production\RawMaterialData.cs" />
+    <Compile Include="Production\RecipeData.cs" />
+    <Compile Include="Production\RecipeRawMaterialData.cs" />
+    <Compile Include="Production\TurnData.cs" />
+    <Compile Include="Production\TurnReportData.cs" />
+    <Compile Include="Production\TurnWorkerData.cs" />
+    <Compile Include="Production\UnitData.cs" />
+    <Compile Include="Production\WorkerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchases\PurchaseOrderData.cs" />
     <Compile Include="Purchases\RawMaterial-SupplierData.cs" />
@@ -59,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Production\" />
+    <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
     <Folder Include="Warehouse\" />
   </ItemGroup>
