@@ -7,36 +7,34 @@ namespace InkaArt.Business.Security
 {
     public class LoginController
     {
-        private UserData user;
+        private UserController user;
         private NpgsqlDataAdapter adap;
         private DataSet data;
-        private DataTable table;
         private DataRow row;
+
+        public LoginController()
+        {
+
+            user = new UserController();
+            adap = new NpgsqlDataAdapter();
+            data = new DataSet();
+        }
         public bool checkCredentials(string loginUsername, string loginPass)
         {
             bool verified = false;
             SHA_2 sha = new SHA_2();
             string key = sha.encrypt(loginPass);
-
-            user = new UserData();
-            adap = new NpgsqlDataAdapter();
-            data = new DataSet();
-
-            user.connect();
-            adap = user.userAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = loginUsername;
-
-            data.Reset();
-            data = user.getData(adap, "User");
+            
+            row = user.getUserRow("username", loginUsername);
 
             //  Read data from DB
-            int rows = data.Tables[0].Rows.Count;
+            
             string userDB, keyDB;
 
-            if (rows > 0)   //Encontro un usuario
+            if (row != null)   //Encontro un usuario
             {
-                userDB = data.Tables["User"].Rows[0]["username"].ToString();
-                keyDB = data.Tables["User"].Rows[0]["password"].ToString(); ;
+                userDB = row["username"].ToString();
+                keyDB = row["password"].ToString();
             }
             else
             {

@@ -1,5 +1,6 @@
 ﻿using InkaArt.Data.Security;
 using Npgsql;
+using sendEmail;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -60,6 +61,23 @@ namespace InkaArt.Business.Security
 
             int rowsAffected = worker.insertData(data, adap, "Worker");
             return rowsAffected;
+        }
+
+        public int getUserID(string username)
+        {
+            UserController user = new UserController();
+            
+            return Int32.Parse(user.getUserRow("username", username)["idUser"].ToString());
+        }
+
+        /*public string getUserUsername(int id) {
+            UserController user = new UserController();            
+        }*/
+
+        public void sendPassword(string recipient, string username, string password)
+        {
+            googleMail mail = new googleMail();
+            mail.sendEmail(recipient, username, password);
         }
     }
 }

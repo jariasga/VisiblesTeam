@@ -44,10 +44,6 @@ namespace InkaArt.Business.Security
 
             table = data.Tables["User"];
 
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-
-            adap.UpdateCommand = builder.GetUpdateCommand();
-
             row = table.NewRow();
 
             row["username"] = username;
@@ -68,7 +64,7 @@ namespace InkaArt.Business.Security
             */
         }
 
-        public int insertData(string username, string description, int status, string password)
+        public int insertData(string username, string description, int status, ref string password)
         {
             //  Get connection string and connect to the database
             user.connect();
@@ -80,6 +76,7 @@ namespace InkaArt.Business.Security
 
             row = table.NewRow();
 
+            password = sha.getMiniSHA();
             //  Add the necesary fields
             row["username"] = username;
             row["password"] = sha.encrypt(password);
@@ -92,6 +89,19 @@ namespace InkaArt.Business.Security
             //  Push the data to the database (Will only work once, as the DB only accepts unique users, please delete the user created)
             int rowsAffected = user.insertData(data, adap, "User");
             return rowsAffected;
+        }
+
+        public DataRow getUserRow(string column, string value)
+        {
+            user.connect();
+            adap = user.userAdapter();
+            adap.SelectCommand.Parameters[0].NpgsqlValue = value;
+
+            data.Clear();
+            data = user.getData(adap, "User");
+
+            if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
+            else return null;
         }
     }
 }
