@@ -36,21 +36,18 @@
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IdUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Abreviatura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView_unitOfMeasurement = new System.Windows.Forms.DataGridView();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_unitOfMeasurement)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox_abbreviature);
             this.groupBox1.Controls.Add(this.textBox_id);
+            this.groupBox1.Controls.Add(this.textBox_abbreviature);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox_name);
@@ -133,39 +130,22 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
-            // dataGridView1
+            // dataGridView_unitOfMeasurement
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdUnidad,
-            this.Nombre,
-            this.Abreviatura,
+            this.dataGridView_unitOfMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_unitOfMeasurement.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Eliminar});
-            this.dataGridView1.Location = new System.Drawing.Point(21, 186);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(663, 184);
-            this.dataGridView1.TabIndex = 45;
-            // 
-            // IdUnidad
-            // 
-            this.IdUnidad.HeaderText = "Id";
-            this.IdUnidad.Name = "IdUnidad";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 320;
-            // 
-            // Abreviatura
-            // 
-            this.Abreviatura.HeaderText = "Abreviatura";
-            this.Abreviatura.Name = "Abreviatura";
+            this.dataGridView_unitOfMeasurement.Location = new System.Drawing.Point(21, 186);
+            this.dataGridView_unitOfMeasurement.Name = "dataGridView_unitOfMeasurement";
+            this.dataGridView_unitOfMeasurement.Size = new System.Drawing.Size(663, 184);
+            this.dataGridView_unitOfMeasurement.TabIndex = 45;
+            this.dataGridView_unitOfMeasurement.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editUnitOfMeasurement);
             // 
             // Eliminar
             // 
-            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.HeaderText = "";
             this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Width = 50;
             // 
             // buttonDelete
             // 
@@ -202,15 +182,15 @@
             this.ClientSize = new System.Drawing.Size(708, 428);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_unitOfMeasurement);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UnitOfMeasurementList";
-            this.Text = "Lista de unidades de medida";
+            this.Text = "Mantenimiento de unidades de medida";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_unitOfMeasurement)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,12 +205,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textBox_abbreviature;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdUnidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Abreviatura;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.DataGridView dataGridView_unitOfMeasurement;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }

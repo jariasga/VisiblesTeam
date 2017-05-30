@@ -55,7 +55,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Production\FinalProductController.cs" />
+    <Compile Include="Production\ProcessController.cs" />
+    <Compile Include="Production\ProcessProductController.cs" />
+    <Compile Include="Production\RawMaterialController.cs" />
+    <Compile Include="Production\RecipeController.cs" />
+    <Compile Include="Production\RecipeRawMaterialController.cs" />
+    <Compile Include="Production\TurnController.cs" />
+    <Compile Include="Production\TurnReportController.cs" />
+    <Compile Include="Production\TurnWorkerController.cs" />
+    <Compile Include="Production\UnitController.cs" />
+    <Compile Include="Production\WorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchases\PurchaseOrderController.cs" />
+    <Compile Include="Purchases\RawMaterial-SupplierController.cs" />
+    <Compile Include="Purchases\RawMaterialController.cs" />
+    <Compile Include="Purchases\SupplierController.cs" />
+    <Compile Include="Purchases\UnitOfMeasurementController.cs" />
     <Compile Include="Security\LoginController.cs" />
     <Compile Include="Security\RoleController.cs" />
     <Compile Include="Security\UserController.cs" />

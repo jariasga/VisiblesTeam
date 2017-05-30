@@ -2,6 +2,7 @@
 using InkaArt.Data.Security;
 using Npgsql;
 using System.Data;
+using System.IO;
 
 namespace InkaArt.Business.Security
 {
@@ -103,7 +104,7 @@ namespace InkaArt.Business.Security
             if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
             else return null;
         }
-
+        
         public DataRow getUserRowbyID(int id)
         {
             table = showData();
@@ -112,6 +113,28 @@ namespace InkaArt.Business.Security
             row = rows[0];
 
             return row;
+        }
+
+        public void massiveUpload(string filename, WorkerController worker)
+        {
+            string password = "";   // las contrase;as las creamos vacias
+            table = showData();     // obtenemos la tabla de usuarios
+
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    // creamos usuario
+                    insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]));
+                    // creamos trabajador
+                    worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
+                    worker.sendPassword(values[10], values[0], password);
+                }
+            }            
         }
     }
 }
