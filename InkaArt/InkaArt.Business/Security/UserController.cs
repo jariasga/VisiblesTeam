@@ -12,12 +12,14 @@ namespace InkaArt.Business.Security
         private DataSet data;
         private DataTable table;
         private DataRow row;
+        private SHA_2 sha;
 
         public UserController()
         {
             user = new UserData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
+            sha = new SHA_2();
         }
 
         public DataTable showData()
@@ -36,7 +38,7 @@ namespace InkaArt.Business.Security
             return table;
         }
 
-        public int updateData()
+        public int updateData(string username, string description, int status, string password)
         {
             user.connect();
 
@@ -48,43 +50,48 @@ namespace InkaArt.Business.Security
 
             row = table.NewRow();
 
-            row["username"] = "test1";
-            row["password"] = "test1";
-            row["status"] = 1;
-            row["description"] = "descrip";
+            row["username"] = username;
+            row["password"] = sha.encrypt(password);
+            row["status"] = status;
+            row["description"] = description;
             
-
             table.Rows.Add(row);
 
-            int rowsAffected = adap.Update(data, "User");
-
-            user.closeConnection();
+            int rowsAffected = user.updateData(data, adap, "User");
 
             return rowsAffected;
+            /*
+             * ================================================
+             * TEST LINE TO INSERT DATA
+            insertData();
+             * ================================================
+            */
         }
 
-        public void insertData()
+        public int insertData(string username, string description, int status, string password)
         {
+            //  Get connection string and connect to the database
             user.connect();
             
+            //  Get the dataset table to modify
             table = data.Tables["User"];
 
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-            
-            adap.InsertCommand = builder.GetInsertCommand();            
+            //  Create a new row for the table (Users)
 
             row = table.NewRow();
-            
-            row["username"] = "test1";
-            row["password"] = "test1";
-            row["status"] = 1;
-            row["description"] = "descrip";
 
+            //  Add the necesary fields
+            row["username"] = username;
+            row["password"] = sha.encrypt(password);
+            row["status"] = status;
+            row["description"] = description;
+
+            //  Add the row created into the table
             table.Rows.Add(row);
-            
-            int rowsAffected = adap.Update(data, "User");
 
-            user.closeConnection();
+            //  Push the data to the database (Will only work once, as the DB only accepts unique users, please delete the user created)
+            int rowsAffected = user.insertData(data, adap, "User");
+            return rowsAffected;
         }
     }
 }

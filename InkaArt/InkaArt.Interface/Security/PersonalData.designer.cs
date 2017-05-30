@@ -48,6 +48,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBoxDescription = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.comboBoxRoles = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxUserStatus = new System.Windows.Forms.ComboBox();
@@ -59,6 +61,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxUserPosition = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -283,6 +287,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBoxPassword);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.textBoxDescription);
+            this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.comboBoxRoles);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.comboBoxUserStatus);
@@ -298,6 +306,28 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Info. Usuario";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBoxDescription
+            // 
+            this.textBoxDescription.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxDescription.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDescription.Location = new System.Drawing.Point(12, 202);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.ReadOnly = true;
+            this.textBoxDescription.Size = new System.Drawing.Size(165, 26);
+            this.textBoxDescription.TabIndex = 21;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(8, 177);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(80, 20);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Descripción";
             // 
             // comboBoxRoles
             // 
@@ -428,6 +458,29 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Puesto de Trabajo:";
             // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxPassword.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPassword.Location = new System.Drawing.Point(189, 30);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.ReadOnly = true;
+            this.textBoxPassword.Size = new System.Drawing.Size(165, 26);
+            this.textBoxPassword.TabIndex = 23;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(185, 5);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 20);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Clave:";
+            // 
             // PersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -486,5 +539,9 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxRoles;
+        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.Label label12;
     }
 }

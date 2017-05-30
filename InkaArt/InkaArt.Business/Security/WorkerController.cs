@@ -38,5 +38,28 @@ namespace InkaArt.Business.Security
             worker.closeConnection();
             return table;
         }
+
+        public int insertData(string firstName, string lastName, int dni, int turn, int user, int phone, string address, string email)
+        {
+            worker.connect();
+            
+            table = data.Tables["Worker"];
+
+            row = table.NewRow();
+            
+            row["firstName"] = firstName;
+            row["lastName"] = lastName;
+            row["dni"] = dni;
+            row["turn"] = turn;
+            row["user"] = user;
+            row["phone"] = phone;
+            row["address"] = address;
+            row["email"] = email;
+            
+            table.Rows.Add(row);
+
+            int rowsAffected = worker.insertData(data, adap, "Worker");
+            return rowsAffected;
+        }
     }
 }

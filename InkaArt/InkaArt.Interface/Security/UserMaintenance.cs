@@ -13,7 +13,8 @@ namespace InkaArt.Interface.Security
 {
     public partial class UserMaintenance : Form
     {
-        DataTable userTable, workerTable;
+        WorkerController worker;
+        UserController user;
         public UserMaintenance()
         {
             InitializeComponent();
@@ -23,13 +24,11 @@ namespace InkaArt.Interface.Security
 
         public void listUsers()
         {
-            WorkerController worker = new WorkerController();
-            UserController user = new UserController();
+            worker = new WorkerController();
+            user = new UserController();
+            
 
-            workerTable = worker.showData();
-            userTable = user.showData();
-
-            dataGridViewUserMaintenance.DataSource = workerTable;
+            dataGridViewUserMaintenance.DataSource = worker.showData();
 
             dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
 
@@ -46,13 +45,13 @@ namespace InkaArt.Interface.Security
 
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            Form personalData = new PersonalData();
+            Form personalData = new PersonalData(user, worker);
             personalData.ShowDialog(this);
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
-            Form personalData = new PersonalData(dataGridViewUserMaintenance);
+            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker);
             personalData.ShowDialog(this);
         }
     }

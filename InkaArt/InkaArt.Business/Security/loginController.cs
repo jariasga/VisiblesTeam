@@ -5,7 +5,7 @@ using System.Data;
 
 namespace InkaArt.Business.Security
 {
-    public class loginController
+    public class LoginController
     {
         private UserData user;
         private NpgsqlDataAdapter adap;
