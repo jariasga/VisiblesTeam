@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InkaArt.Business.Security;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,18 +13,66 @@ namespace InkaArt.Interface.Security
 {
     public partial class UserMaintenance : Form
     {
+        WorkerController worker;
+        UserController user;
+        RoleController role;
         public UserMaintenance()
         {
             InitializeComponent();
+
+            worker = new WorkerController();
+            user = new UserController();
+            role = new RoleController();
+
+            listUsers();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        public void listUsers()
         {
-            openFileDialog1.ShowDialog();
+            dataGridViewUserMaintenance.DataSource = worker.showData();
+
+            dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+
+            dataGridViewUserMaintenance.Columns["idWorker"].HeaderText = "ID";
+            dataGridViewUserMaintenance.Columns["firstName"].HeaderText = "Nombre";
+            dataGridViewUserMaintenance.Columns["lastName"].HeaderText = "Apellido";
+            dataGridViewUserMaintenance.Columns["dni"].HeaderText = "DNI";
+            dataGridViewUserMaintenance.Columns["phone"].HeaderText = "Teléfono";
+            dataGridViewUserMaintenance.Columns["address"].HeaderText = "Dirección";
+            dataGridViewUserMaintenance.Columns["email"].HeaderText = "E-Mail";
+            dataGridViewUserMaintenance.Columns["user"].Visible = false;
+            dataGridViewUserMaintenance.Columns["turn"].Visible = false;
         }
 
-        private void begin() {
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            Form personalData = new PersonalData(user, worker, role);
+            personalData.ShowDialog(this);
+        }
 
+        private void buttonModify_Click(object sender, EventArgs e)
+        {
+            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
+            personalData.ShowDialog(this);
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonMassiveUpload_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string password = "";
+                /*user.insertData(username, description, status, password, role);
+                worker.insertData(firstName, lastName, dni, turn, user, phone, address, email);
+                worker.sendPassword(email, username, password);*/
+            }
         }
     }
 }

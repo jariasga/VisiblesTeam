@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-
-using NpgsqlTypes;
 using InkaArt.Business.Security;
 
 namespace InkaArt.Interface
@@ -15,7 +13,7 @@ namespace InkaArt.Interface
 
         private void button_Login_Click(object sender, EventArgs e)
         {
-            UserController control = new UserController();
+            LoginController control = new LoginController();
             bool pass;
             pass = control.checkCredentials(textbox_user.Text, textbox_password.Text);
 

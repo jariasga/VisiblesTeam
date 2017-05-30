@@ -61,6 +61,7 @@ namespace InkaArt.Interface
             if (logout == DialogResult.No) e.Cancel = true;
         }
 
+
         private void Menu_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.login.Show();
@@ -217,6 +218,13 @@ namespace InkaArt.Interface
             Form change_password = new ChangePassword();
             change_password.MdiParent = this;
             change_password.Show();
+        }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form roles = new UserRolesPermissions();
+            roles.MdiParent = this;
+            roles.Show();
         }
     }
 }

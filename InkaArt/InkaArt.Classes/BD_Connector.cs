@@ -26,6 +26,7 @@ namespace InkaArt.Classes
             ConnectionString.Username = "admin";
             ConnectionString.Password = "fae48";
             ConnectionString.Pooling = true;
+            ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 
         public void connect()
@@ -81,6 +82,21 @@ namespace InkaArt.Classes
             Connection.Close();
         }
 
+        public void execute(string command)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand();
+            cmd.CommandText = command;
+            cmd.Connection = Connection;
+            try
+            {
+                cmd.ExecuteNonQuery();
+                Connection.Close();
+            }
+            catch (Exception msg)
+            {
+                Console.WriteLine(msg.ToString());
+            }
+        }
         public string ServerAddress { get { return serverAddress; } set { serverAddress = value; } }
         protected NpgsqlConnection Connection { get { return connection; } set { connection = value; } }
         public static NpgsqlConnectionStringBuilder ConnectionString { get { return connectionString; } set { connectionString = value; } }
