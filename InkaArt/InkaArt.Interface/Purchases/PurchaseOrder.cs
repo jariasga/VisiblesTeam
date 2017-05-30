@@ -60,7 +60,7 @@ namespace InkaArt.Interface.Purchases
         private void editPurchaseOrder(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentPurchaseOrder = dataGridView_purchaseOrder.CurrentRow;
-            Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder);
+            Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder,control);
             purchaseDetail.Show();
         }
     }

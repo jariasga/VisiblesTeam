@@ -36,9 +36,10 @@ namespace InkaArt.Interface.Purchases
             dateTimePicker_creation.Value = DateTime.Now;
             textBox_total.Text = "0";
         }
-        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder)
+        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder, PurchaseOrderController controlForm)
         {
             mode = 2;
+            control = controlForm;
             InitializeComponent();
             textBox_id.Text = currentPurchaseOrder.Cells[1].Value.ToString();
             textBox_supplier.Text = currentPurchaseOrder.Cells[2].Value.ToString();
@@ -107,6 +108,7 @@ namespace InkaArt.Interface.Purchases
             else
             {
                 //hacer update
+                control.updateData(textBox_id.Text, int.Parse(textBox_supplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
             }
             this.Close();
         }
