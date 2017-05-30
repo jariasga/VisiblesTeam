@@ -55,11 +55,8 @@ namespace InkaArt.Interface.Production
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            string id = textBox_id.Text;
-            int count = int.Parse(textBox_count.Text);
-
             ProcessController control = new ProcessController();
-            control.updateData(id, count);
+            control.updateData(textBox_id.Text, textBox_count.Text);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace InkaArt.Business.Production
         private DataSet data;
         private DataTable table;
         private DataRow row;
-
+        
         public FinalProductController()
         {
             finalProduct = new FinalProductData();
