@@ -35,21 +35,27 @@ namespace InkaArt.Business.Purchases
 
             return supplierList;
         }
-/*        public DataTable getDataWithFilters()
+        public void insertData(string nombre, int ruc,string contacto,int telefono,string correo,string direccion,int prioridad,string estado)
         {
-            supplier = new SupplierData();
-            adap = new NpgsqlDataAdapter();
-            data = new DataSet();
-
             supplier.connect();
-            adap = supplier.supplierAdapter();
-            data.Reset();
-            adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"User\" WHERE username = :user;";
-            //            userAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"User\" WHERE username = :user;", Connection);
-            //            userAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("user", DbType.AnsiStringFixedLength));
-            //            userAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
-            //            userAdapter.SelectCommand.Parameters[0].SourceColumn = "username";
-            return supplierList;
-        }*/
+
+            table = data.Tables["Supplier"];
+            row = table.NewRow();
+            
+            row["name"] = nombre;
+            row["RUC"] = ruc;
+            row["contact"] = contacto;
+            row["telephone"] = telefono;
+            row["email"] = correo;
+            row["address"] = direccion;
+            row["status"] = estado;
+            row["priority"] = prioridad;
+
+            table.Rows.Add(row);
+
+            int rowsAffected = supplier.insertData(data, adap, "Supplier");
+
+            supplier.closeConnection();
+        }
     }
 }

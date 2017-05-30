@@ -18,10 +18,11 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class Suppliers : Form
     {
+        SupplierController control;
         public Suppliers()
         {
             InitializeComponent();
-            SupplierController control = new SupplierController();
+            control = new SupplierController();
             DataTable suppliersList = control.getData();
             dataGridView_suppliersList.DataSource = suppliersList;
 
@@ -64,7 +65,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add(object sender, EventArgs e)
         {
-            Form supplierDet = new SupplierDetail();
+            Form supplierDet = new SupplierDetail(control);
             supplierDet.Show();
         }
 

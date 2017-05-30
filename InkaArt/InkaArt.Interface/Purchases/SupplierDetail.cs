@@ -7,18 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using InkaArt.Business.Purchases;
 namespace InkaArt.Interface.Purchases
 {
     public partial class SupplierDetail : Form
     {
         int mode;
+        SupplierController control;
+
         public SupplierDetail()
         {
             mode = 1; //crear Supplier
+            control = new SupplierController();
             InitializeComponent();
         }
 
+        public SupplierDetail(SupplierController controlForm)
+        {
+            mode = 1;
+            control = controlForm;
+            InitializeComponent();
+        }
         public SupplierDetail(DataGridViewRow currentSupplier)
         {
             mode = 2; //editar Supplier
@@ -64,17 +73,15 @@ namespace InkaArt.Interface.Purchases
         private void button_save_click(object sender, EventArgs e)
         {
             /*Closing*/
-            this.textBox_idSupplier.Text = "";
-            this.textBox_name.Text = "";
-            this.textBox_ruc.Text = "";
-            this.textBox_address.Text = "";
-            this.textBox_contactName.Text = "";
-            this.textBox_telephone.Text = "";
-            this.comboBox_status.Text = "";
-            this.textBox_email.Text = "";
-            this.textBox_priority.Text = "0";
-            this.textBox_idRawMaterial.Text = "";
-            this.textBox_nameRawMaterial.Text = "";
+            if (mode == 1)
+            {
+                //hacer insert
+                control.insertData(textBox_name.Text,int.Parse(textBox_ruc.Text),textBox_contactName.Text,int.Parse(textBox_telephone.Text),textBox_email.Text,textBox_address.Text,int.Parse(textBox_priority.Text),comboBox_status.Text);
+            }
+            else
+            {
+                //hacer update
+            }
             this.dataGridView1.Rows.Clear();
             this.Close();
         }
