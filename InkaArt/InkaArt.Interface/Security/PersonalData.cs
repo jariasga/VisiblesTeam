@@ -50,6 +50,14 @@ namespace InkaArt.Interface.Security
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            if (string.Equals(buttonSave.Text, "Crear"))
+            {
+
+            }
+            else if (string.Equals(buttonSave.Text, "Guardar"))
+            {
+
+            }
             this.Close();
         }
 

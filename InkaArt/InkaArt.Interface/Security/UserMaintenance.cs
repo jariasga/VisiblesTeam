@@ -42,8 +42,6 @@ namespace InkaArt.Interface.Security
             dataGridViewUserMaintenance.Columns["email"].HeaderText = "E-Mail";
             dataGridViewUserMaintenance.Columns["user"].Visible = false;
             dataGridViewUserMaintenance.Columns["turn"].Visible = false;
-
-            
         }
 
         private void buttonNew_Click(object sender, EventArgs e)
