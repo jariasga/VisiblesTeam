@@ -32,8 +32,26 @@ namespace InkaArt.Business.Purchases
 
             DataTable purchaseOrderList = new DataTable();
             purchaseOrderList = data.Tables[0];
-
+            purchaseOrder.closeConnection();
             return purchaseOrderList;
+        }
+        public void inserData(int proveedor,string estado,DateTime creacion, DateTime entrega,double total)
+        {
+            purchaseOrder.connect();
+
+            table = data.Tables["PurcharseOrder"];
+            row = table.NewRow();
+
+            row["idSupplier"] = proveedor;
+            row["status"] = estado;
+            row["creationDate"] = creacion;
+            row["deliveryDate"] = entrega;
+            row["total"] = total;
+            table.Rows.Add(row);
+
+            int rowsAffected = purchaseOrder.insertData(data, adap, "PurcharseOrder");
+
+            purchaseOrder.closeConnection();
         }
     }
 }

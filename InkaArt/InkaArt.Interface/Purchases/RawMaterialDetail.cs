@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
@@ -15,10 +14,21 @@ namespace InkaArt.Interface.Purchases
     public partial class RawMaterialDetail : Form
     {
         int mode;
+        RawMaterialController control;
+
         public RawMaterialDetail()
         {
             mode = 1; // crearRawMaterial
             InitializeComponent();
+            textBox_averagePrice.Text = "0";
+        }
+
+        public RawMaterialDetail(RawMaterialController controlForm)
+        {
+            mode = 1;
+            control = controlForm;
+            InitializeComponent();
+            textBox_averagePrice.Text = "0";
         }
 
         public RawMaterialDetail(DataGridViewRow currentRawMaterial)
@@ -48,6 +58,14 @@ namespace InkaArt.Interface.Purchases
 
         private void button_save(object sender, EventArgs e)
         {
+            if (mode == 1)
+            {
+                control.insertData(textBox_name.Text, textBox_description.Text,comboBox_unit.Text, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
+            }
+            else
+            {
+                mode = 2;
+            }
             /*closing*/
             this.Close();
 

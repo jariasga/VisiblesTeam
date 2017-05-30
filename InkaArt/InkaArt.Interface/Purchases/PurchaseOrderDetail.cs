@@ -7,15 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using InkaArt.Business.Purchases;
 namespace InkaArt.Interface.Purchases
 {
     public partial class PurchaseOrderDetail : Form
     {
+        PurchaseOrderController control;
         int mode;
         public PurchaseOrderDetail()
         {
             mode = 1;
+            control = new PurchaseOrderController();
             InitializeComponent();
             button_add.Enabled = false;
             buttonDelete.Enabled = true;
@@ -23,7 +25,17 @@ namespace InkaArt.Interface.Purchases
             dateTimePicker_creation.Value = DateTime.Now;
             textBox_total.Text = "0";
         }
-
+        public PurchaseOrderDetail(PurchaseOrderController controlForm)
+        {
+            mode = 1;
+            control = controlForm;
+            InitializeComponent();
+            button_add.Enabled = false;
+            buttonDelete.Enabled = true;
+            buttonSave.Enabled = true;
+            dateTimePicker_creation.Value = DateTime.Now;
+            textBox_total.Text = "0";
+        }
         public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder)
         {
             mode = 2;
@@ -86,16 +98,16 @@ namespace InkaArt.Interface.Purchases
 
         private void button_save(object sender, EventArgs e)
         {
-            /*closing*/
-            this.textBox_id.Text = "";
-            this.textBox_supplier.Text = "";
-            this.textBox_total.Text = "";
-            this.comboBox_status.Text = "";
-            this.dataGridView1.Rows.Clear();
-            this.textBox_idRawMaterial.Text = "";
-            this.textBox_nameRawMaterial.Text = "";
-            this.dateTimePicker_creation.Value = DateTime.Today;
-            this.dateTimePicker_delivery.Value = DateTime.Today;
+            if (mode == 1)
+            {
+                //hacer insert
+                control.inserData(int.Parse(textBox_supplier.Text),comboBox_status.Text,DateTime.Parse(dateTimePicker_creation.Text),DateTime.Parse(dateTimePicker_delivery.Text),double.Parse(textBox_total.Text));
+                
+            }
+            else
+            {
+                //hacer update
+            }
             this.Close();
         }
     }

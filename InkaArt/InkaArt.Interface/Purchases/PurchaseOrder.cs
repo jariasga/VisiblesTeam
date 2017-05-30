@@ -18,10 +18,11 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class PurchaseOrder : Form
     {
+        PurchaseOrderController control;
         public PurchaseOrder()
         {
             InitializeComponent();
-            PurchaseOrderController control = new PurchaseOrderController();
+            control = new PurchaseOrderController();
             DataTable purchaseOrderList = control.getData();
             dataGridView_purchaseOrder.DataSource = purchaseOrderList;
 
@@ -42,7 +43,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add(object sender, EventArgs e)
         {
-            Form purchaseDetail = new PurchaseOrderDetail();
+            Form purchaseDetail = new PurchaseOrderDetail(control);
             purchaseDetail.Show();
         }
 
