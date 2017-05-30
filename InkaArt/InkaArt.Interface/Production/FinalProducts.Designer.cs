@@ -37,6 +37,7 @@
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.productDetails = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button_refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_finalProductList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,7 +95,7 @@
             this.productDetails.BackColor = System.Drawing.Color.SteelBlue;
             this.productDetails.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productDetails.ForeColor = System.Drawing.Color.White;
-            this.productDetails.Location = new System.Drawing.Point(178, 325);
+            this.productDetails.Location = new System.Drawing.Point(162, 325);
             this.productDetails.Name = "productDetails";
             this.productDetails.Size = new System.Drawing.Size(103, 42);
             this.productDetails.TabIndex = 19;
@@ -107,7 +108,7 @@
             this.button3.BackColor = System.Drawing.Color.SteelBlue;
             this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(317, 325);
+            this.button3.Location = new System.Drawing.Point(301, 325);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(103, 42);
             this.button3.TabIndex = 20;
@@ -115,12 +116,26 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.productRecipe_Click);
             // 
+            // button_refresh
+            // 
+            this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_refresh.ForeColor = System.Drawing.Color.White;
+            this.button_refresh.Location = new System.Drawing.Point(428, 325);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(103, 42);
+            this.button_refresh.TabIndex = 21;
+            this.button_refresh.Text = "Actualizar";
+            this.button_refresh.UseVisualStyleBackColor = false;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
+            // 
             // FinalProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(716, 391);
+            this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.productDetails);
             this.Controls.Add(this.dataGridView_finalProductList);
@@ -145,5 +160,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioExportacion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.Button button_refresh;
     }
 }

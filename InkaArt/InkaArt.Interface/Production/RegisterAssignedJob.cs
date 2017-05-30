@@ -87,6 +87,37 @@ namespace InkaArt.Interface.Production
 
             if (logout == DialogResult.Yes)
             {
+                WorkerController controlWorker = new WorkerController();
+                DataTable workerList = controlWorker.getData();
+                TurnReportController controlReport = new TurnReportController();
+
+                string broken, finished, date, start, end, process, product, idWorker;
+                broken = finished = date = start = end = process = product = idWorker  = "";
+                
+                foreach (DataGridViewRow row in dataGridView_turn.Rows)//guadra toda la grilla
+                {
+                    for(int j = 0; j < workerList.Rows.Count; j++)//super ineficiente :C
+                    {
+                        string nameAux = workerList.Rows[j]["firstName"].ToString() + " " + workerList.Rows[j]["lastName"].ToString();
+                        if (String.Compare(nameAux, row.Cells[0].Value.ToString()) == 0)
+                        {
+                            idWorker = workerList.Rows[j]["idWorker"].ToString();
+                            break;
+                        }
+                    }
+
+                    broken = row.Cells[5].Value.ToString();
+                    finished = row.Cells[6].Value.ToString();
+                    date = textBox_fecha.Text;
+                    start = row.Cells[3].Value.ToString();
+                    end = row.Cells[4].Value.ToString();
+                    product = row.Cells[1].Value.ToString();
+                    process = row.Cells[2].Value.ToString();
+
+                    //agregar
+                    controlReport.insertData(broken, finished, date, start, end, product, process, idWorker);
+
+                }
             }
         }
     }

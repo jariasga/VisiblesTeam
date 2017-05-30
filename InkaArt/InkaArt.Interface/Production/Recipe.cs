@@ -14,10 +14,12 @@ namespace InkaArt.Interface.Production
 {
     public partial class Recipe : Form
     {
+        private string globalIdRecipe;
 
         public Recipe()
         {
             InitializeComponent();
+            globalIdRecipe = "";
         }
 
         public Recipe(string id, string name)
@@ -62,7 +64,7 @@ namespace InkaArt.Interface.Production
 
         }
 
-        private void comboBox_version_SelectedIndexChanged(object sender, EventArgs e)
+        private void fillGrid()
         {
             //llenar el datagrid
             //necesito la version y el id
@@ -90,6 +92,7 @@ namespace InkaArt.Interface.Production
                         {
                             //version buscada
                             idRecipe = recipeList.Rows[i]["idRecipe"].ToString();
+                            globalIdRecipe = recipeList.Rows[i]["idRecipe"].ToString();
                             break;
                         }
                     }
@@ -103,17 +106,17 @@ namespace InkaArt.Interface.Production
                 UnitController controlUnit = new UnitController();
                 DataTable unitList = controlUnit.getData();
 
-                string idRaw, nameRaw, countRaw, idUnit,nameUnit;
+                string idRaw, nameRaw, countRaw, idUnit, nameUnit;
                 idRaw = nameRaw = countRaw = idUnit = nameUnit = "1";
-                
-                for(int i = 0; i < recipeRawList.Rows.Count; i++)
+
+                for (int i = 0; i < recipeRawList.Rows.Count; i++)
                 {
                     if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0)
                     {
                         idRaw = recipeRawList.Rows[i]["idRawMaterial"].ToString();
                         countRaw = recipeRawList.Rows[i]["materialCount"].ToString();
                         //buscar nombre de la materia prima
-                        for(int j=0;j<rawMList.Rows.Count;j++)
+                        for (int j = 0; j < rawMList.Rows.Count; j++)
                             if (String.Compare(rawMList.Rows[j]["idRawMaterial"].ToString(), idRaw) == 0)
                             {
                                 nameRaw = rawMList.Rows[j]["name"].ToString();
@@ -129,10 +132,76 @@ namespace InkaArt.Interface.Production
                             }
                         dataGridView_rawMaterial.Rows.Add(idRaw, nameRaw, countRaw, nameUnit);
                     }
-                    
-                }           
+
+                }
             }
             dataGridView_rawMaterial.Refresh();
+        }
+
+        private void comboBox_version_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillGrid();
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            bool s = checkBox_newVer.Checked;
+
+            if (s == true)
+            {
+                //insert en recipe
+
+                RecipeController control = new RecipeController();
+                string desc, ver, stat, idProduct;
+
+                desc = ver = stat = idProduct = "";
+                desc = textBox_product.Text;
+                ver = textbox_newVer.Text;
+                stat = "1";
+                idProduct = textBox_id.Text;
+
+                control.insertData(desc, ver, stat, idProduct);
+
+
+                //refresh comboBox_version
+                DataTable recipeList = control.getData();
+                comboBox_version.Items.Clear();
+                //agregar datos a combobox version
+                for (int i = 0; i < recipeList.Rows.Count; i++)
+                {
+                    if (String.Compare(recipeList.Rows[i]["idProduct"].ToString(), textBox_id.Text) == 0)
+                    {
+                        comboBox_version.Items.Add(recipeList.Rows[i]["version"].ToString());
+                    }
+                }
+            }
+
+        }
+
+        private void button_add_Click(object sender, EventArgs e)
+        {
+            RawMaterialController controlRaw = new RawMaterialController();
+            RecipeRawMaterialController controlRecipeRaw = new RecipeRawMaterialController();
+            DataTable rawList = controlRaw.getData();
+            DataTable recipeRawList = controlRecipeRaw.getData();
+
+            string idRaw = "";
+            string count = numericUpDown_count.Value.ToString();
+
+            if (comboBox_version.SelectedItem != null)
+            {
+                for (int i = 0; i < rawList.Rows.Count; i++)
+                {
+                    if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
+                    {
+                        idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
+                        break;
+                    }
+                }
+
+                controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
+                fillGrid();
+            }
         }
     }
 }

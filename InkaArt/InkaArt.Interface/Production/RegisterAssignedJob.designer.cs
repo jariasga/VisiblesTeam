@@ -32,14 +32,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_fecha = new System.Windows.Forms.TextBox();
             this.dataGridView_turn = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraIni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Terminados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_nombre = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,6 +48,14 @@
             this.textBox_horaFin = new System.Windows.Forms.TextBox();
             this.textBox_terminados = new System.Windows.Forms.TextBox();
             this.button_delete = new System.Windows.Forms.Button();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Terminados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraIni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_turn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,52 +109,6 @@
             this.dataGridView_turn.Size = new System.Drawing.Size(814, 216);
             this.dataGridView_turn.TabIndex = 29;
             this.dataGridView_turn.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_turn_CellContentClick);
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Producto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Proceso
-            // 
-            this.Proceso.HeaderText = "Proceso";
-            this.Proceso.Name = "Proceso";
-            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // HoraIni
-            // 
-            this.HoraIni.HeaderText = "HoraIni";
-            this.HoraIni.Name = "HoraIni";
-            // 
-            // HoraFin
-            // 
-            this.HoraFin.HeaderText = "HoraFin";
-            this.HoraFin.Name = "HoraFin";
-            // 
-            // Rotos
-            // 
-            this.Rotos.HeaderText = "Rotos";
-            this.Rotos.Name = "Rotos";
-            // 
-            // Terminados
-            // 
-            this.Terminados.HeaderText = "Terminados";
-            this.Terminados.Name = "Terminados";
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "";
-            this.Seleccionar.Name = "Seleccionar";
             // 
             // label5
             // 
@@ -316,12 +270,58 @@
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // Terminados
+            // 
+            this.Terminados.HeaderText = "Terminados";
+            this.Terminados.Name = "Terminados";
+            // 
+            // Rotos
+            // 
+            this.Rotos.HeaderText = "Rotos";
+            this.Rotos.Name = "Rotos";
+            // 
+            // HoraFin
+            // 
+            this.HoraFin.HeaderText = "HoraFin";
+            this.HoraFin.Name = "HoraFin";
+            // 
+            // HoraIni
+            // 
+            this.HoraIni.HeaderText = "HoraIni";
+            this.HoraIni.Name = "HoraIni";
+            // 
+            // Proceso
+            // 
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Producto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // RegisterAssignedJob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(872, 478);
+            this.ClientSize = new System.Drawing.Size(870, 478);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.textBox_terminados);
             this.Controls.Add(this.textBox_horaFin);
@@ -373,6 +373,7 @@
         private System.Windows.Forms.TextBox textBox_rotos;
         private System.Windows.Forms.TextBox textBox_horaFin;
         private System.Windows.Forms.TextBox textBox_terminados;
+        private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
@@ -381,6 +382,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Rotos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Terminados;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
-        private System.Windows.Forms.Button button_delete;
     }
 }

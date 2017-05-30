@@ -54,6 +54,8 @@
     <Compile Include="Production\RecipeData.cs" />
     <Compile Include="Production\RecipeRawMaterialData.cs" />
     <Compile Include="Production\TurnData.cs" />
+    <Compile Include="Production\TurnReportData.cs" />
+    <Compile Include="Production\TurnWorkerData.cs" />
     <Compile Include="Production\UnitData.cs" />
     <Compile Include="Production\WorkerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

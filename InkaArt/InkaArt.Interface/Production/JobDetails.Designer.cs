@@ -39,7 +39,7 @@
             this.dataGridView_products = new System.Windows.Forms.DataGridView();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_products)).BeginInit();
             this.SuspendLayout();
@@ -150,17 +150,18 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             // 
-            // button1
+            // button_save
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(221, 280);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 42);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "🖫 Guardar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(221, 280);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(103, 42);
+            this.button_save.TabIndex = 18;
+            this.button_save.Text = "🖫 Guardar";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // JobDetails
             // 
@@ -168,7 +169,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(557, 334);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.dataGridView_products);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox1);
@@ -198,6 +199,6 @@
         private System.Windows.Forms.DataGridView dataGridView_products;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_save;
     }
 }

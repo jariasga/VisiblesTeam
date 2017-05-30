@@ -27,7 +27,9 @@ namespace InkaArt.Interface.Production
             ProcessController controlProcess = new ProcessController();
             DataTable productProcessesList = control.getData();
             DataTable processList = controlProcess.getData();
-            
+
+            dataGridView_productProceses.Rows.Clear();
+
             for(int i=0; i< productProcessesList.Rows.Count; i++)
             {
                 if (String.Compare(productProcessesList.Rows[i]["idProduct"].ToString(),id)==0)
@@ -46,6 +48,7 @@ namespace InkaArt.Interface.Production
 
         }
 
+
         public ProductionProcess()
         {
             InitializeComponent();
@@ -63,6 +66,13 @@ namespace InkaArt.Interface.Production
 
         private void label4_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            FinalProductController control = new FinalProductController();
+            control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
 
         }
 

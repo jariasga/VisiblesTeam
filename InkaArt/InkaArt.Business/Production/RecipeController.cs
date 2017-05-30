@@ -15,12 +15,19 @@ namespace InkaArt.Business.Production
         private RecipeData recipe;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
+        private DataTable table;
+        private DataRow row;
+
+        public RecipeController()
+        {
+            recipe = new RecipeData();
+            data = new DataSet();
+        }
 
         public DataTable getData()
         {
-            recipe = new RecipeData();
-            adapt = new NpgsqlDataAdapter();
-            data = new DataSet();
+            //adapt = new NpgsqlDataAdapter();
+
 
             recipe.connect();
             adapt = recipe.recipeAdapter();
@@ -32,6 +39,27 @@ namespace InkaArt.Business.Production
             recipeList = data.Tables[0];
 
             return recipeList;
+        }
+
+        public void insertData(string description, string version, string status, string idProduct)
+        {
+            recipe.connect();
+            adapt = recipe.recipeAdapter();
+
+            data.Clear();
+            data = recipe.getData(adapt, "Recipe");
+
+            table = data.Tables["Recipe"];
+
+            row = table.NewRow();
+
+            row["description"] = description;
+            row["version"] = version;
+            row["status"] = status;
+            row["idProduct"] = idProduct;
+
+            table.Rows.Add(row);
+            int rowsAffected = recipe.insertData(data, adapt, "Recipe");
         }
     }
 }

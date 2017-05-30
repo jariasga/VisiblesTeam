@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textbox_newVer = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.checkBox_newVer = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_version = new System.Windows.Forms.ComboBox();
             this.textBox_product = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
+            this.textbox_newVer = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.checkBox_newVer = new System.Windows.Forms.CheckBox();
             this.dataGridView_rawMaterial = new System.Windows.Forms.DataGridView();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,35 +76,6 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Basicos";
-            // 
-            // textbox_newVer
-            // 
-            this.textbox_newVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_newVer.Location = new System.Drawing.Point(30, 88);
-            this.textbox_newVer.Name = "textbox_newVer";
-            this.textbox_newVer.Size = new System.Drawing.Size(172, 24);
-            this.textbox_newVer.TabIndex = 28;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(28, 66);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(169, 18);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "Nombre Nueva Version";
-            // 
-            // checkBox_newVer
-            // 
-            this.checkBox_newVer.AutoSize = true;
-            this.checkBox_newVer.Location = new System.Drawing.Point(32, 26);
-            this.checkBox_newVer.Name = "checkBox_newVer";
-            this.checkBox_newVer.Size = new System.Drawing.Size(128, 22);
-            this.checkBox_newVer.TabIndex = 26;
-            this.checkBox_newVer.Text = "Nueva Version";
-            this.checkBox_newVer.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -170,6 +141,35 @@
             this.textBox_id.Size = new System.Drawing.Size(172, 24);
             this.textBox_id.TabIndex = 14;
             // 
+            // textbox_newVer
+            // 
+            this.textbox_newVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_newVer.Location = new System.Drawing.Point(30, 88);
+            this.textbox_newVer.Name = "textbox_newVer";
+            this.textbox_newVer.Size = new System.Drawing.Size(172, 24);
+            this.textbox_newVer.TabIndex = 28;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(28, 66);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(169, 18);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Nombre Nueva Version";
+            // 
+            // checkBox_newVer
+            // 
+            this.checkBox_newVer.AutoSize = true;
+            this.checkBox_newVer.Location = new System.Drawing.Point(32, 26);
+            this.checkBox_newVer.Name = "checkBox_newVer";
+            this.checkBox_newVer.Size = new System.Drawing.Size(128, 22);
+            this.checkBox_newVer.TabIndex = 26;
+            this.checkBox_newVer.Text = "Nueva Version";
+            this.checkBox_newVer.UseVisualStyleBackColor = true;
+            // 
             // dataGridView_rawMaterial
             // 
             this.dataGridView_rawMaterial.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
@@ -225,6 +225,7 @@
             this.button_add.TabIndex = 26;
             this.button_add.Text = "＋ Agregar";
             this.button_add.UseVisualStyleBackColor = false;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
             // comboBox_rawMaterial
             // 
@@ -272,6 +273,7 @@
             this.button_save.TabIndex = 27;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // button_delete
             // 

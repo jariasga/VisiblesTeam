@@ -63,5 +63,20 @@ namespace InkaArt.Interface.Production
             Form job_details = new JobDetails(id,name,count);
             job_details.Show();
         }
+
+        private void button_refresh_Click(object sender, EventArgs e)
+        {
+            dataGridView_process.Rows.Clear();
+
+            ProcessController control = new ProcessController();
+            DataTable processList = control.getData();
+
+            for (int i = 0; i < processList.Rows.Count; i++)
+            {
+                dataGridView_process.Rows.Add(processList.Rows[i]["idProcess"],
+                    processList.Rows[i]["description"],
+                    processList.Rows[i]["positionCount"]);
+            }
+        }
     }
 }

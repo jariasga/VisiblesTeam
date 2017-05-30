@@ -59,6 +59,8 @@
     <Compile Include="Production\RecipeController.cs" />
     <Compile Include="Production\RecipeRawMaterialController.cs" />
     <Compile Include="Production\TurnController.cs" />
+    <Compile Include="Production\TurnReportController.cs" />
+    <Compile Include="Production\TurnWorkerController.cs" />
     <Compile Include="Production\UnitController.cs" />
     <Compile Include="Production\WorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

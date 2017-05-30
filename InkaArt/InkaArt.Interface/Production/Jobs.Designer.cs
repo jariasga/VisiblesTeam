@@ -34,6 +34,7 @@
             this.PrecioExportacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Button_processDetails = new System.Windows.Forms.Button();
+            this.button_refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_process)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +82,7 @@
             this.Button_processDetails.BackColor = System.Drawing.Color.SteelBlue;
             this.Button_processDetails.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_processDetails.ForeColor = System.Drawing.Color.White;
-            this.Button_processDetails.Location = new System.Drawing.Point(178, 276);
+            this.Button_processDetails.Location = new System.Drawing.Point(129, 276);
             this.Button_processDetails.Name = "Button_processDetails";
             this.Button_processDetails.Size = new System.Drawing.Size(103, 42);
             this.Button_processDetails.TabIndex = 20;
@@ -89,12 +90,26 @@
             this.Button_processDetails.UseVisualStyleBackColor = false;
             this.Button_processDetails.Click += new System.EventHandler(this.Button_processDetails_Click);
             // 
+            // button_refresh
+            // 
+            this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_refresh.ForeColor = System.Drawing.Color.White;
+            this.button_refresh.Location = new System.Drawing.Point(264, 276);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(103, 42);
+            this.button_refresh.TabIndex = 21;
+            this.button_refresh.Text = "Actualizar";
+            this.button_refresh.UseVisualStyleBackColor = false;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
+            // 
             // Jobs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(500, 335);
+            this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.Button_processDetails);
             this.Controls.Add(this.dataGridView_process);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -114,5 +129,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioExportacion;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.Button Button_processDetails;
+        private System.Windows.Forms.Button button_refresh;
     }
 }

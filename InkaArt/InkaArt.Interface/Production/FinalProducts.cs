@@ -18,8 +18,16 @@ namespace InkaArt.Interface.Production
         public FinalProducts()
         {
             InitializeComponent();
+            fillGrid();
+
+        }
+
+        public void fillGrid()
+        {
             FinalProductController control = new FinalProductController();
             DataTable finalProductList = control.getData();
+
+            dataGridView_finalProductList.Rows.Clear();
 
             for (int i = 0; i < finalProductList.Rows.Count; i++)
             {
@@ -29,7 +37,6 @@ namespace InkaArt.Interface.Production
                     finalProductList.Rows[i]["exportPrice"],
                     finalProductList.Rows[i]["actualStock"]);
             }
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -85,6 +92,11 @@ namespace InkaArt.Interface.Production
         private void FinalProducts_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_refresh_Click(object sender, EventArgs e)
+        {
+            fillGrid();
         }
     }
 }

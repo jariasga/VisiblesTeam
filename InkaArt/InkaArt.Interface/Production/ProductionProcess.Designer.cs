@@ -43,7 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_productProceses)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -199,17 +199,18 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Procesos";
             // 
-            // button1
+            // button_save
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(226, 364);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 42);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "🖫 Guardar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(226, 364);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(103, 42);
+            this.button_save.TabIndex = 16;
+            this.button_save.Text = "🖫 Guardar";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // ProductionProcess
             // 
@@ -217,7 +218,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(564, 424);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView_productProceses);
@@ -249,7 +250,7 @@
         private System.Windows.Forms.TextBox textBox_exportPrice;
         private System.Windows.Forms.TextBox textBox_localPrice;
         private System.Windows.Forms.TextBox textBox_product;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.TextBox textBox_stock;
         private System.Windows.Forms.Label label6;
     }
