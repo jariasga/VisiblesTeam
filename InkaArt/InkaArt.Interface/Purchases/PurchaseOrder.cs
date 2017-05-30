@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NpgsqlTypes;
+//using NpgsqlTypes;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 

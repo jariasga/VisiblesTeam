@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace InkaArt.Interface.Security
         WorkerController worker;
         UserController user;
         RoleController role;
+
         public UserMaintenance()
         {
             InitializeComponent();
@@ -67,12 +69,7 @@ namespace InkaArt.Interface.Security
             dialog.Title = "Open Users File";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                string password = "";
-                /*user.insertData(username, description, status, password, role);
-                worker.insertData(firstName, lastName, dni, turn, user, phone, address, email);
-                worker.sendPassword(email, username, password);*/
-            }
+                user.massiveUpload(dialog.FileName, worker);     
         }
     }
 }
