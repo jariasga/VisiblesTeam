@@ -30,8 +30,7 @@
         {
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.dataGridView_purchaseOrder = new System.Windows.Forms.DataGridView();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_delivery = new System.Windows.Forms.DateTimePicker();
@@ -44,7 +43,14 @@
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).BeginInit();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEmision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaDeEntrega = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MontoTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.VerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,26 +80,23 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.button_add);
             // 
-            // dataGridView_purchaseOrder
+            // dataGridView1
             // 
-            this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView_purchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_purchaseOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Proveedor,
+            this.FechaEmision,
+            this.FechaDeEntrega,
+            this.MontoTotal,
+            this.VerDetalle,
             this.Eliminar});
-            this.dataGridView_purchaseOrder.Location = new System.Drawing.Point(23, 186);
-            this.dataGridView_purchaseOrder.Name = "dataGridView_purchaseOrder";
-            this.dataGridView_purchaseOrder.Size = new System.Drawing.Size(774, 272);
-            this.dataGridView_purchaseOrder.TabIndex = 8;
-            this.dataGridView_purchaseOrder.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editPurchaseOrder);
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.Width = 40;
+            this.dataGridView1.Location = new System.Drawing.Point(23, 186);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(774, 272);
+            this.dataGridView1.TabIndex = 8;
             // 
             // groupBox1
             // 
@@ -225,6 +228,47 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Width = 60;
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            this.Proveedor.Width = 210;
+            // 
+            // FechaEmision
+            // 
+            this.FechaEmision.HeaderText = "Fecha de emisión";
+            this.FechaEmision.Name = "FechaEmision";
+            // 
+            // FechaDeEntrega
+            // 
+            this.FechaDeEntrega.HeaderText = "Fecha de entrega";
+            this.FechaDeEntrega.Name = "FechaDeEntrega";
+            // 
+            // MontoTotal
+            // 
+            this.MontoTotal.HeaderText = "Monto Total";
+            this.MontoTotal.Name = "MontoTotal";
+            // 
+            // VerDetalle
+            // 
+            this.VerDetalle.HeaderText = "Ver detalle";
+            this.VerDetalle.Name = "VerDetalle";
+            this.VerDetalle.Width = 81;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.Width = 80;
+            // 
             // PurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -234,12 +278,12 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.dataGridView_purchaseOrder);
+            this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PurchaseOrder";
             this.Text = "Mantenimiento de orden de compra";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -250,7 +294,7 @@
 
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.DataGridView dataGridView_purchaseOrder;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.TextBox textBox_id;
@@ -263,6 +307,12 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker_creation;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker_delivery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEmision;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaDeEntrega;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MontoTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }

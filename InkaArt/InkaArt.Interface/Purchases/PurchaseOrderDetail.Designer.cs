@@ -106,10 +106,6 @@
             // 
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_status.FormattingEnabled = true;
-            this.comboBox_status.Items.AddRange(new object[] {
-            "Pendiente",
-            "Entregado",
-            "Por pagar"});
             this.comboBox_status.Location = new System.Drawing.Point(13, 394);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(183, 25);

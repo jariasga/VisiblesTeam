@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Business.Warehouse;
+using Npgsql;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -33,6 +35,17 @@ namespace InkaArt.Interface.Warehouse
             this.textBox_nameRawMaterial.Text = "";
             this.comboBox_status.Text = "";
             this.Close();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            string name = textBox_name.Text;
+            string description = textBox_description.Text;
+            string address = textBox_address.Text;
+
+            WarehouseCrud conn = new WarehouseCrud();
+            conn.createWarehouse(name, description, address, "Activo");
+            MessageBox.Show("Almacén Creado", "Crear almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
     }
 }

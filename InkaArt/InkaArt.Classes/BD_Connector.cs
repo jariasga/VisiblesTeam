@@ -26,7 +26,8 @@ namespace InkaArt.Classes
             ConnectionString.Username = "admin";
             ConnectionString.Password = "fae48";
             ConnectionString.Pooling = true;
-            ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
+
+            connect();
         }
 
         public void connect()
@@ -45,41 +46,12 @@ namespace InkaArt.Classes
         public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
             DataSet data = new DataSet();
+            
             adapter.Fill(data, srcTable);
-            closeConnection();
-            return data;
-        }
 
-        public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
-        {
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-            adap.UpdateCommand = builder.GetUpdateCommand();
-            int rowsAffected = adap.Update(data, srcTable);
-            closeConnection();
-            return rowsAffected;
-        }
-
-        public int insertData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
-        {
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-            adap.InsertCommand = builder.GetInsertCommand();
-            int rowsAffected = adap.Update(data, srcTable);
-            closeConnection();
-            return rowsAffected;
-        }
-
-        public int deleteData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
-        {
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-            adap.DeleteCommand = builder.GetDeleteCommand();
-            int rowsAffected = adap.Update(data, srcTable);
-            closeConnection();
-            return rowsAffected;
-        }
-
-        public void closeConnection()
-        {
             Connection.Close();
+
+            return data;
         }
 
         public void execute(string command)
@@ -97,6 +69,17 @@ namespace InkaArt.Classes
                 Console.WriteLine(msg.ToString());
             }
         }
+
+        public void commit()
+        {
+            execute("COMMIT;");
+        }
+
+        public void closeConnection()
+        {
+            Connection.Close();
+        }
+
         public string ServerAddress { get { return serverAddress; } set { serverAddress = value; } }
         protected NpgsqlConnection Connection { get { return connection; } set { connection = value; } }
         public static NpgsqlConnectionStringBuilder ConnectionString { get { return connectionString; } set { connectionString = value; } }

@@ -33,7 +33,6 @@
             this.parámetrosGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.modificarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +63,7 @@
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +81,7 @@
             this.almacénToolStripMenuItem});
             this.menu_strip.Location = new System.Drawing.Point(0, 0);
             this.menu_strip.Name = "menu_strip";
-            this.menu_strip.Size = new System.Drawing.Size(998, 25);
+            this.menu_strip.Size = new System.Drawing.Size(853, 25);
             this.menu_strip.TabIndex = 1;
             this.menu_strip.Text = "Menú";
             // 
@@ -91,7 +90,6 @@
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.parámetrosGeneralesToolStripMenuItem,
             this.listaDeUsuariosToolStripMenuItem,
-            this.rolesToolStripMenuItem,
             this.toolStripSeparator1,
             this.modificarContraseñaToolStripMenuItem,
             this.cerrarSesiónToolStripMenuItem});
@@ -117,13 +115,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
-            // 
-            // modificarContraseñaToolStripMenuItem
-            // 
-            this.modificarContraseñaToolStripMenuItem.Name = "modificarContraseñaToolStripMenuItem";
-            this.modificarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.modificarContraseñaToolStripMenuItem.Text = "Modificar contraseña";
-            this.modificarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.modificarContraseñaToolStripMenuItem_Click);
             // 
             // cerrarSesiónToolStripMenuItem
             // 
@@ -333,9 +324,9 @@
             this.status_strip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status_label});
-            this.status_strip.Location = new System.Drawing.Point(0, 644);
+            this.status_strip.Location = new System.Drawing.Point(0, 542);
             this.status_strip.Name = "status_strip";
-            this.status_strip.Size = new System.Drawing.Size(998, 22);
+            this.status_strip.Size = new System.Drawing.Size(853, 22);
             this.status_strip.TabIndex = 2;
             this.status_strip.Text = "Estado";
             // 
@@ -348,33 +339,32 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 25);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(4);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 619);
+            this.splitter1.Size = new System.Drawing.Size(3, 517);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
-            // rolesToolStripMenuItem
+            // modificarContraseñaToolStripMenuItem
             // 
-            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
-            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.rolesToolStripMenuItem.Text = "Roles";
-            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
+            this.modificarContraseñaToolStripMenuItem.Name = "modificarContraseñaToolStripMenuItem";
+            this.modificarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.modificarContraseñaToolStripMenuItem.Text = "Modificar contraseña";
+            this.modificarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.modificarContraseñaToolStripMenuItem_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(998, 666);
+            this.ClientSize = new System.Drawing.Size(853, 564);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.status_strip);
             this.Controls.Add(this.menu_strip);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menu_strip;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Menu";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Menu_FormClosed);
@@ -425,6 +415,5 @@
         private System.Windows.Forms.ToolStripMenuItem gestionarMovimientosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informeDeTurnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarContraseñaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
     }
 }

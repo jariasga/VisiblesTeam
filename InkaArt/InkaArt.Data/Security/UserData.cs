@@ -10,16 +10,19 @@ using System.Data;
 namespace InkaArt.Data.Security
 {
     public class UserData : BD_Connector
-    {        
+    {
         public NpgsqlDataAdapter userAdapter()
         {
             NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
 
+            //Creación de la query
             userAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"User\" WHERE username = :user;", Connection);
             userAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("user", DbType.AnsiStringFixedLength));
             userAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            userAdapter.SelectCommand.Parameters[0].SourceColumn = "username";
             
             return userAdapter;
         }
     }
+    
 }
