@@ -29,14 +29,10 @@ namespace InkaArt.Business.Security
             worker.connect();
 
             adap = worker.workerAdapter();
-            adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"Worker\";";
-            adap.SelectCommand.Parameters.Clear();
 
             data = worker.getData(adap, "Worker");
 
             table = data.Tables["Worker"];
-
-            worker.closeConnection();
             return table;
         }
 
@@ -67,12 +63,8 @@ namespace InkaArt.Business.Security
         {
             UserController user = new UserController();
             
-            return Int32.Parse(user.getUserRow("username", username)["idUser"].ToString());
+            return Int32.Parse(user.getUserRow(username)["idUser"].ToString());
         }
-
-        /*public string getUserUsername(int id) {
-            UserController user = new UserController();            
-        }*/
 
         public void sendPassword(string recipient, string username, string password)
         {

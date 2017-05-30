@@ -25,7 +25,7 @@ namespace InkaArt.Business.Security
             SHA_2 sha = new SHA_2();
             string key = sha.encrypt(loginPass);
             
-            row = user.getUserRow("username", loginUsername);
+            row = user.getUserRow(loginUsername);
 
             //  Read data from DB
             

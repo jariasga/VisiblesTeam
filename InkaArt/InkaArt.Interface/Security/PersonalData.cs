@@ -29,7 +29,9 @@ namespace InkaArt.Interface.Security
             worker = workerC;
             user = userC;
 
-            userRow = user.getUserRow("idUser", dataGridV.SelectedRows[0].Cells["user"].Value.ToString());
+            int idUserDataGrid = Int32.Parse(dataGridV.SelectedRows[0].Cells["user"].Value.ToString());
+            userRow = user.getUserRowbyID(idUserDataGrid);
+
             textBoxUsername.Text = userRow["username"].ToString();
             textBoxDescription.Text = userRow["description"].ToString();
             comboBoxUserStatus.Text = userRow["status"].ToString();
