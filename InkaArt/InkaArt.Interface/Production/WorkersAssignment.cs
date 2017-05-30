@@ -56,5 +56,10 @@ namespace InkaArt.Interface.Production
             GenerateSimulationReport simulation_report = new GenerateSimulationReport();
             simulation_report.Show();
         }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            //Guardar simulación en BD
+        }
     }
 }

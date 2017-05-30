@@ -43,7 +43,7 @@ namespace InkaArt.Interface.Purchases
                 //hacer el insert
                 UnitOfMeasurementController control = new UnitOfMeasurementController();
 
-                control.insertData(textBox_nameUnit, textBox_abbreviation);
+                control.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text);
             }
             else
             {
