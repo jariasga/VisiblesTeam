@@ -15,6 +15,7 @@ namespace InkaArt.Data.Purchases
         {
             NpgsqlDataAdapter unitOfMeasurementAdapter = new NpgsqlDataAdapter();
             unitOfMeasurementAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"UnitOfMeasurement\";", Connection);
+            
 
             return unitOfMeasurementAdapter;
         }

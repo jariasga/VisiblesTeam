@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
 namespace InkaArt.Interface.Purchases
@@ -37,7 +38,17 @@ namespace InkaArt.Interface.Purchases
 
         private void button_save(object sender, EventArgs e)
         {
-            this.cleaningWindow();
+            if (mode == 1)
+            {
+                //hacer el insert
+                UnitOfMeasurementController control = new UnitOfMeasurementController();
+
+                control.insertData(textBox_nameUnit, textBox_abbreviation);
+            }
+            else
+            {
+                //hacer el update
+            }
             /*Closing the window*/
             this.Close();
         }

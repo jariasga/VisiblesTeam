@@ -29,12 +29,14 @@ namespace InkaArt.Interface.Purchases
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
             dataGridView_suppliersList.Columns["RUC"].HeaderText = "RUC";
             dataGridView_suppliersList.Columns["contact"].HeaderText = "Contacto";
+            dataGridView_suppliersList.Columns["contact"].Visible = false;
             dataGridView_suppliersList.Columns["telephone"].HeaderText = "Teléfono";
+            dataGridView_suppliersList.Columns["telephone"].Visible = false;
             dataGridView_suppliersList.Columns["email"].HeaderText = "Correo";
+            dataGridView_suppliersList.Columns["address"].Visible = false;
             dataGridView_suppliersList.Columns["address"].HeaderText = "Dirección";
             dataGridView_suppliersList.Columns["priority"].HeaderText = "Prioridad";
             dataGridView_suppliersList.Columns["status"].HeaderText = "Estado";
-            //            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
         }
 
         private void button3_Click(object sender, EventArgs e)

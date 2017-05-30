@@ -35,6 +35,22 @@ namespace InkaArt.Business.Purchases
 
             return unitOfMeasurementList;
         }
+        public void insertData(string nombre, string abreviatura)
+        {
+            unitOfMeasurement.connect();
+
+            table = data.Tables["UnitOfMeasurement"];
+            row = table.NewRow();            
+
+            row["name"] = nombre;
+            row["abbreviature"] = abreviatura;
+
+            table.Rows.Add(row);
+
+            int rowsAffected = unitOfMeasurement.insertData(data, adap, "UnitOfMeasurement");
+
+            unitOfMeasurement.closeConnection();
+        }
 
     }
 }

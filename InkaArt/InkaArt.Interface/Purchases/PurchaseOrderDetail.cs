@@ -12,12 +12,28 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class PurchaseOrderDetail : Form
     {
+        int mode;
         public PurchaseOrderDetail()
         {
+            mode = 1;
             InitializeComponent();
             button_add.Enabled = false;
             buttonDelete.Enabled = true;
             buttonSave.Enabled = true;
+            dateTimePicker_creation.Value = DateTime.Now;
+            textBox_total.Text = "0";
+        }
+
+        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder)
+        {
+            mode = 2;
+            InitializeComponent();
+            textBox_id.Text = currentPurchaseOrder.Cells[1].Value.ToString();
+            textBox_supplier.Text = currentPurchaseOrder.Cells[2].Value.ToString();
+            comboBox_status.Text = currentPurchaseOrder.Cells[3].Value.ToString();
+            dateTimePicker_creation.Value = (DateTime) currentPurchaseOrder.Cells[4].Value;
+            dateTimePicker_delivery.Value = (DateTime)currentPurchaseOrder.Cells[5].Value;
+            textBox_total.Text = currentPurchaseOrder.Cells[6].Value.ToString();
         }
 
         /* search */
