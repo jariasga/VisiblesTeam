@@ -15,8 +15,6 @@ namespace InkaArt.Business.Production
         private RawMaterialData rawMaterial;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
 
         public RawMaterialController()
         {

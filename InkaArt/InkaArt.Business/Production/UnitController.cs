@@ -16,8 +16,6 @@ namespace InkaArt.Business.Production
         private UnitData unit;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
 
         public UnitController()
         {
