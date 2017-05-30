@@ -104,20 +104,7 @@ namespace InkaArt.Business.Security
             if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
             else return null;
         }
-
-        public DataRow getUserId(string username)
-        {
-            user.connect();
-            adap = user.userAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = username;
-
-            data.Clear();
-            data = user.getData(adap, "User");
-
-            if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
-            else return null;
-        }
-
+        
         public DataRow getUserRowbyID(int id)
         {
             table = showData();
