@@ -18,16 +18,18 @@ namespace InkaArt.Business.Production
         private DataTable table;
         private DataRow row;
 
-        public DataTable getData()
+        public TurnController()
         {
             turn = new TurnData();
-            adapt = new NpgsqlDataAdapter();
             data = new DataSet();
-
+        }
+        public DataTable getData()
+        {
+            
             turn.connect();
             adapt = turn.turnAdapter();
 
-            data.Reset();
+            data.Clear();
             data = turn.getData(adapt, "Turn");
 
             DataTable turnList = new DataTable();
@@ -38,17 +40,12 @@ namespace InkaArt.Business.Production
 
         public void insertData(string ini, string fin, string desc)
         {
-            turn = new TurnData();
-            adapt = new NpgsqlDataAdapter();
-            data = new DataSet();
-
             turn.connect();
             adapt = turn.turnAdapter();
 
-            data.Reset();
+            data.Clear();
             data = turn.getData(adapt, "Turn");
-
-            table = new DataTable();
+            
             table = data.Tables["Turn"];
 
             row = table.NewRow();
