@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using Npgsql;
+using System.Data;
 using InkaArt.Classes;
 using InkaArt.Data;
 using InkaArt.Data.Warehouse;
-using System.Data;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Warehouse
 {
     public class WarehouseCrud
     {
-        public void createWarehouse(string name,string description, string address, string state)
+
+        public void createWarehouse(string name, string description, string address, string state)
         {
             WarehouseData conn = new WarehouseData();
             string insertQuery;
@@ -22,6 +25,74 @@ namespace InkaArt.Business.Warehouse
             conn.connect();
             conn.execute(insertQuery);
             conn.closeConnection();
+        }
+
+        public void createMovement(int idNote, int idBill, int idMovementType, int idWarehouse, int idMovementReason, string dateIn)
+        {
+            WarehouseData conn = new WarehouseData();
+            string insertQuery;
+
+            insertQuery = "insert into inkaart.\"Movement\"(\"idNote\", \"idBill\", \"idMovementType\",\"idWarehouse\",\"idMovementReason\") values (" + idNote + ", " + idBill + ", " + idMovementType + "," + idWarehouse + ", " + idMovementReason + ");";
+            conn.connect();
+            conn.execute(insertQuery);
+            conn.closeConnection();
+        }
+
+        public bool existeProducto(int idProduct,int idWarehouse)
+        {
+            WarehouseData conn = new WarehouseData();
+            string selectQuery="";
+            NpgsqlDataReader datos;
+
+            selectQuery = selectQuery + "select count(*) from inkaart.\"Product-Warehouse\" where \"idProduct\" = " + idProduct + " and \"idWarehouse\" = " + idWarehouse + ";";
+            conn.connect();
+            datos = conn.warehouseAdapter(selectQuery);
+            int cantidad = 0;
+
+            while (datos.Read())
+            {
+                cantidad = Convert.ToInt32(datos[0]);                
+            }
+
+            if (cantidad > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public void insertProduct(int idProd,int idWarehouse)
+        {
+            string query="";
+
+            if (existeProducto(idProd,idWarehouse))
+            {
+                WarehouseData conn2 = new WarehouseData();
+                string selectQuery = "";
+                NpgsqlDataReader datos2;
+
+                selectQuery = selectQuery + "select \"currentStock\", \"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idProduct\" = " + idProd + " and \"idWarehouse\" = " + idWarehouse + ";";
+                conn2.connect();
+                datos2 = conn2.warehouseAdapter(selectQuery);
+                int currentStock = 0, virtualStock = 0;
+
+                while (datos2.Read())
+                {
+                    currentStock = Convert.ToInt32(datos2[0]) + 1;
+                    virtualStock = Convert.ToInt32(datos2[1]) + 1;
+                }
+                query = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + currentStock + ", \"virtualStock\" = " + virtualStock + " where \"idProduct\" = " + idProd + " and \"idWarehouse\" = " + idWarehouse + ";";
+
+            }
+            else
+            {
+                query = "insert into inkaart.\"Product-Warehouse\"(\"idProduct\", \"idWarehouse\", \"currentStock\",\"virtualStock\",\"state\") values (" + idProd + ", " + idWarehouse + ", 0, 0, 'Activo');";
+            }
+
+            WarehouseData conn = new WarehouseData();
+            conn.connect();
+            conn.execute(query);
+            conn.closeConnection();
+
         }
 
         public void updateWareHouse(int id,string name, string description, string address, string state)
@@ -164,6 +235,35 @@ namespace InkaArt.Business.Warehouse
             datos = conn.warehouseAdapter(selectQuery);
 //            conn.closeConnection();
             return datos;
+        }
+
+        
+        public void massiveUpload(string filename)
+        {
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    // creamos usuario
+                    int idNote, idBill, idMovementType, idWarehouse, idMovementReason,idProd;
+                    string dateIn="";
+                    idNote = int.Parse(values[2]);
+                    idBill = int.Parse(values[7]);
+                    idProd = int.Parse(values[4]);
+                    idMovementType = int.Parse(values[8]);
+                    idWarehouse = int.Parse(values[0]);
+                    idMovementReason = int.Parse(values[3]);
+                    dateIn = values[6];
+                    createMovement(idNote, idBill, idMovementType, idWarehouse, idMovementReason, dateIn);
+                    insertProduct(idProd, idWarehouse);
+                    // agregamos el producto a la tabla producto por almacen                    
+                }
+                MessageBox.Show("Carga de movimientos con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            }
         }
     }
 }

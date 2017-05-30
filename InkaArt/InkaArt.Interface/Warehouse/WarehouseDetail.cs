@@ -47,5 +47,10 @@ namespace InkaArt.Interface.Warehouse
             conn.createWarehouse(name, description, address, "Activo");
             MessageBox.Show("Almacén Creado", "Crear almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

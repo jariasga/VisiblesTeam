@@ -291,6 +291,7 @@
             this.buttonSearch.TabIndex = 52;
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // comboBox_status
             // 

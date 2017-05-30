@@ -128,5 +128,17 @@ namespace InkaArt.Interface.Warehouse
             
             MessageBox.Show("Almacenes actualizados", "Actualizar almacén",MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            WarehouseCrud movimientos = new WarehouseCrud();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                movimientos.massiveUpload(dialog.FileName);
+        }
+
+
     }
 }
