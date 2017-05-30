@@ -32,12 +32,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_fecha = new System.Windows.Forms.TextBox();
             this.dataGridView_turn = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBox_nombre = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox_producto = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox_proceso = new System.Windows.Forms.ComboBox();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,6 +39,13 @@
             this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Terminados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox_nombre = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_producto = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox_proceso = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@
             this.textBox_rotos = new System.Windows.Forms.TextBox();
             this.textBox_horaFin = new System.Windows.Forms.TextBox();
             this.textBox_terminados = new System.Windows.Forms.TextBox();
+            this.button_delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_turn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,12 +64,13 @@
             this.button_guardar.BackColor = System.Drawing.Color.SteelBlue;
             this.button_guardar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_guardar.ForeColor = System.Drawing.Color.White;
-            this.button_guardar.Location = new System.Drawing.Point(473, 415);
+            this.button_guardar.Location = new System.Drawing.Point(551, 423);
             this.button_guardar.Name = "button_guardar";
-            this.button_guardar.Size = new System.Drawing.Size(103, 42);
+            this.button_guardar.Size = new System.Drawing.Size(135, 42);
             this.button_guardar.TabIndex = 28;
             this.button_guardar.Text = "🖫 Guardar";
             this.button_guardar.UseVisualStyleBackColor = false;
+            this.button_guardar.Click += new System.EventHandler(this.button_guardar_Click);
             // 
             // label9
             // 
@@ -99,70 +102,13 @@
             this.HoraIni,
             this.HoraFin,
             this.Rotos,
-            this.Terminados});
-            this.dataGridView_turn.Location = new System.Drawing.Point(72, 181);
+            this.Terminados,
+            this.Seleccionar});
+            this.dataGridView_turn.Location = new System.Drawing.Point(34, 183);
             this.dataGridView_turn.Name = "dataGridView_turn";
-            this.dataGridView_turn.Size = new System.Drawing.Size(744, 216);
+            this.dataGridView_turn.Size = new System.Drawing.Size(814, 216);
             this.dataGridView_turn.TabIndex = 29;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(31, 45);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 18);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "Nombre";
-            // 
-            // comboBox_nombre
-            // 
-            this.comboBox_nombre.FormattingEnabled = true;
-            this.comboBox_nombre.Items.AddRange(new object[] {
-            "juan perez"});
-            this.comboBox_nombre.Location = new System.Drawing.Point(34, 66);
-            this.comboBox_nombre.Name = "comboBox_nombre";
-            this.comboBox_nombre.Size = new System.Drawing.Size(171, 26);
-            this.comboBox_nombre.TabIndex = 30;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 106);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 18);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Producto";
-            // 
-            // comboBox_producto
-            // 
-            this.comboBox_producto.FormattingEnabled = true;
-            this.comboBox_producto.Location = new System.Drawing.Point(34, 127);
-            this.comboBox_producto.Name = "comboBox_producto";
-            this.comboBox_producto.Size = new System.Drawing.Size(171, 26);
-            this.comboBox_producto.TabIndex = 32;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(233, 106);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 18);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "Proceso";
-            // 
-            // comboBox_proceso
-            // 
-            this.comboBox_proceso.FormattingEnabled = true;
-            this.comboBox_proceso.Location = new System.Drawing.Point(236, 127);
-            this.comboBox_proceso.Name = "comboBox_proceso";
-            this.comboBox_proceso.Size = new System.Drawing.Size(171, 26);
-            this.comboBox_proceso.TabIndex = 34;
+            this.dataGridView_turn.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_turn_CellContentClick);
             // 
             // Nombre
             // 
@@ -204,6 +150,69 @@
             // 
             this.Terminados.HeaderText = "Terminados";
             this.Terminados.Name = "Terminados";
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(31, 45);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 18);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "Nombre";
+            // 
+            // comboBox_nombre
+            // 
+            this.comboBox_nombre.FormattingEnabled = true;
+            this.comboBox_nombre.Location = new System.Drawing.Point(34, 66);
+            this.comboBox_nombre.Name = "comboBox_nombre";
+            this.comboBox_nombre.Size = new System.Drawing.Size(171, 26);
+            this.comboBox_nombre.TabIndex = 30;
+            this.comboBox_nombre.SelectedIndexChanged += new System.EventHandler(this.comboBox_nombre_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(31, 106);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 18);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Producto";
+            // 
+            // comboBox_producto
+            // 
+            this.comboBox_producto.FormattingEnabled = true;
+            this.comboBox_producto.Location = new System.Drawing.Point(34, 127);
+            this.comboBox_producto.Name = "comboBox_producto";
+            this.comboBox_producto.Size = new System.Drawing.Size(171, 26);
+            this.comboBox_producto.TabIndex = 32;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(233, 106);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 18);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "Proceso";
+            // 
+            // comboBox_proceso
+            // 
+            this.comboBox_proceso.FormattingEnabled = true;
+            this.comboBox_proceso.Location = new System.Drawing.Point(236, 127);
+            this.comboBox_proceso.Name = "comboBox_proceso";
+            this.comboBox_proceso.Size = new System.Drawing.Size(171, 26);
+            this.comboBox_proceso.TabIndex = 34;
             // 
             // label3
             // 
@@ -254,9 +263,9 @@
             this.button_agregar.BackColor = System.Drawing.Color.SteelBlue;
             this.button_agregar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_agregar.ForeColor = System.Drawing.Color.White;
-            this.button_agregar.Location = new System.Drawing.Point(304, 415);
+            this.button_agregar.Location = new System.Drawing.Point(196, 420);
             this.button_agregar.Name = "button_agregar";
-            this.button_agregar.Size = new System.Drawing.Size(103, 42);
+            this.button_agregar.Size = new System.Drawing.Size(124, 42);
             this.button_agregar.TabIndex = 44;
             this.button_agregar.Text = "🖫 Agregar";
             this.button_agregar.UseVisualStyleBackColor = false;
@@ -294,12 +303,26 @@
             this.textBox_terminados.Size = new System.Drawing.Size(172, 24);
             this.textBox_terminados.TabIndex = 48;
             // 
+            // button_delete
+            // 
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(362, 423);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(144, 39);
+            this.button_delete.TabIndex = 49;
+            this.button_delete.Text = "🗑 Eliminar Fila";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
+            // 
             // RegisterAssignedJob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(872, 519);
+            this.ClientSize = new System.Drawing.Size(872, 478);
+            this.Controls.Add(this.button_delete);
             this.Controls.Add(this.textBox_terminados);
             this.Controls.Add(this.textBox_horaFin);
             this.Controls.Add(this.textBox_rotos);
@@ -335,13 +358,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_fecha;
         private System.Windows.Forms.DataGridView dataGridView_turn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HoraIni;
-        private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rotos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Terminados;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox_nombre;
         private System.Windows.Forms.Label label1;
@@ -357,5 +373,14 @@
         private System.Windows.Forms.TextBox textBox_rotos;
         private System.Windows.Forms.TextBox textBox_horaFin;
         private System.Windows.Forms.TextBox textBox_terminados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraIni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rotos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Terminados;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.Button button_delete;
     }
 }

@@ -38,7 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_rawMaterial = new System.Windows.Forms.DataGridView();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,21 +49,19 @@
             this.numericUpDown_count = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button_return = new System.Windows.Forms.Button();
             this.button_save = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Nuevo = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_count)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.Nuevo.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textbox_newVer);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.checkBox_newVer);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.comboBox_version);
             this.groupBox1.Controls.Add(this.textBox_product);
@@ -74,7 +72,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(227, 356);
+            this.groupBox1.Size = new System.Drawing.Size(227, 221);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Basicos";
@@ -82,7 +80,7 @@
             // textbox_newVer
             // 
             this.textbox_newVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_newVer.Location = new System.Drawing.Point(31, 299);
+            this.textbox_newVer.Location = new System.Drawing.Point(30, 88);
             this.textbox_newVer.Name = "textbox_newVer";
             this.textbox_newVer.Size = new System.Drawing.Size(172, 24);
             this.textbox_newVer.TabIndex = 28;
@@ -91,7 +89,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(29, 277);
+            this.label6.Location = new System.Drawing.Point(28, 66);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(169, 18);
@@ -101,7 +99,7 @@
             // checkBox_newVer
             // 
             this.checkBox_newVer.AutoSize = true;
-            this.checkBox_newVer.Location = new System.Drawing.Point(32, 235);
+            this.checkBox_newVer.Location = new System.Drawing.Point(32, 26);
             this.checkBox_newVer.Name = "checkBox_newVer";
             this.checkBox_newVer.Size = new System.Drawing.Size(128, 22);
             this.checkBox_newVer.TabIndex = 26;
@@ -172,23 +170,23 @@
             this.textBox_id.Size = new System.Drawing.Size(172, 24);
             this.textBox_id.TabIndex = 14;
             // 
-            // dataGridView1
+            // dataGridView_rawMaterial
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridView_rawMaterial.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_rawMaterial.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rawMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_rawMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
             this.Nombre,
             this.Cantidad,
             this.Unidad,
             this.Borrar});
-            this.dataGridView1.Location = new System.Drawing.Point(15, 84);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(538, 184);
-            this.dataGridView1.TabIndex = 17;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView_rawMaterial.Location = new System.Drawing.Point(15, 84);
+            this.dataGridView_rawMaterial.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView_rawMaterial.Name = "dataGridView_rawMaterial";
+            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(538, 184);
+            this.dataGridView_rawMaterial.TabIndex = 17;
+            this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Producto
             // 
@@ -262,25 +260,12 @@
             this.label3.TabIndex = 23;
             this.label3.Text = "Materia Prima";
             // 
-            // button_return
-            // 
-            this.button_return.BackColor = System.Drawing.Color.Gray;
-            this.button_return.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_return.ForeColor = System.Drawing.Color.White;
-            this.button_return.Location = new System.Drawing.Point(434, 345);
-            this.button_return.Margin = new System.Windows.Forms.Padding(2);
-            this.button_return.Name = "button_return";
-            this.button_return.Size = new System.Drawing.Size(107, 39);
-            this.button_return.TabIndex = 28;
-            this.button_return.Text = "⟲ Regresar";
-            this.button_return.UseVisualStyleBackColor = false;
-            // 
             // button_save
             // 
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(280, 345);
+            this.button_save.Location = new System.Drawing.Point(53, 126);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(107, 39);
@@ -303,30 +288,42 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button_delete);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridView_rawMaterial);
             this.groupBox2.Controls.Add(this.button_add);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.comboBox_rawMaterial);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.numericUpDown_count);
-            this.groupBox2.Location = new System.Drawing.Point(280, 28);
+            this.groupBox2.Location = new System.Drawing.Point(280, 73);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(568, 295);
+            this.groupBox2.Size = new System.Drawing.Size(568, 302);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Receta";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // Nuevo
+            // 
+            this.Nuevo.Controls.Add(this.label6);
+            this.Nuevo.Controls.Add(this.textbox_newVer);
+            this.Nuevo.Controls.Add(this.checkBox_newVer);
+            this.Nuevo.Controls.Add(this.button_save);
+            this.Nuevo.Location = new System.Drawing.Point(13, 268);
+            this.Nuevo.Name = "Nuevo";
+            this.Nuevo.Size = new System.Drawing.Size(227, 187);
+            this.Nuevo.TabIndex = 29;
+            this.Nuevo.TabStop = false;
+            this.Nuevo.Text = "Nuevo";
             // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(861, 412);
-            this.Controls.Add(this.button_return);
-            this.Controls.Add(this.button_save);
+            this.ClientSize = new System.Drawing.Size(861, 479);
+            this.Controls.Add(this.Nuevo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -336,10 +333,12 @@
             this.Load += new System.EventHandler(this.Recipe_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_count)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.Nuevo.ResumeLayout(false);
+            this.Nuevo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -351,13 +350,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_id;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_rawMaterial;
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.ComboBox comboBox_rawMaterial;
         private System.Windows.Forms.NumericUpDown numericUpDown_count;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button_return;
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox_version;
@@ -371,5 +369,6 @@
         private System.Windows.Forms.CheckBox checkBox_newVer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textbox_newVer;
+        private System.Windows.Forms.GroupBox Nuevo;
     }
 }

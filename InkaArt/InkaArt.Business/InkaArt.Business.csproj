@@ -55,8 +55,12 @@
     <Compile Include="Production\FinalProductController.cs" />
     <Compile Include="Production\ProcessController.cs" />
     <Compile Include="Production\ProcessProductController.cs" />
+    <Compile Include="Production\RawMaterialController.cs" />
     <Compile Include="Production\RecipeController.cs" />
+    <Compile Include="Production\RecipeRawMaterialController.cs" />
     <Compile Include="Production\TurnController.cs" />
+    <Compile Include="Production\UnitController.cs" />
+    <Compile Include="Production\WorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\UserController.cs" />
   </ItemGroup>

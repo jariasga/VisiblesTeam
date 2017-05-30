@@ -19,8 +19,10 @@ namespace InkaArt.Interface.Production
             InitializeComponent();
             FinalProductController controlProduct = new FinalProductController();
             ProcessController controlProcess = new ProcessController();
+            WorkerController controlWorker = new WorkerController();
             DataTable productList = controlProduct.getData();
             DataTable processList = controlProcess.getData();
+            DataTable workerList = controlWorker.getData();
 
             textBox_fecha.Text = DateTime.Now.ToShortDateString();
 
@@ -29,6 +31,9 @@ namespace InkaArt.Interface.Production
 
             for (int i = 0; i < processList.Rows.Count; i++)
                 comboBox_proceso.Items.Add(processList.Rows[i]["description"].ToString());
+
+            for (int i = 0; i < workerList.Rows.Count; i++)
+                comboBox_nombre.Items.Add(workerList.Rows[i]["firstName"].ToString()+" "+ workerList.Rows[i]["lastName"].ToString());
 
 
         }
@@ -40,13 +45,49 @@ namespace InkaArt.Interface.Production
 
         private void button_agregar_Click(object sender, EventArgs e)
         {
-            dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
-                comboBox_producto.SelectedItem.ToString(),
-                comboBox_proceso.SelectedItem.ToString(),
-                textbox_horaIni.ToString(),
-                textBox_horaFin.ToString(),
-                textBox_rotos.ToString(),
-                textBox_terminados.ToString());
+                dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
+                    comboBox_producto.SelectedItem.ToString(),
+                    comboBox_proceso.SelectedItem.ToString(),
+                    textbox_horaIni.Text,
+                    textBox_horaFin.Text,
+                    textBox_rotos.Text,
+                    textBox_terminados.Text);
+
+        }
+
+        private void comboBox_nombre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView_turn_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView_turn.Rows.Count; i++)
+            {
+                bool s = Convert.ToBoolean(dataGridView_turn.Rows[i].Cells[7].Value);
+
+                if (s == true)
+                {
+                    dataGridView_turn.Rows.RemoveAt(i);
+                    dataGridView_turn.Refresh();
+                    break;
+                }
+            }
+        }
+
+        private void button_guardar_Click(object sender, EventArgs e)
+        {
+            DialogResult logout = MessageBox.Show("¿Esta seguro de guardar los datos?", "Inka Art",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            if (logout == DialogResult.Yes)
+            {
+            }
         }
     }
 }

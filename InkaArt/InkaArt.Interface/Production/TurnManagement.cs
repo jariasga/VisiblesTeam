@@ -71,6 +71,22 @@ namespace InkaArt.Interface.Production
 
                 control.insertData(ini,fin,desc);
             }
+            else //update
+            {
+                if (comboBox_turn.SelectedItem != null)
+                {
+                    TurnController control = new TurnController();
+
+                    string id = "";
+                    string ini, fin, desc;
+                    id = comboBox_turn.SelectedItem.ToString();
+                    ini = textBox_horaIni.Text.ToString();
+                    fin = textBox_horaFin.Text.ToString();
+                    desc = textBox_desc.Text.ToString();
+
+                    control.updateData(id, ini, fin, desc);
+                }
+            }
         }
     }
 }

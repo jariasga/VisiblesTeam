@@ -58,6 +58,28 @@ namespace InkaArt.Business.Production
             int rowsAffected = turn.insertData(data, adapt, "Turn");
         }
 
+        public void updateData(string id,string ini, string fin, string desc)
+        {
+            turn.connect();
+            adapt = turn.turnAdapter();
+
+            data.Clear();
+            data = turn.getData(adapt, "Turn");
+
+            table = data.Tables["Turn"];
+            for(int i = 0; i < table.Rows.Count; i++)
+            {
+                if (String.Compare(table.Rows[i]["idTurn"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["start"] = ini;
+                    table.Rows[i]["end"] = fin;
+                    table.Rows[i]["description"] = desc;
+                    break;
+                }
+            }
+            int rowUpdated = turn.updateData(data, adapt, "Turn");
+        }
+
     }
 
 }
