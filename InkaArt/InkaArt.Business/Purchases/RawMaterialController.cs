@@ -36,30 +36,42 @@ namespace InkaArt.Business.Purchases
             return rawMaterialList;
         }
 
-        public void insertData()
+        public void insertData(string nombre,string descripcion,string unidad,string estado,double precioPromedio)
         {
             rawMaterial.connect();
 
             table = data.Tables["RawMaterial"];
-
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-
-            adap.UpdateCommand = builder.GetUpdateCommand();
-            adap.InsertCommand = builder.GetInsertCommand();
-            adap.DeleteCommand = builder.GetDeleteCommand();
-
             row = table.NewRow();
 
-            row["name"] = "test1";
-            row["description"] = "descrip1";
-            row["unit"] = 1;
-            row["status"] = "Activo";
-            row["averagePrice"] =1.5;
+            row["name"] = nombre;
+            row["description"] = descripcion;
+            row["unit"] = unidad;
+            row["status"] = estado;
+            row["averagePrice"] = precioPromedio;
 
             table.Rows.Add(row);
 
-            int rowsAffected = adap.Update(data, "RawMaterial");
+            int rowsAffected = rawMaterial.insertData(data, adap, "RawMaterial");
 
+            rawMaterial.closeConnection();
+        }
+        public void updateData(string id, string nombre, string descripcion, string unidad, string estado, double precioPromedio)
+        {
+            rawMaterial.connect();
+            table = data.Tables["RawMaterial"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (String.Compare(table.Rows[i]["idRawMaterial"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["name"] = nombre;
+                    table.Rows[i]["description"] = descripcion;
+                    table.Rows[i]["unit"] = unidad;
+                    table.Rows[i]["status"] = estado;
+                    table.Rows[i]["averagePrice"] = precioPromedio;
+                    break;
+                }
+            }
+            rawMaterial.updateData(data, adap, "RawMaterial");
             rawMaterial.closeConnection();
         }
     }

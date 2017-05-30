@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using NpgsqlTypes;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
@@ -18,10 +16,11 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class PurchaseOrder : Form
     {
+        PurchaseOrderController control;
         public PurchaseOrder()
         {
             InitializeComponent();
-            PurchaseOrderController control = new PurchaseOrderController();
+            control = new PurchaseOrderController();
             DataTable purchaseOrderList = control.getData();
             dataGridView_purchaseOrder.DataSource = purchaseOrderList;
 
@@ -42,7 +41,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add(object sender, EventArgs e)
         {
-            Form purchaseDetail = new PurchaseOrderDetail();
+            Form purchaseDetail = new PurchaseOrderDetail(control);
             purchaseDetail.Show();
         }
 
@@ -69,7 +68,7 @@ namespace InkaArt.Interface.Purchases
         private void editPurchaseOrder(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentPurchaseOrder = dataGridView_purchaseOrder.CurrentRow;
-            Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder);
+            Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder,control);
             purchaseDetail.Show();
         }
     }

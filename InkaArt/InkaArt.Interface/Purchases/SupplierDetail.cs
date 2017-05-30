@@ -28,9 +28,10 @@ namespace InkaArt.Interface.Purchases
             control = controlForm;
             InitializeComponent();
         }
-        public SupplierDetail(DataGridViewRow currentSupplier)
+        public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm)
         {
             mode = 2; //editar Supplier
+            control = controlForm;
             InitializeComponent();
             textBox_idSupplier.Text = currentSupplier.Cells[1].Value.ToString();
             textBox_name.Text = currentSupplier.Cells[2].Value.ToString();
@@ -81,8 +82,8 @@ namespace InkaArt.Interface.Purchases
             else
             {
                 //hacer update
+                //control.updateData(textBox_idSupplier.Text, textBox_name.Text, int.Parse(textBox_ruc.Text), textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
             }
-            this.dataGridView1.Rows.Clear();
             this.Close();
         }
 

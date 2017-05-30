@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using NpgsqlTypes;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
@@ -14,10 +12,11 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class RawMaterials : Form
     {
+        RawMaterialController control;
         public RawMaterials()
         {
             InitializeComponent();
-            RawMaterialController control = new RawMaterialController();
+            control = new RawMaterialController();
             DataTable rawMaterialList = control.getData();
             dataGridView_rawMaterialsList.DataSource = rawMaterialList;
 
@@ -27,6 +26,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_rawMaterialsList.Columns["status"].HeaderText = "Estado";
             dataGridView_rawMaterialsList.Columns["description"].HeaderText = "Descripción";
             dataGridView_rawMaterialsList.Columns["averagePrice"].HeaderText = "Precio Promedio";
+            dataGridView_rawMaterialsList.Columns["averagePrice"].Visible = false;
         }
 
         private void button_search(object sender, EventArgs e)
@@ -57,14 +57,14 @@ namespace InkaArt.Interface.Purchases
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_raw_material = new RawMaterialDetail();
+            Form new_raw_material = new RawMaterialDetail(control);
             new_raw_material.Show();
         }
 
         private void editRawMaterialDetail(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentRawMaterial = dataGridView_rawMaterialsList.CurrentRow;
-            Form new_raw_material = new RawMaterialDetail(currentRawMaterial);
+            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control);
             new_raw_material.Show();
         }
     }

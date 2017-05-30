@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using NpgsqlTypes;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
@@ -63,7 +61,7 @@ namespace InkaArt.Interface.Purchases
 
         private void editUnitOfMeasurement(object sender, DataGridViewCellEventArgs e)
         {
-            Form new_unit_of_measurement = new UnitOfMeasurement(dataGridView_unitOfMeasurement.CurrentRow);
+            Form new_unit_of_measurement = new UnitOfMeasurement(dataGridView_unitOfMeasurement.CurrentRow,control);
             new_unit_of_measurement.Show();
         }
     }

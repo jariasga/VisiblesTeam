@@ -57,5 +57,27 @@ namespace InkaArt.Business.Purchases
 
             supplier.closeConnection();
         }
+        public void updateData(string id, string nombre, int ruc, string contacto, int telefono, string correo, string direccion, int prioridad, string estado)
+        {
+            supplier.connect();
+            table = data.Tables["Supplier"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (String.Compare(table.Rows[i]["idSupplier"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["name"] = nombre;
+                    table.Rows[i]["RUC"] = ruc;
+                    table.Rows[i]["contact"] = contacto;
+                    table.Rows[i]["telephone"] = telefono;
+                    table.Rows[i]["email"] = correo;
+                    table.Rows[i]["address"] = direccion;
+                    table.Rows[i]["status"] = estado;
+                    table.Rows[i]["priority"] = prioridad;
+                    break;
+                }
+            }
+            supplier.updateData(data, adap, "Supplier");
+            supplier.closeConnection();
+        }
     }
 }
