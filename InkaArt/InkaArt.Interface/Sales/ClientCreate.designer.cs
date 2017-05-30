@@ -98,12 +98,10 @@
             // radio_juridic
             // 
             this.radio_juridic.AutoSize = true;
-            this.radio_juridic.Checked = true;
             this.radio_juridic.Location = new System.Drawing.Point(6, 24);
             this.radio_juridic.Name = "radio_juridic";
             this.radio_juridic.Size = new System.Drawing.Size(100, 27);
             this.radio_juridic.TabIndex = 37;
-            this.radio_juridic.TabStop = true;
             this.radio_juridic.Text = "Jurídica";
             this.radio_juridic.UseVisualStyleBackColor = true;
             this.radio_juridic.CheckedChanged += new System.EventHandler(this.juridicRadio_CheckedChanged);
@@ -121,12 +119,10 @@
             // radio_national
             // 
             this.radio_national.AutoSize = true;
-            this.radio_national.Checked = true;
             this.radio_national.Location = new System.Drawing.Point(7, 25);
             this.radio_national.Name = "radio_national";
             this.radio_national.Size = new System.Drawing.Size(105, 27);
             this.radio_national.TabIndex = 34;
-            this.radio_national.TabStop = true;
             this.radio_national.Text = "Nacional";
             this.radio_national.UseVisualStyleBackColor = true;
             // 
@@ -157,10 +153,11 @@
             this.textbox_priority.BackColor = System.Drawing.Color.White;
             this.textbox_priority.Location = new System.Drawing.Point(197, 292);
             this.textbox_priority.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_priority.MaxLength = 9;
             this.textbox_priority.Name = "textbox_priority";
             this.textbox_priority.Size = new System.Drawing.Size(92, 30);
             this.textbox_priority.TabIndex = 29;
-            this.textbox_priority.Text = "Nivel 5";
+            this.textbox_priority.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textbox_priority_KeyUp);
             // 
             // label4
             // 
@@ -376,6 +373,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ClientCreate";
             this.Text = "Crear Cliente";
+            this.Load += new System.EventHandler(this.ClientCreate_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbar_priority)).EndInit();

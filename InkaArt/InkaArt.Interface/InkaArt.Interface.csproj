@@ -249,6 +249,12 @@
     <Compile Include="Sales\ClientOrderShow.designer.cs">
       <DependentUpon>ClientOrderShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\ClientSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientSearch.Designer.cs">
+      <DependentUpon>ClientSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\ClientShow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -486,6 +492,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ClientOrderShow.resx">
       <DependentUpon>ClientOrderShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientSearch.resx">
+      <DependentUpon>ClientSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\ClientShow.resx">
       <DependentUpon>ClientShow.cs</DependentUpon>

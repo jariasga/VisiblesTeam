@@ -28,7 +28,7 @@ namespace InkaArt.Data.Security
             user.connect();
             adap = user.userAdapter();
             adap.SelectCommand.Parameters[0].NpgsqlValue = username;
-            return user.getData(adap,"Users");
+            return user.getData(adap,"User");
         }
     }
 }

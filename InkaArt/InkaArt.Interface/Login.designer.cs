@@ -75,6 +75,7 @@
             this.textbox_user.Name = "textbox_user";
             this.textbox_user.Size = new System.Drawing.Size(161, 30);
             this.textbox_user.TabIndex = 3;
+            this.textbox_user.Text = "MCastañeda";
             // 
             // textbox_password
             // 
@@ -85,6 +86,7 @@
             this.textbox_password.PasswordChar = '*';
             this.textbox_password.Size = new System.Drawing.Size(161, 30);
             this.textbox_password.TabIndex = 4;
+            this.textbox_password.Text = "MCastañeda";
             // 
             // label_forgot
             // 
