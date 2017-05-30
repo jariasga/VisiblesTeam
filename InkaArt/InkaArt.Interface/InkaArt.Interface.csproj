@@ -51,8 +51,11 @@
     <StartupObject>InkaArt.Interface.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Npgsql">
-      <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\InkaArt.Libraries\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -55,5 +55,24 @@ namespace InkaArt.Interface.Security
             Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
             personalData.ShowDialog(this);
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonMassiveUpload_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string password = "";
+                /*user.insertData(username, description, status, password, role);
+                worker.insertData(firstName, lastName, dni, turn, user, phone, address, email);
+                worker.sendPassword(email, username, password);*/
+            }
+        }
     }
 }

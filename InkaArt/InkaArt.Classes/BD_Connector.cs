@@ -26,6 +26,7 @@ namespace InkaArt.Classes
             ConnectionString.Username = "admin";
             ConnectionString.Password = "fae48";
             ConnectionString.Pooling = true;
+            ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 
         public void connect()

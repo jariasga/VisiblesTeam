@@ -1,4 +1,8 @@
-﻿using InkaArt.Business.Security;
+﻿using GMap.NET;
+using GMap.NET.MapProviders;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using InkaArt.Business.Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,6 +84,7 @@ namespace InkaArt.Interface.Security
             {
                 comboBoxRoles.Items.Add(roleTable.Rows[i]["description"]);
             }
+            fillMap();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -111,6 +116,37 @@ namespace InkaArt.Interface.Security
         private void comboBoxRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxIDRol.Text = roleTable.Rows[comboBoxRoles.SelectedIndex]["idRole"].ToString();
+        }
+
+        private void fillMap()
+        {
+            GeoCoderStatusCode status;
+
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            PointLatLng? address = GMapProviders.GoogleMap.GetPoint(textBoxAddress.Text, out status);
+            gMapControl1.DragButton = MouseButtons.Left;
+            gMapControl1.CanDragMap = true;
+            gMapControl1.MarkersEnabled = true;
+
+            if (status == GeoCoderStatusCode.G_GEO_SUCCESS)
+            {
+                PointLatLng point = new PointLatLng(address.Value.Lat, address.Value.Lng);
+                gMapControl1.Position = point;
+
+                GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.orange_dot);
+                marker.ToolTipText = textBoxAddress.Text;
+                marker.ToolTip = new GMap.NET.WindowsForms.ToolTips.GMapRoundedToolTip(marker);
+                marker.IsVisible = true;
+
+                GMapOverlay over = new GMapOverlay("markers");
+                over.Markers.Add(marker);
+
+                gMapControl1.Overlays.Add(over);
+            }
+            gMapControl1.MinZoom = 0;
+            gMapControl1.MaxZoom = 25;
+            gMapControl1.Zoom = 16;
+            gMapControl1.AutoScroll = true;
         }
     }
 }
