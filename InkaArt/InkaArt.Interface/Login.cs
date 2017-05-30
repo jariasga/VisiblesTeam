@@ -18,7 +18,7 @@ namespace InkaArt.Interface
             UserController control = new UserController();
             bool pass;
             pass = control.checkCredentials(textbox_user.Text, textbox_password.Text);
-            
+
             if (pass)
             {
                 this.textbox_user.Clear();

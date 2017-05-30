@@ -39,6 +39,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,16 +48,15 @@
             this.stockMaximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonSearch = new System.Windows.Forms.Button();
-            this.comboBox_status = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox_nameRawMaterial = new System.Windows.Forms.TextBox();
-            this.textBox_idRawMaterial = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox_idRawMaterial = new System.Windows.Forms.TextBox();
+            this.textBox_nameRawMaterial = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +76,7 @@
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(14, 241);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 23);
+            this.label4.Size = new System.Drawing.Size(75, 18);
             this.label4.TabIndex = 24;
             this.label4.Text = "Dirección";
             // 
@@ -95,7 +95,7 @@
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(14, 131);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 23);
+            this.label3.Size = new System.Drawing.Size(92, 18);
             this.label3.TabIndex = 22;
             this.label3.Text = "Descripción";
             // 
@@ -104,7 +104,7 @@
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(17, 98);
             this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(214, 29);
+            this.textBox_name.Size = new System.Drawing.Size(214, 24);
             this.textBox_name.TabIndex = 21;
             // 
             // label2
@@ -113,7 +113,7 @@
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(14, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
+            this.label2.Size = new System.Drawing.Size(64, 18);
             this.label2.TabIndex = 20;
             this.label2.Text = "Nombre";
             // 
@@ -124,7 +124,7 @@
             this.textBox_idWarehouse.Location = new System.Drawing.Point(17, 42);
             this.textBox_idWarehouse.Name = "textBox_idWarehouse";
             this.textBox_idWarehouse.ReadOnly = true;
-            this.textBox_idWarehouse.Size = new System.Drawing.Size(214, 29);
+            this.textBox_idWarehouse.Size = new System.Drawing.Size(214, 24);
             this.textBox_idWarehouse.TabIndex = 19;
             // 
             // label1
@@ -133,7 +133,7 @@
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(14, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 23);
+            this.label1.Size = new System.Drawing.Size(20, 18);
             this.label1.TabIndex = 18;
             this.label1.Text = "Id";
             // 
@@ -148,7 +148,6 @@
             this.buttonSave.TabIndex = 26;
             this.buttonSave.Text = "🖫 Guardar";
             this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonReturn
             // 
@@ -179,6 +178,26 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(730, 259);
             this.dataGridView1.TabIndex = 48;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonAdd);
+            this.groupBox1.Controls.Add(this.buttonDelete);
+            this.groupBox1.Controls.Add(this.buttonSearch);
+            this.groupBox1.Controls.Add(this.comboBox_status);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.textBox_nameRawMaterial);
+            this.groupBox1.Controls.Add(this.textBox_idRawMaterial);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(249, 20);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(742, 422);
+            this.groupBox1.TabIndex = 49;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lista de materias primas";
             // 
             // Id
             // 
@@ -233,25 +252,87 @@
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.borrar.Width = 55;
             // 
-            // groupBox1
+            // label5
             // 
-            this.groupBox1.Controls.Add(this.buttonAdd);
-            this.groupBox1.Controls.Add(this.buttonDelete);
-            this.groupBox1.Controls.Add(this.buttonSearch);
-            this.groupBox1.Controls.Add(this.comboBox_status);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBox_nameRawMaterial);
-            this.groupBox1.Controls.Add(this.textBox_idRawMaterial);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(249, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(742, 422);
-            this.groupBox1.TabIndex = 49;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lista de materias primas";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(23, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(123, 18);
+            this.label5.TabIndex = 50;
+            this.label5.Text = "Id Materia Prima";
+            // 
+            // textBox_idRawMaterial
+            // 
+            this.textBox_idRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_idRawMaterial.Location = new System.Drawing.Point(26, 49);
+            this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
+            this.textBox_idRawMaterial.Size = new System.Drawing.Size(138, 24);
+            this.textBox_idRawMaterial.TabIndex = 50;
+            // 
+            // textBox_nameRawMaterial
+            // 
+            this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_nameRawMaterial.Location = new System.Drawing.Point(188, 49);
+            this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
+            this.textBox_nameRawMaterial.Size = new System.Drawing.Size(266, 24);
+            this.textBox_nameRawMaterial.TabIndex = 50;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(185, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(167, 18);
+            this.label6.TabIndex = 50;
+            this.label6.Text = "Nombre Materia Prima";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(475, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 18);
+            this.label7.TabIndex = 50;
+            this.label7.Text = "Estado";
+            // 
+            // comboBox_status
+            // 
+            this.comboBox_status.FormattingEnabled = true;
+            this.comboBox_status.Items.AddRange(new object[] {
+            "Activo",
+            "Eliminado"});
+            this.comboBox_status.Location = new System.Drawing.Point(478, 47);
+            this.comboBox_status.Name = "comboBox_status";
+            this.comboBox_status.Size = new System.Drawing.Size(128, 25);
+            this.comboBox_status.TabIndex = 51;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.BackColor = System.Drawing.Color.Gray;
+            this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.ForeColor = System.Drawing.Color.White;
+            this.buttonSearch.Location = new System.Drawing.Point(631, 34);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(88, 39);
+            this.buttonSearch.TabIndex = 52;
+            this.buttonSearch.Text = "🔎 Buscar";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.White;
+            this.buttonDelete.Location = new System.Drawing.Point(398, 369);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(151, 39);
+            this.buttonDelete.TabIndex = 53;
+            this.buttonDelete.Text = "🗑 Eliminar";
+            this.buttonDelete.UseVisualStyleBackColor = false;
             // 
             // buttonAdd
             // 
@@ -267,91 +348,9 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // buttonDelete
-            // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
-            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(398, 369);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(151, 39);
-            this.buttonDelete.TabIndex = 53;
-            this.buttonDelete.Text = "🗑 Eliminar";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            // 
-            // buttonSearch
-            // 
-            this.buttonSearch.BackColor = System.Drawing.Color.Gray;
-            this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch.ForeColor = System.Drawing.Color.White;
-            this.buttonSearch.Location = new System.Drawing.Point(631, 34);
-            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(88, 39);
-            this.buttonSearch.TabIndex = 52;
-            this.buttonSearch.Text = "🔎 Buscar";
-            this.buttonSearch.UseVisualStyleBackColor = false;
-            // 
-            // comboBox_status
-            // 
-            this.comboBox_status.FormattingEnabled = true;
-            this.comboBox_status.Items.AddRange(new object[] {
-            "Activo",
-            "Eliminado"});
-            this.comboBox_status.Location = new System.Drawing.Point(478, 47);
-            this.comboBox_status.Name = "comboBox_status";
-            this.comboBox_status.Size = new System.Drawing.Size(128, 29);
-            this.comboBox_status.TabIndex = 51;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(475, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 23);
-            this.label7.TabIndex = 50;
-            this.label7.Text = "Estado";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(185, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(209, 23);
-            this.label6.TabIndex = 50;
-            this.label6.Text = "Nombre Materia Prima";
-            // 
-            // textBox_nameRawMaterial
-            // 
-            this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_nameRawMaterial.Location = new System.Drawing.Point(188, 49);
-            this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
-            this.textBox_nameRawMaterial.Size = new System.Drawing.Size(266, 29);
-            this.textBox_nameRawMaterial.TabIndex = 50;
-            // 
-            // textBox_idRawMaterial
-            // 
-            this.textBox_idRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_idRawMaterial.Location = new System.Drawing.Point(26, 49);
-            this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
-            this.textBox_idRawMaterial.Size = new System.Drawing.Size(138, 29);
-            this.textBox_idRawMaterial.TabIndex = 50;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(23, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(157, 23);
-            this.label5.TabIndex = 50;
-            this.label5.Text = "Id Materia Prima";
-            // 
             // WarehouseDetail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1003, 455);
@@ -367,7 +366,7 @@
             this.Controls.Add(this.textBox_idWarehouse);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "WarehouseDetail";
             this.Text = "Detalle de almacén";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

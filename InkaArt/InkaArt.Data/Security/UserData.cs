@@ -15,7 +15,6 @@ namespace InkaArt.Data.Security
         {
             NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
 
-            //Creación de la query
             userAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"User\" WHERE username = :user;", Connection);
             userAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("user", DbType.AnsiStringFixedLength));
             userAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
@@ -24,5 +23,4 @@ namespace InkaArt.Data.Security
             return userAdapter;
         }
     }
-    
 }

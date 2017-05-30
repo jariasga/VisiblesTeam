@@ -45,10 +45,8 @@
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VerDetalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -75,10 +73,11 @@
             // textBox_address
             // 
             this.textBox_address.BackColor = System.Drawing.Color.White;
+            this.textBox_address.Enabled = false;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_address.Location = new System.Drawing.Point(240, 110);
             this.textBox_address.Name = "textBox_address";
-            this.textBox_address.Size = new System.Drawing.Size(334, 29);
+            this.textBox_address.Size = new System.Drawing.Size(334, 24);
             this.textBox_address.TabIndex = 28;
             // 
             // comboBox_status
@@ -90,16 +89,17 @@
             "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);
             this.comboBox_status.Name = "comboBox_status";
-            this.comboBox_status.Size = new System.Drawing.Size(192, 29);
+            this.comboBox_status.Size = new System.Drawing.Size(192, 25);
             this.comboBox_status.TabIndex = 27;
             // 
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
+            this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(25, 50);
             this.textBox_id.Name = "textBox_id";
-            this.textBox_id.Size = new System.Drawing.Size(192, 29);
+            this.textBox_id.Size = new System.Drawing.Size(192, 24);
             this.textBox_id.TabIndex = 26;
             // 
             // label5
@@ -107,7 +107,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(21, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 23);
+            this.label5.Size = new System.Drawing.Size(87, 18);
             this.label5.TabIndex = 25;
             this.label5.Text = "ID Almacén";
             // 
@@ -116,7 +116,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(237, 89);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 23);
+            this.label4.Size = new System.Drawing.Size(75, 18);
             this.label4.TabIndex = 24;
             this.label4.Text = "Dirección";
             // 
@@ -125,17 +125,18 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(21, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 23);
+            this.label3.Size = new System.Drawing.Size(58, 18);
             this.label3.TabIndex = 20;
             this.label3.Text = "Estado";
             // 
             // textBox_supplier
             // 
             this.textBox_supplier.BackColor = System.Drawing.Color.White;
+            this.textBox_supplier.Enabled = false;
             this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_supplier.Location = new System.Drawing.Point(240, 50);
             this.textBox_supplier.Name = "textBox_supplier";
-            this.textBox_supplier.Size = new System.Drawing.Size(446, 29);
+            this.textBox_supplier.Size = new System.Drawing.Size(446, 24);
             this.textBox_supplier.TabIndex = 17;
             // 
             // label1
@@ -143,7 +144,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(237, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(190, 23);
+            this.label1.Size = new System.Drawing.Size(152, 18);
             this.label1.TabIndex = 16;
             this.label1.Text = "Nombre del almacén";
             // 
@@ -159,7 +160,6 @@
             this.buttonSearch.TabIndex = 15;
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
-            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // dataGridView1
             // 
@@ -172,8 +172,7 @@
             this.Dirección,
             this.Estado,
             this.VerDetalle,
-            this.Eliminar,
-            this.Actualizar});
+            this.Eliminar});
             this.dataGridView1.Location = new System.Drawing.Point(12, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(709, 251);
@@ -217,19 +216,12 @@
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Eliminar.Width = 80;
             // 
-            // Actualizar
-            // 
-            this.Actualizar.HeaderText = "Actualizar";
-            this.Actualizar.Name = "Actualizar";
-            this.Actualizar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Actualizar.Width = 80;
-            // 
             // buttonDelete
             // 
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(302, 456);
+            this.buttonDelete.Location = new System.Drawing.Point(377, 456);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(151, 39);
             this.buttonDelete.TabIndex = 45;
@@ -242,7 +234,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(106, 456);
+            this.buttonAdd.Location = new System.Drawing.Point(210, 456);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(142, 39);
@@ -251,27 +243,12 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.button_add_click);
             // 
-            // buttonUpdate
-            // 
-            this.buttonUpdate.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonUpdate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdate.ForeColor = System.Drawing.Color.White;
-            this.buttonUpdate.Location = new System.Drawing.Point(501, 456);
-            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(142, 39);
-            this.buttonUpdate.TabIndex = 46;
-            this.buttonUpdate.Text = "＋ Update";
-            this.buttonUpdate.UseVisualStyleBackColor = false;
-            this.buttonUpdate.Click += new System.EventHandler(this.button1_Click);
-            // 
             // WarehouseIndex
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(744, 518);
-            this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
@@ -300,15 +277,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dirección;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn VerDetalle;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Actualizar;
-        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }

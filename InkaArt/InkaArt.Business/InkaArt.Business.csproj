@@ -65,12 +65,11 @@
     <Compile Include="Production\WorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\UserController.cs" />
-    <Compile Include="Warehouse\WarehouseCrud.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Production\" />
     <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
+    <Folder Include="Warehouse\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
