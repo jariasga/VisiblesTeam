@@ -1,5 +1,6 @@
 ﻿using InkaArt.Data.Security;
 using Npgsql;
+using NpgsqlTypes;
 using sendEmail;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace InkaArt.Business.Security
         private DataSet data;
         private DataTable table;
         private DataRow row;
+
+        public object NpgsqlValue { get; private set; }
 
         public WorkerController()
         {
@@ -36,7 +39,7 @@ namespace InkaArt.Business.Security
             return table;
         }
 
-        public int insertData(string firstName, string lastName, int dni, int turn, int user, int phone, string address, string email)
+        public int insertData(string firstName, string lastName, long dni, int turn, int user, long phone, string address, string email)
         {
             worker.connect();
             
@@ -54,8 +57,40 @@ namespace InkaArt.Business.Security
             row["email"] = email;
             
             table.Rows.Add(row);
-
+            
             int rowsAffected = worker.insertData(data, adap, "Worker");
+            return rowsAffected;
+        }
+
+        public int updateData(int workerID, string firstName, string lastName, long dni, int turn, int user, long phone, string address, string email)
+        {
+            worker.connect();
+
+            row = getWorkerRowbyID(workerID);
+            row["idWorker"] = workerID;
+            row["firstName"] = firstName;
+            row["lastName"] = lastName;
+            row["dni"] = dni;
+            row["turn"] = turn;
+            row["user"] = user;
+            row["phone"] = phone;
+            row["address"] = address;
+            row["email"] = email;
+            /*
+            adap.UpdateCommand.Parameters.AddWithValue("@idWorkerP", NpgsqlDbType.Text, 0, "\"idWorker\"", workerID);
+            adap.UpdateCommand.Parameters.AddWithValue("@firstNameP", NpgsqlDbType.Text, 0, "\"firstName\"", firstName);
+            adap.UpdateCommand.Parameters.AddWithValue("@lastNameP", NpgsqlDbType.Text, 0, "\"lastName\"", lastName);
+            adap.UpdateCommand.Parameters.AddWithValue("@dniP", NpgsqlDbType.Integer, 0, "\"dni\"", dni);
+            adap.UpdateCommand.Parameters.AddWithValue("@turnP", NpgsqlDbType.Integer, 0, "\"turn\"", turn);
+            adap.UpdateCommand.Parameters.AddWithValue("@userP", NpgsqlDbType.Integer, 0, "\"user\"", user);
+            adap.UpdateCommand.Parameters.AddWithValue("@phoneP", NpgsqlDbType.Integer, 0, "\"phone\"", phone);
+            adap.UpdateCommand.Parameters.AddWithValue("@addressP", NpgsqlDbType.Text, 0, "\"address\"", address);
+            adap.UpdateCommand.Parameters.AddWithValue("@emailP", NpgsqlDbType.Text, 0, "\"email\"", email);
+            adap.UpdateCommand.CommandTimeout = 50;
+
+            int rowsAffected = adap.Update(data, "Worker");
+            worker.closeConnection();*/
+            int rowsAffected = worker.updateData(data, adap, "Worker");
             return rowsAffected;
         }
 
@@ -63,13 +98,23 @@ namespace InkaArt.Business.Security
         {
             UserController user = new UserController();
             
-            return Int32.Parse(user.getUserRow(username)["idUser"].ToString());
+            return Convert.ToInt32(user.getUserRow(username)["idUser"].ToString().Trim());
         }
 
         public void sendPassword(string recipient, string username, string password)
         {
             googleMail mail = new googleMail();
             mail.sendEmail(recipient, username, password);
+        }
+
+        public DataRow getWorkerRowbyID(int id)
+        {
+            table = showData();
+            DataRow[] rows;
+            rows = table.Select("idWorker = " + id);
+            row = rows[0];
+
+            return row;
         }
     }
 }

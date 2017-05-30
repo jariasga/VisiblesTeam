@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\RoleData.cs" />
     <Compile Include="Security\UserData.cs" />
     <Compile Include="Security\WorkerData.cs" />
   </ItemGroup>

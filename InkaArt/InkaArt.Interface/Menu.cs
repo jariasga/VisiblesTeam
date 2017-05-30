@@ -219,5 +219,12 @@ namespace InkaArt.Interface
             change_password.MdiParent = this;
             change_password.Show();
         }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form roles = new UserRolesPermissions();
+            roles.MdiParent = this;
+            roles.Show();
+        }
     }
 }

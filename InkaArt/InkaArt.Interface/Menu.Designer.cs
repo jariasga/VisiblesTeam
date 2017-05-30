@@ -64,6 +64,7 @@
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -90,6 +91,7 @@
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.parámetrosGeneralesToolStripMenuItem,
             this.listaDeUsuariosToolStripMenuItem,
+            this.rolesToolStripMenuItem,
             this.toolStripSeparator1,
             this.modificarContraseñaToolStripMenuItem,
             this.cerrarSesiónToolStripMenuItem});
@@ -352,6 +354,13 @@
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.rolesToolStripMenuItem.Text = "Roles";
+            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,5 +425,6 @@
         private System.Windows.Forms.ToolStripMenuItem gestionarMovimientosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informeDeTurnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarContraseñaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
     }
 }

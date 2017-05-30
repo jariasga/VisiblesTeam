@@ -38,21 +38,20 @@ namespace InkaArt.Business.Security
             return table;
         }
 
-        public int updateData(string username, string description, int status, string password)
+        public int updateData(string username, string description, int status, int role)
         {
             user.connect();
 
             table = data.Tables["User"];
 
-            row = table.NewRow();
+            row = getUserRow(username);
 
             row["username"] = username;
-            row["password"] = sha.encrypt(password);
+            //row["password"] = sha.encrypt(password);
             row["status"] = status;
             row["description"] = description;
+            row["idRole"] = role;
             
-            table.Rows.Add(row);
-
             int rowsAffected = user.updateData(data, adap, "User");
 
             return rowsAffected;
@@ -64,7 +63,7 @@ namespace InkaArt.Business.Security
             */
         }
 
-        public int insertData(string username, string description, int status, ref string password)
+        public int insertData(string username, string description, int status, ref string password, int role)
         {
             //  Get connection string and connect to the database
             user.connect();
@@ -82,6 +81,7 @@ namespace InkaArt.Business.Security
             row["password"] = sha.encrypt(password);
             row["status"] = status;
             row["description"] = description;
+            row["idRole"] = role;
 
             //  Add the row created into the table
             table.Rows.Add(row);
@@ -107,10 +107,11 @@ namespace InkaArt.Business.Security
         public DataRow getUserRowbyID(int id)
         {
             table = showData();
-            //table.Rows.IndexOf();
+            DataRow[] rows;
+            rows = table.Select("idUser = " + id);
+            row = rows[0];
 
-            if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
-            else return null;
+            return row;
         }
     }
 }

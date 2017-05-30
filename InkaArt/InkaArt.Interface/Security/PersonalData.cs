@@ -15,36 +15,40 @@ namespace InkaArt.Interface.Security
     {
         private WorkerController worker;
         private UserController user;
+        private RoleController role;
         private DataRow userRow;
-        public PersonalData(DataGridView dataGridV, UserController userC, WorkerController workerC)
+        DataTable roleTable;
+        int workerID;
+        public PersonalData(DataGridView dataGridV, UserController userC, WorkerController workerC, RoleController roleC)
         {
             InitializeComponent();
+            workerID = Convert.ToInt32(dataGridV.SelectedRows[0].Cells["idWorker"].Value.ToString().Trim());
             textBoxName.Text = dataGridV.SelectedRows[0].Cells["firstName"].Value.ToString();
             textBoxLastName.Text = dataGridV.SelectedRows[0].Cells["lastName"].Value.ToString();
             textBoxDNI.Text = dataGridV.SelectedRows[0].Cells["dni"].Value.ToString();
             textBoxPhone.Text = dataGridV.SelectedRows[0].Cells["phone"].Value.ToString();
             textBoxAddress.Text = dataGridV.SelectedRows[0].Cells["address"].Value.ToString();
             textBoxEmail.Text = dataGridV.SelectedRows[0].Cells["email"].Value.ToString();
-
+            comboBoxUserTurn.Text = dataGridV.SelectedRows[0].Cells["turn"].Value.ToString();
             worker = workerC;
             user = userC;
+            role = roleC;
 
-            int idUserDataGrid = Int32.Parse(dataGridV.SelectedRows[0].Cells["user"].Value.ToString());
+            int idUserDataGrid = Convert.ToInt32(dataGridV.SelectedRows[0].Cells["user"].Value.ToString().Trim());
             userRow = user.getUserRowbyID(idUserDataGrid);
 
             textBoxUsername.Text = userRow["username"].ToString();
             textBoxDescription.Text = userRow["description"].ToString();
             comboBoxUserStatus.Text = userRow["status"].ToString();
-            comboBoxUserTurn.Text = userRow["turn"].ToString();
 
             textBoxUsername.Enabled = false;
             comboBoxUserStatus.Enabled = false;
-            comboBoxRoles.Enabled = false;
+            comboBoxRoles.Enabled = true;
 
             buttonSave.Text = "Guardar";
-            
+            fillBasicData();
         }
-        public PersonalData(UserController userC, WorkerController workerC)
+        public PersonalData(UserController userC, WorkerController workerC, RoleController roleC)
         {
             InitializeComponent();
             textBoxName.Text = "";
@@ -64,6 +68,18 @@ namespace InkaArt.Interface.Security
             buttonSave.Text = "Crear";
             worker = workerC;
             user = userC;
+            role = roleC;
+            fillBasicData();
+        }
+
+        private void fillBasicData()
+        {
+            roleTable = role.showData();
+            comboBoxRoles.Items.Clear();
+            for (int i = 0; i < roleTable.Rows.Count; i++)
+            {
+                comboBoxRoles.Items.Add(roleTable.Rows[i]["description"]);
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -72,16 +88,17 @@ namespace InkaArt.Interface.Security
             {
                 string password = "";
                 user.showData();
-                user.insertData(textBoxUsername.Text, textBoxDescription.Text, /*Int32.Parse(comboBoxUserStatus.SelectedText)*/ 1, ref password);                
-                worker.insertData(textBoxName.Text, textBoxLastName.Text, Int32.Parse(textBoxDNI.Text), /*Int32.Parse(comboBoxUserTurn.SelectedText)*/ 1, worker.getUserID(textBoxUsername.Text), Int32.Parse(textBoxPhone.Text), textBoxAddress.Text, textBoxEmail.Text);
+                user.insertData(textBoxUsername.Text, textBoxDescription.Text,  1, ref password, Convert.ToInt32(textBoxIDRol.Text));                
+                worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
 
                 worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
             }
             else if (string.Equals(buttonSave.Text, "Guardar"))
             {
                 user.showData();
-                //user.updateData(textBoxUsername.Text, textBoxDescription.Text, /*Int32.Parse(comboBoxUserStatus.SelectedText)*/ 1);
-                //worker.updateData(textBoxName.Text, textBoxLastName.Text, Int32.Parse(textBoxDNI.Text), /*Int32.Parse(comboBoxUserTurn.SelectedText)*/ 1, worker.getUserID(textBoxUsername.Text), Int32.Parse(textBoxPhone.Text), textBoxAddress.Text, textBoxEmail.Text);
+                user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text));
+                int userID = worker.getUserID(textBoxUsername.Text);
+                worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
             }
             this.Close();
         }
@@ -89,6 +106,11 @@ namespace InkaArt.Interface.Security
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void comboBoxRoles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxIDRol.Text = roleTable.Rows[comboBoxRoles.SelectedIndex]["idRole"].ToString();
         }
     }
 }

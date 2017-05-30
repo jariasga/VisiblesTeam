@@ -15,24 +15,25 @@ namespace InkaArt.Interface.Security
     {
         WorkerController worker;
         UserController user;
+        RoleController role;
         public UserMaintenance()
         {
             InitializeComponent();
+
+            worker = new WorkerController();
+            user = new UserController();
+            role = new RoleController();
 
             listUsers();
         }
 
         public void listUsers()
         {
-            worker = new WorkerController();
-            user = new UserController();
-            
-
             dataGridViewUserMaintenance.DataSource = worker.showData();
 
             dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
 
-            dataGridViewUserMaintenance.Columns["idWorker"].Visible = false;
+            dataGridViewUserMaintenance.Columns["idWorker"].HeaderText = "ID";
             dataGridViewUserMaintenance.Columns["firstName"].HeaderText = "Nombre";
             dataGridViewUserMaintenance.Columns["lastName"].HeaderText = "Apellido";
             dataGridViewUserMaintenance.Columns["dni"].HeaderText = "DNI";
@@ -45,13 +46,13 @@ namespace InkaArt.Interface.Security
 
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            Form personalData = new PersonalData(user, worker);
+            Form personalData = new PersonalData(user, worker, role);
             personalData.ShowDialog(this);
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
-            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker);
+            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
             personalData.ShowDialog(this);
         }
     }

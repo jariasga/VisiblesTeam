@@ -61,6 +61,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxUserPosition = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBoxIDRol = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -285,6 +287,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBoxIDRol);
+            this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.textBoxDescription);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.comboBoxRoles);
@@ -338,6 +342,7 @@
             this.comboBoxRoles.Name = "comboBoxRoles";
             this.comboBoxRoles.Size = new System.Drawing.Size(165, 28);
             this.comboBoxRoles.TabIndex = 9;
+            this.comboBoxRoles.SelectedIndexChanged += new System.EventHandler(this.comboBoxRoles_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -452,6 +457,28 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "Puesto de Trabajo:";
             // 
+            // textBoxIDRol
+            // 
+            this.textBoxIDRol.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxIDRol.Enabled = false;
+            this.textBoxIDRol.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxIDRol.Location = new System.Drawing.Point(185, 144);
+            this.textBoxIDRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxIDRol.Name = "textBoxIDRol";
+            this.textBoxIDRol.Size = new System.Drawing.Size(45, 26);
+            this.textBoxIDRol.TabIndex = 21;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(181, 119);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(49, 20);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "ID Rol:";
+            // 
             // PersonalData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -512,5 +539,7 @@
         private System.Windows.Forms.ComboBox comboBoxRoles;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxIDRol;
+        private System.Windows.Forms.Label label12;
     }
 }

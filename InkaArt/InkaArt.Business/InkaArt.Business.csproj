@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\LoginController.cs" />
+    <Compile Include="Security\RoleController.cs" />
     <Compile Include="Security\UserController.cs" />
     <Compile Include="Security\WorkerController.cs" />
   </ItemGroup>
