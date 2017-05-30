@@ -18,10 +18,11 @@ namespace InkaArt.Interface.Purchases
 {
     public partial class UnitOfMeasurementList : Form
     {
+        UnitOfMeasurementController control;
         public UnitOfMeasurementList()
         {
             InitializeComponent();
-            UnitOfMeasurementController control = new UnitOfMeasurementController();
+            control = new UnitOfMeasurementController();
             DataTable unitOfMeasurementsList = control.getData();
             dataGridView_unitOfMeasurement.DataSource = unitOfMeasurementsList;
 
@@ -51,7 +52,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_unit_of_measurement = new UnitOfMeasurement();
+            Form new_unit_of_measurement = new UnitOfMeasurement(control);
             new_unit_of_measurement.Show();
         }
 

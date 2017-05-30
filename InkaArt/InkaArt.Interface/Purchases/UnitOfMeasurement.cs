@@ -14,9 +14,17 @@ namespace InkaArt.Interface.Purchases
     public partial class UnitOfMeasurement : Form
     {
         int mode;
+        UnitOfMeasurementController controlForm;
         public UnitOfMeasurement()
         {
             mode = 1; //Crear unitOfMeasurement
+            controlForm = new UnitOfMeasurementController();
+            InitializeComponent();
+        }
+        public UnitOfMeasurement(UnitOfMeasurementController control)
+        {
+            mode = 1; //Crear unitOfMeasurement
+            controlForm = control;
             InitializeComponent();   
         }
 
@@ -41,9 +49,7 @@ namespace InkaArt.Interface.Purchases
             if (mode == 1)
             {
                 //hacer el insert
-                UnitOfMeasurementController control = new UnitOfMeasurementController();
-
-                control.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text);
+                controlForm.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text);
             }
             else
             {

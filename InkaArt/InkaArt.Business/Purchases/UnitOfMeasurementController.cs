@@ -32,7 +32,7 @@ namespace InkaArt.Business.Purchases
 
             DataTable unitOfMeasurementList = new DataTable();
             unitOfMeasurementList = data.Tables[0];
-
+            unitOfMeasurement.closeConnection();
             return unitOfMeasurementList;
         }
         public void insertData(string nombre, string abreviatura)
