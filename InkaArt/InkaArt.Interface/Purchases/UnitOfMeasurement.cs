@@ -19,6 +19,7 @@ namespace InkaArt.Interface.Purchases
         {
             mode = 1; //Crear unitOfMeasurement
             controlForm = new UnitOfMeasurementController();
+            controlForm.getData();
             InitializeComponent();
         }
         public UnitOfMeasurement(UnitOfMeasurementController control)
