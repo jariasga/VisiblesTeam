@@ -53,7 +53,9 @@
     <Compile Include="Purchases\RawMaterialData.cs" />
     <Compile Include="Purchases\SupplierData.cs" />
     <Compile Include="Purchases\UnitOfMeasurementData.cs" />
+    <Compile Include="Security\RoleData.cs" />
     <Compile Include="Security\UserData.cs" />
+    <Compile Include="Security\WorkerData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Production\" />

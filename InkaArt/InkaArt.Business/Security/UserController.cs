@@ -1,13 +1,7 @@
 ﻿using encription_SHA256;
 using InkaArt.Data.Security;
 using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NpgsqlTypes;
 
 namespace InkaArt.Business.Security
 {
@@ -18,57 +12,58 @@ namespace InkaArt.Business.Security
         private DataSet data;
         private DataTable table;
         private DataRow row;
-        public bool checkCredentials(string loginUsername, string loginPass)
-        {
-            bool verified = false;
-            SHA_2 sha = new SHA_2();
-            string key = sha.encrypt(loginPass);
+        private SHA_2 sha;
 
+        public UserController()
+        {
             user = new UserData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
+            sha = new SHA_2();
+        }
 
+        public DataTable showData()
+        {
             user.connect();
+
             adap = user.userAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = loginUsername;
-
-            data.Reset();
+            adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"User\";";
+            adap.SelectCommand.Parameters.Clear();
+            
             data = user.getData(adap, "User");
+            
+            table = data.Tables["User"];
 
-            //  Read data from DB
-            int rows = data.Tables[0].Rows.Count;
-            string userDB, keyDB;
+            user.closeConnection();
+            return table;
+        }
 
-            if (rows > 0)   //Encontro un usuario
-            {
-                userDB = data.Tables["User"].Rows[0]["username"].ToString();
-                keyDB = data.Tables["User"].Rows[0]["password"].ToString(); ;
-            }
-            else
-            {
-                userDB = "wrongUsername";
-                keyDB = "badPassword";
-            }
+        public int updateData(string username, string description, int status, int role)
+        {
+            user.connect();
 
+            table = data.Tables["User"];
 
-            if (string.Equals(key, keyDB) & string.Equals(loginUsername, userDB))
-            {
-                //  ToDo - GET ROLES
+            row = getUserRow(username);
 
-                //  GRANT ACCESS
-                verified = true;
-            }
+            row["username"] = username;
+            //row["password"] = sha.encrypt(password);
+            row["status"] = status;
+            row["description"] = description;
+            row["idRole"] = role;
+            
+            int rowsAffected = user.updateData(data, adap, "User");
 
+            return rowsAffected;
             /*
              * ================================================
              * TEST LINE TO INSERT DATA
             insertData();
              * ================================================
             */
-            return verified;
         }
 
-        public void insertData()
+        public int insertData(string username, string description, int status, ref string password, int role)
         {
             //  Get connection string and connect to the database
             user.connect();
@@ -77,19 +72,46 @@ namespace InkaArt.Business.Security
             table = data.Tables["User"];
 
             //  Create a new row for the table (Users)
+
             row = table.NewRow();
 
+            password = sha.getMiniSHA();
             //  Add the necesary fields
-            row["username"] = "test1";
-            row["password"] = "test1";
-            row["status"] = 1;
-            row["description"] = "descrip";
+            row["username"] = username;
+            row["password"] = sha.encrypt(password);
+            row["status"] = status;
+            row["description"] = description;
+            row["idRole"] = role;
 
             //  Add the row created into the table
             table.Rows.Add(row);
 
             //  Push the data to the database (Will only work once, as the DB only accepts unique users, please delete the user created)
             int rowsAffected = user.insertData(data, adap, "User");
+            return rowsAffected;
+        }
+
+        public DataRow getUserRow(string username)
+        {
+            user.connect();
+            adap = user.userAdapter();
+            adap.SelectCommand.Parameters[0].NpgsqlValue = username;
+
+            data.Clear();
+            data = user.getData(adap, "User");
+
+            if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
+            else return null;
+        }
+
+        public DataRow getUserRowbyID(int id)
+        {
+            table = showData();
+            DataRow[] rows;
+            rows = table.Select("idUser = " + id);
+            row = rows[0];
+
+            return row;
         }
     }
 }
