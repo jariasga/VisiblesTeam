@@ -59,7 +59,7 @@ namespace InkaArt.Business.Production
             int rowsAffected = process.insertData(data, adapt, "Process");
         }
 
-        public void updateData(string id, int totatWorkstations)
+        public void updateData(string id, string totatWorkstations)
         {
             process.connect();
             adapt = process.processAdapter();
@@ -68,10 +68,12 @@ namespace InkaArt.Business.Production
             data = process.getData(adapt, "Process");
 
             table = data.Tables["Process"];
+
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 if (String.Compare(table.Rows[i]["idProcess"].ToString(), id) == 0)
                 {
+                    //Debug.WriteLine(totatWorkstations);
                     table.Rows[i]["positionCount"] = totatWorkstations;
                     break;
                 }

@@ -94,11 +94,14 @@ namespace InkaArt.Interface.Production
                 string broken, finished, date, start, end, process, product, idWorker;
                 broken = finished = date = start = end = process = product = idWorker  = "";
                 
-                foreach (DataGridViewRow row in dataGridView_turn.Rows)//guadra toda la grilla
+                for (int i=0; i<dataGridView_turn.Rows.Count-1;i++)//guadra toda la grilla
                 {
+                    DataGridViewRow row = dataGridView_turn.Rows[i];
                     for(int j = 0; j < workerList.Rows.Count; j++)//super ineficiente :C
                     {
                         string nameAux = workerList.Rows[j]["firstName"].ToString() + " " + workerList.Rows[j]["lastName"].ToString();
+                        Debug.WriteLine(nameAux);
+                        Debug.WriteLine(row.Cells[0].Value.ToString());
                         if (String.Compare(nameAux, row.Cells[0].Value.ToString()) == 0)
                         {
                             idWorker = workerList.Rows[j]["idWorker"].ToString();
@@ -118,6 +121,7 @@ namespace InkaArt.Interface.Production
                     controlReport.insertData(broken, finished, date, start, end, product, process, idWorker);
 
                 }
+                dataGridView_turn.Rows.Clear();
             }
         }
     }
