@@ -57,9 +57,9 @@
             this.buttonNew.Location = new System.Drawing.Point(155, 265);
             this.buttonNew.Margin = new System.Windows.Forms.Padding(2);
             this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Size = new System.Drawing.Size(88, 39);
+            this.buttonNew.Size = new System.Drawing.Size(105, 39);
             this.buttonNew.TabIndex = 4;
-            this.buttonNew.Text = "Nuevo";
+            this.buttonNew.Text = "＋ Crear";
             this.buttonNew.UseVisualStyleBackColor = false;
             this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
             // 
@@ -71,9 +71,9 @@
             this.buttonModify.Location = new System.Drawing.Point(264, 265);
             this.buttonModify.Margin = new System.Windows.Forms.Padding(2);
             this.buttonModify.Name = "buttonModify";
-            this.buttonModify.Size = new System.Drawing.Size(88, 39);
+            this.buttonModify.Size = new System.Drawing.Size(105, 39);
             this.buttonModify.TabIndex = 5;
-            this.buttonModify.Text = "Modificar";
+            this.buttonModify.Text = "🖉 Editar";
             this.buttonModify.UseVisualStyleBackColor = false;
             this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
             // 
@@ -82,7 +82,7 @@
             this.buttonMassiveUpload.BackColor = System.Drawing.Color.Gray;
             this.buttonMassiveUpload.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMassiveUpload.ForeColor = System.Drawing.Color.White;
-            this.buttonMassiveUpload.Location = new System.Drawing.Point(503, 265);
+            this.buttonMassiveUpload.Location = new System.Drawing.Point(480, 265);
             this.buttonMassiveUpload.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMassiveUpload.Name = "buttonMassiveUpload";
             this.buttonMassiveUpload.Size = new System.Drawing.Size(199, 39);
@@ -97,10 +97,10 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Location = new System.Drawing.Point(379, 265);
+            this.buttonCancel.Location = new System.Drawing.Point(373, 265);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(86, 39);
+            this.buttonCancel.Size = new System.Drawing.Size(103, 39);
             this.buttonCancel.TabIndex = 16;
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = false;
@@ -110,6 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(835, 329);
             this.Controls.Add(this.buttonCancel);
