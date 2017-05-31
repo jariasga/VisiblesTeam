@@ -30,9 +30,9 @@ namespace InkaArt.Business.Security
             adap = user.userAdapter();
             adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"User\";";
             adap.SelectCommand.Parameters.Clear();
-            
+
             data = user.getData(adap, "User");
-            
+
             table = data.Tables["User"];
 
             user.closeConnection();
@@ -52,7 +52,7 @@ namespace InkaArt.Business.Security
             row["status"] = status;
             row["description"] = description;
             row["idRole"] = role;
-            
+
             int rowsAffected = user.updateData(data, adap, "User");
 
             return rowsAffected;
@@ -68,7 +68,7 @@ namespace InkaArt.Business.Security
         {
             //  Get connection string and connect to the database
             user.connect();
-            
+
             //  Get the dataset table to modify
             table = data.Tables["User"];
 
@@ -104,7 +104,7 @@ namespace InkaArt.Business.Security
             if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
             else return null;
         }
-        
+
         public DataRow getUserRowbyID(int id)
         {
             table = showData();
@@ -134,7 +134,7 @@ namespace InkaArt.Business.Security
                     worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
                     worker.sendPassword(values[10], values[0], password);
                 }
-            }            
+            }
         }
     }
 }

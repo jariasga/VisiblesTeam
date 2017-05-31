@@ -51,11 +51,8 @@
     <StartupObject>InkaArt.Interface.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GMap.NET.Core">
-      <HintPath>..\InkaArt.Libraries\GMap.NET.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="GMap.NET.WindowsForms">
-      <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
+    <Reference Include="Npgsql">
+      <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -294,16 +291,10 @@
     <Compile Include="Security\ChangePassword.designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Security\PersonalData.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Security\PersonalData.designer.cs">
-      <DependentUpon>PersonalData.cs</DependentUpon>
-    </Compile>
     <Compile Include="Security\UserMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Security\UserMaintenance.Designer.cs">
+    <Compile Include="Security\UserMaintenance.designer.cs">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
     </Compile>
     <Compile Include="Security\UserRolesPermissions.cs">
@@ -516,9 +507,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Security\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Security\PersonalData.resx">
-      <DependentUpon>PersonalData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Security\UserMaintenance.resx">
       <DependentUpon>UserMaintenance.cs</DependentUpon>

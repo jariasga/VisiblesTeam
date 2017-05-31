@@ -38,14 +38,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dataGridView_suppliersPrice = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.comboBox_unit = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.comboBox_unit = new System.Windows.Forms.ComboBox();
+            this.buttonCreate = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersPrice)).BeginInit();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -149,15 +152,19 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Estado";
             // 
-            // dataGridView_suppliersPrice
+            // dataGridView1
             // 
-            this.dataGridView_suppliersPrice.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_suppliersPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView_suppliersPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_suppliersPrice.Location = new System.Drawing.Point(15, 26);
-            this.dataGridView_suppliersPrice.Name = "dataGridView_suppliersPrice";
-            this.dataGridView_suppliersPrice.Size = new System.Drawing.Size(383, 382);
-            this.dataGridView_suppliersPrice.TabIndex = 13;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.nombre,
+            this.precio});
+            this.dataGridView1.Location = new System.Drawing.Point(15, 26);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(383, 382);
+            this.dataGridView1.TabIndex = 13;
             // 
             // buttonSave
             // 
@@ -195,6 +202,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos básicos";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(14, 238);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 18);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Unidad";
+            // 
+            // comboBox_unit
+            // 
+            this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_unit.FormattingEnabled = true;
+            this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
+            this.comboBox_unit.Name = "comboBox_unit";
+            this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
+            this.comboBox_unit.TabIndex = 13;
+            // 
             // buttonCreate
             // 
             this.buttonCreate.BackColor = System.Drawing.Color.SteelBlue;
@@ -209,28 +235,9 @@
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
-            // comboBox_unit
-            // 
-            this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_unit.FormattingEnabled = true;
-            this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
-            this.comboBox_unit.Name = "comboBox_unit";
-            this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
-            this.comboBox_unit.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(14, 238);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 18);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Unidad";
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView_suppliersPrice);
+            this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(273, 13);
             this.groupBox2.Name = "groupBox2";
@@ -238,6 +245,24 @@
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Proveedores";
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.Width = 50;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.Width = 200;
+            // 
+            // precio
+            // 
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.Width = 90;
             // 
             // RawMaterialDetail
             // 
@@ -250,7 +275,7 @@
             this.Controls.Add(this.buttonSave);
             this.Name = "RawMaterialDetail";
             this.Text = "Detalle de materia prima";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -270,12 +295,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dataGridView_suppliersPrice;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox_unit;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
     }
 }
