@@ -57,7 +57,6 @@ namespace InkaArt.Classes
             closeConnection();
             return rowsAffected;
         }
-
         public int insertData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);

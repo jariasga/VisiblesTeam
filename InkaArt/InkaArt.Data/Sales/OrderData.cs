@@ -44,14 +44,15 @@ namespace InkaArt.Data.Sales
         public int InsertOrderLines(DataTable orderLines, double igv)
         {
             connect();
-            adap = orderIdAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = igv;
+            adap = orderAdapter();
             data.Clear();
             data = getData(adap, "Order");
-            DataTable order = new DataTable();
+            DataTable order;
             order = data.Tables[0];
-            DataRow rowOrder = order.Rows[0];
+            int index = order.Rows.Count;
+            DataRow rowOrder = order.Rows[index-1];
             int orderId = int.Parse(rowOrder["idOrder"].ToString());
+//            int recipeId = 
             connect();
             adap = insertOrderLineAdapter();
             data.Clear();
@@ -60,8 +61,12 @@ namespace InkaArt.Data.Sales
             foreach(DataRow r in orderLines.Rows)
             {
                 row = table.NewRow();
-                row["quantity"] = r["Cantidad"];
-                row["quality"] = r["Calidad"];
+                var cantColumn = r["Cantidad"];
+                if (cantColumn == DBNull.Value) break;
+                float cant = float.Parse(r["Cantidad"].ToString());
+                string cali = r["Calidad"].ToString();
+                row["quantity"] = cant;
+                row["quality"] = cali;
                 row["idRecipe"] = getRecipeId(getProductId(r["Producto"].ToString()));
                 row["idProduct"] = getProductId(r["Producto"].ToString());
                 row["idOrder"] = orderId;
@@ -75,11 +80,11 @@ namespace InkaArt.Data.Sales
         {
             connect();
 
-            adap = recipeIdAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = productId;
+            var myAdap = recipeIdAdapter();
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = productId;
 
             data.Clear();
-            data = getData(adap, "Recipe");
+            data = getData(myAdap, "Recipe");
 
             DataTable documentList = new DataTable();
             documentList = data.Tables[0];

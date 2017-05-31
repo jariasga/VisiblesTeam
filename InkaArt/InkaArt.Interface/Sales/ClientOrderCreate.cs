@@ -44,20 +44,22 @@ namespace InkaArt.Interface.Sales
 
         private void ClientOrderCreate_Load(object sender, EventArgs e)
         {
-            //populateCombobox(combo_doc, saleDocumentList, "nombre", "idTipoDocumento");
-            combo_doc.DropDownStyle = ComboBoxStyle.DropDownList;
+            populateCombobox(combo_doc, saleDocumentList, "nombre", "idTipoDocumento");
             populateCombobox(combo_product, productList, "name", "idProduct");
-            combo_quality.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void populateCombobox(ComboBox combo, DataTable dataSource, string displayParam, string valueParam)
-        {
-            combo.BindingContext = new BindingContext();
-            combo.DisplayMember = displayParam;
-            combo.ValueMember = valueParam;
-            combo.DataSource = dataSource;
-            combo.DropDownStyle = ComboBoxStyle.DropDownList;
-            combo.Invalidate();
+        {            
+            var dp = displayParam;
+            var vp = valueParam;
+            Dictionary<string, string> obj = new Dictionary<string, string>();
+            foreach (DataRow row in dataSource.Rows)
+            {
+                obj.Add(row[dp].ToString(), row[vp].ToString());
+            }
+            combo.DataSource = new BindingSource(obj, null);
+            combo.DisplayMember = "Key";
+            combo.ValueMember = "Value";
         }
 
         private void button_back_Click(object sender, EventArgs e)

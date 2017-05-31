@@ -13,8 +13,8 @@ namespace InkaArt.Interface
 
         private void button_Login_Click(object sender, EventArgs e)
         {
-            var auth = new AuthenticationController();
-            bool pass = auth.CheckCredentials(textbox_user.Text,textbox_password.Text);
+            var auth = new UserController();
+            bool pass = auth.checkCredentials(textbox_user.Text,textbox_password.Text);
 
             if (pass)
             {
