@@ -59,12 +59,16 @@
     <Compile Include="Production\UnitData.cs" />
     <Compile Include="Production\WorkerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchases\PurchaseOrderData.cs" />
+    <Compile Include="Purchases\RawMaterial-SupplierData.cs" />
+    <Compile Include="Purchases\RawMaterialData.cs" />
+    <Compile Include="Purchases\SupplierData.cs" />
+    <Compile Include="Purchases\UnitOfMeasurementData.cs" />
     <Compile Include="Security\RoleData.cs" />
     <Compile Include="Security\UserData.cs" />
     <Compile Include="Security\WorkerData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
     <Folder Include="Warehouse\" />
   </ItemGroup>

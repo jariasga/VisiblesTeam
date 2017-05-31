@@ -15,8 +15,6 @@ namespace InkaArt.Business.Purchases
         private RawMaterial_SupplierData rawMaterial_supplier;
         private NpgsqlDataAdapter adap;
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
 
         public DataTable getDataSuppliers(int idRawMaterial)
         {

@@ -7,13 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Business.Purchases;
 
 namespace InkaArt.Interface.Purchases
 {
     public partial class SupplierDetail : Form
     {
+        int mode;
+        SupplierController control;
+
         public SupplierDetail()
         {
+            mode = 1; //crear Supplier
+            control = new SupplierController();
+            InitializeComponent();
+        }
+
+        public SupplierDetail(SupplierController controlForm)
+        {
+            mode = 1;
+            control = controlForm;
+            InitializeComponent();
+        }
+
+        public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm)
+        {
+            mode = 2; //editar Supplier
+            control = controlForm;
             InitializeComponent();
         }
         
@@ -58,6 +78,16 @@ namespace InkaArt.Interface.Purchases
             this.textBox_idRawMaterial.Text = "";
             this.textBox_nameRawMaterial.Text = "";
             this.dataGridView1.Rows.Clear();
+            if (mode == 1)
+            {
+                //hacer insert
+                control.insertData(textBox_name.Text,int.Parse(textBox_ruc.Text),textBox_contactName.Text,int.Parse(textBox_telephone.Text),textBox_email.Text,textBox_address.Text,int.Parse(textBox_priority.Text),comboBox_status.Text);
+            }
+            else
+            {
+                //hacer update
+                //control.updateData(textBox_idSupplier.Text, textBox_name.Text, int.Parse(textBox_ruc.Text), textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+            }
             this.Close();
         }
 

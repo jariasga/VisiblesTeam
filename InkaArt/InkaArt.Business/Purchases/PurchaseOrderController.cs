@@ -53,5 +53,24 @@ namespace InkaArt.Business.Purchases
 
             purchaseOrder.closeConnection();
         }
+        public void updateData(string id,int proveedor, string estado, DateTime creacion, DateTime entrega, double total)
+        {
+            purchaseOrder.connect();
+            table = data.Tables["PurcharseOrder"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (String.Compare(table.Rows[i]["idOrder"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["idSupplier"] = proveedor;
+                    table.Rows[i]["status"] = estado;
+                    table.Rows[i]["creationDate"] = creacion;
+                    table.Rows[i]["deliveryDate"] = entrega;
+                    table.Rows[i]["total"] = total;
+                    break;
+                }
+            }
+            purchaseOrder.updateData(data, adap, "PurcharseOrder");
+            purchaseOrder.closeConnection();
+        }
     }
 }

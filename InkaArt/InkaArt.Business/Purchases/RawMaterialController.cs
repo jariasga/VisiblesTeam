@@ -55,5 +55,24 @@ namespace InkaArt.Business.Purchases
 
             rawMaterial.closeConnection();
         }
+        public void updateData(string id, string nombre, string descripcion, string unidad, string estado, double precioPromedio)
+        {
+            rawMaterial.connect();
+            table = data.Tables["RawMaterial"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (String.Compare(table.Rows[i]["idRawMaterial"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["name"] = nombre;
+                    table.Rows[i]["description"] = descripcion;
+                    table.Rows[i]["unit"] = unidad;
+                    table.Rows[i]["status"] = estado;
+                    table.Rows[i]["averagePrice"] = precioPromedio;
+                    break;
+                }
+            }
+            rawMaterial.updateData(data, adap, "RawMaterial");
+            rawMaterial.closeConnection();
+        }
     }
 }

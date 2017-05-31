@@ -40,6 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="sendEmail">
+      <HintPath>..\InkaArt.Libraries\sendEmail.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -64,13 +67,17 @@
     <Compile Include="Production\UnitController.cs" />
     <Compile Include="Production\WorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchases\PurchaseOrderController.cs" />
+    <Compile Include="Purchases\RawMaterial-SupplierController.cs" />
+    <Compile Include="Purchases\RawMaterialController.cs" />
+    <Compile Include="Purchases\SupplierController.cs" />
+    <Compile Include="Purchases\UnitOfMeasurementController.cs" />
     <Compile Include="Security\loginController.cs" />
     <Compile Include="Security\RoleController.cs" />
     <Compile Include="Security\UserController.cs" />
     <Compile Include="Security\WorkerController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Purchases\" />
     <Folder Include="Sales\" />
     <Folder Include="Warehouse\" />
   </ItemGroup>
