@@ -86,7 +86,7 @@ namespace InkaArt.Business.Production
             string updateQuery;
             //int filtros = 0;
             updateQuery = "UPDATE inkaart.\"Process\" SET ";
-            updateQuery = updateQuery + "positionCount = '" + positionCount + "' ";
+            updateQuery = updateQuery + "position_count = '" + positionCount + "' ";
             updateQuery = updateQuery + " WHERE \"idProcess\"= " + id + ";";
             process.connect();
             process.execute(updateQuery);
