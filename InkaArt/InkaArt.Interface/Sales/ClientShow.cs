@@ -43,8 +43,8 @@ namespace InkaArt.Interface.Sales
                 radio_inactive.Checked = row["status"].ToString().Equals("0");
                 radio_inter.Checked = row["type"].ToString().Equals("1");
                 radio_national.Checked = row["type"].ToString().Equals("0");
-                radio_juridic.Checked = row["clientType"].ToString().Equals("1");
-                radio_natural.Checked = row["clientType"].ToString().Equals("0");
+                radio_juridic.Checked = row["clientType"].ToString().Equals("0");
+                radio_natural.Checked = row["clientType"].ToString().Equals("1");
                 textbox_address.Text = row["address"].ToString();
                 textbox_doc.Text = row["clientType"].Equals("0") ? row["ruc"].ToString() : row["dni"].ToString();
                 textbox_contact.Text = row["contactName"].ToString();
@@ -63,17 +63,26 @@ namespace InkaArt.Interface.Sales
 
         private void button_edit_Click(object sender, EventArgs e)
         {
-            if (first) enableFields();
+            if (first)
+            {
+                enableFields();
+                button_edit.Text = "🖫 Guardar";
+            }
             else
             {
-                string personType = radio_juridic.Checked ? "0" : "1";
-                string clientType = radio_national.Checked ? "0" : "1";
-                string state = radio_inactive.Checked ? "0" : "1";
+                string personType = "-1", clientType = "-1", state = "-1";
+                if (radio_juridic.Checked) personType = "0";
+                if (radio_natural.Checked) personType = "1";
+                if (radio_national.Checked) clientType = "0";
+                if (radio_inter.Checked) clientType = "1";
+                if (radio_inactive.Checked) state = "0";
+                if (radio_active.Checked) state = "1";
                 string priority = textbox_priority.Text;
-                int response = clientController.UpdateClient(clientId.ToString(),personType, textbox_name.Text, textbox_doc.Text, textbox_doc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);                
+                int response = clientController.UpdateClient(clientId.ToString(), personType, textbox_name.Text, textbox_doc.Text, textbox_doc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
                 if (response > 0)
                 {
                     MessageBox.Show(this, "El cliente ha sido actualizado correctamente.", "Editar cliente", MessageBoxButtons.OK);
+                    DialogResult = DialogResult.OK;
                     Close();
                 }
             }  

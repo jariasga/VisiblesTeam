@@ -50,7 +50,7 @@
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColumnD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_clients)).BeginInit();
             this.SuspendLayout();
@@ -207,6 +207,7 @@
             // 
             // grid_clients
             // 
+            this.grid_clients.AllowUserToAddRows = false;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
@@ -226,7 +227,7 @@
             this.cost,
             this.delete,
             this.Column1,
-            this.Column3});
+            this.ColumnD});
             this.grid_clients.Location = new System.Drawing.Point(47, 257);
             this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_clients.Name = "grid_clients";
@@ -264,35 +265,39 @@
             // 
             // Producto
             // 
+            this.Producto.Frozen = true;
             this.Producto.HeaderText = "ID";
             this.Producto.Name = "Producto";
             // 
             // Cantidad
             // 
+            this.Cantidad.Frozen = true;
             this.Cantidad.HeaderText = "Documento";
             this.Cantidad.Name = "Cantidad";
             // 
             // cost
             // 
+            this.cost.Frozen = true;
             this.cost.HeaderText = "Nombre";
             this.cost.Name = "cost";
             // 
             // delete
             // 
+            this.delete.Frozen = true;
             this.delete.HeaderText = "Estado";
             this.delete.Name = "delete";
             // 
             // Column1
             // 
+            this.Column1.Frozen = true;
             this.Column1.HeaderText = "Prioridad";
             this.Column1.Name = "Column1";
             // 
-            // Column3
+            // ColumnD
             // 
-            this.Column3.HeaderText = "Eliminar";
-            this.Column3.Name = "Column3";
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnD.Frozen = true;
+            this.ColumnD.HeaderText = "Eliminar";
+            this.ColumnD.Name = "ColumnD";
             // 
             // ClientsIndex
             // 
@@ -337,6 +342,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnD;
     }
 }
