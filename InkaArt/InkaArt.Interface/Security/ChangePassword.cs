@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Npgsql;
 using System.Data;
 
 namespace InkaArt.Interface.Security
