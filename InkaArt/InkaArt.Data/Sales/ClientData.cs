@@ -34,7 +34,7 @@ namespace InkaArt.Data.Sales
             clientUpdateAdapter.SelectCommand.Parameters[0].SourceColumn = "idClient";
             return clientUpdateAdapter;
         }
-        public int InsertClient(int personType, string name, int ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
+        public int InsertClient(int personType, string name, long ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
         {
             connect();
             adap = clientAdapter();

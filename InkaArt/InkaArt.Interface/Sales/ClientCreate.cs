@@ -37,15 +37,27 @@ namespace InkaArt.Interface.Sales
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            string personType = radio_juridic.Checked ? "0" : "1";
-            string clientType = radio_national.Checked ? "0" : "1";
-            string state = radio_inactive.Checked ? "0" : "1";
+            string personType = "-1", clientType = "-1", state = "-1";
+            if (radio_juridic.Checked) personType = "0";
+            if (radio_natural.Checked) personType = "1";
+            if (radio_national.Checked) clientType = "0";
+            if (inter_radio.Checked) clientType = "1";
+            if (radio_inactive.Checked) state = "0";
+            if (radio_active.Checked) state = "1";
             string priority = textbox_priority.Text;
-            int response = clientController.AddClient(personType, textbox_name.Text, textbox_ruc.Text, textbox_ruc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
-            if (response > 0)
+            string messageResponse = clientController.makeValidations(personType, textbox_name.Text, textbox_ruc.Text, textbox_ruc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
+            if (messageResponse.Equals("OK"))
             {
-                MessageBox.Show(this,"El cliente ha sido agregado correctamente.","Crear cliente",MessageBoxButtons.OK);
-                ClearFields();
+                int response = clientController.AddClient(personType, textbox_name.Text, textbox_ruc.Text, textbox_ruc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
+                if (response > 0)
+                {
+                    MessageBox.Show(this, "El cliente ha sido agregado correctamente.", "Crear cliente", MessageBoxButtons.OK);
+                    ClearFields();
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, messageResponse, "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -98,7 +110,13 @@ namespace InkaArt.Interface.Sales
 
         private void textbox_priority_KeyUp(object sender, KeyEventArgs e)
         {
-            trackbar_priority.Value = int.Parse(textbox_priority.Text);
+            if (clientController.validateTrackBar(textbox_priority.Text))
+            {
+                trackbar_priority.Value = int.Parse(textbox_priority.Text);
+            }else
+            {
+                MessageBox.Show(this, "La prioridad debe ser un número", "Error", MessageBoxButtons.OK);
+            }
         }
 
         private void ClientCreate_Load(object sender, EventArgs e)
