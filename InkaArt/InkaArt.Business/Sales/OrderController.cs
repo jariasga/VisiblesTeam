@@ -16,11 +16,13 @@ namespace InkaArt.Business.Sales
         {
             orderData = new OrderData();
         }
-        public void AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines)
+        public int AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines)
         {
             //orderData.InsertSaleDocument(documentTypeId, float.Parse(saleAmount), float.Parse(igv), float.Parse(totalAmount));
-            orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus);
-            orderData.InsertOrderLines(orderLines,double.Parse(igv));
+            int orderAdded, orderLineAdded;
+            orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus);
+            orderLineAdded = orderData.InsertOrderLines(orderLines,double.Parse(igv));
+            return orderAdded + orderLineAdded;
         }
         public DataTable GetDocumentTypes()
         {

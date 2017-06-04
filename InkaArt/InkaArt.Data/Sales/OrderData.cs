@@ -52,7 +52,6 @@ namespace InkaArt.Data.Sales
             int index = order.Rows.Count;
             DataRow rowOrder = order.Rows[index-1];
             int orderId = int.Parse(rowOrder["idOrder"].ToString());
-//            int recipeId = 
             connect();
             adap = insertOrderLineAdapter();
             data.Clear();
@@ -79,15 +78,15 @@ namespace InkaArt.Data.Sales
         private int getRecipeId(int productId)
         {
             connect();
-
-            var myAdap = recipeIdAdapter();
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = recipeIdAdapter();
             myAdap.SelectCommand.Parameters[0].NpgsqlValue = productId;
 
-            data.Clear();
-            data = getData(myAdap, "Recipe");
+            myData.Clear();
+            myData = getData(myAdap, "Recipe");
 
             DataTable documentList = new DataTable();
-            documentList = data.Tables[0];
+            documentList = myData.Tables[0];
             DataRow row = documentList.Rows[0];
             int id = int.Parse(row["idRecipe"].ToString());
             return id;
@@ -96,15 +95,15 @@ namespace InkaArt.Data.Sales
         private int getProductId(string productName)
         {
             connect();
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = productIdAdapter();
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = productName;
 
-            adap = productIdAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = productName;
-
-            data.Clear();
-            data = getData(adap, "Product");
+            myData.Clear();
+            myData = getData(myAdap, "Product");
 
             DataTable documentList = new DataTable();
-            documentList = data.Tables[0];
+            documentList = myData.Tables[0];
             DataRow row = documentList.Rows[0];
             int id = int.Parse(row["idProduct"].ToString());
             return id;

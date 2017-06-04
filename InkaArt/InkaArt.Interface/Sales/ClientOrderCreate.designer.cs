@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_save = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.date_delivery = new System.Windows.Forms.DateTimePicker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.combo_doc = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_create = new System.Windows.Forms.Button();
             this.textbox_name = new System.Windows.Forms.TextBox();
@@ -61,7 +62,6 @@
             this.numeric_quantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.combo_doc = new System.Windows.Forms.ComboBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -128,6 +128,17 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
+            // 
+            // combo_doc
+            // 
+            this.combo_doc.BackColor = System.Drawing.Color.White;
+            this.combo_doc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_doc.FormattingEnabled = true;
+            this.combo_doc.Location = new System.Drawing.Point(34, 154);
+            this.combo_doc.Name = "combo_doc";
+            this.combo_doc.Size = new System.Drawing.Size(368, 31);
+            this.combo_doc.TabIndex = 13;
+            this.combo_doc.SelectedIndexChanged += new System.EventHandler(this.combo_doc_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -323,14 +334,14 @@
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -412,6 +423,7 @@
             this.numeric_quantity.Size = new System.Drawing.Size(107, 30);
             this.numeric_quantity.TabIndex = 19;
             this.numeric_quantity.ValueChanged += new System.EventHandler(this.numeric_quantity_ValueChanged);
+            this.numeric_quantity.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numeric_quantity_KeyUp);
             // 
             // label4
             // 
@@ -432,17 +444,6 @@
             this.label5.Size = new System.Drawing.Size(89, 23);
             this.label5.TabIndex = 16;
             this.label5.Text = "Producto";
-            // 
-            // combo_doc
-            // 
-            this.combo_doc.BackColor = System.Drawing.Color.White;
-            this.combo_doc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combo_doc.FormattingEnabled = true;
-            this.combo_doc.Location = new System.Drawing.Point(34, 154);
-            this.combo_doc.Name = "combo_doc";
-            this.combo_doc.Size = new System.Drawing.Size(368, 31);
-            this.combo_doc.TabIndex = 13;
-            this.combo_doc.SelectedIndexChanged += new System.EventHandler(this.combo_doc_SelectedIndexChanged);
             // 
             // ClientOrderCreate
             // 

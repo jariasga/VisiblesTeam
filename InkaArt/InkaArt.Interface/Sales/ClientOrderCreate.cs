@@ -21,8 +21,6 @@ namespace InkaArt.Interface.Sales
         public ClientOrderCreate()
         {
             InitializeComponent();
-            saleDocumentList = orderController.GetDocumentTypes();
-            productList = orderController.GetProducts();
             amount = 0;
         }
 
@@ -44,7 +42,9 @@ namespace InkaArt.Interface.Sales
 
         private void ClientOrderCreate_Load(object sender, EventArgs e)
         {
+            saleDocumentList = orderController.GetDocumentTypes();
             populateCombobox(combo_doc, saleDocumentList, "nombre", "idTipoDocumento");
+            productList = orderController.GetProducts();
             populateCombobox(combo_product, productList, "name", "idProduct");
         }
 
@@ -75,8 +75,25 @@ namespace InkaArt.Interface.Sales
                 if (row["nombre"].ToString().Equals(combo_doc.Text))
                     docTypeId = int.Parse(row["idTipoDocumento"].ToString());
             }
-            DataTable orderLine = parseDataGrid(grid_orderline);
-            orderController.AddOrder(currentClientId, docTypeId, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, "Pedido Registrado", 1, orderLine);
+            DataTable orderLine = parseDataGrid(grid_orderline);            
+            int response = orderController.AddOrder(currentClientId, docTypeId, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, "Pedido Registrado", 1, orderLine);
+            if (response > 0)
+            {
+                MessageBox.Show(this, "El pedido ha sido registrado con éxito.", "Registrar Pedido", MessageBoxButtons.OK);
+                ClearFields();
+            }
+        }
+
+        private void ClearFields()
+        {
+            amount = 0;
+            currentClientId = -1;
+            date_delivery.Value = DateTime.Now;
+            textbox_doc.Clear();
+            textbox_name.Clear();
+            numeric_quantity.Value = 0;
+            grid_orderline.Rows.Clear();
+            textbox_amount.Text = textbox_igv.Text = textbox_total.Text = "S/. 0.00";
         }
 
         private DataTable parseDataGrid(DataGridView grid_orderline)
@@ -137,8 +154,11 @@ namespace InkaArt.Interface.Sales
         private void button_add_Click(object sender, EventArgs e)
         {
             Console.WriteLine(combo_product.SelectedValue);
+            if (productList.Rows.Count == 0) productList = orderController.GetProducts();
             foreach (DataRow row in productList.Rows)
             {
+                var aux = row["idProduct"];
+                string strAux = aux.ToString();
                 if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                 {
                     float price = float.Parse(row["localPrice"].ToString()) + float.Parse(row["basePrice"].ToString());
@@ -147,9 +167,13 @@ namespace InkaArt.Interface.Sales
                 }
             }
             textbox_amount.Text = amount.ToString();
-            //textbox_igv = GeneralParameters.IGV * amount;
             textbox_igv.Text = (0.18 * amount).ToString();
             textbox_total.Text = (1.18 * amount).ToString();
+        }
+
+        private void numeric_quantity_KeyUp(object sender, KeyEventArgs e)
+        {
+            button_add.Enabled = numeric_quantity.Value > 0;
         }
     }
 }
