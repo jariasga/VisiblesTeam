@@ -39,20 +39,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.checkBox_newVer = new System.Windows.Forms.CheckBox();
             this.dataGridView_rawMaterial = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_add = new System.Windows.Forms.Button();
             this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
             this.numericUpDown_count = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
-            this.button_delete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Nuevo = new System.Windows.Forms.GroupBox();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_count)).BeginInit();
@@ -179,39 +177,13 @@
             this.Producto,
             this.Nombre,
             this.Cantidad,
-            this.Unidad,
-            this.Borrar});
+            this.Unidad});
             this.dataGridView_rawMaterial.Location = new System.Drawing.Point(15, 84);
             this.dataGridView_rawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_rawMaterial.Name = "dataGridView_rawMaterial";
-            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(538, 184);
+            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(443, 184);
             this.dataGridView_rawMaterial.TabIndex = 17;
             this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Unidad
-            // 
-            this.Unidad.HeaderText = "Unidad";
-            this.Unidad.Name = "Unidad";
-            // 
-            // Borrar
-            // 
-            this.Borrar.HeaderText = "Borrar";
-            this.Borrar.Name = "Borrar";
             // 
             // button_add
             // 
@@ -275,21 +247,8 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
-            // button_delete
-            // 
-            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
-            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(448, 30);
-            this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(105, 39);
-            this.button_delete.TabIndex = 46;
-            this.button_delete.Text = "🗑 Eliminar";
-            this.button_delete.UseVisualStyleBackColor = false;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button_delete);
             this.groupBox2.Controls.Add(this.dataGridView_rawMaterial);
             this.groupBox2.Controls.Add(this.button_add);
             this.groupBox2.Controls.Add(this.label3);
@@ -319,12 +278,32 @@
             this.Nuevo.TabStop = false;
             this.Nuevo.Text = "Nuevo";
             // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Unidad
+            // 
+            this.Unidad.HeaderText = "Unidad";
+            this.Unidad.Name = "Unidad";
+            // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(861, 479);
+            this.ClientSize = new System.Drawing.Size(759, 479);
             this.Controls.Add(this.Nuevo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -361,16 +340,14 @@
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox_version;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Borrar;
-        private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBox_newVer;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textbox_newVer;
         private System.Windows.Forms.GroupBox Nuevo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
     }
 }

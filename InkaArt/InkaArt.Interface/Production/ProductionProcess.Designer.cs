@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView_productProceses = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_stock = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,6 +42,8 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_productProceses)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,16 +62,6 @@
             this.dataGridView_productProceses.Size = new System.Drawing.Size(244, 310);
             this.dataGridView_productProceses.TabIndex = 0;
             this.dataGridView_productProceses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
             // 
             // groupBox1
             // 
@@ -212,6 +202,18 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
             // ProductionProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -243,8 +245,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_exportPrice;
@@ -253,5 +253,7 @@
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.TextBox textBox_stock;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
     }
 }

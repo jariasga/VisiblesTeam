@@ -48,14 +48,14 @@
             this.textBox_horaFin = new System.Windows.Forms.TextBox();
             this.textBox_terminados = new System.Windows.Forms.TextBox();
             this.button_delete = new System.Windows.Forms.Button();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Terminados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraIni = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraIni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rotos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Terminados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_turn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -270,51 +270,58 @@
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
-            // Seleccionar
+            // Nombre
             // 
-            this.Seleccionar.HeaderText = "";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // Terminados
-            // 
-            this.Terminados.HeaderText = "Terminados";
-            this.Terminados.Name = "Terminados";
-            // 
-            // Rotos
-            // 
-            this.Rotos.HeaderText = "Rotos";
-            this.Rotos.Name = "Rotos";
-            // 
-            // HoraFin
-            // 
-            this.HoraFin.HeaderText = "HoraFin";
-            this.HoraFin.Name = "HoraFin";
-            // 
-            // HoraIni
-            // 
-            this.HoraIni.HeaderText = "HoraIni";
-            this.HoraIni.Name = "HoraIni";
-            // 
-            // Proceso
-            // 
-            this.Proceso.HeaderText = "Proceso";
-            this.Proceso.Name = "Proceso";
-            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Proceso.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Producto
             // 
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Producto.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // Nombre
+            // Proceso
             // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Nombre.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Proceso.HeaderText = "Proceso";
+            this.Proceso.Name = "Proceso";
+            this.Proceso.ReadOnly = true;
+            this.Proceso.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Proceso.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // HoraIni
+            // 
+            this.HoraIni.HeaderText = "HoraIni";
+            this.HoraIni.Name = "HoraIni";
+            this.HoraIni.ReadOnly = true;
+            // 
+            // HoraFin
+            // 
+            this.HoraFin.HeaderText = "HoraFin";
+            this.HoraFin.Name = "HoraFin";
+            this.HoraFin.ReadOnly = true;
+            // 
+            // Rotos
+            // 
+            this.Rotos.HeaderText = "Rotos";
+            this.Rotos.Name = "Rotos";
+            this.Rotos.ReadOnly = true;
+            // 
+            // Terminados
+            // 
+            this.Terminados.HeaderText = "Terminados";
+            this.Terminados.Name = "Terminados";
+            this.Terminados.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.Name = "Seleccionar";
             // 
             // RegisterAssignedJob
             // 

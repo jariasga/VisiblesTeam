@@ -45,6 +45,7 @@ namespace InkaArt.Interface.Production
             //agregar datos al combobox rawmaterial
             for (int i = 0; i < rawMList.Rows.Count; i++)
                 comboBox_rawMaterial.Items.Add(rawMList.Rows[i]["name"].ToString());
+            comboBox_rawMaterial.SelectedIndex = 1;
 
         }
 
@@ -189,18 +190,26 @@ namespace InkaArt.Interface.Production
 
             if (comboBox_version.SelectedItem != null)
             {
-                for (int i = 0; i < rawList.Rows.Count; i++)
+                if (numericUpDown_count.Value > 0)
                 {
-                    if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
+                    for (int i = 0; i < rawList.Rows.Count; i++)
                     {
-                        idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
-                        break;
+                        if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
+                        {
+                            idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
+                            break;
+                        }
                     }
-                }
 
-                controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
-                fillGrid();
-            }
+                    controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
+                    fillGrid();
+                }
+                else
+                    MessageBox.Show("La cantidad debe ser mayor a 0");
+
+            }else
+                MessageBox.Show("Seleccione una version");
+
         }
     }
 }
