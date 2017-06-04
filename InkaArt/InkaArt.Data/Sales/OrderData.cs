@@ -19,6 +19,18 @@ namespace InkaArt.Data.Sales
         {
             data = new DataSet();
         }
+        public DataTable GetOrders()
+        {
+            connect();
+            adap = orderAdapter();
+            data.Clear();
+            data = getData(adap, "Orders");
+            //Tengo el id del cliente, ahora tengo que buscar el campo RUC/DNI en la tabla cliente.
+            DataTable orderList = new DataTable();
+            orderList = data.Tables[0];
+            return orderList;
+        }
+
         public NpgsqlDataAdapter orderAdapter()
         {
             NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();

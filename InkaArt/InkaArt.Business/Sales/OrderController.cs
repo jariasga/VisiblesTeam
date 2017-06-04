@@ -16,6 +16,10 @@ namespace InkaArt.Business.Sales
         {
             orderData = new OrderData();
         }
+        public DataTable GetOrders()
+        {
+            return orderData.GetOrders();
+        }
         public int AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines)
         {
             //orderData.InsertSaleDocument(documentTypeId, float.Parse(saleAmount), float.Parse(igv), float.Parse(totalAmount));
