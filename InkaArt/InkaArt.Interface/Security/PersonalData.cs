@@ -112,7 +112,6 @@ namespace InkaArt.Interface.Security
                 else
                 {
                     worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
-
                     worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
                 }
                 

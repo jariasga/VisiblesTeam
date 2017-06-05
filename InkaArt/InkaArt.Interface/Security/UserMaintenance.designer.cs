@@ -48,12 +48,12 @@
             this.dataGridViewUserMaintenance.AllowUserToAddRows = false;
             this.dataGridViewUserMaintenance.AllowUserToDeleteRows = false;
             this.dataGridViewUserMaintenance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewUserMaintenance.Location = new System.Drawing.Point(12, 96);
+            this.dataGridViewUserMaintenance.Location = new System.Drawing.Point(12, 82);
             this.dataGridViewUserMaintenance.MultiSelect = false;
             this.dataGridViewUserMaintenance.Name = "dataGridViewUserMaintenance";
             this.dataGridViewUserMaintenance.ReadOnly = true;
             this.dataGridViewUserMaintenance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewUserMaintenance.Size = new System.Drawing.Size(811, 232);
+            this.dataGridViewUserMaintenance.Size = new System.Drawing.Size(899, 302);
             this.dataGridViewUserMaintenance.TabIndex = 0;
             this.dataGridViewUserMaintenance.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUserMaintenance_CellContentDoubleClick);
             // 
@@ -62,7 +62,7 @@
             this.buttonNew.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonNew.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNew.ForeColor = System.Drawing.Color.White;
-            this.buttonNew.Location = new System.Drawing.Point(155, 349);
+            this.buttonNew.Location = new System.Drawing.Point(183, 411);
             this.buttonNew.Margin = new System.Windows.Forms.Padding(2);
             this.buttonNew.Name = "buttonNew";
             this.buttonNew.Size = new System.Drawing.Size(88, 39);
@@ -76,7 +76,7 @@
             this.buttonModify.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonModify.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonModify.ForeColor = System.Drawing.Color.White;
-            this.buttonModify.Location = new System.Drawing.Point(264, 349);
+            this.buttonModify.Location = new System.Drawing.Point(292, 411);
             this.buttonModify.Margin = new System.Windows.Forms.Padding(2);
             this.buttonModify.Name = "buttonModify";
             this.buttonModify.Size = new System.Drawing.Size(88, 39);
@@ -90,7 +90,7 @@
             this.buttonMassiveUpload.BackColor = System.Drawing.Color.Gray;
             this.buttonMassiveUpload.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMassiveUpload.ForeColor = System.Drawing.Color.White;
-            this.buttonMassiveUpload.Location = new System.Drawing.Point(503, 349);
+            this.buttonMassiveUpload.Location = new System.Drawing.Point(531, 411);
             this.buttonMassiveUpload.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMassiveUpload.Name = "buttonMassiveUpload";
             this.buttonMassiveUpload.Size = new System.Drawing.Size(199, 39);
@@ -105,7 +105,7 @@
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Location = new System.Drawing.Point(379, 349);
+            this.buttonCancel.Location = new System.Drawing.Point(407, 411);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(86, 39);
@@ -190,7 +190,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(835, 399);
+            this.ClientSize = new System.Drawing.Size(923, 470);
             this.Controls.Add(this.buttonFilter);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonCancel);
@@ -198,6 +198,8 @@
             this.Controls.Add(this.buttonModify);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.dataGridViewUserMaintenance);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "UserMaintenance";
             this.Text = "Mantenimiento de Usuarios";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserMaintenance)).EndInit();
