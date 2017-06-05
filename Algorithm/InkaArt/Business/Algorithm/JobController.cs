@@ -1,10 +1,12 @@
-﻿using InkaArt.Data.Algorithm;
-using Npgsql;
+﻿using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using InkaArt.Common;
+using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
 {

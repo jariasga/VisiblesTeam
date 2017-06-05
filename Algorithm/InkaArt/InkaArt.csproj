@@ -58,7 +58,7 @@
     <Compile Include="Business\Algorithm\RatioResumeController.cs" />
     <Compile Include="Business\Algorithm\RecipeController.cs" />
     <Compile Include="Business\Algorithm\WorkerController.cs" />
-    <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="Common\DatabaseConnection.cs" />
     <Compile Include="Data\Algorithm\Job.cs" />
     <Compile Include="Data\Algorithm\Ratio.cs" />
     <Compile Include="Data\Algorithm\RatioResume.cs" />
