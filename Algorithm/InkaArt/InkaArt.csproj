@@ -52,11 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Algorithm\Assignment.cs" />
+    <Compile Include="Business\Algorithm\IndexController.cs" />
+    <Compile Include="Business\Algorithm\ProcessController.cs" />
+    <Compile Include="Data\Algorithm\Assignment.cs" />
     <Compile Include="Business\Algorithm\Grasp.cs" />
     <Compile Include="Business\Algorithm\Instance.cs" />
-    <Compile Include="Business\Algorithm\TabuMove.cs" />
-    <Compile Include="Business\Algorithm\TabuQueue.cs" />
+    <Compile Include="Data\Algorithm\Index.cs" />
+    <Compile Include="Data\Algorithm\Process.cs" />
+    <Compile Include="Data\Algorithm\TabuMove.cs" />
+    <Compile Include="Data\Algorithm\TabuQueue.cs" />
     <Compile Include="Business\Algorithm\TabuSearch.cs" />
     <Compile Include="Business\Algorithm\JobController.cs" />
     <Compile Include="Business\Algorithm\RatioController.cs" />
