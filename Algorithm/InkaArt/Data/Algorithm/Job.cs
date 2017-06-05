@@ -13,7 +13,7 @@ namespace InkaArt.Data.Production
         private int id_job;
         private string name;
         private int id_process;
-        private int idProduct;
+        private int id_product;
 
         public int ID
         {
@@ -29,15 +29,15 @@ namespace InkaArt.Data.Production
         }
         public int Product
         {
-            get { return idProduct; }
+            get { return id_product; }
         }
 
-        public Job(int id_job, string name, int id_process, int idProduct)
+        public Job(int id_job, string name, int id_process, int id_product)
         {
             this.id_job = id_job;
             this.name = name;
             this.id_process = id_process;
-            this.idProduct = idProduct;
+            this.id_product = id_product;
         }
 
     }

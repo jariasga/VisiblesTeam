@@ -10,11 +10,11 @@ namespace InkaArt.Data.Production
 {
     class TurnReport
     {
-        private int idReport;
+        private int id_report;
         private DateTime date;
-        private int idWorker;
+        private int id_worker;
         private int id_job; //Puesto de trabajo = Proceso x Producto
-        private int idRecipe;
+        private int id_recipe;
         private TimeSpan start;
         private TimeSpan end;
         private int broken;
@@ -24,7 +24,7 @@ namespace InkaArt.Data.Production
 
         public int ID
         {
-            get { return idReport; }
+            get { return id_report; }
         }
         public DateTime Date
         {
@@ -33,8 +33,8 @@ namespace InkaArt.Data.Production
         }
         public int Worker
         {
-            get { return idWorker; }
-            //set { idWorker = value; }
+            get { return id_worker; }
+            //set { id_worker = value; }
         }
         public int Job
         {
@@ -43,8 +43,8 @@ namespace InkaArt.Data.Production
         }
         public int Recipe
         {
-            get { return idRecipe; }
-            //set { idRecipe = value; }
+            get { return id_recipe; }
+            //set { id_recipe = value; }
         }
         public TimeSpan Start
         {
@@ -77,14 +77,14 @@ namespace InkaArt.Data.Production
             set { time = value; }
         }
 
-        public TurnReport(int idReport, DateTime date, int idWorker, int id_job, int idRecipe, TimeSpan start, TimeSpan end,
+        public TurnReport(int id_report, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
             int broken, int produced, double breakage, double time)
         {
-            this.idReport = idReport;
+            this.id_report = id_report;
             this.date = date;
-            this.idWorker = idWorker;
+            this.id_worker = id_worker;
             this.id_job = id_job;
-            this.idRecipe = idRecipe;
+            this.id_recipe = id_recipe;
             this.start = start;
             this.end = end;
             this.broken = broken;
@@ -99,14 +99,14 @@ namespace InkaArt.Data.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO TurnReport2(date, idWorker, id_job, idRecipe, " +
-                "start, end, broken, produced, breakage, time) VALUES(:date, :idWorker, :id_job, :idRecipe, " +
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO TurnReport2(date, id_worker, id_job, id_recipe, " +
+                "start, end, broken, produced, breakage, time) VALUES(:date, :id_worker, :id_job, :id_recipe, " +
                 ":start, :end, :broken, :produced, :breakage, :time)", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
-            command.Parameters.AddWithValue("idWorker", NpgsqlDbType.Integer, idWorker);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
             command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("idRecipe", NpgsqlDbType.Integer, idRecipe);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
             command.Parameters.AddWithValue("start", NpgsqlDbType.Time, start);
             command.Parameters.AddWithValue("end", NpgsqlDbType.Time, end);
             command.Parameters.AddWithValue("broken", NpgsqlDbType.Integer, broken);
@@ -115,16 +115,16 @@ namespace InkaArt.Data.Production
             command.Parameters.AddWithValue("time", NpgsqlDbType.Double, time);
             command.Prepare();
 
-            this.idReport = (int)command.ExecuteScalar();
+            this.id_report = (int)command.ExecuteScalar();
             connection.Close();
         }
 
-        public void Update(DateTime date, int idWorker, int id_job, int idRecipe, TimeSpan start, TimeSpan end,
+        public void Update(DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
             int broken, int produced, double breakage, double time)
         {
-            this.idWorker = idWorker;
+            this.id_worker = id_worker;
             this.id_job = id_job;
-            this.idRecipe = idRecipe;
+            this.id_recipe = id_recipe;
             this.start = start;
             this.end = end;
             this.broken = broken;
@@ -136,21 +136,21 @@ namespace InkaArt.Data.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("UPDATE TurnReport2 SET date = :date, idWorker = :idWorker, "
-                + "id_job = :id_job, idRecipe = :idRecipe, start = :start, end = :end, broken = :broken, " +
-                "produced = :produced WHERE idReport = :idReport", connection);
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE TurnReport2 SET date = :date, id_worker = :id_worker, "
+                + "id_job = :id_job, id_recipe = :id_recipe, start = :start, end = :end, broken = :broken, " +
+                "produced = :produced WHERE id_report = :id_report", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
-            command.Parameters.AddWithValue("idWorker", NpgsqlDbType.Integer, idWorker);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
             command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("idRecipe", NpgsqlDbType.Integer, idRecipe);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
             command.Parameters.AddWithValue("start", NpgsqlDbType.Time, start);
             command.Parameters.AddWithValue("end", NpgsqlDbType.Time, end);
             command.Parameters.AddWithValue("broken", NpgsqlDbType.Integer, broken);
             command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, produced);
             command.Parameters.AddWithValue("breakage", NpgsqlDbType.Double, breakage);
             command.Parameters.AddWithValue("time", NpgsqlDbType.Double, time);
-            command.Parameters.AddWithValue("idReport", NpgsqlDbType.Integer, idReport);  
+            command.Parameters.AddWithValue("id_report", NpgsqlDbType.Integer, id_report);  
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -162,9 +162,9 @@ namespace InkaArt.Data.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM TurnReport2 WHERE idReport = :idReport", connection);
+            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM TurnReport2 WHERE id_report = :id_report", connection);
 
-            command.Parameters.AddWithValue("idReport", NpgsqlDbType.Integer, idReport);
+            command.Parameters.AddWithValue("id_report", NpgsqlDbType.Integer, id_report);
 
             command.ExecuteNonQuery();
             connection.Close();

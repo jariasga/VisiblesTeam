@@ -29,13 +29,13 @@ namespace InkaArt.Business.Algorithm
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id_index = reader.GetInt32(0);
+                int id_resume = reader.GetInt32(0);
                 int id_worker = reader.GetInt32(1);
                 int id_job = reader.GetInt32(2);
                 int id_recipe = reader.GetInt32(3);
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
-                TurnReportResume turn_report_resume = new TurnReportResume(id_index, id_worker, id_job, id_recipe,
+                TurnReportResume turn_report_resume = new TurnReportResume(id_resume, id_worker, id_job, id_recipe,
                     average_breakage, average_time);
                 turn_report_resumes.Add(turn_report_resume);
             }

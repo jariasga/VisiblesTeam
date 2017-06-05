@@ -10,13 +10,13 @@ namespace InkaArt.Data.Production
     //- Anthony
     class Worker
     {
-        private int idWorker;
+        private int id_worker;
         private string name;
         private string last_name;
 
         public int ID
         {
-            get { return idWorker; }
+            get { return id_worker; }
         }
         public string Name
         {
@@ -27,9 +27,9 @@ namespace InkaArt.Data.Production
             get { return last_name; }
         }
 
-        public Worker(int idWorker, string name, string last_name)
+        public Worker(int id_worker, string name, string last_name)
         {
-            this.idWorker = idWorker;
+            this.id_worker = id_worker;
             this.name = name;
             this.last_name = last_name;
         }
