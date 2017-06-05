@@ -19,6 +19,7 @@ namespace InkaArt.Data.Security
 
             //  UPDATE STATEMENT - SQL QUERY FOR NPGSQL
             //  ADDED, BUILDER IS NOT WORKING
+            /*
             workerAdapter.UpdateCommand = new NpgsqlCommand("UPDATE inkaart.\"Worker\" SET " +
                 "\"firstName\" = @firstNameP, " +
                 "\"lastName\" = @lastNameP, " +
@@ -29,7 +30,7 @@ namespace InkaArt.Data.Security
                 "\"address\" = @addressP, " +
                 "\"email\" = @emailP " +
                 "WHERE \"idWorker\" = @idWorkerP;", Connection);
-
+                */
             return workerAdapter;
         }
     }

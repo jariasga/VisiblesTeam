@@ -39,12 +39,17 @@ namespace InkaArt.Interface.Security
             user = userC;
             role = roleC;
 
-            int idUserDataGrid = Convert.ToInt32(dataGridV.SelectedRows[0].Cells["user"].Value.ToString().Trim());
+            int idUserDataGrid = Convert.ToInt32(dataGridV.SelectedRows[0].Cells["id_user"].Value.ToString().Trim());
             userRow = user.getUserRowbyID(idUserDataGrid);
 
+            int roleID = Convert.ToInt32(userRow["id_role"].ToString());
             textBoxUsername.Text = userRow["username"].ToString();
             textBoxDescription.Text = userRow["description"].ToString();
             comboBoxUserStatus.Text = userRow["status"].ToString();
+
+            DataRow roleRow = role.getRoleRowbyID(roleID);
+            textBoxIDRol.Text = roleID.ToString();
+            comboBoxRoles.Text = roleRow["description"].ToString();
 
             textBoxUsername.Enabled = false;
             comboBoxUserStatus.Enabled = false;
@@ -103,10 +108,10 @@ namespace InkaArt.Interface.Security
             {
                 if (user != null)
                 {
-                    user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, /*Convert.ToInt32(textBoxIDRol.Text)*/ 1);
+                    user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text));
                     int userID = worker.getUserID(textBoxUsername.Text);
                     worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
-                }
+                    }
                 
             }
             this.Close();

@@ -42,7 +42,7 @@ namespace InkaArt.Interface.Security
             dataGridViewUserMaintenance.Columns["phone"].HeaderText = "Teléfono";
             dataGridViewUserMaintenance.Columns["address"].HeaderText = "Dirección";
             dataGridViewUserMaintenance.Columns["email"].HeaderText = "E-Mail";
-            dataGridViewUserMaintenance.Columns["user"].Visible = false;
+            dataGridViewUserMaintenance.Columns["id_user"].Visible = false;
             dataGridViewUserMaintenance.Columns["turn"].Visible = false;
         }
 
@@ -50,12 +50,14 @@ namespace InkaArt.Interface.Security
         {
             Form personalData = new PersonalData(user, worker, role);
             personalData.ShowDialog(this);
+            listUsers();
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
             Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
             personalData.ShowDialog(this);
+            listUsers();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

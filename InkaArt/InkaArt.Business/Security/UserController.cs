@@ -25,8 +25,6 @@ namespace InkaArt.Business.Security
 
         public DataTable showData()
         {
-            user.connect();
-
             adap = user.userAdapter();
             adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"User\";";
             adap.SelectCommand.Parameters.Clear();
@@ -34,17 +32,21 @@ namespace InkaArt.Business.Security
             data = user.getData(adap, "User");
             
             table = data.Tables["User"];
-
-            user.closeConnection();
+            
             return table;
         }
 
         public int updateData(string username, string description, int status, int role)
         {
-            user.connect();
 
             table = data.Tables["User"];
 
+
+            user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
+                "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
+                "WHERE username = '{4}'", username, status, description, role, username));
+
+            /* TODO
             row = getUserRow(username);
 
             row["username"] = username;
@@ -56,19 +58,12 @@ namespace InkaArt.Business.Security
             int rowsAffected = user.updateData(data, adap, "User");
 
             return rowsAffected;
-            /*
-             * ================================================
-             * TEST LINE TO INSERT DATA
-            insertData();
-             * ================================================
             */
+            return 1;
         }
 
         public int insertData(string username, string description, int status, ref string password, int role)
-        {
-            //  Get connection string and connect to the database
-            user.connect();
-            
+        {   
             //  Get the dataset table to modify
             table = data.Tables["User"];
 
@@ -94,7 +89,6 @@ namespace InkaArt.Business.Security
 
         public DataRow getUserRow(string username)
         {
-            user.connect();
             adap = user.userAdapter();
             adap.SelectCommand.Parameters[0].NpgsqlValue = username;
 

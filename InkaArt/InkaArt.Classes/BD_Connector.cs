@@ -44,6 +44,8 @@ namespace InkaArt.Classes
 
         public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
+            if (Connection == null) connect();
+            adapter.SelectCommand.Connection = Connection;
             DataSet data = new DataSet();
             adapter.Fill(data, srcTable);
             closeConnection();
@@ -52,51 +54,67 @@ namespace InkaArt.Classes
 
         public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-            adap.UpdateCommand = builder.GetUpdateCommand();
-            int rowsAffected = adap.Update(data, srcTable);
-            closeConnection();
-            return rowsAffected;
+            adap = callAdapter(data, adap, srcTable);
+            return adap.Update(data, srcTable);
         }
 
         public int insertData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
-            adap.InsertCommand = builder.GetInsertCommand();
-            int rowsAffected = adap.Update(data, srcTable);
-            closeConnection();
-            return rowsAffected;
+            adap = callAdapter(data, adap, srcTable);
+            return adap.Update(data, srcTable); ;
         }
 
         public int deleteData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
+            adap = callAdapter(data, adap, srcTable);
+            return adap.Update(data, srcTable);
+        }
+
+        public NpgsqlDataAdapter callAdapter(DataSet data, NpgsqlDataAdapter adap, string srcTable)
+        {
+            if (Connection.State != System.Data.ConnectionState.Open) connect();
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
+            adap.UpdateCommand = builder.GetUpdateCommand();
+            adap.InsertCommand = builder.GetInsertCommand();
             adap.DeleteCommand = builder.GetDeleteCommand();
-            int rowsAffected = adap.Update(data, srcTable);
+            adap.UpdateCommand.Connection = Connection;
+            adap.InsertCommand.Connection = Connection;
+            adap.DeleteCommand.Connection = Connection;
             closeConnection();
-            return rowsAffected;
+            return adap;
         }
 
         public void closeConnection()
         {
-            Connection.Close();
+            if (Connection.State != System.Data.ConnectionState.Closed)
+                Connection.Close();
         }
 
-        public void execute(string command)
+        public int execute(string command)
         {
+            int rowsAffected = 0;
+            if (Connection.State != System.Data.ConnectionState.Open) connect();
             NpgsqlCommand cmd = new NpgsqlCommand();
             cmd.CommandText = command;
             cmd.Connection = Connection;
             try
             {
-                cmd.ExecuteNonQuery();
-                Connection.Close();
+                rowsAffected = cmd.ExecuteNonQuery();
             }
             catch (Exception msg)
             {
                 Console.WriteLine(msg.ToString());
             }
+            finally
+            {
+                Connection.Close();
+            }
+            return rowsAffected;
         }
+
+
+
+
         public string ServerAddress { get { return serverAddress; } set { serverAddress = value; } }
         protected NpgsqlConnection Connection { get { return connection; } set { connection = value; } }
         public static NpgsqlConnectionStringBuilder ConnectionString { get { return connectionString; } set { connectionString = value; } }
