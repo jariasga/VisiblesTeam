@@ -74,5 +74,10 @@ namespace InkaArt.Business.Security
 
             return row;
         }
+
+        public void filterData()
+        {
+
+        }
     }
 }
