@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Interface Layer", "1 Interface Layer", "{0B2F5818-90C6-43BC-9068-FF0AE9E9E1B5}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Interface", "InkaArt.Interface\InkaArt.Interface.csproj", "{E76AEA59-7E54-4515-8A8C-EA035816AEA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Business", "InkaArt.Business\InkaArt.Business.csproj", "{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Business.Model", "InkaArt.Business.Model\InkaArt.Business.Model.csproj", "{FBEE6079-A35D-4C6D-8A55-73B518AB7B20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBEE6079-A35D-4C6D-8A55-73B518AB7B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBEE6079-A35D-4C6D-8A55-73B518AB7B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBEE6079-A35D-4C6D-8A55-73B518AB7B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBEE6079-A35D-4C6D-8A55-73B518AB7B20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 		{5615D3B3-9283-4141-B935-CBD59627EC0A} = {F2A9AE53-8761-4852-A5B9-01157F2735B3}
 		{E76AEA59-7E54-4515-8A8C-EA035816AEA7} = {0B2F5818-90C6-43BC-9068-FF0AE9E9E1B5}
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9} = {856471DB-DAC8-45DE-9EFA-2BD967B80CFF}
+		{FBEE6079-A35D-4C6D-8A55-73B518AB7B20} = {856471DB-DAC8-45DE-9EFA-2BD967B80CFF}
 	EndGlobalSection
 EndGlobal
