@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PersonalData));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxUser = new System.Windows.Forms.PictureBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -66,7 +66,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUser)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -77,7 +77,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.buttonCancel);
-            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.pictureBoxUser);
             this.groupBox1.Controls.Add(this.buttonSave);
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Location = new System.Drawing.Point(16, 18);
@@ -103,14 +103,15 @@
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // pictureBox1
+            // pictureBoxUser
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(401, 58);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(120, 150);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxUser.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUser.Image")));
+            this.pictureBoxUser.Location = new System.Drawing.Point(401, 58);
+            this.pictureBoxUser.Name = "pictureBoxUser";
+            this.pictureBoxUser.Size = new System.Drawing.Size(120, 150);
+            this.pictureBoxUser.TabIndex = 13;
+            this.pictureBoxUser.TabStop = false;
+            this.pictureBoxUser.Click += new System.EventHandler(this.pictureBoxUser_Click);
             // 
             // buttonSave
             // 
@@ -179,6 +180,7 @@
             this.textBoxPhone.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPhone.Location = new System.Drawing.Point(194, 86);
             this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxPhone.MaxLength = 9;
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(165, 26);
             this.textBoxPhone.TabIndex = 4;
@@ -199,6 +201,7 @@
             this.textBoxDNI.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDNI.Location = new System.Drawing.Point(13, 86);
             this.textBoxDNI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxDNI.MaxLength = 8;
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(165, 26);
             this.textBoxDNI.TabIndex = 3;
@@ -527,13 +530,14 @@
             this.ClientSize = new System.Drawing.Size(569, 355);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
             this.Name = "PersonalData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Datos Personales";
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUser)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -549,7 +553,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxUser;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox textBoxAddress;

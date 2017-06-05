@@ -69,10 +69,15 @@ namespace InkaArt.Business.Security
         {
             table = showData();
             DataRow[] rows;
-            rows = table.Select("idRole = " + id);
+            rows = table.Select("id_role = " + id);
             row = rows[0];
 
             return row;
+        }
+
+        public void filterData()
+        {
+
         }
     }
 }

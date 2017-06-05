@@ -17,6 +17,7 @@ namespace InkaArt.Interface.Security
         WorkerController worker;
         UserController user;
         RoleController role;
+        DataTable workerTable;
 
         public UserMaintenance()
         {
@@ -26,36 +27,26 @@ namespace InkaArt.Interface.Security
             user = new UserController();
             role = new RoleController();
 
-            listUsers();
+            workerTable = new DataTable();
+            showTable();
         }
-
-        public void listUsers()
-        {
-            dataGridViewUserMaintenance.DataSource = worker.showData();
-
-            dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-
-            dataGridViewUserMaintenance.Columns["idWorker"].HeaderText = "ID";
-            dataGridViewUserMaintenance.Columns["firstName"].HeaderText = "Nombre";
-            dataGridViewUserMaintenance.Columns["lastName"].HeaderText = "Apellido";
-            dataGridViewUserMaintenance.Columns["dni"].HeaderText = "DNI";
-            dataGridViewUserMaintenance.Columns["phone"].HeaderText = "Teléfono";
-            dataGridViewUserMaintenance.Columns["address"].HeaderText = "Dirección";
-            dataGridViewUserMaintenance.Columns["email"].HeaderText = "E-Mail";
-            dataGridViewUserMaintenance.Columns["user"].Visible = false;
-            dataGridViewUserMaintenance.Columns["turn"].Visible = false;
-        }
-
+        
         private void buttonNew_Click(object sender, EventArgs e)
         {
             Form personalData = new PersonalData(user, worker, role);
             personalData.ShowDialog(this);
+            showTable();
+            
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
-            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
-            personalData.ShowDialog(this);
+            if (dataGridViewUserMaintenance.Rows.Count > 0)
+            {
+                Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
+                personalData.ShowDialog(this);
+                showTable();
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -70,6 +61,52 @@ namespace InkaArt.Interface.Security
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
                 user.massiveUpload(dialog.FileName, worker);     
+        }
+
+        private void dataGridViewUserMaintenance_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
+            personalData.ShowDialog(this);
+            showTable();
+        }
+
+        private void buttonFilter_Click(object sender, EventArgs e)
+        {
+            showTable();
+        }
+
+        public void filter()
+        {
+            DataRow[] rows;
+            workerTable = worker.showData();
+            rows = workerTable.Select("first_name LIKE '%" + textBoxNameFilter.Text + "%' AND last_name LIKE '%" + textBoxLastnameFilter.Text + "%'");
+            if (rows.Any()) workerTable = rows.CopyToDataTable();
+            else workerTable.Rows.Clear();
+            string sortQuery = string.Format("id_worker");
+            workerTable.DefaultView.Sort = sortQuery;
+        }
+
+        public void showTable()
+        {
+            filter();
+            dataGridViewUserMaintenance.DataSource = workerTable;
+
+            dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dataGridViewUserMaintenance.Columns["id_worker"].HeaderText = "ID";
+            dataGridViewUserMaintenance.Columns["first_name"].HeaderText = "Nombre";
+            dataGridViewUserMaintenance.Columns["last_name"].HeaderText = "Apellido";
+            dataGridViewUserMaintenance.Columns["dni"].HeaderText = "DNI";
+            dataGridViewUserMaintenance.Columns["phone"].HeaderText = "Teléfono";
+            dataGridViewUserMaintenance.Columns["address"].HeaderText = "Dirección";
+            dataGridViewUserMaintenance.Columns["email"].HeaderText = "E-Mail";
+            dataGridViewUserMaintenance.Columns["id_user"].Visible = false;
+            dataGridViewUserMaintenance.Columns["turn"].Visible = false;
+
+            dataGridViewUserMaintenance.AllowUserToAddRows = false;
+            dataGridViewUserMaintenance.AllowUserToDeleteRows = false;
+            dataGridViewUserMaintenance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUserMaintenance.MultiSelect = false;
         }
     }
 }
