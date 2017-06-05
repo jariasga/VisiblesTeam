@@ -31,7 +31,7 @@ namespace InkaArt.Interface.Sales
 
         private void ClientShow_Load(object sender, EventArgs e)
         {
-            DataTable clientObject = clientController.GetClients(clientId);
+            DataTable clientObject = clientController.GetClients(clientId.ToString());
             populateFields(clientObject);
         }
 

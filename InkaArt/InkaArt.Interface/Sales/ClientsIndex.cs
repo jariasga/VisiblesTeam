@@ -65,7 +65,11 @@ namespace InkaArt.Interface.Sales
             DataTable clientList;
             if (textbox_id.Text.Equals("") && textbox_doc.Text.Equals("") && textbox_name.Text.Equals("") && combobox_state.SelectedIndex == -1 && combobox_priority.SelectedIndex == -1) clientList = clientController.GetClients();
             else
-                clientList = clientController.GetClients(int.Parse(textbox_id.Text), int.Parse(textbox_doc.Text), int.Parse(textbox_doc.Text), textbox_name.Text,combobox_state.SelectedIndex,combobox_priority.SelectedIndex);
+            {
+                int sI1 = combobox_priority.SelectedIndex;
+                int sI2 = combobox_state.SelectedIndex;
+                clientList = clientController.GetClients(textbox_id.Text, textbox_doc.Text, textbox_doc.Text, textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
+            }                
             populateDataGrid(clientList);
         }
 

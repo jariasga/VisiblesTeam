@@ -27,18 +27,16 @@ namespace InkaArt.Business.Sales
             int phoneInt = int.Parse(phone);
             return clientData.InsertClient(personTypeInt, name, rucInt, dniInt, priorityInt, typeInt, stateInt, address, phoneInt, contact, email);
         }
-        public DataTable GetClients()
+
+        public DataTable GetClients(string id = "", string ruc = "", string dni = "", string name = "", int state = -1, int priority = -1)
         {
-            return clientData.GetClients();
+            int intId = -1, intAux; long intRuc = -1, intDni = -1, longAux;
+            if (!id.Equals("")) if (int.TryParse(id, out intAux)) intId = int.Parse(id);
+            if (!ruc.Equals("")) if (long.TryParse(ruc, out longAux)) intRuc = long.Parse(ruc);
+            if (!dni.Equals("")) if (long.TryParse(dni, out longAux))  intDni = long.Parse(dni);
+            return clientData.GetClients(intId, intRuc, intDni, name, state, priority);
         }
-        public DataTable GetClients(int id)
-        {
-            return clientData.GetClients(id);
-        }
-        public DataTable GetClients(int id = -1, int ruc = -1, int dni = -1, string name = "", int state = -1, int priority = -1)
-        {
-            return clientData.GetClients(id, ruc, dni, name, state, priority);
-        }
+
         public int UpdateClient(string id, string personType, string name, string ruc, string dni, string priority, string type, string state, string address, string phone, string contact, string email)
         {
             int personTypeInt = int.Parse(personType);
