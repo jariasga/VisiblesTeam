@@ -34,15 +34,13 @@
             this.textBox_nameFilter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Agregar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridView_supplies = new System.Windows.Forms.DataGridView();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
+            this.Agregar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_supplies)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -112,39 +110,18 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
-            // dataGridView1
+            // dataGridView_supplies
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Nombre,
+            this.dataGridView_supplies.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_supplies.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_supplies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_supplies.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Agregar});
-            this.dataGridView1.Location = new System.Drawing.Point(30, 123);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(543, 178);
-            this.dataGridView1.TabIndex = 45;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 320;
-            // 
-            // Agregar
-            // 
-            this.Agregar.HeaderText = "Agregar";
-            this.Agregar.Name = "Agregar";
-            this.Agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Agregar.Width = 80;
+            this.dataGridView_supplies.Location = new System.Drawing.Point(30, 123);
+            this.dataGridView_supplies.Name = "dataGridView_supplies";
+            this.dataGridView_supplies.Size = new System.Drawing.Size(543, 178);
+            this.dataGridView_supplies.TabIndex = 45;
+            this.dataGridView_supplies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonReturn
             // 
@@ -186,6 +163,14 @@
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
+            // Agregar
+            // 
+            this.Agregar.HeaderText = "";
+            this.Agregar.Name = "Agregar";
+            this.Agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Agregar.Width = 50;
+            // 
             // AddSupply
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -195,7 +180,7 @@
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonReturn);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView_supplies);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -203,7 +188,7 @@
             this.Text = "Agregar insumos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_supplies)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -216,12 +201,10 @@
         private System.Windows.Forms.TextBox textBox_nameFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_supplies;
         private System.Windows.Forms.Button buttonReturn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Agregar;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Agregar;
     }
 }

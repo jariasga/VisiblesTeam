@@ -102,6 +102,7 @@
             // 
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(24, 94);
+            this.textBox_name.MaxLength = 100;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(253, 24);
             this.textBox_name.TabIndex = 12;
@@ -120,9 +121,11 @@
             // 
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ruc.Location = new System.Drawing.Point(24, 148);
+            this.textBox_ruc.MaxLength = 11;
             this.textBox_ruc.Name = "textBox_ruc";
             this.textBox_ruc.Size = new System.Drawing.Size(253, 24);
             this.textBox_ruc.TabIndex = 14;
+            this.textBox_ruc.TextChanged += new System.EventHandler(this.verifying_number);
             // 
             // label4
             // 
@@ -155,7 +158,7 @@
             // 
             // trackBar_priority
             // 
-            this.trackBar_priority.LargeChange = 2;
+            this.trackBar_priority.LargeChange = 1;
             this.trackBar_priority.Location = new System.Drawing.Point(24, 283);
             this.trackBar_priority.Name = "trackBar_priority";
             this.trackBar_priority.Size = new System.Drawing.Size(201, 45);
@@ -192,9 +195,11 @@
             // 
             this.textBox_telephone.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_telephone.Location = new System.Drawing.Point(15, 170);
+            this.textBox_telephone.MaxLength = 9;
             this.textBox_telephone.Name = "textBox_telephone";
             this.textBox_telephone.Size = new System.Drawing.Size(221, 24);
             this.textBox_telephone.TabIndex = 25;
+            this.textBox_telephone.TextChanged += new System.EventHandler(this.verifying_telephone);
             // 
             // label8
             // 
@@ -228,6 +233,7 @@
             // 
             this.textBox_contactName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_contactName.Location = new System.Drawing.Point(15, 53);
+            this.textBox_contactName.MaxLength = 200;
             this.textBox_contactName.Name = "textBox_contactName";
             this.textBox_contactName.Size = new System.Drawing.Size(221, 24);
             this.textBox_contactName.TabIndex = 21;
@@ -266,11 +272,13 @@
             this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
             this.textBox_idRawMaterial.Size = new System.Drawing.Size(118, 24);
             this.textBox_idRawMaterial.TabIndex = 26;
+            this.textBox_idRawMaterial.TextChanged += new System.EventHandler(this.veryfing_id);
             // 
             // textBox_nameRawMaterial
             // 
             this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameRawMaterial.Location = new System.Drawing.Point(162, 48);
+            this.textBox_nameRawMaterial.MaxLength = 250;
             this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
             this.textBox_nameRawMaterial.Size = new System.Drawing.Size(250, 24);
             this.textBox_nameRawMaterial.TabIndex = 26;
@@ -337,6 +345,10 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -385,9 +397,9 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(144, 42);
             this.buttonSave.TabIndex = 22;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.button_save_click);
+            this.buttonSave.Click += new System.EventHandler(this.button_event_click);
             // 
             // comboBox_status
             // 
