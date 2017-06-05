@@ -45,13 +45,28 @@ namespace InkaArt.Interface.Production
         private void button_agregar_Click(object sender, EventArgs e)
         {
             //validacion
-                dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
-                    comboBox_producto.SelectedItem.ToString(),
-                    comboBox_proceso.SelectedItem.ToString(),
-                    textbox_horaIni.Text,
-                    textBox_horaFin.Text,
-                    textBox_rotos.Text,
-                    textBox_terminados.Text);
+            DateTime auxDate;
+            int auxInt;
+            if (comboBox_nombre.SelectedItem != null && comboBox_producto.SelectedItem != null &&
+                comboBox_proceso.SelectedItem != null)
+            {
+                if (DateTime.TryParse(textbox_horaIni.Text, out auxDate) &&
+                    DateTime.TryParse(textBox_horaFin.Text, out auxDate) &&
+                    int.TryParse(textBox_rotos.Text, out auxInt) &&
+                    int.TryParse(textBox_terminados.Text, out auxInt))
+                {
+                    dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
+                        comboBox_producto.SelectedItem.ToString(),
+                        comboBox_proceso.SelectedItem.ToString(),
+                        textbox_horaIni.Text,
+                        textBox_horaFin.Text,
+                        textBox_rotos.Text,
+                        textBox_terminados.Text);
+                }
+                else
+                    MessageBox.Show("Formato de datos no válido, por favor verifique todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else
+                MessageBox.Show("Por favor asegurese de seleccionar un nombre, producto y proceso.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 

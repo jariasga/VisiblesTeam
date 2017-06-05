@@ -23,6 +23,7 @@ namespace InkaArt.Interface.Production
         {
             TurnController control = new TurnController();
             DataTable turnList = control.getData();
+            comboBox_turn.Items.Clear();
             for (int i = 0; i < turnList.Rows.Count; i++)
                 comboBox_turn.Items.Add(turnList.Rows[i]["idTurn"].ToString());
         }
@@ -78,7 +79,7 @@ namespace InkaArt.Interface.Production
                     control.insertData(ini, fin, desc);
                     fillCombo();
                 }else
-                    MessageBox.Show("Formato de fecha no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else //update
             {
@@ -100,7 +101,7 @@ namespace InkaArt.Interface.Production
 
                         control.updateData(id, ini, fin, desc);
                     }else
-                        MessageBox.Show("Formato de fecha no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                     MessageBox.Show("Por favor, elija un turno válido.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
