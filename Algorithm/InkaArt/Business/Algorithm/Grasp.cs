@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Business.Production;
+using InkaArt.Business.Algorithm;
 
 namespace InkaArt.Algorithm.Grasp
 {
@@ -12,7 +12,7 @@ namespace InkaArt.Algorithm.Grasp
     {
         WorkerController workers;
         JobController jobs;
-        TurnReportController turn_reports;
+        RatioController turn_reports;
 
         public Grasp()
         {
@@ -20,7 +20,7 @@ namespace InkaArt.Algorithm.Grasp
             workers.Load();
             jobs = new JobController();
             jobs.Load();
-            turn_reports = new TurnReportController();
+            turn_reports = new RatioController();
         }
     }
 }

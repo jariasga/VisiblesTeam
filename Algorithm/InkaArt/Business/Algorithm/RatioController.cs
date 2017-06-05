@@ -1,4 +1,4 @@
-﻿using InkaArt.Data.Production;
+﻿using InkaArt.Data.Algorithm;
 using Npgsql;
 using NpgsqlTypes;
 using System;
@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Business.Production
+namespace InkaArt.Business.Algorithm
 {
-    class TurnReportController
+    class RatioController
     {
-        List<TurnReport> turn_reports;
+        List<Ratio> turn_reports;
 
-        public TurnReportController()
+        public RatioController()
         {
-            turn_reports = new List<TurnReport>();
+            turn_reports = new List<Ratio>();
         }
 
         public void Load(DateTime date)
@@ -26,7 +26,7 @@ namespace InkaArt.Business.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TurnReport2\" WHERE date = :date "
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date "
                 + "ORDER BY id_report ASC", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
@@ -45,7 +45,7 @@ namespace InkaArt.Business.Production
                 double breakage = reader.GetDouble(9);
                 double time = reader.GetDouble(10);
 
-                turn_reports.Add(new TurnReport(id_report, date, id_worker, id_job, id_recipe, start, end, broken,
+                turn_reports.Add(new Ratio(id_report, date, id_worker, id_job, id_recipe, start, end, broken,
                     produced, breakage, time));
             }
 
@@ -55,7 +55,7 @@ namespace InkaArt.Business.Production
         public void Insert(int id_worker, DateTime date, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
             int broken, int produced)
         {
-            TurnReport turn_report = new TurnReport(0, date, id_worker, id_job, id_recipe, start, end, broken, produced,
+            Ratio turn_report = new Ratio(0, date, id_worker, id_job, id_recipe, start, end, broken, produced,
                 broken / produced, (end - start).Minutes / produced);
             turn_reports.Add(turn_report);
             turn_report.Insert();
@@ -67,7 +67,7 @@ namespace InkaArt.Business.Production
         public void Update(int id_report, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
             int broken, int produced)
         {
-            TurnReport turn_report = GetById(id_report);
+            Ratio turn_report = GetById(id_report);
             turn_report.Update(date, id_worker, id_job, id_recipe, start, end, broken, produced, broken / produced,
                 (end - start).Minutes / produced);
 
@@ -77,21 +77,21 @@ namespace InkaArt.Business.Production
 
         public void Delete(int id_report)
         {
-            TurnReport turn_report = GetById(id_report);
+            Ratio turn_report = GetById(id_report);
             turn_report.Delete();
 
             //Actualizar resumen de reportes
 
         }
 
-        public TurnReport GetById(int id)
+        public Ratio GetById(int id)
         {
             for (int i = 0; i < turn_reports.Count; i++)
                 if (turn_reports[i].ID == id) return turn_reports[i];
             return null;
         }
 
-        public TurnReport this[int index]
+        public Ratio this[int index]
         {
             get { return turn_reports[index]; }
             //set { turn_reports[index] = value; }

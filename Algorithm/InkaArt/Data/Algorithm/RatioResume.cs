@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    public class TurnReportResume
+    public class RatioResume
     {
         private int id_resume;
         private int id_worker;
@@ -45,7 +45,7 @@ namespace InkaArt.Data.Algorithm
             set { average_time = value; }
         }
 
-        public TurnReportResume(int id_resume, int id_worker, int id_job, int id_recipe, double average_breakage,
+        public RatioResume(int id_resume, int id_worker, int id_job, int id_recipe, double average_breakage,
             double average_time)
         {
             this.id_resume = id_resume;
@@ -62,7 +62,7 @@ namespace InkaArt.Data.Algorithm
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO TurnReportResume(id_worker, id_job, id_recipe, " +
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO RatioResume(id_worker, id_job, id_recipe, " +
                 "average_breakage, average_time) VALUES (:id_worker, :id_job, :id_recipe, :average_breakage, " +
                 ":average_time)", connection);
 
@@ -82,7 +82,7 @@ namespace InkaArt.Data.Algorithm
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"TurnReportResume\" SET " +
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"RatioResume\" SET " +
                 "average_breakage = :average_breakage, average_time = :average_time WHERE " +
                 "id_resume = :id_resume", connection);
 

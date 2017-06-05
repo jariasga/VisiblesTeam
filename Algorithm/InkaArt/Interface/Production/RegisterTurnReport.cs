@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-using InkaArt.Business.Production;
+using InkaArt.Business.Algorithm;
 
 namespace InkaArt.Interface.Production
 {
-    public partial class RegisterTurnReport : Form
+    public partial class RegisterRatio : Form
     {
         private WorkerController workers;
         private JobController jobs;
         private RecipeController recipes;
-        private TurnReportController turn_reports;
+        private RatioController turn_reports;
 
         private bool grid_modified;
 
-        public RegisterTurnReport()
+        public RegisterRatio()
         {
             InitializeComponent();
             workers = new WorkerController();
             jobs = new JobController();
             recipes = new RecipeController();
-            turn_reports = new TurnReportController();
+            turn_reports = new RatioController();
         }
 
         private void RegisterAssignedJob_Load(object sender, EventArgs e)

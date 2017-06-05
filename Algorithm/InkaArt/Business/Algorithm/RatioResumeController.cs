@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Business.Algorithm
 {
-    class TurnReportResumeController
+    class RatioResumeController
     {
-        private List<TurnReportResume> turn_report_resumes;
+        private List<RatioResume> turn_report_resumes;
 
-        public TurnReportResumeController()
+        public RatioResumeController()
         {
-            turn_report_resumes = new List<TurnReportResume>();
+            turn_report_resumes = new List<RatioResume>();
         }
 
         public void Load()
@@ -23,7 +23,7 @@ namespace InkaArt.Business.Algorithm
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TurnReportResume\" WHERE status = 1 " +
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"RatioResume\" WHERE status = 1 " +
                 "ORDER BY id_resume ASC", connection);
 
             NpgsqlDataReader reader = command.ExecuteReader();
@@ -35,7 +35,7 @@ namespace InkaArt.Business.Algorithm
                 int id_recipe = reader.GetInt32(3);
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
-                TurnReportResume turn_report_resume = new TurnReportResume(id_resume, id_worker, id_job, id_recipe,
+                RatioResume turn_report_resume = new RatioResume(id_resume, id_worker, id_job, id_recipe,
                     average_breakage, average_time);
                 turn_report_resumes.Add(turn_report_resume);
             }
@@ -43,14 +43,14 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
-        public TurnReportResume GetByID(int id_resume)
+        public RatioResume GetByID(int id_resume)
         {
-            foreach (TurnReportResume turn_report_resume in turn_report_resumes)
+            foreach (RatioResume turn_report_resume in turn_report_resumes)
                 if (turn_report_resume.ID == id_resume) return turn_report_resume;
             return null;
         }
 
-        public TurnReportResume this[int index]
+        public RatioResume this[int index]
         {
             get { return turn_report_resumes[index]; }
         }
