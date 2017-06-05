@@ -101,32 +101,54 @@ namespace InkaArt.Interface.Security
             fillMap();
         }
 
+        private bool validateData()
+        {
+            if (textBoxName.Text == "") return false;
+            if (textBoxLastName.Text == "") return false;
+            if (textBoxDNI.Text == "" || Convert.ToInt32(textBoxDNI.Text) < 0) return false;
+            if (textBoxPhone.Text == "" || Convert.ToInt32(textBoxPhone.Text) < 0) return false;
+            if (textBoxAddress.Text == "") return false;
+            if (textBoxEmail.Text == "")return false;
+
+            if (textBoxUsername.Text == "") return false;
+            if (textBoxDescription.Text == "") return false;
+            if (textBoxIDRol.Text == "") return false;
+            return true;
+        }
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.Equals(buttonSave.Text, "Crear"))
             {
                 string password = "";
                 user.showData();
-                if (user.insertData(textBoxUsername.Text, textBoxDescription.Text,  1, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
-                    MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
+                if (validateData())
                 {
-                    worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
-                    worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
+                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, 1, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                        MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                        worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
+                    }
                 }
-                
+                else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
             }
             else if (string.Equals(buttonSave.Text, "Guardar"))
             {
                 if (user != null)
                 {
-                    if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
-                        MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else
+                    if (validateData())
                     {
-                        int userID = worker.getUserID(textBoxUsername.Text);
-                        worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
-                    }
+                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                            MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else
+                        {
+                            int userID = worker.getUserID(textBoxUsername.Text);
+                            worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                        }
+                    }else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
