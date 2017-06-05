@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.naturalRadio = new System.Windows.Forms.RadioButton();
+            this.juridicRadio = new System.Windows.Forms.RadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,12 +55,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.label10 = new System.Windows.Forms.Label();
-            this.naturalRadio = new System.Windows.Forms.RadioButton();
-            this.juridicRadio = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -87,12 +87,76 @@
             this.groupBox2.Text = "General";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // naturalRadio
+            // 
+            this.naturalRadio.AutoSize = true;
+            this.naturalRadio.Location = new System.Drawing.Point(169, 57);
+            this.naturalRadio.Name = "naturalRadio";
+            this.naturalRadio.Size = new System.Drawing.Size(93, 27);
+            this.naturalRadio.TabIndex = 38;
+            this.naturalRadio.Text = "Natural";
+            this.naturalRadio.UseVisualStyleBackColor = true;
+            this.naturalRadio.CheckedChanged += new System.EventHandler(this.personRadio_CheckedChanged);
+            // 
+            // juridicRadio
+            // 
+            this.juridicRadio.AutoSize = true;
+            this.juridicRadio.Checked = true;
+            this.juridicRadio.Location = new System.Drawing.Point(35, 57);
+            this.juridicRadio.Name = "juridicRadio";
+            this.juridicRadio.Size = new System.Drawing.Size(100, 27);
+            this.juridicRadio.TabIndex = 37;
+            this.juridicRadio.TabStop = true;
+            this.juridicRadio.Text = "Jurídica";
+            this.juridicRadio.UseVisualStyleBackColor = true;
+            this.juridicRadio.CheckedChanged += new System.EventHandler(this.juridicRadio_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(32, 34);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(154, 23);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Tipo de Persona";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(165, 235);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(142, 27);
+            this.radioButton3.TabIndex = 35;
+            this.radioButton3.Text = "Internacional";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
+            this.radioButton4.Location = new System.Drawing.Point(31, 235);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(105, 27);
+            this.radioButton4.TabIndex = 34;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "Nacional";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(28, 214);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(141, 23);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "Tipo de Cliente";
+            // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(165, 357);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(78, 22);
+            this.radioButton2.Size = new System.Drawing.Size(98, 27);
             this.radioButton2.TabIndex = 32;
             this.radioButton2.Text = "Inactivo";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -103,7 +167,7 @@
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(31, 357);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(69, 22);
+            this.radioButton1.Size = new System.Drawing.Size(84, 27);
             this.radioButton1.TabIndex = 31;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Activo";
@@ -114,7 +178,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(28, 336);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 18);
+            this.label5.Size = new System.Drawing.Size(72, 23);
             this.label5.TabIndex = 30;
             this.label5.Text = "Estado";
             // 
@@ -125,7 +189,7 @@
             this.textBox5.Location = new System.Drawing.Point(197, 292);
             this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(92, 26);
+            this.textBox5.Size = new System.Drawing.Size(92, 30);
             this.textBox5.TabIndex = 29;
             this.textBox5.Text = "Nivel 5";
             // 
@@ -135,7 +199,7 @@
             this.label4.Location = new System.Drawing.Point(28, 266);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 18);
+            this.label4.Size = new System.Drawing.Size(89, 23);
             this.label4.TabIndex = 28;
             this.label4.Text = "Prioridad";
             // 
@@ -143,7 +207,7 @@
             // 
             this.trackBar1.Location = new System.Drawing.Point(31, 292);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(159, 45);
+            this.trackBar1.Size = new System.Drawing.Size(159, 56);
             this.trackBar1.TabIndex = 27;
             // 
             // textBox3
@@ -153,7 +217,7 @@
             this.textBox3.Location = new System.Drawing.Point(31, 174);
             this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(258, 26);
+            this.textBox3.Size = new System.Drawing.Size(258, 30);
             this.textBox3.TabIndex = 26;
             this.textBox3.Text = "Retablos Lovers S.A.";
             // 
@@ -163,7 +227,7 @@
             this.label2.Location = new System.Drawing.Point(28, 152);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 18);
+            this.label2.Size = new System.Drawing.Size(79, 23);
             this.label2.TabIndex = 25;
             this.label2.Text = "Nombre";
             // 
@@ -174,7 +238,7 @@
             this.textBox2.Location = new System.Drawing.Point(31, 111);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(258, 26);
+            this.textBox2.Size = new System.Drawing.Size(258, 30);
             this.textBox2.TabIndex = 24;
             this.textBox2.Text = "000000001";
             // 
@@ -184,7 +248,7 @@
             this.documentLabel.Location = new System.Drawing.Point(28, 89);
             this.documentLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.documentLabel.Name = "documentLabel";
-            this.documentLabel.Size = new System.Drawing.Size(42, 18);
+            this.documentLabel.Size = new System.Drawing.Size(51, 23);
             this.documentLabel.TabIndex = 23;
             this.documentLabel.Text = "RUC";
             // 
@@ -214,7 +278,7 @@
             this.textBox8.Location = new System.Drawing.Point(23, 244);
             this.textBox8.Margin = new System.Windows.Forms.Padding(4);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(281, 26);
+            this.textBox8.Size = new System.Drawing.Size(281, 30);
             this.textBox8.TabIndex = 33;
             this.textBox8.Text = "retablos@gmail.com";
             // 
@@ -224,7 +288,7 @@
             this.label9.Location = new System.Drawing.Point(20, 222);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(57, 18);
+            this.label9.Size = new System.Drawing.Size(71, 23);
             this.label9.TabIndex = 32;
             this.label9.Text = "Correo";
             // 
@@ -235,7 +299,7 @@
             this.textBox4.Location = new System.Drawing.Point(23, 182);
             this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(281, 26);
+            this.textBox4.Size = new System.Drawing.Size(281, 30);
             this.textBox4.TabIndex = 31;
             this.textBox4.Text = "Maria del pilar";
             // 
@@ -245,7 +309,7 @@
             this.label3.Location = new System.Drawing.Point(20, 160);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 18);
+            this.label3.Size = new System.Drawing.Size(89, 23);
             this.label3.TabIndex = 30;
             this.label3.Text = "Contacto";
             // 
@@ -256,7 +320,7 @@
             this.textBox7.Location = new System.Drawing.Point(23, 119);
             this.textBox7.Margin = new System.Windows.Forms.Padding(4);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(281, 26);
+            this.textBox7.Size = new System.Drawing.Size(281, 30);
             this.textBox7.TabIndex = 29;
             this.textBox7.Text = "333 88902";
             // 
@@ -266,7 +330,7 @@
             this.label7.Location = new System.Drawing.Point(20, 97);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 18);
+            this.label7.Size = new System.Drawing.Size(84, 23);
             this.label7.TabIndex = 28;
             this.label7.Text = "Teléfono";
             // 
@@ -277,7 +341,7 @@
             this.textBox6.Location = new System.Drawing.Point(23, 56);
             this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(281, 26);
+            this.textBox6.Size = new System.Drawing.Size(281, 30);
             this.textBox6.TabIndex = 27;
             this.textBox6.Text = "Calle Re 333, Urbuanización Tablos";
             // 
@@ -287,7 +351,7 @@
             this.label6.Location = new System.Drawing.Point(20, 34);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 18);
+            this.label6.Size = new System.Drawing.Size(91, 23);
             this.label6.TabIndex = 26;
             this.label6.Text = "Dirección";
             // 
@@ -296,82 +360,18 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(485, 368);
+            this.button_save.Location = new System.Drawing.Point(467, 368);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(107, 39);
+            this.button_save.Size = new System.Drawing.Size(125, 39);
             this.button_save.TabIndex = 38;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(165, 235);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(113, 22);
-            this.radioButton3.TabIndex = 35;
-            this.radioButton3.Text = "Internacional";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Checked = true;
-            this.radioButton4.Location = new System.Drawing.Point(31, 235);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(87, 22);
-            this.radioButton4.TabIndex = 34;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Nacional";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 214);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(113, 18);
-            this.label10.TabIndex = 33;
-            this.label10.Text = "Tipo de Cliente";
-            // 
-            // naturalRadio
-            // 
-            this.naturalRadio.AutoSize = true;
-            this.naturalRadio.Location = new System.Drawing.Point(169, 57);
-            this.naturalRadio.Name = "naturalRadio";
-            this.naturalRadio.Size = new System.Drawing.Size(75, 22);
-            this.naturalRadio.TabIndex = 38;
-            this.naturalRadio.Text = "Natural";
-            this.naturalRadio.UseVisualStyleBackColor = true;
-            this.naturalRadio.CheckedChanged += new System.EventHandler(this.personRadio_CheckedChanged);
-            // 
-            // juridicRadio
-            // 
-            this.juridicRadio.AutoSize = true;
-            this.juridicRadio.Checked = true;
-            this.juridicRadio.Location = new System.Drawing.Point(35, 57);
-            this.juridicRadio.Name = "juridicRadio";
-            this.juridicRadio.Size = new System.Drawing.Size(80, 22);
-            this.juridicRadio.TabIndex = 37;
-            this.juridicRadio.TabStop = true;
-            this.juridicRadio.Text = "Jurídica";
-            this.juridicRadio.UseVisualStyleBackColor = true;
-            this.juridicRadio.CheckedChanged += new System.EventHandler(this.juridicRadio_CheckedChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 34);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(123, 18);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Tipo de Persona";
-            // 
             // ClientCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(733, 452);
