@@ -116,6 +116,7 @@
             // 
             // ChangePassword
             // 
+            this.AcceptButton = this.button_change;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -127,6 +128,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textbox_password_old);
             this.Controls.Add(this.label_password);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ChangePassword";

@@ -45,7 +45,7 @@ namespace InkaArt.Interface.Security
 
         private void comboBoxDescription_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxIDRole.Text = table.Rows[comboBoxDescription.SelectedIndex]["idRole"].ToString();
+            textBoxIDRole.Text = table.Rows[comboBoxDescription.SelectedIndex]["id_role"].ToString();
         }
 
         private void listRoles()

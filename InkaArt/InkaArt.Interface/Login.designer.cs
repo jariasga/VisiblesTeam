@@ -100,6 +100,7 @@
             this.label_forgot.Size = new System.Drawing.Size(150, 15);
             this.label_forgot.TabIndex = 5;
             this.label_forgot.Text = "¿Olvidaste tu contraseña?";
+            this.label_forgot.Click += new System.EventHandler(this.label_forgot_Click);
             // 
             // button_Login
             // 
@@ -134,7 +135,6 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
