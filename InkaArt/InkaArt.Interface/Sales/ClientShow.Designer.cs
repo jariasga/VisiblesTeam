@@ -232,7 +232,6 @@
             this.radio_active.TabStop = true;
             this.radio_active.Text = "Activo";
             this.radio_active.UseVisualStyleBackColor = true;
-            this.radio_active.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // radio_inactive
             // 
@@ -244,7 +243,6 @@
             this.radio_inactive.TabIndex = 32;
             this.radio_inactive.Text = "Inactivo";
             this.radio_inactive.UseVisualStyleBackColor = true;
-            this.radio_inactive.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // groupBox4
             // 

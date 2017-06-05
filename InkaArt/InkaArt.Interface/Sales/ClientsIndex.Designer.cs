@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combobox_priority = new System.Windows.Forms.ComboBox();
             this.textbox_id = new System.Windows.Forms.TextBox();
@@ -83,7 +83,6 @@
             this.combobox_priority.BackColor = System.Drawing.Color.White;
             this.combobox_priority.FormattingEnabled = true;
             this.combobox_priority.Items.AddRange(new object[] {
-            "",
             "Nivel 1",
             "Nivel 2",
             "Nivel 3",
@@ -103,7 +102,6 @@
             // textbox_id
             // 
             this.textbox_id.BackColor = System.Drawing.Color.White;
-            this.textbox_id.Enabled = false;
             this.textbox_id.Location = new System.Drawing.Point(47, 62);
             this.textbox_id.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_id.Name = "textbox_id";
@@ -135,8 +133,8 @@
             this.combobox_state.BackColor = System.Drawing.Color.White;
             this.combobox_state.FormattingEnabled = true;
             this.combobox_state.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
+            "Inactivo",
+            "Activo"});
             this.combobox_state.Location = new System.Drawing.Point(45, 135);
             this.combobox_state.Margin = new System.Windows.Forms.Padding(4);
             this.combobox_state.Name = "combobox_state";
@@ -156,7 +154,6 @@
             // textbox_name
             // 
             this.textbox_name.BackColor = System.Drawing.Color.White;
-            this.textbox_name.Enabled = false;
             this.textbox_name.Location = new System.Drawing.Point(572, 62);
             this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_name.Name = "textbox_name";
@@ -176,7 +173,6 @@
             // textbox_doc
             // 
             this.textbox_doc.BackColor = System.Drawing.Color.White;
-            this.textbox_doc.Enabled = false;
             this.textbox_doc.Location = new System.Drawing.Point(311, 62);
             this.textbox_doc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_doc.Name = "textbox_doc";
@@ -205,22 +201,23 @@
             this.button_search.TabIndex = 15;
             this.button_search.Text = "🔎 Buscar";
             this.button_search.UseVisualStyleBackColor = false;
+            this.button_search.Click += new System.EventHandler(this.button_search_Click);
             // 
             // grid_clients
             // 
             this.grid_clients.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_clients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_clients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.grid_clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_clients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,

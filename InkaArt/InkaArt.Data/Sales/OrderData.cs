@@ -19,12 +19,14 @@ namespace InkaArt.Data.Sales
         {
             data = new DataSet();
         }
+
         public NpgsqlDataAdapter clientAdapter()
         {
             NpgsqlDataAdapter clientAdapter = new NpgsqlDataAdapter();
-            clientAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\";", Connection);
+            clientAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\"", Connection);
             return clientAdapter;
         }
+        
         public NpgsqlDataAdapter clientUpdateAdapter()
         {
             NpgsqlDataAdapter clientUpdateAdapter = new NpgsqlDataAdapter();
@@ -34,7 +36,8 @@ namespace InkaArt.Data.Sales
             clientUpdateAdapter.SelectCommand.Parameters[0].SourceColumn = "idClient";
             return clientUpdateAdapter;
         }
-        public int InsertClient(int personType, string name, long ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
+
+        public int InsertClient(int personType, string name, long ruc, long dni, int priority, int type, int state, string address, int phone, string contact, string email)
         {
             connect();
             adap = clientAdapter();
@@ -57,12 +60,18 @@ namespace InkaArt.Data.Sales
             int rowsAffected = insertData(data, adap, "Client");
             return rowsAffected;
         }
-        public DataTable GetClients()
+
+        public DataTable GetClients(int id = -1, long ruc = -1, long dni = -1, string name = "", int state = -1, int priority = -1)
         {
             connect();
 
             adap = clientAdapter();
-
+            byId(adap, id);
+            byName(adap, name);
+            byDoc(adap, ruc);
+            byState(adap, state);
+            byPriority(adap, priority);
+            adap.SelectCommand.CommandText += ";";
             data.Clear();
             data = getData(adap, "Client");
 
@@ -70,39 +79,73 @@ namespace InkaArt.Data.Sales
             clientList = data.Tables[0];
             return clientList;
         }
-        public DataTable GetClients(int id)
+
+        private void byPriority(NpgsqlDataAdapter adap, int priority)
         {
-            connect();
-
-            adap = clientUpdateAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = id;
-
-            data.Clear();
-            data = getData(adap, "Client");
-
-            DataTable clientList = new DataTable();
-            clientList = data.Tables[0];
-            return clientList;
+            if (priority == -1) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "priority = :priority";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("priority", DbType.Int32));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "priority";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = priority;
         }
-        public DataTable GetClients(int id = -1, int ruc = -1, int dni = -1, string name = "", int state = -1, int priority = -1)
+
+        private void byState(NpgsqlDataAdapter adap, int state)
         {
-            connect();
-
-            adap = clientUpdateAdapter();
-            if (id != -1) adap.SelectCommand.Parameters[0].NpgsqlValue = id;
-            if (!name.Equals("")) adap.SelectCommand.Parameters[1].NpgsqlValue = name;
-            if (ruc != -1) adap.SelectCommand.Parameters[2].NpgsqlValue = ruc;
-            if (dni != -1) adap.SelectCommand.Parameters[3].NpgsqlValue = dni;
-            if (state != -1) adap.SelectCommand.Parameters[4].NpgsqlValue = state;
-            if (priority != -1) adap.SelectCommand.Parameters[5].NpgsqlValue = priority;
-
-            data.Clear();
-            data = getData(adap, "Client");
-
-            DataTable clientList = new DataTable();
-            clientList = data.Tables[0];
-            return clientList;
+            if (state == -1) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "status = :status";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("status", DbType.Int32));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "status";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = state;
         }
+
+        private void byDoc(NpgsqlDataAdapter adap, long doc)
+        {
+            if (doc == -1) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "ruc = :ruc";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("ruc", DbType.Int64));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "ruc";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = doc;
+        }
+
+        private void byName(NpgsqlDataAdapter adap, string name)
+        {
+            name = "%" + name + "%";
+            if (name.Equals("")) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "name LIKE :name";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "name";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = name;
+        }
+
+        private void byId(NpgsqlDataAdapter adap, int id)
+        {
+            if (id == -1) return; //If there is no id, just return dude
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "\"idClient\" = :idClient";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idClient", DbType.Int32));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "idClient";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
+        }
+
         public int UpdateClient(string id, int personType, string name, int ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
         {
             connect();
