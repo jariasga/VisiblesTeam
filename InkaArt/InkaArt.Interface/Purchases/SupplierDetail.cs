@@ -107,7 +107,8 @@ namespace InkaArt.Interface.Purchases
             textBox_address.Text = textBox_address.Text.Trim();
             textBox_contactName.Text = textBox_contactName.Text.Trim();
             textBox_email.Text = textBox_email.Text.Trim();
-            if(textBox_name.Text.Length<1 || textBox_address.Text.Length<1 || textBox_contactName.Text.Length<1 || textBox_email.Text.Length<1 || textBox_ruc.Text.Length<1 || textBox_telephone.Text.Length < 1)
+
+            if(textBox_name.Text.Length<1 || textBox_address.Text.Length<1 || textBox_contactName.Text.Length<1 || textBox_email.Text.Length<1 || textBox_ruc.Text.Length<1 || textBox_telephone.Text.Length < 1 || comboBox_status.Text.Length<1)
             {
                 MessageBox.Show("Debe llenar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;

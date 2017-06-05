@@ -80,6 +80,7 @@
             // 
             // textBox_idSupplier
             // 
+            this.textBox_idSupplier.BackColor = System.Drawing.Color.White;
             this.textBox_idSupplier.Enabled = false;
             this.textBox_idSupplier.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idSupplier.Location = new System.Drawing.Point(24, 40);
@@ -100,6 +101,7 @@
             // 
             // textBox_name
             // 
+            this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(24, 94);
             this.textBox_name.MaxLength = 100;
@@ -119,6 +121,7 @@
             // 
             // textBox_ruc
             // 
+            this.textBox_ruc.BackColor = System.Drawing.Color.White;
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ruc.Location = new System.Drawing.Point(24, 148);
             this.textBox_ruc.MaxLength = 11;
@@ -139,6 +142,7 @@
             // 
             // textBox_address
             // 
+            this.textBox_address.BackColor = System.Drawing.Color.White;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_address.Location = new System.Drawing.Point(24, 203);
             this.textBox_address.Multiline = true;
@@ -193,6 +197,7 @@
             // 
             // textBox_telephone
             // 
+            this.textBox_telephone.BackColor = System.Drawing.Color.White;
             this.textBox_telephone.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_telephone.Location = new System.Drawing.Point(15, 170);
             this.textBox_telephone.MaxLength = 9;
@@ -213,6 +218,7 @@
             // 
             // textBox_email
             // 
+            this.textBox_email.BackColor = System.Drawing.Color.White;
             this.textBox_email.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_email.Location = new System.Drawing.Point(15, 111);
             this.textBox_email.Name = "textBox_email";
@@ -231,6 +237,7 @@
             // 
             // textBox_contactName
             // 
+            this.textBox_contactName.BackColor = System.Drawing.Color.White;
             this.textBox_contactName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_contactName.Location = new System.Drawing.Point(15, 53);
             this.textBox_contactName.MaxLength = 200;
@@ -403,6 +410,9 @@
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
             "Activo",
