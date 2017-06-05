@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_abbreviature = new System.Windows.Forms.TextBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
+            this.textBox_abbreviature = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_name = new System.Windows.Forms.TextBox();
@@ -61,23 +61,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // textBox_abbreviature
-            // 
-            this.textBox_abbreviature.BackColor = System.Drawing.Color.White;
-            this.textBox_abbreviature.Enabled = false;
-            this.textBox_abbreviature.Location = new System.Drawing.Point(24, 110);
-            this.textBox_abbreviature.Name = "textBox_abbreviature";
-            this.textBox_abbreviature.Size = new System.Drawing.Size(192, 26);
-            this.textBox_abbreviature.TabIndex = 27;
-            // 
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
-            this.textBox_id.Enabled = false;
             this.textBox_id.Location = new System.Drawing.Point(24, 50);
+            this.textBox_id.MaxLength = 9;
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(192, 26);
             this.textBox_id.TabIndex = 26;
+            this.textBox_id.TextChanged += new System.EventHandler(this.validating_id);
+            // 
+            // textBox_abbreviature
+            // 
+            this.textBox_abbreviature.BackColor = System.Drawing.Color.White;
+            this.textBox_abbreviature.Location = new System.Drawing.Point(24, 110);
+            this.textBox_abbreviature.MaxLength = 10;
+            this.textBox_abbreviature.Name = "textBox_abbreviature";
+            this.textBox_abbreviature.Size = new System.Drawing.Size(192, 26);
+            this.textBox_abbreviature.TabIndex = 27;
             // 
             // label5
             // 
@@ -100,9 +101,9 @@
             // textBox_name
             // 
             this.textBox_name.BackColor = System.Drawing.Color.White;
-            this.textBox_name.Enabled = false;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_name.Location = new System.Drawing.Point(240, 50);
+            this.textBox_name.MaxLength = 280;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(404, 24);
             this.textBox_name.TabIndex = 17;
@@ -132,6 +133,9 @@
             // 
             // dataGridView_unitOfMeasurement
             // 
+            this.dataGridView_unitOfMeasurement.AllowUserToAddRows = false;
+            this.dataGridView_unitOfMeasurement.AllowUserToDeleteRows = false;
+            this.dataGridView_unitOfMeasurement.AllowUserToResizeRows = false;
             this.dataGridView_unitOfMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_unitOfMeasurement.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Eliminar});
@@ -158,7 +162,7 @@
             this.buttonDelete.TabIndex = 47;
             this.buttonDelete.Text = "🗑 Eliminar";
             this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.button_delete);
             // 
             // buttonCreate
             // 

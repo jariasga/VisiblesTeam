@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace InkaArt.Interface.Purchases
 {
@@ -23,21 +24,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button2_Click(object sender, EventArgs e)
         {
-            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
 
-            foreach (DataGridViewRow row in dataGridView_unitOfMeasurement.Rows)
-            {
-                bool s = Convert.ToBoolean(row.Cells[0].Value);
-                if (s == true)
-                {
-                    toDelete.Add(row);
-                }
-            }
-
-            foreach (DataGridViewRow row in toDelete)
-            {
-                dataGridView_unitOfMeasurement.Rows.Remove(row);
-            }
         }
 
         private void button_create(object sender, EventArgs e)
@@ -48,13 +35,54 @@ namespace InkaArt.Interface.Purchases
 
         private void button_search(object sender, EventArgs e)
         {
-
+            textBox_abbreviature.Text=textBox_abbreviature.Text.Trim();
+            textBox_id.Text = textBox_id.Text.Trim();
+            textBox_name.Text = textBox_name.Text.Trim();
+            if(textBox_abbreviature.Text.Length<1 && textBox_id.Text.Length<1 && textBox_name.Text.Length < 1)
+            {
+                return;
+            }
         }
 
         private void editUnitOfMeasurement(object sender, DataGridViewCellEventArgs e)
         {
             Form new_unit_of_measurement = new UnitOfMeasurement(dataGridView_unitOfMeasurement.CurrentRow,control);
             new_unit_of_measurement.Show();
+        }
+
+        private void validating_id(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_id.Text.ToCharArray();
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if (Char.IsDigit(aChar))
+                {
+                    actualdata = actualdata + aChar;
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede ingresar números en el id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_id.Text = actualdata;
+        }
+
+        private void button_delete(object sender, EventArgs e)
+        {
+            /*int registros = dataGridView_unitOfMeasurement.Rows.Count;
+            for (int i = 0; i < registros; i++)
+            {
+                if (Convert.ToBoolean(dataGridView_unitOfMeasurement.Rows[i].Cells[0].Value) == true)
+                {
+                    string idUnit = dataGridView_unitOfMeasurement.Rows[i].Cells[1].Value.ToString();
+                    string name = dataGridView_unitOfMeasurement.Rows[i].Cells[2].Value.ToString();
+                    string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
+                    //control.updateData(idSupplier,name, int.Parse(ruc), contactName, int.Parse(telephone), email, address, int.Parse(priority), status);
+                }
+            }*/
         }
     }
 }

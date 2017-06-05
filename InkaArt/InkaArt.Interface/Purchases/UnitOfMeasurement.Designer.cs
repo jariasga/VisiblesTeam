@@ -62,6 +62,7 @@
             // 
             this.textBox_nameUnit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameUnit.Location = new System.Drawing.Point(15, 99);
+            this.textBox_nameUnit.MaxLength = 280;
             this.textBox_nameUnit.Name = "textBox_nameUnit";
             this.textBox_nameUnit.Size = new System.Drawing.Size(212, 24);
             this.textBox_nameUnit.TabIndex = 12;
@@ -70,6 +71,7 @@
             // 
             this.textBox_abbreviation.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_abbreviation.Location = new System.Drawing.Point(15, 158);
+            this.textBox_abbreviation.MaxLength = 10;
             this.textBox_abbreviation.Name = "textBox_abbreviation";
             this.textBox_abbreviation.Size = new System.Drawing.Size(212, 24);
             this.textBox_abbreviation.TabIndex = 16;
@@ -111,6 +113,7 @@
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Location = new System.Drawing.Point(15, 40);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.ReadOnly = true;
