@@ -37,9 +37,9 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView_products = new System.Windows.Forms.DataGridView();
+            this.button_save = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_products)).BeginInit();
             this.SuspendLayout();
@@ -129,6 +129,8 @@
             // 
             // dataGridView_products
             // 
+            this.dataGridView_products.AllowUserToAddRows = false;
+            this.dataGridView_products.AllowUserToDeleteRows = false;
             this.dataGridView_products.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -139,16 +141,6 @@
             this.dataGridView_products.Name = "dataGridView_products";
             this.dataGridView_products.Size = new System.Drawing.Size(244, 204);
             this.dataGridView_products.TabIndex = 17;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
             // 
             // button_save
             // 
@@ -162,6 +154,18 @@
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // JobDetails
             // 
@@ -197,8 +201,8 @@
         private System.Windows.Forms.TextBox textBox_count;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridView_products;
+        private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.Button button_save;
     }
 }

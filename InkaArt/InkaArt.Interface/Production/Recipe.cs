@@ -14,6 +14,7 @@ namespace InkaArt.Interface.Production
     public partial class Recipe : Form
     {
         private string globalIdRecipe;
+        private int maxRow=0;
 
         public Recipe()
         {
@@ -45,6 +46,7 @@ namespace InkaArt.Interface.Production
             //agregar datos al combobox rawmaterial
             for (int i = 0; i < rawMList.Rows.Count; i++)
                 comboBox_rawMaterial.Items.Add(rawMList.Rows[i]["name"].ToString());
+            comboBox_rawMaterial.SelectedIndex = 1;
 
         }
 
@@ -110,7 +112,8 @@ namespace InkaArt.Interface.Production
 
                 for (int i = 0; i < recipeRawList.Rows.Count; i++)
                 {
-                    if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0)
+                    if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0 && 
+                        string.Compare(recipeRawList.Rows[i]["status"].ToString(),"1")==0)
                     {
                         idRaw = recipeRawList.Rows[i]["idRawMaterial"].ToString();
                         countRaw = recipeRawList.Rows[i]["materialCount"].ToString();
@@ -131,8 +134,8 @@ namespace InkaArt.Interface.Production
                             }
                         dataGridView_rawMaterial.Rows.Add(idRaw, nameRaw, countRaw, nameUnit);
                     }
-
                 }
+                maxRow = dataGridView_rawMaterial.Rows.Count;
             }
             dataGridView_rawMaterial.Refresh();
         }
@@ -189,17 +192,47 @@ namespace InkaArt.Interface.Production
 
             if (comboBox_version.SelectedItem != null)
             {
-                for (int i = 0; i < rawList.Rows.Count; i++)
+                if (numericUpDown_count.Value > 0)
                 {
-                    if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
+                    for (int i = 0; i < rawList.Rows.Count; i++)
                     {
-                        idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
+                        if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
+                        {
+                            idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
+                            break;
+                        }
+                    }
+
+                    controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
+                    fillGrid();
+                }
+                else
+                    MessageBox.Show("La cantidad debe ser mayor a 0");
+
+            }else
+                MessageBox.Show("Seleccione una version");
+
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            string id = "";
+            foreach(DataGridViewRow row in dataGridView_rawMaterial.Rows)
+            {
+                //fill valores limites
+                int number;
+                
+                if(row.Index>=0 && row.Index < dataGridView_rawMaterial.Rows.Count && Convert.ToBoolean(row.Cells[4].Value))
+                {
+                    if (int.TryParse(row.Cells[0].Value.ToString(),out number)){
+                        id = row.Cells[0].Value.ToString();
+                        RecipeRawMaterialController control = new RecipeRawMaterialController();
+                        control.updateDataNoAdapter(globalIdRecipe, id);
+                        fillGrid();
                         break;
                     }
                 }
-
-                controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
-                fillGrid();
+                   
             }
         }
     }

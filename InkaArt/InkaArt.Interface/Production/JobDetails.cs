@@ -55,7 +55,15 @@ namespace InkaArt.Interface.Production
         private void button_save_Click(object sender, EventArgs e)
         {
             ProcessController control = new ProcessController();
-            control.updateData(textBox_id.Text, textBox_count.Text);
+            int positionCount;
+            if (int.TryParse(textBox_count.Text, out positionCount))
+            {
+                positionCount = int.Parse(textBox_count.Text);
+                int id = int.Parse(textBox_id.Text);
+                control.updateDataNoAdapter(id, positionCount);
+            }
+            else
+                MessageBox.Show("Tipo de dato no valido.");
         }
     }
 }

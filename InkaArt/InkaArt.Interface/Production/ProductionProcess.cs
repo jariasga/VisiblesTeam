@@ -71,8 +71,15 @@ namespace InkaArt.Interface.Production
         private void button_save_Click(object sender, EventArgs e)
         {
             FinalProductController control = new FinalProductController();
-            control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
-
+            double local,exp;
+            local = exp = 0;
+            if (double.TryParse(textBox_localPrice.Text, out local) && double.TryParse(textBox_exportPrice.Text, out exp))
+            {
+                control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
+                MessageBox.Show("Se guardaron los cambios.");
+            }
+            else
+                MessageBox.Show("Tipo de dato no permitido");
         }
 
         private void ProductionProcess_Load(object sender, EventArgs e)

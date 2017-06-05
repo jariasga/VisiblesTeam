@@ -50,6 +50,8 @@
             // 
             // dataGridView_productProceses
             // 
+            this.dataGridView_productProceses.AllowUserToAddRows = false;
+            this.dataGridView_productProceses.AllowUserToDeleteRows = false;
             this.dataGridView_productProceses.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_productProceses.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_productProceses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -67,11 +69,13 @@
             // 
             this.Producto.HeaderText = "Id";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // Nombre
             // 
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -243,8 +247,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_exportPrice;
@@ -253,5 +255,7 @@
         private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.TextBox textBox_stock;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
     }
 }

@@ -32,7 +32,7 @@ namespace InkaArt.Interface.Production
                 comboBox_proceso.Items.Add(processList.Rows[i]["description"].ToString());
 
             for (int i = 0; i < workerList.Rows.Count; i++)
-                comboBox_nombre.Items.Add(workerList.Rows[i]["firstName"].ToString()+" "+ workerList.Rows[i]["lastName"].ToString());
+                comboBox_nombre.Items.Add(workerList.Rows[i]["first_name"].ToString()+" "+ workerList.Rows[i]["last_name"].ToString());
 
 
         }
@@ -44,13 +44,29 @@ namespace InkaArt.Interface.Production
 
         private void button_agregar_Click(object sender, EventArgs e)
         {
-                dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
-                    comboBox_producto.SelectedItem.ToString(),
-                    comboBox_proceso.SelectedItem.ToString(),
-                    textbox_horaIni.Text,
-                    textBox_horaFin.Text,
-                    textBox_rotos.Text,
-                    textBox_terminados.Text);
+            //validacion
+            DateTime auxDate;
+            int auxInt;
+            if (comboBox_nombre.SelectedItem != null && comboBox_producto.SelectedItem != null &&
+                comboBox_proceso.SelectedItem != null)
+            {
+                if (DateTime.TryParse(textbox_horaIni.Text, out auxDate) &&
+                    DateTime.TryParse(textBox_horaFin.Text, out auxDate) &&
+                    int.TryParse(textBox_rotos.Text, out auxInt) &&
+                    int.TryParse(textBox_terminados.Text, out auxInt))
+                {
+                    dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
+                        comboBox_producto.SelectedItem.ToString(),
+                        comboBox_proceso.SelectedItem.ToString(),
+                        textbox_horaIni.Text,
+                        textBox_horaFin.Text,
+                        textBox_rotos.Text,
+                        textBox_terminados.Text);
+                }
+                else
+                    MessageBox.Show("Formato de datos no válido, por favor verifique todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }else
+                MessageBox.Show("Por favor asegurese de seleccionar un nombre, producto y proceso.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 

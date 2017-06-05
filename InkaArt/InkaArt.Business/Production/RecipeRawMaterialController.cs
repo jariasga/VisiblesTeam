@@ -53,9 +53,24 @@ namespace InkaArt.Business.Production
             row["idRecipe"] = idRecipe;
             row["idRawMaterial"] = idRawMaterial;
             row["materialCount"] = materialCount;
+            row["status"] = "1";
 
             table.Rows.Add(row);
             int rowsAffected = recipeRawMaterial.insertData(data, adapt, "Recipe-RawMaterial");
+        }
+
+
+        public void updateDataNoAdapter(string idRecipe, string idRawMaterial)
+        {
+            recipeRawMaterial.connect();
+            string updateQuery;
+
+            updateQuery = "UPDATE inkaart.\"Recipe-RawMaterial\" SET ";
+            updateQuery = updateQuery + "status = 0 ";
+            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + "AND \"idRawMaterial\"= "+ idRawMaterial+" ;";
+            recipeRawMaterial.connect();
+            recipeRawMaterial.execute(updateQuery);
+            recipeRawMaterial.closeConnection();
         }
     }
 }

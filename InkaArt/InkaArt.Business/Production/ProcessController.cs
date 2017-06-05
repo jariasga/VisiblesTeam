@@ -80,5 +80,17 @@ namespace InkaArt.Business.Production
             }
             int rowUpdated = process.updateData(data, adapt, "Process");
         }
+
+        public void updateDataNoAdapter(int id, int positionCount)
+        {
+            string updateQuery;
+            //int filtros = 0;
+            updateQuery = "UPDATE inkaart.\"Process\" SET ";
+            updateQuery = updateQuery + "position_count = '" + positionCount + "' ";
+            updateQuery = updateQuery + " WHERE \"idProcess\"= " + id + ";";
+            process.connect();
+            process.execute(updateQuery);
+            process.closeConnection();
+        }
     }
 }
