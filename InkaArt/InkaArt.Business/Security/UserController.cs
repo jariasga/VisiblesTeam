@@ -51,7 +51,7 @@ namespace InkaArt.Business.Security
             //row["password"] = sha.encrypt(password);
             row["status"] = status;
             row["description"] = description;
-            row["idRole"] = role;
+            row["id_role"] = role;
             
             int rowsAffected = user.updateData(data, adap, "User");
 
@@ -82,7 +82,7 @@ namespace InkaArt.Business.Security
             row["password"] = sha.encrypt(password);
             row["status"] = status;
             row["description"] = description;
-            row["idRole"] = role;
+            row["id_role"] = role;
 
             //  Add the row created into the table
             table.Rows.Add(row);
@@ -109,7 +109,7 @@ namespace InkaArt.Business.Security
         {
             table = showData();
             DataRow[] rows;
-            rows = table.Select("idUser = " + id);
+            rows = table.Select("id_user = " + id);
             row = rows[0];
 
             return row;

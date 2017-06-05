@@ -35,9 +35,9 @@ namespace InkaArt.Interface.Security
 
             dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
 
-            dataGridViewUserMaintenance.Columns["idWorker"].HeaderText = "ID";
-            dataGridViewUserMaintenance.Columns["firstName"].HeaderText = "Nombre";
-            dataGridViewUserMaintenance.Columns["lastName"].HeaderText = "Apellido";
+            dataGridViewUserMaintenance.Columns["id_worker"].HeaderText = "ID";
+            dataGridViewUserMaintenance.Columns["first_name"].HeaderText = "Nombre";
+            dataGridViewUserMaintenance.Columns["last_name"].HeaderText = "Apellido";
             dataGridViewUserMaintenance.Columns["dni"].HeaderText = "DNI";
             dataGridViewUserMaintenance.Columns["phone"].HeaderText = "Teléfono";
             dataGridViewUserMaintenance.Columns["address"].HeaderText = "Dirección";

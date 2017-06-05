@@ -47,8 +47,8 @@ namespace InkaArt.Business.Security
 
             row = table.NewRow();
             
-            row["firstName"] = firstName;
-            row["lastName"] = lastName;
+            row["first_name"] = firstName;
+            row["las_name"] = lastName;
             row["dni"] = dni;
             row["turn"] = turn;
             row["user"] = user;
@@ -67,9 +67,9 @@ namespace InkaArt.Business.Security
             worker.connect();
 
             row = getWorkerRowbyID(workerID);
-            row["idWorker"] = workerID;
-            row["firstName"] = firstName;
-            row["lastName"] = lastName;
+            row["id_worker"] = workerID;
+            row["first_name"] = firstName;
+            row["last_name"] = lastName;
             row["dni"] = dni;
             row["turn"] = turn;
             row["user"] = user;
@@ -98,7 +98,7 @@ namespace InkaArt.Business.Security
         {
             UserController user = new UserController();
             
-            return Convert.ToInt32(user.getUserRow(username)["idUser"].ToString().Trim());
+            return Convert.ToInt32(user.getUserRow(username)["id_user"].ToString().Trim());
         }
 
         public void sendPassword(string recipient, string username, string password)
@@ -111,7 +111,7 @@ namespace InkaArt.Business.Security
         {
             table = showData();
             DataRow[] rows;
-            rows = table.Select("idWorker = " + id);
+            rows = table.Select("id_worker = " + id);
             row = rows[0];
 
             return row;

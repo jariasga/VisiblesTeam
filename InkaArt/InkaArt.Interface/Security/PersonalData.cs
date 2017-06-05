@@ -1,4 +1,5 @@
-﻿using GMap.NET;
+﻿
+using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
@@ -26,9 +27,9 @@ namespace InkaArt.Interface.Security
         public PersonalData(DataGridView dataGridV, UserController userC, WorkerController workerC, RoleController roleC)
         {
             InitializeComponent();
-            workerID = Convert.ToInt32(dataGridV.SelectedRows[0].Cells["idWorker"].Value.ToString().Trim());
-            textBoxName.Text = dataGridV.SelectedRows[0].Cells["firstName"].Value.ToString();
-            textBoxLastName.Text = dataGridV.SelectedRows[0].Cells["lastName"].Value.ToString();
+            workerID = Convert.ToInt32(dataGridV.SelectedRows[0].Cells["id_worker"].Value.ToString().Trim());
+            textBoxName.Text = dataGridV.SelectedRows[0].Cells["first_name"].Value.ToString();
+            textBoxLastName.Text = dataGridV.SelectedRows[0].Cells["last_name"].Value.ToString();
             textBoxDNI.Text = dataGridV.SelectedRows[0].Cells["dni"].Value.ToString();
             textBoxPhone.Text = dataGridV.SelectedRows[0].Cells["phone"].Value.ToString();
             textBoxAddress.Text = dataGridV.SelectedRows[0].Cells["address"].Value.ToString();
@@ -100,10 +101,13 @@ namespace InkaArt.Interface.Security
             }
             else if (string.Equals(buttonSave.Text, "Guardar"))
             {
-                user.showData();
-                user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text));
-                int userID = worker.getUserID(textBoxUsername.Text);
-                worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                if (user != null)
+                {
+                    user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, /*Convert.ToInt32(textBoxIDRol.Text)*/ 1);
+                    int userID = worker.getUserID(textBoxUsername.Text);
+                    worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                }
+                
             }
             this.Close();
         }
@@ -115,7 +119,7 @@ namespace InkaArt.Interface.Security
 
         private void comboBoxRoles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxIDRol.Text = roleTable.Rows[comboBoxRoles.SelectedIndex]["idRole"].ToString();
+            textBoxIDRol.Text = roleTable.Rows[comboBoxRoles.SelectedIndex]["id_role"].ToString();
         }
 
         private void fillMap()
