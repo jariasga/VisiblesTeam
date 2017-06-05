@@ -45,7 +45,7 @@ namespace InkaArt.Business.Security
             row = table.NewRow();
             
             row["first_name"] = firstName;
-            row["las_name"] = lastName;
+            row["last_name"] = lastName;
             row["dni"] = dni;
             row["turn"] = turn;
             row["id_user"] = user;

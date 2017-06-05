@@ -1,5 +1,4 @@
-﻿
-using GMap.NET;
+﻿using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
@@ -9,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +23,7 @@ namespace InkaArt.Interface.Security
         private RoleController role;
         private DataRow userRow;
         DataTable roleTable;
+        Byte[] rawImage;
         int workerID;
         public PersonalData(DataGridView dataGridV, UserController userC, WorkerController workerC, RoleController roleC)
         {
@@ -46,6 +47,13 @@ namespace InkaArt.Interface.Security
             textBoxUsername.Text = userRow["username"].ToString();
             textBoxDescription.Text = userRow["description"].ToString();
             comboBoxUserStatus.Text = userRow["status"].ToString();
+            rawImage = new Byte[0];
+            if (userRow["photo"] != DBNull.Value)
+            {
+                rawImage = (Byte[]) userRow["photo"];
+                MemoryStream photoMem = new MemoryStream(rawImage);
+                pictureBoxUser.Image = Image.FromStream(photoMem);
+            }
 
             DataRow roleRow = role.getRoleRowbyID(roleID);
             textBoxIDRol.Text = roleID.ToString();
@@ -99,19 +107,28 @@ namespace InkaArt.Interface.Security
             {
                 string password = "";
                 user.showData();
-                user.insertData(textBoxUsername.Text, textBoxDescription.Text,  1, ref password, Convert.ToInt32(textBoxIDRol.Text));                
-                worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                if (user.insertData(textBoxUsername.Text, textBoxDescription.Text,  1, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                    MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
 
-                worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
+                    worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
+                }
+                
             }
             else if (string.Equals(buttonSave.Text, "Guardar"))
             {
                 if (user != null)
                 {
-                    user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text));
-                    int userID = worker.getUserID(textBoxUsername.Text);
-                    worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                    if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                        MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        int userID = worker.getUserID(textBoxUsername.Text);
+                        worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
                     }
+                }
                 
             }
             this.Close();
@@ -156,6 +173,19 @@ namespace InkaArt.Interface.Security
             gMapControl1.MaxZoom = 25;
             gMapControl1.Zoom = 16;
             gMapControl1.AutoScroll = true;
+        }
+
+        private void pictureBoxUser_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog photo = new OpenFileDialog();
+            photo.Title = "Open photo";
+            photo.Filter = "JPG files (*.jpg)|*.jpg";
+            if (photo.ShowDialog(this) == DialogResult.OK)
+            {
+                rawImage = File.ReadAllBytes(photo.FileName);
+                pictureBoxUser.Image = new Bitmap(photo.FileName);
+                pictureBoxUser.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using System.Data;
+using System.ComponentModel;
 
 namespace InkaArt.Classes
 {
@@ -54,24 +55,22 @@ namespace InkaArt.Classes
 
         public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            adap = callAdapter(data, adap, srcTable);
-            return adap.Update(data, srcTable);
+            return callAdapter(data, adap, srcTable);
         }
 
         public int insertData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            adap = callAdapter(data, adap, srcTable);
-            return adap.Update(data, srcTable); ;
+            return callAdapter(data, adap, srcTable);
         }
 
         public int deleteData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            adap = callAdapter(data, adap, srcTable);
-            return adap.Update(data, srcTable);
+            return callAdapter(data, adap, srcTable);
         }
 
-        public NpgsqlDataAdapter callAdapter(DataSet data, NpgsqlDataAdapter adap, string srcTable)
+        public int callAdapter(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
+            int code = 0;
             if (Connection.State != System.Data.ConnectionState.Open) connect();
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
             adap.UpdateCommand = builder.GetUpdateCommand();
@@ -80,8 +79,19 @@ namespace InkaArt.Classes
             adap.UpdateCommand.Connection = Connection;
             adap.InsertCommand.Connection = Connection;
             adap.DeleteCommand.Connection = Connection;
+
+            try
+            {
+                adap.Update(data, srcTable);
+            }
+            catch (Exception ex)
+            {
+                code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
+                if (code == 23505) return 23505;
+            }
+
             closeConnection();
-            return adap;
+            return code;
         }
 
         public void closeConnection()
@@ -112,8 +122,7 @@ namespace InkaArt.Classes
             return rowsAffected;
         }
 
-
-
+        
 
         public string ServerAddress { get { return serverAddress; } set { serverAddress = value; } }
         protected NpgsqlConnection Connection { get { return connection; } set { connection = value; } }

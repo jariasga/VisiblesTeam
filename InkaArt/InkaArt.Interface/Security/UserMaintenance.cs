@@ -36,13 +36,17 @@ namespace InkaArt.Interface.Security
             Form personalData = new PersonalData(user, worker, role);
             personalData.ShowDialog(this);
             showTable();
+            
         }
 
         private void buttonModify_Click(object sender, EventArgs e)
         {
-            Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
-            personalData.ShowDialog(this);
-            showTable();
+            if (dataGridViewUserMaintenance.Rows.Count > 0)
+            {
+                Form personalData = new PersonalData(dataGridViewUserMaintenance, user, worker, role);
+                personalData.ShowDialog(this);
+                showTable();
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -87,7 +91,7 @@ namespace InkaArt.Interface.Security
             filter();
             dataGridViewUserMaintenance.DataSource = workerTable;
 
-            dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            dataGridViewUserMaintenance.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dataGridViewUserMaintenance.Columns["id_worker"].HeaderText = "ID";
             dataGridViewUserMaintenance.Columns["first_name"].HeaderText = "Nombre";
