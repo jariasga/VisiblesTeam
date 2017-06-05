@@ -63,7 +63,7 @@ namespace InkaArt.Interface.Production
             string id, name, count;
             id = name = count = "";
 
-            if (e.RowIndex >= 0 && e.RowIndex < maxRow)
+            if (e.RowIndex >= 0 && e.RowIndex < maxRow && e.ColumnIndex ==3)
             {
                 DataGridViewRow row = dataGridView_process.Rows[e.RowIndex];
                 id = row.Cells[0].Value.ToString();

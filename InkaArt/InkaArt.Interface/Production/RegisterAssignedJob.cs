@@ -32,7 +32,7 @@ namespace InkaArt.Interface.Production
                 comboBox_proceso.Items.Add(processList.Rows[i]["description"].ToString());
 
             for (int i = 0; i < workerList.Rows.Count; i++)
-                comboBox_nombre.Items.Add(workerList.Rows[i]["firstName"].ToString()+" "+ workerList.Rows[i]["lastName"].ToString());
+                comboBox_nombre.Items.Add(workerList.Rows[i]["first_name"].ToString()+" "+ workerList.Rows[i]["last_name"].ToString());
 
 
         }
@@ -44,6 +44,7 @@ namespace InkaArt.Interface.Production
 
         private void button_agregar_Click(object sender, EventArgs e)
         {
+            //validacion
                 dataGridView_turn.Rows.Add(comboBox_nombre.SelectedItem.ToString(),
                     comboBox_producto.SelectedItem.ToString(),
                     comboBox_proceso.SelectedItem.ToString(),

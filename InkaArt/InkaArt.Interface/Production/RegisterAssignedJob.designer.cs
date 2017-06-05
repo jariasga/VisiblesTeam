@@ -94,6 +94,8 @@
             // 
             // dataGridView_turn
             // 
+            this.dataGridView_turn.AllowUserToAddRows = false;
+            this.dataGridView_turn.AllowUserToDeleteRows = false;
             this.dataGridView_turn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_turn.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nombre,
@@ -320,7 +322,7 @@
             // 
             // Seleccionar
             // 
-            this.Seleccionar.HeaderText = "";
+            this.Seleccionar.HeaderText = "Eliminar";
             this.Seleccionar.Name = "Seleccionar";
             // 
             // RegisterAssignedJob

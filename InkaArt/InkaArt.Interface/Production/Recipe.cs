@@ -14,6 +14,7 @@ namespace InkaArt.Interface.Production
     public partial class Recipe : Form
     {
         private string globalIdRecipe;
+        private int maxRow=0;
 
         public Recipe()
         {
@@ -111,7 +112,8 @@ namespace InkaArt.Interface.Production
 
                 for (int i = 0; i < recipeRawList.Rows.Count; i++)
                 {
-                    if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0)
+                    if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0 && 
+                        string.Compare(recipeRawList.Rows[i]["status"].ToString(),"1")==0)
                     {
                         idRaw = recipeRawList.Rows[i]["idRawMaterial"].ToString();
                         countRaw = recipeRawList.Rows[i]["materialCount"].ToString();
@@ -132,8 +134,8 @@ namespace InkaArt.Interface.Production
                             }
                         dataGridView_rawMaterial.Rows.Add(idRaw, nameRaw, countRaw, nameUnit);
                     }
-
                 }
+                maxRow = dataGridView_rawMaterial.Rows.Count;
             }
             dataGridView_rawMaterial.Refresh();
         }
@@ -210,6 +212,28 @@ namespace InkaArt.Interface.Production
             }else
                 MessageBox.Show("Seleccione una version");
 
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            string id = "";
+            foreach(DataGridViewRow row in dataGridView_rawMaterial.Rows)
+            {
+                //fill valores limites
+                int number;
+                
+                if(row.Index>=0 && row.Index < dataGridView_rawMaterial.Rows.Count && Convert.ToBoolean(row.Cells[4].Value))
+                {
+                    if (int.TryParse(row.Cells[0].Value.ToString(),out number)){
+                        id = row.Cells[0].Value.ToString();
+                        RecipeRawMaterialController control = new RecipeRawMaterialController();
+                        control.updateDataNoAdapter(globalIdRecipe, id);
+                        fillGrid();
+                        break;
+                    }
+                }
+                   
+            }
         }
     }
 }

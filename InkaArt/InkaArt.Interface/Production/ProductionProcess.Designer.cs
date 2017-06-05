@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.dataGridView_productProceses = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_stock = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -42,14 +44,14 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_productProceses)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView_productProceses
             // 
+            this.dataGridView_productProceses.AllowUserToAddRows = false;
+            this.dataGridView_productProceses.AllowUserToDeleteRows = false;
             this.dataGridView_productProceses.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_productProceses.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_productProceses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -62,6 +64,18 @@
             this.dataGridView_productProceses.Size = new System.Drawing.Size(244, 310);
             this.dataGridView_productProceses.TabIndex = 0;
             this.dataGridView_productProceses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -201,18 +215,6 @@
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
             // 
             // ProductionProcess
             // 
