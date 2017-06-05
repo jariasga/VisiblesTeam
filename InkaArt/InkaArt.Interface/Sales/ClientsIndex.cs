@@ -28,8 +28,21 @@ namespace InkaArt.Interface.Sales
         private void grid_clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             string id = grid_clients.Rows[e.RowIndex].Cells[0].Value.ToString();
-            ClientShow show_form = new ClientShow(id);
-            show_form.Show();
+            var show_form = new ClientShow(id);
+            var result = show_form.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();
+        }
+
+        private void updateDataGrid()
+        {
+            DataTable clientList = clientController.GetClients();
+            populateDataGrid(clientList);
+        }
+
+        private void ClientsIndex_Load(object sender, EventArgs e)
+        {
+            updateDataGrid();
         }
 
         private void populateDataGrid(DataTable clientList)
@@ -52,14 +65,18 @@ namespace InkaArt.Interface.Sales
             DataTable clientList;
             if (textbox_id.Text.Equals("") && textbox_doc.Text.Equals("") && textbox_name.Text.Equals("") && combobox_state.SelectedIndex == -1 && combobox_priority.SelectedIndex == -1) clientList = clientController.GetClients();
             else
-                clientList = clientController.GetClients(int.Parse(textbox_id.Text), int.Parse(textbox_doc.Text), int.Parse(textbox_doc.Text), textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
+            {
+                int sI1 = combobox_priority.SelectedIndex;
+                int sI2 = combobox_state.SelectedIndex;
+                clientList = clientController.GetClients(textbox_id.Text, textbox_doc.Text, textbox_doc.Text, textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
+            }
             populateDataGrid(clientList);
         }
 
-        private void ClientsIndex_Load(object sender, EventArgs e)
+        private void grid_clients_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            DataTable clientList = clientController.GetClients();
-            populateDataGrid(clientList);
+
         }
+
     }
 }
