@@ -40,12 +40,16 @@
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_unitOfMeasurement)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox_id);
             this.groupBox1.Controls.Add(this.textBox_abbreviature);
             this.groupBox1.Controls.Add(this.label5);
@@ -74,10 +78,10 @@
             // textBox_abbreviature
             // 
             this.textBox_abbreviature.BackColor = System.Drawing.Color.White;
-            this.textBox_abbreviature.Location = new System.Drawing.Point(24, 110);
+            this.textBox_abbreviature.Location = new System.Drawing.Point(240, 110);
             this.textBox_abbreviature.MaxLength = 10;
             this.textBox_abbreviature.Name = "textBox_abbreviature";
-            this.textBox_abbreviature.Size = new System.Drawing.Size(192, 26);
+            this.textBox_abbreviature.Size = new System.Drawing.Size(290, 26);
             this.textBox_abbreviature.TabIndex = 27;
             // 
             // label5
@@ -92,7 +96,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 89);
+            this.label3.Location = new System.Drawing.Point(237, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 18);
             this.label3.TabIndex = 20;
@@ -178,6 +182,29 @@
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 18);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Estado";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.comboBox1.Location = new System.Drawing.Point(24, 110);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(192, 26);
+            this.comboBox1.TabIndex = 29;
+            // 
             // UnitOfMeasurementList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -213,5 +240,7 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -35,10 +35,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView_supplies = new System.Windows.Forms.DataGridView();
+            this.Agregar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonReturn = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.Agregar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_supplies)).BeginInit();
             this.SuspendLayout();
@@ -64,9 +64,11 @@
             this.textBox_idFilter.Enabled = false;
             this.textBox_idFilter.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_idFilter.Location = new System.Drawing.Point(20, 50);
+            this.textBox_idFilter.MaxLength = 9;
             this.textBox_idFilter.Name = "textBox_idFilter";
             this.textBox_idFilter.Size = new System.Drawing.Size(135, 24);
             this.textBox_idFilter.TabIndex = 26;
+            this.textBox_idFilter.TextChanged += new System.EventHandler(this.validating_id);
             // 
             // label5
             // 
@@ -112,6 +114,9 @@
             // 
             // dataGridView_supplies
             // 
+            this.dataGridView_supplies.AllowUserToAddRows = false;
+            this.dataGridView_supplies.AllowUserToDeleteRows = false;
+            this.dataGridView_supplies.AllowUserToResizeRows = false;
             this.dataGridView_supplies.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_supplies.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_supplies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -122,6 +127,14 @@
             this.dataGridView_supplies.Size = new System.Drawing.Size(543, 178);
             this.dataGridView_supplies.TabIndex = 45;
             this.dataGridView_supplies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Agregar
+            // 
+            this.Agregar.HeaderText = "";
+            this.Agregar.Name = "Agregar";
+            this.Agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Agregar.Width = 50;
             // 
             // buttonReturn
             // 
@@ -162,14 +175,6 @@
             this.buttonCreate.Text = "＋ Crear";
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
-            // 
-            // Agregar
-            // 
-            this.Agregar.HeaderText = "";
-            this.Agregar.Name = "Agregar";
-            this.Agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Agregar.Width = 50;
             // 
             // AddSupply
             // 

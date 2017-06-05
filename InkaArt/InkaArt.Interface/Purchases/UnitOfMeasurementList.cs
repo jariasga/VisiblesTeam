@@ -20,6 +20,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_unitOfMeasurement.Columns["idUnit"].HeaderText = "ID";
             dataGridView_unitOfMeasurement.Columns["name"].HeaderText = "Nombre";
             dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
+            dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -72,7 +73,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_delete(object sender, EventArgs e)
         {
-            /*int registros = dataGridView_unitOfMeasurement.Rows.Count;
+            int registros = dataGridView_unitOfMeasurement.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
                 if (Convert.ToBoolean(dataGridView_unitOfMeasurement.Rows[i].Cells[0].Value) == true)
@@ -80,9 +81,11 @@ namespace InkaArt.Interface.Purchases
                     string idUnit = dataGridView_unitOfMeasurement.Rows[i].Cells[1].Value.ToString();
                     string name = dataGridView_unitOfMeasurement.Rows[i].Cells[2].Value.ToString();
                     string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
-                    //control.updateData(idSupplier,name, int.Parse(ruc), contactName, int.Parse(telephone), email, address, int.Parse(priority), status);
+                    dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value = "Inactivo";
+                    string status = dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value.ToString();
+                    control.updateData(idUnit,name, abbrev, status);
                 }
-            }*/
+            }
         }
     }
 }

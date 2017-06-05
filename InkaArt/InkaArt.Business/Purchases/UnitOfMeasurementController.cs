@@ -35,7 +35,7 @@ namespace InkaArt.Business.Purchases
             unitOfMeasurement.closeConnection();
             return unitOfMeasurementList;
         }
-        public void insertData(string nombre, string abreviatura)
+        public void insertData(string nombre, string abreviatura,string estado)
         {
             unitOfMeasurement.connect();
 
@@ -44,14 +44,14 @@ namespace InkaArt.Business.Purchases
 
             row["name"] = nombre;
             row["abbreviature"] = abreviatura;
-
+            row["status"] = estado;
             table.Rows.Add(row);
 
             int rowsAffected = unitOfMeasurement.insertData(data, adap, "UnitOfMeasurement");
 
             unitOfMeasurement.closeConnection();
         }
-        public void updateData(string id, string nombre, string abreviatura)
+        public void updateData(string id, string nombre, string abreviatura,string estado)
         {
             unitOfMeasurement.connect();
             table = data.Tables["UnitOfMeasurement"];
@@ -61,6 +61,7 @@ namespace InkaArt.Business.Purchases
                 {
                     table.Rows[i]["name"] = nombre;
                     table.Rows[i]["abbreviature"] = abreviatura;
+                    table.Rows[i]["status"] = estado;
                     break;
                 }
             }

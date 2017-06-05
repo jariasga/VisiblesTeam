@@ -84,7 +84,27 @@ namespace InkaArt.Interface.Purchases
 
         private void button_search(object sender, EventArgs e)
         {
+            textBox_nameFilter.Text = textBox_nameFilter.Text.Trim();
+        }
 
+        private void validating_id(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_idFilter.Text.ToCharArray();
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if (Char.IsDigit(aChar))
+                {
+                    actualdata = actualdata + aChar;
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede ingresar números en el id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_idFilter.Text = actualdata;
         }
     }
 }
