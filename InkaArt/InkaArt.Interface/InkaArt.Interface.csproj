@@ -51,10 +51,11 @@
     <StartupObject>InkaArt.Interface.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="encription-SHA256">
-      <HintPath>..\InkaArt.Libraries\encription-SHA256.dll</HintPath>
-      <Private>True</Private>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\InkaArt.Libraries\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
@@ -290,10 +291,22 @@
     <Compile Include="Sales\SalesReport.designer.cs">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\ChangePassword.designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Security\PersonalData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\PersonalData.designer.cs">
+      <DependentUpon>PersonalData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\UserMaintenance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Security\UserMaintenance.designer.cs">
+    <Compile Include="Security\UserMaintenance.Designer.cs">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
     </Compile>
     <Compile Include="Security\UserRolesPermissions.cs">
@@ -504,6 +517,12 @@
     <EmbeddedResource Include="Sales\SalesReport.resx">
       <DependentUpon>SalesReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Security\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\PersonalData.resx">
+      <DependentUpon>PersonalData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Security\UserMaintenance.resx">
       <DependentUpon>UserMaintenance.cs</DependentUpon>
     </EmbeddedResource>
@@ -571,10 +590,6 @@
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>
       <Name>InkaArt.Classes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InkaArt.Data\InkaArt.Data.csproj">
-      <Project>{28dd7710-8f67-4401-aec4-cd8c3e135b82}</Project>
-      <Name>InkaArt.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

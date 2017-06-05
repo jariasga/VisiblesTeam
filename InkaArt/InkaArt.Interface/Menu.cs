@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using InkaArt.Interface.Purchases;
 using InkaArt.Interface.Sales;
 using InkaArt.Interface.Production;
@@ -19,7 +11,7 @@ namespace InkaArt.Interface
     public partial class Menu : Form
     {
         private Form login;
-
+        public static int userID;
         public Menu(Form login)
         {
             InitializeComponent();
@@ -60,6 +52,7 @@ namespace InkaArt.Interface
 
             if (logout == DialogResult.No) e.Cancel = true;
         }
+
 
         private void Menu_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -210,6 +203,20 @@ namespace InkaArt.Interface
             Form inform = new RegisterAssignedJob();
             inform.MdiParent = this;
             inform.Show();
+        }
+
+        private void modificarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form change_password = new ChangePassword();
+            change_password.MdiParent = this;
+            change_password.Show();
+        }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form roles = new UserRolesPermissions();
+            roles.MdiParent = this;
+            roles.Show();
         }
     }
 }

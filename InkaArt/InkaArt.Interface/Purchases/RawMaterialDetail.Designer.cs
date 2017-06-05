@@ -38,17 +38,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView_suppliersPrice = new System.Windows.Forms.DataGridView();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBox_unit = new System.Windows.Forms.ComboBox();
             this.buttonCreate = new System.Windows.Forms.Button();
+            this.comboBox_unit = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersPrice)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +62,7 @@
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_id.Location = new System.Drawing.Point(18, 48);
@@ -75,16 +73,20 @@
             // 
             // textBox_name
             // 
+            this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(18, 108);
+            this.textBox_name.MaxLength = 200;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(205, 24);
             this.textBox_name.TabIndex = 3;
             // 
             // textBox_description
             // 
+            this.textBox_description.BackColor = System.Drawing.Color.White;
             this.textBox_description.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_description.Location = new System.Drawing.Point(18, 167);
+            this.textBox_description.MaxLength = 400;
             this.textBox_description.Multiline = true;
             this.textBox_description.Name = "textBox_description";
             this.textBox_description.Size = new System.Drawing.Size(204, 57);
@@ -102,6 +104,7 @@
             // 
             // textBox_averagePrice
             // 
+            this.textBox_averagePrice.BackColor = System.Drawing.Color.White;
             this.textBox_averagePrice.Enabled = false;
             this.textBox_averagePrice.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_averagePrice.Location = new System.Drawing.Point(17, 323);
@@ -112,11 +115,14 @@
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
-            "En uso",
-            "Eliminado"});
+            "Activo",
+            "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(17, 383);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(204, 25);
@@ -152,19 +158,15 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Estado";
             // 
-            // dataGridView1
+            // dataGridView_suppliersPrice
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.nombre,
-            this.precio});
-            this.dataGridView1.Location = new System.Drawing.Point(15, 26);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(383, 382);
-            this.dataGridView1.TabIndex = 13;
+            this.dataGridView_suppliersPrice.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_suppliersPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_suppliersPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_suppliersPrice.Location = new System.Drawing.Point(15, 26);
+            this.dataGridView_suppliersPrice.Name = "dataGridView_suppliersPrice";
+            this.dataGridView_suppliersPrice.Size = new System.Drawing.Size(383, 382);
+            this.dataGridView_suppliersPrice.TabIndex = 13;
             // 
             // buttonSave
             // 
@@ -175,7 +177,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(103, 42);
             this.buttonSave.TabIndex = 15;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 
@@ -202,25 +204,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos básicos";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(14, 238);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(58, 18);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Unidad";
-            // 
-            // comboBox_unit
-            // 
-            this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_unit.FormattingEnabled = true;
-            this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
-            this.comboBox_unit.Name = "comboBox_unit";
-            this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
-            this.comboBox_unit.TabIndex = 13;
-            // 
             // buttonCreate
             // 
             this.buttonCreate.BackColor = System.Drawing.Color.SteelBlue;
@@ -235,9 +218,29 @@
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
+            // comboBox_unit
+            // 
+            this.comboBox_unit.BackColor = System.Drawing.Color.White;
+            this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_unit.FormattingEnabled = true;
+            this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
+            this.comboBox_unit.Name = "comboBox_unit";
+            this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
+            this.comboBox_unit.TabIndex = 13;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(14, 238);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 18);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Unidad";
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridView_suppliersPrice);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(273, 13);
             this.groupBox2.Name = "groupBox2";
@@ -245,24 +248,6 @@
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Proveedores";
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.Width = 50;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.Width = 200;
-            // 
-            // precio
-            // 
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.Width = 90;
             // 
             // RawMaterialDetail
             // 
@@ -275,7 +260,7 @@
             this.Controls.Add(this.buttonSave);
             this.Name = "RawMaterialDetail";
             this.Text = "Detalle de materia prima";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersPrice)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -295,15 +280,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_suppliersPrice;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox_unit;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
     }
 }

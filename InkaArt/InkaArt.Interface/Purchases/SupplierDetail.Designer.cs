@@ -74,18 +74,19 @@
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(21, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 23);
+            this.label1.Size = new System.Drawing.Size(20, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Id";
             // 
             // textBox_idSupplier
             // 
+            this.textBox_idSupplier.BackColor = System.Drawing.Color.White;
             this.textBox_idSupplier.Enabled = false;
             this.textBox_idSupplier.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idSupplier.Location = new System.Drawing.Point(24, 40);
             this.textBox_idSupplier.Name = "textBox_idSupplier";
             this.textBox_idSupplier.ReadOnly = true;
-            this.textBox_idSupplier.Size = new System.Drawing.Size(253, 29);
+            this.textBox_idSupplier.Size = new System.Drawing.Size(253, 24);
             this.textBox_idSupplier.TabIndex = 2;
             // 
             // label2
@@ -94,16 +95,18 @@
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(21, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
+            this.label2.Size = new System.Drawing.Size(64, 18);
             this.label2.TabIndex = 11;
             this.label2.Text = "Nombre";
             // 
             // textBox_name
             // 
+            this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(24, 94);
+            this.textBox_name.MaxLength = 100;
             this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(253, 29);
+            this.textBox_name.Size = new System.Drawing.Size(253, 24);
             this.textBox_name.TabIndex = 12;
             // 
             // label3
@@ -112,17 +115,20 @@
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(21, 127);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 23);
+            this.label3.Size = new System.Drawing.Size(42, 18);
             this.label3.TabIndex = 13;
             this.label3.Text = "RUC";
             // 
             // textBox_ruc
             // 
+            this.textBox_ruc.BackColor = System.Drawing.Color.White;
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ruc.Location = new System.Drawing.Point(24, 148);
+            this.textBox_ruc.MaxLength = 11;
             this.textBox_ruc.Name = "textBox_ruc";
-            this.textBox_ruc.Size = new System.Drawing.Size(253, 29);
+            this.textBox_ruc.Size = new System.Drawing.Size(253, 24);
             this.textBox_ruc.TabIndex = 14;
+            this.textBox_ruc.TextChanged += new System.EventHandler(this.verifying_number);
             // 
             // label4
             // 
@@ -130,12 +136,13 @@
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(21, 182);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 23);
+            this.label4.Size = new System.Drawing.Size(75, 18);
             this.label4.TabIndex = 15;
             this.label4.Text = "Dirección";
             // 
             // textBox_address
             // 
+            this.textBox_address.BackColor = System.Drawing.Color.White;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_address.Location = new System.Drawing.Point(24, 203);
             this.textBox_address.Multiline = true;
@@ -149,15 +156,16 @@
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(21, 261);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 23);
+            this.label5.Size = new System.Drawing.Size(73, 18);
             this.label5.TabIndex = 17;
             this.label5.Text = "Prioridad";
             // 
             // trackBar_priority
             // 
+            this.trackBar_priority.LargeChange = 1;
             this.trackBar_priority.Location = new System.Drawing.Point(24, 283);
             this.trackBar_priority.Name = "trackBar_priority";
-            this.trackBar_priority.Size = new System.Drawing.Size(201, 56);
+            this.trackBar_priority.Size = new System.Drawing.Size(201, 45);
             this.trackBar_priority.TabIndex = 18;
             this.trackBar_priority.Scroll += new System.EventHandler(this.trackBar_priority_Scroll);
             // 
@@ -168,7 +176,7 @@
             this.textBox_priority.Location = new System.Drawing.Point(231, 283);
             this.textBox_priority.Name = "textBox_priority";
             this.textBox_priority.ReadOnly = true;
-            this.textBox_priority.Size = new System.Drawing.Size(46, 29);
+            this.textBox_priority.Size = new System.Drawing.Size(46, 24);
             this.textBox_priority.TabIndex = 19;
             // 
             // groupBox1
@@ -189,11 +197,14 @@
             // 
             // textBox_telephone
             // 
+            this.textBox_telephone.BackColor = System.Drawing.Color.White;
             this.textBox_telephone.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_telephone.Location = new System.Drawing.Point(15, 170);
+            this.textBox_telephone.MaxLength = 9;
             this.textBox_telephone.Name = "textBox_telephone";
-            this.textBox_telephone.Size = new System.Drawing.Size(221, 29);
+            this.textBox_telephone.Size = new System.Drawing.Size(221, 24);
             this.textBox_telephone.TabIndex = 25;
+            this.textBox_telephone.TextChanged += new System.EventHandler(this.verifying_telephone);
             // 
             // label8
             // 
@@ -201,16 +212,17 @@
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(15, 148);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(84, 23);
+            this.label8.Size = new System.Drawing.Size(66, 18);
             this.label8.TabIndex = 24;
             this.label8.Text = "Teléfono";
             // 
             // textBox_email
             // 
+            this.textBox_email.BackColor = System.Drawing.Color.White;
             this.textBox_email.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_email.Location = new System.Drawing.Point(15, 111);
             this.textBox_email.Name = "textBox_email";
-            this.textBox_email.Size = new System.Drawing.Size(221, 29);
+            this.textBox_email.Size = new System.Drawing.Size(221, 24);
             this.textBox_email.TabIndex = 23;
             // 
             // label7
@@ -219,16 +231,18 @@
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(12, 89);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 23);
+            this.label7.Size = new System.Drawing.Size(57, 18);
             this.label7.TabIndex = 22;
             this.label7.Text = "Correo";
             // 
             // textBox_contactName
             // 
+            this.textBox_contactName.BackColor = System.Drawing.Color.White;
             this.textBox_contactName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_contactName.Location = new System.Drawing.Point(15, 53);
+            this.textBox_contactName.MaxLength = 200;
             this.textBox_contactName.Name = "textBox_contactName";
-            this.textBox_contactName.Size = new System.Drawing.Size(221, 29);
+            this.textBox_contactName.Size = new System.Drawing.Size(221, 24);
             this.textBox_contactName.TabIndex = 21;
             // 
             // label6
@@ -237,7 +251,7 @@
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(12, 31);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(188, 23);
+            this.label6.Size = new System.Drawing.Size(149, 18);
             this.label6.TabIndex = 21;
             this.label6.Text = "Nombre de contacto";
             // 
@@ -263,15 +277,17 @@
             this.textBox_idRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idRawMaterial.Location = new System.Drawing.Point(23, 48);
             this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
-            this.textBox_idRawMaterial.Size = new System.Drawing.Size(118, 29);
+            this.textBox_idRawMaterial.Size = new System.Drawing.Size(118, 24);
             this.textBox_idRawMaterial.TabIndex = 26;
+            this.textBox_idRawMaterial.TextChanged += new System.EventHandler(this.veryfing_id);
             // 
             // textBox_nameRawMaterial
             // 
             this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameRawMaterial.Location = new System.Drawing.Point(162, 48);
+            this.textBox_nameRawMaterial.MaxLength = 250;
             this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
-            this.textBox_nameRawMaterial.Size = new System.Drawing.Size(250, 29);
+            this.textBox_nameRawMaterial.Size = new System.Drawing.Size(250, 24);
             this.textBox_nameRawMaterial.TabIndex = 26;
             // 
             // label11
@@ -280,7 +296,7 @@
             this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(159, 28);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(132, 23);
+            this.label11.Size = new System.Drawing.Size(105, 18);
             this.label11.TabIndex = 44;
             this.label11.Text = "Materia prima";
             // 
@@ -290,7 +306,7 @@
             this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(20, 28);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(155, 23);
+            this.label10.Size = new System.Drawing.Size(121, 18);
             this.label10.TabIndex = 26;
             this.label10.Text = "Id Materia prima";
             // 
@@ -336,6 +352,10 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -384,19 +404,22 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(144, 42);
             this.buttonSave.TabIndex = 22;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.button_save_click);
+            this.buttonSave.Click += new System.EventHandler(this.button_event_click);
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(24, 343);
             this.comboBox_status.Name = "comboBox_status";
-            this.comboBox_status.Size = new System.Drawing.Size(253, 31);
+            this.comboBox_status.Size = new System.Drawing.Size(253, 26);
             this.comboBox_status.TabIndex = 24;
             // 
             // label9
@@ -405,13 +428,13 @@
             this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(21, 322);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 23);
+            this.label9.Size = new System.Drawing.Size(58, 18);
             this.label9.TabIndex = 25;
             this.label9.Text = "Estado";
             // 
             // SupplierDetail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(764, 608);

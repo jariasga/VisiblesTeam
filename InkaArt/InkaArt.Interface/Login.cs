@@ -1,23 +1,23 @@
-﻿using encription_SHA256;
-using System;
+﻿using System;
 using System.Windows.Forms;
-using InkaArt.Data.Security;
-using Npgsql;
+using InkaArt.Business.Security;
 using System.Data;
 
 namespace InkaArt.Interface
 {
     public partial class Login : Form
     {
+        private LoginController control;
         public Login()
         {
             InitializeComponent();
+            control = new LoginController();
         }
 
         private void button_Login_Click(object sender, EventArgs e)
         {
             bool pass;
-            pass = checkCredentials();
+            pass = control.checkCredentials(textbox_user.Text, textbox_password.Text);
 
             if (pass)
             {
@@ -31,50 +31,28 @@ namespace InkaArt.Interface
             }
             else
             {
-                DialogResult badPassword = MessageBox.Show("El usuario/password ingresado es incorrecto", "Inka Art",
+                DialogResult badPassword = MessageBox.Show("El usuario/contraseña ingresado(a) es incorrecto(a)", "Inka Art",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private bool checkCredentials()
+        private void label_forgot_Click(object sender, EventArgs e)
         {
-            bool verified = false;
-            SHA_2 sha = new SHA_2();
-            string key = sha.encrypt(textbox_password.Text);
-
-            UserData user = new UserData();
-            NpgsqlDataAdapter adap = new NpgsqlDataAdapter();
-            DataSet data = new DataSet();
-
-            user.connect();
-            adap = user.userAdapter();
-            adap.SelectCommand.Parameters[0].NpgsqlValue = textbox_user.Text;
-            
-            data = user.getData(adap);
-
-            //  Read data from DB
-            int rows = data.Tables[0].Rows.Count;
-            string userDB, keyDB;
-
-            if (rows > 0)
+            if (string.Equals(textbox_user.Text, ""))
             {
-                userDB = data.Tables[0].Rows[0][3].ToString();
-                keyDB = data.Tables[0].Rows[0][4].ToString(); ;
+                DialogResult insertUser = MessageBox.Show("Por favor ingrese un usuario", "Inka Art", 
+                MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand);
             }
             else
             {
-                userDB = "wrongUsername";
-                keyDB = "badPassword";
+                DialogResult resetPassword = MessageBox.Show("Desea enviar una nueva contraseña a su correo?", "Inka Art", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resetPassword == DialogResult.Yes)
+                {
+                    control.sendResetPassword(textbox_user.Text);
+                    DialogResult infor = MessageBox.Show("Si el usuario se encuentra registrado, recibirá" +
+                        " un email con su nueva clave", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }                    
             }
-            
-
-            if (string.Equals(key, keyDB) & string.Equals(textbox_user.Text, userDB)){
-                //  ToDo - GET ROLES
-
-                //  GRANT ACCESS
-                verified = true;
-            }
-            return verified;
         }
     }
 }
