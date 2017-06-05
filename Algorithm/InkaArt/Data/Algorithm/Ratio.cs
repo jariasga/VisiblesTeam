@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Data.Production
+using InkaArt.Common;
+
+namespace InkaArt.Data.Algorithm
 {
-    class TurnReport
+    class Ratio
     {
         private int id_report;
         private DateTime date;
@@ -77,7 +79,7 @@ namespace InkaArt.Data.Production
             set { time = value; }
         }
 
-        public TurnReport(int id_report, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
+        public Ratio(int id_report, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
             int broken, int produced, double breakage, double time)
         {
             this.id_report = id_report;
@@ -99,7 +101,7 @@ namespace InkaArt.Data.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO TurnReport2(date, id_worker, id_job, id_recipe, " +
+            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO inkaart.\"Ratio\"(date, id_worker, id_job, id_recipe, " +
                 "start, end, broken, produced, breakage, time) VALUES(:date, :id_worker, :id_job, :id_recipe, " +
                 ":start, :end, :broken, :produced, :breakage, :time)", connection);
 
@@ -136,7 +138,7 @@ namespace InkaArt.Data.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("UPDATE TurnReport2 SET date = :date, id_worker = :id_worker, "
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Ratio\" SET date = :date, id_worker = :id_worker, "
                 + "id_job = :id_job, id_recipe = :id_recipe, start = :start, end = :end, broken = :broken, " +
                 "produced = :produced WHERE id_report = :id_report", connection);
 
@@ -162,8 +164,10 @@ namespace InkaArt.Data.Production
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("DELETE FROM TurnReport2 WHERE id_report = :id_report", connection);
+            NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Ratio\" SET status = :status " + 
+                "WHERE id_report = :id_report", connection);
 
+            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, false);
             command.Parameters.AddWithValue("id_report", NpgsqlDbType.Integer, id_report);
 
             command.ExecuteNonQuery();

@@ -1,5 +1,4 @@
-﻿using InkaArt.Data.Production;
-using Npgsql;
+﻿using Npgsql;
 using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Business.Production
+using InkaArt.Common;
+using InkaArt.Data.Algorithm;
+
+namespace InkaArt.Business.Algorithm
 {
     class RecipeController
     {

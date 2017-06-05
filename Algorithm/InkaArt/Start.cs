@@ -21,7 +21,7 @@ namespace InkaArt
 
         private void button_ratio_Click(object sender, EventArgs e)
         {
-            Form ratio = new RegisterTurnReport();
+            Form ratio = new RegisterRatio();
             ratio.Show();
         }
 

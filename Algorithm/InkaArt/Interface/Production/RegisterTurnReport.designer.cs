@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Production
 {
-    partial class RegisterTurnReport
+    partial class RegisterRatio
     {
         /// <summary>
         /// Required designer variable.
@@ -353,7 +353,7 @@
             this.date_picker.Value = new System.DateTime(2017, 6, 4, 18, 31, 53, 0);
             this.date_picker.ValueChanged += new System.EventHandler(this.date_picker_ValueChanged);
             // 
-            // RegisterTurnReport
+            // RegisterRatio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -368,7 +368,7 @@
             this.Controls.Add(this.label9);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "RegisterTurnReport";
+            this.Name = "RegisterRatio";
             this.Text = "Informe de Turno";
             this.Load += new System.EventHandler(this.RegisterAssignedJob_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).EndInit();

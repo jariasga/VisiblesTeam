@@ -1,12 +1,14 @@
-﻿using InkaArt.Data.Production;
-using Npgsql;
+﻿using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Business.Production
+using InkaArt.Common;
+using InkaArt.Data.Algorithm;
+
+namespace InkaArt.Business.Algorithm
 {
     //ESTA CLASE SE USA SOLO PARA LA ASIGNACIÓN DE TRABAJADORES Y PARA EL REGISTRO DE INFORMES DE TURNO
     //- Anthony

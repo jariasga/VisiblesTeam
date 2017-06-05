@@ -58,16 +58,16 @@
     <Compile Include="Business\Algorithm\TabuMove.cs" />
     <Compile Include="Business\Algorithm\TabuQueue.cs" />
     <Compile Include="Business\Algorithm\TabuSearch.cs" />
-    <Compile Include="Business\Algorithm\TurnReportResumeController.cs" />
     <Compile Include="Business\Algorithm\JobController.cs" />
+    <Compile Include="Business\Algorithm\RatioController.cs" />
+    <Compile Include="Business\Algorithm\RatioResumeController.cs" />
     <Compile Include="Business\Algorithm\RecipeController.cs" />
-    <Compile Include="Business\Algorithm\TurnReportController.cs" />
     <Compile Include="Business\Algorithm\WorkerController.cs" />
-    <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="Common\DatabaseConnection.cs" />
     <Compile Include="Data\Algorithm\Job.cs" />
-    <Compile Include="Data\Algorithm\TurnReportResume.cs" />
+    <Compile Include="Data\Algorithm\Ratio.cs" />
+    <Compile Include="Data\Algorithm\RatioResume.cs" />
     <Compile Include="Data\Algorithm\Recipe.cs" />
-    <Compile Include="Data\Algorithm\TurnReport.cs" />
     <Compile Include="Data\Algorithm\Worker.cs" />
     <Compile Include="Interface\Production\NewSimulation.cs">
       <SubType>Form</SubType>

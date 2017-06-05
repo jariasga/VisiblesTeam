@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Data.Production
+using InkaArt.Common;
+
+namespace InkaArt.Data.Algorithm
 {
     //ESTA CLASE SE USA SOLO PARA LA ASIGNACIÓN DE TRABAJADORES Y PARA EL REGISTRO DE INFORMES DE TURNO
     //- Anthony
     class Job
     {
+        //Job (Puesto de trabajo) = Proceso x Producto
+
         private int id_job;
         private string name;
         private int id_process;
