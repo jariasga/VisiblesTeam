@@ -9,6 +9,7 @@ namespace InkaArt.Data.Algorithm
     public class Simulation
     {
         private string name;
+        private int days;
         // pesos de ratios
         private double breakage_weight;              // para los indices de perdida
         private double time_weight;
@@ -83,11 +84,25 @@ namespace InkaArt.Data.Algorithm
             }
         }
 
+        public int Days
+        {
+            get
+            {
+                return days;
+            }
+
+            set
+            {
+                days = value;
+            }
+        }
+
         public Simulation() { }
 
-        public Simulation(string name, double breakage, double time, double huaco, double huamanga, double retable)
+        public Simulation(string name, int days, double breakage, double time, double huaco, double huamanga, double retable)
         {
             this.name = name;
+            this.days = days;
             this.breakage_weight = breakage;
             this.time_weight = time;
             this.huaco_weight = huaco;
@@ -96,15 +111,17 @@ namespace InkaArt.Data.Algorithm
             this.workers = new List<Worker>();
         }
 
-        public void Update(string name = null, double breakage = -1, double time = -1, double huaco = -1, double huamanga = -1, double retable = -1, List<Worker> workers = null)
+        public void Update(string name, int days, double breakage, double time, double huaco, double huamanga, double retable, List<Worker> workers)
         {
-            if (name != null)       this.name = name;
-            if (breakage >= 0)      this.breakage_weight = breakage;
-            if (time >= 0)          this.time_weight = time;
-            if (huaco>= 0)          this.huaco_weight = huaco;
-            if (huamanga >= 0)      this.huaco_weight = huamanga;
-            if (retable >= 0)       this.retable_weight = retable;
-            if (workers != null)    this.workers = workers;
+            this.name = name;
+            this.days = days;
+            this.breakage_weight = breakage;
+            this.time_weight = time;
+            this.huaco_weight = huaco;
+            this.huaco_weight = huamanga;
+            this.retable_weight = retable;
+            this.workers = workers;
+            //this.orders = orders;
         }
     }
 }

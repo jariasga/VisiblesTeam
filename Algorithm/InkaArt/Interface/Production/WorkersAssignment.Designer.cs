@@ -78,7 +78,7 @@
             this.button_config.Name = "button_config";
             this.button_config.Size = new System.Drawing.Size(143, 43);
             this.button_config.TabIndex = 32;
-            this.button_config.Text = "Configuración";
+            this.button_config.Text = "+ Crear";
             this.button_config.UseVisualStyleBackColor = false;
             this.button_config.Click += new System.EventHandler(this.ButtonConfigClick);
             // 
@@ -181,6 +181,7 @@
             this.combo_simulations.Name = "combo_simulations";
             this.combo_simulations.Size = new System.Drawing.Size(212, 26);
             this.combo_simulations.TabIndex = 44;
+            this.combo_simulations.SelectedIndexChanged += new System.EventHandler(this.ComboSimulationsSelectedIndexChanged);
             // 
             // button_report
             // 

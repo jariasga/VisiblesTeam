@@ -2,19 +2,20 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InkaArt.Business.Algorithm
 {
-    class SimulationController
+    public class SimulationController
     {
-        private List<Simulation> simulations;
+        private BindingList<Simulation> simulations;
 
         public SimulationController()
         {
-            simulations = new List<Simulation>();
+            simulations = new BindingList<Simulation>();
         }        
         
         public Simulation this[int index]
@@ -32,10 +33,17 @@ namespace InkaArt.Business.Algorithm
             simulations.Add(simulation);
         }
 
-        public List<Simulation> List()
+        //public List<Simulation> List()
+        //{
+        //    return simulations;
+        //}
+
+        public BindingList<Simulation> BindingList()
         {
-            return simulations;
+            return new BindingList<Simulation>(simulations);
         }
+
+
 
     }
 }

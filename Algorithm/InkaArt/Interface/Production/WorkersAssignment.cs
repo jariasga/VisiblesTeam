@@ -21,10 +21,11 @@ namespace InkaArt.Interface.Production
             InitializeComponent();
 
             simulations = new SimulationController();
-            simulations.Add(new Simulation("simu 1", 0, 0, 0, 0, 0));
-
-            combo_simulations.DataSource = simulations.List();
-            combo_simulations.DisplayMember = "Name";           
+            simulations.Add(new Simulation("simu 1", 0, 0, 0, 0, 0, 0));
+            
+            combo_simulations.DataSource = simulations.BindingList();
+            combo_simulations.DisplayMember = "Name";
+            combo_simulations.SelectedIndex = -1;
         }
         
         private void WorkersAssignment_Load(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace InkaArt.Interface.Production
         private void ButtonConfigClick(object sender, EventArgs e)
         {
             Simulation simulation = (Simulation) combo_simulations.SelectedItem;
-            Form simulation_config = new SimulationConfig(simulation);
+            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations);
             simulation_config.MdiParent = this.MdiParent;
             simulation_config.Show();
         }
@@ -73,5 +74,19 @@ namespace InkaArt.Interface.Production
             simulation_grid.Rows.Clear();
             summary_grid.Rows.Clear();
         }
+
+        private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
+        {
+            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
+            if (simulation == null)
+            {
+                button_config.Text = "+ Crear";
+            } else
+            {
+                button_config.Text = "Configuración";
+                // completar asignaciones
+            }
+        }
+        
     }
 }
