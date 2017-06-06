@@ -22,7 +22,9 @@ namespace InkaArt.Interface.Sales
         private void button_create_Click(object sender, EventArgs e)
         {
             ClientCreate create_form = new ClientCreate();
-            create_form.Show();
+            var response = create_form.ShowDialog();
+            if (response == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void grid_clients_CellContentClick(object sender, DataGridViewCellEventArgs e)

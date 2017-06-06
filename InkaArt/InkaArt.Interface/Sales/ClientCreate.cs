@@ -53,6 +53,8 @@ namespace InkaArt.Interface.Sales
                 {
                     MessageBox.Show(this, "El cliente ha sido agregado correctamente.", "Crear cliente", MessageBoxButtons.OK);
                     ClearFields();
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
             else
