@@ -36,6 +36,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label3
@@ -62,6 +64,7 @@
             // 
             this.textBox_nameUnit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameUnit.Location = new System.Drawing.Point(15, 99);
+            this.textBox_nameUnit.MaxLength = 280;
             this.textBox_nameUnit.Name = "textBox_nameUnit";
             this.textBox_nameUnit.Size = new System.Drawing.Size(212, 24);
             this.textBox_nameUnit.TabIndex = 12;
@@ -70,6 +73,7 @@
             // 
             this.textBox_abbreviation.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_abbreviation.Location = new System.Drawing.Point(15, 158);
+            this.textBox_abbreviation.MaxLength = 10;
             this.textBox_abbreviation.Name = "textBox_abbreviation";
             this.textBox_abbreviation.Size = new System.Drawing.Size(212, 24);
             this.textBox_abbreviation.TabIndex = 16;
@@ -79,11 +83,11 @@
             this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Location = new System.Drawing.Point(15, 198);
+            this.buttonSave.Location = new System.Drawing.Point(15, 258);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(103, 39);
             this.buttonSave.TabIndex = 17;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 
@@ -92,7 +96,7 @@
             this.buttonCancel.BackColor = System.Drawing.Color.Firebrick;
             this.buttonCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Location = new System.Drawing.Point(124, 198);
+            this.buttonCancel.Location = new System.Drawing.Point(124, 258);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(103, 39);
             this.buttonCancel.TabIndex = 41;
@@ -111,18 +115,46 @@
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.Color.White;
+            this.textBox_id.Enabled = false;
             this.textBox_id.Location = new System.Drawing.Point(15, 40);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.ReadOnly = true;
             this.textBox_id.Size = new System.Drawing.Size(212, 26);
             this.textBox_id.TabIndex = 43;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 196);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 18);
+            this.label4.TabIndex = 44;
+            this.label4.Text = "Estado";
+            // 
+            // comboBox_status
+            // 
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_status.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_status.FormattingEnabled = true;
+            this.comboBox_status.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.comboBox_status.Location = new System.Drawing.Point(15, 217);
+            this.comboBox_status.Name = "comboBox_status";
+            this.comboBox_status.Size = new System.Drawing.Size(212, 25);
+            this.comboBox_status.TabIndex = 45;
+            // 
             // UnitOfMeasurement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(240, 254);
+            this.ClientSize = new System.Drawing.Size(240, 309);
+            this.Controls.Add(this.comboBox_status);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_id);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
@@ -151,5 +183,7 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_id;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox_status;
     }
 }

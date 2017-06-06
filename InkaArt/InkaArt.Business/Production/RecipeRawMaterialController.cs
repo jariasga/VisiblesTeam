@@ -25,8 +25,7 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-
-            recipeRawMaterial.connect();
+            
             adapt = recipeRawMaterial.recipeRawMaterialAdapter();
 
             data.Clear();
@@ -40,7 +39,6 @@ namespace InkaArt.Business.Production
 
         public void insertData(string idRecipe, string idRawMaterial, string materialCount)
         {
-            recipeRawMaterial.connect();
             adapt = recipeRawMaterial.recipeRawMaterialAdapter();
 
             data.Clear();
@@ -53,9 +51,21 @@ namespace InkaArt.Business.Production
             row["idRecipe"] = idRecipe;
             row["idRawMaterial"] = idRawMaterial;
             row["materialCount"] = materialCount;
+            row["status"] = "1";
 
             table.Rows.Add(row);
             int rowsAffected = recipeRawMaterial.insertData(data, adapt, "Recipe-RawMaterial");
+        }
+
+
+        public void updateDataNoAdapter(string idRecipe, string idRawMaterial)
+        {
+            string updateQuery;
+
+            updateQuery = "UPDATE inkaart.\"Recipe-RawMaterial\" SET ";
+            updateQuery = updateQuery + "status = 0 ";
+            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + "AND \"idRawMaterial\"= "+ idRawMaterial+" ;";
+            recipeRawMaterial.execute(updateQuery);
         }
     }
 }

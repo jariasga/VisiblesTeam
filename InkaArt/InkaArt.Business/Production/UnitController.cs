@@ -24,8 +24,6 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-
-            unit.connect();
             adapt = unit.unitAdapter();
 
             data.Clear();

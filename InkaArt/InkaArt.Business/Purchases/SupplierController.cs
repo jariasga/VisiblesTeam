@@ -23,8 +23,7 @@ namespace InkaArt.Business.Purchases
             supplier = new SupplierData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            supplier.connect();
+            
             adap = supplier.supplierAdapter();
 
             data.Reset();
@@ -35,15 +34,14 @@ namespace InkaArt.Business.Purchases
 
             return supplierList;
         }
-        public void insertData(string nombre, int ruc,string contacto,int telefono,string correo,string direccion,int prioridad,string estado)
+        public void insertData(string nombre, long ruc,string contacto,long telefono,string correo,string direccion,int prioridad,string estado)
         {
-            supplier.connect();
 
             table = data.Tables["Supplier"];
             row = table.NewRow();
             
             row["name"] = nombre;
-            row["RUC"] = ruc;
+            row["ruc"] = ruc;
             row["contact"] = contacto;
             row["telephone"] = telefono;
             row["email"] = correo;
@@ -54,19 +52,16 @@ namespace InkaArt.Business.Purchases
             table.Rows.Add(row);
 
             int rowsAffected = supplier.insertData(data, adap, "Supplier");
-
-            supplier.closeConnection();
         }
-        public void updateData(string id, string nombre, int ruc, string contacto, int telefono, string correo, string direccion, int prioridad, string estado)
+        public void updateData(string id, string nombre, long ruc, string contacto, long telefono, string correo, string direccion, int prioridad, string estado)
         {
-            supplier.connect();
             table = data.Tables["Supplier"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                if (String.Compare(table.Rows[i]["idSupplier"].ToString(), id) == 0)
+                if (String.Compare(table.Rows[i]["id_supplier"].ToString(), id) == 0)
                 {
                     table.Rows[i]["name"] = nombre;
-                    table.Rows[i]["RUC"] = ruc;
+                    table.Rows[i]["ruc"] = ruc;
                     table.Rows[i]["contact"] = contacto;
                     table.Rows[i]["telephone"] = telefono;
                     table.Rows[i]["email"] = correo;
@@ -77,7 +72,6 @@ namespace InkaArt.Business.Purchases
                 }
             }
             supplier.updateData(data, adap, "Supplier");
-            supplier.closeConnection();
         }
     }
 }

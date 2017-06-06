@@ -27,8 +27,6 @@ namespace InkaArt.Business.Production
         public DataTable getData()
         {
             //adapt = new NpgsqlDataAdapter();
-
-            process.connect();
             adapt = process.processAdapter();
 
             data.Reset();
@@ -42,7 +40,6 @@ namespace InkaArt.Business.Production
 
         public void insertData(string desc, string totalWorkstations)
         {
-            process.connect();
             adapt = process.processAdapter();
 
             data.Clear();
@@ -61,7 +58,6 @@ namespace InkaArt.Business.Production
 
         public void updateData(string id, string totatWorkstations)
         {
-            process.connect();
             adapt = process.processAdapter();
 
             data.Clear();
@@ -79,6 +75,16 @@ namespace InkaArt.Business.Production
                 }
             }
             int rowUpdated = process.updateData(data, adapt, "Process");
+        }
+
+        public void updateDataNoAdapter(int id, int positionCount)
+        {
+            string updateQuery;
+            //int filtros = 0;
+            updateQuery = "UPDATE inkaart.\"Process\" SET ";
+            updateQuery = updateQuery + "position_count = '" + positionCount + "' ";
+            updateQuery = updateQuery + " WHERE \"idProcess\"= " + id + ";";
+            process.execute(updateQuery);
         }
     }
 }

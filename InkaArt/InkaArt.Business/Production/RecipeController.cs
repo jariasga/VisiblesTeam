@@ -27,9 +27,7 @@ namespace InkaArt.Business.Production
         public DataTable getData()
         {
             //adapt = new NpgsqlDataAdapter();
-
-
-            recipe.connect();
+            
             adapt = recipe.recipeAdapter();
 
             data.Reset();
@@ -43,7 +41,6 @@ namespace InkaArt.Business.Production
 
         public void insertData(string description, string version, string status, string idProduct)
         {
-            recipe.connect();
             adapt = recipe.recipeAdapter();
 
             data.Clear();

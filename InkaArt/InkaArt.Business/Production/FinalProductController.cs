@@ -27,8 +27,7 @@ namespace InkaArt.Business.Production
         public DataTable getData()
         {
             //adapt = new NpgsqlDataAdapter();
-
-            finalProduct.connect();
+            
             adapt = finalProduct.finalProductAdapter();
 
             data.Reset();
@@ -42,7 +41,6 @@ namespace InkaArt.Business.Production
 
         public void insertData(string name, string description, string localP, string exportP, string actualS, string logicS)
         {
-            finalProduct.connect();
             adapt = finalProduct.finalProductAdapter();
 
             data.Clear();
@@ -63,11 +61,11 @@ namespace InkaArt.Business.Production
             int rowsAffected = finalProduct.insertData(data, adapt, "Product");
         }
 
-        public void updateData(string id,string localPrice, string exportPrice)
+        public int updateData(string id,string localPrice, string exportPrice)
         {
-            finalProduct.connect();
+            int retorno = 0;
             adapt = finalProduct.finalProductAdapter();
-
+            double basePrice=0;
             data.Clear();
             data = finalProduct.getData(adapt, "Product");
 
@@ -78,10 +76,18 @@ namespace InkaArt.Business.Production
                 {
                     table.Rows[i]["localPrice"] = localPrice;
                     table.Rows[i]["exportPrice"] = exportPrice;
+                    basePrice = double.Parse(table.Rows[i]["basePrice"].ToString());
                     break;
                 }
             }
-            int rowUpdated = finalProduct.updateData(data, adapt, "Product");
+            //retorno es 0 si no hace update porque los precios son menores al base y uno si es satisfactorio
+            if (basePrice <= double.Parse(localPrice) && basePrice <= double.Parse(exportPrice))
+            {
+                int rowUpdated = finalProduct.updateData(data, adapt, "Product");
+                retorno = 1;
+            }
+            return retorno;
+            
         }   
     }
 }

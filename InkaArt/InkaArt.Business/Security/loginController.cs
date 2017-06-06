@@ -1,7 +1,9 @@
 ﻿using encription_SHA256;
 using InkaArt.Data.Security;
 using Npgsql;
+using System;
 using System.Data;
+using sendEmail;
 
 namespace InkaArt.Business.Security
 {
@@ -11,7 +13,8 @@ namespace InkaArt.Business.Security
         private NpgsqlDataAdapter adap;
         private DataSet data;
         private DataRow row;
-
+        public static int userID, roleID;
+        public static string userName, firstName, lastName;
         public LoginController()
         {
 
@@ -34,7 +37,9 @@ namespace InkaArt.Business.Security
             if (row != null)   //Encontro un usuario
             {
                 userDB = row["username"].ToString();
+                userName = userDB;
                 keyDB = row["password"].ToString();
+                userID = Convert.ToInt32(row["id_user"]);
             }
             else
             {
@@ -50,8 +55,11 @@ namespace InkaArt.Business.Security
                 //  GRANT ACCESS
                 verified = true;
             }
-
             return verified;
+        }
+        public void sendResetPassword(string username)
+        {
+            user.sendResetPass(username);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace InkaArt.Interface.Production
 {
     public partial class ProductionProcess : Form
     {
-        public ProductionProcess(string id, string name, string count, string localPrice, string exportPrice)
+        public ProductionProcess(string id, string name, string count, string localPrice, string exportPrice,string basePrice)
         {
             InitializeComponent();
             textBox_id.Text = id;
@@ -21,6 +21,7 @@ namespace InkaArt.Interface.Production
             textBox_stock.Text = count;
             textBox_localPrice.Text = localPrice;
             textBox_exportPrice.Text = exportPrice;
+            textBox_basePrice.Text = basePrice;
 
             ProcessProductController control = new ProcessProductController();
             ProcessController controlProcess = new ProcessController();
@@ -71,8 +72,21 @@ namespace InkaArt.Interface.Production
         private void button_save_Click(object sender, EventArgs e)
         {
             FinalProductController control = new FinalProductController();
-            control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
-
+            double local,exp;
+            local = exp = 0;
+            if (double.TryParse(textBox_localPrice.Text, out local) && double.TryParse(textBox_exportPrice.Text, out exp))
+            {
+                int retorno;
+                retorno =control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
+                if(retorno == 0)//los precios son menores
+                {
+                    MessageBox.Show("Los precios no pueden ser menores al precio base, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("Tipo de dato no permitido, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ProductionProcess_Load(object sender, EventArgs e)

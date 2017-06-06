@@ -85,6 +85,7 @@
             // 
             // dateTimePicker_creation
             // 
+            this.dateTimePicker_creation.CalendarMonthBackground = System.Drawing.Color.White;
             this.dateTimePicker_creation.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_creation.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_creation.Location = new System.Drawing.Point(13, 208);
@@ -104,6 +105,9 @@
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
@@ -126,6 +130,7 @@
             // 
             // textBox_total
             // 
+            this.textBox_total.BackColor = System.Drawing.Color.White;
             this.textBox_total.Enabled = false;
             this.textBox_total.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_total.Location = new System.Drawing.Point(13, 331);
@@ -145,6 +150,7 @@
             // 
             // dateTimePicker_delivery
             // 
+            this.dateTimePicker_delivery.CalendarMonthBackground = System.Drawing.Color.White;
             this.dateTimePicker_delivery.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_delivery.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_delivery.Location = new System.Drawing.Point(13, 267);
@@ -164,6 +170,7 @@
             // 
             // textBox_supplier
             // 
+            this.textBox_supplier.BackColor = System.Drawing.Color.White;
             this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_supplier.Location = new System.Drawing.Point(13, 116);
             this.textBox_supplier.Multiline = true;
@@ -183,6 +190,7 @@
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_id.Location = new System.Drawing.Point(13, 54);
@@ -221,6 +229,7 @@
             // 
             this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameRawMaterial.Location = new System.Drawing.Point(196, 54);
+            this.textBox_nameRawMaterial.MaxLength = 280;
             this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
             this.textBox_nameRawMaterial.Size = new System.Drawing.Size(331, 24);
             this.textBox_nameRawMaterial.TabIndex = 18;
@@ -245,6 +254,9 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -328,9 +340,11 @@
             // 
             this.textBox_idRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idRawMaterial.Location = new System.Drawing.Point(16, 54);
+            this.textBox_idRawMaterial.MaxLength = 9;
             this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
             this.textBox_idRawMaterial.Size = new System.Drawing.Size(160, 24);
             this.textBox_idRawMaterial.TabIndex = 11;
+            this.textBox_idRawMaterial.TextChanged += new System.EventHandler(this.validating_idmateria);
             // 
             // button_search
             // 

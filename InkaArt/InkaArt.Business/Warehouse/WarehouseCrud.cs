@@ -22,9 +22,7 @@ namespace InkaArt.Business.Warehouse
             string insertQuery;
 
             insertQuery = "insert into inkaart.\"Warehouse\"  (name, description, address,state) values ('" + name + "', '" + description + "', '" + address + "','" + state + "');";
-            conn.connect();
             conn.execute(insertQuery);
-            conn.closeConnection();
         }
 
         public void createMovement(int idNote, int idBill, int idMovementType, int idWarehouse, int idMovementReason, string dateIn)
@@ -33,9 +31,7 @@ namespace InkaArt.Business.Warehouse
             string insertQuery;
 
             insertQuery = "insert into inkaart.\"Movement\"(\"idNote\", \"idBill\", \"idMovementType\",\"idWarehouse\",\"idMovementReason\") values (" + idNote + ", " + idBill + ", " + idMovementType + "," + idWarehouse + ", " + idMovementReason + ");";
-            conn.connect();
             conn.execute(insertQuery);
-            conn.closeConnection();
         }
 
         public bool existeProducto(int idProduct,int idWarehouse)
@@ -45,7 +41,6 @@ namespace InkaArt.Business.Warehouse
             NpgsqlDataReader datos;
 
             selectQuery = selectQuery + "select count(*) from inkaart.\"Product-Warehouse\" where \"idProduct\" = " + idProduct + " and \"idWarehouse\" = " + idWarehouse + ";";
-            conn.connect();
             datos = conn.warehouseAdapter(selectQuery);
             int cantidad = 0;
 
@@ -71,7 +66,6 @@ namespace InkaArt.Business.Warehouse
                 NpgsqlDataReader datos2;
 
                 selectQuery = selectQuery + "select \"currentStock\", \"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idProduct\" = " + idProd + " and \"idWarehouse\" = " + idWarehouse + ";";
-                conn2.connect();
                 datos2 = conn2.warehouseAdapter(selectQuery);
                 int currentStock = 0, virtualStock = 0;
 
@@ -89,9 +83,7 @@ namespace InkaArt.Business.Warehouse
             }
 
             WarehouseData conn = new WarehouseData();
-            conn.connect();
             conn.execute(query);
-            conn.closeConnection();
 
         }
 
@@ -145,9 +137,7 @@ namespace InkaArt.Business.Warehouse
                 }
             }
             updateQuery = updateQuery + " where \"idWarehouse\"="+id+";";
-            conn.connect();
             conn.execute(updateQuery);
-            conn.closeConnection();
         }
 
         public void deleteWarehouse(int [] id, int tam)
@@ -169,9 +159,7 @@ namespace InkaArt.Business.Warehouse
                 }
             }
             updateQuery = updateQuery + ";";
-            conn.connect();
             conn.execute(updateQuery);
-            conn.closeConnection();
         }
 
         public NpgsqlDataReader readWarehouse(int id, string name, string address, string state)
@@ -231,7 +219,6 @@ namespace InkaArt.Business.Warehouse
             }
             //Si no existió filtro se traerá toda la tabla
             selectQuery = selectQuery + " order by 1;";
-            conn.connect();
             datos = conn.warehouseAdapter(selectQuery);
 //            conn.closeConnection();
             return datos;

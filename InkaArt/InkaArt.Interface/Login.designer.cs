@@ -74,7 +74,7 @@
             // 
             this.textbox_user.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_user.Location = new System.Drawing.Point(147, 117);
-            this.textbox_user.Margin = new System.Windows.Forms.Padding(2);
+            this.textbox_user.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textbox_user.Name = "textbox_user";
             this.textbox_user.Size = new System.Drawing.Size(122, 26);
             this.textbox_user.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             this.textbox_password.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_password.Location = new System.Drawing.Point(147, 166);
-            this.textbox_password.Margin = new System.Windows.Forms.Padding(2);
+            this.textbox_password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textbox_password.Name = "textbox_password";
             this.textbox_password.PasswordChar = '*';
             this.textbox_password.Size = new System.Drawing.Size(122, 26);
@@ -100,6 +100,7 @@
             this.label_forgot.Size = new System.Drawing.Size(150, 15);
             this.label_forgot.TabIndex = 5;
             this.label_forgot.Text = "¿Olvidaste tu contraseña?";
+            this.label_forgot.Click += new System.EventHandler(this.label_forgot_Click);
             // 
             // button_Login
             // 
@@ -107,7 +108,7 @@
             this.button_Login.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_Login.ForeColor = System.Drawing.Color.White;
             this.button_Login.Location = new System.Drawing.Point(117, 242);
-            this.button_Login.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Login.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Login.Name = "button_Login";
             this.button_Login.Size = new System.Drawing.Size(92, 39);
             this.button_Login.TabIndex = 45;
@@ -129,12 +130,11 @@
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_user);
             this.Controls.Add(this.label_title);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

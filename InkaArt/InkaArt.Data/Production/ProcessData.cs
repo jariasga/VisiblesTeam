@@ -18,5 +18,17 @@ namespace InkaArt.Data.Production
 
             return processAdapter;
         }
+
+        public NpgsqlDataReader processAdapterForUpdate(string query)
+        {
+            //NpgsqlDataAdapter processAdapter = new NpgsqlDataAdapter();
+
+            //query = "Select * from inkaart.\"Warehouse\";";
+            NpgsqlCommand command = new NpgsqlCommand(query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            //closeConnection();
+            return dr;
+        } 
     }
 }

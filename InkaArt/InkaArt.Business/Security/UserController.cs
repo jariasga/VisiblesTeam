@@ -1,6 +1,8 @@
 ﻿using encription_SHA256;
 using InkaArt.Data.Security;
 using Npgsql;
+using NpgsqlTypes;
+using System;
 using System.Data;
 using System.IO;
 
@@ -25,8 +27,6 @@ namespace InkaArt.Business.Security
 
         public DataTable showData()
         {
-            user.connect();
-
             adap = user.userAdapter();
             adap.SelectCommand.CommandText = "SELECT * FROM inkaart.\"User\";";
             adap.SelectCommand.Parameters.Clear();
@@ -34,41 +34,56 @@ namespace InkaArt.Business.Security
             data = user.getData(adap, "User");
             
             table = data.Tables["User"];
-
-            user.closeConnection();
+            
             return table;
         }
 
-        public int updateData(string username, string description, int status, int role)
+        public int updatePassword(int idUser, string password)
         {
-            user.connect();
+            return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
+                "SET password = '{0}' " +
+                "WHERE id_user = '{1}'", sha.encrypt(password), idUser));
 
-            table = data.Tables["User"];
-
+            /* TODO
             row = getUserRow(username);
 
             row["username"] = username;
             //row["password"] = sha.encrypt(password);
             row["status"] = status;
             row["description"] = description;
-            row["idRole"] = role;
+            row["id_role"] = role;
             
             int rowsAffected = user.updateData(data, adap, "User");
 
             return rowsAffected;
-            /*
-             * ================================================
-             * TEST LINE TO INSERT DATA
-            insertData();
-             * ================================================
             */
         }
 
-        public int insertData(string username, string description, int status, ref string password, int role)
+        public int updateData(string username, string description, int status, int role, System.Byte[] photo)
         {
-            //  Get connection string and connect to the database
-            user.connect();
+            table = data.Tables["User"];
+
+            return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
+                "SET username = '{0}', status = {1}, description = '{2}', id_role = {3}, photo = {4} " +
+                "WHERE username = '{5}'", username, status, description, role, photo, username));
             
+            /* TODO
+            row = getUserRow(username);
+
+            row["username"] = username;
+            //row["password"] = sha.encrypt(password);
+            row["status"] = status;
+            row["description"] = description;
+            row["id_role"] = role;
+            
+            int rowsAffected = user.updateData(data, adap, "User");
+
+            return rowsAffected;
+            */
+        }
+
+        public int insertData(string username, string description, int status, ref string password, int role, System.Byte [] photo)
+        {   
             //  Get the dataset table to modify
             table = data.Tables["User"];
 
@@ -82,7 +97,8 @@ namespace InkaArt.Business.Security
             row["password"] = sha.encrypt(password);
             row["status"] = status;
             row["description"] = description;
-            row["idRole"] = role;
+            row["id_role"] = role;
+            if (photo != null) row["photo"] = photo;
 
             //  Add the row created into the table
             table.Rows.Add(row);
@@ -94,7 +110,6 @@ namespace InkaArt.Business.Security
 
         public DataRow getUserRow(string username)
         {
-            user.connect();
             adap = user.userAdapter();
             adap.SelectCommand.Parameters[0].NpgsqlValue = username;
 
@@ -109,7 +124,7 @@ namespace InkaArt.Business.Security
         {
             table = showData();
             DataRow[] rows;
-            rows = table.Select("idUser = " + id);
+            rows = table.Select("id_user = " + id);
             row = rows[0];
 
             return row;
@@ -129,12 +144,29 @@ namespace InkaArt.Business.Security
                     var values = line.Split(';');
 
                     // creamos usuario
-                    insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]));
+                    insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]), null);
                     // creamos trabajador
                     worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
                     worker.sendPassword(values[10], values[0], password);
                 }
             }            
+        }
+
+        public void sendResetPass(string username)
+        {
+            WorkerController worker = new WorkerController();
+            row = getUserRow(username);
+            DataTable workerTable = worker.showData();
+            int idUser = Convert.ToInt32(row["id_user"]);
+
+            DataRow [] rows = workerTable.Select("id_user = " + idUser);
+            row = rows[0];
+            if (row != null)
+            {
+                string newPass = sha.getMiniSHA();
+                worker.sendPassword(row["email"].ToString(), username, newPass);
+                updatePassword(idUser, newPass);
+            }
         }
     }
 }

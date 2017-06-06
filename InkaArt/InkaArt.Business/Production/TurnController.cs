@@ -25,8 +25,6 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-            
-            turn.connect();
             adapt = turn.turnAdapter();
 
             data.Clear();
@@ -40,7 +38,6 @@ namespace InkaArt.Business.Production
 
         public void insertData(string ini, string fin, string desc)
         {
-            turn.connect();
             adapt = turn.turnAdapter();
 
             data.Clear();
@@ -60,7 +57,6 @@ namespace InkaArt.Business.Production
 
         public void updateData(string id,string ini, string fin, string desc)
         {
-            turn.connect();
             adapt = turn.turnAdapter();
 
             data.Clear();

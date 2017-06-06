@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridView_suppliersList = new System.Windows.Forms.DataGridView();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,14 +43,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_supplier = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView_suppliersList
             // 
+            this.dataGridView_suppliersList.AllowUserToAddRows = false;
+            this.dataGridView_suppliersList.AllowUserToDeleteRows = false;
             this.dataGridView_suppliersList.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_suppliersList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_suppliersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -60,6 +62,14 @@
             this.dataGridView_suppliersList.Size = new System.Drawing.Size(709, 251);
             this.dataGridView_suppliersList.TabIndex = 8;
             this.dataGridView_suppliersList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editCurrentSupplier);
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.Width = 50;
             // 
             // buttonDelete
             // 
@@ -100,7 +110,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox_supplier);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(25, 11);
             this.groupBox1.Name = "groupBox1";
@@ -112,15 +122,18 @@
             // textBox_address
             // 
             this.textBox_address.BackColor = System.Drawing.Color.White;
-            this.textBox_address.Enabled = false;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_address.Location = new System.Drawing.Point(240, 110);
+            this.textBox_address.MaxLength = 400;
             this.textBox_address.Name = "textBox_address";
             this.textBox_address.Size = new System.Drawing.Size(269, 24);
             this.textBox_address.TabIndex = 28;
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
@@ -134,12 +147,13 @@
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
-            this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(25, 50);
+            this.textBox_id.MaxLength = 9;
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(192, 24);
             this.textBox_id.TabIndex = 26;
+            this.textBox_id.TextChanged += new System.EventHandler(this.validating_id);
             // 
             // label5
             // 
@@ -171,12 +185,13 @@
             // textBox_ruc
             // 
             this.textBox_ruc.BackColor = System.Drawing.Color.White;
-            this.textBox_ruc.Enabled = false;
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_ruc.Location = new System.Drawing.Point(531, 50);
+            this.textBox_ruc.MaxLength = 11;
             this.textBox_ruc.Name = "textBox_ruc";
             this.textBox_ruc.Size = new System.Drawing.Size(150, 24);
             this.textBox_ruc.TabIndex = 19;
+            this.textBox_ruc.TextChanged += new System.EventHandler(this.validating_ruc);
             // 
             // label2
             // 
@@ -190,9 +205,9 @@
             // textBox_supplier
             // 
             this.textBox_supplier.BackColor = System.Drawing.Color.White;
-            this.textBox_supplier.Enabled = false;
             this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_supplier.Location = new System.Drawing.Point(240, 50);
+            this.textBox_supplier.MaxLength = 280;
             this.textBox_supplier.Name = "textBox_supplier";
             this.textBox_supplier.Size = new System.Drawing.Size(269, 24);
             this.textBox_supplier.TabIndex = 17;
@@ -206,26 +221,19 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Nombre del proveedor";
             // 
-            // button2
+            // buttonSearch
             // 
-            this.button2.BackColor = System.Drawing.Color.Gray;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(562, 97);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 39);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "🔎 Buscar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.Width = 50;
+            this.buttonSearch.BackColor = System.Drawing.Color.Gray;
+            this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.ForeColor = System.Drawing.Color.White;
+            this.buttonSearch.Location = new System.Drawing.Point(562, 97);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(88, 39);
+            this.buttonSearch.TabIndex = 15;
+            this.buttonSearch.Text = "🔎 Buscar";
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
             // Suppliers
             // 
@@ -261,7 +269,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_supplier;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textBox_address;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
