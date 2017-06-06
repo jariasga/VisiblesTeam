@@ -37,33 +37,35 @@ namespace InkaArt.Interface.Production
                     finalProductList.Rows[i]["name"],
                     finalProductList.Rows[i]["localPrice"],
                     finalProductList.Rows[i]["exportPrice"],
+                    finalProductList.Rows[i]["BasePrice"],
                     finalProductList.Rows[i]["actualStock"]);
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id, name, stock, localPrice, exportPrice;
+            string id, name, stock, localPrice, exportPrice,basePrice;
             id = name = stock = localPrice = exportPrice = "";
 
             if (e.RowIndex >= 0 && e.RowIndex<maxrow)
             {
                 DataGridViewRow row = dataGridView_finalProductList.Rows[e.RowIndex];
 
-                if (e.ColumnIndex == 5)//detalles
+                if (e.ColumnIndex == 6)//detalles
                 {
                     id = row.Cells[0].Value.ToString();
                     name = row.Cells[1].Value.ToString();
-                    stock = row.Cells[4].Value.ToString();
+                    stock = row.Cells[5].Value.ToString();
+                    basePrice = row.Cells[4].Value.ToString();
                     localPrice = row.Cells[2].Value.ToString();
                     exportPrice = row.Cells[3].Value.ToString();
 
-                    Form production_process = new ProductionProcess(id, name, stock, localPrice, exportPrice);
+                    Form production_process = new ProductionProcess(id, name, stock, localPrice, exportPrice,basePrice);
                     production_process.MdiParent = this.MdiParent;
                     production_process.Show();
                 }
                 else
-                    if (e.ColumnIndex == 6)//receta
+                    if (e.ColumnIndex == 7)//receta
                 {
                     id = row.Cells[0].Value.ToString();
                     name = row.Cells[1].Value.ToString();
