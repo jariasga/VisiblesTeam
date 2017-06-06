@@ -36,26 +36,26 @@ namespace InkaArt.Interface.Warehouse
                 updateDataGrid();*/
         }
 
-        /*private void updateDataGrid()
+        private void updateDataGrid()
         {
-            DataTable clientList = clientController.GetClients();
+            DataTable clientList = warehouseController.GetWarehouses();
             populateDataGrid(clientList);
-        }*/
+        }
 
         private void WarehouseIndex_Load(object sender, EventArgs e)
         {
-            //updateDataGrid();
+            updateDataGrid();
         }
 
-       /* private void populateDataGrid(DataTable clientList)
+        private void populateDataGrid(DataTable clientList)
         {
-            grid_clients.Rows.Clear();
+            dataGridView1.Rows.Clear();
             foreach (DataRow row in clientList.Rows)
             {
                 string status = row["status"].ToString().Equals("1") ? "Activo" : "Inactivo";
-                if (status.Equals("Activo")) grid_clients.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"]);
+                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"]);
             }
-        }*/
+        }
 
         private void button_delete_click(object sender, EventArgs e)
         {
@@ -91,7 +91,7 @@ namespace InkaArt.Interface.Warehouse
             clientList = clientController.GetClients(textbox_id.Text, textbox_doc.Text, textbox_doc.Text, textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
             populateDataGrid(clientList);*/
         }
-
+/*
         private void button_bulk_upload_Click(object sender, EventArgs e)
         {
             WarehouseCrud movimientos = new WarehouseCrud();
@@ -100,6 +100,6 @@ namespace InkaArt.Interface.Warehouse
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
                 movimientos.massiveUpload(dialog.FileName);
-        }
+        }*/
     }
 }

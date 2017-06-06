@@ -15,16 +15,21 @@ namespace InkaArt.Business.Warehouse
 {
     public class WarehouseCrud
     {
+        private WarehouseData warehouseData;
 
-        public void createWarehouse(string name, string description, string address, string state)
+        public WarehouseCrud()
         {
-            WarehouseData conn = new WarehouseData();
-            string insertQuery;
+            warehouseData = new WarehouseData();
+        }
 
-            insertQuery = "insert into inkaart.\"Warehouse\"  (name, description, address,state) values ('" + name + "', '" + description + "', '" + address + "','" + state + "');";
-            conn.connect();
-            conn.execute(insertQuery);
-            conn.closeConnection();
+        public int createWarehouse(string name, string description, string address, string state)
+        {
+            return warehouseData.InsertWarehouse(name, description, address, state);
+        }
+
+        public DataTable GetWarehouses(string name = "", string description = "", string address = "", int state = -1)
+        {
+            return warehouseData.GetWarehouses(name, description, address, state);
         }
 
         public void createMovement(int idNote, int idBill, int idMovementType, int idWarehouse, int idMovementReason, string dateIn)
@@ -38,6 +43,13 @@ namespace InkaArt.Business.Warehouse
             conn.closeConnection();
         }
 
+        public string makeValidations(string name, string description, string address, string state)
+        {
+            
+            return "OK";
+        }
+
+        /*
         public bool existeProducto(int idProduct,int idWarehouse)
         {
             WarehouseData conn = new WarehouseData();
@@ -93,7 +105,7 @@ namespace InkaArt.Business.Warehouse
             conn.execute(query);
             conn.closeConnection();
 
-        }
+        }*/
 
         public void updateWareHouse(int id,string name, string description, string address, string state)
         {
@@ -174,6 +186,7 @@ namespace InkaArt.Business.Warehouse
             conn.closeConnection();
         }
 
+        /*
         public NpgsqlDataReader readWarehouse(int id, string name, string address, string state)
         {
             WarehouseData conn = new WarehouseData();
@@ -235,9 +248,9 @@ namespace InkaArt.Business.Warehouse
             datos = conn.warehouseAdapter(selectQuery);
 //            conn.closeConnection();
             return datos;
-        }
+        }*/
 
-        
+        /*
         public void massiveUpload(string filename)
         {
             using (var fs = File.OpenRead(filename))
@@ -264,6 +277,6 @@ namespace InkaArt.Business.Warehouse
                 }
                 MessageBox.Show("Carga de movimientos con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             }
-        }
+        }*/
     }
 }

@@ -11,17 +11,54 @@ namespace InkaArt.Data.Warehouse
 {
     public class WarehouseData : BD_Connector
     {
-        public NpgsqlDataReader warehouseAdapter(string query)
-        {
-            NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
+        private DataSet data;
+        private DataTable table;
+        private DataRow row;
+        private NpgsqlDataAdapter adap;
 
-            //query = "Select * from inkaart.\"Warehouse\";";
-            NpgsqlCommand command = new NpgsqlCommand(query, Connection);
-            NpgsqlDataReader dr = command.ExecuteReader();
-            
-            //closeConnection();
-            return dr;
+        public NpgsqlDataAdapter warehouseAdapter()
+        {
+            NpgsqlDataAdapter warehouseAdapter = new NpgsqlDataAdapter();
+            warehouseAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Warehouse\"", Connection);
+            return warehouseAdapter;
         }
-        
+
+        public int InsertWarehouse(string name, string description, string address, string state)
+        {
+            connect();
+            adap = warehouseAdapter();
+            data.Clear();
+            data = getData(adap, "Warehouse");
+            table = data.Tables["Ware"];
+            row = table.NewRow();
+            row["name"] = name;
+            row["description"] = name;
+            row["address"] = name;
+            row["state"] = name;
+            table.Rows.Add(row);
+            int rowsAffected = insertData(data, adap, "Warehouse");
+            return rowsAffected;
+        }
+
+        public DataTable GetWarehouses(string name = "", string description = "", string address = "", int state = -1)
+        {
+            /*connect();
+
+            adap = warehouseAdapter();
+            
+            byId(adap, id);
+            byName(adap, name);
+            byDoc(adap, ruc);
+            byState(adap, state);
+            byPriority(adap, priority);
+            adap.SelectCommand.CommandText += ";";
+            data.Clear();
+            data = getData(adap, "Client");
+
+            DataTable clientList = new DataTable();
+            clientList = data.Tables[0];
+            return clientList;*/
+        }
+
     }
 }
