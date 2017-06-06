@@ -22,6 +22,7 @@ namespace InkaArt.Business.Production
         {
             process = new ProcessData();
             data = new DataSet();
+            adapt = new NpgsqlDataAdapter();
         }
 
         public DataTable getData()
@@ -81,6 +82,7 @@ namespace InkaArt.Business.Production
         {
             string updateQuery;
             //int filtros = 0;
+            table = getData();  //ACA se inicializa la CONEXION, el GETDATA hace toda la inicializacion
             updateQuery = "UPDATE inkaart.\"Process\" SET ";
             updateQuery = updateQuery + "position_count = '" + positionCount + "' ";
             updateQuery = updateQuery + " WHERE \"idProcess\"= " + id + ";";

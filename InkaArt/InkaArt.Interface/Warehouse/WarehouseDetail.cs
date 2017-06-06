@@ -14,9 +14,12 @@ namespace InkaArt.Interface.Warehouse
 {
     public partial class WarehouseDetail : Form
     {
+        WarehouseCrud warehouseController;
+
         public WarehouseDetail()
         {
             InitializeComponent();
+            warehouseController = new WarehouseCrud();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -25,32 +28,35 @@ namespace InkaArt.Interface.Warehouse
             new_add_supply_window.Show();
         }
 
-        private void button_return_click(object sender, EventArgs e)
-        {
-            this.textBox_idWarehouse.Text = "";
-            this.textBox_name.Text = "";
-            this.textBox_description.Text = "";
-            this.textBox_address.Text = "";
-            this.textBox_idRawMaterial.Text = "";
-            this.textBox_nameRawMaterial.Text = "";
-            this.comboBox_status.Text = "";
-            this.Close();
-        }
-
-        private void buttonSave_Click(object sender, EventArgs e)
-        {
-            string name = textBox_name.Text;
-            string description = textBox_description.Text;
-            string address = textBox_address.Text;
-
-            WarehouseCrud conn = new WarehouseCrud();
-            conn.createWarehouse(name, description, address, "Activo");
-            MessageBox.Show("Almacén Creado", "Crear almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-        }
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_save_Click(object sender, EventArgs e)
+        {
+            string messageResponse = warehouseController.makeValidations(textBox_name.Text, textBox_description.Text, textBox_address.Text);
+            if (messageResponse.Equals("OK"))
+            {
+                int response = warehouseController.createWarehouse(textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
+                if (response >= 0)
+                {
+                    MessageBox.Show(this, "El almacén ha sido agregado correctamente.", "Crear almacén", MessageBoxButtons.OK);
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+            /*else
+            {
+                MessageBox.Show("El almacén no ha sido creado correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+        }
+
+        private void ClearFields()
+        {
+            textBox_name.Clear();
+            textBox_description.Clear();
+            textBox_address.Clear();
         }
     }
 }

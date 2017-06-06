@@ -31,12 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_orders = new System.Windows.Forms.DataGridView();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_create_dev = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -52,6 +46,13 @@
             this.button_search = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_create = new System.Windows.Forms.Button();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orders)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             this.grid_orders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid_orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4,
             this.Tipo,
             this.cost,
             this.Cantidad,
@@ -86,38 +88,6 @@
             this.grid_orders.Size = new System.Drawing.Size(891, 255);
             this.grid_orders.TabIndex = 24;
             this.grid_orders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_orders_CellDoubleClick);
-            // 
-            // Tipo
-            // 
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            // 
-            // cost
-            // 
-            this.cost.HeaderText = "Nombre Cliente";
-            this.cost.Name = "cost";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "RUC/DNI Cliente";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Estado";
-            this.Column1.Name = "Column1";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Monto";
-            this.Column3.Name = "Column3";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Eliminar";
-            this.Column2.Name = "Column2";
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button_create_dev
             // 
@@ -302,6 +272,43 @@
             this.button_create.UseVisualStyleBackColor = false;
             this.button_create.Click += new System.EventHandler(this.button_create_Click);
             // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "ID";
+            this.Column4.Name = "Column4";
+            // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            // 
+            // cost
+            // 
+            this.cost.HeaderText = "Nombre Cliente";
+            this.cost.Name = "cost";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "RUC/DNI Cliente";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Estado";
+            this.Column1.Name = "Column1";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Monto";
+            this.Column3.Name = "Column3";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Eliminar";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // ClientOrderIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -340,12 +347,13 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.Button button_create;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
-        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

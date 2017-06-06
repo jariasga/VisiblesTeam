@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using InkaArt.Interface.Purchases;
 using InkaArt.Interface.Sales;
@@ -7,6 +9,9 @@ using InkaArt.Interface.Warehouse;
 using InkaArt.Interface.Security;
 using InkaArt.Business.Security;
 using System.Data;
+using System.Threading;
+using System.Net.NetworkInformation;
+using InkaArt.Classes;
 
 namespace InkaArt.Interface
 {
@@ -14,11 +19,16 @@ namespace InkaArt.Interface
     {
         private Form login;
         private RoleController controller;
+        Thread pingThread;
+        delegate void SetPingStatusTextCallback(string text);
         public Menu(Form login)
         {
             InitializeComponent();
             this.login = login;
             getPermissions();
+            pingThread = new Thread(new ThreadStart(pingStatus));
+            pingThread.IsBackground = true;
+            pingThread.Start();
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -111,6 +121,7 @@ namespace InkaArt.Interface
         private void listaDeTurnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form turn_management = new TurnManagement();
+            turn_management.MdiParent = this;
             turn_management.Show();
         }
 
@@ -251,6 +262,39 @@ namespace InkaArt.Interface
             gestionarMovimientosToolStripMenuItem.Enabled = (bool)roleRow["warehouse_movements"];
             verStocksFísicosYLógicosToolStripMenuItem.Enabled = (bool)roleRow["warehouse_stock_reports"];
             kardexToolStripMenuItem.Enabled = (bool)roleRow["warehouse_kardex_reports"];
+        }
+
+        private void pingStatus()
+        {
+            Ping ping = new Ping();
+            ping.InitializeLifetimeService();
+
+            while (true)
+            {
+                try
+                {
+                    long ms = ping.Send(BD_Connector.serverAddress).RoundtripTime;
+                    this.SetPingStatusText("Reply from server: " + ms + "ms");
+                }
+                catch (Exception Msg)
+                {
+                    this.SetPingStatusText("Server unreacheable");
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void SetPingStatusText(string text)
+        {
+            /*if (this.toolStripStatusLabelPingStatus.InvokeRequired)
+            {
+                SetPingStatusTextCallback d = new SetPingStatusTextCallback(SetPingStatusText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {*/
+                this.toolStripStatusLabelPingStatus.Text = text;
+            //}
         }
     }
 }

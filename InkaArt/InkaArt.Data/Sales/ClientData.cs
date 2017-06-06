@@ -104,6 +104,29 @@ namespace InkaArt.Data.Sales
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = state;
         }
 
+        public void deleteClients(List<string> selectedClients)
+        {
+            adap = clientAdapter();
+
+            data.Clear();
+            data = getData(adap, "Client");
+
+            table = data.Tables["Client"];
+
+            foreach(string id in selectedClients)
+            {
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    if (string.Compare(table.Rows[i]["idClient"].ToString(), id) == 0)
+                    {
+                        table.Rows[i]["status"] = 0;
+                        break;
+                    }
+                }
+            }
+            updateData(data, adap, "Client");
+        }
+
         private void byDoc(NpgsqlDataAdapter adap, long doc)
         {
             if (doc == -1) return;
