@@ -15,7 +15,6 @@ namespace InkaArt.Interface.Security
     {
         RoleController role;
         DataTable table;
-        bool[] values;
         public UserRolesPermissions()
         {
             InitializeComponent();
