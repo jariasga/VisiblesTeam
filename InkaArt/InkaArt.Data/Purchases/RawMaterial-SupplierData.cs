@@ -79,5 +79,17 @@ namespace InkaArt.Data.Purchases
 
             updateData(data, adap, "RawMaterial-Supplier");
         }
+        public void InsertRM_Sup(int idMat,int idSup,double precio)
+        {
+            table = data.Tables["RawMaterial-Supplier"];
+            row = table.NewRow();
+
+            row["id_raw_material"] = idMat;
+            row["id_supplier"] = idSup;
+            row["price"] = precio;
+            table.Rows.Add(row);
+
+            insertData(data, adap, "RawMaterial-Supplier");
+        }
     }
 }

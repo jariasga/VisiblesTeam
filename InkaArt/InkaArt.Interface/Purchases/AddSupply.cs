@@ -14,7 +14,9 @@ namespace InkaArt.Interface.Purchases
     public partial class AddSupply : Form
     {
         RawMaterialController control;
+        RawMaterial_SupplierController control_rs;
         Form supplierView;
+        int idSupplier;
         public AddSupply()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_supplies.Columns["averagePrice"].HeaderText = "Precio Promedio";
             dataGridView_supplies.Columns["averagePrice"].Visible = false;
         }
-        public AddSupply(Form viewSupplier)
+        public AddSupply(Form viewSupplier,RawMaterial_SupplierController controlForm,string idSupp)
         {
             InitializeComponent();
             control = new RawMaterialController();
@@ -52,6 +54,8 @@ namespace InkaArt.Interface.Purchases
             dataGridView_supplies.Columns["averagePrice"].Visible = false;
 
             supplierView = viewSupplier;
+            control_rs = controlForm;
+            idSupplier = int.Parse(idSupp);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -67,10 +71,12 @@ namespace InkaArt.Interface.Purchases
         private void button_add(object sender, EventArgs e)
         {
             int totalSupplies=dataGridView_supplies.RowCount;
-            for(int i = 1; i < totalSupplies; i++)
+            for(int i = 0; i < totalSupplies; i++)
             {
                 if ((bool)dataGridView_supplies.Rows[i].Cells[0].Value == true)
                 {
+                    //control_rs.insertRM_Sup(dataGridView_supplies.Rows[i].Cells[1].Value.ToString(),idSupplier,"0");
+                    dataGridView_supplies.Rows[i].Cells[0].Value = false;
                 }
             }
             this.Close();

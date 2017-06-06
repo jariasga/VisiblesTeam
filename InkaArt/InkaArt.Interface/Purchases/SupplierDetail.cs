@@ -79,7 +79,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add(object sender, EventArgs e)
         {
-            Form pageAddSupply = new AddSupply(this);
+            Form pageAddSupply = new AddSupply(this,control_rs,textBox_idSupplier.Text);
             pageAddSupply.Show();
         }
 
