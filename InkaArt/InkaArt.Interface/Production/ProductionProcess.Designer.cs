@@ -44,6 +44,8 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox_basePrice = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_productProceses)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +81,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_basePrice);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.textBox_stock);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.textBox_product);
@@ -101,17 +105,17 @@
             // 
             this.textBox_stock.Enabled = false;
             this.textBox_stock.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_stock.Location = new System.Drawing.Point(20, 176);
+            this.textBox_stock.Location = new System.Drawing.Point(130, 58);
             this.textBox_stock.Name = "textBox_stock";
             this.textBox_stock.ReadOnly = true;
-            this.textBox_stock.Size = new System.Drawing.Size(204, 24);
+            this.textBox_stock.Size = new System.Drawing.Size(95, 24);
             this.textBox_stock.TabIndex = 25;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 154);
+            this.label6.Location = new System.Drawing.Point(127, 36);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(48, 18);
             this.label6.TabIndex = 24;
@@ -190,7 +194,7 @@
             this.textBox_id.Location = new System.Drawing.Point(23, 58);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.ReadOnly = true;
-            this.textBox_id.Size = new System.Drawing.Size(204, 24);
+            this.textBox_id.Size = new System.Drawing.Size(67, 24);
             this.textBox_id.TabIndex = 14;
             // 
             // label5
@@ -215,6 +219,26 @@
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(20, 160);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(95, 18);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Precio Base";
+            // 
+            // textBox_basePrice
+            // 
+            this.textBox_basePrice.Enabled = false;
+            this.textBox_basePrice.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_basePrice.Location = new System.Drawing.Point(22, 181);
+            this.textBox_basePrice.Name = "textBox_basePrice";
+            this.textBox_basePrice.ReadOnly = true;
+            this.textBox_basePrice.Size = new System.Drawing.Size(202, 24);
+            this.textBox_basePrice.TabIndex = 27;
             // 
             // ProductionProcess
             // 
@@ -257,5 +281,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.TextBox textBox_basePrice;
+        private System.Windows.Forms.Label label7;
     }
 }

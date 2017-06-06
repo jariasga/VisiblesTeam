@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.dataGridView_finalProductList = new System.Windows.Forms.DataGridView();
+            this.button_refresh = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioExportacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detalles = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Receta = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button_refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_finalProductList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,15 +52,29 @@
             this.Nombre,
             this.PrecioLocal,
             this.PrecioExportacion,
+            this.PrecioBase,
             this.Stock,
             this.Detalles,
             this.Receta});
             this.dataGridView_finalProductList.Location = new System.Drawing.Point(34, 57);
             this.dataGridView_finalProductList.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_finalProductList.Name = "dataGridView_finalProductList";
-            this.dataGridView_finalProductList.Size = new System.Drawing.Size(743, 242);
+            this.dataGridView_finalProductList.Size = new System.Drawing.Size(836, 242);
             this.dataGridView_finalProductList.TabIndex = 0;
             this.dataGridView_finalProductList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // button_refresh
+            // 
+            this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_refresh.ForeColor = System.Drawing.Color.White;
+            this.button_refresh.Location = new System.Drawing.Point(459, 315);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(103, 42);
+            this.button_refresh.TabIndex = 21;
+            this.button_refresh.Text = "Actualizar";
+            this.button_refresh.UseVisualStyleBackColor = false;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
             // Id
             // 
@@ -86,6 +101,12 @@
             this.PrecioExportacion.Name = "PrecioExportacion";
             this.PrecioExportacion.ReadOnly = true;
             // 
+            // PrecioBase
+            // 
+            this.PrecioBase.HeaderText = "Precio Base";
+            this.PrecioBase.Name = "PrecioBase";
+            this.PrecioBase.ReadOnly = true;
+            // 
             // Stock
             // 
             this.Stock.HeaderText = "Stock";
@@ -103,25 +124,12 @@
             this.Receta.HeaderText = "Receta";
             this.Receta.Name = "Receta";
             // 
-            // button_refresh
-            // 
-            this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_refresh.ForeColor = System.Drawing.Color.White;
-            this.button_refresh.Location = new System.Drawing.Point(343, 315);
-            this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(103, 42);
-            this.button_refresh.TabIndex = 21;
-            this.button_refresh.Text = "Actualizar";
-            this.button_refresh.UseVisualStyleBackColor = false;
-            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
-            // 
             // FinalProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(806, 391);
+            this.ClientSize = new System.Drawing.Size(883, 391);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.dataGridView_finalProductList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -142,6 +150,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioLocal;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioExportacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioBase;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewButtonColumn Detalles;
         private System.Windows.Forms.DataGridViewButtonColumn Receta;
