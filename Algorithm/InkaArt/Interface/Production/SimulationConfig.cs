@@ -17,15 +17,20 @@ namespace InkaArt.Interface.Production
         SimulationController simulations;
         Simulation simulation;
         ComboBox combo_simulations;
+        WorkerController workers;
 
         public SimulationConfig()
         {
             InitializeComponent();
         }
         
-        public SimulationConfig(SimulationController simulations, Simulation simulation, ComboBox combo)
+        public SimulationConfig(SimulationController simulations, Simulation simulation, ComboBox combo, WorkerController workers)
         {
             InitializeComponent();
+
+            this.workers = workers;
+            this.list_workers.DataSource = workers.List();
+            this.list_workers.DisplayMember = "GetFullName";
 
             this.simulations = simulations;
             this.simulation = simulation;
@@ -40,20 +45,50 @@ namespace InkaArt.Interface.Production
                 this.textbox_huacos.Text = simulation.HuacoWeight.ToString();
                 this.textbox_stones.Text = simulation.HuamangaStoneWeight.ToString();
                 this.textbox_altarpieces.Text = simulation.RetableWeight.ToString();
+                
+                for (int i = 0; i < list_workers.Items.Count; i ++)
+                {
+                    if (simulation.Workers != null && simulation.Workers.Contains((Worker)list_workers.Items[i]))
+                        list_workers.SetItemChecked(i, true);
+                }
+
+                this.Text = "Editar Simulación";
+                return;
             }
+
+            this.Text = "Crear Simulación";
         }
 
         private void ButtonSaveClick(object sender, EventArgs e)
         {
-            List<Worker> workers; // filtrar trabajadores y ordenes
+            string message;
+            string action;
+            List<Worker> workers = new List<Worker>();
+
+            foreach (object item in list_workers.CheckedItems)
+            {
+                workers.Add((Worker)item);
+            }
+            // filtrar ordenes/pedidos
 
             if (simulation == null)
             {
-                this.simulation = new Simulation(textbox_name.Text, int.Parse(textbox_days.Text), double.Parse(textbox_roture.Text), double.Parse(textbox_time.Text), double.Parse(textbox_huacos.Text), double.Parse(textbox_stones.Text), double.Parse(textbox_altarpieces.Text));
-                this.simulations.Add(simulation);                
+                message = this.simulations.Insert(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers);
+                action = "creada";
             }
             else
-                this.simulation.Update(simulation.Name, int.Parse(textbox_days.Text), double.Parse(textbox_roture.Text), double.Parse(textbox_time.Text), double.Parse(textbox_huacos.Text), double.Parse(textbox_stones.Text), double.Parse(textbox_altarpieces.Text), null);
+            {
+                message = this.simulations.Update(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers);
+                action = "actualizada";
+            }
+
+            if (message.Equals("OK")) { 
+                MessageBox.Show(this, "La simulación ha sido " + action + " correctamente.", "Éxito", MessageBoxButtons.OK);
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+                MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);            
 
             combo_simulations.DataSource = simulations.BindingList();
         }        

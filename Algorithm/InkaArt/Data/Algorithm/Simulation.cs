@@ -99,7 +99,7 @@ namespace InkaArt.Data.Algorithm
 
         public Simulation() { }
 
-        public Simulation(string name, int days, double breakage, double time, double huaco, double huamanga, double retable)
+        public Simulation(string name, int days, double breakage, double time, double huaco, double huamanga, double retable, List<Worker> workers)
         {
             this.name = name;
             this.days = days;
@@ -108,7 +108,31 @@ namespace InkaArt.Data.Algorithm
             this.huaco_weight = huaco;
             this.huaco_weight = huamanga;
             this.retable_weight = retable;
-            this.workers = new List<Worker>();
+            this.workers = workers;
+        }
+
+        public Simulation(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        {
+            this.name = name;
+            this.days = int.Parse(days);
+            this.breakage_weight = double.Parse(breakage);
+            this.time_weight = double.Parse(time);
+            this.huaco_weight = double.Parse(huaco);
+            this.huaco_weight = double.Parse(huamanga);
+            this.retable_weight = double.Parse(retable);
+            this.workers = workers;
+        }
+
+        public void Update(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        {
+            this.name = name;
+            this.days = int.Parse(days);
+            this.breakage_weight = double.Parse(breakage);
+            this.time_weight = double.Parse(time);
+            this.huaco_weight = double.Parse(huaco);
+            this.huaco_weight = double.Parse(huamanga);
+            this.retable_weight = double.Parse(retable);
+            this.workers = workers;
         }
 
         public void Update(string name, int days, double breakage, double time, double huaco, double huamanga, double retable, List<Worker> workers)
@@ -122,6 +146,53 @@ namespace InkaArt.Data.Algorithm
             this.retable_weight = retable;
             this.workers = workers;
             //this.orders = orders;
+        }
+
+        static public string Validate(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        {
+            int aux_int;
+            double aux_double;
+
+            // campos obligatorios
+
+            if (name.Equals("") || days.Equals("") || breakage.Equals("") || time.Equals("") || huaco.Equals("") || huamanga.Equals("") || retable.Equals(""))
+                return "Por favor, complete todos los campos antes de continuar";
+            if (workers.Count == 0)
+                return "Por favor, considere como mínimo un empleado";
+
+            // campos numericos y positivos
+
+            if (!int.TryParse(days, out aux_int))
+                return "El NÚMERO DE DÍAS debe ser numérico";
+            else if (aux_int < 0)
+                return "El NÚMERO DE DÍAS debe ser positivo";
+
+            if (!double.TryParse(breakage, out aux_double))
+                return "El PESO DE ROTURA debe ser numérico";
+            else if (aux_double < 0)
+                return "El PESO DE ROTURA debe ser positivo";
+
+            if (!double.TryParse(time, out aux_double))
+                return "El PESO DE TIEMPO debe ser numérico";
+            else if (aux_double < 0)
+                return "El PESO DE TIEMPO debe ser positivo";
+
+            if (!double.TryParse(huaco, out aux_double))
+                return "El PESO DE HUACO debe ser numérico";
+            else if (aux_double < 0)
+                return "El PESO DE HUACO debe ser positivo";
+
+            if (!double.TryParse(huamanga, out aux_double))
+                return "El PESO DE PIEDRAS DE HUAMANGA debe ser numérico";
+            else if (aux_double < 0)
+                return "El PESO DE PIEDRAS DE HUAMANGA debe ser positivo";
+
+            if (!double.TryParse(retable, out aux_double))
+                return "El PESO DE RETABLO debe ser numérico";
+            else if (aux_double < 0)
+                return "El PESO DE RETABLO debe ser positivo";
+
+            return "OK";
         }
     }
 }

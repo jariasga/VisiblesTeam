@@ -15,13 +15,16 @@ namespace InkaArt.Interface.Production
     public partial class WorkersAssignment : Form
     {
         private SimulationController simulations;
+        private WorkerController workers;
 
         public WorkersAssignment()
         {
             InitializeComponent();
 
+            workers = new WorkerController();
+            workers.Load();
             simulations = new SimulationController();
-            simulations.Add(new Simulation("simu 1", 0, 0, 0, 0, 0, 0));
+            simulations.Add(new Simulation("simu 1", 0, 0, 0, 0, 0, 0, null)); // prueba
             
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
@@ -57,7 +60,7 @@ namespace InkaArt.Interface.Production
         private void ButtonConfigClick(object sender, EventArgs e)
         {
             Simulation simulation = (Simulation) combo_simulations.SelectedItem;
-            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations);
+            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers);
             simulation_config.MdiParent = this.MdiParent;
             simulation_config.Show();
         }
@@ -78,10 +81,12 @@ namespace InkaArt.Interface.Production
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
         {
             Simulation simulation = (Simulation)combo_simulations.SelectedItem;
+
             if (simulation == null)
             {
                 button_config.Text = "+ Crear";
-            } else
+            }
+            else
             {
                 button_config.Text = "Configuración";
                 // completar asignaciones
