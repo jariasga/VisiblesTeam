@@ -1,6 +1,6 @@
-﻿namespace InkaArt.Interface.Purchases
+﻿namespace InkaArt.Interface.Warehouse
 {
-    partial class AddSupplyForOrder
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -29,87 +29,111 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox_name = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_supplier = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Agregar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.buttonReturn = new System.Windows.Forms.Button();
+            this.TipoDeProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox_status);
             this.groupBox1.Controls.Add(this.textBox_id);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox_name);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.textBox_supplier);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(21, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(575, 91);
-            this.groupBox1.TabIndex = 45;
+            this.groupBox1.Size = new System.Drawing.Size(709, 158);
+            this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // comboBox_status
+            // 
+            this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F);
+            this.comboBox_status.FormattingEnabled = true;
+            this.comboBox_status.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.comboBox_status.Location = new System.Drawing.Point(25, 110);
+            this.comboBox_status.Name = "comboBox_status";
+            this.comboBox_status.Size = new System.Drawing.Size(192, 29);
+            this.comboBox_status.TabIndex = 27;
             // 
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
-            this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_id.Location = new System.Drawing.Point(20, 50);
+            this.textBox_id.Location = new System.Drawing.Point(25, 50);
             this.textBox_id.Name = "textBox_id";
-            this.textBox_id.Size = new System.Drawing.Size(135, 29);
+            this.textBox_id.Size = new System.Drawing.Size(192, 29);
             this.textBox_id.TabIndex = 26;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 29);
+            this.label5.Location = new System.Drawing.Point(21, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(158, 23);
+            this.label5.Size = new System.Drawing.Size(112, 23);
             this.label5.TabIndex = 25;
-            this.label5.Text = "ID Materia prima";
+            this.label5.Text = "Id Producto";
             // 
-            // textBox_name
+            // label3
             // 
-            this.textBox_name.BackColor = System.Drawing.Color.White;
-            this.textBox_name.Enabled = false;
-            this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_name.Location = new System.Drawing.Point(172, 50);
-            this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(287, 29);
-            this.textBox_name.TabIndex = 17;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(160, 23);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Tipo de Producto";
+            // 
+            // textBox_supplier
+            // 
+            this.textBox_supplier.BackColor = System.Drawing.Color.White;
+            this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_supplier.Location = new System.Drawing.Point(240, 50);
+            this.textBox_supplier.Name = "textBox_supplier";
+            this.textBox_supplier.Size = new System.Drawing.Size(446, 29);
+            this.textBox_supplier.TabIndex = 17;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(169, 29);
+            this.label1.Location = new System.Drawing.Point(237, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(255, 23);
+            this.label1.Size = new System.Drawing.Size(164, 23);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Nombre de la materia prima";
+            this.label1.Text = "Nombre Producto";
             // 
             // buttonSearch
             // 
             this.buttonSearch.BackColor = System.Drawing.Color.Gray;
             this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
-            this.buttonSearch.Location = new System.Drawing.Point(473, 35);
+            this.buttonSearch.Location = new System.Drawing.Point(349, 100);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(88, 39);
+            this.buttonSearch.Size = new System.Drawing.Size(207, 39);
             this.buttonSearch.TabIndex = 15;
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // dataGridView1
             // 
@@ -119,79 +143,75 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Nombre,
-            this.PrecioUnitario,
-            this.Agregar});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 109);
+            this.TipoDeProducto,
+            this.Seleccionar});
+            this.dataGridView1.Location = new System.Drawing.Point(21, 195);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(575, 178);
-            this.dataGridView1.TabIndex = 46;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.Size = new System.Drawing.Size(709, 210);
+            this.dataGridView1.TabIndex = 44;
             // 
             // Id
             // 
-            this.Id.HeaderText = "Id";
+            this.Id.HeaderText = "Id Item";
             this.Id.Name = "Id";
-            this.Id.Width = 80;
+            this.Id.Width = 190;
             // 
             // Nombre
             // 
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 280;
+            this.Nombre.Width = 250;
             // 
-            // PrecioUnitario
+            // TipoDeProducto
             // 
-            this.PrecioUnitario.HeaderText = "Precio unitario";
-            this.PrecioUnitario.Name = "PrecioUnitario";
+            this.TipoDeProducto.HeaderText = "Tipo de Producto";
+            this.TipoDeProducto.Name = "TipoDeProducto";
+            this.TipoDeProducto.Width = 120;
             // 
-            // Agregar
+            // Seleccionar
             // 
-            this.Agregar.HeaderText = "Agregar";
-            this.Agregar.Name = "Agregar";
-            this.Agregar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Agregar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Agregar.Width = 70;
-            // 
-            // buttonReturn
-            // 
-            this.buttonReturn.BackColor = System.Drawing.Color.Gray;
-            this.buttonReturn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonReturn.ForeColor = System.Drawing.Color.White;
-            this.buttonReturn.Location = new System.Drawing.Point(299, 303);
-            this.buttonReturn.Name = "buttonReturn";
-            this.buttonReturn.Size = new System.Drawing.Size(104, 42);
-            this.buttonReturn.TabIndex = 47;
-            this.buttonReturn.Text = "⟲ Regresar";
-            this.buttonReturn.UseVisualStyleBackColor = false;
-            this.buttonReturn.Click += new System.EventHandler(this.button_return);
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
             // 
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(184, 303);
+            this.buttonAdd.Location = new System.Drawing.Point(167, 432);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(104, 41);
-            this.buttonAdd.TabIndex = 48;
-            this.buttonAdd.Text = "+ Agregar";
+            this.buttonAdd.Size = new System.Drawing.Size(142, 39);
+            this.buttonAdd.TabIndex = 56;
+            this.buttonAdd.Text = "Aceptar";
             this.buttonAdd.UseVisualStyleBackColor = false;
-            this.buttonAdd.Click += new System.EventHandler(this.button_add);
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // AddSupplyForOrder
+            // buttonDelete
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.White;
+            this.buttonDelete.Location = new System.Drawing.Point(426, 432);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(151, 39);
+            this.buttonDelete.TabIndex = 55;
+            this.buttonDelete.Text = "Cancelar";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(599, 358);
+            this.ClientSize = new System.Drawing.Size(763, 494);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.buttonReturn);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
-            this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "AddSupplyForOrder";
-            this.Text = "Agregar insumos a la orden";
+            this.Name = "Form1";
+            this.Text = "Seleccionar Item";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -202,17 +222,19 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.TextBox textBox_id;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox_name;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox_supplier;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonReturn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioUnitario;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Agregar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoDeProducto;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }

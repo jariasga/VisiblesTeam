@@ -49,7 +49,6 @@ namespace InkaArt.Business.Production
             data = finalProduct.getData(adapt, "Product");
 
             table = data.Tables["Product"];
-
             row = table.NewRow();
 
             row["name"] = name;

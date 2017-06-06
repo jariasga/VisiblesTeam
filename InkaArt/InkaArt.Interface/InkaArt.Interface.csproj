@@ -171,6 +171,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Warehouse\ExchangeMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ExchangeMovement.Designer.cs">
+      <DependentUpon>ExchangeMovement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ProductionMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ProductionMovement.Designer.cs">
+      <DependentUpon>ProductionMovement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\PurchaseMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\PurchaseMovement.Designer.cs">
+      <DependentUpon>PurchaseMovement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Purchases\AddSupply.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -321,6 +339,12 @@
     <Compile Include="Warehouse\AlertLackSupplies.designer.cs">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\GenerateKardexReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,6 +399,12 @@
     <Compile Include="Warehouse\PurchaseOrderIndex.designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\SaleMovementcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\SaleMovementcs.Designer.cs">
+      <DependentUpon>SaleMovementcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\SalesOut.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,6 +428,12 @@
     </Compile>
     <Compile Include="Warehouse\WarehouseIndex.Designer.cs">
       <DependentUpon>WarehouseIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseSearchMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseSearchMovement.Designer.cs">
+      <DependentUpon>WarehouseSearchMovement.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="GeneralParameters.resx">
       <DependentUpon>GeneralParameters.cs</DependentUpon>
@@ -457,6 +493,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
+      <DependentUpon>ExchangeMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ProductionMovement.resx">
+      <DependentUpon>ProductionMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\PurchaseMovement.resx">
+      <DependentUpon>PurchaseMovement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchases\AddSupply.resx">
       <DependentUpon>AddSupply.cs</DependentUpon>
     </EmbeddedResource>
@@ -532,6 +577,9 @@
     <EmbeddedResource Include="Warehouse\AlertLackSupplies.resx">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\GenerateKardexReport.resx">
       <DependentUpon>GenerateKardexReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -559,6 +607,9 @@
     <EmbeddedResource Include="Warehouse\PurchaseOrderIndex.resx">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\SaleMovementcs.resx">
+      <DependentUpon>SaleMovementcs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\SalesOut.resx">
       <DependentUpon>SalesOut.cs</DependentUpon>
     </EmbeddedResource>
@@ -570,6 +621,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\WarehouseIndex.resx">
       <DependentUpon>WarehouseIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseSearchMovement.resx">
+      <DependentUpon>WarehouseSearchMovement.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
