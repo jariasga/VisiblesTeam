@@ -16,6 +16,11 @@ namespace InkaArt.Data.Warehouse
         private DataRow row;
         private NpgsqlDataAdapter adap;
 
+        public WarehouseData()
+        {
+            data = new DataSet();
+        }
+
         public NpgsqlDataAdapter warehouseAdapter()
         {
             NpgsqlDataAdapter warehouseAdapter = new NpgsqlDataAdapter();
@@ -40,24 +45,25 @@ namespace InkaArt.Data.Warehouse
             return rowsAffected;
         }
 
-        public DataTable GetWarehouses(string name = "", string description = "", string address = "", int state = -1)
+        public DataTable GetWarehouses(string name = "", string description = "", string address = "", string state = "")
         {
-            /*connect();
+            connect();
 
             adap = warehouseAdapter();
             
-            byId(adap, id);
+            /*byId(adap, id);
             byName(adap, name);
             byDoc(adap, ruc);
             byState(adap, state);
-            byPriority(adap, priority);
+            byPriority(adap, priority);*/
+
             adap.SelectCommand.CommandText += ";";
             data.Clear();
-            data = getData(adap, "Client");
+            data = getData(adap, "Warehouse");
 
-            DataTable clientList = new DataTable();
-            clientList = data.Tables[0];
-            return clientList;*/
+            DataTable warehouseList = new DataTable();
+            warehouseList = data.Tables[0];
+            return warehouseList;
         }
 
     }

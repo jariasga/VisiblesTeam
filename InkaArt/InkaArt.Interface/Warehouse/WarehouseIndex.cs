@@ -38,8 +38,8 @@ namespace InkaArt.Interface.Warehouse
 
         private void updateDataGrid()
         {
-            DataTable clientList = warehouseController.GetWarehouses();
-            populateDataGrid(clientList);
+            DataTable warehouseList = warehouseController.GetWarehouses();
+            populateDataGrid(warehouseList);
         }
 
         private void WarehouseIndex_Load(object sender, EventArgs e)
@@ -47,13 +47,13 @@ namespace InkaArt.Interface.Warehouse
             updateDataGrid();
         }
 
-        private void populateDataGrid(DataTable clientList)
+        private void populateDataGrid(DataTable warehouseList)
         {
             dataGridView1.Rows.Clear();
-            foreach (DataRow row in clientList.Rows)
+            foreach (DataRow row in warehouseList.Rows)
             {
-                string status = row["status"].ToString().Equals("1") ? "Activo" : "Inactivo";
-                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"]);
+                string status = row["state"].ToString();
+                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["address"]);
             }
         }
 

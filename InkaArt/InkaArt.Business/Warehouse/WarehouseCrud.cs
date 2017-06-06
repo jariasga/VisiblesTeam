@@ -27,7 +27,7 @@ namespace InkaArt.Business.Warehouse
             return warehouseData.InsertWarehouse(name, description, address, state);
         }
 
-        public DataTable GetWarehouses(string name = "", string description = "", string address = "", int state = -1)
+        public DataTable GetWarehouses(string name = "", string description = "", string address = "", string state = "")
         {
             return warehouseData.GetWarehouses(name, description, address, state);
         }
