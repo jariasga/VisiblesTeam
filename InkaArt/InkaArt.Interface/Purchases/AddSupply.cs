@@ -15,13 +15,14 @@ namespace InkaArt.Interface.Purchases
     {
         RawMaterialController control;
         RawMaterial_SupplierController control_rs;
+        DataTable rawMaterialList;
         Form supplierView;
         int idSupplier;
         public AddSupply()
         {
             InitializeComponent();
             control = new RawMaterialController();
-            DataTable rawMaterialList = control.getData();
+            rawMaterialList = control.getData();
             dataGridView_supplies.DataSource = rawMaterialList;
 
             dataGridView_supplies.Columns["idRawMaterial"].HeaderText = "ID";
@@ -39,7 +40,7 @@ namespace InkaArt.Interface.Purchases
         {
             InitializeComponent();
             control = new RawMaterialController();
-            DataTable rawMaterialList = control.getData();
+            rawMaterialList = control.getData();
             dataGridView_supplies.DataSource = rawMaterialList;
 
             dataGridView_supplies.Columns["idRawMaterial"].HeaderText = "ID";
@@ -88,9 +89,38 @@ namespace InkaArt.Interface.Purchases
             newRawMaterialWindow.Show();
         }
 
+        private void filter()
+        {
+            DataRow[] rows;
+            rawMaterialList = control.getData();
+            string cadena = "";
+            if (textBox_idFilter.Text.Length > 0)
+            {
+                cadena = " AND idRawMaterial = " + textBox_idFilter.Text;
+            }
+            rows = rawMaterialList.Select("name LIKE '%" + textBox_nameFilter.Text + "%'" + cadena);
+            
+            if (rows.Any()) rawMaterialList = rows.CopyToDataTable();
+            else rawMaterialList.Rows.Clear();
+            string sortQuery = string.Format("idRawMaterial");
+            rawMaterialList.DefaultView.Sort = sortQuery;
+        }
         private void button_search(object sender, EventArgs e)
         {
             textBox_nameFilter.Text = textBox_nameFilter.Text.Trim();
+            filter();
+            dataGridView_supplies.DataSource = rawMaterialList;
+
+            dataGridView_supplies.Columns["idRawMaterial"].HeaderText = "ID";
+            dataGridView_supplies.Columns["name"].HeaderText = "Nombre";
+            dataGridView_supplies.Columns["unit"].HeaderText = "Unidad";
+            dataGridView_supplies.Columns["unit"].Visible = false;
+            dataGridView_supplies.Columns["status"].HeaderText = "Estado";
+            dataGridView_supplies.Columns["status"].Visible = false;
+            dataGridView_supplies.Columns["description"].HeaderText = "Descripción";
+            dataGridView_supplies.Columns["description"].Visible = false;
+            dataGridView_supplies.Columns["averagePrice"].HeaderText = "Precio Promedio";
+            dataGridView_supplies.Columns["averagePrice"].Visible = false;
         }
 
         private void validating_id(object sender, EventArgs e)
