@@ -10,7 +10,7 @@ namespace InkaArt.Data.Algorithm
 {
     //ESTA CLASE SE USA SOLO PARA LA ASIGNACIÓN DE TRABAJADORES Y PARA EL REGISTRO DE INFORMES DE TURNO
     //- Anthony
-    class Worker
+    public class Worker
     {
         private int id_worker;
         private string name;
@@ -39,6 +39,11 @@ namespace InkaArt.Data.Algorithm
         public string FullName()
         {
             return name + " " + last_name;
+        }
+
+        public string GetFullName
+        {
+            get { return name + " " + last_name; }
         }
     }
 }

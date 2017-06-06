@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using InkaArt.Data.Algorithm;
+using Npgsql;
+using InkaArt.Common;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -32,19 +34,35 @@ namespace InkaArt.Business.Algorithm
         /* Se inicializan los parametros a calibrar */
         public TabuSearch(Instance instance)
         {
-            // reactive tabu list
-            this.tabu_list_length = 10;     // largo inicial
-            this.tabu_list_growth = 0.1;    // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
-            this.max_no_growth = 3;         // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
-
-            // neighbor
-            this.neighbor_checks = 500;     // cantidad maxima de vecinos a evaluar
-
-            // solutions
-            this.max_iterations = 10000;    // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
-
-            // instance parameters
             this.instance = instance;       // la instancia tiene datos del problema
+            LoadParameters();
+
+        }
+
+        public void LoadParameters()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection();
+            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"SimulationParameters\"", connection);
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                // reactive tabu list
+                this.tabu_list_length = reader.GetInt32(8);     // largo inicial
+                this.tabu_list_growth = reader.GetDouble(9);    // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
+                this.max_no_growth = reader.GetInt32(10);       // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
+
+                // solutions
+                this.max_iterations = reader.GetInt32(11);      // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
+
+                // neighbor
+                this.neighbor_checks = reader.GetInt32(12);     // cantidad maxima de vecinos a evaluar                
+            }
+
+            connection.Close();
         }
 
         /* Busca el ratio de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
@@ -89,8 +107,8 @@ namespace InkaArt.Business.Algorithm
             int worker2;
 
             // hay 2 tipos de swap
-            // 0: intercambiar listas
-            // 1: intercambiar productos
+            //  0: intercambiar listas
+            //  1: intercambiar productos
             if (swap_type == 0)
             {
                 // buscamos trabajadores
@@ -142,7 +160,7 @@ namespace InkaArt.Business.Algorithm
 
             // inicio
             // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (Environment.TickCount - instance.start_time < instance.limit_time && iter_count < max_iterations)
+            while (Environment.TickCount - instance.StartTime < instance.LimitTime && iter_count < max_iterations)
             {
                 int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 

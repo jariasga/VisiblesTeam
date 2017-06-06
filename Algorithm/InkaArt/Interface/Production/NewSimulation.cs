@@ -21,5 +21,10 @@ namespace InkaArt.Interface.Production
         {
             this.Close();
         }
+
+        private void button_start_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

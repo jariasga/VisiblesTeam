@@ -12,8 +12,9 @@ namespace InkaArt.Business.Algorithm
 {
     //ESTA CLASE SE USA SOLO PARA LA ASIGNACIÓN DE TRABAJADORES Y PARA EL REGISTRO DE INFORMES DE TURNO
     //- Anthony
-    class WorkerController
+    public class WorkerController
     {
+
         private List<Worker> workers;
 
         public WorkerController()
@@ -64,5 +65,11 @@ namespace InkaArt.Business.Algorithm
         {
             get { return workers[index]; }
         }
+
+        public List<Worker> List()
+        {
+            return workers;
+        }
+
     }
 }

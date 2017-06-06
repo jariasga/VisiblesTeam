@@ -1,4 +1,6 @@
-﻿using InkaArt.Data.Algorithm;
+﻿using InkaArt.Common;
+using InkaArt.Data.Algorithm;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,70 +9,101 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Business.Algorithm
 {
+
     class Instance
     {
-        public List<Worker> workers;
-        //public List<Index> ratios; 
-        public double shift_duration;               // minutos en un turno
+        private WorkerController workers;
+        private RatioResumeController ratios; 
+        private ProcessController processes;
+        private JobController jobs;        
 
+        // pesos de ratios
+        private double breakage_weight;              // para los indices de perdida
+        private double time_weight;
+        // pesos de productos
+        private double huaco_weight;
+        private double huamanga_stone_weight;
+        private double retable_weight;
+        // numero de miniturnos        
+        private double miniturns;               
         // time
-        public int start_time;                      // milisegundos
-        public int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
+        private int start_time;                      // milisegundos
+        private int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
 
-        // processes
-        public int processes_num;
-        public List<int> processes_positions;       // puestos de trabajo por proceso
+        /* gets */
 
-        // products
-        public int products_num;
-        public List<float> products_weights;        // pesos de productos para la funcion objetivo
-
-        // processes x products
-        public int processes_products_num;
-        public List<int> processes_products;        // los ids de procesos productos
-
-        // ratios
-        public double breakage_weight;              // para los indices de perdida
-        public double time_weight;
-
-        public Instance(string workers_filename, string ratios_filename)
+        public int LimitTime
         {
-            // DESDE LA BASE DE DATOS
+            get
+            {
+                return limit_time;
+            }
+        }
 
+        public int StartTime
+        {
+            get
+            {
+                return start_time;
+            }
+        }
+
+        public double Miniturns
+        {
+            get
+            {
+                return miniturns;
+            }
+        }
+
+        /* constructor */
+
+        public Instance()
+        {
             // time
             start_time = Environment.TickCount;
-            limit_time = 300000;                    // 1 000 * 60 * 5 (maximo 5 miutos)            
 
             // processes
-            processes_num = 4;
-            processes_positions = new List<int>(4);
-            processes_positions.Add(10);            // tallado
-            processes_positions.Add(10);            // modelado
-            processes_positions.Add(10);            // horneado
-            processes_positions.Add(10);            // pintado
+            processes = new ProcessController();
+            processes.Load();
+            jobs = new JobController();
+            jobs.Load();
 
-            // products
-            products_num = 3;
-            products_weights = new List<float>(products_num);
-            products_weights.Add(1);                // huacos
-            products_weights.Add(1);                // piedras
-            products_weights.Add(1);                // retablos
+            // workers y ratios
+            workers = new WorkerController();
+            workers.Load(); // solo filtrados
+            ratios = new RatioResumeController();
+            ratios.Load();
 
-            // processes products
-            processes_products_num = 7;
-            processes_products = new List<int>(processes_products_num);
-            processes_products.Add(0);              // no asignado
-            processes_products.Add(10);             // modelado de huacos
-            processes_products.Add(11);             // pintado de huacos
-            processes_products.Add(12);             // horneado de huacos
-            processes_products.Add(20);             // tallado de piedras
-            processes_products.Add(30);             // tallado de retablos
-            processes_products.Add(31);             // pintado de retablos
+            // pesos de ratios y productos
+            LoadParameters();
+        }
 
-            // ratios
-            breakage_weight = 0.5;
-            time_weight = 0.5;
-            shift_duration = 8*60;            
+        public void LoadParameters()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection();
+            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"SimulationParameters\"", connection);
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                this.breakage_weight = reader.GetDouble(0);
+                this.time_weight = reader.GetDouble(1);
+
+                this.huaco_weight = reader.GetDouble(2);
+                this.huamanga_stone_weight = reader.GetDouble(3);
+                this.retable_weight = reader.GetDouble(4);
+
+                // parametros de tabu entre 7 y 13
+
+                this.limit_time = reader.GetInt32(13);
+                this.miniturns = reader.GetInt32(14);
+            }
+
+            connection.Close();
         }
 
         /* Devuelve la lista de procesos productos que existen para un proceso */

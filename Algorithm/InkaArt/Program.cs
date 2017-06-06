@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InkaArt.Interface.Production;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,8 @@ namespace InkaArt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Start());
+            //Application.Run(new Start());
+            Application.Run(new WorkersAssignment());
         }
     }
 }
