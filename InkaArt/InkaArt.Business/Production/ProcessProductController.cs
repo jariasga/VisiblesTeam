@@ -21,8 +21,7 @@ namespace InkaArt.Business.Production
             processProduct = new ProcessProductData();
             adapt = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            processProduct.connect();
+            
             adapt = processProduct.processProductsAdapter();
             adapt.SelectCommand.Parameters[0].NpgsqlValue = process;
 
@@ -45,8 +44,7 @@ namespace InkaArt.Business.Production
             processProduct = new ProcessProductData();
             adapt = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            processProduct.connect();
+            
             adapt = processProduct.productProcesesAdapter();
             //adapt.SelectCommand.Parameters[0].NpgsqlValue = idProduct;
 
@@ -69,8 +67,7 @@ namespace InkaArt.Business.Production
             processProduct = new ProcessProductData();
             adapt = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            processProduct.connect();
+            
             adapt = processProduct.productProcessAdapter();
 
             data.Reset();

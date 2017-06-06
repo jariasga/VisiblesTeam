@@ -23,8 +23,7 @@ namespace InkaArt.Business.Purchases
             supplier = new SupplierData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            supplier.connect();
+            
             adap = supplier.supplierAdapter();
 
             data.Reset();
@@ -37,7 +36,6 @@ namespace InkaArt.Business.Purchases
         }
         public void insertData(string nombre, long ruc,string contacto,long telefono,string correo,string direccion,int prioridad,string estado)
         {
-            supplier.connect();
 
             table = data.Tables["Supplier"];
             row = table.NewRow();
@@ -54,12 +52,9 @@ namespace InkaArt.Business.Purchases
             table.Rows.Add(row);
 
             int rowsAffected = supplier.insertData(data, adap, "Supplier");
-
-            supplier.closeConnection();
         }
         public void updateData(string id, string nombre, long ruc, string contacto, long telefono, string correo, string direccion, int prioridad, string estado)
         {
-            supplier.connect();
             table = data.Tables["Supplier"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
@@ -77,7 +72,6 @@ namespace InkaArt.Business.Purchases
                 }
             }
             supplier.updateData(data, adap, "Supplier");
-            supplier.closeConnection();
         }
     }
 }

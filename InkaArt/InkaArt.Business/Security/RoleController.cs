@@ -25,7 +25,6 @@ namespace InkaArt.Business.Security
         private DataRow row;
         public DataTable showData()
         {
-            role.connect();
 
             adap = role.roleAdapter();
 
@@ -37,8 +36,6 @@ namespace InkaArt.Business.Security
 
         public int insertData(string description)
         {
-            role.connect();
-
             table = data.Tables["Role"];
 
             row = table.NewRow();
@@ -53,8 +50,6 @@ namespace InkaArt.Business.Security
 
         public int updateData(int roleID, string description)
         {
-            role.connect();
-
             table = data.Tables["Role"];
 
             row = getRoleRowbyID(roleID);

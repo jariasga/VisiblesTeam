@@ -21,7 +21,6 @@ namespace InkaArt.Data.Sales
         }
         public DataTable GetOrders()
         {
-            connect();
             adap = orderAdapter();
             data.Clear();
             data = getData(adap, "Orders");
@@ -55,7 +54,6 @@ namespace InkaArt.Data.Sales
 
         public int InsertOrderLines(DataTable orderLines, double igv)
         {
-            connect();
             adap = orderAdapter();
             data.Clear();
             data = getData(adap, "Order");
@@ -64,7 +62,6 @@ namespace InkaArt.Data.Sales
             int index = order.Rows.Count;
             DataRow rowOrder = order.Rows[index - 1];
             int orderId = int.Parse(rowOrder["idOrder"].ToString());
-            connect();
             adap = insertOrderLineAdapter();
             data.Clear();
             data = getData(adap, "LineItem");
@@ -89,7 +86,6 @@ namespace InkaArt.Data.Sales
 
         private int getRecipeId(int productId)
         {
-            connect();
             DataSet myData = new DataSet();
             NpgsqlDataAdapter myAdap = recipeIdAdapter();
             myAdap.SelectCommand.Parameters[0].NpgsqlValue = productId;
@@ -106,7 +102,6 @@ namespace InkaArt.Data.Sales
 
         private int getProductId(string productName)
         {
-            connect();
             DataSet myData = new DataSet();
             NpgsqlDataAdapter myAdap = productIdAdapter();
             myAdap.SelectCommand.Parameters[0].NpgsqlValue = productName;
@@ -165,7 +160,6 @@ namespace InkaArt.Data.Sales
         }
         public DataTable GetDocumentTypes()
         {
-            connect();
 
             adap = documentAdapter();
 
@@ -178,7 +172,6 @@ namespace InkaArt.Data.Sales
         }
         public DataTable GetProducts()
         {
-            connect();
 
             adap = productAdapter();
 
@@ -191,7 +184,6 @@ namespace InkaArt.Data.Sales
         }
         public int InsertSaleDocument(int documentTypeId, float saleAmount, float igv, float totalAmount)
         {
-            connect();
             adap = insertDocumentAdapter();
             data.Clear();
             data = getData(adap, "SalesDocument");
@@ -208,7 +200,6 @@ namespace InkaArt.Data.Sales
         }
         public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus)
         {
-            connect();
             adap = insertOrderAdapter();
             data.Clear();
             data = getData(adap, "Order");

@@ -39,7 +39,6 @@ namespace InkaArt.Data.Sales
 
         public int InsertClient(int personType, string name, long ruc, long dni, int priority, int type, int state, string address, int phone, string contact, string email)
         {
-            connect();
             adap = clientAdapter();
             data.Clear();
             data = getData(adap, "Client");
@@ -63,7 +62,6 @@ namespace InkaArt.Data.Sales
 
         public DataTable GetClients(int id = -1, long ruc = -1, long dni = -1, string name = "", int state = -1, int priority = -1)
         {
-            connect();
 
             adap = clientAdapter();
             byId(adap, id);
@@ -148,7 +146,6 @@ namespace InkaArt.Data.Sales
 
         public int UpdateClient(string id, int personType, string name, int ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
         {
-            connect();
             adap = clientAdapter();
 
             data.Clear();

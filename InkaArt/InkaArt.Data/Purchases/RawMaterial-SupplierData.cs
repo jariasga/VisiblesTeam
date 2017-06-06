@@ -32,8 +32,6 @@ namespace InkaArt.Data.Purchases
         }
         public DataTable GetRmSup(int id_rm = -1, int id_sup = -1)
         {
-            connect();
-
             adap = rawMaterial_SupplierAdapter();
             byIdRm(adap, id_rm);
             byIdSup(adap, id_sup);

@@ -27,8 +27,7 @@ namespace InkaArt.Business.Production
         public DataTable getData()
         {
             //adapt = new NpgsqlDataAdapter();
-
-            finalProduct.connect();
+            
             adapt = finalProduct.finalProductAdapter();
 
             data.Reset();
@@ -42,7 +41,6 @@ namespace InkaArt.Business.Production
 
         public void insertData(string name, string description, string localP, string exportP, string actualS, string logicS)
         {
-            finalProduct.connect();
             adapt = finalProduct.finalProductAdapter();
 
             data.Clear();
@@ -67,7 +65,6 @@ namespace InkaArt.Business.Production
         public int updateData(string id,string localPrice, string exportPrice)
         {
             int retorno = 0;
-            finalProduct.connect();
             adapt = finalProduct.finalProductAdapter();
             double basePrice=0;
             data.Clear();

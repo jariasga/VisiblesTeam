@@ -29,8 +29,6 @@ namespace InkaArt.Data.Purchases
         }
         public DataTable GetUnits(int id = -1, string name = "", string abrev ="", string estado= "")
         {
-            connect();
-
             adap = unitOfMeasurementAdapter();
             byId(adap, id);
             byName(adap, name);
@@ -42,7 +40,6 @@ namespace InkaArt.Data.Purchases
 
             DataTable unitsList = new DataTable();
             unitsList = data.Tables[0];
-            closeConnection();
             return unitsList;
         }
         private void byId(NpgsqlDataAdapter adap, int id)
@@ -97,7 +94,6 @@ namespace InkaArt.Data.Purchases
         }
         public void UpdateUnit(string id, string name, string abrev, string state)
         {
-            connect();
             table = data.Tables["UnitOfMeasurement"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
@@ -110,11 +106,9 @@ namespace InkaArt.Data.Purchases
                 }
             }
             updateData(data, adap, "UnitOfMeasurement");
-            closeConnection();
         }
         public void insertUnit(string nombre, string abreviatura, string estado)
         {
-            connect();
 
             table = data.Tables["UnitOfMeasurement"];
             row = table.NewRow();
@@ -125,8 +119,6 @@ namespace InkaArt.Data.Purchases
             table.Rows.Add(row);
 
             insertData(data, adap, "UnitOfMeasurement");
-
-            closeConnection();
         }
     }
 }
