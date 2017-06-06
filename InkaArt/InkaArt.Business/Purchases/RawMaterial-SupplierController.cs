@@ -44,6 +44,19 @@ namespace InkaArt.Business.Purchases
             if (!idSup.Equals("")) if (int.TryParse(idSup, out intAux)) intIdSup = int.Parse(idSup);
             return rawMaterial_supplier.GetRmSup(intIdMat, intIdSup);
         }
-
+        public void UpdateRM_Sup(string idMat, string idSup, string price)
+        {
+            double douPrice = -1;
+            if (!price.Equals("0")) if (double.TryParse(price, out douPrice)) douPrice = double.Parse(price);
+            rawMaterial_supplier.UpdateRM_Sup(idMat, idSup, douPrice);
+        }
+        public void insertRM_Sup(string idMat,int idSup,string price)
+        {
+            double douPrice = 0;
+            int intIdMat = -1, intAux;
+            if (!idMat.Equals("")) if (int.TryParse(idMat, out intAux)) intIdMat = int.Parse(idMat);
+            if (!price.Equals("0")) if (double.TryParse(price, out douPrice)) douPrice = double.Parse(price);
+            rawMaterial_supplier.InsertRM_Sup(intIdMat, idSup, douPrice);
+        }
     }
 }

@@ -137,6 +137,7 @@
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
+            "",
             "Activo",
             "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);

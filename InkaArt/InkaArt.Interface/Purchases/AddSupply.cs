@@ -14,12 +14,15 @@ namespace InkaArt.Interface.Purchases
     public partial class AddSupply : Form
     {
         RawMaterialController control;
+        RawMaterial_SupplierController control_rs;
+        DataTable rawMaterialList;
         Form supplierView;
+        int idSupplier;
         public AddSupply()
         {
             InitializeComponent();
             control = new RawMaterialController();
-            DataTable rawMaterialList = control.getData();
+            rawMaterialList = control.getData();
             dataGridView_supplies.DataSource = rawMaterialList;
 
             dataGridView_supplies.Columns["idRawMaterial"].HeaderText = "ID";
@@ -33,11 +36,11 @@ namespace InkaArt.Interface.Purchases
             dataGridView_supplies.Columns["averagePrice"].HeaderText = "Precio Promedio";
             dataGridView_supplies.Columns["averagePrice"].Visible = false;
         }
-        public AddSupply(Form viewSupplier)
+        public AddSupply(Form viewSupplier,RawMaterial_SupplierController controlForm,string idSupp)
         {
             InitializeComponent();
             control = new RawMaterialController();
-            DataTable rawMaterialList = control.getData();
+            rawMaterialList = control.getData();
             dataGridView_supplies.DataSource = rawMaterialList;
 
             dataGridView_supplies.Columns["idRawMaterial"].HeaderText = "ID";
@@ -52,6 +55,8 @@ namespace InkaArt.Interface.Purchases
             dataGridView_supplies.Columns["averagePrice"].Visible = false;
 
             supplierView = viewSupplier;
+            control_rs = controlForm;
+            idSupplier = int.Parse(idSupp);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -67,10 +72,12 @@ namespace InkaArt.Interface.Purchases
         private void button_add(object sender, EventArgs e)
         {
             int totalSupplies=dataGridView_supplies.RowCount;
-            for(int i = 1; i < totalSupplies; i++)
+            for(int i = 0; i < totalSupplies; i++)
             {
                 if ((bool)dataGridView_supplies.Rows[i].Cells[0].Value == true)
                 {
+                    //control_rs.insertRM_Sup(dataGridView_supplies.Rows[i].Cells[1].Value.ToString(),idSupplier,"0");
+                    dataGridView_supplies.Rows[i].Cells[0].Value = false;
                 }
             }
             this.Close();
@@ -82,9 +89,38 @@ namespace InkaArt.Interface.Purchases
             newRawMaterialWindow.Show();
         }
 
+        private void filter()
+        {
+            DataRow[] rows;
+            rawMaterialList = control.getData();
+            string cadena = "";
+            if (textBox_idFilter.Text.Length > 0)
+            {
+                cadena = " AND idRawMaterial = " + textBox_idFilter.Text;
+            }
+            rows = rawMaterialList.Select("name LIKE '%" + textBox_nameFilter.Text + "%'" + cadena);
+            
+            if (rows.Any()) rawMaterialList = rows.CopyToDataTable();
+            else rawMaterialList.Rows.Clear();
+            string sortQuery = string.Format("idRawMaterial");
+            rawMaterialList.DefaultView.Sort = sortQuery;
+        }
         private void button_search(object sender, EventArgs e)
         {
             textBox_nameFilter.Text = textBox_nameFilter.Text.Trim();
+            filter();
+            dataGridView_supplies.DataSource = rawMaterialList;
+
+            dataGridView_supplies.Columns["idRawMaterial"].HeaderText = "ID";
+            dataGridView_supplies.Columns["name"].HeaderText = "Nombre";
+            dataGridView_supplies.Columns["unit"].HeaderText = "Unidad";
+            dataGridView_supplies.Columns["unit"].Visible = false;
+            dataGridView_supplies.Columns["status"].HeaderText = "Estado";
+            dataGridView_supplies.Columns["status"].Visible = false;
+            dataGridView_supplies.Columns["description"].HeaderText = "Descripción";
+            dataGridView_supplies.Columns["description"].Visible = false;
+            dataGridView_supplies.Columns["averagePrice"].HeaderText = "Precio Promedio";
+            dataGridView_supplies.Columns["averagePrice"].Visible = false;
         }
 
         private void validating_id(object sender, EventArgs e)
