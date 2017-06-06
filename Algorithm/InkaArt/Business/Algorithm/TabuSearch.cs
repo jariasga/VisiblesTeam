@@ -87,8 +87,8 @@ namespace InkaArt.Business.Algorithm
             int worker2;
 
             // hay 2 tipos de swap
-            // 0: intercambiar listas
-            // 1: intercambiar productos
+            //  0: intercambiar listas
+            //  1: intercambiar productos
             if (swap_type == 0)
             {
                 // buscamos trabajadores
