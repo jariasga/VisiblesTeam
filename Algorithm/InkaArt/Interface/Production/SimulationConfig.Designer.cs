@@ -197,7 +197,7 @@
             this.button_save.TabIndex = 32;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
-            this.button_save.Click += new System.EventHandler(this.buttonSaveClick);
+            this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
             // SimulationConfig
             // 

@@ -32,5 +32,10 @@ namespace InkaArt.Business.Algorithm
             simulations.Add(simulation);
         }
 
+        public List<Simulation> List()
+        {
+            return simulations;
+        }
+
     }
 }

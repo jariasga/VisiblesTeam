@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InkaArt.Business.Algorithm;
+using InkaArt.Data.Algorithm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,25 +14,19 @@ namespace InkaArt.Interface.Production
 {
     public partial class WorkersAssignment : Form
     {
+        private SimulationController simulations;
+
         public WorkersAssignment()
         {
             InitializeComponent();
-        }
 
-        private void ButtonSimulationConfig_Click(object sender, EventArgs e)
-        {
-            Form simulation_config = new SimulationConfig();
-            simulation_config.MdiParent = this.MdiParent;
-            simulation_config.Show();
-        }
+            simulations = new SimulationController();
+            simulations.Add(new Simulation("simu 1", 0, 0, 0, 0, 0));
 
-        private void button_delete_Click(object sender, EventArgs e)
-        {
-            general_grid.Rows.Clear();
-            simulation_grid.Rows.Clear();
-            summary_grid.Rows.Clear();
+            combo_simulations.DataSource = simulations.List();
+            combo_simulations.DisplayMember = "Name";           
         }
-
+        
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
             //Temporal
@@ -43,23 +39,39 @@ namespace InkaArt.Interface.Production
             simulation_grid.Rows.Add(data);
 
         }
-
-        private void button_start_Click(object sender, EventArgs e)
+                
+        private void ButtonStartClick(object sender, EventArgs e)
         {
             Form new_simultation = new NewSimulation();
             new_simultation.MdiParent = this.MdiParent;
             new_simultation.Show();
         }
 
-        private void button_generate_Click(object sender, EventArgs e)
+        private void ButtonSaveClick(object sender, EventArgs e)
+        {
+            //Guardar simulación en BD
+
+        }
+
+        private void ButtonConfigClick(object sender, EventArgs e)
+        {
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            Form simulation_config = new SimulationConfig(simulation);
+            simulation_config.MdiParent = this.MdiParent;
+            simulation_config.Show();
+        }
+
+        private void ButtonReportClick(object sender, EventArgs e)
         {
             //GenerateSimulationReport simulation_report = new GenerateSimulationReport();
             //simulation_report.Show();
         }
 
-        private void button_save_Click(object sender, EventArgs e)
+        private void ButtonDeleteClick(object sender, EventArgs e)
         {
-            //Guardar simulación en BD
+            general_grid.Rows.Clear();
+            simulation_grid.Rows.Clear();
+            summary_grid.Rows.Clear();
         }
     }
 }

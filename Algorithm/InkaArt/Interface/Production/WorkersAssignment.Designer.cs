@@ -38,8 +38,8 @@
             this.TotalAltarpiece = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalProduced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label_select = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button_generate = new System.Windows.Forms.Button();
+            this.combo_simulations = new System.Windows.Forms.ComboBox();
+            this.button_report = new System.Windows.Forms.Button();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
             this.grid_assignment_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_worker_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,7 +80,7 @@
             this.button_config.TabIndex = 32;
             this.button_config.Text = "Configuración";
             this.button_config.UseVisualStyleBackColor = false;
-            this.button_config.Click += new System.EventHandler(this.ButtonSimulationConfig_Click);
+            this.button_config.Click += new System.EventHandler(this.ButtonConfigClick);
             // 
             // button_delete
             // 
@@ -93,7 +93,7 @@
             this.button_delete.TabIndex = 39;
             this.button_delete.Text = "🗑 Eliminar simulación";
             this.button_delete.UseVisualStyleBackColor = false;
-            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
+            this.button_delete.Click += new System.EventHandler(this.ButtonDeleteClick);
             // 
             // button_start
             // 
@@ -106,7 +106,7 @@
             this.button_start.TabIndex = 40;
             this.button_start.Text = "Iniciar simulación";
             this.button_start.UseVisualStyleBackColor = false;
-            this.button_start.Click += new System.EventHandler(this.button_start_Click);
+            this.button_start.Click += new System.EventHandler(this.ButtonStartClick);
             // 
             // groupbox_summary
             // 
@@ -174,30 +174,26 @@
             this.label_select.TabIndex = 43;
             this.label_select.Text = "Seleccionar simulación:";
             // 
-            // comboBox1
+            // combo_simulations
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Simulación 1",
-            "Simulación 2",
-            "Simulación 3"});
-            this.comboBox1.Location = new System.Drawing.Point(200, 17);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(212, 26);
-            this.comboBox1.TabIndex = 44;
+            this.combo_simulations.FormattingEnabled = true;
+            this.combo_simulations.Location = new System.Drawing.Point(200, 17);
+            this.combo_simulations.Name = "combo_simulations";
+            this.combo_simulations.Size = new System.Drawing.Size(212, 26);
+            this.combo_simulations.TabIndex = 44;
             // 
-            // button_generate
+            // button_report
             // 
-            this.button_generate.BackColor = System.Drawing.Color.Gray;
-            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(582, 469);
-            this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(146, 43);
-            this.button_generate.TabIndex = 45;
-            this.button_generate.Text = "Generar reporte";
-            this.button_generate.UseVisualStyleBackColor = false;
-            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
+            this.button_report.BackColor = System.Drawing.Color.Gray;
+            this.button_report.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_report.ForeColor = System.Drawing.Color.White;
+            this.button_report.Location = new System.Drawing.Point(582, 469);
+            this.button_report.Name = "button_report";
+            this.button_report.Size = new System.Drawing.Size(146, 43);
+            this.button_report.TabIndex = 45;
+            this.button_report.Text = "Generar reporte";
+            this.button_report.UseVisualStyleBackColor = false;
+            this.button_report.Click += new System.EventHandler(this.ButtonReportClick);
             // 
             // simulation_grid
             // 
@@ -378,7 +374,7 @@
             this.button_save.TabIndex = 47;
             this.button_save.Text = "🖫 Guardar simulación";
             this.button_save.UseVisualStyleBackColor = false;
-            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
             // WorkersAssignment
             // 
@@ -390,8 +386,8 @@
             this.Controls.Add(this.button_start);
             this.Controls.Add(this.simulation_tab_control);
             this.Controls.Add(this.button_delete);
-            this.Controls.Add(this.button_generate);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.button_report);
+            this.Controls.Add(this.combo_simulations);
             this.Controls.Add(this.label_select);
             this.Controls.Add(this.groupbox_summary);
             this.Controls.Add(this.button_config);
@@ -423,8 +419,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAltarpiece;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalProduced;
         private System.Windows.Forms.Label label_select;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button_generate;
+        private System.Windows.Forms.ComboBox combo_simulations;
+        private System.Windows.Forms.Button button_report;
         private System.Windows.Forms.DataGridView simulation_grid;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_assignment_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_1;
