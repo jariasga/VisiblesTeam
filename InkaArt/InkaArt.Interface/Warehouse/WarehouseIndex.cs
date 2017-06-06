@@ -15,10 +15,47 @@ namespace InkaArt.Interface.Warehouse
 {
     public partial class WarehouseIndex : Form
     {
+        private WarehouseCrud warehouseController = new WarehouseCrud();
         public WarehouseIndex()
         {
             InitializeComponent();
         }
+
+        private void button_add_click(object sender, EventArgs e)
+        {
+            WarehouseDetail create_form = new WarehouseDetail();
+            create_form.Show();
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            /*string id = grid_clients.Rows[e.RowIndex].Cells[0].Value.ToString();
+            var show_form = new ClientShow(id);
+            var result = show_form.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();*/
+        }
+
+        /*private void updateDataGrid()
+        {
+            DataTable clientList = clientController.GetClients();
+            populateDataGrid(clientList);
+        }*/
+
+        private void WarehouseIndex_Load(object sender, EventArgs e)
+        {
+            //updateDataGrid();
+        }
+
+       /* private void populateDataGrid(DataTable clientList)
+        {
+            grid_clients.Rows.Clear();
+            foreach (DataRow row in clientList.Rows)
+            {
+                string status = row["status"].ToString().Equals("1") ? "Activo" : "Inactivo";
+                if (status.Equals("Activo")) grid_clients.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"]);
+            }
+        }*/
 
         private void button_delete_click(object sender, EventArgs e)
         {
@@ -48,88 +85,14 @@ namespace InkaArt.Interface.Warehouse
             MessageBox.Show("Almacenes eliminados", "Eliminar almacen", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
 
-        private void button_add_click(object sender, EventArgs e)
-        {
-            Form new_warehouse_window = new WarehouseDetail();
-            new_warehouse_window.Show();
-        }
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int id;
-            NpgsqlDataReader datos;
-            if (Int32.TryParse(textBox_id.Text, out id))
-            {
-                Console.WriteLine("Por favor ingrese un valor entero");
-            }
-            string name = textBox_supplier.Text;
-            string address = textBox_address.Text;
-            string state = comboBox_status.GetItemText(comboBox_status.SelectedItem);
-
-            WarehouseCrud conn = new WarehouseCrud();
-
-            datos = conn.readWarehouse(id, name, address, state);
-
-            int rowIndex = 0;
-
-            //Limpiamos el datagridview
-            this.dataGridView1.Rows.Clear();
-
-            //Muestra los datos en el gridview
-            while (datos.Read())
-            {                
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];
-                row.Cells[1].Value = datos[1];
-                row.Cells[2].Value = datos[3];
-                row.Cells[3].Value = datos[4];
-                dataGridView1.Rows.Add(row);
-                /*
-                dataGridView1.Rows[rowIndex].Cells[0].Value = datos[0];
-                dataGridView1.Rows[rowIndex].Cells[1].Value = datos[1];
-                dataGridView1.Rows[rowIndex].Cells[2].Value = datos[2];
-                dataGridView1.Rows[rowIndex].Cells[3].Value = datos[3];*/
-                rowIndex++;
-            }
-            
-            //lestura de valores
-            /*while (datos.Read())
-                Console.Write("{0}\t{1} \n", datos[0], datos[1]);
-            */
+            /*DataTable clientList;
+            clientList = clientController.GetClients(textbox_id.Text, textbox_doc.Text, textbox_doc.Text, textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
+            populateDataGrid(clientList);*/
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
-            int itemsUpdate = 0;
-            int[] idUpdate = new int[500];
-            string name = "", description = "", address = "", state = "";
-            int idWarehouse = 0;
-            //Se elimina la data
-            WarehouseCrud objCrudWarehouse = new WarehouseCrud();
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                bool s = Convert.ToBoolean(row.Cells[6].Value);
-
-                if (s == true)
-                {
-                    toDelete.Add(row);
-                    idUpdate[itemsUpdate] = Convert.ToInt32(row.Cells[0].Value);
-                    idWarehouse = Convert.ToInt32(row.Cells[0].Value);
-                    name = Convert.ToString(row.Cells[1].Value);
-                    address = Convert.ToString(row.Cells[2].Value);
-                    state = Convert.ToString(row.Cells[3].Value);
-                    description = "";
-                    objCrudWarehouse.updateWareHouse(idWarehouse, name, description, address, state);
-                    itemsUpdate++;
-                }
-            }
-            
-            MessageBox.Show("Almacenes actualizados", "Actualizar almacén",MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button_bulk_upload_Click(object sender, EventArgs e)
         {
             WarehouseCrud movimientos = new WarehouseCrud();
             OpenFileDialog dialog = new OpenFileDialog();
@@ -138,7 +101,5 @@ namespace InkaArt.Interface.Warehouse
             if (dialog.ShowDialog() == DialogResult.OK)
                 movimientos.massiveUpload(dialog.FileName);
         }
-
-
     }
 }

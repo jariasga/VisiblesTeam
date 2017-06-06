@@ -46,7 +46,7 @@
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_bulk_upload = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -175,6 +175,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(774, 251);
             this.dataGridView1.TabIndex = 43;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // Id
             // 
@@ -231,19 +232,19 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.button_add_click);
             // 
-            // button1
+            // button_bulk_upload
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(507, 453);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 39);
-            this.button1.TabIndex = 47;
-            this.button1.Text = "CargaMasiva";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button_bulk_upload.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_bulk_upload.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_bulk_upload.ForeColor = System.Drawing.Color.White;
+            this.button_bulk_upload.Location = new System.Drawing.Point(507, 453);
+            this.button_bulk_upload.Margin = new System.Windows.Forms.Padding(2);
+            this.button_bulk_upload.Name = "button_bulk_upload";
+            this.button_bulk_upload.Size = new System.Drawing.Size(151, 39);
+            this.button_bulk_upload.TabIndex = 47;
+            this.button_bulk_upload.Text = "CargaMasiva";
+            this.button_bulk_upload.UseVisualStyleBackColor = false;
+            this.button_bulk_upload.Click += new System.EventHandler(this.button_bulk_upload_Click);
             // 
             // WarehouseIndex
             // 
@@ -251,7 +252,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(811, 518);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_bulk_upload);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
@@ -260,6 +261,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WarehouseIndex";
             this.Text = "Mantenimiento de almacenes";
+            this.Load += new System.EventHandler(this.WarehouseIndex_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -282,7 +284,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_bulk_upload;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dirección;
