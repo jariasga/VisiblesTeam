@@ -38,5 +38,27 @@ namespace InkaArt.Business.Warehouse
 
             return rmWarehouseList;
         }
+
+        public int insertData(string idW, string idRM, string name, string min, string max)
+        {
+            adapt = rmWarehouse.rmWarehouseAdapter();
+
+            data.Reset();
+            data = rmWarehouse.getData(adapt, "RawMaterial-Warehouse");
+            table = data.Tables["RawMaterial-Warehouse"];
+            row = table.NewRow();
+
+            row["idWarehouse"] = idW;
+            row["idRawMaterial"] = idRM;
+            row["minimunStock"] = min;
+            row["maximunStock"] = max;
+            row["virtualStock"] = 0;
+            row["currentStock"] = 0;
+            row["state"] = "Activo";
+
+            table.Rows.Add(row);
+            int rowsAffected = rmWarehouse.insertData(data,adapt, "RawMaterial-Warehouse");
+            return rowsAffected;
+        }
     }
 }

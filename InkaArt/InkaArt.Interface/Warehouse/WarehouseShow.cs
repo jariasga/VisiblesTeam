@@ -26,6 +26,12 @@ namespace InkaArt.Interface.Warehouse
             first = true;
             warehouseController = new WarehouseCrud();
             idWarehouse = id;
+            RawMaterialController controlRM = new RawMaterialController();
+            DataTable rmList = controlRM.getData();
+            for (int i = 0; i< rmList.Rows.Count; i++)
+            {
+                comboBox_RM.Items.Add(rmList.Rows[i]["name"]);
+            }
             fillGridRawMaterial();
         }
 
@@ -42,7 +48,8 @@ namespace InkaArt.Interface.Warehouse
 
             for (int i = 0; i < rmWarehouseList.Rows.Count; i++)
             {
-                if (string.Compare(rmWarehouseList.Rows[i]["idWarehouse"].ToString(), idWarehouse) == 0) {
+                if (string.Compare(rmWarehouseList.Rows[i]["idWarehouse"].ToString(), idWarehouse) == 0 &&
+                    string.Compare(rmWarehouseList.Rows[i]["state"].ToString(), "Activo") == 0) {
                     for (int j = 0; j < rmList.Rows.Count; j++)
                     {
                         if (string.Compare(rmWarehouseList.Rows[i]["idRawMaterial"].ToString(), rmList.Rows[j]["idRawMaterial"].ToString()) == 0)
@@ -104,13 +111,31 @@ namespace InkaArt.Interface.Warehouse
             textBox_address.Enabled = true;
             textBox_idProduct.Enabled = true;
             textBox_nameProduct.Enabled = true;
-            comboBox_statusRM.Enabled = true;
+            comboBox_RM.Enabled = true;
             comboBox_statusP.Enabled = true;
         }
 
         private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
         {
+            RawMaterialController controlRM = new RawMaterialController();
+            DataTable rmList = controlRM.getData();
 
+            RawMaterialWarehouseController control = new RawMaterialWarehouseController();
+            DataTable rmWarehouseList = control.getData();
+
+            string name = comboBox_RM.SelectedItem.ToString();
+            string idRM = "";
+            for (int i = 0; i < rmList.Rows.Count; i++)
+            {
+                if (string.Compare(rmList.Rows[i]["name"].ToString(), name) == 0)
+                {
+                    idRM = rmList.Rows[i]["idRawMaterial"].ToString();
+                    break;
+                }
+            }
+
+            control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
+            fillGridRawMaterial();
         }
 
         private void buttonAdd_Product_Click(object sender, EventArgs e)

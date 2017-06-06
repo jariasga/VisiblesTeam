@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_rawMaterial = new System.Windows.Forms.TabPage();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.buttonAdd_RawMaterial = new System.Windows.Forms.Button();
             this.dataGridView_RawMaterial = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +51,7 @@
             this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete_RawMaterial = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox_statusRM = new System.Windows.Forms.ComboBox();
+            this.comboBox_RM = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage_Products = new System.Windows.Forms.TabPage();
@@ -71,15 +73,13 @@
             this.textBox_nameProduct = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage_rawMaterial.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RawMaterial)).BeginInit();
             this.tabPage_Products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Product)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // button_edit
@@ -175,7 +175,7 @@
             this.tabPage_rawMaterial.Controls.Add(this.dataGridView_RawMaterial);
             this.tabPage_rawMaterial.Controls.Add(this.buttonDelete_RawMaterial);
             this.tabPage_rawMaterial.Controls.Add(this.label5);
-            this.tabPage_rawMaterial.Controls.Add(this.comboBox_statusRM);
+            this.tabPage_rawMaterial.Controls.Add(this.comboBox_RM);
             this.tabPage_rawMaterial.Controls.Add(this.label7);
             this.tabPage_rawMaterial.Controls.Add(this.label6);
             this.tabPage_rawMaterial.Location = new System.Drawing.Point(4, 25);
@@ -185,6 +185,20 @@
             this.tabPage_rawMaterial.TabIndex = 0;
             this.tabPage_rawMaterial.Text = "Materias Primas";
             this.tabPage_rawMaterial.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(426, 46);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown2.TabIndex = 65;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(233, 49);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown1.TabIndex = 58;
             // 
             // buttonAdd_RawMaterial
             // 
@@ -285,18 +299,18 @@
             this.label5.TabIndex = 60;
             this.label5.Text = "Materia Prima";
             // 
-            // comboBox_statusRM
+            // comboBox_RM
             // 
-            this.comboBox_statusRM.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.comboBox_statusRM.Enabled = false;
-            this.comboBox_statusRM.FormattingEnabled = true;
-            this.comboBox_statusRM.Items.AddRange(new object[] {
+            this.comboBox_RM.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox_RM.Enabled = false;
+            this.comboBox_RM.FormattingEnabled = true;
+            this.comboBox_RM.Items.AddRange(new object[] {
             "Activo",
             "Eliminado"});
-            this.comboBox_statusRM.Location = new System.Drawing.Point(30, 48);
-            this.comboBox_statusRM.Name = "comboBox_statusRM";
-            this.comboBox_statusRM.Size = new System.Drawing.Size(170, 24);
-            this.comboBox_statusRM.TabIndex = 61;
+            this.comboBox_RM.Location = new System.Drawing.Point(30, 48);
+            this.comboBox_RM.Name = "comboBox_RM";
+            this.comboBox_RM.Size = new System.Drawing.Size(170, 24);
+            this.comboBox_RM.TabIndex = 61;
             // 
             // label7
             // 
@@ -501,20 +515,6 @@
             this.label9.TabIndex = 67;
             this.label9.Text = "Nombre";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(233, 49);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown1.TabIndex = 58;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(426, 46);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown2.TabIndex = 65;
-            // 
             // WarehouseShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -535,12 +535,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage_rawMaterial.ResumeLayout(false);
             this.tabPage_rawMaterial.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RawMaterial)).EndInit();
             this.tabPage_Products.ResumeLayout(false);
             this.tabPage_Products.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Product)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -568,7 +568,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn borrar;
         private System.Windows.Forms.Button buttonDelete_RawMaterial;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox_statusRM;
+        private System.Windows.Forms.ComboBox comboBox_RM;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPage_Products;
