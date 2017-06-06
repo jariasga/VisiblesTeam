@@ -45,6 +45,7 @@ namespace InkaArt.Data.Purchases
 
             DataTable rawMaterial_suppliersList = new DataTable();
             rawMaterial_suppliersList = data.Tables[0];
+            closeConnection();
             return rawMaterial_suppliersList;
 
         }
