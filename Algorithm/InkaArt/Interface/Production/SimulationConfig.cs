@@ -16,5 +16,10 @@ namespace InkaArt.Interface.Production
         {
             InitializeComponent();
         }
+
+        private void buttonSaveClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

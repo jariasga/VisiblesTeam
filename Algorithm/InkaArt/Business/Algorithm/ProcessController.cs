@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using InkaArt.Common;
 using InkaArt.Data.Algorithm;
+using Npgsql;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -20,7 +21,22 @@ namespace InkaArt.Business.Algorithm
 
         public void Load()
         {
+            NpgsqlConnection connection = new NpgsqlConnection();
+            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.Open();
 
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Process\"", connection);
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                string description = reader.GetString(1);
+                int position_count = reader.GetInt32(2);
+                processes.Add(new Process(id, description, position_count));
+            }
+
+            connection.Close();
         }
     }
 }

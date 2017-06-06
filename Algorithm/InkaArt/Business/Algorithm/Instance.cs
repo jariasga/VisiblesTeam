@@ -1,4 +1,6 @@
-﻿using InkaArt.Data.Algorithm;
+﻿using InkaArt.Common;
+using InkaArt.Data.Algorithm;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Business.Algorithm
 {
+
     class Instance
     {
-        public List<Worker> workers;
+        public WorkerController workers;
         //public List<Index> ratios; 
         public double shift_duration;               // minutos en un turno
 
@@ -21,21 +24,22 @@ namespace InkaArt.Business.Algorithm
         public int processes_num;
         public List<int> processes_positions;       // puestos de trabajo por proceso
 
-        // products
-        public int products_num;
-        public List<float> products_weights;        // pesos de productos para la funcion objetivo
-
         // processes x products
-        public int processes_products_num;
-        public List<int> processes_products;        // los ids de procesos productos
+        public JobController jobs;
+        
+        // pesos
 
-        // ratios
-        public double breakage_weight;              // para los indices de perdida
-        public double time_weight;
+        // de ratios
+        private double breakage_weight;              // para los indices de perdida
+        private double time_weight;
+        // de productos
+        private double huaco_weight;
+        private double huamanga_stone_weight;
+        private double retable_weight;
 
-        public Instance(string workers_filename, string ratios_filename)
+        public Instance()
         {
-            // DESDE LA BASE DE DATOS
+            // Tabla 
 
             // time
             start_time = Environment.TickCount;
@@ -49,28 +53,61 @@ namespace InkaArt.Business.Algorithm
             processes_positions.Add(10);            // horneado
             processes_positions.Add(10);            // pintado
 
-            // products
-            products_num = 3;
-            products_weights = new List<float>(products_num);
-            products_weights.Add(1);                // huacos
-            products_weights.Add(1);                // piedras
-            products_weights.Add(1);                // retablos
-
             // processes products
-            processes_products_num = 7;
-            processes_products = new List<int>(processes_products_num);
-            processes_products.Add(0);              // no asignado
-            processes_products.Add(10);             // modelado de huacos
-            processes_products.Add(11);             // pintado de huacos
-            processes_products.Add(12);             // horneado de huacos
-            processes_products.Add(20);             // tallado de piedras
-            processes_products.Add(30);             // tallado de retablos
-            processes_products.Add(31);             // pintado de retablos
+            jobs = new JobController();
+            jobs.Load();
 
-            // ratios
-            breakage_weight = 0.5;
-            time_weight = 0.5;
-            shift_duration = 8*60;            
+            // pesos de ratios y productos
+            LoadWeights();
+
+            // from database
+            workers = new WorkerController();
+            workers.Load();
+            
+        }
+
+        public void LoadProcess()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection();
+            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Process\"", connection);
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                this.breakage_weight = reader.GetDouble(0);
+                this.time_weight = reader.GetDouble(1);
+
+                this.huaco_weight = reader.GetDouble(2);
+                this.huamanga_stone_weight = reader.GetDouble(3);
+                this.retable_weight = reader.GetDouble(4);
+            }
+
+            connection.Close();
+        }
+
+        public void LoadWeights()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection();
+            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"SimulationParameters\"", connection);
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                this.breakage_weight = reader.GetDouble(0);
+                this.time_weight = reader.GetDouble(1);
+
+                this.huaco_weight = reader.GetDouble(2);
+                this.huamanga_stone_weight = reader.GetDouble(3);
+                this.retable_weight = reader.GetDouble(4);
+            }
+
+            connection.Close();
         }
 
         /* Devuelve la lista de procesos productos que existen para un proceso */

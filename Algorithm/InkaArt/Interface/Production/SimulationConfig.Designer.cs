@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.groupbox_weight = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textbox_time = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textbox_altarpieces = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textbox_stones = new System.Windows.Forms.TextBox();
+            this.textbox_huacos = new System.Windows.Forms.TextBox();
             this.textbox_roture = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textbox_time = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textbox_huacos = new System.Windows.Forms.TextBox();
-            this.textbox_stones = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
-            this.textbox_altarpieces = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.button_save = new System.Windows.Forms.Button();
             this.groupbox_weight.SuspendLayout();
             this.groupbox_workers.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +65,78 @@
             this.groupbox_weight.TabStop = false;
             this.groupbox_weight.Text = "Pesos o relevancias";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(19, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(123, 18);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Peso de Tiempo";
+            // 
+            // textbox_time
+            // 
+            this.textbox_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_time.Location = new System.Drawing.Point(179, 72);
+            this.textbox_time.Name = "textbox_time";
+            this.textbox_time.Size = new System.Drawing.Size(205, 24);
+            this.textbox_time.TabIndex = 24;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(19, 217);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(133, 18);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Peso de Retablos";
+            // 
+            // textbox_altarpieces
+            // 
+            this.textbox_altarpieces.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_altarpieces.Location = new System.Drawing.Point(179, 214);
+            this.textbox_altarpieces.Name = "textbox_altarpieces";
+            this.textbox_altarpieces.Size = new System.Drawing.Size(205, 24);
+            this.textbox_altarpieces.TabIndex = 26;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(19, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(126, 36);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Peso de Piedras\r\nde Huamanga";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(19, 137);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(124, 18);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "Peso de Huacos";
+            // 
+            // textbox_stones
+            // 
+            this.textbox_stones.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_stones.Location = new System.Drawing.Point(179, 174);
+            this.textbox_stones.Name = "textbox_stones";
+            this.textbox_stones.Size = new System.Drawing.Size(205, 24);
+            this.textbox_stones.TabIndex = 26;
+            // 
+            // textbox_huacos
+            // 
+            this.textbox_huacos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_huacos.Location = new System.Drawing.Point(179, 134);
+            this.textbox_huacos.Name = "textbox_huacos";
+            this.textbox_huacos.Size = new System.Drawing.Size(205, 24);
+            this.textbox_huacos.TabIndex = 26;
+            // 
             // textbox_roture
             // 
             this.textbox_roture.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -83,50 +155,6 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Peso de Rotura";
             // 
-            // textbox_time
-            // 
-            this.textbox_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_time.Location = new System.Drawing.Point(179, 72);
-            this.textbox_time.Name = "textbox_time";
-            this.textbox_time.Size = new System.Drawing.Size(205, 24);
-            this.textbox_time.TabIndex = 24;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(19, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 18);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Peso de Tiempo";
-            // 
-            // textbox_huacos
-            // 
-            this.textbox_huacos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_huacos.Location = new System.Drawing.Point(179, 134);
-            this.textbox_huacos.Name = "textbox_huacos";
-            this.textbox_huacos.Size = new System.Drawing.Size(205, 24);
-            this.textbox_huacos.TabIndex = 26;
-            // 
-            // textbox_stones
-            // 
-            this.textbox_stones.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_stones.Location = new System.Drawing.Point(179, 174);
-            this.textbox_stones.Name = "textbox_stones";
-            this.textbox_stones.Size = new System.Drawing.Size(205, 24);
-            this.textbox_stones.TabIndex = 26;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(19, 169);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 36);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Peso de Piedras\r\nde Huamanga";
-            // 
             // groupbox_workers
             // 
             this.groupbox_workers.Controls.Add(this.checkedListBox1);
@@ -136,46 +164,6 @@
             this.groupbox_workers.TabIndex = 30;
             this.groupbox_workers.TabStop = false;
             this.groupbox_workers.Text = "Trabajadores a considerar";
-            // 
-            // textbox_altarpieces
-            // 
-            this.textbox_altarpieces.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_altarpieces.Location = new System.Drawing.Point(179, 214);
-            this.textbox_altarpieces.Name = "textbox_altarpieces";
-            this.textbox_altarpieces.Size = new System.Drawing.Size(205, 24);
-            this.textbox_altarpieces.TabIndex = 26;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 217);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(133, 18);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Peso de Retablos";
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(359, 311);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 42);
-            this.button2.TabIndex = 32;
-            this.button2.Text = "🖫 Guardar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 18);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "Peso de Huacos";
             // 
             // checkedListBox1
             // 
@@ -198,13 +186,26 @@
             this.checkedListBox1.Size = new System.Drawing.Size(281, 214);
             this.checkedListBox1.TabIndex = 0;
             // 
+            // button_save
+            // 
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(359, 311);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(119, 42);
+            this.button_save.TabIndex = 32;
+            this.button_save.Text = "🖫 Guardar";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.buttonSaveClick);
+            // 
             // SimulationConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(814, 367);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.groupbox_workers);
             this.Controls.Add(this.groupbox_weight);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -231,7 +232,7 @@
         private System.Windows.Forms.GroupBox groupbox_workers;
         private System.Windows.Forms.TextBox textbox_altarpieces;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
