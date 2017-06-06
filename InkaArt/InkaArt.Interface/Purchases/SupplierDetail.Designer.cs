@@ -54,18 +54,15 @@
             this.button3 = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rm_sup)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -264,7 +261,7 @@
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.buttonDelete);
             this.groupBox2.Controls.Add(this.buttonAdd);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridView_rm_sup);
             this.groupBox2.Location = new System.Drawing.Point(305, 18);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(434, 522);
@@ -350,50 +347,21 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.button_add);
             // 
-            // dataGridView1
+            // dataGridView_rm_sup
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Nombre,
-            this.Precio,
+            this.dataGridView_rm_sup.AllowUserToAddRows = false;
+            this.dataGridView_rm_sup.AllowUserToDeleteRows = false;
+            this.dataGridView_rm_sup.AllowUserToResizeColumns = false;
+            this.dataGridView_rm_sup.AllowUserToResizeRows = false;
+            this.dataGridView_rm_sup.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_rm_sup.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rm_sup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_rm_sup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Acción});
-            this.dataGridView1.Location = new System.Drawing.Point(23, 130);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(389, 326);
-            this.dataGridView1.TabIndex = 10;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Width = 80;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 130;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            this.Precio.Width = 75;
-            // 
-            // Acción
-            // 
-            this.Acción.HeaderText = "Acción";
-            this.Acción.Name = "Acción";
-            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Acción.Width = 61;
+            this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 130);
+            this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
+            this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 326);
+            this.dataGridView_rm_sup.TabIndex = 10;
             // 
             // buttonSave
             // 
@@ -432,6 +400,14 @@
             this.label9.TabIndex = 25;
             this.label9.Text = "Estado";
             // 
+            // Acción
+            // 
+            this.Acción.HeaderText = "";
+            this.Acción.Name = "Acción";
+            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Acción.Width = 61;
+            // 
             // SupplierDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -463,7 +439,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rm_sup)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,7 +466,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_telephone;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_rm_sup;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
@@ -501,9 +477,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Acción;
     }
 }

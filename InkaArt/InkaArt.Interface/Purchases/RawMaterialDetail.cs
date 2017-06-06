@@ -76,7 +76,7 @@ namespace InkaArt.Interface.Purchases
             buttonCreate.Enabled = false;
 
             control_material_supplier = new RawMaterial_SupplierController();
-            DataTable priceList= control_material_supplier.getDataSuppliers(int.Parse(textBox_id.Text));
+            DataTable priceList= control_material_supplier.getDataSuppliers(textBox_id.Text,"");
             dataGridView_suppliersPrice.DataSource = priceList;
             dataGridView_suppliersPrice.Columns["id_supplier"].HeaderText = "ID";
             dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";

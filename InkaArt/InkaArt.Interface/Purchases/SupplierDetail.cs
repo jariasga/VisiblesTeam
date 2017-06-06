@@ -66,6 +66,12 @@ namespace InkaArt.Interface.Purchases
             textBox_email.Enabled = false;
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
+
+            DataTable rm_supList=control_rs.getDataSuppliers("", textBox_idSupplier.Text);
+            dataGridView_rm_sup.DataSource = rm_supList;
+            dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
+            dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
+            dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
         }
 
         private void button_add(object sender, EventArgs e)
