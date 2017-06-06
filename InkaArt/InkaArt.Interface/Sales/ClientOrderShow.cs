@@ -28,6 +28,32 @@ namespace InkaArt.Interface.Sales
             populateFields(orderObject);
         }
 
+        private void populateFields(DataTable orderObject)
+        {
+            DataTable orderLine;
+            foreach (DataRow row in orderObject.Rows)
+            {
+                date_deliverydate.Value = Convert.ToDateTime(row["deliveryDate"]);
+                combo_orderstatus.Text = row["orderStatus"].ToString();
+                textbox_amount.Text = row["saleAmount"].ToString();
+                textbox_igv.Text = row["igv"].ToString();
+                textbox_total.Text = row["totalAmount"].ToString();
+                string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType="Boleta";
+                textbox_ruc.Text = clientDoc;
+                textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
+                if (clientDoc.Length == 11) docType = "Factura";
+                combo_doc.Text = docType;
+                
+                orderLine = orderController.getOrderLines(row["idOrder"].ToString());
+                foreach (DataRow orderline in orderLine.Rows)
+                {
+                    string productId = orderline["idProduct"].ToString();
+                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId);
+                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"]);
+                }
+            }
+        }
+
         private void button_delete_Click(object sender, EventArgs e)
         {
 

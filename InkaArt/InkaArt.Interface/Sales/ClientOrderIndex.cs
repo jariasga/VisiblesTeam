@@ -31,10 +31,14 @@ namespace InkaArt.Interface.Sales
 
         private void grid_orders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ClientOrderShow show_form = new ClientOrderShow();
-            var response = show_form.ShowDialog();
-            if (response == DialogResult.OK)
-                updateDataGrid();
+            if (e.RowIndex != -1)
+            {
+                string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
+                ClientOrderShow show_form = new ClientOrderShow(id);
+                var response = show_form.ShowDialog();
+                if (response == DialogResult.OK)
+                    updateDataGrid();
+            }
         }
 
         private void updateDataGrid()
@@ -68,7 +72,12 @@ namespace InkaArt.Interface.Sales
             foreach (DataRow row in orderList.Rows)
             {
                 string status = row["bdStatus"].ToString().Equals("1") ? "Activo" : "Inactivo";
-                if (status.Equals("Activo")) grid_orders.Rows.Add("Pedido", row["idClient"], "999999", row["orderStatus"], row["totalAmount"]);
+                if (status.Equals("Activo"))
+                {
+                    string idClient = row["idClient"].ToString();
+                    string clientName = orderController.getClientName(idClient), clientDoc = orderController.getClientDoc(idClient);
+                    grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"], row["totalAmount"]);
+                }
             }
         }
     }
