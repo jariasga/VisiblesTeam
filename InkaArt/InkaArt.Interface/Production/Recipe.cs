@@ -220,6 +220,7 @@ namespace InkaArt.Interface.Production
         private void button_delete_Click(object sender, EventArgs e)
         {
             string id = "";
+            string quantity = "";
             foreach(DataGridViewRow row in dataGridView_rawMaterial.Rows)
             {
                 //fill valores limites
@@ -229,8 +230,9 @@ namespace InkaArt.Interface.Production
                 {
                     if (int.TryParse(row.Cells[0].Value.ToString(),out number)){
                         id = row.Cells[0].Value.ToString();
+                        quantity = row.Cells[2].Value.ToString();
                         RecipeRawMaterialController control = new RecipeRawMaterialController();
-                        control.updateDataNoAdapter(globalIdRecipe, id);
+                        control.updateDataNoAdapter(globalIdRecipe, id,quantity);
                         fillGrid();
                         break;
                     }

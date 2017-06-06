@@ -67,13 +67,14 @@ namespace InkaArt.Business.Production
         }
 
 
-        public void updateDataNoAdapter(string idRecipe, string idRawMaterial)
+        public void updateDataNoAdapter(string idRecipe, string idRawMaterial,string quantity)
         {
             string updateQuery;
             table = getData();
             updateQuery = "UPDATE inkaart.\"Recipe-RawMaterial\" SET ";
             updateQuery = updateQuery + "status = 0 ";
-            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + "AND \"idRawMaterial\"= "+ idRawMaterial+" ;";
+            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + "AND \"idRawMaterial\"= "+ idRawMaterial+
+                " AND \"materialCount\"= " + quantity + " ;";
             recipeRawMaterial.execute(updateQuery);
         }
     }
