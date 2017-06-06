@@ -10,11 +10,12 @@ namespace InkaArt.Interface.Purchases
     public partial class UnitOfMeasurementList : Form
     {
         UnitOfMeasurementController control;
+        bool canReturn = false;
         public UnitOfMeasurementList()
         {
             InitializeComponent();
             control = new UnitOfMeasurementController();
-            DataTable unitOfMeasurementsList = control.getData();
+            DataTable unitOfMeasurementsList = control.GetUnits("","","");
             dataGridView_unitOfMeasurement.DataSource = unitOfMeasurementsList;
 
             dataGridView_unitOfMeasurement.Columns["idUnit"].HeaderText = "ID";
@@ -39,10 +40,18 @@ namespace InkaArt.Interface.Purchases
             textBox_abbreviature.Text=textBox_abbreviature.Text.Trim();
             textBox_id.Text = textBox_id.Text.Trim();
             textBox_name.Text = textBox_name.Text.Trim();
-            if(textBox_abbreviature.Text.Length<1 && textBox_id.Text.Length<1 && textBox_name.Text.Length < 1)
+            if(textBox_abbreviature.Text.Length<1 && textBox_id.Text.Length<1 && textBox_name.Text.Length < 1 && comboBox1.Text.Length<1 && !canReturn)
             {
                 return;
             }
+            DataTable unitOfMeasurementsList = control.GetUnits(textBox_id.Text, textBox_name.Text, textBox_abbreviature.Text, comboBox1.Text);
+            dataGridView_unitOfMeasurement.DataSource = unitOfMeasurementsList;
+
+            dataGridView_unitOfMeasurement.Columns["idUnit"].HeaderText = "ID";
+            dataGridView_unitOfMeasurement.Columns["name"].HeaderText = "Nombre";
+            dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
+            dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
+            canReturn = true;
         }
 
         private void editUnitOfMeasurement(object sender, DataGridViewCellEventArgs e)
@@ -83,7 +92,7 @@ namespace InkaArt.Interface.Purchases
                     string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
                     dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value = "Inactivo";
                     string status = dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value.ToString();
-                    control.updateData(idUnit,name, abbrev, status);
+                    control.UpdateUnit(idUnit,name, abbrev, status);
                 }
             }
         }

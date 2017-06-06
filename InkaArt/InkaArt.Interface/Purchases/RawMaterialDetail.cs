@@ -33,7 +33,7 @@ namespace InkaArt.Interface.Purchases
             comboBox_status.SelectedIndex = 0;
 
             control_units = new UnitOfMeasurementController();
-            unitsList = control_units.getData();
+            unitsList = control_units.GetUnits("","","","");
             for (int i = 0; i < unitsList.Rows.Count; i++)
                 comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
         }
@@ -51,7 +51,7 @@ namespace InkaArt.Interface.Purchases
             comboBox_status.SelectedIndex = 0;
 
             control_units = new UnitOfMeasurementController();
-            unitsList = control_units.getData();
+            unitsList = control_units.GetUnits("", "", "", "");
             for (int i = 0; i < unitsList.Rows.Count; i++)
                 comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
         }
@@ -83,7 +83,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_suppliersPrice.Columns["id_raw_material"].Visible = false;
 
             control_units = new UnitOfMeasurementController();
-            unitsList = control_units.getData();
+            unitsList = control_units.GetUnits("", "", "", "");
             for (int i = 0; i < unitsList.Rows.Count; i++)
             {
                 comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());

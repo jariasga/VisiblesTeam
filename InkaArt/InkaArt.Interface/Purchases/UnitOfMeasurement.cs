@@ -20,7 +20,7 @@ namespace InkaArt.Interface.Purchases
         {
             mode = 1; //Crear unitOfMeasurement
             controlForm = new UnitOfMeasurementController();
-            controlForm.getData();
+            controlForm.GetUnits("","","","");
             InitializeComponent();
             isInEditMode = true;
             buttonSave.Text = "🖫 Guardar";
@@ -78,7 +78,7 @@ namespace InkaArt.Interface.Purchases
                     return;
                 }
                 //hacer el insert
-                controlForm.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
+                controlForm.AddUnit(textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
                 isInEditMode = false;
                 textBox_abbreviation.Enabled = false;
                 textBox_nameUnit.Enabled = false;
@@ -93,7 +93,7 @@ namespace InkaArt.Interface.Purchases
                     return;
                 }
                 //hacer el update
-                controlForm.updateData(textBox_id.Text,textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
+                controlForm.UpdateUnit(textBox_id.Text,textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
                 isInEditMode = false;
                 textBox_abbreviation.Enabled = false;
                 textBox_nameUnit.Enabled = false;
