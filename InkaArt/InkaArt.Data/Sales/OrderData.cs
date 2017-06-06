@@ -51,37 +51,81 @@ namespace InkaArt.Data.Sales
             }
         }
 
+        public DataTable GetSalesDocument()
+        {
+            adap = salesDocumentAdapter();
+            data.Clear();
+            data = getData(adap, "SalesDocument");
+            DataTable salesDocuments = new DataTable();
+            salesDocuments = data.Tables[0];
+            return salesDocuments;
+        }
+
+        public void deleteOrders(List<string> selectedOrders)
+        {
+            adap = orderAdapter();
+
+            data.Clear();
+            data = getData(adap, "Order");
+
+            table = data.Tables["Order"];
+
+            foreach (string id in selectedOrders)
+            {
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    if (string.Compare(table.Rows[i]["idOrder"].ToString(), id) == 0)
+                    {
+                        table.Rows[i]["bdStatus"] = 0;
+                        break;
+                    }
+                }
+            }
+            updateData(data, adap, "Order");
+        }
+
         private int getClientId(long doc, string clientName)
         {
             NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
             DataSet curData = new DataSet();
             curAdap = clientAdapter();
             curAdap.SelectCommand.CommandText += " WHERE ";
-            if (doc != -1)
+            if (doc != -1 && !clientName.Equals(""))
             {
-                curAdap.SelectCommand.CommandText += "ruc = :ruc";
+                clientName = "%" + clientName + "%";
+                curAdap.SelectCommand.CommandText += "ruc = :ruc AND ";
                 curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("ruc", DbType.Int64));
                 curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[0].SourceColumn = "ruc";
                 curAdap.SelectCommand.Parameters[0].NpgsqlValue = doc;
-                if (!clientName.Equals("")) curAdap.SelectCommand.CommandText += " AND ";
-                else curAdap.SelectCommand.CommandText += ";";
+                curAdap.SelectCommand.CommandText += "name LIKE :name;";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
+                curAdap.SelectCommand.Parameters[1].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[1].SourceColumn = "name";
+                curAdap.SelectCommand.Parameters[1].NpgsqlValue = clientName;
             }
-            if (!clientName.Equals(""))
+            else if (doc != -1 && clientName.Equals(""))
+            {
+                curAdap.SelectCommand.CommandText += "ruc = :ruc;";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("ruc", DbType.Int64));
+                curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[0].SourceColumn = "ruc";
+                curAdap.SelectCommand.Parameters[0].NpgsqlValue = doc;
+            }
+            else if (doc == -1 && !clientName.Equals(""))
             {
                 clientName = "%" + clientName + "%";
-                curAdap.SelectCommand.CommandText += "name LIKE :name";
+                curAdap.SelectCommand.CommandText += "name LIKE :name;";
                 curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
                 curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[0].SourceColumn = "name";
                 curAdap.SelectCommand.Parameters[0].NpgsqlValue = clientName;
-                if (doc != -1) curAdap.SelectCommand.CommandText += " AND ";
-                else curAdap.SelectCommand.CommandText += ";";
             }
             curData.Clear();
             curData = getData(curAdap, "Client");
             DataTable client = new DataTable();
-            client = data.Tables[0];
+            client = curData.Tables[0];
+            if (client.Rows.Count == 0) return -1;
             return int.Parse(client.Rows[0]["idClient"].ToString());
         }
 
@@ -129,6 +173,12 @@ namespace InkaArt.Data.Sales
             NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
             orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\"", Connection);
             return orderAdapter;
+        }
+        public NpgsqlDataAdapter salesDocumentAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"SalesDocument\";", Connection);
+            return adapter;
         }
         public NpgsqlDataAdapter orderIdAdapter()
         {
@@ -299,7 +349,7 @@ namespace InkaArt.Data.Sales
         public NpgsqlDataAdapter clientAdapter()
         {
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\";", Connection);
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\"", Connection);
             return adapter;
         }
         public DataTable GetDocumentTypes()
@@ -326,7 +376,7 @@ namespace InkaArt.Data.Sales
             productList = data.Tables[0];
             return productList;
         }
-        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type)
+        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type, string reason, string totalDev)
         {
             adap = insertOrderAdapter();
             data.Clear();
@@ -341,6 +391,8 @@ namespace InkaArt.Data.Sales
             row["bdStatus"] = bdStatus;
             row["orderStatus"] = orderStatus;
             row["type"] = type;
+            row["reason"] = reason;
+            row["totalDev"] = totalDev;
             table.Rows.Add(row);
             int rowsAffected = insertData(data, adap, "Order");
             return rowsAffected;
