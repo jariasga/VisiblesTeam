@@ -160,6 +160,9 @@
             // 
             // dataGridView_suppliersPrice
             // 
+            this.dataGridView_suppliersPrice.AllowUserToAddRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToDeleteRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToResizeRows = false;
             this.dataGridView_suppliersPrice.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_suppliersPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_suppliersPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

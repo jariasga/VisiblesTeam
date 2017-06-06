@@ -15,10 +15,10 @@ namespace InkaArt.Data.Purchases
         {
             NpgsqlDataAdapter rawMaterial_SupplierAdapter = new NpgsqlDataAdapter();
 
-            rawMaterial_SupplierAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial-Supplier\" WHERE idRawMaterial = :rawMaterial ;", Connection);
+            rawMaterial_SupplierAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial-Supplier\" WHERE id_raw_material = :rawMaterial ;", Connection);
             rawMaterial_SupplierAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("rawMaterial", DbType.Int32));
             rawMaterial_SupplierAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
-            rawMaterial_SupplierAdapter.SelectCommand.Parameters[0].SourceColumn = "idRawMaterial";
+            rawMaterial_SupplierAdapter.SelectCommand.Parameters[0].SourceColumn = "id_raw_material";
 
             //rawMaterial_SupplierAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial-Supplier\";", Connection);
             return rawMaterial_SupplierAdapter;
