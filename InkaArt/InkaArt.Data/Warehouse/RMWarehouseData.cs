@@ -44,5 +44,22 @@ namespace InkaArt.Data.Warehouse
             return rmWarehouseList;
         }
 
+        public int InsertRMWarehouse(string idWarehouse, string id, string name, string description)
+        {
+            adap = rmWarehouseAdapter();
+            data.Clear();
+            data = getData(adap, "RawMaterial-Warehouse");
+            table = data.Tables["RawMaterial-Warehouse"];
+
+
+
+            row = table.NewRow();
+            row["name"] = name;
+            row["description"] = description;
+            table.Rows.Add(row);
+            int rowsAffected = insertData(data, adap, "RawMaterial-Warehouse");
+            return rowsAffected;
+        }
+
     }
 }
