@@ -5,17 +5,20 @@ using InkaArt.Interface.Sales;
 using InkaArt.Interface.Production;
 using InkaArt.Interface.Warehouse;
 using InkaArt.Interface.Security;
+using InkaArt.Business.Security;
+using System.Data;
 
 namespace InkaArt.Interface
 {
     public partial class Menu : Form
     {
         private Form login;
-        public static int userID;
+        private RoleController controller;
         public Menu(Form login)
         {
             InitializeComponent();
             this.login = login;
+            getPermissions();
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -217,6 +220,37 @@ namespace InkaArt.Interface
             Form roles = new UserRolesPermissions();
             roles.MdiParent = this;
             roles.Show();
+        }
+
+        private void getPermissions()
+        {
+            controller = new RoleController();
+            DataRow roleRow = controller.getRoleRowbyID(LoginController.roleID);
+            //  Security
+            parámetrosGeneralesToolStripMenuItem.Enabled = (bool)roleRow["security_general_parameters"];
+            listaDeUsuariosToolStripMenuItem.Enabled = (bool)roleRow["security_user_list"];
+            rolesToolStripMenuItem.Enabled = (bool)roleRow["security_roles"];
+            //  Purchases
+            listaDeProveedoresToolStripMenuItem.Enabled = (bool)roleRow["purchases_suppliers"];
+            listaDeMateriasPrimasToolStripMenuItem.Enabled = (bool)roleRow["purchases_raw_materials"];
+            unidadesDeMedidaToolStripMenuItem.Enabled = (bool)roleRow["purchases_unit_of_measure"];
+            verMateriasPrimasToolStripMenuItem.Enabled = (bool)roleRow["purchases_purchase_order"];
+            //  Production
+            listaDeProductosToolStripMenuItem.Enabled = (bool)roleRow["production_final_product"];
+            listaDeProcesosDeProducciónToolStripMenuItem.Enabled = (bool)roleRow["production_production_process"];
+            listaDeTurnosToolStripMenuItem.Enabled = (bool)roleRow["production_production_turn"];
+            asignaciónDeTrabajadoresToolStripMenuItem.Enabled = (bool)roleRow["production_worker_assignment"];
+            informeDeTurnoToolStripMenuItem.Enabled = (bool)roleRow["production_turn_report"];
+            generarReporteDeProductividadToolStripMenuItem.Enabled = (bool)roleRow["production_productivity_report"];
+            //  Sales
+            verClientesToolStripMenuItem.Enabled = (bool)roleRow["sales_clients"];
+            verPedidosToolStripMenuItem.Enabled = (bool)roleRow["sales_orders"];
+            generarReporteToolStripMenuItem.Enabled = (bool)roleRow["sales_generate_report"];
+            //  Warehouse
+            listaDeAlmacenesToolStripMenuItem.Enabled = (bool)roleRow["warehouse_warehouses"];
+            gestionarMovimientosToolStripMenuItem.Enabled = (bool)roleRow["warehouse_movements"];
+            verStocksFísicosYLógicosToolStripMenuItem.Enabled = (bool)roleRow["warehouse_stock_reports"];
+            kardexToolStripMenuItem.Enabled = (bool)roleRow["warehouse_kardex_reports"];
         }
     }
 }
