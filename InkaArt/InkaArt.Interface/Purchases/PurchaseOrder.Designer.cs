@@ -76,6 +76,9 @@
             // 
             // dataGridView_purchaseOrder
             // 
+            this.dataGridView_purchaseOrder.AllowUserToAddRows = false;
+            this.dataGridView_purchaseOrder.AllowUserToDeleteRows = false;
+            this.dataGridView_purchaseOrder.AllowUserToResizeRows = false;
             this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_purchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -145,11 +148,14 @@
             // 
             // comboBox_status
             // 
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
+            "Pendiente",
+            "Entregado",
+            "Por pagar"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(192, 25);
@@ -158,12 +164,13 @@
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
-            this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(25, 50);
+            this.textBox_id.MaxLength = 9;
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(192, 24);
             this.textBox_id.TabIndex = 26;
+            this.textBox_id.TextChanged += new System.EventHandler(this.validating_id);
             // 
             // label5
             // 
@@ -195,9 +202,9 @@
             // textBox_name
             // 
             this.textBox_name.BackColor = System.Drawing.Color.White;
-            this.textBox_name.Enabled = false;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_name.Location = new System.Drawing.Point(240, 50);
+            this.textBox_name.MaxLength = 280;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(515, 24);
             this.textBox_name.TabIndex = 17;

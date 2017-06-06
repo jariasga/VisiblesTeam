@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace InkaArt.Interface.Purchases
 {
@@ -28,7 +29,8 @@ namespace InkaArt.Interface.Purchases
 
         private void button_search(object sender, EventArgs e)
         {
-
+            textBox_name.Text = textBox_name.Text.Trim();
+            
         }
 
         private void button_add(object sender, EventArgs e)
@@ -62,6 +64,26 @@ namespace InkaArt.Interface.Purchases
             DataGridViewRow currentPurchaseOrder = dataGridView_purchaseOrder.CurrentRow;
             Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder,control);
             purchaseDetail.Show();
+        }
+
+        private void validating_id(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_id.Text.ToCharArray();
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if (Char.IsDigit(aChar))
+                {
+                    actualdata = actualdata + aChar;
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede ingresar números en el id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_id.Text = actualdata;
         }
     }
 }

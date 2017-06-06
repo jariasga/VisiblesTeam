@@ -160,6 +160,9 @@
             // 
             // dataGridView_suppliersPrice
             // 
+            this.dataGridView_suppliersPrice.AllowUserToAddRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToDeleteRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToResizeRows = false;
             this.dataGridView_suppliersPrice.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_suppliersPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_suppliersPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -220,10 +223,13 @@
             // 
             // comboBox_unit
             // 
+            this.comboBox_unit.AllowDrop = true;
             this.comboBox_unit.BackColor = System.Drawing.Color.White;
+            this.comboBox_unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_unit.FormattingEnabled = true;
             this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
+            this.comboBox_unit.MaxDropDownItems = 20;
             this.comboBox_unit.Name = "comboBox_unit";
             this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
             this.comboBox_unit.TabIndex = 13;

@@ -32,6 +32,7 @@
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parámetrosGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.modificarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +64,9 @@
             this.kardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabelPingStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +114,13 @@
             this.listaDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.listaDeUsuariosToolStripMenuItem.Text = "Lista de usuarios";
             this.listaDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.listaDeUsuariosToolStripMenuItem_Click);
+            // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.rolesToolStripMenuItem.Text = "Roles";
+            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -332,7 +341,9 @@
             // 
             this.status_strip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.status_label});
+            this.status_label,
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabelPingStatus});
             this.status_strip.Location = new System.Drawing.Point(0, 644);
             this.status_strip.Name = "status_strip";
             this.status_strip.Size = new System.Drawing.Size(998, 22);
@@ -345,6 +356,17 @@
             this.status_label.Size = new System.Drawing.Size(32, 17);
             this.status_label.Text = "Listo";
             // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabelPingStatus
+            // 
+            this.toolStripStatusLabelPingStatus.Name = "toolStripStatusLabelPingStatus";
+            this.toolStripStatusLabelPingStatus.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabelPingStatus.Text = "toolStripStatusLabel1";
+            // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 25);
@@ -353,13 +375,6 @@
             this.splitter1.Size = new System.Drawing.Size(3, 619);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
-            // 
-            // rolesToolStripMenuItem
-            // 
-            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
-            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.rolesToolStripMenuItem.Text = "Roles";
-            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
             // 
             // Menu
             // 
@@ -426,5 +441,7 @@
         private System.Windows.Forms.ToolStripMenuItem informeDeTurnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelPingStatus;
     }
 }

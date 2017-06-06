@@ -23,8 +23,7 @@ namespace InkaArt.Business.Purchases
             rawMaterial = new RawMaterialData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            rawMaterial.connect();
+            
             adap = rawMaterial.rawMaterialAdapter();
 
             data.Reset();
@@ -38,7 +37,6 @@ namespace InkaArt.Business.Purchases
 
         public void insertData(string nombre,string descripcion,string unidad,string estado,double precioPromedio)
         {
-            rawMaterial.connect();
 
             table = data.Tables["RawMaterial"];
             row = table.NewRow();
@@ -52,12 +50,9 @@ namespace InkaArt.Business.Purchases
             table.Rows.Add(row);
 
             int rowsAffected = rawMaterial.insertData(data, adap, "RawMaterial");
-
-            rawMaterial.closeConnection();
         }
         public void updateData(string id, string nombre, string descripcion, string unidad, string estado, double precioPromedio)
         {
-            rawMaterial.connect();
             table = data.Tables["RawMaterial"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
@@ -72,7 +67,6 @@ namespace InkaArt.Business.Purchases
                 }
             }
             rawMaterial.updateData(data, adap, "RawMaterial");
-            rawMaterial.closeConnection();
         }
     }
 }

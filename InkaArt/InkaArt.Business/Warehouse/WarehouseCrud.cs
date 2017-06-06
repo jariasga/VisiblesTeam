@@ -21,7 +21,7 @@ namespace InkaArt.Business.Warehouse
         {
             warehouseData = new WarehouseData();
         }
-
+        
         public int createWarehouse(string name, string description, string address, string state)
         {
             return warehouseData.InsertWarehouse(name, description, address, state);
@@ -45,9 +45,7 @@ namespace InkaArt.Business.Warehouse
             string insertQuery;
 
             insertQuery = "insert into inkaart.\"Movement\"(\"idNote\", \"idBill\", \"idMovementType\",\"idWarehouse\",\"idMovementReason\") values (" + idNote + ", " + idBill + ", " + idMovementType + "," + idWarehouse + ", " + idMovementReason + ");";
-            conn.connect();
             conn.execute(insertQuery);
-            conn.closeConnection();
         }
 
         public string makeValidations(string name, string description, string address)
@@ -65,7 +63,6 @@ namespace InkaArt.Business.Warehouse
             NpgsqlDataReader datos;
 
             selectQuery = selectQuery + "select count(*) from inkaart.\"Product-Warehouse\" where \"idProduct\" = " + idProduct + " and \"idWarehouse\" = " + idWarehouse + ";";
-            conn.connect();
             datos = conn.warehouseAdapter(selectQuery);
             int cantidad = 0;
 
@@ -91,7 +88,6 @@ namespace InkaArt.Business.Warehouse
                 NpgsqlDataReader datos2;
 
                 selectQuery = selectQuery + "select \"currentStock\", \"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idProduct\" = " + idProd + " and \"idWarehouse\" = " + idWarehouse + ";";
-                conn2.connect();
                 datos2 = conn2.warehouseAdapter(selectQuery);
                 int currentStock = 0, virtualStock = 0;
 
@@ -109,11 +105,62 @@ namespace InkaArt.Business.Warehouse
             }
 
             WarehouseData conn = new WarehouseData();
-            conn.connect();
             conn.execute(query);
-            conn.closeConnection();
-
+            
         }*/
+
+        public void updateWareHouse(int id,string name, string description, string address, string state)
+        {
+            WarehouseData conn = new WarehouseData();
+            string updateQuery;
+            int filtros = 0;
+
+            updateQuery = "update inkaart.\"Warehouse\" set ";
+            if (name != "")
+            {
+                updateQuery = updateQuery + " name = '" + name + "'";
+                filtros++;
+            }
+            if (description != "")
+            {
+                if (filtros > 0)
+                {
+                    updateQuery = updateQuery + ", description = '" + description + "'";
+                }
+                else
+                {
+                    updateQuery = updateQuery + " description = '" + description + "'";
+                    filtros++;
+                }
+            }
+                
+            if (address != "")
+            {
+                if (filtros > 0)
+                {
+                    updateQuery = updateQuery + ", address = '" + address + "'";
+                }
+                else
+                {
+                    updateQuery = updateQuery + " address = '" + address + "'";
+                    filtros++;
+                }
+            }
+            if (state != "")
+            {
+                if (filtros > 0)
+                {
+                    updateQuery = updateQuery + ", state = '" + state + "'";
+                }
+                else
+                {
+                    updateQuery = updateQuery + " state = '" + state + "'";
+                    filtros++;
+                }
+            }
+            updateQuery = updateQuery + " where \"idWarehouse\"="+id+";";
+            conn.execute(updateQuery);
+        }
 
         public void deleteWarehouse(int [] id, int tam)
         {
@@ -134,9 +181,7 @@ namespace InkaArt.Business.Warehouse
                 }
             }
             updateQuery = updateQuery + ";";
-            conn.connect();
             conn.execute(updateQuery);
-            conn.closeConnection();
         }
 
         /*
@@ -197,7 +242,6 @@ namespace InkaArt.Business.Warehouse
             }
             //Si no existió filtro se traerá toda la tabla
             selectQuery = selectQuery + " order by 1;";
-            conn.connect();
             datos = conn.warehouseAdapter(selectQuery);
 //            conn.closeConnection();
             return datos;

@@ -15,37 +15,55 @@ namespace InkaArt.Interface.Purchases
     {
         int mode;
         bool isInEditMode=false;
-        RawMaterialController control;
+        RawMaterialController control_material;
+        RawMaterial_SupplierController control_material_supplier;
+        UnitOfMeasurementController control_units;
+        DataTable unitsList;
 
         public RawMaterialDetail()
         {
             mode = 1; // crearRawMaterial
             InitializeComponent();
+            control_material = new RawMaterialController();
+            control_material_supplier = new RawMaterial_SupplierController();
+            control_units = new UnitOfMeasurementController();
             textBox_averagePrice.Text = "0";
             textBox_averagePrice.Enabled = false;
             buttonSave.Text="🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
+
+            control_units = new UnitOfMeasurementController();
+            unitsList = control_units.GetUnits("","","","");
+            for (int i = 0; i < unitsList.Rows.Count; i++)
+                comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
         }
 
         public RawMaterialDetail(RawMaterialController controlForm)
         {
             mode = 1;
-            control = controlForm;
+            control_material = controlForm;
+            control_material_supplier = new RawMaterial_SupplierController();
+            control_units = new UnitOfMeasurementController();
             InitializeComponent();
             textBox_averagePrice.Text = "0";
             buttonSave.Text = "🖫 Guardar";
             textBox_averagePrice.Enabled = false;
             comboBox_status.SelectedIndex = 0;
+
+            control_units = new UnitOfMeasurementController();
+            unitsList = control_units.GetUnits("", "", "", "");
+            for (int i = 0; i < unitsList.Rows.Count; i++)
+                comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
         }
 
         public RawMaterialDetail(DataGridViewRow currentRawMaterial, RawMaterialController controlForm)
         {
             mode = 2; //editarRawMaterial
-            control = controlForm;
+            control_material = controlForm;
             InitializeComponent();
             textBox_id.Text = currentRawMaterial.Cells[1].Value.ToString();
             textBox_name.Text = currentRawMaterial.Cells[2].Value.ToString();
-            comboBox_unit.Text = currentRawMaterial.Cells[4].Value.ToString();
+            
             comboBox_status.Text = currentRawMaterial.Cells[5].Value.ToString();
             textBox_description.Text = currentRawMaterial.Cells[3].Value.ToString();
             textBox_averagePrice.Text = currentRawMaterial.Cells[6].Value.ToString();
@@ -56,12 +74,24 @@ namespace InkaArt.Interface.Purchases
             textBox_description.Enabled = false;
             textBox_averagePrice.Enabled = false;
             buttonCreate.Enabled = false;
-            /*RawMaterial_SupplierController control = new RawMaterial_SupplierController();
-            DataTable priceList=control.getDataSuppliers(1);
-            dataGridView_suppliersPrice.DataSource = priceList;
-            dataGridView_suppliersPrice.Columns["idSupplier"].HeaderText = "ID";
-            dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";*/
 
+            control_material_supplier = new RawMaterial_SupplierController();
+            DataTable priceList= control_material_supplier.getDataSuppliers(textBox_id.Text,"");
+            dataGridView_suppliersPrice.DataSource = priceList;
+            dataGridView_suppliersPrice.Columns["id_supplier"].HeaderText = "ID";
+            dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";
+            dataGridView_suppliersPrice.Columns["id_raw_material"].Visible = false;
+
+            control_units = new UnitOfMeasurementController();
+            unitsList = control_units.GetUnits("", "", "", "");
+            for (int i = 0; i < unitsList.Rows.Count; i++)
+            {
+                comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
+                if (String.Compare(unitsList.Rows[i]["idUnit"].ToString(), currentRawMaterial.Cells[4].Value.ToString())==0)
+                {
+                    comboBox_unit.Text = unitsList.Rows[i]["name"].ToString();
+                }
+            }
         }
 
         private void button_create(object sender, EventArgs e)
@@ -96,7 +126,9 @@ namespace InkaArt.Interface.Purchases
                 textBox_description.Enabled = false;
                 buttonCreate.Enabled = false;
                 buttonSave.Text = "Editar";
-                control.insertData(textBox_name.Text, textBox_description.Text,comboBox_unit.Text, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
+                int indexUnit=comboBox_unit.SelectedIndex;
+                string id_unit_selected = unitsList.Rows[indexUnit]["idUnit"].ToString();
+                control_material.insertData(textBox_name.Text, textBox_description.Text, id_unit_selected, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
             }
             else if(mode==2 && isInEditMode)
             {
@@ -111,7 +143,9 @@ namespace InkaArt.Interface.Purchases
                 buttonCreate.Enabled = false;
                 buttonSave.Text = "Editar";
                 isInEditMode = false;
-                control.updateData(textBox_id.Text,textBox_name.Text, textBox_description.Text, comboBox_unit.Text, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
+                int indexUnit = comboBox_unit.SelectedIndex;
+                string id_unit_selected = unitsList.Rows[indexUnit]["idUnit"].ToString();
+                control_material.updateData(textBox_id.Text,textBox_name.Text, textBox_description.Text, id_unit_selected, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
             }
             else
             {

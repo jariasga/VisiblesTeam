@@ -30,7 +30,6 @@ namespace InkaArt.Data.Warehouse
 
         public int InsertWarehouse(string name, string description, string address, string state)
         {
-            connect();
             adap = warehouseAdapter();
             data.Clear();
             data = getData(adap, "Warehouse");
@@ -47,8 +46,6 @@ namespace InkaArt.Data.Warehouse
 
         public DataTable GetWarehouses(int id = -1, string name = "", string description = "", string address = "", string state = "")
         {
-            connect();
-
             adap = warehouseAdapter();
             
             byId(adap, id);
@@ -121,7 +118,6 @@ namespace InkaArt.Data.Warehouse
 
         public int updateWarehouse(string id, string name, string description, string address, string state)
         {
-            connect();
             adap = warehouseAdapter();
 
             data.Clear();

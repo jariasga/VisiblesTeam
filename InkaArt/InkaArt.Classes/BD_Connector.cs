@@ -14,23 +14,26 @@ namespace InkaArt.Classes
     {
         private NpgsqlConnection connection;
         private static NpgsqlConnectionStringBuilder connectionString;
-        private string serverAddress;
-        private string databaseName;
+        public static string serverAddress;
+        public static string databaseName;
         private string uid, pwd;
         private int port;
         public BD_Connector()
         {
             ConnectionString = new NpgsqlConnectionStringBuilder();
 
-            ConnectionString.Host = "skeletpiece.homeip.net";
-            ConnectionString.Database = "desarrolloprogramas1";
+            serverAddress = "skeletpiece.homeip.net";
+            databaseName = "desarrolloprogramas1";
+
+            ConnectionString.Host = serverAddress;
+            ConnectionString.Database = databaseName;
             ConnectionString.Username = "admin";
             ConnectionString.Password = "fae48";
             ConnectionString.Pooling = true;
             ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 
-        public void connect()
+        private void connect()
         {
             try
             {
@@ -94,7 +97,7 @@ namespace InkaArt.Classes
             return code;
         }
 
-        public void closeConnection()
+        private void closeConnection()
         {
             if (Connection.State != System.Data.ConnectionState.Closed)
                 Connection.Close();
