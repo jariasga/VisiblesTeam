@@ -202,8 +202,8 @@ namespace InkaArt.Interface.Production
                             break;
                         }
                     }
-
-                    controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
+                    DataTable table = controlRecipeRaw.getData();
+                    controlRecipeRaw.insertDataNoAdapter(globalIdRecipe, idRaw, count);
                     fillGrid();
                 }
                 else
