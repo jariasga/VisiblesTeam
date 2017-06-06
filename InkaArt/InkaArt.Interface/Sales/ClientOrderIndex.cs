@@ -21,18 +21,36 @@ namespace InkaArt.Interface.Sales
 
         private void button_search_Click(object sender, EventArgs e)
         {
-
+            DataTable orderFiltered = orderController.GetOrders(-1, combo_type.SelectedItem, textbox_doc.Text, textbox_name.Text, combo_orderStatus.SelectedItem);
+            populateDataGrid(orderFiltered);
         }
 
         private void button_delete_Click(object sender, EventArgs e)
         {
-
+            List<string> selectedOrders = new List<string>();
+            foreach (DataGridViewRow row in grid_orders.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[deleteColumn.Index].Value) == true)
+                {
+                    selectedOrders.Add(row.Cells[0].Value.ToString());
+                }
+            }
+            if (selectedOrders.Count() > 0)
+            {
+                orderController.deleteOrders(selectedOrders);
+                updateDataGrid();
+            }
         }
 
         private void grid_orders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
+                string type = grid_orders.Rows[e.RowIndex].Cells[1].Value.ToString().ToLower();
+                if (type.Equals("pedido"))
+                {
+
+                }
                 string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
                 ClientOrderShow show_form = new ClientOrderShow(id);
                 var response = show_form.ShowDialog();
@@ -50,7 +68,9 @@ namespace InkaArt.Interface.Sales
         private void button_create_dev_Click(object sender, EventArgs e)
         {
             DevolutionCreate create_form = new DevolutionCreate();
-            create_form.Show();
+            var response = create_form.ShowDialog();
+            if (response == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void button_create_Click(object sender, EventArgs e)

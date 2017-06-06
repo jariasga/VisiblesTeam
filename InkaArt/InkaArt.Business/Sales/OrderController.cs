@@ -16,23 +16,37 @@ namespace InkaArt.Business.Sales
         {
             orderData = new OrderData();
         }
-        public DataTable GetOrders(int id = -1, string type = "", string doc = "", string clientName = "", string orderStatus = "")
+        public DataTable GetOrders(int id = -1, object type = null, string doc = "", string clientName = "", object orderStatus = null)
         {
             long aux, intDoc = -1;
-            type = type.ToLower();
-            orderStatus = orderStatus.ToLower();
+            string strType = "", strOrderStatus = "";
+            if (type != null) strType = type.ToString();
+            if (orderStatus != null) strOrderStatus = orderStatus.ToString();
+            strType = strType.ToLower();
+            strOrderStatus = strOrderStatus.ToLower();
             if (!doc.Equals("")) if (long.TryParse(doc, out aux)) intDoc = long.Parse(doc);
-            return orderData.GetOrders(id,type,intDoc,clientName,orderStatus);
+            return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus);
         }
-        public int AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines, string type)
+
+        public DataTable GetSalesDocument()
+        {
+            return orderData.GetSalesDocument();
+        }
+
+        public int AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines, string type, string reason = "", string totalDev = "")
         {
             saleAmount = Math.Round(double.Parse(saleAmount), 2).ToString();
             igv = Math.Round(double.Parse(igv), 2).ToString();
             totalAmount = Math.Round(double.Parse(totalAmount), 2).ToString();
             int orderAdded, orderLineAdded;
-            orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type);
+            orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, totalDev);
             orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv));
             return orderAdded + orderLineAdded;
+        }
+
+        public void deleteOrders(List<string> selectedOrders)
+        {
+            orderData.deleteOrders(selectedOrders);
         }
 
         public string getClientName(string v)
@@ -64,6 +78,16 @@ namespace InkaArt.Business.Sales
             int parsedID = int.Parse(id);
             return orderData.getProductPU(parsedID);
         }
+
+        public string makeValidations(string clientDoc, string clientName, DataTable orderLines, string type, string reason, string docId = "null")
+        {
+            if (clientDoc.Equals("") || clientName.Equals("")) return "Debe seleccionar un cliente antes de continuar.";
+            if (orderLines.Rows.Count == 0) return "Debe añadir productos para realizar un pedido.";
+            if (type.Equals("devolucion") && reason.Equals("")) return "Debe ingresar un motivo para continuar.";
+            if (type.Equals("devolucion") && docId.Equals("")) return "Debe seleccionar un documento de venta para continuar.";
+            return "OK";
+        }
+
         public string getProductName(string id)
         {
             int parsedID = int.Parse(id);
