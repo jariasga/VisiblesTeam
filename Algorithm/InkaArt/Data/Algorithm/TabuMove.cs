@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Business.Algorithm
+namespace InkaArt.Data.Algorithm
 {
     class TabuMove
     {
