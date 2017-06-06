@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
+using InkaArt.Business.Purchases;
 using Npgsql;
 
 namespace InkaArt.Interface.Warehouse
@@ -20,25 +21,15 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
             warehouseController = new WarehouseCrud();
+            //fillGridRawMaterial();
         }
-
-        private void buttonAdd_Click(object sender, EventArgs e)
-        {
-            Form new_add_supply_window = new InkaArt.Interface.Purchases.AddSupply();
-            new_add_supply_window.Show();
-        }
-
-        private void buttonSearch_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void button_save_Click(object sender, EventArgs e)
         {
             string messageResponse = warehouseController.makeValidations(textBox_name.Text, textBox_description.Text, textBox_address.Text);
             if (messageResponse.Equals("OK"))
             {
-                int response = warehouseController.createWarehouse(textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
+                int response = warehouseController.createWarehouse(textBox_name.Text, textBox_description.Text, textBox_address.Text);
                 if (response >= 0)
                 {
                     MessageBox.Show(this, "El almacén ha sido agregado correctamente.", "Crear almacén", MessageBoxButtons.OK);
@@ -57,6 +48,19 @@ namespace InkaArt.Interface.Warehouse
             textBox_name.Clear();
             textBox_description.Clear();
             textBox_address.Clear();
+        }
+
+        private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
+        {
+           /* var show_form = new AddRawMaterialWarehouse();
+            var result = show_form.ShowDialog();
+           if (result == DialogResult.OK)
+                updateDataGrid();*/
+        }
+
+        private void WarehouseDetail_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

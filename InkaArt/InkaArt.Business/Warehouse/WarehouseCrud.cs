@@ -22,14 +22,19 @@ namespace InkaArt.Business.Warehouse
             warehouseData = new WarehouseData();
         }
         
-        public int createWarehouse(string name, string description, string address, string state)
+        public int createWarehouse(string name, string description, string address)
         {
-            return warehouseData.InsertWarehouse(name, description, address, state);
+            return warehouseData.InsertWarehouse(name, description, address);
         }
 
-        public int updateWarehouse(string id, string name, string description, string address, string state)
+        public int updateWarehouse(string id, string name, string description, string address)
         {
-            return warehouseData.updateWarehouse(id, name, description, address, state);
+            return warehouseData.updateWarehouse(id, name, description, address);
+        }
+
+        public int deleteWarehouse(string id, string name, string description, string address, string state)
+        {
+            return warehouseData.deleteWarehouse(id, name, description, address, state);
         }
 
         public DataTable GetWarehouses(string id = "", string name = "", string description = "", string address = "", string state = "")
