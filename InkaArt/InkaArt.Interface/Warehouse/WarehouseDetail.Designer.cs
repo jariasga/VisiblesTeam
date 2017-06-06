@@ -34,8 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonReturn = new System.Windows.Forms.Button();
+            this.button_save = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,31 +114,18 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "Nombre";
             // 
-            // buttonSave
+            // button_save
             // 
-            this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Location = new System.Drawing.Point(30, 399);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(127, 42);
-            this.buttonSave.TabIndex = 26;
-            this.buttonSave.Text = "🖫 Guardar";
-            this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
-            // buttonReturn
-            // 
-            this.buttonReturn.BackColor = System.Drawing.Color.Gray;
-            this.buttonReturn.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonReturn.ForeColor = System.Drawing.Color.White;
-            this.buttonReturn.Location = new System.Drawing.Point(164, 399);
-            this.buttonReturn.Name = "buttonReturn";
-            this.buttonReturn.Size = new System.Drawing.Size(127, 42);
-            this.buttonReturn.TabIndex = 47;
-            this.buttonReturn.Text = "⟲ Regresar";
-            this.buttonReturn.UseVisualStyleBackColor = false;
-            this.buttonReturn.Click += new System.EventHandler(this.button_return_click);
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(97, 399);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(127, 42);
+            this.button_save.TabIndex = 26;
+            this.button_save.Text = "🖫 Guardar";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // dataGridView1
             // 
@@ -328,8 +314,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1175, 464);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonReturn);
-            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.button_save);
             this.Controls.Add(this.textBox_address);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_description);
@@ -355,8 +340,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonReturn;
+        private System.Windows.Forms.Button button_save;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;

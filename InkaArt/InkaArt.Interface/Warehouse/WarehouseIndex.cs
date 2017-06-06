@@ -23,17 +23,19 @@ namespace InkaArt.Interface.Warehouse
 
         private void button_add_click(object sender, EventArgs e)
         {
-            WarehouseDetail create_form = new WarehouseDetail();
-            create_form.Show();
+            var create_form = new WarehouseDetail();
+            var result = create_form.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            /*string id = grid_clients.Rows[e.RowIndex].Cells[0].Value.ToString();
-            var show_form = new ClientShow(id);
+            string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            var show_form = new WarehouseShow(id);
             var result = show_form.ShowDialog();
             if (result == DialogResult.OK)
-                updateDataGrid();*/
+                updateDataGrid();
         }
 
         private void updateDataGrid()
@@ -53,7 +55,7 @@ namespace InkaArt.Interface.Warehouse
             foreach (DataRow row in warehouseList.Rows)
             {
                 string status = row["state"].ToString();
-                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["address"]);
+                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["description"], row["address"]);
             }
         }
 
@@ -87,19 +89,19 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            /*DataTable clientList;
-            clientList = clientController.GetClients(textbox_id.Text, textbox_doc.Text, textbox_doc.Text, textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
-            populateDataGrid(clientList);*/
+            DataTable warehouseList;
+            warehouseList = warehouseController.GetWarehouses(textBox_id.Text, textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
+            populateDataGrid(warehouseList);
         }
-/*
-        private void button_bulk_upload_Click(object sender, EventArgs e)
-        {
-            WarehouseCrud movimientos = new WarehouseCrud();
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Open Users File";
-            dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK)
-                movimientos.massiveUpload(dialog.FileName);
-        }*/
+        /*
+                private void button_bulk_upload_Click(object sender, EventArgs e)
+                {
+                    WarehouseCrud movimientos = new WarehouseCrud();
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    dialog.Title = "Open Users File";
+                    dialog.Filter = "CSV files|*.csv";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                        movimientos.massiveUpload(dialog.FileName);
+                }*/
     }
 }

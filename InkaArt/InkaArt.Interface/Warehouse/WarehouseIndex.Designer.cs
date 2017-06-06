@@ -35,7 +35,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox_supplier = new System.Windows.Forms.TextBox();
+            this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -44,27 +44,32 @@
             this.button_bulk_upload = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descripción = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dirección = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.textBox_description = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_description);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox_address);
             this.groupBox1.Controls.Add(this.comboBox_status);
             this.groupBox1.Controls.Add(this.textBox_id);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox_supplier);
+            this.groupBox1.Controls.Add(this.textBox_name);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(774, 158);
+            this.groupBox1.Size = new System.Drawing.Size(982, 158);
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -104,9 +109,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(21, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 23);
+            this.label5.Size = new System.Drawing.Size(30, 23);
             this.label5.TabIndex = 25;
-            this.label5.Text = "ID Almacén";
+            this.label5.Text = "ID";
             // 
             // label4
             // 
@@ -126,30 +131,30 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "Estado";
             // 
-            // textBox_supplier
+            // textBox_name
             // 
-            this.textBox_supplier.BackColor = System.Drawing.Color.White;
-            this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_supplier.Location = new System.Drawing.Point(240, 50);
-            this.textBox_supplier.Name = "textBox_supplier";
-            this.textBox_supplier.Size = new System.Drawing.Size(499, 29);
-            this.textBox_supplier.TabIndex = 17;
+            this.textBox_name.BackColor = System.Drawing.Color.White;
+            this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_name.Location = new System.Drawing.Point(240, 50);
+            this.textBox_name.Name = "textBox_name";
+            this.textBox_name.Size = new System.Drawing.Size(334, 29);
+            this.textBox_name.TabIndex = 17;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(237, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(190, 23);
+            this.label1.Size = new System.Drawing.Size(79, 23);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Nombre del almacén";
+            this.label1.Text = "Nombre";
             // 
             // buttonSearch
             // 
             this.buttonSearch.BackColor = System.Drawing.Color.Gray;
             this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
-            this.buttonSearch.Location = new System.Drawing.Point(616, 103);
+            this.buttonSearch.Location = new System.Drawing.Point(728, 100);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(123, 39);
@@ -167,11 +172,12 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Nombre,
+            this.Descripción,
             this.Dirección,
             this.Eliminar});
             this.dataGridView1.Location = new System.Drawing.Point(12, 187);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(774, 251);
+            this.dataGridView1.Size = new System.Drawing.Size(982, 251);
             this.dataGridView1.TabIndex = 43;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
@@ -180,7 +186,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(332, 453);
+            this.buttonDelete.Location = new System.Drawing.Point(435, 467);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(151, 39);
             this.buttonDelete.TabIndex = 45;
@@ -193,7 +199,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(157, 453);
+            this.buttonAdd.Location = new System.Drawing.Point(260, 467);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(151, 39);
@@ -207,7 +213,7 @@
             this.button_bulk_upload.BackColor = System.Drawing.Color.SteelBlue;
             this.button_bulk_upload.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_bulk_upload.ForeColor = System.Drawing.Color.White;
-            this.button_bulk_upload.Location = new System.Drawing.Point(507, 453);
+            this.button_bulk_upload.Location = new System.Drawing.Point(610, 467);
             this.button_bulk_upload.Margin = new System.Windows.Forms.Padding(2);
             this.button_bulk_upload.Name = "button_bulk_upload";
             this.button_bulk_upload.Size = new System.Drawing.Size(151, 39);
@@ -226,6 +232,11 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             // 
+            // Descripción
+            // 
+            this.Descripción.HeaderText = "Descripción";
+            this.Descripción.Name = "Descripción";
+            // 
             // Dirección
             // 
             this.Dirección.HeaderText = "Dirección";
@@ -238,12 +249,30 @@
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // textBox_description
+            // 
+            this.textBox_description.BackColor = System.Drawing.Color.White;
+            this.textBox_description.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_description.Location = new System.Drawing.Point(616, 50);
+            this.textBox_description.Name = "textBox_description";
+            this.textBox_description.Size = new System.Drawing.Size(334, 29);
+            this.textBox_description.TabIndex = 30;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(613, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(112, 23);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Descripción";
+            // 
             // WarehouseIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(811, 518);
+            this.ClientSize = new System.Drawing.Size(1025, 518);
             this.Controls.Add(this.button_bulk_upload);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
@@ -270,7 +299,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox_supplier;
+        private System.Windows.Forms.TextBox textBox_name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -279,7 +308,10 @@
         private System.Windows.Forms.Button button_bulk_upload;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descripción;
         private System.Windows.Forms.DataGridViewTextBoxColumn Dirección;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.TextBox textBox_description;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -27,11 +27,18 @@ namespace InkaArt.Business.Warehouse
             return warehouseData.InsertWarehouse(name, description, address, state);
         }
 
-        public DataTable GetWarehouses(string name = "", string description = "", string address = "", string state = "")
+        public int updateWarehouse(string id, string name, string description, string address, string state)
         {
-            return warehouseData.GetWarehouses(name, description, address, state);
+            return warehouseData.updateWarehouse(id, name, description, address, state);
         }
 
+        public DataTable GetWarehouses(string id = "", string name = "", string description = "", string address = "", string state = "")
+        {
+            int intId = -1, intAux;
+            if (!id.Equals("")) if (int.TryParse(id, out intAux)) intId = int.Parse(id);
+            return warehouseData.GetWarehouses(intId, name, description, address, state);
+        }
+        
         public void createMovement(int idNote, int idBill, int idMovementType, int idWarehouse, int idMovementReason, string dateIn)
         {
             WarehouseData conn = new WarehouseData();
@@ -43,9 +50,10 @@ namespace InkaArt.Business.Warehouse
             conn.closeConnection();
         }
 
-        public string makeValidations(string name, string description, string address, string state)
+        public string makeValidations(string name, string description, string address)
         {
-            
+            if (name.Equals("") || description.Equals("") || address.Equals(""))
+                return "Por favor, complete todos los campos antes de continuar";
             return "OK";
         }
 
@@ -106,61 +114,6 @@ namespace InkaArt.Business.Warehouse
             conn.closeConnection();
 
         }*/
-
-        public void updateWareHouse(int id,string name, string description, string address, string state)
-        {
-            WarehouseData conn = new WarehouseData();
-            string updateQuery;
-            int filtros = 0;
-
-            updateQuery = "update inkaart.\"Warehouse\" set ";
-            if (name != "")
-            {
-                updateQuery = updateQuery + " name = '" + name + "'";
-                filtros++;
-            }
-            if (description != "")
-            {
-                if (filtros > 0)
-                {
-                    updateQuery = updateQuery + ", description = '" + description + "'";
-                }
-                else
-                {
-                    updateQuery = updateQuery + " description = '" + description + "'";
-                    filtros++;
-                }
-            }
-                
-            if (address != "")
-            {
-                if (filtros > 0)
-                {
-                    updateQuery = updateQuery + ", address = '" + address + "'";
-                }
-                else
-                {
-                    updateQuery = updateQuery + " address = '" + address + "'";
-                    filtros++;
-                }
-            }
-            if (state != "")
-            {
-                if (filtros > 0)
-                {
-                    updateQuery = updateQuery + ", state = '" + state + "'";
-                }
-                else
-                {
-                    updateQuery = updateQuery + " state = '" + state + "'";
-                    filtros++;
-                }
-            }
-            updateQuery = updateQuery + " where \"idWarehouse\"="+id+";";
-            conn.connect();
-            conn.execute(updateQuery);
-            conn.closeConnection();
-        }
 
         public void deleteWarehouse(int [] id, int tam)
         {
