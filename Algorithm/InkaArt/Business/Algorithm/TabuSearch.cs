@@ -142,7 +142,7 @@ namespace InkaArt.Business.Algorithm
 
             // inicio
             // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (Environment.TickCount - instance.start_time < instance.limit_time && iter_count < max_iterations)
+            while (Environment.TickCount - instance.StartTime < instance.LimitTime && iter_count < max_iterations)
             {
                 int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 

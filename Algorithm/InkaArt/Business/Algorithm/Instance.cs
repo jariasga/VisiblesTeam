@@ -12,83 +12,73 @@ namespace InkaArt.Business.Algorithm
 
     class Instance
     {
-        public WorkerController workers;
-        //public List<Index> ratios; 
-        public double shift_duration;               // minutos en un turno
+        private WorkerController workers;
+        private RatioResumeController ratios; 
+        private ProcessController processes;
+        private JobController jobs;        
 
-        // time
-        public int start_time;                      // milisegundos
-        public int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
-
-        // processes
-        public int processes_num;
-        public List<int> processes_positions;       // puestos de trabajo por proceso
-
-        // processes x products
-        public JobController jobs;
-        
-        // pesos
-
-        // de ratios
+        // pesos de ratios
         private double breakage_weight;              // para los indices de perdida
         private double time_weight;
-        // de productos
+        // pesos de productos
         private double huaco_weight;
         private double huamanga_stone_weight;
         private double retable_weight;
+        // numero de miniturnos        
+        private double miniturns;               
+        // time
+        private int start_time;                      // milisegundos
+        private int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
+
+        /* encapsulacion */
+
+        public int LimitTime
+        {
+            get
+            {
+                return limit_time;
+            }
+        }
+
+        public int StartTime
+        {
+            get
+            {
+                return start_time;
+            }
+        }
+
+        public double Miniturns
+        {
+            get
+            {
+                return miniturns;
+            }
+        }
+
+        /* constructor */
 
         public Instance()
         {
-            // Tabla 
-
             // time
             start_time = Environment.TickCount;
             limit_time = 300000;                    // 1 000 * 60 * 5 (maximo 5 miutos)            
 
             // processes
-            processes_num = 4;
-            processes_positions = new List<int>(4);
-            processes_positions.Add(10);            // tallado
-            processes_positions.Add(10);            // modelado
-            processes_positions.Add(10);            // horneado
-            processes_positions.Add(10);            // pintado
+            processes = new ProcessController();
+            processes.Load();
 
-            // processes products
             jobs = new JobController();
             jobs.Load();
 
-            // pesos de ratios y productos
-            LoadWeights();
-
-            // from database
             workers = new WorkerController();
             workers.Load();
-            
+
+            // pesos de ratios y productos
+            LoadParameters();
         }
 
-        public void LoadProcess()
-        {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
-            connection.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Process\"", connection);
-
-            NpgsqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                this.breakage_weight = reader.GetDouble(0);
-                this.time_weight = reader.GetDouble(1);
-
-                this.huaco_weight = reader.GetDouble(2);
-                this.huamanga_stone_weight = reader.GetDouble(3);
-                this.retable_weight = reader.GetDouble(4);
-            }
-
-            connection.Close();
-        }
-
-        public void LoadWeights()
+        public void LoadParameters()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = DatabaseConnection.ConnectionString();
@@ -105,6 +95,11 @@ namespace InkaArt.Business.Algorithm
                 this.huaco_weight = reader.GetDouble(2);
                 this.huamanga_stone_weight = reader.GetDouble(3);
                 this.retable_weight = reader.GetDouble(4);
+
+                // parametros de tabu entre 7 y 13
+
+                this.limit_time = reader.GetInt32(13);
+                this.miniturns = reader.GetInt32(14);
             }
 
             connection.Close();
