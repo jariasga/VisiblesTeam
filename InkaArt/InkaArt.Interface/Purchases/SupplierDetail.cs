@@ -78,11 +78,7 @@ namespace InkaArt.Interface.Purchases
         {
             
         }
-
-        private void button_save_click()
-        {
-
-        }
+        
 
         private void trackBar_priority_Scroll(object sender, EventArgs e)
         {
@@ -134,7 +130,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = false;
                 buttonAdd.Enabled = false;
                 buttonDelete.Enabled = false;
-                button_save_click();
+                control.updateData(textBox_idSupplier.Text,textBox_name.Text, int.Parse(textBox_ruc.Text), textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                 buttonSave.Text = "Editar";
             }
             else if (mode==2)

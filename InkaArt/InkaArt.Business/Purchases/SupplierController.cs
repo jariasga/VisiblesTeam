@@ -43,7 +43,7 @@ namespace InkaArt.Business.Purchases
             row = table.NewRow();
             
             row["name"] = nombre;
-            row["RUC"] = ruc;
+            row["ruc"] = ruc;
             row["contact"] = contacto;
             row["telephone"] = telefono;
             row["email"] = correo;
@@ -63,10 +63,10 @@ namespace InkaArt.Business.Purchases
             table = data.Tables["Supplier"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                if (String.Compare(table.Rows[i]["idSupplier"].ToString(), id) == 0)
+                if (String.Compare(table.Rows[i]["id_supplier"].ToString(), id) == 0)
                 {
                     table.Rows[i]["name"] = nombre;
-                    table.Rows[i]["RUC"] = ruc;
+                    table.Rows[i]["ruc"] = ruc;
                     table.Rows[i]["contact"] = contacto;
                     table.Rows[i]["telephone"] = telefono;
                     table.Rows[i]["email"] = correo;

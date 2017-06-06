@@ -17,9 +17,9 @@ namespace InkaArt.Interface.Purchases
             DataTable suppliersList = control.getData();
             dataGridView_suppliersList.DataSource = suppliersList;
 
-            dataGridView_suppliersList.Columns["idSupplier"].HeaderText = "ID";
+            dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
-            dataGridView_suppliersList.Columns["RUC"].HeaderText = "RUC";
+            dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
             dataGridView_suppliersList.Columns["contact"].HeaderText = "Contacto";
             dataGridView_suppliersList.Columns["contact"].Visible = false;
             dataGridView_suppliersList.Columns["telephone"].HeaderText = "Teléfono";
