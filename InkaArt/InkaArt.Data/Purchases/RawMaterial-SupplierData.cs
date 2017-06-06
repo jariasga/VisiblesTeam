@@ -12,6 +12,8 @@ namespace InkaArt.Data.Purchases
     public class RawMaterial_SupplierData : BD_Connector
     {
         private DataSet data;
+        private DataTable table;
+        private DataRow row;
         private NpgsqlDataAdapter adap;
         public RawMaterial_SupplierData()
         {
@@ -62,6 +64,20 @@ namespace InkaArt.Data.Purchases
             adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
             adap.SelectCommand.Parameters[numParams].SourceColumn = "id_supplier";
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = supplier;
+        }
+        public void UpdateRM_Sup(string idMat, string idSup, double precio)
+        {
+            table = data.Tables["RawMaterial-Supplier"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if ((String.Compare(table.Rows[i]["id_raw_material"].ToString(), idMat) == 0)&&(String.Compare(table.Rows[i]["id_supplier"].ToString(), idSup) == 0))
+                {
+                    table.Rows[i]["price"] = precio;
+                    break;
+                }
+            }
+
+            updateData(data, adap, "RawMaterial-Supplier");
         }
     }
 }
