@@ -47,14 +47,20 @@
             this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockMaximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estado = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonDelete_RawMaterial = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_RM = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage_Products = new System.Windows.Forms.TabPage();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_Producto = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.buttonAdd_Product = new System.Windows.Forms.Button();
             this.dataGridView_Product = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,22 +69,16 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete_Product = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonSearch_Product = new System.Windows.Forms.Button();
-            this.textBox_idProduct = new System.Windows.Forms.TextBox();
-            this.comboBox_statusP = new System.Windows.Forms.ComboBox();
-            this.textBox_nameProduct = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage_rawMaterial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RawMaterial)).BeginInit();
             this.tabPage_Products.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Product)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,6 +216,7 @@
             // 
             // dataGridView_RawMaterial
             // 
+            this.dataGridView_RawMaterial.AllowUserToAddRows = false;
             this.dataGridView_RawMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_RawMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_RawMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -225,8 +226,8 @@
             this.stockVirtual,
             this.stockMinimo,
             this.stockMaximo,
-            this.estado,
-            this.borrar});
+            this.borrar,
+            this.IdRMW});
             this.dataGridView_RawMaterial.Location = new System.Drawing.Point(30, 94);
             this.dataGridView_RawMaterial.Name = "dataGridView_RawMaterial";
             this.dataGridView_RawMaterial.Size = new System.Drawing.Size(778, 259);
@@ -262,20 +263,18 @@
             this.stockMaximo.HeaderText = "Stock Máximo";
             this.stockMaximo.Name = "stockMaximo";
             // 
-            // estado
-            // 
-            this.estado.HeaderText = "Estado";
-            this.estado.Items.AddRange(new object[] {
-            "Activo",
-            "Eliminado"});
-            this.estado.Name = "estado";
-            // 
             // borrar
             // 
             this.borrar.HeaderText = "Borrar";
             this.borrar.Name = "borrar";
             this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IdRMW
+            // 
+            this.IdRMW.HeaderText = "IdRMW";
+            this.IdRMW.Name = "IdRMW";
+            this.IdRMW.Visible = false;
             // 
             // buttonDelete_RawMaterial
             // 
@@ -334,16 +333,15 @@
             // 
             // tabPage_Products
             // 
+            this.tabPage_Products.Controls.Add(this.numericUpDown3);
+            this.tabPage_Products.Controls.Add(this.numericUpDown4);
+            this.tabPage_Products.Controls.Add(this.label1);
+            this.tabPage_Products.Controls.Add(this.comboBox_Producto);
+            this.tabPage_Products.Controls.Add(this.label8);
+            this.tabPage_Products.Controls.Add(this.label9);
             this.tabPage_Products.Controls.Add(this.buttonAdd_Product);
             this.tabPage_Products.Controls.Add(this.dataGridView_Product);
             this.tabPage_Products.Controls.Add(this.buttonDelete_Product);
-            this.tabPage_Products.Controls.Add(this.label1);
-            this.tabPage_Products.Controls.Add(this.buttonSearch_Product);
-            this.tabPage_Products.Controls.Add(this.textBox_idProduct);
-            this.tabPage_Products.Controls.Add(this.comboBox_statusP);
-            this.tabPage_Products.Controls.Add(this.textBox_nameProduct);
-            this.tabPage_Products.Controls.Add(this.label8);
-            this.tabPage_Products.Controls.Add(this.label9);
             this.tabPage_Products.Location = new System.Drawing.Point(4, 25);
             this.tabPage_Products.Name = "tabPage_Products";
             this.tabPage_Products.Padding = new System.Windows.Forms.Padding(3);
@@ -352,12 +350,69 @@
             this.tabPage_Products.Text = "Productos";
             this.tabPage_Products.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(437, 52);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown3.TabIndex = 80;
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.Location = new System.Drawing.Point(244, 55);
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown4.TabIndex = 77;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(38, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 23);
+            this.label1.TabIndex = 78;
+            this.label1.Text = "Producto";
+            // 
+            // comboBox_Producto
+            // 
+            this.comboBox_Producto.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox_Producto.Enabled = false;
+            this.comboBox_Producto.FormattingEnabled = true;
+            this.comboBox_Producto.Items.AddRange(new object[] {
+            "Activo",
+            "Eliminado"});
+            this.comboBox_Producto.Location = new System.Drawing.Point(41, 54);
+            this.comboBox_Producto.Name = "comboBox_Producto";
+            this.comboBox_Producto.Size = new System.Drawing.Size(170, 24);
+            this.comboBox_Producto.TabIndex = 79;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(433, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(134, 23);
+            this.label8.TabIndex = 75;
+            this.label8.Text = "Stock Máximo";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(240, 24);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(130, 23);
+            this.label9.TabIndex = 76;
+            this.label9.Text = "Stock Mínimo";
+            // 
             // buttonAdd_Product
             // 
             this.buttonAdd_Product.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd_Product.Location = new System.Drawing.Point(255, 358);
+            this.buttonAdd_Product.Location = new System.Drawing.Point(642, 38);
             this.buttonAdd_Product.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd_Product.Name = "buttonAdd_Product";
             this.buttonAdd_Product.Size = new System.Drawing.Size(142, 39);
@@ -377,7 +432,6 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
-            this.dataGridViewComboBoxColumn1,
             this.dataGridViewCheckBoxColumn1});
             this.dataGridView_Product.Location = new System.Drawing.Point(29, 94);
             this.dataGridView_Product.Name = "dataGridView_Product";
@@ -414,14 +468,6 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "Stock Máximo";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // dataGridViewComboBoxColumn1
-            // 
-            this.dataGridViewComboBoxColumn1.HeaderText = "Estado";
-            this.dataGridViewComboBoxColumn1.Items.AddRange(new object[] {
-            "Activo",
-            "Eliminado"});
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            // 
             // dataGridViewCheckBoxColumn1
             // 
             this.dataGridViewCheckBoxColumn1.HeaderText = "Borrar";
@@ -434,86 +480,12 @@
             this.buttonDelete_Product.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_Product.Location = new System.Drawing.Point(425, 358);
+            this.buttonDelete_Product.Location = new System.Drawing.Point(373, 375);
             this.buttonDelete_Product.Name = "buttonDelete_Product";
             this.buttonDelete_Product.Size = new System.Drawing.Size(142, 39);
             this.buttonDelete_Product.TabIndex = 73;
             this.buttonDelete_Product.Text = "🗑 Eliminar";
             this.buttonDelete_Product.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 23);
-            this.label1.TabIndex = 70;
-            this.label1.Text = "ID";
-            // 
-            // buttonSearch_Product
-            // 
-            this.buttonSearch_Product.BackColor = System.Drawing.Color.Gray;
-            this.buttonSearch_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearch_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonSearch_Product.Location = new System.Drawing.Point(660, 37);
-            this.buttonSearch_Product.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSearch_Product.Name = "buttonSearch_Product";
-            this.buttonSearch_Product.Size = new System.Drawing.Size(122, 39);
-            this.buttonSearch_Product.TabIndex = 72;
-            this.buttonSearch_Product.Text = "🔎 Buscar";
-            this.buttonSearch_Product.UseVisualStyleBackColor = false;
-            // 
-            // textBox_idProduct
-            // 
-            this.textBox_idProduct.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox_idProduct.Enabled = false;
-            this.textBox_idProduct.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_idProduct.Location = new System.Drawing.Point(29, 44);
-            this.textBox_idProduct.Name = "textBox_idProduct";
-            this.textBox_idProduct.Size = new System.Drawing.Size(154, 29);
-            this.textBox_idProduct.TabIndex = 69;
-            // 
-            // comboBox_statusP
-            // 
-            this.comboBox_statusP.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.comboBox_statusP.FormattingEnabled = true;
-            this.comboBox_statusP.Items.AddRange(new object[] {
-            "Activo",
-            "Eliminado"});
-            this.comboBox_statusP.Location = new System.Drawing.Point(482, 44);
-            this.comboBox_statusP.Name = "comboBox_statusP";
-            this.comboBox_statusP.Size = new System.Drawing.Size(135, 24);
-            this.comboBox_statusP.TabIndex = 71;
-            // 
-            // textBox_nameProduct
-            // 
-            this.textBox_nameProduct.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox_nameProduct.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_nameProduct.Location = new System.Drawing.Point(192, 44);
-            this.textBox_nameProduct.Name = "textBox_nameProduct";
-            this.textBox_nameProduct.Size = new System.Drawing.Size(266, 29);
-            this.textBox_nameProduct.TabIndex = 68;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(478, 18);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 23);
-            this.label8.TabIndex = 66;
-            this.label8.Text = "Estado";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(188, 18);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(79, 23);
-            this.label9.TabIndex = 67;
-            this.label9.Text = "Nombre";
             // 
             // WarehouseShow
             // 
@@ -540,6 +512,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RawMaterial)).EndInit();
             this.tabPage_Products.ResumeLayout(false);
             this.tabPage_Products.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Product)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -558,14 +532,6 @@
         private System.Windows.Forms.TabPage tabPage_rawMaterial;
         private System.Windows.Forms.Button buttonAdd_RawMaterial;
         private System.Windows.Forms.DataGridView dataGridView_RawMaterial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockActual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockVirtual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockMinimo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockMaximo;
-        private System.Windows.Forms.DataGridViewComboBoxColumn estado;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn borrar;
         private System.Windows.Forms.Button buttonDelete_RawMaterial;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox_RM;
@@ -574,23 +540,29 @@
         private System.Windows.Forms.TabPage tabPage_Products;
         private System.Windows.Forms.Button buttonAdd_Product;
         private System.Windows.Forms.DataGridView dataGridView_Product;
+        private System.Windows.Forms.Button buttonDelete_Product;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_Producto;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.Button buttonDelete_Product;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonSearch_Product;
-        private System.Windows.Forms.TextBox textBox_idProduct;
-        private System.Windows.Forms.ComboBox comboBox_statusP;
-        private System.Windows.Forms.TextBox textBox_nameProduct;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockVirtual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockMinimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockMaximo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn borrar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdRMW;
     }
 }

@@ -63,7 +63,8 @@ namespace InkaArt.Interface.Warehouse
                         rmWarehouseList.Rows[i]["currentStock"],
                         rmWarehouseList.Rows[i]["virtualStock"],
                         rmWarehouseList.Rows[i]["minimunStock"],
-                        rmWarehouseList.Rows[i]["maximunStock"]);
+                        rmWarehouseList.Rows[i]["maximunStock"],
+                        rmWarehouseList.Rows[i]["idRawMaterialWarehouse"]);
                 }
             }
         }
@@ -109,10 +110,7 @@ namespace InkaArt.Interface.Warehouse
             textBox_name.Enabled = true;
             textBox_description.Enabled = true;
             textBox_address.Enabled = true;
-            textBox_idProduct.Enabled = true;
-            textBox_nameProduct.Enabled = true;
             comboBox_RM.Enabled = true;
-            comboBox_statusP.Enabled = true;
         }
 
         private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
