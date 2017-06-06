@@ -136,7 +136,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = false;
                 buttonAdd.Enabled = false;
                 buttonDelete.Enabled = false;
-                control.updateData(textBox_idSupplier.Text,textBox_name.Text, int.Parse(textBox_ruc.Text), textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                control.updateData(textBox_idSupplier.Text,textBox_name.Text, long.Parse(textBox_ruc.Text), textBox_contactName.Text, long.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                 buttonSave.Text = "Editar";
             }
             else if (mode==2)
@@ -160,7 +160,7 @@ namespace InkaArt.Interface.Purchases
                 {
                     return;
                 }
-                control.insertData(textBox_name.Text, int.Parse(textBox_ruc.Text), textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                control.insertData(textBox_name.Text, long.Parse(textBox_ruc.Text), textBox_contactName.Text, long.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                 mode = 2;
                 isInEditMode = false;
                 textBox_name.Enabled = false;
@@ -237,6 +237,18 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_idRawMaterial.Text = actualdata;
+        }
+
+        private void button_doSearch(object sender, EventArgs e)
+        {
+            DataTable matList;
+            textBox_idRawMaterial.Text = textBox_idRawMaterial.Text.Trim();
+            matList = control_rs.getDataSuppliers(textBox_idRawMaterial.Text, textBox_idSupplier.Text);
+            dataGridView_rm_sup.DataSource = matList;
+            dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
+            dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
+            dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
+
         }
     }
 }

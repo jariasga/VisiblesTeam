@@ -121,7 +121,7 @@
             this.textBox_ruc.BackColor = System.Drawing.Color.White;
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ruc.Location = new System.Drawing.Point(24, 148);
-            this.textBox_ruc.MaxLength = 11;
+            this.textBox_ruc.MaxLength = 7;
             this.textBox_ruc.Name = "textBox_ruc";
             this.textBox_ruc.Size = new System.Drawing.Size(253, 24);
             this.textBox_ruc.TabIndex = 14;
@@ -282,7 +282,7 @@
             // 
             this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameRawMaterial.Location = new System.Drawing.Point(162, 48);
-            this.textBox_nameRawMaterial.MaxLength = 250;
+            this.textBox_nameRawMaterial.MaxLength = 280;
             this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
             this.textBox_nameRawMaterial.Size = new System.Drawing.Size(250, 24);
             this.textBox_nameRawMaterial.TabIndex = 26;
@@ -319,6 +319,7 @@
             this.button3.TabIndex = 41;
             this.button3.Text = "🔎 Buscar";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button_doSearch);
             // 
             // buttonDelete
             // 

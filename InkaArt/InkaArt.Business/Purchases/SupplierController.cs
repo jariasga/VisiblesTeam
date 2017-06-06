@@ -35,7 +35,7 @@ namespace InkaArt.Business.Purchases
 
             return supplierList;
         }
-        public void insertData(string nombre, int ruc,string contacto,int telefono,string correo,string direccion,int prioridad,string estado)
+        public void insertData(string nombre, long ruc,string contacto,long telefono,string correo,string direccion,int prioridad,string estado)
         {
             supplier.connect();
 
@@ -57,7 +57,7 @@ namespace InkaArt.Business.Purchases
 
             supplier.closeConnection();
         }
-        public void updateData(string id, string nombre, int ruc, string contacto, int telefono, string correo, string direccion, int prioridad, string estado)
+        public void updateData(string id, string nombre, long ruc, string contacto, long telefono, string correo, string direccion, int prioridad, string estado)
         {
             supplier.connect();
             table = data.Tables["Supplier"];
