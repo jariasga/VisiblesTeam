@@ -55,10 +55,10 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
+            this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -363,6 +363,16 @@
             this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
             this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 326);
             this.dataGridView_rm_sup.TabIndex = 10;
+            this.dataGridView_rm_sup.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.update_price);
+            this.dataGridView_rm_sup.DoubleClick += new System.EventHandler(this.obtain_idEdit);
+            // 
+            // Acción
+            // 
+            this.Acción.HeaderText = "";
+            this.Acción.Name = "Acción";
+            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Acción.Width = 61;
             // 
             // buttonSave
             // 
@@ -400,14 +410,6 @@
             this.label9.Size = new System.Drawing.Size(58, 18);
             this.label9.TabIndex = 25;
             this.label9.Text = "Estado";
-            // 
-            // Acción
-            // 
-            this.Acción.HeaderText = "";
-            this.Acción.Name = "Acción";
-            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Acción.Width = 61;
             // 
             // SupplierDetail
             // 

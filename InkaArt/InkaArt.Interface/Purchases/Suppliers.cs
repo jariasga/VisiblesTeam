@@ -10,11 +10,12 @@ namespace InkaArt.Interface.Purchases
     public partial class Suppliers : Form
     {
         SupplierController control;
+        DataTable suppliersList;
         public Suppliers()
         {
             InitializeComponent();
             control = new SupplierController();
-            DataTable suppliersList = control.getData();
+            suppliersList = control.getData();
             dataGridView_suppliersList.DataSource = suppliersList;
 
             dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
@@ -29,7 +30,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_suppliersList.Columns["address"].HeaderText = "Dirección";
             dataGridView_suppliersList.Columns["priority"].HeaderText = "Prioridad";
             dataGridView_suppliersList.Columns["status"].HeaderText = "Estado";
-        }
+             }
         
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,16 +52,9 @@ namespace InkaArt.Interface.Purchases
                 if (Convert.ToBoolean(dataGridView_suppliersList.Rows[i].Cells[0].Value)==true)
                 {
                     string idSupplier = dataGridView_suppliersList.Rows[i].Cells[1].Value.ToString();
-                    string name = dataGridView_suppliersList.Rows[i].Cells[2].Value.ToString();
-                    string ruc = dataGridView_suppliersList.Rows[i].Cells[3].Value.ToString();
-                    string address = dataGridView_suppliersList.Rows[i].Cells[8].Value.ToString();
-                    string priority = dataGridView_suppliersList.Rows[i].Cells[9].Value.ToString();
                     dataGridView_suppliersList.Rows[i].Cells[7].Value = "Inactivo";
                     string status = dataGridView_suppliersList.Rows[i].Cells[7].Value.ToString();
-                    string contactName = dataGridView_suppliersList.Rows[i].Cells[4].Value.ToString();
-                    string email = dataGridView_suppliersList.Rows[i].Cells[6].Value.ToString();
-                    string telephone = dataGridView_suppliersList.Rows[i].Cells[5].Value.ToString();
-                    //control.updateData(idSupplier,name, int.Parse(ruc), contactName, int.Parse(telephone), email, address, int.Parse(priority), status);
+                    control.updateStatus(idSupplier,status);
                 }
             }
         }
@@ -110,13 +104,51 @@ namespace InkaArt.Interface.Purchases
             }
             textBox_ruc.Text = actualdata;
         }
-
+        private void filter()
+        {
+            DataRow[] rows;
+            suppliersList = control.getData();
+            string cadena = "";
+            if (textBox_id.Text.Length > 0)
+            {
+                cadena = " AND id_supplier = " + textBox_id.Text;
+            }
+            if (textBox_ruc.Text.Length > 0)
+            {
+                cadena += " AND ruc = " + textBox_ruc.Text;
+            }
+            if (String.Compare(comboBox_status.Text, "Activo") == 0)
+            {
+                rows = suppliersList.Select("name LIKE '%" + textBox_supplier.Text + "%' AND address LIKE '%" + textBox_address.Text + "%' AND status LIKE '" + comboBox_status.Text + "'" + cadena);
+            }
+            else
+            {
+                rows = suppliersList.Select("name LIKE '%" + textBox_supplier.Text + "%' AND address LIKE '%" + textBox_address.Text + "%' AND status LIKE '%" + comboBox_status.Text + "%'" + cadena);
+            }
+            if (rows.Any()) suppliersList = rows.CopyToDataTable();
+            else suppliersList.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            suppliersList.DefaultView.Sort = sortQuery;
+        }
         private void button_search(object sender, EventArgs e)
         {
-            if (true)
-            {
-                //buscar
-            }
+            textBox_address.Text = textBox_address.Text.Trim();
+            textBox_supplier.Text = textBox_supplier.Text.Trim();
+            filter();
+            dataGridView_suppliersList.DataSource = suppliersList;
+
+            dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
+            dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
+            dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
+            dataGridView_suppliersList.Columns["contact"].HeaderText = "Contacto";
+            dataGridView_suppliersList.Columns["contact"].Visible = false;
+            dataGridView_suppliersList.Columns["telephone"].HeaderText = "Teléfono";
+            dataGridView_suppliersList.Columns["telephone"].Visible = false;
+            dataGridView_suppliersList.Columns["email"].HeaderText = "Correo";
+            dataGridView_suppliersList.Columns["address"].Visible = false;
+            dataGridView_suppliersList.Columns["address"].HeaderText = "Dirección";
+            dataGridView_suppliersList.Columns["priority"].HeaderText = "Prioridad";
+            dataGridView_suppliersList.Columns["status"].HeaderText = "Estado";
         }
     }
 }

@@ -113,7 +113,8 @@
             this.comboBox_status.Items.AddRange(new object[] {
             "Pendiente",
             "Entregado",
-            "Por pagar"});
+            "Por pagar",
+            "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(13, 394);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(183, 25);
@@ -368,7 +369,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(104, 42);
             this.buttonSave.TabIndex = 23;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 

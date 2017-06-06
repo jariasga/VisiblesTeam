@@ -73,5 +73,18 @@ namespace InkaArt.Business.Purchases
             }
             supplier.updateData(data, adap, "Supplier");
         }
+        public void updateStatus(string id,string estado)
+        {
+            table = data.Tables["Supplier"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (String.Compare(table.Rows[i]["id_supplier"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["status"] = estado;
+                    break;
+                }
+            }
+            supplier.updateData(data, adap, "Supplier");
+        }
     }
 }
