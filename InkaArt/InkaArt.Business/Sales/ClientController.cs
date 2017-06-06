@@ -61,16 +61,12 @@ namespace InkaArt.Business.Sales
                 {
                     case 0:
                         return "Ingrese un RUC válido";
-                    case 1:
-                        return "El RUC debe ser numérico";
-                    case 2:
-                        return "El RUC debe ser de 10 cifras";
                 }
             }
             else if (personType.Equals("1"))
             {
                 if (!int.TryParse(dni, out aux))
-                    return "El DNI debe ser numérico";
+                    return "Ingrese un DNI válido";
             }
             else
             {
@@ -135,7 +131,7 @@ namespace InkaArt.Business.Sales
             }
             else
             {
-                return 1;
+                return 0;
             }
         }
     }
