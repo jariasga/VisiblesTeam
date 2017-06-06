@@ -30,20 +30,12 @@
         {
             this.button_save = new System.Windows.Forms.Button();
             this.grid_reports = new System.Windows.Forms.DataGridView();
-            this.grid_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label_date = new System.Windows.Forms.Label();
+            this.label_worker = new System.Windows.Forms.Label();
             this.combobox_worker = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label_job = new System.Windows.Forms.Label();
             this.combobox_job = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label_recipe = new System.Windows.Forms.Label();
@@ -51,12 +43,20 @@
             this.textbox_produced = new System.Windows.Forms.TextBox();
             this.textbox_end = new System.Windows.Forms.TextBox();
             this.textbox_broken = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label_produced = new System.Windows.Forms.Label();
+            this.label_end = new System.Windows.Forms.Label();
             this.label_broken = new System.Windows.Forms.Label();
             this.textbox_start = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.label_start = new System.Windows.Forms.Label();
             this.date_picker = new System.Windows.Forms.DateTimePicker();
+            this.grid_column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +69,7 @@
             this.button_save.Location = new System.Drawing.Point(566, 424);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(185, 42);
-            this.button_save.TabIndex = 28;
+            this.button_save.TabIndex = 65;
             this.button_save.Text = "🖫 Guardar registros";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_guardar_Click);
@@ -78,73 +78,21 @@
             // 
             this.grid_reports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_reports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.grid_id,
-            this.grid_worker,
-            this.grid_job,
-            this.grid_recipe,
-            this.grid_start,
-            this.grid_end,
-            this.grid_broken,
-            this.grid_produced});
+            this.grid_column_id,
+            this.grid_column_worker,
+            this.grid_column_job,
+            this.grid_column_recipe,
+            this.grid_column_start,
+            this.grid_column_end,
+            this.grid_column_broken,
+            this.grid_column_produced});
             this.grid_reports.Location = new System.Drawing.Point(12, 215);
             this.grid_reports.Name = "grid_reports";
             this.grid_reports.Size = new System.Drawing.Size(846, 198);
-            this.grid_reports.TabIndex = 29;
-            // 
-            // grid_id
-            // 
-            this.grid_id.HeaderText = "ID";
-            this.grid_id.Name = "grid_id";
-            this.grid_id.ReadOnly = true;
-            this.grid_id.Width = 50;
-            // 
-            // grid_worker
-            // 
-            this.grid_worker.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.grid_worker.HeaderText = "Trabajador";
-            this.grid_worker.Name = "grid_worker";
-            this.grid_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grid_worker.Width = 180;
-            // 
-            // grid_job
-            // 
-            this.grid_job.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.grid_job.HeaderText = "Puesto de trabajo";
-            this.grid_job.Name = "grid_job";
-            this.grid_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_job.Width = 180;
-            // 
-            // grid_recipe
-            // 
-            this.grid_recipe.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.grid_recipe.HeaderText = "Receta";
-            this.grid_recipe.Name = "grid_recipe";
-            this.grid_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // grid_start
-            // 
-            this.grid_start.HeaderText = "Hora inicio";
-            this.grid_start.Name = "grid_start";
-            this.grid_start.Width = 110;
-            // 
-            // grid_end
-            // 
-            this.grid_end.HeaderText = "Hora fin";
-            this.grid_end.Name = "grid_end";
-            // 
-            // grid_broken
-            // 
-            this.grid_broken.HeaderText = "Rotos";
-            this.grid_broken.Name = "grid_broken";
-            this.grid_broken.Width = 80;
-            // 
-            // grid_produced
-            // 
-            this.grid_produced.HeaderText = "Terminados";
-            this.grid_produced.Name = "grid_produced";
-            this.grid_produced.Width = 95;
+            this.grid_reports.TabIndex = 50;
+            this.grid_reports.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_reports_CellValueChanged);
+            this.grid_reports.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_reports_EditingControlShowing);
+            this.grid_reports.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grid_reports_RowsAdded);
             // 
             // button_delete
             // 
@@ -154,7 +102,7 @@
             this.button_delete.Location = new System.Drawing.Point(367, 424);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(151, 42);
-            this.button_delete.TabIndex = 49;
+            this.button_delete.TabIndex = 60;
             this.button_delete.Text = "🗑 Eliminar Fila";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
@@ -167,50 +115,51 @@
             this.button_add.Location = new System.Drawing.Point(97, 424);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(223, 42);
-            this.button_add.TabIndex = 44;
+            this.button_add.TabIndex = 55;
             this.button_add.Text = "Agregar informe de turno";
             this.button_add.UseVisualStyleBackColor = false;
             this.button_add.Click += new System.EventHandler(this.button_agregar_Click);
             // 
-            // label9
+            // label_date
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(12, 17);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(197, 18);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Fecha del informe de turno:";
+            this.label_date.AutoSize = true;
+            this.label_date.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_date.Location = new System.Drawing.Point(12, 17);
+            this.label_date.Name = "label_date";
+            this.label_date.Size = new System.Drawing.Size(197, 18);
+            this.label_date.TabIndex = 25;
+            this.label_date.Text = "Fecha del informe de turno:";
             // 
-            // label5
+            // label_worker
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(13, 29);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 18);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "Trabajador";
+            this.label_worker.AutoSize = true;
+            this.label_worker.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_worker.Location = new System.Drawing.Point(13, 29);
+            this.label_worker.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_worker.Name = "label_worker";
+            this.label_worker.Size = new System.Drawing.Size(83, 18);
+            this.label_worker.TabIndex = 31;
+            this.label_worker.Text = "Trabajador";
             // 
             // combobox_worker
             // 
             this.combobox_worker.FormattingEnabled = true;
+            this.combobox_worker.ItemHeight = 18;
             this.combobox_worker.Location = new System.Drawing.Point(16, 50);
             this.combobox_worker.Name = "combobox_worker";
             this.combobox_worker.Size = new System.Drawing.Size(376, 26);
-            this.combobox_worker.TabIndex = 30;
+            this.combobox_worker.TabIndex = 10;
             // 
-            // label2
+            // label_job
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 90);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 18);
-            this.label2.TabIndex = 35;
-            this.label2.Text = "Puesto de trabajo";
+            this.label_job.AutoSize = true;
+            this.label_job.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_job.Location = new System.Drawing.Point(13, 90);
+            this.label_job.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_job.Name = "label_job";
+            this.label_job.Size = new System.Drawing.Size(131, 18);
+            this.label_job.TabIndex = 35;
+            this.label_job.Text = "Puesto de trabajo";
             // 
             // combobox_job
             // 
@@ -218,7 +167,7 @@
             this.combobox_job.Location = new System.Drawing.Point(16, 111);
             this.combobox_job.Name = "combobox_job";
             this.combobox_job.Size = new System.Drawing.Size(171, 26);
-            this.combobox_job.TabIndex = 34;
+            this.combobox_job.TabIndex = 15;
             this.combobox_job.SelectedIndexChanged += new System.EventHandler(this.combobox_job_SelectedIndexChanged);
             // 
             // groupBox1
@@ -228,19 +177,19 @@
             this.groupBox1.Controls.Add(this.textbox_produced);
             this.groupBox1.Controls.Add(this.textbox_end);
             this.groupBox1.Controls.Add(this.textbox_broken);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label_produced);
+            this.groupBox1.Controls.Add(this.label_end);
             this.groupBox1.Controls.Add(this.label_broken);
             this.groupBox1.Controls.Add(this.textbox_start);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label_start);
+            this.groupBox1.Controls.Add(this.label_worker);
             this.groupBox1.Controls.Add(this.combobox_worker);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label_job);
             this.groupBox1.Controls.Add(this.combobox_job);
             this.groupBox1.Location = new System.Drawing.Point(12, 49);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(846, 152);
-            this.groupBox1.TabIndex = 50;
+            this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agregar un informe de turno";
             // 
@@ -261,24 +210,24 @@
             this.combobox_recipe.Location = new System.Drawing.Point(221, 111);
             this.combobox_recipe.Name = "combobox_recipe";
             this.combobox_recipe.Size = new System.Drawing.Size(171, 26);
-            this.combobox_recipe.TabIndex = 55;
+            this.combobox_recipe.TabIndex = 20;
             // 
             // textbox_produced
             // 
             this.textbox_produced.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_produced.Location = new System.Drawing.Point(629, 113);
+            this.textbox_produced.Location = new System.Drawing.Point(639, 113);
             this.textbox_produced.Name = "textbox_produced";
             this.textbox_produced.Size = new System.Drawing.Size(172, 24);
-            this.textbox_produced.TabIndex = 54;
+            this.textbox_produced.TabIndex = 40;
             this.textbox_produced.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_number_KeyPress);
             // 
             // textbox_end
             // 
             this.textbox_end.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_end.Location = new System.Drawing.Point(629, 50);
+            this.textbox_end.Location = new System.Drawing.Point(639, 50);
             this.textbox_end.Name = "textbox_end";
             this.textbox_end.Size = new System.Drawing.Size(172, 24);
-            this.textbox_end.TabIndex = 53;
+            this.textbox_end.TabIndex = 30;
             this.textbox_end.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_hour_KeyPress);
             // 
             // textbox_broken
@@ -287,36 +236,36 @@
             this.textbox_broken.Location = new System.Drawing.Point(428, 113);
             this.textbox_broken.Name = "textbox_broken";
             this.textbox_broken.Size = new System.Drawing.Size(172, 24);
-            this.textbox_broken.TabIndex = 52;
+            this.textbox_broken.TabIndex = 35;
             this.textbox_broken.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_number_KeyPress);
             // 
-            // label6
+            // label_produced
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(626, 90);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(194, 18);
-            this.label6.TabIndex = 51;
-            this.label6.Text = "# de productos terminados";
+            this.label_produced.AutoSize = true;
+            this.label_produced.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_produced.Location = new System.Drawing.Point(636, 90);
+            this.label_produced.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_produced.Name = "label_produced";
+            this.label_produced.Size = new System.Drawing.Size(194, 18);
+            this.label_produced.TabIndex = 51;
+            this.label_produced.Text = "# de productos terminados";
             // 
-            // label7
+            // label_end
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(626, 29);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 18);
-            this.label7.TabIndex = 50;
-            this.label7.Text = "Hora final";
+            this.label_end.AutoSize = true;
+            this.label_end.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_end.Location = new System.Drawing.Point(636, 29);
+            this.label_end.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_end.Name = "label_end";
+            this.label_end.Size = new System.Drawing.Size(74, 18);
+            this.label_end.TabIndex = 50;
+            this.label_end.Text = "Hora final";
             // 
             // label_broken
             // 
             this.label_broken.AutoSize = true;
             this.label_broken.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_broken.Location = new System.Drawing.Point(425, 90);
+            this.label_broken.Location = new System.Drawing.Point(425, 92);
             this.label_broken.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_broken.Name = "label_broken";
             this.label_broken.Size = new System.Drawing.Size(151, 18);
@@ -329,19 +278,19 @@
             this.textbox_start.Location = new System.Drawing.Point(428, 50);
             this.textbox_start.Name = "textbox_start";
             this.textbox_start.Size = new System.Drawing.Size(172, 24);
-            this.textbox_start.TabIndex = 46;
+            this.textbox_start.TabIndex = 25;
             this.textbox_start.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_hour_KeyPress);
             // 
-            // label4
+            // label_start
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(425, 29);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 18);
-            this.label4.TabIndex = 38;
-            this.label4.Text = "Hora inicial";
+            this.label_start.AutoSize = true;
+            this.label_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_start.Location = new System.Drawing.Point(425, 29);
+            this.label_start.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_start.Name = "label_start";
+            this.label_start.Size = new System.Drawing.Size(86, 18);
+            this.label_start.TabIndex = 38;
+            this.label_start.Text = "Hora inicial";
             // 
             // date_picker
             // 
@@ -349,9 +298,64 @@
             this.date_picker.Location = new System.Drawing.Point(233, 12);
             this.date_picker.Name = "date_picker";
             this.date_picker.Size = new System.Drawing.Size(171, 26);
-            this.date_picker.TabIndex = 51;
+            this.date_picker.TabIndex = 5;
             this.date_picker.Value = new System.DateTime(2017, 6, 4, 18, 31, 53, 0);
             this.date_picker.ValueChanged += new System.EventHandler(this.date_picker_ValueChanged);
+            // 
+            // grid_column_id
+            // 
+            this.grid_column_id.HeaderText = "ID";
+            this.grid_column_id.Name = "grid_column_id";
+            this.grid_column_id.ReadOnly = true;
+            this.grid_column_id.Width = 50;
+            // 
+            // grid_column_worker
+            // 
+            this.grid_column_worker.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.grid_column_worker.HeaderText = "Trabajador";
+            this.grid_column_worker.Name = "grid_column_worker";
+            this.grid_column_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.grid_column_worker.Width = 180;
+            // 
+            // grid_column_job
+            // 
+            this.grid_column_job.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.grid_column_job.HeaderText = "Puesto de trabajo";
+            this.grid_column_job.Name = "grid_column_job";
+            this.grid_column_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_job.Width = 180;
+            // 
+            // grid_column_recipe
+            // 
+            this.grid_column_recipe.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.grid_column_recipe.HeaderText = "Receta";
+            this.grid_column_recipe.Name = "grid_column_recipe";
+            this.grid_column_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // grid_column_start
+            // 
+            this.grid_column_start.HeaderText = "Hora inicio";
+            this.grid_column_start.Name = "grid_column_start";
+            this.grid_column_start.Width = 110;
+            // 
+            // grid_column_end
+            // 
+            this.grid_column_end.HeaderText = "Hora fin";
+            this.grid_column_end.Name = "grid_column_end";
+            // 
+            // grid_column_broken
+            // 
+            this.grid_column_broken.HeaderText = "Rotos";
+            this.grid_column_broken.Name = "grid_column_broken";
+            this.grid_column_broken.Width = 80;
+            // 
+            // grid_column_produced
+            // 
+            this.grid_column_produced.HeaderText = "Terminados";
+            this.grid_column_produced.Name = "grid_column_produced";
+            this.grid_column_produced.Width = 95;
             // 
             // RegisterRatio
             // 
@@ -365,7 +369,7 @@
             this.Controls.Add(this.button_add);
             this.Controls.Add(this.grid_reports);
             this.Controls.Add(this.button_save);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label_date);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RegisterRatio";
@@ -384,30 +388,30 @@
         private System.Windows.Forms.DataGridView grid_reports;
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.Button button_add;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label_date;
+        private System.Windows.Forms.Label label_worker;
         private System.Windows.Forms.ComboBox combobox_worker;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label_job;
         private System.Windows.Forms.ComboBox combobox_job;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker date_picker;
         private System.Windows.Forms.TextBox textbox_produced;
-        private System.Windows.Forms.TextBox textbox_end;
         private System.Windows.Forms.TextBox textbox_broken;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label_produced;
+        private System.Windows.Forms.Label label_end;
         private System.Windows.Forms.Label label_broken;
-        private System.Windows.Forms.TextBox textbox_start;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label_start;
         private System.Windows.Forms.Label label_recipe;
         private System.Windows.Forms.ComboBox combobox_recipe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_id;
-        private System.Windows.Forms.DataGridViewComboBoxColumn grid_worker;
-        private System.Windows.Forms.DataGridViewComboBoxColumn grid_job;
-        private System.Windows.Forms.DataGridViewComboBoxColumn grid_recipe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_start;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_end;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_broken;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_produced;
+        private System.Windows.Forms.TextBox textbox_end;
+        private System.Windows.Forms.TextBox textbox_start;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_worker;
+        private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_job;
+        private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_recipe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_start;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_end;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_broken;
+        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_produced;
     }
 }

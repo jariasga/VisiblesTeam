@@ -12,7 +12,7 @@ namespace InkaArt.Algorithm.Grasp
     {
         WorkerController workers;
         JobController jobs;
-        RatioController turn_reports;
+        RatioController ratios;
 
         public Grasp()
         {
@@ -20,7 +20,7 @@ namespace InkaArt.Algorithm.Grasp
             workers.Load();
             jobs = new JobController();
             jobs.Load();
-            turn_reports = new RatioController();
+            ratios = new RatioController();
         }
     }
 }

@@ -57,52 +57,5 @@ namespace InkaArt.Data.Algorithm
             this.average_breakage = average_breakage;
             this.average_time = average_time;
         }
-
-        public void Insert()
-        {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
-            connection.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO RatioResume(id_worker, id_job, id_recipe, " +
-                "average_breakage, average_time) VALUES (:id_worker, :id_job, :id_recipe, :average_breakage, " +
-                ":average_time)", connection);
-
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
-            command.Parameters.AddWithValue("average_breakage", NpgsqlDbType.Double, average_breakage);
-            command.Parameters.AddWithValue("average_time", NpgsqlDbType.Double, average_time);
-
-            this.id_resume = (int) command.ExecuteScalar();
-            connection.Close();
-        }
-
-        public void Update(double averageBreakage, double averageTime, double breakageIndex, double timeIndex)
-        {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
-            connection.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"RatioResume\" SET " +
-                "average_breakage = :average_breakage, average_time = :average_time WHERE " +
-                "id_resume = :id_resume", connection);
-
-            command.Parameters.AddWithValue("average_breakage", NpgsqlDbType.Double, average_breakage);
-            command.Parameters.AddWithValue("average_time", NpgsqlDbType.Double, average_time);
-            command.Parameters.AddWithValue("id_resume", NpgsqlDbType.Integer, id_resume);
-
-            command.ExecuteNonQuery();
-            connection.Close();
-        }
-        
-        public void Delete()
-        {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
-            connection.Open();
-            
-            connection.Close();
-        }
     }
 }

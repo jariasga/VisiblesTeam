@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Business\Algorithm\IndexController.cs" />
     <Compile Include="Business\Algorithm\ProcessController.cs" />
+    <Compile Include="Common\LogHandler.cs" />
     <Compile Include="Data\Algorithm\Assignment.cs" />
     <Compile Include="Business\Algorithm\Grasp.cs" />
     <Compile Include="Business\Algorithm\Instance.cs" />

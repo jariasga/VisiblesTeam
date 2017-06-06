@@ -13,25 +13,28 @@ namespace InkaArt.Business.Algorithm
 {
     class RatioController
     {
-        List<Ratio> turn_reports;
+        List<Ratio> ratios;
+        RatioResumeController resumes;
 
         public RatioController()
         {
-            turn_reports = new List<Ratio>();
+            ratios = new List<Ratio>();
+            resumes = new RatioResumeController();
         }
 
         public void Load(DateTime date)
         {
-            turn_reports.Clear();
+            ratios.Clear();
 
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date "
-                + "ORDER BY id_report ASC", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date AND "
+                + "status = :status ORDER BY id_report ASC", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
+            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -47,61 +50,212 @@ namespace InkaArt.Business.Algorithm
                 double breakage = reader.GetDouble(9);
                 double time = reader.GetDouble(10);
 
-                turn_reports.Add(new Ratio(id_report, date, id_worker, id_job, id_recipe, start, end, broken,
+                ratios.Add(new Ratio(id_report, date, id_worker, id_job, id_recipe, start, end, broken,
                     produced, breakage, time));
             }
 
             connection.Close();
         }
 
-        public void Insert(int id_worker, DateTime date, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
-            int broken, int produced)
+        public Ratio Verify(int id_report, DateTime date, string worker_text, string job_text, string recipe_text,
+            string start_text, string end_text, string broken_text, string produced_text, WorkerController workers,
+            JobController jobs, RecipeController recipes, ref string message)
         {
-            Ratio turn_report = new Ratio(0, date, id_worker, id_job, id_recipe, start, end, broken, produced,
-                broken / produced, (end - start).Minutes / produced);
-            turn_reports.Add(turn_report);
-            turn_report.Insert();
+            if (id_report < 0)
+            {
+                message = "El ID del informe de turno no es válido.";
+                return null;
+            }
 
-            //Actualizar resumen de reportes
+            Worker worker = workers.GetByFullName(worker_text);
+            if (worker == null)
+            {
+                message = "El trabajador seleccionado no es válido.";
+                return null;
+            }
 
+            Job job = jobs.GetByName(job_text);
+            if (job == null)
+            {
+                message = "El puesto de trabajo seleccionado no es válido.";
+                return null;
+            }
+
+            Recipe recipe = recipes.GetByDescription(recipe_text);
+            if (recipe == null)
+            {
+                message = "La receta seleccionada no es válida.";
+                return null;
+            }
+            if (recipe.Product != job.Product)
+            {
+                message = "Los productos asocidados al puesto de trabajo y a la receta no coinciden.";
+                return null;
+            }
+
+            TimeSpan start, end;
+            if (!TimeSpan.TryParse(start_text, out start) || start.TotalMinutes <= 0 || start.TotalMinutes >= 24 * 60)
+            {
+                message = "La hora inicial ingresada no es válida.";
+                return null;
+            }
+            if (!TimeSpan.TryParse(end_text, out end) || end.TotalMinutes <= 0 || end.TotalMinutes >= 24 * 60)
+            {
+                message = "La hora final ingresada no es válida.";
+                return null;
+            }
+            if (start.TotalMinutes >= end.TotalMinutes)
+            {
+                message = "La hora inicial ingresada debe ser menor a la hora final ingresada.";
+                return null;
+            }
+
+            int broken, produced;
+            if (!int.TryParse(broken_text, out broken) || broken <= 0)
+            {
+                message = "El número de productos rotos no es válido.";
+                return null;
+            }
+            if (!int.TryParse(produced_text, out produced) || produced <= 0)
+            {
+                message = "El número de productos elaborados no es válido.";
+                return null;
+            }
+            if (broken > produced)
+            {
+                message = "El número de productos rotos no puede ser mayor al número de productos elaborados.";
+                return null;
+            }
+            
+            Ratio ratio = new Ratio(id_report, date, worker.ID, job.ID, recipe.ID, start, end, broken, produced,
+                (double)broken / produced, (end - start).TotalMinutes / produced);
+            return ratio;
         }
 
-        public void Update(int id_report, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
-            int broken, int produced)
+        public int VerifyAndSave(int id_report, DateTime date, string worker, string job, string recipe,
+            string start, string end, string broken, string produced, WorkerController workers,
+            JobController jobs, RecipeController recipes, ref string message)
         {
-            Ratio turn_report = GetById(id_report);
-            turn_report.Update(date, id_worker, id_job, id_recipe, start, end, broken, produced, broken / produced,
-                (end - start).Minutes / produced);
+            Ratio ratio = Verify(id_report, date, worker, job, recipe, start, end, broken, produced,
+                workers, jobs, recipes, ref message);
+            if (ratio == null) return 0;
 
-            //Actualizar resumen de reportes
-
+            if (id_report == 0) return Insert(ratio, ref message);
+            else return Update(ratio, ref message);
         }
 
-        public void Delete(int id_report)
+        public int Insert(Ratio ratio, ref string message)
         {
-            Ratio turn_report = GetById(id_report);
-            turn_report.Delete();
+            try
+            {
+                ratio.Insert();
+                ratios.Add(ratio);
 
-            //Actualizar resumen de reportes
+                //Actualizar resumen de reportes
+                /*int count = ratio.Count();
+                if (count <= 0) resumes.Insert(ratio);
+                else
+                {
+                    double average_breakage, average_time;
+                    ratio.AverageValues(out average_breakage, out average_time);
+                    resumes.Update(ratio, average_breakage, average_time);
+                }*/
+                    
+                
+                return ratio.ID;
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrió un problema con la base de datos al intentar insertar un ratio: " + e.Message;
+                LogHandler.WriteLine("Excepción al intentar insertar un ratio: " + e.ToString());
+                return 0;
+            }
+        }
 
+        public int Update(Ratio ratio, ref string message)
+        {
+            try
+            {
+                int index = GetIndex(ratio.ID);
+                if (index < 0)
+                {
+                    message = "No se pudo encontrar el ID del informe de turno al intentar actualizarlo.";
+                    return 0;
+                }
+                Ratio old_ratio = ratios[index];
+                ratios[index] = ratio;
+                ratios[index].Update();
+
+                //Actualizar resumen de reportes
+                if (old_ratio.Worker == ratio.Worker && old_ratio.Job == ratio.Job && old_ratio.Recipe == ratio.Recipe)
+                {
+
+                }
+                else
+                {
+
+                }
+                //resumes.Save(old_ratio, ref message);
+                //resumes.Save(ratio, ref message);
+
+                return ratio.ID;
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrió un problema con la base de datos al intentar actualizar un ratio: " + e.Message;
+                LogHandler.WriteLine("Excepción al intentar actualizar un ratio: " + e.ToString());
+                return 0;
+            }
+        }
+
+        public bool Delete(int id_report, ref string message)
+        {
+            try
+            {
+                int index = GetIndex(id_report);
+                if (index < 0)
+                {
+                    message = "No se pudo encontrar el ID del informe de turno al intentar eliminarlo.";
+                    return false;
+                }
+                ratios[index].Delete();
+                ratios.RemoveAt(index);
+
+                //Actualizar resumen de reportes
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                message = "Ocurrió un problema con la base de datos al intentar eliminar un ratio: " + e.Message;
+                LogHandler.WriteLine("Excepción al intentar eliminar un ratio: " + e.ToString());
+                return false;
+            }
         }
 
         public Ratio GetById(int id)
         {
-            for (int i = 0; i < turn_reports.Count; i++)
-                if (turn_reports[i].ID == id) return turn_reports[i];
+            for (int i = 0; i < ratios.Count; i++)
+                if (ratios[i].ID == id) return ratios[i];
             return null;
+        }
+
+        public int GetIndex(int id)
+        {
+            for (int i = 0; i < ratios.Count; i++)
+                if (ratios[i].ID == id) return i;
+            return -1;
         }
 
         public Ratio this[int index]
         {
-            get { return turn_reports[index]; }
-            //set { turn_reports[index] = value; }
+            get { return ratios[index]; }
+            //set { ratios[index] = value; }
         }
 
         public int Count()
         {
-            return turn_reports.Count();
+            return ratios.Count();
         }
     }
 }
