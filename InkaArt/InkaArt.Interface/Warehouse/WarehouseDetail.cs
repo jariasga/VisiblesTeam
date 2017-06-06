@@ -27,7 +27,6 @@ namespace InkaArt.Interface.Warehouse
 
         private void button_return_click(object sender, EventArgs e)
         {
-            this.textBox_idWarehouse.Text = "";
             this.textBox_name.Text = "";
             this.textBox_description.Text = "";
             this.textBox_address.Text = "";
