@@ -27,7 +27,7 @@ namespace InkaArt.Data.Warehouse
 
         public DataTable GetData(int id = -1, string name = "", int state = -1)
         {
-            connect();
+            //connect();
 
             adap = productMovementAdapter();
             byId(adap, id);

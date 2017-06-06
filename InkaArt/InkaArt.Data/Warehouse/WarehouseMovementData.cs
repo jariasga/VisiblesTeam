@@ -17,6 +17,7 @@ namespace InkaArt.Data.Warehouse
         public WarehouseMovementData()
         {
             data = new DataSet();
+            //  Para futuro, no es necesario, solo tienes que apuntar data = getData(), el adaptador FILL ya devuelve un DataSet
         }
 
         public NpgsqlDataAdapter materialMovementAdapter()
@@ -28,7 +29,7 @@ namespace InkaArt.Data.Warehouse
 
         public DataTable GetData(int id = -1, string name = "", string state = "", string address = "")
         {
-            connect();
+            //connect();
 
             adap = materialMovementAdapter();
             byId(adap, id);

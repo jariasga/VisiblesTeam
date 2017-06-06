@@ -28,7 +28,7 @@ namespace InkaArt.Data.Warehouse
 
         public DataTable GetData()
         {
-            connect();
+            //connect();
 
             adap = ProductionMovementMovementDataAdapter();
             adap.SelectCommand.CommandText += " order by 1;";

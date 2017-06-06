@@ -60,7 +60,7 @@ namespace InkaArt.Business.Warehouse
 
         public void updateData(string idProd, string idWarehouse, int numMov, string typeMovement)
         {
-            productionItemWarehouseMovementData.connect();
+            //productionItemWarehouseMovementData.connect();
             adapt = productionItemWarehouseMovementData.ProductionItemWarehouseAdapter();
 
             data.Clear();
