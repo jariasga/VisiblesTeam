@@ -84,6 +84,12 @@ namespace InkaArt.Business.Sales
                 return "Seleccione un estado";
             return "OK";
         }
+
+        public void deleteClients(List<string> selectedClients)
+        {
+            clientData.deleteClients(selectedClients);
+        }
+
         public bool validateTrackBar(string value)
         {
             int aux;

@@ -24,7 +24,7 @@ namespace InkaArt.Interface.Sales
             ClientCreate create_form = new ClientCreate();
             var response = create_form.ShowDialog();
             if (response == DialogResult.OK)
-                updateDataGrid();
+                updateDataGrid(false);
         }
 
         private void grid_clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -35,28 +35,28 @@ namespace InkaArt.Interface.Sales
                 var show_form = new ClientShow(id);
                 var result = show_form.ShowDialog();
                 if (result == DialogResult.OK)
-                    updateDataGrid();
+                    updateDataGrid(false);
             }
         }
 
-        private void updateDataGrid()
+        private void updateDataGrid(bool flag)
         {
             DataTable clientList = clientController.GetClients();
-            populateDataGrid(clientList);
+            populateDataGrid(clientList,flag);
         }
 
         private void ClientsIndex_Load(object sender, EventArgs e)
         {
-            updateDataGrid();
+            updateDataGrid(false);
         }
 
-        private void populateDataGrid(DataTable clientList)
+        private void populateDataGrid(DataTable clientList, bool flag)
         {
             grid_clients.Rows.Clear();
             foreach (DataRow row in clientList.Rows)
             {
                 string status = row["status"].ToString().Equals("1") ? "Activo" : "Inactivo";
-                if (status.Equals("Activo")) grid_clients.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"]);
+                if (status.Equals("Activo") || flag) grid_clients.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"]);
             }
         }
 
@@ -74,7 +74,24 @@ namespace InkaArt.Interface.Sales
         {
             DataTable clientList;
             clientList = clientController.GetClients(textbox_id.Text, textbox_doc.Text, textbox_doc.Text, textbox_name.Text, combobox_state.SelectedIndex, combobox_priority.SelectedIndex);
-            populateDataGrid(clientList);
+            populateDataGrid(clientList, combobox_state.SelectedIndex == 0);
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            List<string> selectedClients = new List<string>();
+            foreach (DataGridViewRow row in grid_clients.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[deleteColumn.Index].Value) == true)
+                {
+                    selectedClients.Add(row.Cells[0].Value.ToString());
+                }
+            }
+            if (selectedClients.Count() > 0)
+            {
+                clientController.deleteClients(selectedClients);
+                updateDataGrid(false);
+            }
         }
     }
 }
