@@ -121,6 +121,7 @@ namespace InkaArt.Interface
         private void listaDeTurnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form turn_management = new TurnManagement();
+            turn_management.MdiParent = this;
             turn_management.Show();
         }
 

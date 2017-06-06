@@ -176,6 +176,7 @@ namespace InkaArt.Interface.Production
                         comboBox_version.Items.Add(recipeList.Rows[i]["version"].ToString());
                     }
                 }
+                MessageBox.Show("Nueva versión creada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
