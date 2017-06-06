@@ -67,6 +67,7 @@
             this.button_start.TabIndex = 41;
             this.button_start.Text = "Iniciar simulación";
             this.button_start.UseVisualStyleBackColor = false;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
             // 
             // label_name
             // 

@@ -30,7 +30,7 @@ namespace InkaArt.Business.Algorithm
         private int start_time;                      // milisegundos
         private int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
 
-        /* encapsulacion */
+        /* gets */
 
         public int LimitTime
         {
@@ -62,17 +62,18 @@ namespace InkaArt.Business.Algorithm
         {
             // time
             start_time = Environment.TickCount;
-            limit_time = 300000;                    // 1 000 * 60 * 5 (maximo 5 miutos)            
 
             // processes
             processes = new ProcessController();
             processes.Load();
-
             jobs = new JobController();
             jobs.Load();
 
+            // workers y ratios
             workers = new WorkerController();
-            workers.Load();
+            workers.Load(); // solo filtrados
+            ratios = new RatioResumeController();
+            ratios.Load();
 
             // pesos de ratios y productos
             LoadParameters();

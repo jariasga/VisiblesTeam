@@ -54,11 +54,13 @@
   <ItemGroup>
     <Compile Include="Business\Algorithm\IndexController.cs" />
     <Compile Include="Business\Algorithm\ProcessController.cs" />
+    <Compile Include="Business\Algorithm\SimulationController.cs" />
     <Compile Include="Data\Algorithm\Assignment.cs" />
     <Compile Include="Business\Algorithm\Grasp.cs" />
     <Compile Include="Business\Algorithm\Instance.cs" />
     <Compile Include="Data\Algorithm\Index.cs" />
     <Compile Include="Data\Algorithm\Process.cs" />
+    <Compile Include="Data\Algorithm\Simulation.cs" />
     <Compile Include="Data\Algorithm\TabuMove.cs" />
     <Compile Include="Data\Algorithm\TabuQueue.cs" />
     <Compile Include="Business\Algorithm\TabuSearch.cs" />
@@ -91,6 +93,12 @@
     <Compile Include="Interface\Production\SimulationConfig.designer.cs">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interface\Production\WorkersAssignment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\Production\WorkersAssignment.Designer.cs">
+      <DependentUpon>WorkersAssignment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Start.cs">
@@ -107,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\Production\SimulationConfig.resx">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interface\Production\WorkersAssignment.resx">
+      <DependentUpon>WorkersAssignment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
