@@ -131,6 +131,7 @@ namespace InkaArt.Data.Warehouse
                     table.Rows[i]["name"] = name;
                     table.Rows[i]["description"] = description;
                     table.Rows[i]["address"] = address;
+                    table.Rows[i]["state"] = state;
                     break;
                 }
             }
