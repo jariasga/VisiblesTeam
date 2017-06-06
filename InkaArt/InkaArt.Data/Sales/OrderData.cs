@@ -3,177 +3,227 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Npgsql;
 using InkaArt.Classes;
 using System.Data;
+using Npgsql;
 
 namespace InkaArt.Data.Sales
 {
-    public class ClientData : BD_Connector
+    public class OrderData : BD_Connector
     {
         private DataSet data;
         private DataTable table;
         private DataRow row;
         private NpgsqlDataAdapter adap;
-        public ClientData()
+        public OrderData()
         {
             data = new DataSet();
         }
-
-        public NpgsqlDataAdapter clientAdapter()
-        {
-            NpgsqlDataAdapter clientAdapter = new NpgsqlDataAdapter();
-            clientAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\"", Connection);
-            return clientAdapter;
-        }
-        
-        public NpgsqlDataAdapter clientUpdateAdapter()
-        {
-            NpgsqlDataAdapter clientUpdateAdapter = new NpgsqlDataAdapter();
-            clientUpdateAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\" WHERE \"idClient\" = :idClient;", Connection);
-            clientUpdateAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("idClient", DbType.Int32));
-            clientUpdateAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
-            clientUpdateAdapter.SelectCommand.Parameters[0].SourceColumn = "idClient";
-            return clientUpdateAdapter;
-        }
-
-        public int InsertClient(int personType, string name, long ruc, long dni, int priority, int type, int state, string address, int phone, string contact, string email)
+        public DataTable GetOrders()
         {
             connect();
-            adap = clientAdapter();
+            adap = orderAdapter();
             data.Clear();
-            data = getData(adap, "Client");
-            table = data.Tables["Client"];
-            row = table.NewRow();
-            row["clientType"] = personType;
-            row["name"] = name;
-            row["ruc"] = ruc;
-            row["dni"] = dni;
-            row["priority"] = priority;
-            row["type"] = type;
-            row["status"] = state;
-            row["address"] = address;
-            row["phone"] = phone;
-            row["contactName"] = contact;
-            row["email"] = email;
-            table.Rows.Add(row);
-            int rowsAffected = insertData(data, adap, "Client");
+            data = getData(adap, "Orders");
+            //Tengo el id del cliente, ahora tengo que buscar el campo RUC/DNI en la tabla cliente.
+            DataTable orderList = new DataTable();
+            orderList = data.Tables[0];
+            return orderList;
+        }
+
+        public NpgsqlDataAdapter orderAdapter()
+        {
+            NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
+            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\";", Connection);
+            return orderAdapter;
+        }
+        public NpgsqlDataAdapter orderIdAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT \"idOrder\" FROM inkaart.\"Order\" WHERE igv = :igv;", Connection);
+            adapter.SelectCommand.Parameters.Add(new NpgsqlParameter("igv", DbType.Double));
+            adapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters[0].SourceColumn = "igv";
+            return adapter;
+        }
+        public NpgsqlDataAdapter documentAdapter()
+        {
+            NpgsqlDataAdapter documentAdapter = new NpgsqlDataAdapter();
+            documentAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"DocumentType\";", Connection);
+            return documentAdapter;
+        }
+
+        public int InsertOrderLines(DataTable orderLines, double igv)
+        {
+            connect();
+            adap = orderAdapter();
+            data.Clear();
+            data = getData(adap, "Order");
+            DataTable order;
+            order = data.Tables[0];
+            int index = order.Rows.Count;
+            DataRow rowOrder = order.Rows[index - 1];
+            int orderId = int.Parse(rowOrder["idOrder"].ToString());
+            connect();
+            adap = insertOrderLineAdapter();
+            data.Clear();
+            data = getData(adap, "LineItem");
+            table = data.Tables["LineItem"];
+            foreach (DataRow r in orderLines.Rows)
+            {
+                row = table.NewRow();
+                var cantColumn = r["Cantidad"];
+                if (cantColumn == DBNull.Value) break;
+                float cant = float.Parse(r["Cantidad"].ToString());
+                string cali = r["Calidad"].ToString();
+                row["quantity"] = cant;
+                row["quality"] = cali;
+                row["idRecipe"] = getRecipeId(getProductId(r["Producto"].ToString()));
+                row["idProduct"] = getProductId(r["Producto"].ToString());
+                row["idOrder"] = orderId;
+                table.Rows.Add(row);
+            }
+            int rowsAffected = insertData(data, adap, "LineItem");
             return rowsAffected;
         }
 
-        public DataTable GetClients(int id = -1, long ruc = -1, long dni = -1, string name = "", int state = -1, int priority = -1)
+        private int getRecipeId(int productId)
+        {
+            connect();
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = recipeIdAdapter();
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = productId;
+
+            myData.Clear();
+            myData = getData(myAdap, "Recipe");
+
+            DataTable documentList = new DataTable();
+            documentList = myData.Tables[0];
+            DataRow row = documentList.Rows[0];
+            int id = int.Parse(row["idRecipe"].ToString());
+            return id;
+        }
+
+        private int getProductId(string productName)
+        {
+            connect();
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = productIdAdapter();
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = productName;
+
+            myData.Clear();
+            myData = getData(myAdap, "Product");
+
+            DataTable documentList = new DataTable();
+            documentList = myData.Tables[0];
+            DataRow row = documentList.Rows[0];
+            int id = int.Parse(row["idProduct"].ToString());
+            return id;
+        }
+
+        public NpgsqlDataAdapter productIdAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT \"idProduct\" FROM inkaart.\"Product\" WHERE name = :name;", Connection);
+            adapter.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
+            adapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters[0].SourceColumn = "name";
+            return adapter;
+        }
+        public NpgsqlDataAdapter recipeIdAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT \"idRecipe\" FROM inkaart.\"Recipe\" WHERE \"idProduct\" = :idProduct;", Connection);
+            adapter.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+            adapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters[0].SourceColumn = "idProduct";
+            return adapter;
+        }
+        public NpgsqlDataAdapter productAdapter()
+        {
+            NpgsqlDataAdapter productAdapter = new NpgsqlDataAdapter();
+            productAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Product\";", Connection);
+            return productAdapter;
+        }
+        public NpgsqlDataAdapter insertDocumentAdapter()
+        {
+            NpgsqlDataAdapter insertDocumentAdapter = new NpgsqlDataAdapter();
+            insertDocumentAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"SalesDocument\";", Connection);
+            return insertDocumentAdapter;
+        }
+        public NpgsqlDataAdapter insertOrderAdapter()
+        {
+            NpgsqlDataAdapter insertOrderAdapter = new NpgsqlDataAdapter();
+            insertOrderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\";", Connection);
+            return insertOrderAdapter;
+        }
+        public NpgsqlDataAdapter insertOrderLineAdapter()
+        {
+            NpgsqlDataAdapter insertOrderLineAdapter = new NpgsqlDataAdapter();
+            insertOrderLineAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"LineItem\";", Connection);
+            return insertOrderLineAdapter;
+        }
+        public DataTable GetDocumentTypes()
         {
             connect();
 
-            adap = clientAdapter();
-            byId(adap, id);
-            byName(adap, name);
-            byDoc(adap, ruc);
-            byState(adap, state);
-            byPriority(adap, priority);
-            adap.SelectCommand.CommandText += ";";
+            adap = documentAdapter();
+
             data.Clear();
-            data = getData(adap, "Client");
+            data = getData(adap, "DocumentType");
 
-            DataTable clientList = new DataTable();
-            clientList = data.Tables[0];
-            return clientList;
+            DataTable documentList = new DataTable();
+            documentList = data.Tables[0];
+            return documentList;
         }
-
-        private void byPriority(NpgsqlDataAdapter adap, int priority)
-        {
-            if (priority == -1) return;
-            int numParams = adap.SelectCommand.Parameters.Count();
-            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
-            else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "priority = :priority";
-            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("priority", DbType.Int32));
-            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
-            adap.SelectCommand.Parameters[numParams].SourceColumn = "priority";
-            adap.SelectCommand.Parameters[numParams].NpgsqlValue = priority;
-        }
-
-        private void byState(NpgsqlDataAdapter adap, int state)
-        {
-            if (state == -1) return;
-            int numParams = adap.SelectCommand.Parameters.Count();
-            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
-            else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "status = :status";
-            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("status", DbType.Int32));
-            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
-            adap.SelectCommand.Parameters[numParams].SourceColumn = "status";
-            adap.SelectCommand.Parameters[numParams].NpgsqlValue = state;
-        }
-
-        private void byDoc(NpgsqlDataAdapter adap, long doc)
-        {
-            if (doc == -1) return;
-            int numParams = adap.SelectCommand.Parameters.Count();
-            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
-            else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "ruc = :ruc";
-            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("ruc", DbType.Int64));
-            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
-            adap.SelectCommand.Parameters[numParams].SourceColumn = "ruc";
-            adap.SelectCommand.Parameters[numParams].NpgsqlValue = doc;
-        }
-
-        private void byName(NpgsqlDataAdapter adap, string name)
-        {
-            name = "%" + name + "%";
-            if (name.Equals("")) return;
-            int numParams = adap.SelectCommand.Parameters.Count();
-            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
-            else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "name LIKE :name";
-            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
-            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
-            adap.SelectCommand.Parameters[numParams].SourceColumn = "name";
-            adap.SelectCommand.Parameters[numParams].NpgsqlValue = name;
-        }
-
-        private void byId(NpgsqlDataAdapter adap, int id)
-        {
-            if (id == -1) return; //If there is no id, just return dude
-            int numParams = adap.SelectCommand.Parameters.Count();
-            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
-            else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "\"idClient\" = :idClient";
-            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idClient", DbType.Int32));
-            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
-            adap.SelectCommand.Parameters[numParams].SourceColumn = "idClient";
-            adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
-        }
-
-        public int UpdateClient(string id, int personType, string name, int ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
+        public DataTable GetProducts()
         {
             connect();
-            adap = clientAdapter();
+
+            adap = productAdapter();
 
             data.Clear();
-            data = getData(adap, "Client");
+            data = getData(adap, "Product");
 
-            table = data.Tables["Client"];
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                if (string.Compare(table.Rows[i]["idClient"].ToString(), id) == 0)
-                {
-                    table.Rows[i]["clientType"] = personType;
-                    table.Rows[i]["name"] = name;
-                    table.Rows[i]["ruc"] = ruc;
-                    table.Rows[i]["dni"] = dni;
-                    table.Rows[i]["priority"] = priority;
-                    table.Rows[i]["type"] = type;
-                    table.Rows[i]["status"] = state;
-                    table.Rows[i]["address"] = address;
-                    table.Rows[i]["phone"] = phone;
-                    table.Rows[i]["contactName"] = contact;
-                    table.Rows[i]["email"] = email;
-                    break;
-                }
-            }
-            return updateData(data, adap, "Client");
+            DataTable productList = new DataTable();
+            productList = data.Tables[0];
+            return productList;
+        }
+        public int InsertSaleDocument(int documentTypeId, float saleAmount, float igv, float totalAmount)
+        {
+            connect();
+            adap = insertDocumentAdapter();
+            data.Clear();
+            data = getData(adap, "SalesDocument");
+            table = data.Tables["SalesDocument"];
+            row = table.NewRow();
+            row["idDocumentType"] = documentTypeId;
+            row["amount"] = saleAmount;
+            row["igv"] = igv;
+            row["totalAmount"] = totalAmount;
+            table.Rows.Add(row);
+
+            int rowsAffected = insertData(data, adap, "SalesDocument");
+            return rowsAffected;
+        }
+        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus)
+        {
+            connect();
+            adap = insertOrderAdapter();
+            data.Clear();
+            data = getData(adap, "Order");
+            table = data.Tables["Order"];
+            row = table.NewRow();
+            row["idClient"] = idClient;
+            row["deliveryDate"] = deliveryDate;
+            row["saleAmount"] = totalAmount;
+            row["igv"] = igv;
+            row["totalAmount"] = totalAmount;
+            row["bdStatus"] = bdStatus;
+            row["orderStatus"] = orderStatus;
+            table.Rows.Add(row);
+            int rowsAffected = insertData(data, adap, "Order");
+            return rowsAffected;
         }
     }
 }
