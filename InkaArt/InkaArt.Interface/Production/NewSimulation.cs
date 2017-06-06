@@ -16,10 +16,10 @@ namespace InkaArt.Interface.Production
         {
             InitializeComponent();
         }
-
-        private void button_delete_Click(object sender, EventArgs e)
+        
+        private void ButtonCancelClick(object sender, EventArgs e)
         {
-            this.Close();
+
         }
     }
 }
