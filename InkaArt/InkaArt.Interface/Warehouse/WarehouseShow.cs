@@ -50,7 +50,7 @@ namespace InkaArt.Interface.Warehouse
             }
             else
             {
-                int response = warehouseController.updateWarehouse(warehouseId.ToString(), textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
+                int response = warehouseController.updateWarehouse(warehouseId.ToString(), textBox_name.Text, textBox_description.Text, textBox_address.Text);
                 if (response >= 0)
                 {
                     MessageBox.Show(this, "El almacén ha sido actualizado correctamente.", "Editar almacén", MessageBoxButtons.OK);
@@ -68,7 +68,10 @@ namespace InkaArt.Interface.Warehouse
             textBox_address.Enabled = true;
             textBox_idRawMaterial.Enabled = true;
             textBox_nameRawMaterial.Enabled = true;
-            comboBox_status.Enabled = true;
+            textBox_idProduct.Enabled = true;
+            textBox_nameProduct.Enabled = true;
+            comboBox_statusRM.Enabled = true;
+            comboBox_statusP.Enabled = true;
         }
 
     }

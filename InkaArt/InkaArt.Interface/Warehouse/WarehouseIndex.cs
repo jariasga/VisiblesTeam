@@ -71,7 +71,7 @@ namespace InkaArt.Interface.Warehouse
                     string description = dataGridView1.Rows[i].Cells[2].Value.ToString();
                     string address = dataGridView1.Rows[i].Cells[3].Value.ToString();
                     string state="Inactivo";
-                    warehouseController.updateWarehouse(id, name, description,address, state);
+                    warehouseController.deleteWarehouse(id, name, description,address, state);
                 }
             }
             updateDataGrid();
