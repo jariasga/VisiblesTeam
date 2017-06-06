@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InkaArt.Business.Sales;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,16 +13,17 @@ namespace InkaArt.Interface.Sales
 {
     public partial class ClientOrderIndex : Form
     {
+        private OrderController orderController = new OrderController();
         public ClientOrderIndex()
         {
             InitializeComponent();
         }
-        
+
         private void button_search_Click(object sender, EventArgs e)
-        {            
+        {
 
         }
-        
+
         private void button_delete_Click(object sender, EventArgs e)
         {
 
@@ -43,6 +45,22 @@ namespace InkaArt.Interface.Sales
         {
             ClientOrderCreate create_form = new ClientOrderCreate();
             create_form.Show();
+        }
+
+        private void ClientOrderIndex_Load(object sender, EventArgs e)
+        {
+            DataTable orderList = orderController.GetOrders();
+            populateDataGrid(orderList);
+        }
+
+        private void populateDataGrid(DataTable orderList)
+        {
+            grid_orders.Rows.Clear();
+            foreach (DataRow row in orderList.Rows)
+            {
+                string status = row["bdStatus"].ToString().Equals("1") ? "Activo" : "Inactivo";
+                if (status.Equals("Activo")) grid_orders.Rows.Add("Pedido", row["idClient"], "999999", row["orderStatus"], row["totalAmount"]);
+            }
         }
     }
 }
