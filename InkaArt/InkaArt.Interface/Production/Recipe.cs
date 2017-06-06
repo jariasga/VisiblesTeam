@@ -207,10 +207,13 @@ namespace InkaArt.Interface.Production
                     fillGrid();
                 }
                 else
-                    MessageBox.Show("La cantidad debe ser mayor a 0");
+                    MessageBox.Show("La cantidad de materia prima debe ser mayor a cero, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }else
-                MessageBox.Show("Seleccione una version");
+
+            }
+            else
+                MessageBox.Show("Versión no válida, por favor seleccione una versión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
 
         }
 

@@ -23,8 +23,6 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-
-            rawMaterial.connect();
             adapt = rawMaterial.rawMaterialAdapter();
 
             data.Clear();

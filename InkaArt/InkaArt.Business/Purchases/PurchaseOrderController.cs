@@ -24,7 +24,6 @@ namespace InkaArt.Business.Purchases
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
 
-            purchaseOrder.connect();
             adap = purchaseOrder.purchaseOrderAdapter();
 
             data.Reset();
@@ -32,12 +31,10 @@ namespace InkaArt.Business.Purchases
 
             DataTable purchaseOrderList = new DataTable();
             purchaseOrderList = data.Tables[0];
-            purchaseOrder.closeConnection();
             return purchaseOrderList;
         }
         public void inserData(int proveedor,string estado,DateTime creacion, DateTime entrega,double total)
         {
-            purchaseOrder.connect();
 
             table = data.Tables["PurcharseOrder"];
             row = table.NewRow();
@@ -50,12 +47,9 @@ namespace InkaArt.Business.Purchases
             table.Rows.Add(row);
 
             int rowsAffected = purchaseOrder.insertData(data, adap, "PurcharseOrder");
-
-            purchaseOrder.closeConnection();
         }
         public void updateData(string id,int proveedor, string estado, DateTime creacion, DateTime entrega, double total)
         {
-            purchaseOrder.connect();
             table = data.Tables["PurcharseOrder"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
@@ -70,7 +64,6 @@ namespace InkaArt.Business.Purchases
                 }
             }
             purchaseOrder.updateData(data, adap, "PurcharseOrder");
-            purchaseOrder.closeConnection();
         }
     }
 }

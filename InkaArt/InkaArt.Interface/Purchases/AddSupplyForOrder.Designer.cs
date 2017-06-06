@@ -67,7 +67,7 @@
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(20, 50);
             this.textBox_id.Name = "textBox_id";
-            this.textBox_id.Size = new System.Drawing.Size(135, 24);
+            this.textBox_id.Size = new System.Drawing.Size(135, 29);
             this.textBox_id.TabIndex = 26;
             // 
             // label5
@@ -75,7 +75,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(17, 29);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(124, 18);
+            this.label5.Size = new System.Drawing.Size(158, 23);
             this.label5.TabIndex = 25;
             this.label5.Text = "ID Materia prima";
             // 
@@ -86,7 +86,7 @@
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_name.Location = new System.Drawing.Point(172, 50);
             this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(287, 24);
+            this.textBox_name.Size = new System.Drawing.Size(287, 29);
             this.textBox_name.TabIndex = 17;
             // 
             // label1
@@ -94,7 +94,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(169, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(203, 18);
+            this.label1.Size = new System.Drawing.Size(255, 23);
             this.label1.TabIndex = 16;
             this.label1.Text = "Nombre de la materia prima";
             // 
@@ -180,7 +180,7 @@
             // 
             // AddSupplyForOrder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(599, 358);

@@ -59,13 +59,13 @@ namespace InkaArt.Business.Security
             */
         }
 
-        public int updateData(string username, string description, int status, int role, System.Byte[] photo)
+        public int updateData(string username, string description, int status, int role, System.Byte[] photo, int userID)
         {
             table = data.Tables["User"];
 
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
-                "SET username = '{0}', status = {1}, description = '{2}', id_role = {3}, photo = {4} " +
-                "WHERE username = '{5}'", username, status, description, role, photo, username));
+                "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
+                "WHERE id_user = {4}", username, status, description, role, userID));
             
             /* TODO
             row = getUserRow(username);

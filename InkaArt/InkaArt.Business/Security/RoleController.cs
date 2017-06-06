@@ -25,7 +25,6 @@ namespace InkaArt.Business.Security
         private DataRow row;
         public DataTable showData()
         {
-            role.connect();
 
             adap = role.roleAdapter();
 
@@ -35,15 +34,42 @@ namespace InkaArt.Business.Security
             return table;
         }
 
-        public int insertData(string description)
+        public int insertData(string description, bool generalParameters, bool userList, bool roles,
+            bool suppliers, bool rawMaterials, bool unitOfmeasure, bool purcharseOrder, 
+            bool finalProduct, bool productionProcess, bool productionTurn, bool workerAssignment, bool turnReport, bool productivityReport,
+            bool clients, bool orders, bool generateReport,
+            bool warehouse, bool movements, bool stockReport, bool kardexReport)
         {
-            role.connect();
-
             table = data.Tables["Role"];
 
             row = table.NewRow();
 
             row["description"] = description;
+            //  Security
+            row["security_general_parameters"] = generalParameters;
+            row["security_user_list"] = userList;
+            row["security_roles"] = roles;
+            //  Purchases
+            row["purchases_suppliers"] = suppliers;
+            row["purchases_raw_materials"] = rawMaterials;
+            row["purchases_unit_of_measure"] = unitOfmeasure;
+            row["purchases_purchase_order"] = purcharseOrder;
+            //  Production
+            row["production_final_product"] = finalProduct;
+            row["production_production_process"] = productionProcess;
+            row["production_production_turn"] = productionTurn;
+            row["production_worker_assignment"] = workerAssignment;
+            row["production_turn_report"] = turnReport;
+            row["production_productivity_report"] = productivityReport;
+            //  Sales
+            row["sales_clients"] = clients;
+            row["sales_orders"] = orders;
+            row["sales_generate_report"] = generateReport;
+            //  Warehouse
+            row["warehouse_warehouses"] = warehouse;
+            row["warehouse_movements"] = movements;
+            row["warehouse_stock_reports"] = stockReport;
+            row["warehouse_kardex_reports"] = kardexReport;
 
             table.Rows.Add(row);
 
@@ -51,15 +77,42 @@ namespace InkaArt.Business.Security
             return rowsAffected;
         }
 
-        public int updateData(int roleID, string description)
+        public int updateData(int roleID, string description, bool generalParameters, bool userList, bool roles,
+            bool suppliers, bool rawMaterials, bool unitOfmeasure, bool purcharseOrder,
+            bool finalProduct, bool productionProcess, bool productionTurn, bool workerAssignment, bool turnReport, bool productivityReport,
+            bool clients, bool orders, bool generateReport,
+            bool warehouse, bool movements, bool stockReport, bool kardexReport)
         {
-            role.connect();
-
             table = data.Tables["Role"];
 
             row = getRoleRowbyID(roleID);
             
             row["description"] = description;
+            //  Security
+            row["security_general_parameters"] = generalParameters;
+            row["security_user_list"] = userList;
+            row["security_roles"] = roles;
+            //  Purchases
+            row["purchases_suppliers"] = suppliers;
+            row["purchases_raw_materials"] = rawMaterials;
+            row["purchases_unit_of_measure"] = unitOfmeasure;
+            row["purchases_purchase_order"] = purcharseOrder;
+            //  Production
+            row["production_final_product"] = finalProduct;
+            row["production_production_process"] = productionProcess;
+            row["production_production_turn"] = productionTurn;
+            row["production_worker_assignment"] = workerAssignment;
+            row["production_turn_report"] = turnReport;
+            row["production_productivity_report"] = productivityReport;
+            //  Sales
+            row["sales_clients"] = clients;
+            row["sales_orders"] = orders;
+            row["sales_generate_report"] = generateReport;
+            //  Warehouse
+            row["warehouse_warehouses"] = warehouse;
+            row["warehouse_movements"] = movements;
+            row["warehouse_stock_reports"] = stockReport;
+            row["warehouse_kardex_reports"] = kardexReport;
 
             int rowsAffected = role.updateData(data, adap, "Role");
             return rowsAffected;
@@ -73,11 +126,6 @@ namespace InkaArt.Business.Security
             row = rows[0];
 
             return row;
-        }
-
-        public void filterData()
-        {
-
         }
     }
 }

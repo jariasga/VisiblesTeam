@@ -141,11 +141,11 @@ namespace InkaArt.Interface.Security
                 {
                     if (validateData())
                     {
-                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                        int userID = worker.getUserID(textBoxUsername.Text);
+                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage, userID) == 23505)
                             MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else
                         {
-                            int userID = worker.getUserID(textBoxUsername.Text);
                             worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
                         }
                     }else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

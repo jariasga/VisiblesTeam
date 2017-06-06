@@ -59,11 +59,18 @@ namespace InkaArt.Interface.Production
             if (int.TryParse(textBox_count.Text, out positionCount))
             {
                 positionCount = int.Parse(textBox_count.Text);
-                int id = int.Parse(textBox_id.Text);
-                control.updateDataNoAdapter(id, positionCount);
+                if (positionCount >= 0)
+                {
+                    int id = int.Parse(textBox_id.Text);
+                    control.updateDataNoAdapter(id, positionCount);
+                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show("La cantidad de turnos no puede ser negativo, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("Tipo de dato no valido.");
+                MessageBox.Show("Formato de datos no válido, por favor verifique los valores.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
     }
 }

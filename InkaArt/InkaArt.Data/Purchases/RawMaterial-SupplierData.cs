@@ -12,8 +12,6 @@ namespace InkaArt.Data.Purchases
     public class RawMaterial_SupplierData : BD_Connector
     {
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
         private NpgsqlDataAdapter adap;
         public RawMaterial_SupplierData()
         {
@@ -34,8 +32,6 @@ namespace InkaArt.Data.Purchases
         }
         public DataTable GetRmSup(int id_rm = -1, int id_sup = -1)
         {
-            connect();
-
             adap = rawMaterial_SupplierAdapter();
             byIdRm(adap, id_rm);
             byIdSup(adap, id_sup);

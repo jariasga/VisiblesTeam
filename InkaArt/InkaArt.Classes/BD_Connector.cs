@@ -30,7 +30,7 @@ namespace InkaArt.Classes
             ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 
-        public void connect()
+        private void connect()
         {
             try
             {
@@ -94,7 +94,7 @@ namespace InkaArt.Classes
             return code;
         }
 
-        public void closeConnection()
+        private void closeConnection()
         {
             if (Connection.State != System.Data.ConnectionState.Closed)
                 Connection.Close();
