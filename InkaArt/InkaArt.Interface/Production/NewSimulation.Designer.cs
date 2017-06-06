@@ -30,14 +30,13 @@
         {
             this.progress_bar = new System.Windows.Forms.ProgressBar();
             this.button_cancel = new System.Windows.Forms.Button();
-            this.button_start = new System.Windows.Forms.Button();
             this.label_name = new System.Windows.Forms.Label();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // progress_bar
             // 
-            this.progress_bar.Location = new System.Drawing.Point(15, 60);
+            this.progress_bar.Location = new System.Drawing.Point(33, 68);
             this.progress_bar.Margin = new System.Windows.Forms.Padding(4);
             this.progress_bar.Name = "progress_bar";
             this.progress_bar.Size = new System.Drawing.Size(576, 37);
@@ -48,30 +47,18 @@
             this.button_cancel.BackColor = System.Drawing.Color.Firebrick;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(314, 114);
+            this.button_cancel.Location = new System.Drawing.Point(213, 122);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(192, 44);
             this.button_cancel.TabIndex = 40;
             this.button_cancel.Text = "Cancelar simulación";
             this.button_cancel.UseVisualStyleBackColor = false;
-            this.button_cancel.Click += new System.EventHandler(this.button_delete_Click);
-            // 
-            // button_start
-            // 
-            this.button_start.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_start.ForeColor = System.Drawing.Color.White;
-            this.button_start.Location = new System.Drawing.Point(113, 115);
-            this.button_start.Name = "button_start";
-            this.button_start.Size = new System.Drawing.Size(164, 43);
-            this.button_start.TabIndex = 41;
-            this.button_start.Text = "Iniciar simulación";
-            this.button_start.UseVisualStyleBackColor = false;
+            this.button_cancel.Click += new System.EventHandler(this.ButtonCancelClick);
             // 
             // label_name
             // 
             this.label_name.AutoSize = true;
-            this.label_name.Location = new System.Drawing.Point(12, 20);
+            this.label_name.Location = new System.Drawing.Point(30, 28);
             this.label_name.Name = "label_name";
             this.label_name.Size = new System.Drawing.Size(184, 18);
             this.label_name.TabIndex = 42;
@@ -79,7 +66,7 @@
             // 
             // textbox_name
             // 
-            this.textbox_name.Location = new System.Drawing.Point(202, 17);
+            this.textbox_name.Location = new System.Drawing.Point(220, 25);
             this.textbox_name.Name = "textbox_name";
             this.textbox_name.Size = new System.Drawing.Size(389, 26);
             this.textbox_name.TabIndex = 43;
@@ -90,10 +77,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(606, 170);
+            this.ClientSize = new System.Drawing.Size(642, 192);
             this.Controls.Add(this.textbox_name);
             this.Controls.Add(this.label_name);
-            this.Controls.Add(this.button_start);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.progress_bar);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -111,7 +97,6 @@
 
         private System.Windows.Forms.ProgressBar progress_bar;
         private System.Windows.Forms.Button button_cancel;
-        private System.Windows.Forms.Button button_start;
         private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.TextBox textbox_name;
     }
