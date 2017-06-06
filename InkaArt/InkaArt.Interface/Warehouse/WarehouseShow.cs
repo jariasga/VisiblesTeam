@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
+using InkaArt.Business.Purchases;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -16,6 +17,7 @@ namespace InkaArt.Interface.Warehouse
         int warehouseId;
         bool first;
         WarehouseCrud warehouseController;
+        string idWarehouse;
 
         public WarehouseShow(string id)
         {
@@ -23,6 +25,40 @@ namespace InkaArt.Interface.Warehouse
             warehouseId = int.Parse(id);
             first = true;
             warehouseController = new WarehouseCrud();
+            idWarehouse = id;
+            fillGridRawMaterial();
+        }
+
+        public void fillGridRawMaterial()
+        {
+            RawMaterialWarehouseController control = new RawMaterialWarehouseController();
+            RawMaterialController controlRM = new RawMaterialController();
+
+            DataTable rmWarehouseList = control.getData();
+            DataTable rmList = controlRM.getData();
+
+            string name = "";
+            dataGridView_RawMaterial.Rows.Clear();
+
+            for (int i = 0; i < rmWarehouseList.Rows.Count; i++)
+            {
+                if (string.Compare(rmWarehouseList.Rows[i]["idWarehouse"].ToString(), idWarehouse) == 0) {
+                    for (int j = 0; j < rmList.Rows.Count; j++)
+                    {
+                        if (string.Compare(rmWarehouseList.Rows[i]["idRawMaterial"].ToString(), rmList.Rows[j]["idRawMaterial"].ToString()) == 0)
+                        {
+                            name = rmList.Rows[j]["name"].ToString();
+                            break;
+                        }
+                    }
+                    dataGridView_RawMaterial.Rows.Add(rmWarehouseList.Rows[i]["idRawMaterial"],
+                        name,
+                        rmWarehouseList.Rows[i]["currentStock"],
+                        rmWarehouseList.Rows[i]["virtualStock"],
+                        rmWarehouseList.Rows[i]["minimunStock"],
+                        rmWarehouseList.Rows[i]["maximunStock"]);
+                }
+            }
         }
 
         private void WarehouseShow_Load(object sender, EventArgs e)
@@ -66,8 +102,6 @@ namespace InkaArt.Interface.Warehouse
             textBox_name.Enabled = true;
             textBox_description.Enabled = true;
             textBox_address.Enabled = true;
-            textBox_idRawMaterial.Enabled = true;
-            textBox_nameRawMaterial.Enabled = true;
             textBox_idProduct.Enabled = true;
             textBox_nameProduct.Enabled = true;
             comboBox_statusRM.Enabled = true;

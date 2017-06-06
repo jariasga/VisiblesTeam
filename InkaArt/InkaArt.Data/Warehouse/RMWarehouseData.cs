@@ -27,14 +27,10 @@ namespace InkaArt.Data.Warehouse
             rmWarehouseAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial-Warehouse\"", Connection);
             return rmWarehouseAdapter;
         }
+
         public DataTable GetRMWarehouses(int id = -1)
         {
             adap = rmWarehouseAdapter();
-            /*
-            byId(adap, id);
-            byName(adap, name);
-            byDescription(adap, description);
-            byAddress(adap, address);*/
             adap.SelectCommand.CommandText += ";";
             data.Clear();
             data = getData(adap, "RawMaterial-Warehouse");

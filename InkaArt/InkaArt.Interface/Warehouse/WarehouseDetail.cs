@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
+using InkaArt.Business.Purchases;
 using Npgsql;
 
 namespace InkaArt.Interface.Warehouse
@@ -20,8 +21,9 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
             warehouseController = new WarehouseCrud();
+            //fillGridRawMaterial();
         }
-
+        
         private void button_save_Click(object sender, EventArgs e)
         {
             string messageResponse = warehouseController.makeValidations(textBox_name.Text, textBox_description.Text, textBox_address.Text);
@@ -50,10 +52,15 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
         {
-            var show_form = new AddRawMaterialWarehouse();
+           /* var show_form = new AddRawMaterialWarehouse();
             var result = show_form.ShowDialog();
-            /*if (result == DialogResult.OK)
+           if (result == DialogResult.OK)
                 updateDataGrid();*/
+        }
+
+        private void WarehouseDetail_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

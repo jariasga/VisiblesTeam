@@ -6,24 +6,37 @@ using System.Threading.Tasks;
 using InkaArt.Data.Warehouse;
 using InkaArt.Data.Purchases;
 using System.Data;
+using Npgsql;
 
 namespace InkaArt.Business.Warehouse
 {
     public class RawMaterialWarehouseController
     {
-        private RawMaterialData rmData;
-        private RMWarehouseData rmWarehouseData;
+        private RMWarehouseData rmWarehouse;
+        private NpgsqlDataAdapter adapt;
+        private DataSet data;
+        private DataTable table;
+        private DataRow row;
 
-        public DataTable GetRM(string id = "")
+        public RawMaterialWarehouseController()
         {
-            int intId = -1, intAux;
-            if (!id.Equals("")) if (int.TryParse(id, out intAux)) intId = int.Parse(id);
-            return rmData.GetRM(intId);
+            rmWarehouse = new RMWarehouseData();
+            data = new DataSet();
         }
 
-        public int AddRawMaterialToWarehouse(string idWarehouse, string id, string name, string description)
+        public DataTable getData()
         {
-            return rmWarehouseData.InsertRMWarehouse(idWarehouse, id, name, description);
+            //adapt = new NpgsqlDataAdapter();
+
+            adapt = rmWarehouse.rmWarehouseAdapter();
+
+            data.Reset();
+            data = rmWarehouse.getData(adapt, "RawMaterial-Warehouse");
+
+            DataTable rmWarehouseList = new DataTable();
+            rmWarehouseList = data.Tables[0];
+
+            return rmWarehouseList;
         }
     }
 }
