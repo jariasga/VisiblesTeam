@@ -49,10 +49,12 @@ namespace InkaArt.Interface.Sales
             if (messageResponse.Equals("OK"))
             {
                 int response = clientController.AddClient(personType, textbox_name.Text, textbox_ruc.Text, textbox_ruc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
-                if (response > 0)
+                if (response >= 0)
                 {
                     MessageBox.Show(this, "El cliente ha sido agregado correctamente.", "Crear cliente", MessageBoxButtons.OK);
                     ClearFields();
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
             else
