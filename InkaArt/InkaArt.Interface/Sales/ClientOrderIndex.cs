@@ -46,16 +46,21 @@ namespace InkaArt.Interface.Sales
         {
             if (e.RowIndex != -1)
             {
+                string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string type = grid_orders.Rows[e.RowIndex].Cells[1].Value.ToString().ToLower();
                 if (type.Equals("pedido"))
                 {
-
+                    ClientOrderShow show_form = new ClientOrderShow(id);
+                    var response = show_form.ShowDialog();
+                    if (response == DialogResult.OK)
+                        updateDataGrid();
+                }else
+                {
+                    DevolutionShow show_form = new DevolutionShow(id);
+                    var response = show_form.ShowDialog();
+                    if (response == DialogResult.OK)
+                        updateDataGrid();
                 }
-                string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
-                ClientOrderShow show_form = new ClientOrderShow(id);
-                var response = show_form.ShowDialog();
-                if (response == DialogResult.OK)
-                    updateDataGrid();
             }
         }
 
