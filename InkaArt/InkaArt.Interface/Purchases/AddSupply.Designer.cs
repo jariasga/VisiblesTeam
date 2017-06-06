@@ -61,7 +61,6 @@
             // textBox_idFilter
             // 
             this.textBox_idFilter.BackColor = System.Drawing.Color.White;
-            this.textBox_idFilter.Enabled = false;
             this.textBox_idFilter.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_idFilter.Location = new System.Drawing.Point(20, 50);
             this.textBox_idFilter.MaxLength = 9;
@@ -82,7 +81,6 @@
             // textBox_nameFilter
             // 
             this.textBox_nameFilter.BackColor = System.Drawing.Color.White;
-            this.textBox_nameFilter.Enabled = false;
             this.textBox_nameFilter.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_nameFilter.Location = new System.Drawing.Point(172, 50);
             this.textBox_nameFilter.Name = "textBox_nameFilter";

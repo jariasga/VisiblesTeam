@@ -31,8 +31,20 @@ namespace InkaArt.Interface.Sales
 
         private void grid_orders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ClientOrderShow show_form = new ClientOrderShow();
-            show_form.Show();
+            if (e.RowIndex != -1)
+            {
+                string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
+                ClientOrderShow show_form = new ClientOrderShow(id);
+                var response = show_form.ShowDialog();
+                if (response == DialogResult.OK)
+                    updateDataGrid();
+            }
+        }
+
+        private void updateDataGrid()
+        {
+            DataTable orderList = orderController.GetOrders();
+            populateDataGrid(orderList);
         }
 
         private void button_create_dev_Click(object sender, EventArgs e)
@@ -44,13 +56,14 @@ namespace InkaArt.Interface.Sales
         private void button_create_Click(object sender, EventArgs e)
         {
             ClientOrderCreate create_form = new ClientOrderCreate();
-            create_form.Show();
+            var response = create_form.ShowDialog();
+            if (response == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void ClientOrderIndex_Load(object sender, EventArgs e)
         {
-            DataTable orderList = orderController.GetOrders();
-            populateDataGrid(orderList);
+            updateDataGrid();
         }
 
         private void populateDataGrid(DataTable orderList)
@@ -59,7 +72,12 @@ namespace InkaArt.Interface.Sales
             foreach (DataRow row in orderList.Rows)
             {
                 string status = row["bdStatus"].ToString().Equals("1") ? "Activo" : "Inactivo";
-                if (status.Equals("Activo")) grid_orders.Rows.Add("Pedido", row["idClient"], "999999", row["orderStatus"], row["totalAmount"]);
+                if (status.Equals("Activo"))
+                {
+                    string idClient = row["idClient"].ToString();
+                    string clientName = orderController.getClientName(idClient), clientDoc = orderController.getClientDoc(idClient);
+                    grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"], row["totalAmount"]);
+                }
             }
         }
     }

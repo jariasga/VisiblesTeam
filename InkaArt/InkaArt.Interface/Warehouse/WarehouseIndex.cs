@@ -15,130 +15,108 @@ namespace InkaArt.Interface.Warehouse
 {
     public partial class WarehouseIndex : Form
     {
+        private WarehouseCrud warehouseController = new WarehouseCrud();
         public WarehouseIndex()
         {
             InitializeComponent();
         }
 
-        private void button_delete_click(object sender, EventArgs e)
-        {
-            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
-            int itemsBorrar=0;
-            int [] idEliminar = new int[500];
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                bool s = Convert.ToBoolean(row.Cells[5].Value);
-
-                if (s == true)
-                {
-                    toDelete.Add(row);
-                    idEliminar[itemsBorrar] = Convert.ToInt32(row.Cells[0].Value);
-                    itemsBorrar++;
-                }
-            }
-
-            foreach (DataGridViewRow row in toDelete)
-            {
-                dataGridView1.Rows.Remove(row);
-            }
-            //Se elimina la data
-            WarehouseCrud objCrudWarehouse = new WarehouseCrud();
-
-            objCrudWarehouse.deleteWarehouse(idEliminar, itemsBorrar);
-            MessageBox.Show("Almacenes eliminados", "Eliminar almacen", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-        }
-
         private void button_add_click(object sender, EventArgs e)
         {
-            Form new_warehouse_window = new WarehouseDetail();
-            new_warehouse_window.Show();
+            var create_form = new WarehouseDetail();
+            var result = create_form.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            var show_form = new WarehouseShow(id);
+            var result = show_form.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();
+        }
+
+        private void updateDataGrid()
+        {
+            DataTable warehouseList = warehouseController.GetWarehouses();
+            populateDataGrid(warehouseList);
+        }
+
+        private void WarehouseIndex_Load(object sender, EventArgs e)
+        {
+            updateDataGrid();
+        }
+
+        private void populateDataGrid(DataTable warehouseList)
+        {
+            dataGridView1.Rows.Clear();
+            foreach (DataRow row in warehouseList.Rows)
+            {
+                string status = row["state"].ToString();
+                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["description"], row["address"]);
+            }
+        }
+
+        private void button_delete_click(object sender, EventArgs e)
+        {
+            int registros = dataGridView1.Rows.Count;
+            for (int i = 0; i < registros; i++)
+            {
+                if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[4].Value) == true)
+                {
+                    string id = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                    string name = dataGridView1.Rows[i].Cells[1].Value.ToString();
+                    string description = dataGridView1.Rows[i].Cells[2].Value.ToString();
+                    string address = dataGridView1.Rows[i].Cells[3].Value.ToString();
+                    string state="Inactivo";
+                    warehouseController.updateWarehouse(id, name, description,address, state);
+                }
+            }
+            updateDataGrid();
+
+            //List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
+            //int itemsBorrar=0;
+            //int [] idEliminar = new int[500];
+            //foreach (DataGridViewRow row in dataGridView1.Rows)
+            //{
+            //    bool s = Convert.ToBoolean(row.Cells[5].Value);
+
+            //    if (s == true)
+            //    {
+            //        toDelete.Add(row);
+            //        idEliminar[itemsBorrar] = Convert.ToInt32(row.Cells[0].Value);
+            //        itemsBorrar++;
+            //    }
+            //}
+
+            //foreach (DataGridViewRow row in toDelete)
+            //{
+            //    dataGridView1.Rows.Remove(row);
+            //}
+            ////Se elimina la data
+            //WarehouseCrud objCrudWarehouse = new WarehouseCrud();
+            //MessageBox.Show("Almacenes eliminados", "Eliminar almacen", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+            MessageBox.Show("Almacenes eliminados", "Eliminar almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int id;
-            NpgsqlDataReader datos;
-            if (Int32.TryParse(textBox_id.Text, out id))
-            {
-                Console.WriteLine("Por favor ingrese un valor entero");
-            }
-            string name = textBox_supplier.Text;
-            string address = textBox_address.Text;
-            string state = comboBox_status.GetItemText(comboBox_status.SelectedItem);
-
-            WarehouseCrud conn = new WarehouseCrud();
-
-            datos = conn.readWarehouse(id, name, address, state);
-
-            int rowIndex = 0;
-
-            //Limpiamos el datagridview
-            this.dataGridView1.Rows.Clear();
-
-            //Muestra los datos en el gridview
-            while (datos.Read())
-            {                
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];
-                row.Cells[1].Value = datos[1];
-                row.Cells[2].Value = datos[3];
-                row.Cells[3].Value = datos[4];
-                dataGridView1.Rows.Add(row);
-                /*
-                dataGridView1.Rows[rowIndex].Cells[0].Value = datos[0];
-                dataGridView1.Rows[rowIndex].Cells[1].Value = datos[1];
-                dataGridView1.Rows[rowIndex].Cells[2].Value = datos[2];
-                dataGridView1.Rows[rowIndex].Cells[3].Value = datos[3];*/
-                rowIndex++;
-            }
-            
-            //lestura de valores
-            /*while (datos.Read())
-                Console.Write("{0}\t{1} \n", datos[0], datos[1]);
-            */
+            DataTable warehouseList;
+            warehouseList = warehouseController.GetWarehouses(textBox_id.Text, textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
+            populateDataGrid(warehouseList);
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
-            int itemsUpdate = 0;
-            int[] idUpdate = new int[500];
-            string name = "", description = "", address = "", state = "";
-            int idWarehouse = 0;
-            //Se elimina la data
-            WarehouseCrud objCrudWarehouse = new WarehouseCrud();
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                bool s = Convert.ToBoolean(row.Cells[6].Value);
-
-                if (s == true)
+        /*
+                private void button_bulk_upload_Click(object sender, EventArgs e)
                 {
-                    toDelete.Add(row);
-                    idUpdate[itemsUpdate] = Convert.ToInt32(row.Cells[0].Value);
-                    idWarehouse = Convert.ToInt32(row.Cells[0].Value);
-                    name = Convert.ToString(row.Cells[1].Value);
-                    address = Convert.ToString(row.Cells[2].Value);
-                    state = Convert.ToString(row.Cells[3].Value);
-                    description = "";
-                    objCrudWarehouse.updateWareHouse(idWarehouse, name, description, address, state);
-                    itemsUpdate++;
-                }
-            }
-            
-            MessageBox.Show("Almacenes actualizados", "Actualizar almacén",MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            WarehouseCrud movimientos = new WarehouseCrud();
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Open Users File";
-            dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK)
-                movimientos.massiveUpload(dialog.FileName);
-        }
-
-
+                    WarehouseCrud movimientos = new WarehouseCrud();
+                    OpenFileDialog dialog = new OpenFileDialog();
+                    dialog.Title = "Open Users File";
+                    dialog.Filter = "CSV files|*.csv";
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                        movimientos.massiveUpload(dialog.FileName);
+                }*/
     }
 }

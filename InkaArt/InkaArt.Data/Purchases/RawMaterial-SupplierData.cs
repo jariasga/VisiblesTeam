@@ -12,6 +12,8 @@ namespace InkaArt.Data.Purchases
     public class RawMaterial_SupplierData : BD_Connector
     {
         private DataSet data;
+        private DataTable table;
+        private DataRow row;
         private NpgsqlDataAdapter adap;
         public RawMaterial_SupplierData()
         {
@@ -23,12 +25,7 @@ namespace InkaArt.Data.Purchases
             NpgsqlDataAdapter rawMaterial_SupplierAdapter = new NpgsqlDataAdapter();
             rawMaterial_SupplierAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial-Supplier\"", Connection);
             return rawMaterial_SupplierAdapter;
-
-            /*rawMaterial_SupplierAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial-Supplier\" WHERE id_raw_material = :rawMaterial ;", Connection);
-            rawMaterial_SupplierAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("rawMaterial", DbType.Int32));
-            rawMaterial_SupplierAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
-            rawMaterial_SupplierAdapter.SelectCommand.Parameters[0].SourceColumn = "id_raw_material";*/
-
+            
         }
         public DataTable GetRmSup(int id_rm = -1, int id_sup = -1)
         {
@@ -67,6 +64,32 @@ namespace InkaArt.Data.Purchases
             adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
             adap.SelectCommand.Parameters[numParams].SourceColumn = "id_supplier";
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = supplier;
+        }
+        public void UpdateRM_Sup(string idMat, string idSup, double precio)
+        {
+            table = data.Tables["RawMaterial-Supplier"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if ((String.Compare(table.Rows[i]["id_raw_material"].ToString(), idMat) == 0)&&(String.Compare(table.Rows[i]["id_supplier"].ToString(), idSup) == 0))
+                {
+                    table.Rows[i]["price"] = precio;
+                    break;
+                }
+            }
+
+            updateData(data, adap, "RawMaterial-Supplier");
+        }
+        public void InsertRM_Sup(int idMat,int idSup,double precio)
+        {
+            table = data.Tables["RawMaterial-Supplier"];
+            row = table.NewRow();
+
+            row["id_raw_material"] = idMat;
+            row["id_supplier"] = idSup;
+            row["price"] = precio;
+            table.Rows.Add(row);
+
+            insertData(data, adap, "RawMaterial-Supplier");
         }
     }
 }

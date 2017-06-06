@@ -17,6 +17,7 @@ namespace InkaArt.Interface.Purchases
         SupplierController control;
         RawMaterial_SupplierController control_rs;
         bool isInEditMode = false;
+        bool editPriceMode = false;
 
         public SupplierDetail()
         {
@@ -70,13 +71,15 @@ namespace InkaArt.Interface.Purchases
             DataTable rm_supList=control_rs.getDataSuppliers("", textBox_idSupplier.Text);
             dataGridView_rm_sup.DataSource = rm_supList;
             dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
+            dataGridView_rm_sup.Columns["id_raw_material"].ReadOnly = true;
             dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
             dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
+            
         }
 
         private void button_add(object sender, EventArgs e)
         {
-            Form pageAddSupply = new AddSupply(this);
+            Form pageAddSupply = new AddSupply(this,control_rs,textBox_idSupplier.Text);
             pageAddSupply.Show();
         }
 
@@ -136,6 +139,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = false;
                 buttonAdd.Enabled = false;
                 buttonDelete.Enabled = false;
+                dataGridView_rm_sup.Columns["price"].ReadOnly = true;
                 control.updateData(textBox_idSupplier.Text,textBox_name.Text, long.Parse(textBox_ruc.Text), textBox_contactName.Text, long.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                 buttonSave.Text = "Editar";
             }
@@ -152,6 +156,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = true;
                 buttonAdd.Enabled = true;
                 buttonDelete.Enabled = true;
+                dataGridView_rm_sup.Columns["price"].ReadOnly = false;
                 buttonSave.Text = "🖫 Guardar";
             }
             else
@@ -173,6 +178,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = false;
                 buttonAdd.Enabled = false;
                 buttonDelete.Enabled = false;
+                dataGridView_rm_sup.Columns["price"].ReadOnly = true;
                 buttonSave.Text = "Editar";
 
             }
@@ -248,7 +254,32 @@ namespace InkaArt.Interface.Purchases
             dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
             dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
             dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
+            dataGridView_rm_sup.Columns["price"].ReadOnly = false;
+        }
+        
+        private void actualizar_precio(int fila)
+        {
+            string id_rm = dataGridView_rm_sup.Rows[fila].Cells[1].Value.ToString();
+            string id_sup = dataGridView_rm_sup.Rows[fila].Cells[2].Value.ToString();
+            string price = dataGridView_rm_sup.Rows[fila].Cells[3].Value.ToString();
+            //control_rs.UpdateRM_Sup(id_rm, id_sup, price);
+        }
 
+        private void obtain_idEdit(object sender, EventArgs e)
+        {
+            if (isInEditMode)
+            {
+                editPriceMode = true;
+            }
+        }
+
+        private void update_price(object sender, DataGridViewCellEventArgs e)
+        {
+            if (editPriceMode)
+            {                   
+                actualizar_precio(e.RowIndex);
+            }
+            editPriceMode = false;
         }
     }
 }

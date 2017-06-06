@@ -51,17 +51,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textbox_amount = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.combo_product = new System.Windows.Forms.ComboBox();
             this.numeric_quantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -296,6 +296,7 @@
             // 
             // combo_quality
             // 
+            this.combo_quality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_quality.FormattingEnabled = true;
             this.combo_quality.Items.AddRange(new object[] {
             "Premium",
@@ -306,7 +307,6 @@
             this.combo_quality.Name = "combo_quality";
             this.combo_quality.Size = new System.Drawing.Size(219, 31);
             this.combo_quality.TabIndex = 23;
-            this.combo_quality.Text = "Estandar";
             // 
             // label1
             // 
@@ -356,6 +356,36 @@
             this.grid_orderline.Name = "grid_orderline";
             this.grid_orderline.Size = new System.Drawing.Size(560, 167);
             this.grid_orderline.TabIndex = 22;
+            // 
+            // Producto
+            // 
+            this.Producto.FillWeight = 141.1049F;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 141.1049F;
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            // 
+            // cost
+            // 
+            this.cost.FillWeight = 77.87196F;
+            this.cost.HeaderText = "PU";
+            this.cost.Name = "cost";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.FillWeight = 76.14214F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 63.7762F;
+            this.Column2.HeaderText = "Eliminar";
+            this.Column2.Name = "Column2";
             // 
             // label7
             // 
@@ -421,36 +451,6 @@
             this.label5.Size = new System.Drawing.Size(89, 23);
             this.label5.TabIndex = 16;
             this.label5.Text = "Producto";
-            // 
-            // Producto
-            // 
-            this.Producto.FillWeight = 141.1049F;
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            // 
-            // Column1
-            // 
-            this.Column1.FillWeight = 141.1049F;
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            // 
-            // cost
-            // 
-            this.cost.FillWeight = 77.87196F;
-            this.cost.HeaderText = "PU";
-            this.cost.Name = "cost";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.FillWeight = 76.14214F;
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 63.7762F;
-            this.Column2.HeaderText = "Eliminar";
-            this.Column2.Name = "Column2";
             // 
             // ClientOrderCreate
             // 
