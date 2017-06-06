@@ -78,7 +78,9 @@ namespace InkaArt.Interface.Production
 
                     control.insertData(ini, fin, desc);
                     fillCombo();
-                }else
+                    MessageBox.Show("Nuevo turno creado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
                     MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else //update
