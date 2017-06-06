@@ -198,6 +198,7 @@
             this.buttonAdd_RawMaterial.TabIndex = 64;
             this.buttonAdd_RawMaterial.Text = "＋ Agregar";
             this.buttonAdd_RawMaterial.UseVisualStyleBackColor = false;
+            this.buttonAdd_RawMaterial.Click += new System.EventHandler(this.buttonAdd_RawMaterial_Click);
             // 
             // dataGridView_RawMaterial
             // 
@@ -382,6 +383,7 @@
             this.buttonAdd_Product.TabIndex = 74;
             this.buttonAdd_Product.Text = "＋ Agregar";
             this.buttonAdd_Product.UseVisualStyleBackColor = false;
+            this.buttonAdd_Product.Click += new System.EventHandler(this.buttonAdd_Product_Click);
             // 
             // dataGridView_Product
             // 

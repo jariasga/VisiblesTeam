@@ -50,8 +50,10 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
         {
-            Form new_add_supply_window = new InkaArt.Interface.Purchases.AddSupply();
-            new_add_supply_window.Show();
+            var show_form = new AddRawMaterialWarehouse();
+            var result = show_form.ShowDialog();
+            /*if (result == DialogResult.OK)
+                updateDataGrid();*/
         }
     }
 }

@@ -74,5 +74,14 @@ namespace InkaArt.Interface.Warehouse
             comboBox_statusP.Enabled = true;
         }
 
+        private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAdd_Product_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

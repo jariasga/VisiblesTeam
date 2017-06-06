@@ -76,29 +76,6 @@ namespace InkaArt.Interface.Warehouse
             }
             updateDataGrid();
 
-            //List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
-            //int itemsBorrar=0;
-            //int [] idEliminar = new int[500];
-            //foreach (DataGridViewRow row in dataGridView1.Rows)
-            //{
-            //    bool s = Convert.ToBoolean(row.Cells[5].Value);
-
-            //    if (s == true)
-            //    {
-            //        toDelete.Add(row);
-            //        idEliminar[itemsBorrar] = Convert.ToInt32(row.Cells[0].Value);
-            //        itemsBorrar++;
-            //    }
-            //}
-
-            //foreach (DataGridViewRow row in toDelete)
-            //{
-            //    dataGridView1.Rows.Remove(row);
-            //}
-            ////Se elimina la data
-            //WarehouseCrud objCrudWarehouse = new WarehouseCrud();
-            //MessageBox.Show("Almacenes eliminados", "Eliminar almacen", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-
             MessageBox.Show("Almacenes eliminados", "Eliminar almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
 
