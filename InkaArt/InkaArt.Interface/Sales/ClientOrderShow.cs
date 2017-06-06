@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InkaArt.Business.Sales;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,19 @@ namespace InkaArt.Interface.Sales
 {
     public partial class ClientOrderShow : Form
     {
-        public ClientOrderShow()
+        int orderId;
+        OrderController orderController;
+        public ClientOrderShow(string id)
         {
             InitializeComponent();
+            orderId = int.Parse(id);
+            orderController = new OrderController();
         }
 
         private void ClientOrderShow_Load(object sender, EventArgs e)
         {
-
+            DataTable orderObject = orderController.GetOrders(orderId);
+            populateFields(orderObject);
         }
 
         private void button_delete_Click(object sender, EventArgs e)
@@ -27,13 +33,6 @@ namespace InkaArt.Interface.Sales
 
         }
         
-        private void button_edit_Click(object sender, EventArgs e)
-        {
-            ClientOrderCreate edit_form = new ClientOrderCreate("Editar Cliente");
-            Close();
-            edit_form.Show();
-        }
-
         private void button_doc_Click(object sender, EventArgs e)
         {
 

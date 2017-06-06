@@ -29,6 +29,10 @@ namespace InkaArt.Data.Sales
             orderList = data.Tables[0];
             return orderList;
         }
+        public DataTable GetOrders(string type, long doc, string clientName, string orderStatus)
+        {
+
+        }
 
         public NpgsqlDataAdapter orderAdapter()
         {
@@ -198,7 +202,7 @@ namespace InkaArt.Data.Sales
             int rowsAffected = insertData(data, adap, "SalesDocument");
             return rowsAffected;
         }
-        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus)
+        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type)
         {
             adap = insertOrderAdapter();
             data.Clear();
@@ -212,6 +216,7 @@ namespace InkaArt.Data.Sales
             row["totalAmount"] = totalAmount;
             row["bdStatus"] = bdStatus;
             row["orderStatus"] = orderStatus;
+            row["type"] = type;
             table.Rows.Add(row);
             int rowsAffected = insertData(data, adap, "Order");
             return rowsAffected;

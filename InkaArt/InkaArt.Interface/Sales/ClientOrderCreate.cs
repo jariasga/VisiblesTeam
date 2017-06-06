@@ -76,11 +76,13 @@ namespace InkaArt.Interface.Sales
                     docTypeId = int.Parse(row["idTipoDocumento"].ToString());
             }
             DataTable orderLine = parseDataGrid(grid_orderline);
-            int response = orderController.AddOrder(currentClientId, docTypeId, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, "Pedido Registrado", 1, orderLine);
+            int response = orderController.AddOrder(currentClientId, docTypeId, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, "registrado", 1, orderLine,"pedido");
             if (response > 0)
             {
                 MessageBox.Show(this, "El pedido ha sido registrado con éxito.", "Registrar Pedido", MessageBoxButtons.OK);
                 ClearFields();
+                DialogResult = DialogResult.OK;
+                Close();
             }
         }
 

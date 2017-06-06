@@ -32,7 +32,15 @@ namespace InkaArt.Interface.Sales
         private void grid_orders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             ClientOrderShow show_form = new ClientOrderShow();
-            show_form.Show();
+            var response = show_form.ShowDialog();
+            if (response == DialogResult.OK)
+                updateDataGrid();
+        }
+
+        private void updateDataGrid()
+        {
+            DataTable orderList = orderController.GetOrders();
+            populateDataGrid(orderList);
         }
 
         private void button_create_dev_Click(object sender, EventArgs e)
@@ -44,13 +52,14 @@ namespace InkaArt.Interface.Sales
         private void button_create_Click(object sender, EventArgs e)
         {
             ClientOrderCreate create_form = new ClientOrderCreate();
-            create_form.Show();
+            var response = create_form.ShowDialog();
+            if (response == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void ClientOrderIndex_Load(object sender, EventArgs e)
         {
-            DataTable orderList = orderController.GetOrders();
-            populateDataGrid(orderList);
+            updateDataGrid();
         }
 
         private void populateDataGrid(DataTable orderList)
