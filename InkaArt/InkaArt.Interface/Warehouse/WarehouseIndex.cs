@@ -74,7 +74,7 @@ namespace InkaArt.Interface.Warehouse
                     warehouseController.updateWarehouse(id, name, description,address, state);
                 }
             }
-
+            updateDataGrid();
 
             //List<DataGridViewRow> toDelete = new List<DataGridViewRow>();
             //int itemsBorrar=0;
