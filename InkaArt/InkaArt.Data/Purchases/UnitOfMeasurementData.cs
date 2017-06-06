@@ -40,6 +40,7 @@ namespace InkaArt.Data.Purchases
 
             DataTable unitsList = new DataTable();
             unitsList = data.Tables[0];
+           
             return unitsList;
         }
         private void byId(NpgsqlDataAdapter adap, int id)
@@ -105,6 +106,7 @@ namespace InkaArt.Data.Purchases
                     break;
                 }
             }
+            
             updateData(data, adap, "UnitOfMeasurement");
         }
         public void insertUnit(string nombre, string abreviatura, string estado)
