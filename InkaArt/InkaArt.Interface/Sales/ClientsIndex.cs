@@ -27,11 +27,14 @@ namespace InkaArt.Interface.Sales
 
         private void grid_clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id = grid_clients.Rows[e.RowIndex].Cells[0].Value.ToString();
-            var show_form = new ClientShow(id);
-            var result = show_form.ShowDialog();
-            if (result == DialogResult.OK)
-                updateDataGrid();
+            if (e.RowIndex != -1)
+            {
+                string id = grid_clients.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var show_form = new ClientShow(id);
+                var result = show_form.ShowDialog();
+                if (result == DialogResult.OK)
+                    updateDataGrid();
+            }
         }
 
         private void updateDataGrid()
