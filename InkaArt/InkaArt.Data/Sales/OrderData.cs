@@ -376,7 +376,7 @@ namespace InkaArt.Data.Sales
             productList = data.Tables[0];
             return productList;
         }
-        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type, string reason, string totalDev)
+        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type, string reason, double totalDev)
         {
             adap = insertOrderAdapter();
             data.Clear();

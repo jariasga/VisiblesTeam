@@ -38,8 +38,10 @@ namespace InkaArt.Business.Sales
             saleAmount = Math.Round(double.Parse(saleAmount), 2).ToString();
             igv = Math.Round(double.Parse(igv), 2).ToString();
             totalAmount = Math.Round(double.Parse(totalAmount), 2).ToString();
+            double realTotalDev = -1; ;
             int orderAdded, orderLineAdded;
-            orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, totalDev);
+            if (!totalDev.Equals("")) realTotalDev = double.Parse(totalDev);
+            orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, realTotalDev);
             orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv));
             return orderAdded + orderLineAdded;
         }
