@@ -33,8 +33,7 @@
             this.dataGridView_purchaseOrder = new System.Windows.Forms.DataGridView();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker_delivery = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_creationEnd = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_creation = new System.Windows.Forms.DateTimePicker();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
@@ -44,6 +43,7 @@
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +76,9 @@
             // 
             // dataGridView_purchaseOrder
             // 
+            this.dataGridView_purchaseOrder.AllowUserToAddRows = false;
+            this.dataGridView_purchaseOrder.AllowUserToDeleteRows = false;
+            this.dataGridView_purchaseOrder.AllowUserToResizeRows = false;
             this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_purchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -98,7 +101,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.dateTimePicker_delivery);
+            this.groupBox1.Controls.Add(this.dateTimePicker_creationEnd);
             this.groupBox1.Controls.Add(this.dateTimePicker_creation);
             this.groupBox1.Controls.Add(this.comboBox_status);
             this.groupBox1.Controls.Add(this.textBox_id);
@@ -116,23 +119,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // label2
+            // dateTimePicker_creationEnd
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(453, 89);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(131, 18);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Fecha de entrega";
-            // 
-            // dateTimePicker_delivery
-            // 
-            this.dateTimePicker_delivery.Font = new System.Drawing.Font("Arial", 11F);
-            this.dateTimePicker_delivery.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_delivery.Location = new System.Drawing.Point(456, 110);
-            this.dateTimePicker_delivery.Name = "dateTimePicker_delivery";
-            this.dateTimePicker_delivery.Size = new System.Drawing.Size(190, 24);
-            this.dateTimePicker_delivery.TabIndex = 29;
+            this.dateTimePicker_creationEnd.Font = new System.Drawing.Font("Arial", 11F);
+            this.dateTimePicker_creationEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_creationEnd.Location = new System.Drawing.Point(456, 110);
+            this.dateTimePicker_creationEnd.Name = "dateTimePicker_creationEnd";
+            this.dateTimePicker_creationEnd.Size = new System.Drawing.Size(190, 24);
+            this.dateTimePicker_creationEnd.TabIndex = 29;
             // 
             // dateTimePicker_creation
             // 
@@ -145,10 +139,15 @@
             // 
             // comboBox_status
             // 
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
-            "Activo",
+            "",
+            "Pendiente",
+            "Entregado",
+            "Por pagar",
             "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);
             this.comboBox_status.Name = "comboBox_status";
@@ -158,12 +157,13 @@
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
-            this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(25, 50);
+            this.textBox_id.MaxLength = 9;
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(192, 24);
             this.textBox_id.TabIndex = 26;
+            this.textBox_id.TextChanged += new System.EventHandler(this.validating_id);
             // 
             // label5
             // 
@@ -179,9 +179,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(237, 89);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 18);
+            this.label4.Size = new System.Drawing.Size(184, 18);
             this.label4.TabIndex = 24;
-            this.label4.Text = "Fecha de emisión";
+            this.label4.Text = "Fecha de emisión (inicio)";
             // 
             // label3
             // 
@@ -195,9 +195,9 @@
             // textBox_name
             // 
             this.textBox_name.BackColor = System.Drawing.Color.White;
-            this.textBox_name.Enabled = false;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_name.Location = new System.Drawing.Point(240, 50);
+            this.textBox_name.MaxLength = 280;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(515, 24);
             this.textBox_name.TabIndex = 17;
@@ -224,6 +224,15 @@
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(453, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(163, 18);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Fecha de emisión (fin)";
             // 
             // PurchaseOrder
             // 
@@ -261,8 +270,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DateTimePicker dateTimePicker_creation;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_delivery;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_creationEnd;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -62,6 +62,7 @@
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_id.Location = new System.Drawing.Point(18, 48);
@@ -72,16 +73,20 @@
             // 
             // textBox_name
             // 
+            this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(18, 108);
+            this.textBox_name.MaxLength = 200;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(205, 24);
             this.textBox_name.TabIndex = 3;
             // 
             // textBox_description
             // 
+            this.textBox_description.BackColor = System.Drawing.Color.White;
             this.textBox_description.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_description.Location = new System.Drawing.Point(18, 167);
+            this.textBox_description.MaxLength = 400;
             this.textBox_description.Multiline = true;
             this.textBox_description.Name = "textBox_description";
             this.textBox_description.Size = new System.Drawing.Size(204, 57);
@@ -99,6 +104,7 @@
             // 
             // textBox_averagePrice
             // 
+            this.textBox_averagePrice.BackColor = System.Drawing.Color.White;
             this.textBox_averagePrice.Enabled = false;
             this.textBox_averagePrice.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_averagePrice.Location = new System.Drawing.Point(17, 323);
@@ -109,11 +115,14 @@
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
-            "En uso",
-            "Eliminado"});
+            "Activo",
+            "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(17, 383);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(204, 25);
@@ -151,6 +160,9 @@
             // 
             // dataGridView_suppliersPrice
             // 
+            this.dataGridView_suppliersPrice.AllowUserToAddRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToDeleteRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToResizeRows = false;
             this.dataGridView_suppliersPrice.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_suppliersPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_suppliersPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -168,7 +180,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(103, 42);
             this.buttonSave.TabIndex = 15;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 
@@ -211,9 +223,13 @@
             // 
             // comboBox_unit
             // 
+            this.comboBox_unit.AllowDrop = true;
+            this.comboBox_unit.BackColor = System.Drawing.Color.White;
+            this.comboBox_unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_unit.FormattingEnabled = true;
             this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
+            this.comboBox_unit.MaxDropDownItems = 20;
             this.comboBox_unit.Name = "comboBox_unit";
             this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
             this.comboBox_unit.TabIndex = 13;

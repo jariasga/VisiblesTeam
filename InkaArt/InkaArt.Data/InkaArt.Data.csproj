@@ -64,14 +64,24 @@
     <Compile Include="Purchases\RawMaterialData.cs" />
     <Compile Include="Purchases\SupplierData.cs" />
     <Compile Include="Purchases\UnitOfMeasurementData.cs" />
+    <Compile Include="Sales\ClientData.cs" />
+    <Compile Include="Sales\OrderData.cs" />
     <Compile Include="Security\RoleData.cs" />
     <Compile Include="Security\UserData.cs" />
     <Compile Include="Security\WorkerData.cs" />
+    <Compile Include="Warehouse\MaterialMovementData.cs" />
+    <Compile Include="Warehouse\ProductionItemMovementData.cs" />
+    <Compile Include="Warehouse\ProductionItemWarehouseMovementData.cs" />
+    <Compile Include="Warehouse\ProductionMovementMovementData.cs" />
+    <Compile Include="Warehouse\ProductMovementData.cs" />
+    <Compile Include="Warehouse\RawWarehouseData.cs" />
+    <Compile Include="Warehouse\ReasonMovementData.cs" />
+    <Compile Include="Warehouse\RMWarehouseData.cs" />
+    <Compile Include="Warehouse\TypeMovementData.cs" />
     <Compile Include="Warehouse\WarehouseData.cs" />
+    <Compile Include="Warehouse\WarehouseMovementData.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sales\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>

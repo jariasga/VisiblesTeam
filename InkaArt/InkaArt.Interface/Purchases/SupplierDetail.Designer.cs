@@ -54,10 +54,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
             this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
@@ -65,7 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rm_sup)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -80,6 +77,7 @@
             // 
             // textBox_idSupplier
             // 
+            this.textBox_idSupplier.BackColor = System.Drawing.Color.White;
             this.textBox_idSupplier.Enabled = false;
             this.textBox_idSupplier.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idSupplier.Location = new System.Drawing.Point(24, 40);
@@ -100,8 +98,10 @@
             // 
             // textBox_name
             // 
+            this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(24, 94);
+            this.textBox_name.MaxLength = 100;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(253, 24);
             this.textBox_name.TabIndex = 12;
@@ -118,11 +118,14 @@
             // 
             // textBox_ruc
             // 
+            this.textBox_ruc.BackColor = System.Drawing.Color.White;
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ruc.Location = new System.Drawing.Point(24, 148);
+            this.textBox_ruc.MaxLength = 7;
             this.textBox_ruc.Name = "textBox_ruc";
             this.textBox_ruc.Size = new System.Drawing.Size(253, 24);
             this.textBox_ruc.TabIndex = 14;
+            this.textBox_ruc.TextChanged += new System.EventHandler(this.verifying_number);
             // 
             // label4
             // 
@@ -136,6 +139,7 @@
             // 
             // textBox_address
             // 
+            this.textBox_address.BackColor = System.Drawing.Color.White;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_address.Location = new System.Drawing.Point(24, 203);
             this.textBox_address.Multiline = true;
@@ -155,7 +159,7 @@
             // 
             // trackBar_priority
             // 
-            this.trackBar_priority.LargeChange = 2;
+            this.trackBar_priority.LargeChange = 1;
             this.trackBar_priority.Location = new System.Drawing.Point(24, 283);
             this.trackBar_priority.Name = "trackBar_priority";
             this.trackBar_priority.Size = new System.Drawing.Size(201, 45);
@@ -190,11 +194,14 @@
             // 
             // textBox_telephone
             // 
+            this.textBox_telephone.BackColor = System.Drawing.Color.White;
             this.textBox_telephone.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_telephone.Location = new System.Drawing.Point(15, 170);
+            this.textBox_telephone.MaxLength = 9;
             this.textBox_telephone.Name = "textBox_telephone";
             this.textBox_telephone.Size = new System.Drawing.Size(221, 24);
             this.textBox_telephone.TabIndex = 25;
+            this.textBox_telephone.TextChanged += new System.EventHandler(this.verifying_telephone);
             // 
             // label8
             // 
@@ -208,6 +215,7 @@
             // 
             // textBox_email
             // 
+            this.textBox_email.BackColor = System.Drawing.Color.White;
             this.textBox_email.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_email.Location = new System.Drawing.Point(15, 111);
             this.textBox_email.Name = "textBox_email";
@@ -226,8 +234,10 @@
             // 
             // textBox_contactName
             // 
+            this.textBox_contactName.BackColor = System.Drawing.Color.White;
             this.textBox_contactName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_contactName.Location = new System.Drawing.Point(15, 53);
+            this.textBox_contactName.MaxLength = 200;
             this.textBox_contactName.Name = "textBox_contactName";
             this.textBox_contactName.Size = new System.Drawing.Size(221, 24);
             this.textBox_contactName.TabIndex = 21;
@@ -251,7 +261,7 @@
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.buttonDelete);
             this.groupBox2.Controls.Add(this.buttonAdd);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dataGridView_rm_sup);
             this.groupBox2.Location = new System.Drawing.Point(305, 18);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(434, 522);
@@ -266,11 +276,13 @@
             this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
             this.textBox_idRawMaterial.Size = new System.Drawing.Size(118, 24);
             this.textBox_idRawMaterial.TabIndex = 26;
+            this.textBox_idRawMaterial.TextChanged += new System.EventHandler(this.veryfing_id);
             // 
             // textBox_nameRawMaterial
             // 
             this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_nameRawMaterial.Location = new System.Drawing.Point(162, 48);
+            this.textBox_nameRawMaterial.MaxLength = 280;
             this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
             this.textBox_nameRawMaterial.Size = new System.Drawing.Size(250, 24);
             this.textBox_nameRawMaterial.TabIndex = 26;
@@ -307,6 +319,7 @@
             this.button3.TabIndex = 41;
             this.button3.Text = "🔎 Buscar";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button_doSearch);
             // 
             // buttonDelete
             // 
@@ -335,42 +348,27 @@
             this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.button_add);
             // 
-            // dataGridView1
+            // dataGridView_rm_sup
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Nombre,
-            this.Precio,
+            this.dataGridView_rm_sup.AllowUserToAddRows = false;
+            this.dataGridView_rm_sup.AllowUserToDeleteRows = false;
+            this.dataGridView_rm_sup.AllowUserToResizeColumns = false;
+            this.dataGridView_rm_sup.AllowUserToResizeRows = false;
+            this.dataGridView_rm_sup.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_rm_sup.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rm_sup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_rm_sup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Acción});
-            this.dataGridView1.Location = new System.Drawing.Point(23, 130);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(389, 326);
-            this.dataGridView1.TabIndex = 10;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Width = 80;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 130;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            this.Precio.Width = 75;
+            this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 130);
+            this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
+            this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 326);
+            this.dataGridView_rm_sup.TabIndex = 10;
+            this.dataGridView_rm_sup.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.update_price);
+            this.dataGridView_rm_sup.DoubleClick += new System.EventHandler(this.obtain_idEdit);
             // 
             // Acción
             // 
-            this.Acción.HeaderText = "Acción";
+            this.Acción.HeaderText = "";
             this.Acción.Name = "Acción";
             this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -385,12 +383,15 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(144, 42);
             this.buttonSave.TabIndex = 22;
-            this.buttonSave.Text = "🖫 Guardar";
+            this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.button_save_click);
+            this.buttonSave.Click += new System.EventHandler(this.button_event_click);
             // 
             // comboBox_status
             // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
             "Activo",
@@ -441,7 +442,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rm_sup)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,7 +469,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_telephone;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView_rm_sup;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
@@ -479,9 +480,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Acción;
     }
 }

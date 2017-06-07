@@ -14,6 +14,7 @@ namespace InkaArt.Interface.Purchases
     {
         PurchaseOrderController control;
         int mode;
+        bool isInEditMode = true;
         public PurchaseOrderDetail()
         {
             mode = 1;
@@ -24,6 +25,7 @@ namespace InkaArt.Interface.Purchases
             buttonSave.Enabled = true;
             dateTimePicker_creation.Value = DateTime.Now;
             textBox_total.Text = "0";
+            buttonSave.Text = "🖫 Guardar";
         }
         public PurchaseOrderDetail(PurchaseOrderController controlForm)
         {
@@ -35,6 +37,7 @@ namespace InkaArt.Interface.Purchases
             buttonSave.Enabled = true;
             dateTimePicker_creation.Value = DateTime.Now;
             textBox_total.Text = "0";
+            buttonSave.Text = "🖫 Guardar";
         }
         public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder, PurchaseOrderController controlForm)
         {
@@ -47,6 +50,12 @@ namespace InkaArt.Interface.Purchases
             dateTimePicker_creation.Value = (DateTime) currentPurchaseOrder.Cells[4].Value;
             dateTimePicker_delivery.Value = (DateTime)currentPurchaseOrder.Cells[5].Value;
             textBox_total.Text = currentPurchaseOrder.Cells[6].Value.ToString();
+            textBox_supplier.Enabled = false;
+            dateTimePicker_creation.Enabled = false;
+            dateTimePicker_delivery.Enabled = false;
+            comboBox_status.Enabled = false;
+            button_add.Enabled = false;
+            buttonDelete.Enabled = false;
         }
 
         /* search */
@@ -96,21 +105,92 @@ namespace InkaArt.Interface.Purchases
             }
             else this.button_add.Enabled = true;
         }
-
+        private bool validating_alldata()
+        {
+            textBox_supplier.Text = textBox_supplier.Text.Trim();
+            if(textBox_supplier.Text.Length<1 || comboBox_status.Text.Length<1)
+            {
+                MessageBox.Show("Debe llenar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if(dateTimePicker_creation.Value > dateTimePicker_delivery.Value)
+            {
+                MessageBox.Show("La fecha de emisión no puede ser posterior a la entrega", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+                return true;
+        }
         private void button_save(object sender, EventArgs e)
         {
             if (mode == 1)
             {
+                if (!validating_alldata())
+                {
+                    return;
+                }
+
+                buttonSave.Text = "Editar";
+                mode = 2;
+                isInEditMode = false;
+                textBox_supplier.Enabled = false;
+                dateTimePicker_creation.Enabled = false;
+                dateTimePicker_delivery.Enabled = false;
+                comboBox_status.Enabled = false;
+                button_add.Enabled = false;
+                buttonDelete.Enabled = false;
                 //hacer insert
                 control.inserData(int.Parse(textBox_supplier.Text),comboBox_status.Text,DateTime.Parse(dateTimePicker_creation.Text),DateTime.Parse(dateTimePicker_delivery.Text),double.Parse(textBox_total.Text));
                 
             }
-            else
+            else if(mode==2 && isInEditMode)
             {
+                if (!validating_alldata())
+                {
+                    return;
+                }
+                buttonSave.Text = "Editar";
+                isInEditMode = false;
+                textBox_supplier.Enabled = false;
+                dateTimePicker_creation.Enabled = false;
+                dateTimePicker_delivery.Enabled = false;
+                comboBox_status.Enabled = false;
+                button_add.Enabled = false;
+                buttonDelete.Enabled = false;
                 //hacer update
                 control.updateData(textBox_id.Text, int.Parse(textBox_supplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
             }
-            this.Close();
+            else
+            {
+                isInEditMode = true;
+                buttonSave.Text = "🖫 Guardar";
+                textBox_supplier.Enabled = true;
+                dateTimePicker_creation.Enabled = true;
+                dateTimePicker_delivery.Enabled = true;
+                button_add.Enabled = true;
+                buttonDelete.Enabled = true;
+                comboBox_status.Enabled = true;
+
+            }
+        }
+
+        private void validating_idmateria(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_idRawMaterial.Text.ToCharArray();
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if (Char.IsDigit(aChar))
+                {
+                    actualdata = actualdata + aChar;
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede ingresar números en el id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_idRawMaterial.Text = actualdata;
         }
     }
 }

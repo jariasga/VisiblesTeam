@@ -25,22 +25,19 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-
-            recipeRawMaterial.connect();
+            
             adapt = recipeRawMaterial.recipeRawMaterialAdapter();
 
             data.Clear();
-            data = recipeRawMaterial.getData(adapt, "Worker");
+            data = recipeRawMaterial.getData(adapt, "Recipe-RawMaterial");
+            
+            table = data.Tables["Recipe-RawMaterial"];
 
-            DataTable recipeRawMaterialList = new DataTable();
-            recipeRawMaterialList = data.Tables[0];
-
-            return recipeRawMaterialList;
+            return table;
         }
 
         public void insertData(string idRecipe, string idRawMaterial, string materialCount)
         {
-            recipeRawMaterial.connect();
             adapt = recipeRawMaterial.recipeRawMaterialAdapter();
 
             data.Clear();
@@ -53,9 +50,32 @@ namespace InkaArt.Business.Production
             row["idRecipe"] = idRecipe;
             row["idRawMaterial"] = idRawMaterial;
             row["materialCount"] = materialCount;
+            row["status"] = "1";
 
             table.Rows.Add(row);
             int rowsAffected = recipeRawMaterial.insertData(data, adapt, "Recipe-RawMaterial");
+        }
+        public void insertDataNoAdapter(string idRecipe, string idRawMaterial, string materialCount)
+        {
+            adapt = recipeRawMaterial.recipeRawMaterialAdapter();
+
+            data.Clear();
+            data = recipeRawMaterial.getData(adapt, "Recipe-RawMaterial");
+
+            table = data.Tables["Recipe-RawMaterial"];
+            recipeRawMaterial.execute(string.Format("INSERT INTO \"inkaart\".\"Recipe-RawMaterial\"(\"idRecipe\", \"idRawMaterial\", \"materialCount\", status) VALUES({0},  {1}, {2}, {3});", idRecipe, idRawMaterial, materialCount, 1));
+        }
+
+
+        public void updateDataNoAdapter(string idRecipe, string idRawMaterial,string quantity)
+        {
+            string updateQuery;
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"Recipe-RawMaterial\" SET ";
+            updateQuery = updateQuery + "status = 0 ";
+            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + "AND \"idRawMaterial\"= "+ idRawMaterial+
+                " AND \"materialCount\"= " + quantity + " ;";
+            recipeRawMaterial.execute(updateQuery);
         }
     }
 }

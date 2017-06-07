@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_abbreviature = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
+            this.textBox_abbreviature = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox_name = new System.Windows.Forms.TextBox();
@@ -46,6 +48,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox_id);
             this.groupBox1.Controls.Add(this.textBox_abbreviature);
             this.groupBox1.Controls.Add(this.label5);
@@ -61,23 +65,48 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // textBox_abbreviature
+            // comboBox1
             // 
-            this.textBox_abbreviature.BackColor = System.Drawing.Color.White;
-            this.textBox_abbreviature.Enabled = false;
-            this.textBox_abbreviature.Location = new System.Drawing.Point(24, 110);
-            this.textBox_abbreviature.Name = "textBox_abbreviature";
-            this.textBox_abbreviature.Size = new System.Drawing.Size(192, 26);
-            this.textBox_abbreviature.TabIndex = 27;
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "",
+            "Activo",
+            "Inactivo"});
+            this.comboBox1.Location = new System.Drawing.Point(24, 110);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(192, 26);
+            this.comboBox1.TabIndex = 29;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 18);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Estado";
             // 
             // textBox_id
             // 
             this.textBox_id.BackColor = System.Drawing.Color.White;
-            this.textBox_id.Enabled = false;
             this.textBox_id.Location = new System.Drawing.Point(24, 50);
+            this.textBox_id.MaxLength = 9;
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(192, 26);
             this.textBox_id.TabIndex = 26;
+            this.textBox_id.TextChanged += new System.EventHandler(this.validating_id);
+            // 
+            // textBox_abbreviature
+            // 
+            this.textBox_abbreviature.BackColor = System.Drawing.Color.White;
+            this.textBox_abbreviature.Location = new System.Drawing.Point(240, 110);
+            this.textBox_abbreviature.MaxLength = 10;
+            this.textBox_abbreviature.Name = "textBox_abbreviature";
+            this.textBox_abbreviature.Size = new System.Drawing.Size(290, 26);
+            this.textBox_abbreviature.TabIndex = 27;
             // 
             // label5
             // 
@@ -91,7 +120,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 89);
+            this.label3.Location = new System.Drawing.Point(237, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 18);
             this.label3.TabIndex = 20;
@@ -100,9 +129,9 @@
             // textBox_name
             // 
             this.textBox_name.BackColor = System.Drawing.Color.White;
-            this.textBox_name.Enabled = false;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_name.Location = new System.Drawing.Point(240, 50);
+            this.textBox_name.MaxLength = 280;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(404, 24);
             this.textBox_name.TabIndex = 17;
@@ -132,6 +161,9 @@
             // 
             // dataGridView_unitOfMeasurement
             // 
+            this.dataGridView_unitOfMeasurement.AllowUserToAddRows = false;
+            this.dataGridView_unitOfMeasurement.AllowUserToDeleteRows = false;
+            this.dataGridView_unitOfMeasurement.AllowUserToResizeRows = false;
             this.dataGridView_unitOfMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_unitOfMeasurement.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Eliminar});
@@ -158,7 +190,7 @@
             this.buttonDelete.TabIndex = 47;
             this.buttonDelete.Text = "🗑 Eliminar";
             this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.button2_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.button_delete);
             // 
             // buttonCreate
             // 
@@ -209,5 +241,7 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

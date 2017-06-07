@@ -15,6 +15,7 @@ namespace InkaArt.Business.Production
         private RawMaterialData rawMaterial;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
+        private DataTable rawMaterialList;
 
         public RawMaterialController()
         {
@@ -23,15 +24,12 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-
-            rawMaterial.connect();
             adapt = rawMaterial.rawMaterialAdapter();
 
             data.Clear();
             data = rawMaterial.getData(adapt, "RawMaterial");
-
-            DataTable rawMaterialList = new DataTable();
-            rawMaterialList = data.Tables[0];
+            
+            rawMaterialList = data.Tables["RawMaterial"];
 
             return rawMaterialList;
         }

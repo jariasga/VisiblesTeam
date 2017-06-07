@@ -55,6 +55,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\Controllers\Grasp.cs" />
+    <Compile Include="Algorithm\Controllers\IndexController.cs" />
+    <Compile Include="Algorithm\Controllers\Instance.cs" />
+    <Compile Include="Algorithm\Controllers\JobController.cs" />
+    <Compile Include="Algorithm\Controllers\ProcessController.cs" />
+    <Compile Include="Algorithm\Controllers\RatioController.cs" />
+    <Compile Include="Algorithm\Controllers\RatioResumeController.cs" />
+    <Compile Include="Algorithm\Controllers\RecipeController.cs" />
+    <Compile Include="Algorithm\Controllers\SimulationController.cs" />
+    <Compile Include="Algorithm\Controllers\TabuSearch.cs" />
+    <Compile Include="Algorithm\Controllers\WorkerController.cs" />
+    <Compile Include="Algorithm\Models\Assignment.cs" />
+    <Compile Include="Algorithm\Models\Index.cs" />
+    <Compile Include="Algorithm\Models\Job.cs" />
+    <Compile Include="Algorithm\Models\Process.cs" />
+    <Compile Include="Algorithm\Models\Product.cs" />
+    <Compile Include="Algorithm\Models\Ratio.cs" />
+    <Compile Include="Algorithm\Models\RatioResume.cs" />
+    <Compile Include="Algorithm\Models\Recipe.cs" />
+    <Compile Include="Algorithm\Models\Simulation.cs" />
+    <Compile Include="Algorithm\Models\TabuMove.cs" />
+    <Compile Include="Algorithm\Models\TabuQueue.cs" />
+    <Compile Include="Algorithm\Models\Worker.cs" />
     <Compile Include="Production\FinalProductController.cs" />
     <Compile Include="Production\ProcessController.cs" />
     <Compile Include="Production\ProcessProductController.cs" />
@@ -72,15 +95,24 @@
     <Compile Include="Purchases\RawMaterialController.cs" />
     <Compile Include="Purchases\SupplierController.cs" />
     <Compile Include="Purchases\UnitOfMeasurementController.cs" />
+    <Compile Include="Sales\ClientController.cs" />
+    <Compile Include="Sales\OrderController.cs" />
     <Compile Include="Security\LoginController.cs" />
     <Compile Include="Security\RoleController.cs" />
     <Compile Include="Security\UserController.cs" />
     <Compile Include="Security\WorkerController.cs" />
+    <Compile Include="Warehouse\MaterialMovementController.cs" />
+    <Compile Include="Warehouse\ProductionItemMovementController.cs" />
+    <Compile Include="Warehouse\ProductionItemWarehouseMovementController.cs" />
+    <Compile Include="Warehouse\ProductionMovementMovementController.cs" />
+    <Compile Include="Warehouse\ProductMovementController.cs" />
+    <Compile Include="Warehouse\RawMaterialWarehouseController.cs" />
+    <Compile Include="Warehouse\ReasonMovementController.cs" />
+    <Compile Include="Warehouse\TypeMovementController.cs" />
     <Compile Include="Warehouse\WarehouseCrud.cs" />
+    <Compile Include="Warehouse\WarehouseMovementController.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sales\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>

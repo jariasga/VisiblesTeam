@@ -16,14 +16,16 @@ namespace InkaArt.Interface.Production
         public TurnManagement()
         {
             InitializeComponent();
+            fillCombo();
+        }
+
+        private void fillCombo()
+        {
             TurnController control = new TurnController();
             DataTable turnList = control.getData();
-
-            for (int i= 0; i < turnList.Rows.Count; i++)
+            comboBox_turn.Items.Clear();
+            for (int i = 0; i < turnList.Rows.Count; i++)
                 comboBox_turn.Items.Add(turnList.Rows[i]["idTurn"].ToString());
-
-
-
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -33,7 +35,11 @@ namespace InkaArt.Interface.Production
 
         private void comboBox_turn_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //comboBox_turn.SelectedItem.ToString();
+            fillGrid();
+        }
+
+        private void fillGrid()
+        {
             TurnController control = new TurnController();
             DataTable turnList = control.getData();
 
@@ -47,8 +53,6 @@ namespace InkaArt.Interface.Production
                     break;
                 }
             }
-
-
         }
 
         private void TurnManagement_Load(object sender, EventArgs e)
@@ -64,27 +68,45 @@ namespace InkaArt.Interface.Production
                 TurnController control = new TurnController();
 
                 string ini, fin, desc;
-                ini = textBox_horaIni.Text.ToString();
-                fin = textBox_horaFin.Text.ToString();
-                desc = textBox_desc.Text.ToString();
+                DateTime aux;
+                if (DateTime.TryParse(textBox_horaIni.Text.ToString(), out aux) &&
+                    DateTime.TryParse(textBox_horaFin.Text.ToString(), out aux))
+                {
+                    ini = textBox_horaIni.Text.ToString();
+                    fin = textBox_horaFin.Text.ToString();
+                    desc = textBox_desc.Text.ToString();
 
-                control.insertData(ini,fin,desc);
+                    control.insertData(ini, fin, desc);
+                    fillCombo();
+                    MessageBox.Show("Nuevo turno creado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else //update
             {
+                //validacion de date
                 if (comboBox_turn.SelectedItem != null)
                 {
                     TurnController control = new TurnController();
 
                     string id = "";
                     string ini, fin, desc;
-                    id = comboBox_turn.SelectedItem.ToString();
-                    ini = textBox_horaIni.Text.ToString();
-                    fin = textBox_horaFin.Text.ToString();
-                    desc = textBox_desc.Text.ToString();
+                    DateTime aux;
+                    if (DateTime.TryParse(textBox_horaIni.Text.ToString(), out aux)&&
+                        DateTime.TryParse(textBox_horaFin.Text.ToString(), out aux))
+                    {
+                        id = comboBox_turn.SelectedItem.ToString();
+                        ini = textBox_horaIni.Text.ToString();
+                        fin = textBox_horaFin.Text.ToString();
+                        desc = textBox_desc.Text.ToString();
 
-                    control.updateData(id, ini, fin, desc);
+                        control.updateData(id, ini, fin, desc);
+                    }else
+                        MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else
+                    MessageBox.Show("Por favor, elija un turno válido.","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
     }

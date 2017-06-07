@@ -14,7 +14,7 @@ namespace InkaArt.Data.Production
         public NpgsqlDataAdapter rawMaterialAdapter()
         {
             NpgsqlDataAdapter rawMaterialAdapter = new NpgsqlDataAdapter();
-            rawMaterialAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"RawMaterial\";", Connection);
+            rawMaterialAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM \"inkaart\".\"RawMaterial\";", Connection);
 
             return rawMaterialAdapter;
         }
