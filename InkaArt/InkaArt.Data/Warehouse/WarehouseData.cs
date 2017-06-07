@@ -28,7 +28,7 @@ namespace InkaArt.Data.Warehouse
             return warehouseAdapter;
         }
 
-        public int InsertWarehouse(string name, string description, string address, string state)
+        public int InsertWarehouse(string name, string description, string address)
         {
             adap = warehouseAdapter();
             data.Clear();
@@ -116,7 +116,7 @@ namespace InkaArt.Data.Warehouse
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
         }
 
-        public int updateWarehouse(string id, string name, string description, string address, string state)
+        public int updateWarehouse(string id, string name, string description, string address)
         {
             adap = warehouseAdapter();
 
@@ -131,7 +131,29 @@ namespace InkaArt.Data.Warehouse
                     table.Rows[i]["name"] = name;
                     table.Rows[i]["description"] = description;
                     table.Rows[i]["address"] = address;
-                    table.Rows[i]["state"] = state;
+                    //table.Rows[i]["state"] = state;
+                    break;
+                }
+            }
+            return updateData(data, adap, "Warehouse");
+        }
+
+        public int deleteWarehouse(string id, string name, string description, string address, string state)
+        {
+            adap = warehouseAdapter();
+
+            data.Clear();
+            data = getData(adap, "Warehouse");
+
+            table = data.Tables["Warehouse"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (string.Compare(table.Rows[i]["idWarehouse"].ToString(), id) == 0)
+                {
+                    table.Rows[i]["name"] = name;
+                    table.Rows[i]["description"] = description;
+                    table.Rows[i]["address"] = address;
+                    table.Rows[i]["state"] = "Inactivo";
                     break;
                 }
             }

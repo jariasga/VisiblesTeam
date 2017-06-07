@@ -76,6 +76,7 @@
     <Compile Include="Warehouse\ProductMovementData.cs" />
     <Compile Include="Warehouse\RawWarehouseData.cs" />
     <Compile Include="Warehouse\ReasonMovementData.cs" />
+    <Compile Include="Warehouse\RMWarehouseData.cs" />
     <Compile Include="Warehouse\TypeMovementData.cs" />
     <Compile Include="Warehouse\WarehouseData.cs" />
     <Compile Include="Warehouse\WarehouseMovementData.cs" />
