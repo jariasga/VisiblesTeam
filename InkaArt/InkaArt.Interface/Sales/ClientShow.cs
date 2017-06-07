@@ -58,7 +58,11 @@ namespace InkaArt.Interface.Sales
 
         private void button_delete_Click(object sender, EventArgs e)
         {
-
+            List<string> client = new List<string>();
+            client.Add(clientId.ToString());
+            clientController.deleteClients(client);
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void button_edit_Click(object sender, EventArgs e)

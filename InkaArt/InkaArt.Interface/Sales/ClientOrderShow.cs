@@ -56,7 +56,11 @@ namespace InkaArt.Interface.Sales
 
         private void button_delete_Click(object sender, EventArgs e)
         {
-
+            List<string> order = new List<string>();
+            order.Add(orderId.ToString());
+            orderController.deleteOrders(order);
+            DialogResult = DialogResult.OK;
+            Close();
         }
         
         private void button_doc_Click(object sender, EventArgs e)
