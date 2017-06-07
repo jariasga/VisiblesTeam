@@ -132,23 +132,7 @@ namespace InkaArt.Business.Algorithm
 
             return list;
         }
-
-        public List<int> getBestSolution(List<int[]> solutions)
-        {
-            int best_fitness = int.MaxValue;
-            List<int> temp;
-            List<int> best = new List<int>();
-
-            foreach(int[] solution in solutions)
-            {
-                //temp = new List<int>(solution);
-                //if (best_fitness > getFitness(temp))
-                //    best = temp;
-            }
-
-            return best;
-        }
-
+        
         /* Predicado de solucion */
         public static Predicate<int> byProcessProduct(int process_product_id)
         {

@@ -15,7 +15,7 @@ namespace InkaArt.Data.Algorithm
         private int days;        
 
         // pesos de ratios
-        private double breakage_weight;              // para los indices de perdida
+        private double breakage_weight;
         private double time_weight;
         // pesos de productos
         private double huaco_weight;
@@ -187,7 +187,7 @@ namespace InkaArt.Data.Algorithm
             this.breakage_weight = double.Parse(breakage);
             this.time_weight = double.Parse(time);
             this.huaco_weight = double.Parse(huaco);
-            this.huaco_weight = double.Parse(huamanga);
+            this.huamanga_stone_weight = double.Parse(huamanga);
             this.retable_weight = double.Parse(retable);
             this.workers = workers;
 
@@ -205,7 +205,7 @@ namespace InkaArt.Data.Algorithm
             this.breakage_weight = double.Parse(breakage);
             this.time_weight = double.Parse(time);
             this.huaco_weight = double.Parse(huaco);
-            this.huaco_weight = double.Parse(huamanga);
+            this.huamanga_stone_weight = double.Parse(huamanga);
             this.retable_weight = double.Parse(retable);
             this.workers = workers;
         }
@@ -267,7 +267,7 @@ namespace InkaArt.Data.Algorithm
                 return retable_weight;
 
             return 0;                
-        }
+        }        
 
         public void Start()
         {

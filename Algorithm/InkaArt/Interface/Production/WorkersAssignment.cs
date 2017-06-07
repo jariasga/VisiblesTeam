@@ -109,5 +109,10 @@ namespace InkaArt.Interface.Production
         {
 
         }
+
+        private void groupbox_summary_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

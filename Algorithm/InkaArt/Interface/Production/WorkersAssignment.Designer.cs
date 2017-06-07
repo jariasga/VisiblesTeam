@@ -54,6 +54,10 @@
             this.grid_altarpiece_left = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
             this.button_save = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupbox_summary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.summary_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
@@ -111,6 +115,7 @@
             this.groupbox_summary.TabIndex = 42;
             this.groupbox_summary.TabStop = false;
             this.groupbox_summary.Text = "Resumen";
+            this.groupbox_summary.Enter += new System.EventHandler(this.groupbox_summary_Enter);
             // 
             // summary_grid
             // 
@@ -123,12 +128,12 @@
             this.TotalStones,
             this.TotalAltarpiece,
             this.TotalProduced});
-            this.summary_grid.Location = new System.Drawing.Point(9, 27);
+            this.summary_grid.Location = new System.Drawing.Point(31, 27);
             this.summary_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.summary_grid.Name = "summary_grid";
             this.summary_grid.ReadOnly = true;
             this.summary_grid.RowHeadersVisible = false;
-            this.summary_grid.Size = new System.Drawing.Size(902, 61);
+            this.summary_grid.Size = new System.Drawing.Size(865, 61);
             this.summary_grid.TabIndex = 2;
             // 
             // TotalHuacos
@@ -194,11 +199,16 @@
             // 
             this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.simulation_grid.Location = new System.Drawing.Point(9, 8);
+            this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.simulation_grid.Location = new System.Drawing.Point(24, 23);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.simulation_grid.Name = "simulation_grid";
             this.simulation_grid.RowHeadersVisible = false;
-            this.simulation_grid.Size = new System.Drawing.Size(873, 227);
+            this.simulation_grid.Size = new System.Drawing.Size(865, 197);
             this.simulation_grid.TabIndex = 1;
             this.simulation_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulation_grid_CellContentClick);
             // 
@@ -238,12 +248,12 @@
             this.grid_stones_left,
             this.grid_altarpiece_produced,
             this.grid_altarpiece_left});
-            this.general_grid.Location = new System.Drawing.Point(9, 8);
+            this.general_grid.Location = new System.Drawing.Point(22, 23);
             this.general_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.general_grid.Name = "general_grid";
             this.general_grid.ReadOnly = true;
             this.general_grid.RowHeadersVisible = false;
-            this.general_grid.Size = new System.Drawing.Size(895, 230);
+            this.general_grid.Size = new System.Drawing.Size(870, 203);
             this.general_grid.TabIndex = 3;
             // 
             // grid_general_date
@@ -324,6 +334,26 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fecha";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Trabajador";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Proceso y Producto";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Receta";
+            this.Column4.Name = "Column4";
+            // 
             // WorkersAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -383,5 +413,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_altarpiece_produced;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_altarpiece_left;
         private System.Windows.Forms.Button button_save;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
