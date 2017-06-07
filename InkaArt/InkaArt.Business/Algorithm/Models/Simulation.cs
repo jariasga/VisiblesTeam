@@ -274,7 +274,7 @@ namespace InkaArt.Data.Algorithm
             start_time = Environment.TickCount;
             List<Assignment[][]> initial_solution = new List<Assignment[][]>(); // GRASP
             TabuSearch tabu = new TabuSearch(this, initial_solution);
-            tabu.run();
+            //tabu.run();
 
             assignments = tabu.BestSolution;
         }

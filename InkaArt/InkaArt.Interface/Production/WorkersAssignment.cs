@@ -93,10 +93,16 @@ namespace InkaArt.Interface.Production
             if (simulation == null)
             {
                 button_config.Text = "+ Crear";
+                button_save.Enabled = false;
+                button_start.Enabled = false;
+                button_delete.Enabled = false;
             }
             else
             {
                 button_config.Text = "Configuración";
+                button_save.Enabled = true;
+                button_start.Enabled = true;
+                button_delete.Enabled = true;
                 if (simulation.AssignmentsToList().Count > 0)
                 {
                     simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
