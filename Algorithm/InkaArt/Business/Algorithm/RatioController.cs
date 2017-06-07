@@ -14,12 +14,12 @@ namespace InkaArt.Business.Algorithm
     class RatioController
     {
         List<Ratio> ratios;
-        RatioResumeController resumes;
+        IndexController indexes;
 
         public RatioController()
         {
             ratios = new List<Ratio>();
-            resumes = new RatioResumeController();
+            indexes = new IndexController();
         }
 
         public void Load(DateTime date)
@@ -153,12 +153,12 @@ namespace InkaArt.Business.Algorithm
 
                 //Actualizar resumen de reportes
                 /*int count = ratio.Count();
-                if (count <= 0) resumes.Insert(ratio);
+                if (count <= 0) indexes.Insert(ratio);
                 else
                 {
                     double average_breakage, average_time;
                     ratio.AverageValues(out average_breakage, out average_time);
-                    resumes.Update(ratio, average_breakage, average_time);
+                    indexes.Update(ratio, average_breakage, average_time);
                 }*/
                     
                 
@@ -195,8 +195,8 @@ namespace InkaArt.Business.Algorithm
                 {
 
                 }
-                //resumes.Save(old_ratio, ref message);
-                //resumes.Save(ratio, ref message);
+                //indexes.Save(old_ratio, ref message);
+                //indexes.Save(ratio, ref message);
 
                 return ratio.ID;
             }

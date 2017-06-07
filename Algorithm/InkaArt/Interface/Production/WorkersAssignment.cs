@@ -46,11 +46,16 @@ namespace InkaArt.Interface.Production
                 
         private void ButtonStartClick(object sender, EventArgs e)
         {            
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            if (simulation == null)
+            {
+                MessageBox.Show("Seleccione una simulación.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             Form new_simultation = new NewSimulation();
             new_simultation.MdiParent = this.MdiParent;
             new_simultation.Show();
-
-            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
             simulation.Start();
         }
 
@@ -100,7 +105,7 @@ namespace InkaArt.Interface.Production
                 if (simulation.Assignments != null)
                 {
                     simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
-                    { Column1 = o.Date, Column2 = o.Worker.GetFullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description }).ToList();
+                    { Column1 = o.Date, Column2 = o.Worker.FullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description }).ToList();
                 }
             }
         }

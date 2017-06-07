@@ -38,8 +38,8 @@ namespace InkaArt.Interface.Production
                 workers.Load();
                 for (int i = 0; i < workers.Count(); i++)
                 {
-                    combobox_worker.Items.Add(workers[i].FullName());
-                    grid_column_worker.Items.Add(workers[i].FullName());
+                    combobox_worker.Items.Add(workers[i].FullName);
+                    grid_column_worker.Items.Add(workers[i].FullName);
                 }
 
                 jobs.Load();
@@ -89,7 +89,7 @@ namespace InkaArt.Interface.Production
                 {
                     string[] parameters = new string[8];
                     parameters[0] = ratios[i].ID.ToString();
-                    parameters[1] = workers.GetByID(ratios[i].Worker).FullName();
+                    parameters[1] = workers.GetByID(ratios[i].Worker).FullName;
                     parameters[2] = jobs.GetByID(ratios[i].Job).Name;
                     parameters[3] = recipes.GetByID(ratios[i].Recipe).Description;
                     parameters[4] = ratios[i].Start.ToString();

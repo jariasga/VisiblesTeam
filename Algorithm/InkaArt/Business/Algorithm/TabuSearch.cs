@@ -98,7 +98,7 @@ namespace InkaArt.Business.Algorithm
                         
                         product_weight = simulation.ProductWeight(assignment.Job.Product);
                         // sumamos el indice de perdida
-                        fitness += (index.Breakage * simulation.BreakageWeight + index.Time * simulation.TimeWeight) / product_weight;
+                        fitness += (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight) / product_weight;
                     }
                 }
             }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupbox_weight = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textbox_time = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
             this.list_workers = new System.Windows.Forms.CheckedListBox();
             this.button_save = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textbox_days = new System.Windows.Forms.TextBox();
@@ -67,12 +67,23 @@
             this.groupbox_weight.Controls.Add(this.textbox_huacos);
             this.groupbox_weight.Controls.Add(this.textbox_roture);
             this.groupbox_weight.Controls.Add(this.label1);
+            this.groupbox_weight.Enabled = false;
             this.groupbox_weight.Location = new System.Drawing.Point(26, 172);
             this.groupbox_weight.Name = "groupbox_weight";
             this.groupbox_weight.Size = new System.Drawing.Size(296, 295);
             this.groupbox_weight.TabIndex = 14;
             this.groupbox_weight.TabStop = false;
             this.groupbox_weight.Text = "Pesos o relevancias";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(19, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(228, 18);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Peso de Piedras de Huamanga";
             // 
             // label2
             // 
@@ -160,30 +171,18 @@
             // groupbox_workers
             // 
             this.groupbox_workers.Controls.Add(this.list_workers);
-            this.groupbox_workers.Location = new System.Drawing.Point(328, 19);
+            this.groupbox_workers.Location = new System.Drawing.Point(343, 19);
             this.groupbox_workers.Name = "groupbox_workers";
-            this.groupbox_workers.Size = new System.Drawing.Size(273, 392);
+            this.groupbox_workers.Size = new System.Drawing.Size(249, 392);
             this.groupbox_workers.TabIndex = 30;
             this.groupbox_workers.TabStop = false;
             this.groupbox_workers.Text = "Trabajadores a considerar";
             // 
             // list_workers
             // 
+            this.list_workers.Enabled = false;
             this.list_workers.FormattingEnabled = true;
-            this.list_workers.Items.AddRange(new object[] {
-            "Trabajador 1",
-            "Trabajador 2",
-            "Trabajador 3",
-            "Trabajador 4",
-            "Trabajador 5",
-            "Trabajador 6",
-            "Trabajador 7",
-            "Trabajador 8",
-            "Trabajador 9",
-            "Trabajador 10",
-            "Trabajador 11",
-            "Trabajador 12"});
-            this.list_workers.Location = new System.Drawing.Point(25, 45);
+            this.list_workers.Location = new System.Drawing.Point(15, 31);
             this.list_workers.Name = "list_workers";
             this.list_workers.Size = new System.Drawing.Size(221, 319);
             this.list_workers.TabIndex = 0;
@@ -193,23 +192,13 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(545, 425);
+            this.button_save.Location = new System.Drawing.Point(486, 425);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(119, 42);
+            this.button_save.Size = new System.Drawing.Size(241, 42);
             this.button_save.TabIndex = 32;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(19, 175);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(228, 18);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "Peso de Piedras de Huamanga";
             // 
             // groupBox1
             // 
@@ -236,6 +225,7 @@
             // 
             // textbox_days
             // 
+            this.textbox_days.Enabled = false;
             this.textbox_days.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_days.Location = new System.Drawing.Point(22, 100);
             this.textbox_days.Name = "textbox_days";
@@ -263,30 +253,18 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.list_orders);
-            this.groupBox2.Location = new System.Drawing.Point(607, 19);
+            this.groupBox2.Location = new System.Drawing.Point(611, 19);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(273, 392);
+            this.groupBox2.Size = new System.Drawing.Size(250, 392);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pedidos a considerar";
             // 
             // list_orders
             // 
+            this.list_orders.Enabled = false;
             this.list_orders.FormattingEnabled = true;
-            this.list_orders.Items.AddRange(new object[] {
-            "Trabajador 1",
-            "Trabajador 2",
-            "Trabajador 3",
-            "Trabajador 4",
-            "Trabajador 5",
-            "Trabajador 6",
-            "Trabajador 7",
-            "Trabajador 8",
-            "Trabajador 9",
-            "Trabajador 10",
-            "Trabajador 11",
-            "Trabajador 12"});
-            this.list_orders.Location = new System.Drawing.Point(25, 45);
+            this.list_orders.Location = new System.Drawing.Point(15, 31);
             this.list_orders.Name = "list_orders";
             this.list_orders.Size = new System.Drawing.Size(221, 319);
             this.list_orders.TabIndex = 0;
