@@ -86,7 +86,7 @@ namespace InkaArt.Data.Algorithm
                 return name;
             }            
         }
-
+                
         public List<Worker> Workers
         {
             get
@@ -100,7 +100,7 @@ namespace InkaArt.Data.Algorithm
             }
         }
 
-        public List<Index> Indexes
+        internal List<Index> Indexes
         {
             get
             {
@@ -280,14 +280,13 @@ namespace InkaArt.Data.Algorithm
         }
 
         public void Save()
-        {
-            if (assignments == null) return;
+        {            
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
             int miniturn;
-            int days = 1;            
+            int days = 1;
 
             foreach (Assignment[][] day in assignments)
             {
@@ -320,7 +319,6 @@ namespace InkaArt.Data.Algorithm
         {
             List<Assignment> list = new List<Assignment>();
 
-            if (assignments == null) return list;
             foreach(Assignment[][] day in assignments)
             {
                 foreach(Assignment[] worker in day)

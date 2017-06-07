@@ -38,5 +38,17 @@ namespace InkaArt.Business.Algorithm
 
             connection.Close();
         }
+
+        public int Count
+        {
+            get { return this.processes.Count; }
+        }
+
+        public Process GetByID(int id)
+        {
+            foreach (Process process in processes)
+                if (process.ID == id) return process;
+            return null;
+        }
     }
 }

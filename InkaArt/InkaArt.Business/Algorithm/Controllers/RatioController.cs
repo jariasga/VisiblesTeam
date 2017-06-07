@@ -14,12 +14,10 @@ namespace InkaArt.Business.Algorithm
     class RatioController
     {
         List<Ratio> ratios;
-        RatioResumeController resumes;
 
         public RatioController()
         {
             ratios = new List<Ratio>();
-            resumes = new RatioResumeController();
         }
 
         public void Load(DateTime date)

@@ -52,7 +52,7 @@ namespace InkaArt.Business.Algorithm
         public Worker GetByFullName(string full_name)
         {
             for (int i = 0; i < workers.Count; i++)
-                if (workers[i].FullName() == full_name) return workers[i];
+                if (workers[i].FullName == full_name) return workers[i];
             return null;
         }
 

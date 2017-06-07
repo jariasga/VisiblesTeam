@@ -13,7 +13,7 @@ namespace InkaArt.Business.Algorithm
     class Instance
     {
         private WorkerController workers;
-        private RatioResumeController ratios; 
+        //private RatioResumeController ratios; 
         private ProcessController processes;
         private JobController jobs;        
 
@@ -72,8 +72,8 @@ namespace InkaArt.Business.Algorithm
             // workers y ratios
             workers = new WorkerController();
             workers.Load(); // solo filtrados
-            ratios = new RatioResumeController();
-            ratios.Load();
+            //ratios = new RatioResumeController();
+            //ratios.Load();
 
             // pesos de ratios y productos
             LoadParameters();

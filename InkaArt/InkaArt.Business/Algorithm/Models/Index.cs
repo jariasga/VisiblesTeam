@@ -6,63 +6,63 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    public class Index
+    class Index
     {
-        private int worker_id;
-        private int job_id;
-        private double breakage;
-        private double time;
+        private int id_resume;
+        private int id_worker;
+        private int id_job;
+        private int id_recipe;
+        private double average_breakage;
+        private double average_time;
+        private double breakage_index;
+        private double time_index;
 
-        public int WorkerId
+        public int ID
         {
-            get
-            {
-                return worker_id;
-            }
-
-            set
-            {
-                worker_id = value;
-            }
+            get { return id_resume; }
+        }
+        public int Worker
+        {
+            get { return id_worker; }
+        }
+        public int Job
+        {
+            get { return id_job; }
+        }
+        public int Recipe
+        {
+            get { return id_recipe; }
+        }
+        public double AverageBreakage
+        {
+            get { return average_breakage; }
+            set { average_breakage = value; }
+        }
+        public double AverageTime
+        {
+            get { return average_time; }
+            set { average_time = value; }
+        }
+        public double BreakageIndex
+        {
+            get { return breakage_index; }
+            set { breakage_index = value; }
+        }
+        public double TimeIndex
+        {
+            get { return time_index; }
+            set { time_index = value; }
         }
 
-        public int JobId
+        public Index(int id_resume, int id_worker, int id_job, int id_recipe, double average_breakage,
+            double average_time)
         {
-            get
-            {
-                return job_id;
-            }
-
-            set
-            {
-                job_id = value;
-            }
-        }
-
-        public double Breakage
-        {
-            get
-            {
-                return breakage;
-            }
-
-            set
-            {
-                breakage = value;
-            }
-        }
-
-        public double Time
-        {
-            get
-            {
-                return time;
-            }
-
-            set
-            {
-                time = value;
-            }
+            this.id_resume = id_resume;
+            this.id_worker = id_worker;
+            this.id_job = id_job;
+            this.id_recipe = id_recipe;
+            this.average_breakage = average_breakage;
+            this.average_time = average_time;
         }
 
         public static Predicate<Index> byWorkerAndJob(Worker worker, Job job)
@@ -71,7 +71,7 @@ namespace InkaArt.Data.Algorithm
             {
                 if (worker == null || job == null)
                     return false;
-                return index.worker_id.Equals(worker.ID) && index.job_id.Equals(job.ID);
+                return index.id_worker.Equals(worker.ID) && index.id_job.Equals(job.ID);
             };
         }
     }

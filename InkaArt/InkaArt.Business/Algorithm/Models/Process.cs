@@ -11,6 +11,7 @@ namespace InkaArt.Data.Algorithm
         private int id_process;
         private string description;
         private int position_count;
+        private int number_of_jobs;
 
         public int ID
         {
@@ -23,6 +24,10 @@ namespace InkaArt.Data.Algorithm
         public int PositionCount
         {
             get { return position_count; }
+        }
+        public int NumberOfJobs
+        {
+            get { return number_of_jobs; }
         }
 
         public Process(int id_process, string description, int position_count)
