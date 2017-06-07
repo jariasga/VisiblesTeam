@@ -54,7 +54,7 @@ namespace InkaArt.Interface.Purchases
                     string idSupplier = dataGridView_suppliersList.Rows[i].Cells[1].Value.ToString();
                     dataGridView_suppliersList.Rows[i].Cells[7].Value = "Inactivo";
                     string status = dataGridView_suppliersList.Rows[i].Cells[7].Value.ToString();
-                    control.updateStatus(idSupplier,status);
+                    //control.updateStatus(idSupplier,status);
                 }
             }
         }

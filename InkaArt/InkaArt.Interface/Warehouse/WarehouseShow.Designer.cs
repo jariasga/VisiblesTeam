@@ -287,6 +287,7 @@
             this.buttonDelete_RawMaterial.TabIndex = 63;
             this.buttonDelete_RawMaterial.Text = "🗑 Eliminar";
             this.buttonDelete_RawMaterial.UseVisualStyleBackColor = false;
+            this.buttonDelete_RawMaterial.Click += new System.EventHandler(this.buttonDelete_RawMaterial_Click);
             // 
             // label5
             // 
