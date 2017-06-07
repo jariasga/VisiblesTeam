@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    class Assignment
+    public class Assignment
     {
         private Worker worker;
         private Recipe recipe;
@@ -51,6 +51,32 @@ namespace InkaArt.Data.Algorithm
             set
             {
                 recipe = value;
+            }
+        }
+
+        public DateTime Date
+        {
+            get
+            {
+                return date;
+            }
+
+            set
+            {
+                date = value;
+            }
+        }
+
+        public int Minitun
+        {
+            get
+            {
+                return minitun;
+            }
+
+            set
+            {
+                minitun = value;
             }
         }
 

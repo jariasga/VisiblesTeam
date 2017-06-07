@@ -28,6 +28,19 @@ namespace InkaArt.Business.Algorithm
         private List<Assignment[][]> initial_solution;
         private List<Assignment[][]> best_solution;
 
+        internal List<Assignment[][]> BestSolution
+        {
+            get
+            {
+                return best_solution;
+            }
+
+            set
+            {
+                best_solution = value;
+            }
+        }
+
         /* Se inicializan los parametros a calibrar */
         public TabuSearch(Simulation simulation, List<Assignment[][]> initial_solution)
         {

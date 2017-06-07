@@ -1,4 +1,6 @@
 ﻿using InkaArt.Business.Algorithm;
+using InkaArt.Common;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +35,9 @@ namespace InkaArt.Data.Algorithm
         private int start_time;                      // milisegundos
         private int limit_time = 3000000;            // 1 000 * 60 * 5 (maximo 5 miutos)
         private int miniturns = 30;
+
+        // Resultados de asignacion
+        List<Assignment[][]> assignments = null;
 
         public double BreakageWeight
         {
@@ -81,7 +86,7 @@ namespace InkaArt.Data.Algorithm
                 return name;
             }            
         }
-
+                
         internal List<Worker> Workers
         {
             get
@@ -157,6 +162,19 @@ namespace InkaArt.Data.Algorithm
             set
             {
                 miniturns = value;
+            }
+        }
+
+        internal List<Assignment[][]> Assignments
+        {
+            get
+            {
+                return assignments;
+            }
+
+            set
+            {
+                assignments = value;
             }
         }
 
@@ -254,10 +272,62 @@ namespace InkaArt.Data.Algorithm
         public void Start()
         {
             start_time = Environment.TickCount;
-            // grasp
-            List<Assignment[][]> initial_solution = new List<Assignment[][]>(); // falta para varios dias
+            List<Assignment[][]> initial_solution = new List<Assignment[][]>(); // GRASP
             TabuSearch tabu = new TabuSearch(this, initial_solution);
             tabu.run();
-        }        
+
+            assignments = tabu.BestSolution;
+        }
+
+        internal void Save()
+        {            
+            NpgsqlConnection connection = new NpgsqlConnection();
+            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.Open();
+
+            int miniturn;
+            int days = 1;
+
+            foreach (Assignment[][] day in assignments)
+            {
+                foreach(Assignment[] worker in day)
+                {
+                    miniturn = 0;
+                    foreach (Assignment assignment in worker)
+                    {
+                        assignment.Minitun = miniturn;
+                        assignment.Date = DateTime.Now.AddDays(days);
+
+                        NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
+                        command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
+                        command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
+                        command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
+                        command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Minitun));
+                        command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
+
+                        command.ExecuteNonQuery();
+                        miniturn++;
+                    }
+                }
+                days++;                
+            }           
+            
+            connection.Close();
+        }
+
+        public List<Assignment> AssignmentsToList()
+        {
+            List<Assignment> list = new List<Assignment>();
+
+            foreach(Assignment[][] day in assignments)
+            {
+                foreach(Assignment[] worker in day)
+                {
+                    list.Concat(worker.ToList<Assignment>());
+                }
+            }
+            
+            return list.OrderByDescending(o => o.Minitun).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
+        }
     }
 }

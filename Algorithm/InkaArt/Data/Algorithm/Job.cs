@@ -10,7 +10,8 @@ namespace InkaArt.Data.Algorithm
 {
     //ESTA CLASE SE USA SOLO PARA LA ASIGNACIÓN DE TRABAJADORES Y PARA EL REGISTRO DE INFORMES DE TURNO
     //- Anthony
-    class Job
+
+    public class Job
     {
         //Job (Puesto de trabajo) = Proceso x Producto
 

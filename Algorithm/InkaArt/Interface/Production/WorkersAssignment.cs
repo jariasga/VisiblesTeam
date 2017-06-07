@@ -34,13 +34,13 @@ namespace InkaArt.Interface.Production
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
             //Temporal
-            string[] data = new string[5];
-            data[0] = "09/05/2017";
-            data[1] = "Tallado de piedras";
-            data[2] = "";
-            data[3] = "Moldeado de huacos";
-            data[4] = "Pintado de retablos";
-            simulation_grid.Rows.Add(data);
+            //string[] data = new string[5];
+            //data[0] = "09/05/2017";
+            //data[1] = "Tallado de piedras";
+            //data[2] = "";
+            //data[3] = "Moldeado de huacos";
+            //data[4] = "Pintado de retablos";
+            //simulation_grid.Rows.Add(data);
 
         }
                 
@@ -57,7 +57,8 @@ namespace InkaArt.Interface.Production
         private void ButtonSaveClick(object sender, EventArgs e)
         {
             //Guardar simulación en BD
-
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            simulation.Save();
         }
 
         private void ButtonConfigClick(object sender, EventArgs e)
@@ -96,9 +97,17 @@ namespace InkaArt.Interface.Production
             else
             {
                 button_config.Text = "Configuración";
-                // completar asignaciones
+                if (simulation.Assignments != null)
+                {
+                    simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
+                    { Column1 = o.Date, Column2 = o.Worker.GetFullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description }).ToList();
+                }
             }
         }
-        
+
+        private void simulation_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -41,12 +41,6 @@
             this.combo_simulations = new System.Windows.Forms.ComboBox();
             this.button_report = new System.Windows.Forms.Button();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
-            this.grid_assignment_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_worker_1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_worker_2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_worker_3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_worker_4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_worker_5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulation_tab_control = new System.Windows.Forms.TabControl();
             this.simulation_tab_general = new System.Windows.Forms.TabPage();
             this.general_grid = new System.Windows.Forms.DataGridView();
@@ -200,60 +194,13 @@
             // 
             this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.grid_assignment_date,
-            this.grid_worker_1,
-            this.grid_worker_2,
-            this.grid_worker_3,
-            this.grid_worker_4,
-            this.grid_worker_5});
             this.simulation_grid.Location = new System.Drawing.Point(9, 8);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.simulation_grid.Name = "simulation_grid";
             this.simulation_grid.RowHeadersVisible = false;
             this.simulation_grid.Size = new System.Drawing.Size(873, 227);
             this.simulation_grid.TabIndex = 1;
-            // 
-            // grid_assignment_date
-            // 
-            this.grid_assignment_date.HeaderText = "Fecha";
-            this.grid_assignment_date.Name = "grid_assignment_date";
-            this.grid_assignment_date.ReadOnly = true;
-            // 
-            // grid_worker_1
-            // 
-            this.grid_worker_1.HeaderText = "Trabajador 1";
-            this.grid_worker_1.Name = "grid_worker_1";
-            this.grid_worker_1.ReadOnly = true;
-            this.grid_worker_1.Width = 150;
-            // 
-            // grid_worker_2
-            // 
-            this.grid_worker_2.HeaderText = "Trabajador 2";
-            this.grid_worker_2.Name = "grid_worker_2";
-            this.grid_worker_2.ReadOnly = true;
-            this.grid_worker_2.Width = 150;
-            // 
-            // grid_worker_3
-            // 
-            this.grid_worker_3.HeaderText = "Trabajador 3";
-            this.grid_worker_3.Name = "grid_worker_3";
-            this.grid_worker_3.ReadOnly = true;
-            this.grid_worker_3.Width = 150;
-            // 
-            // grid_worker_4
-            // 
-            this.grid_worker_4.HeaderText = "Trabajador 4";
-            this.grid_worker_4.Name = "grid_worker_4";
-            this.grid_worker_4.ReadOnly = true;
-            this.grid_worker_4.Width = 150;
-            // 
-            // grid_worker_5
-            // 
-            this.grid_worker_5.HeaderText = "Trabajador 5";
-            this.grid_worker_5.Name = "grid_worker_5";
-            this.grid_worker_5.ReadOnly = true;
-            this.grid_worker_5.Width = 150;
+            this.simulation_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulation_grid_CellContentClick);
             // 
             // simulation_tab_control
             // 
@@ -423,12 +370,6 @@
         private System.Windows.Forms.ComboBox combo_simulations;
         private System.Windows.Forms.Button button_report;
         private System.Windows.Forms.DataGridView simulation_grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_assignment_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_worker_5;
         private System.Windows.Forms.TabControl simulation_tab_control;
         private System.Windows.Forms.TabPage simulation_tab_general;
         private System.Windows.Forms.DataGridView general_grid;
