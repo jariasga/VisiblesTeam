@@ -93,11 +93,19 @@ namespace InkaArt.Interface.Purchases
                 }
             }
         }
-
+        
         private void button_create(object sender, EventArgs e)
         {
             Form new_unit_of_measurement = new UnitOfMeasurement();
-            new_unit_of_measurement.Show();
+            var respuesta=new_unit_of_measurement.ShowDialog();
+            if (respuesta == DialogResult.OK)
+            {
+                unitsList = control_units.GetUnits("", "", "", "");
+                for (int i = 0; i < unitsList.Rows.Count; i++)
+                {
+                    comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
+                }
+            }
         }
         private bool validating_fields()
         {
