@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InkaArt.Business.Algorithm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace InkaArt.Data.Algorithm
     {
         private string name;
         private int days;
+        // time
+        private int start_time;                      // milisegundos
+        private int limit_time = 3000000;            // 1 000 * 60 * 5 (maximo 5 miutos)
+
         // pesos de ratios
         private double breakage_weight;              // para los indices de perdida
         private double time_weight;
@@ -20,6 +25,7 @@ namespace InkaArt.Data.Algorithm
 
         // trabajadores filtrados
         private List<Worker> workers;
+        private List<Index> indexes;
         // pedidos filtrados
         //private List<Orders> orders;
 
@@ -84,6 +90,19 @@ namespace InkaArt.Data.Algorithm
             }
         }
 
+        internal List<Index> Indexes
+        {
+            get
+            {
+                return indexes;
+            }
+
+            set
+            {
+                indexes = value;
+            }
+        }
+
         public int Days
         {
             get
@@ -94,6 +113,32 @@ namespace InkaArt.Data.Algorithm
             set
             {
                 days = value;
+            }
+        }
+
+        public int StartTime
+        {
+            get
+            {
+                return start_time;
+            }
+
+            set
+            {
+                start_time = value;
+            }
+        }
+
+        public int LimitTime
+        {
+            get
+            {
+                return limit_time;
+            }
+
+            set
+            {
+                limit_time = value;
             }
         }
 
@@ -194,5 +239,26 @@ namespace InkaArt.Data.Algorithm
 
             return "OK";
         }
+
+        public double ProductWeight(int product_id)
+        {
+            if (product_id == 1)
+                return huaco_weight;
+            if (product_id == 2)
+                return huamanga_stone_weight;
+            if (product_id == 3)
+                return retable_weight;
+
+            return 0;                
+        }
+
+        public void Start()
+        {
+            start_time = Environment.TickCount;
+            // grasp
+            Assignment[][] initial_solution = new Assignment[workers.Count][]; // falta para varios dias
+            TabuSearch tabu = new TabuSearch();
+            tabu.run(this, initial_solution);
+        }        
     }
 }

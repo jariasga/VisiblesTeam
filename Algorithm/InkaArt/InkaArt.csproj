@@ -61,6 +61,7 @@
     <Compile Include="Business\Algorithm\Instance.cs" />
     <Compile Include="Data\Algorithm\Index.cs" />
     <Compile Include="Data\Algorithm\Process.cs" />
+    <Compile Include="Data\Algorithm\Product.cs" />
     <Compile Include="Data\Algorithm\Simulation.cs" />
     <Compile Include="Data\Algorithm\TabuMove.cs" />
     <Compile Include="Data\Algorithm\TabuQueue.cs" />

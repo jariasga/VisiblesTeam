@@ -51,6 +51,7 @@ namespace InkaArt.Interface.Production
                     if (simulation.Workers != null && simulation.Workers.Contains((Worker)list_workers.Items[i]))
                         list_workers.SetItemChecked(i, true);
                 }
+                // pedidos
 
                 this.Text = "Editar Simulación";
                 return;

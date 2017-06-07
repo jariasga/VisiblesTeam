@@ -46,6 +46,7 @@ namespace InkaArt.Interface.Production
                 
         private void ButtonStartClick(object sender, EventArgs e)
         {
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
             Form new_simultation = new NewSimulation();
             new_simultation.MdiParent = this.MdiParent;
             new_simultation.Show();
@@ -80,7 +81,7 @@ namespace InkaArt.Interface.Production
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
 
             if (simulation == null)
             {
