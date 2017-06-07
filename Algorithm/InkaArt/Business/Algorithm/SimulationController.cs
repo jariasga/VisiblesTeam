@@ -33,6 +33,11 @@ namespace InkaArt.Business.Algorithm
         {
             simulations.Add(simulation);
         }
+        
+        internal void Delete(Simulation simulation)
+        {
+            simulations.Remove(simulation);
+        }
 
         public string Insert(Simulation simulation, string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
         {
@@ -66,6 +71,6 @@ namespace InkaArt.Business.Algorithm
         {
             return new BindingList<Simulation>(simulations);
         }
-        
+
     }
 }

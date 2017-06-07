@@ -10,10 +10,7 @@ namespace InkaArt.Data.Algorithm
     public class Simulation
     {
         private string name;
-        private int days;
-        // time
-        private int start_time;                      // milisegundos
-        private int limit_time = 3000000;            // 1 000 * 60 * 5 (maximo 5 miutos)
+        private int days;        
 
         // pesos de ratios
         private double breakage_weight;              // para los indices de perdida
@@ -28,6 +25,14 @@ namespace InkaArt.Data.Algorithm
         private List<Index> indexes;
         // pedidos filtrados
         //private List<Orders> orders;
+        private ProcessController processes;
+        private JobController jobs;
+
+        // Parametros no configurables por el usuario
+        // time
+        private int start_time;                      // milisegundos
+        private int limit_time = 3000000;            // 1 000 * 60 * 5 (maximo 5 miutos)
+        private int miniturns = 30;
 
         public double BreakageWeight
         {
@@ -142,20 +147,21 @@ namespace InkaArt.Data.Algorithm
             }
         }
 
-        public Simulation() { }
-
-        public Simulation(string name, int days, double breakage, double time, double huaco, double huamanga, double retable, List<Worker> workers)
+        public int Miniturns
         {
-            this.name = name;
-            this.days = days;
-            this.breakage_weight = breakage;
-            this.time_weight = time;
-            this.huaco_weight = huaco;
-            this.huaco_weight = huamanga;
-            this.retable_weight = retable;
-            this.workers = workers;
+            get
+            {
+                return miniturns;
+            }
+
+            set
+            {
+                miniturns = value;
+            }
         }
 
+        public Simulation() { }
+        
         public Simulation(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
         {
             this.name = name;
@@ -166,6 +172,12 @@ namespace InkaArt.Data.Algorithm
             this.huaco_weight = double.Parse(huamanga);
             this.retable_weight = double.Parse(retable);
             this.workers = workers;
+
+            // processes
+            processes = new ProcessController();
+            processes.Load();
+            jobs = new JobController();
+            jobs.Load();
         }
 
         public void Update(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
@@ -179,20 +191,7 @@ namespace InkaArt.Data.Algorithm
             this.retable_weight = double.Parse(retable);
             this.workers = workers;
         }
-
-        public void Update(string name, int days, double breakage, double time, double huaco, double huamanga, double retable, List<Worker> workers)
-        {
-            this.name = name;
-            this.days = days;
-            this.breakage_weight = breakage;
-            this.time_weight = time;
-            this.huaco_weight = huaco;
-            this.huaco_weight = huamanga;
-            this.retable_weight = retable;
-            this.workers = workers;
-            //this.orders = orders;
-        }
-
+        
         static public string Validate(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
         {
             int aux_int;
@@ -256,9 +255,9 @@ namespace InkaArt.Data.Algorithm
         {
             start_time = Environment.TickCount;
             // grasp
-            Assignment[][] initial_solution = new Assignment[workers.Count][]; // falta para varios dias
-            TabuSearch tabu = new TabuSearch();
-            tabu.run(this, initial_solution);
+            List<Assignment[][]> initial_solution = new List<Assignment[][]>(); // falta para varios dias
+            TabuSearch tabu = new TabuSearch(this, initial_solution);
+            tabu.run();
         }        
     }
 }

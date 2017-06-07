@@ -24,7 +24,7 @@ namespace InkaArt.Interface.Production
             workers = new WorkerController();
             workers.Load();
             simulations = new SimulationController();
-            simulations.Add(new Simulation("simu 1", 0, 0, 0, 0, 0, 0, null)); // prueba
+            simulations.Add(new Simulation("simu 1", "0", "0", "0", "0", "0", "0", null)); // prueba
             
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
@@ -45,11 +45,13 @@ namespace InkaArt.Interface.Production
         }
                 
         private void ButtonStartClick(object sender, EventArgs e)
-        {
-            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+        {            
             Form new_simultation = new NewSimulation();
             new_simultation.MdiParent = this.MdiParent;
             new_simultation.Show();
+
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            simulation.Start();
         }
 
         private void ButtonSaveClick(object sender, EventArgs e)
@@ -77,6 +79,10 @@ namespace InkaArt.Interface.Production
             general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
             summary_grid.Rows.Clear();
+            combo_simulations.SelectedIndex = -1;
+
+            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
+            simulations.Delete(simulation);            
         }
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)

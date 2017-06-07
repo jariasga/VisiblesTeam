@@ -12,6 +12,7 @@ namespace InkaArt.Business.Algorithm
 {
     class TabuSearch
     {
+        private Simulation simulation;
 
         // reactive tabu list
         private int tabu_list_length;
@@ -24,13 +25,16 @@ namespace InkaArt.Business.Algorithm
         // solutions
         private int max_iterations;
         private double best_fitness;
-        private Assignment[][] initial_solution;
-        private Assignment[][] best_solution;
+        private List<Assignment[][]> initial_solution;
+        private List<Assignment[][]> best_solution;
 
         /* Se inicializan los parametros a calibrar */
-        public TabuSearch()
+        public TabuSearch(Simulation simulation, List<Assignment[][]> initial_solution)
         {
             LoadParameters();
+            this.simulation = simulation;
+            this.initial_solution = initial_solution;
+            this.best_solution = new List<Assignment[][]>();
         }
 
         public void LoadParameters()
@@ -93,64 +97,67 @@ namespace InkaArt.Business.Algorithm
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
         public Assignment[][] getNeighbor(Assignment[][] solution, TabuMove move)
         {
-            Assignment[][] neighbor= new Assignment[solution.Length][];
+            Assignment[][] neighbor = new Assignment[solution.Length][];
+            solution.CopyTo(neighbor, 0);
             Random rnd = new Random();
 
             // move attributes
             int swap_type = rnd.Next(1);
-            int worker1;
-            int worker2;
-
-            // hay 2 tipos de swap
-            //  0: intercambiar listas
-            //  1: intercambiar productos
-            if (swap_type == 0)
+            int worker1_index;
+            int worker2_index;
+            
+            // tipo 0: intercambiar listas
+            if (true) //(swap_type == 0)
             {
                 // buscamos trabajadores
-                worker1 = rnd.Next(solution.Length);
-                worker2 = rnd.Next(solution.Length);
+                worker1_index = rnd.Next(solution.Length);
+                worker2_index = rnd.Next(solution.Length);
                 // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-                while (solution.Length > 1 && worker1 == worker2)
-                    worker2 = rnd.Next(solution.Length);
+                while (solution.Length > 1 && worker1_index == worker2_index)
+                    worker2_index = rnd.Next(solution.Length);
                 // intercambiamos valores
-                neighbor[worker1] = solution[worker2];
-                neighbor[worker2] = solution[worker1];
+                SwapWorkers(neighbor, worker1_index, worker2_index);
             }
+            // tipo 1: intercambiar productos
             else
             {
                 // FALTA EL SEGUNDO MODO
-                worker1 = rnd.Next(solution.Length);
-                worker2 = rnd.Next(solution.Length);
-                // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-                while (solution.Length > 1 && worker1 == worker2)
-                    worker2 = rnd.Next(solution.Length);
-                // intercambiamos valores
-                neighbor[worker1] = solution[worker2];
-                neighbor[worker2] = solution[worker1];
             }
 
             // guardamos movimiento
-            move = new TabuMove(swap_type, neighbor, worker1, worker2);
+            move = new TabuMove(swap_type, neighbor, worker1_index, worker2_index);
 
             return neighbor;
         }
 
-        /* Flujo del algoritmo */
-        public void run(Simulation simulation, Assignment[][] initial_solution)
+        public void SwapWorkers(Assignment[][] solution, int worker1_index, int worker2_index)
         {
-            for(int day = 0; day < simulation.Days; day++)
+            Worker worker1 = solution[worker1_index].First().Worker;
+            Worker worker2 = solution[worker2_index].First().Worker;
+
+            for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
+            {
+                solution[worker1_index][miniturn].Worker = worker2;
+                solution[worker2_index][miniturn].Worker = worker1;
+            }
+        }
+
+        /* Flujo del algoritmo */
+        public void run()
+        {
+            for(int day = 0; day < initial_solution.Count; day++)
             {
                 // soluciones
-                Assignment[][] current_solution = new Assignment[initial_solution.Length][];
+                Assignment[][] current_solution = new Assignment[initial_solution[day].Length][];
+                Assignment[][] best_day_solution = current_solution;
                 Assignment[][] neighbor = null;
-                initial_solution.CopyTo(current_solution, 0);
-                best_solution = current_solution;
+                initial_solution[day].CopyTo(current_solution, 0);
+                current_solution.CopyTo(best_day_solution, 0);
 
                 // condicion de meseta: contador de iteraciones sin mejora en best_solution
                 int iter_count = 0;
 
                 // lista tabu
-                //Move next_move = null;
                 TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
                 int no_growth_count = 0;
 
@@ -195,7 +202,7 @@ namespace InkaArt.Business.Algorithm
                     if (!success)
                     {
                         // cambia el espacio de busqueda si no encuentra buenas soluciones
-                        neighbor = initial_solution;
+                        neighbor = initial_solution[day];
                         neighbor_fitness = initial_fitness;
                     }
 
@@ -207,7 +214,7 @@ namespace InkaArt.Business.Algorithm
                         if (best_fitness > neighbor_fitness)
                         {
                             // actualizamos
-                            best_solution = neighbor;
+                            best_day_solution = neighbor;
                             best_fitness = neighbor_fitness;
                             // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
                             iter_count = 0;
@@ -237,8 +244,8 @@ namespace InkaArt.Business.Algorithm
                     // siguiente iteracion
                     current_solution = neighbor;
                     current_fitness = neighbor_fitness;
-
                 }
+                best_solution.Add(best_day_solution);
             }            
         }
         
