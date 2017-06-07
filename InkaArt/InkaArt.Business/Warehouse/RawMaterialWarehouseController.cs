@@ -60,5 +60,25 @@ namespace InkaArt.Business.Warehouse
             int rowsAffected = rmWarehouse.insertData(data,adapt, "RawMaterial-Warehouse");
             return rowsAffected;
         }
+
+        public int deleteData(string idRMW)
+        {
+            adapt = rmWarehouse.rmWarehouseAdapter();
+
+            data.Reset();
+            data = rmWarehouse.getData(adapt, "RawMaterial-Warehouse");
+            table = data.Tables["RawMaterial-Warehouse"];
+            
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (string.Compare(table.Rows[i]["idRawMaterialWarehouse"].ToString(), idRMW) == 0)
+                {
+                    table.Rows[i]["state"] = "Inactivo";
+                    break;
+                }
+            }
+
+            return rmWarehouse.updateData(data, adapt, "RawMaterial-Warehouse");            
+        }
     }
 }

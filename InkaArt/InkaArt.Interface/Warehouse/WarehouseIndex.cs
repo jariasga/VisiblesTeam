@@ -85,15 +85,15 @@ namespace InkaArt.Interface.Warehouse
             warehouseList = warehouseController.GetWarehouses(textBox_id.Text, textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
             populateDataGrid(warehouseList);
         }
-        /*
-                private void button_bulk_upload_Click(object sender, EventArgs e)
-                {
-                    WarehouseCrud movimientos = new WarehouseCrud();
-                    OpenFileDialog dialog = new OpenFileDialog();
-                    dialog.Title = "Open Users File";
-                    dialog.Filter = "CSV files|*.csv";
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                        movimientos.massiveUpload(dialog.FileName);
-                }*/
+        
+        /*private void button_bulk_upload_Click(object sender, EventArgs e)
+        {
+            WarehouseCrud movimientos = new WarehouseCrud();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                movimientos.massiveUpload(dialog.FileName);
+        }*/
     }
 }

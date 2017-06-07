@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
 using InkaArt.Business.Purchases;
+using System.Diagnostics;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -63,7 +64,8 @@ namespace InkaArt.Interface.Warehouse
                         rmWarehouseList.Rows[i]["currentStock"],
                         rmWarehouseList.Rows[i]["virtualStock"],
                         rmWarehouseList.Rows[i]["minimunStock"],
-                        rmWarehouseList.Rows[i]["maximunStock"]);
+                        rmWarehouseList.Rows[i]["maximunStock"],false,
+                        rmWarehouseList.Rows[i]["idRawMaterialWarehouse"]);
                 }
             }
         }
@@ -109,10 +111,7 @@ namespace InkaArt.Interface.Warehouse
             textBox_name.Enabled = true;
             textBox_description.Enabled = true;
             textBox_address.Enabled = true;
-            textBox_idProduct.Enabled = true;
-            textBox_nameProduct.Enabled = true;
             comboBox_RM.Enabled = true;
-            comboBox_statusP.Enabled = true;
         }
 
         private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
@@ -141,6 +140,27 @@ namespace InkaArt.Interface.Warehouse
         private void buttonAdd_Product_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonDelete_RawMaterial_Click(object sender, EventArgs e)
+        {
+            RawMaterialWarehouseController rmWarehouseController = new RawMaterialWarehouseController();
+
+            int registros = dataGridView_RawMaterial.Rows.Count;
+            for (int i = 0; i < registros; i++)
+            {
+                string ide = dataGridView_RawMaterial.Rows[i].Cells[6].Value.ToString();
+                string name = dataGridView_RawMaterial.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(dataGridView_RawMaterial.Rows[i].Cells[6].Value) == true)
+                {
+                    string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
+                    Debug.WriteLine(id);
+                    rmWarehouseController.deleteData(id);
+                }
+            }
+            //updateDataGrid();
+            fillGridRawMaterial();
+            MessageBox.Show("Materias primas eliminadas", "Eliminar materia prima", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
     }
 }
