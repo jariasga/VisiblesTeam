@@ -31,11 +31,14 @@ namespace InkaArt.Interface.Warehouse
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            var show_form = new WarehouseShow(id);
-            var result = show_form.ShowDialog();
-            if (result == DialogResult.OK)
-                updateDataGrid();
+            if (dataGridView1.Rows.Count > 0)
+            {
+                string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var show_form = new WarehouseShow(id);
+                var result = show_form.ShowDialog();
+                if (result == DialogResult.OK)
+                    updateDataGrid();
+            }   
         }
 
         private void updateDataGrid()
