@@ -280,13 +280,14 @@ namespace InkaArt.Data.Algorithm
         }
 
         public void Save()
-        {            
+        {
+            if (assignments == null) return;
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = DatabaseConnection.ConnectionString();
             connection.Open();
 
             int miniturn;
-            int days = 1;
+            int days = 1;            
 
             foreach (Assignment[][] day in assignments)
             {

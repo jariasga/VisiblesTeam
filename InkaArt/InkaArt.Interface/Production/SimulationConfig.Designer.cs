@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupbox_weight = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textbox_time = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
             this.list_workers = new System.Windows.Forms.CheckedListBox();
             this.button_save = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textbox_days = new System.Windows.Forms.TextBox();
@@ -73,6 +73,16 @@
             this.groupbox_weight.TabIndex = 14;
             this.groupbox_weight.TabStop = false;
             this.groupbox_weight.Text = "Pesos o relevancias";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(19, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(228, 18);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Peso de Piedras de Huamanga";
             // 
             // label2
             // 
@@ -193,23 +203,13 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(545, 425);
+            this.button_save.Location = new System.Drawing.Point(409, 425);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(119, 42);
             this.button_save.TabIndex = 32;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(19, 175);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(228, 18);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "Peso de Piedras de Huamanga";
             // 
             // groupBox1
             // 
@@ -269,6 +269,7 @@
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pedidos a considerar";
+            this.groupBox2.Visible = false;
             // 
             // list_orders
             // 
@@ -296,7 +297,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(906, 491);
+            this.ClientSize = new System.Drawing.Size(625, 491);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_save);

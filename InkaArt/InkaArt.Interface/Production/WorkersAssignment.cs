@@ -24,7 +24,7 @@ namespace InkaArt.Interface.Production
             workers = new WorkerController();
             workers.Load();
             simulations = new SimulationController();
-            simulations.Add(new Simulation("simu 1", "0", "0", "0", "0", "0", "0", null)); // prueba
+            //simulations.Add(new Simulation("simu 1", "0", "0", "0", "0", "0", "0", null)); // prueba
 
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
@@ -77,20 +77,21 @@ namespace InkaArt.Interface.Production
 
         private void ButtonDeleteClick(object sender, EventArgs e)
         {
-            general_grid.Rows.Clear();
+            //general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
-            summary_grid.Rows.Clear();
+            //summary_grid.Rows.Clear();
             combo_simulations.SelectedIndex = -1;
 
             Simulation simulation = (Simulation)combo_simulations.SelectedItem;
             simulations.Delete(simulation);
+            combo_simulations.DataSource = simulations.BindingList();
         }
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
 
-            if (simulation == null)
+            if (combo_simulations.SelectedIndex == -1 || simulation == null)
             {
                 button_config.Text = "+ Crear";
                 button_save.Enabled = false;
@@ -99,7 +100,7 @@ namespace InkaArt.Interface.Production
             }
             else
             {
-                button_config.Text = "Configuración";
+                button_config.Text = "🖉 Editar";
                 button_save.Enabled = true;
                 button_start.Enabled = true;
                 button_delete.Enabled = true;
