@@ -103,8 +103,9 @@ namespace InkaArt.Interface.Security
 
         private bool validateData()
         {
-            if (int.TryParse(textBoxDNI.Text, out int i) != true) return false;
-            if (int.TryParse(textBoxPhone.Text, out int j) != true) return false;
+            int i, j;
+            if (int.TryParse(textBoxDNI.Text, out i) != true) return false;
+            if (int.TryParse(textBoxPhone.Text, out j) != true) return false;
 
             if (textBoxName.Text == "") return false;
             if (textBoxLastName.Text == "") return false;

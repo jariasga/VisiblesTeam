@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BD_Connector.cs" />
-    <Compile Include="DatabaseConnection.cs" />
     <Compile Include="LogHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

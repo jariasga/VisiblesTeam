@@ -672,6 +672,10 @@
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>
       <Name>InkaArt.Classes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InkaArt.Data\InkaArt.Data.csproj">
+      <Project>{28dd7710-8f67-4401-aec4-cd8c3e135b82}</Project>
+      <Name>InkaArt.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Classes
+namespace InkaArt.Common
 {
-    public class LogHandler
+    class LogHandler
     {
         public static bool WriteLine(string text)
         {

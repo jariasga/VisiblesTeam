@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    public class Index
+    class Index
     {
         private int worker_id;
         private int job_id;
