@@ -26,6 +26,8 @@ namespace InkaArt.Interface.Production
             comboBox_turn.Items.Clear();
             for (int i = 0; i < turnList.Rows.Count; i++)
                 comboBox_turn.Items.Add(turnList.Rows[i]["idTurn"].ToString());
+            comboBox_turn.SelectedIndex = 1;
+
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -102,7 +104,9 @@ namespace InkaArt.Interface.Production
                         desc = textBox_desc.Text.ToString();
 
                         control.updateData(id, ini, fin, desc);
-                    }else
+                        MessageBox.Show("Turno actualizado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
                         MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
