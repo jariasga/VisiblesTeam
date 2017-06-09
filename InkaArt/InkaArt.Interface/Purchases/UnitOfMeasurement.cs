@@ -79,6 +79,7 @@ namespace InkaArt.Interface.Purchases
                 }
                 //hacer el insert
                 controlForm.AddUnit(textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
+                DialogResult = DialogResult.OK;
                 isInEditMode = false;
                 textBox_abbreviation.Enabled = false;
                 textBox_nameUnit.Enabled = false;

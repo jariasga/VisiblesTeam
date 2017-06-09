@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_description = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.textBox_address = new System.Windows.Forms.TextBox();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
@@ -39,16 +41,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.button_bulk_upload = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripción = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dirección = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.textBox_description = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.button_bulk_upload = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -74,13 +74,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // textBox_description
+            // 
+            this.textBox_description.BackColor = System.Drawing.Color.White;
+            this.textBox_description.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_description.Location = new System.Drawing.Point(616, 50);
+            this.textBox_description.Name = "textBox_description";
+            this.textBox_description.Size = new System.Drawing.Size(334, 24);
+            this.textBox_description.TabIndex = 30;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(613, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(92, 18);
+            this.label2.TabIndex = 29;
+            this.label2.Text = "Descripción";
+            // 
             // textBox_address
             // 
             this.textBox_address.BackColor = System.Drawing.Color.White;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_address.Location = new System.Drawing.Point(240, 110);
             this.textBox_address.Name = "textBox_address";
-            this.textBox_address.Size = new System.Drawing.Size(334, 29);
+            this.textBox_address.Size = new System.Drawing.Size(334, 24);
             this.textBox_address.TabIndex = 28;
             // 
             // comboBox_status
@@ -92,7 +110,7 @@
             "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);
             this.comboBox_status.Name = "comboBox_status";
-            this.comboBox_status.Size = new System.Drawing.Size(192, 29);
+            this.comboBox_status.Size = new System.Drawing.Size(192, 25);
             this.comboBox_status.TabIndex = 27;
             // 
             // textBox_id
@@ -101,7 +119,7 @@
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(25, 50);
             this.textBox_id.Name = "textBox_id";
-            this.textBox_id.Size = new System.Drawing.Size(192, 29);
+            this.textBox_id.Size = new System.Drawing.Size(192, 24);
             this.textBox_id.TabIndex = 26;
             // 
             // label5
@@ -109,7 +127,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(21, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 23);
+            this.label5.Size = new System.Drawing.Size(23, 18);
             this.label5.TabIndex = 25;
             this.label5.Text = "ID";
             // 
@@ -118,7 +136,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(237, 89);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 23);
+            this.label4.Size = new System.Drawing.Size(75, 18);
             this.label4.TabIndex = 24;
             this.label4.Text = "Dirección";
             // 
@@ -127,7 +145,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(21, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 23);
+            this.label3.Size = new System.Drawing.Size(58, 18);
             this.label3.TabIndex = 20;
             this.label3.Text = "Estado";
             // 
@@ -137,7 +155,7 @@
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_name.Location = new System.Drawing.Point(240, 50);
             this.textBox_name.Name = "textBox_name";
-            this.textBox_name.Size = new System.Drawing.Size(334, 29);
+            this.textBox_name.Size = new System.Drawing.Size(334, 24);
             this.textBox_name.TabIndex = 17;
             // 
             // label1
@@ -145,7 +163,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(237, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 23);
+            this.label1.Size = new System.Drawing.Size(64, 18);
             this.label1.TabIndex = 16;
             this.label1.Text = "Nombre";
             // 
@@ -165,6 +183,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -180,6 +199,34 @@
             this.dataGridView1.Size = new System.Drawing.Size(982, 251);
             this.dataGridView1.TabIndex = 43;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // Descripción
+            // 
+            this.Descripción.HeaderText = "Descripción";
+            this.Descripción.Name = "Descripción";
+            // 
+            // Dirección
+            // 
+            this.Dirección.HeaderText = "Dirección";
+            this.Dirección.Name = "Dirección";
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // buttonDelete
             // 
@@ -221,55 +268,9 @@
             this.button_bulk_upload.Text = "CargaMasiva";
             this.button_bulk_upload.UseVisualStyleBackColor = false;
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Descripción
-            // 
-            this.Descripción.HeaderText = "Descripción";
-            this.Descripción.Name = "Descripción";
-            // 
-            // Dirección
-            // 
-            this.Dirección.HeaderText = "Dirección";
-            this.Dirección.Name = "Dirección";
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // textBox_description
-            // 
-            this.textBox_description.BackColor = System.Drawing.Color.White;
-            this.textBox_description.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_description.Location = new System.Drawing.Point(616, 50);
-            this.textBox_description.Name = "textBox_description";
-            this.textBox_description.Size = new System.Drawing.Size(334, 29);
-            this.textBox_description.TabIndex = 30;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(613, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 23);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Descripción";
-            // 
             // WarehouseIndex
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1025, 518);
