@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
+using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
 
@@ -22,7 +22,7 @@ namespace InkaArt.Business.Algorithm
         public void Load()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Process\"", connection);

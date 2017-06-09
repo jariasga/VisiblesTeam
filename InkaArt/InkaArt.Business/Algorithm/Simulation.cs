@@ -1,5 +1,5 @@
-﻿using InkaArt.Business.Algorithm;
-using InkaArt.Common;
+﻿using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InkaArt.Data.Algorithm
+namespace InkaArt.Business.Algorithm
 {
     public class Simulation
     {
         private string name;
-        private int days;        
+        private int days;
 
         // pesos de ratios
         private double breakage_weight;
@@ -283,7 +283,7 @@ namespace InkaArt.Data.Algorithm
         {
             if (assignments == null) return;
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             int miniturn;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
-using InkaArt.Common;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -53,7 +53,7 @@ namespace InkaArt.Business.Algorithm
         public void LoadParameters()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TabuParameters\"", connection);
@@ -98,7 +98,8 @@ namespace InkaArt.Business.Algorithm
                         
                         product_weight = simulation.ProductWeight(assignment.Job.Product);
                         // sumamos el indice de perdida
-                        fitness += (index.Breakage * simulation.BreakageWeight + index.Time * simulation.TimeWeight) / product_weight;
+                        fitness += (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight)
+                            / product_weight;
                     }
                 }
             }

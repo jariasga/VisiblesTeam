@@ -1,4 +1,4 @@
-﻿using InkaArt.Common;
+﻿using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
 using System;
@@ -13,19 +13,22 @@ namespace InkaArt.Business.Algorithm
     class Instance
     {
         private WorkerController workers;
-        private RatioResumeController ratios; 
+        private IndexController indexes; 
         private ProcessController processes;
         private JobController jobs;        
 
         // pesos de ratios
         private double breakage_weight;              // para los indices de perdida
         private double time_weight;
+
         // pesos de productos
         private double huaco_weight;
         private double huamanga_stone_weight;
         private double retable_weight;
+
         // numero de miniturnos        
-        private double miniturns;               
+        private double miniturns;               //debería ser int
+
         // time
         private int start_time;                      // milisegundos
         private int limit_time;                      // 1 000 * 60 * 5 (maximo 5 miutos)
@@ -34,26 +37,15 @@ namespace InkaArt.Business.Algorithm
 
         public int LimitTime
         {
-            get
-            {
-                return limit_time;
-            }
+            get { return limit_time; }
         }
-
         public int StartTime
         {
-            get
-            {
-                return start_time;
-            }
+            get { return start_time; }
         }
-
         public double Miniturns
         {
-            get
-            {
-                return miniturns;
-            }
+            get { return miniturns; }
         }
 
         /* constructor */
@@ -64,16 +56,15 @@ namespace InkaArt.Business.Algorithm
             start_time = Environment.TickCount;
 
             // processes
-            processes = new ProcessController();
-            processes.Load();
-            jobs = new JobController();
-            jobs.Load();
-
-            // workers y ratios
-            workers = new WorkerController();
-            workers.Load(); // solo filtrados
-            ratios = new RatioResumeController();
-            ratios.Load();
+            this.processes = new ProcessController();
+            this.processes.Load();
+            this.jobs = new JobController();
+            this.jobs.Load();
+            this.workers = new WorkerController();
+            this.workers.Load(); // solo filtrados
+            this.indexes = new IndexController();
+            this.indexes.Load();
+            
 
             // pesos de ratios y productos
             LoadParameters();
@@ -82,7 +73,7 @@ namespace InkaArt.Business.Algorithm
         public void LoadParameters()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"SimulationParameters\"", connection);
@@ -106,51 +97,6 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
-        /* Devuelve la lista de procesos productos que existen para un proceso */
-        public List<int> getProcessProducts(int i)
-        {
-            List<int> list = new List<int>();
-
-            if (i == 0)
-            {
-                list.Add(20);       // tallado de piedras
-                list.Add(30);       // tallado de retablos
-            }
-            else if (i == 1)
-            {
-                list.Add(10);       // modelado de huacos
-            }
-            else if (i == 2)
-            {
-                list.Add(12);       // horneado de huacos
-            }
-            else if (i == 3)
-            {
-                list.Add(11);       // pintado de huacos
-                list.Add(31);       // pintado de retablos
-            }
-
-            return list;
-        }
         
-        /* Predicado de solucion */
-        public static Predicate<int> byProcessProduct(int process_product_id)
-        {
-            return delegate (int assignment)
-            {
-                return assignment == process_product_id;
-            };
-        }
-
-        /* Predicado de solucion */
-        public static Predicate<int> byProduct(int product_id)
-        {
-            // ids: 0 Huacos, 1 piedras, 2 retablos
-            return delegate (int assignment)
-            {
-                return (assignment / 10) == (product_id + 1);
-            };
-        }
-
     }
 }

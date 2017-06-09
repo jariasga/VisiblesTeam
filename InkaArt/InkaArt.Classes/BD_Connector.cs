@@ -9,7 +9,6 @@ using System.ComponentModel;
 
 namespace InkaArt.Classes
 {
-
     public class BD_Connector
     {
         private NpgsqlConnection connection;

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
+using InkaArt.Classes;
 
 namespace InkaArt.Data.Algorithm
 {
-    class Ratio
+    public class Ratio
     {
         private int id_report;
         private DateTime date;
@@ -98,7 +98,7 @@ namespace InkaArt.Data.Algorithm
         public void Insert()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("INSERT INTO inkaart.\"Ratio\"(date, id_worker, id_job, id_recipe, " +
@@ -124,7 +124,7 @@ namespace InkaArt.Data.Algorithm
         public void Update()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Ratio\" SET date = :date, id_worker = :id_worker, "
@@ -151,7 +151,7 @@ namespace InkaArt.Data.Algorithm
         public void Delete()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Ratio\" SET status = :status " + 
@@ -167,7 +167,7 @@ namespace InkaArt.Data.Algorithm
         public int Count()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT COUNT(id_report) FROM inkaart.\"Ratio\" " + 
@@ -186,7 +186,7 @@ namespace InkaArt.Data.Algorithm
         public void AverageValues(out double average_breakage, out double average_time)
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT AVG(breakage) FROM inkaart.\"Ratio\" " +

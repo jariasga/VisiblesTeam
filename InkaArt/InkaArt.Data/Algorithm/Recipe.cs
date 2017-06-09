@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
+using InkaArt.Classes;
 
 namespace InkaArt.Data.Algorithm
 {

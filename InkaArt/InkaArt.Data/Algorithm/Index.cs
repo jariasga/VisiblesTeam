@@ -1,17 +1,12 @@
-﻿using Npgsql;
-using NpgsqlTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
-
 namespace InkaArt.Data.Algorithm
 {
-    public class RatioResume
+    public class Index
     {
         private int id_resume;
         private int id_worker;
@@ -19,6 +14,8 @@ namespace InkaArt.Data.Algorithm
         private int id_recipe;
         private double average_breakage;
         private double average_time;
+        private double breakage_index;
+        private double time_index;
 
         public int ID
         {
@@ -46,8 +43,18 @@ namespace InkaArt.Data.Algorithm
             get { return average_time; }
             set { average_time = value; }
         }
+        public double BreakageIndex
+        {
+            get { return breakage_index; }
+            set { breakage_index = value; }
+        }
+        public double TimeIndex
+        {
+            get { return time_index; }
+            set { time_index = value; }
+        }
 
-        public RatioResume(int id_resume, int id_worker, int id_job, int id_recipe, double average_breakage,
+        public Index(int id_resume, int id_worker, int id_job, int id_recipe, double average_breakage,
             double average_time)
         {
             this.id_resume = id_resume;
@@ -56,6 +63,15 @@ namespace InkaArt.Data.Algorithm
             this.id_recipe = id_recipe;
             this.average_breakage = average_breakage;
             this.average_time = average_time;
+        }
+
+        public static Predicate<Index> byWorkerAndJob(Worker worker, Job job)
+        {
+            return delegate (Index index)
+            {
+                if (worker == null || job == null) return false;
+                return index.id_worker.Equals(worker.ID) && index.id_job.Equals(job.ID);
+            };
         }
     }
 }

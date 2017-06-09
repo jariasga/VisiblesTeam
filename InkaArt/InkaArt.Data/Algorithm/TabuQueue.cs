@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    class TabuQueue
+    public class TabuQueue
     {
         Queue<TabuMove> tabu = new Queue<TabuMove>();
         public int limit { get; set; }

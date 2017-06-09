@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    class Product
+    public class Product
     {
     }
 }

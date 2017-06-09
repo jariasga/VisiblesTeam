@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
+using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
@@ -14,12 +14,10 @@ namespace InkaArt.Business.Algorithm
     class RatioController
     {
         List<Ratio> ratios;
-        RatioResumeController resumes;
 
         public RatioController()
         {
             ratios = new List<Ratio>();
-            resumes = new RatioResumeController();
         }
 
         public void Load(DateTime date)
@@ -27,7 +25,7 @@ namespace InkaArt.Business.Algorithm
             ratios.Clear();
 
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date AND "

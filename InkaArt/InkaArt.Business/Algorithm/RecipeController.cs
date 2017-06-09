@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
+using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
@@ -23,7 +23,7 @@ namespace InkaArt.Business.Algorithm
         public void Load()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Recipe\" WHERE status = :status",

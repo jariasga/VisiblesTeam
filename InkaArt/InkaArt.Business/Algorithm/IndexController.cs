@@ -6,24 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Common;
+using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
 {
-    class RatioResumeController
+    class IndexController
     {
-        private List<RatioResume> resumes;
+        private List<Index> indexes;
 
-        public RatioResumeController()
+        public IndexController()
         {
-            resumes = new List<RatioResume>();
+            indexes = new List<Index>();
         }
 
         public void Load()
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"RatioResume\" WHERE status = 1 " +
@@ -38,9 +37,9 @@ namespace InkaArt.Business.Algorithm
                 int id_recipe = reader.GetInt32(3);
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
-                RatioResume turn_report_resume = new RatioResume(id_resume, id_worker, id_job, id_recipe,
+                Index turn_report_resume = new Index(id_resume, id_worker, id_job, id_recipe,
                     average_breakage, average_time);
-                resumes.Add(turn_report_resume);
+                indexes.Add(turn_report_resume);
             }
 
             connection.Close();
@@ -48,8 +47,7 @@ namespace InkaArt.Business.Algorithm
 
         public void Insert(Ratio ratio)
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("INSERT INTO inkaart.\"RatioResume\"(id_worker, id_job, "
@@ -68,8 +66,7 @@ namespace InkaArt.Business.Algorithm
 
         public void Update(Ratio ratio, double average_breakage, double average_time)
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = DatabaseConnection.ConnectionString();
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"RatioResume\" SET " +
@@ -86,17 +83,56 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
-
-        public RatioResume GetByID(int id_resume)
+        public void CalculateIndexes(JobController jobs, RecipeController recipes)
         {
-            foreach (RatioResume resume in resumes)
+            double[,] average_breakage_mean = new double[jobs.Count(), recipes.Count()];
+            double[,] average_time_mean = new double[jobs.Count(), recipes.Count()];
+            int[,] average_mean_count = new int[jobs.Count(), recipes.Count()];
+
+            for (int i = 0; i < jobs.Count(); i++)
+            {
+                for (int j = 0; j < recipes.Count(); j++)
+                {
+                    foreach (Index index in indexes)
+                    {
+                        if (index.Job == jobs[i].ID && index.Recipe == recipes[j].ID)
+                        {
+                            average_mean_count[i, j]++;
+                            average_breakage_mean[i, j] += index.AverageBreakage;
+                            average_time_mean[i, j] += index.AverageTime;
+                        }
+                    }
+
+                    average_breakage_mean[i, j] = (average_mean_count[i, j] <= 0) ? 1 :
+                        average_breakage_mean[i, j] / average_mean_count[i, j];
+                    average_time_mean[i, j] = (average_mean_count[i, j] <= 0) ? 1 :
+                        average_time_mean[i, j] / average_mean_count[i, j];
+                }
+            }
+
+            foreach (Index index in indexes)
+            {
+                index.BreakageIndex = index.AverageBreakage / average_breakage_mean[index.Job, index.Recipe];
+                index.TimeIndex = index.AverageTime / average_time_mean[index.Job, index.Recipe];
+            }
+        }
+
+        public Index GetByID(int id_resume)
+        {
+            foreach (Index resume in indexes)
                 if (resume.ID == id_resume) return resume;
             return null;
         }
 
-        public RatioResume this[int index]
+        public Index this[int index]
         {
-            get { return resumes[index]; }
+            get { return indexes[index]; }
         }
+
+        public int Count()
+        {
+            return indexes.Count;
+        }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    class Process
+    public class Process
     {
         private int id_process;
         private string description;

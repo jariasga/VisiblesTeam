@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Algorithm
 {
-    class TabuMove
+    public class TabuMove
     {
         // cada tupla contiene: <worker_id, item_id>
         // tipo de movimiento (de esto dependera que el item sea producto o proceso)

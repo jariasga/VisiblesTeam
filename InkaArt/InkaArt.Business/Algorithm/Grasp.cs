@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using InkaArt.Business.Algorithm;
-
-namespace InkaArt.Algorithm.Grasp
+namespace InkaArt.Business.Algorithm
 {
     class Grasp
     {
