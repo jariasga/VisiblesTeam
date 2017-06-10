@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Business.Production;
 
 namespace InkaArt.Interface.Sales
 {
@@ -15,17 +16,41 @@ namespace InkaArt.Interface.Sales
         public GenerateSalesReport()
         {
             InitializeComponent();
+            FinalProductController controlProd = new FinalProductController();
+            DataTable prodList = controlProd.getData();
+            for (int i = 0; i < prodList.Rows.Count; i++)
+                comboBox_products.Items.Add(prodList.Rows[i]["name"]);
         }
 
-        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        private void GenerateSalesReport_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button_generate_Click(object sender, EventArgs e)
+        private void button_generateSalesResport_Click(object sender, EventArgs e)
         {
-            SalesReport sales_form = new SalesReport();
-            sales_form.Show();
+            int response = validateData();
+            if (response == 1)
+            {
+                SalesReport sales_form = new SalesReport();
+                sales_form.Show();
+            }
+
+        }
+
+        private int validateData()
+        {
+            if (dateTimePicker_fechaIni.Value >= dateTimePicker_fechaFin.Value)
+            {
+                MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+            else if (comboBox_products.Text == "")
+            {
+                MessageBox.Show(this, "Por favor, seleccionar un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+            else return 1;
         }
     }
 }

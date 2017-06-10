@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker_fechaIni = new System.Windows.Forms.DateTimePicker();
-            this.button_generate = new System.Windows.Forms.Button();
+            this.button_generateSalesResport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,7 +41,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button_generate);
+            this.groupBox1.Controls.Add(this.button_generateSalesResport);
             this.groupBox1.Controls.Add(this.comboBox_products);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -74,18 +74,18 @@
             this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(340, 28);
             this.dateTimePicker_fechaIni.TabIndex = 4;
             // 
-            // button_generate
+            // button_generateSalesResport
             // 
-            this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(505, 136);
-            this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(138, 51);
-            this.button_generate.TabIndex = 22;
-            this.button_generate.Text = "Generar";
-            this.button_generate.UseVisualStyleBackColor = false;
-            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
+            this.button_generateSalesResport.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_generateSalesResport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_generateSalesResport.ForeColor = System.Drawing.Color.White;
+            this.button_generateSalesResport.Location = new System.Drawing.Point(505, 136);
+            this.button_generateSalesResport.Name = "button_generateSalesResport";
+            this.button_generateSalesResport.Size = new System.Drawing.Size(138, 51);
+            this.button_generateSalesResport.TabIndex = 22;
+            this.button_generateSalesResport.Text = "Generar";
+            this.button_generateSalesResport.UseVisualStyleBackColor = false;
+            this.button_generateSalesResport.Click += new System.EventHandler(this.button_generateSalesResport_Click);
             // 
             // label2
             // 
@@ -132,6 +132,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerateSalesReport";
             this.Text = "Generar Reporte de Ventas";
+            this.Load += new System.EventHandler(this.GenerateSalesReport_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -143,7 +144,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker_fechaIni;
-        private System.Windows.Forms.Button button_generate;
+        private System.Windows.Forms.Button button_generateSalesResport;
         private System.Windows.Forms.ComboBox comboBox_products;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
