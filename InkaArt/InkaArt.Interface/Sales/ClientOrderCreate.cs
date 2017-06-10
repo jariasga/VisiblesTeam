@@ -162,7 +162,6 @@ namespace InkaArt.Interface.Sales
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(combo_product.SelectedValue);
             if (productList.Rows.Count == 0) productList = orderController.GetProducts();
             foreach (DataRow row in productList.Rows)
             {
@@ -183,6 +182,32 @@ namespace InkaArt.Interface.Sales
         private void numeric_quantity_KeyUp(object sender, KeyEventArgs e)
         {
             button_add.Enabled = numeric_quantity.Value > 0;
+        }
+
+        private void button_delete_Click(object sender, EventArgs e)
+        {
+            double remAmount = 0;
+            foreach (DataGridViewRow row in grid_orderline.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[deleteColumn.Index].Value) == true)
+                {
+                    remAmount += Math.Round((double.Parse(row.Cells[2].Value.ToString()) * double.Parse(row.Cells[3].Value.ToString())),2);
+                    grid_orderline.Rows.RemoveAt(row.Index);
+                }
+            }
+            amount -= remAmount;
+            if (amount > 0)
+            {
+                textbox_amount.Text = Math.Round(amount, 2).ToString();
+                textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
+                textbox_total.Text = Math.Round((1.18 * amount), 2).ToString();
+            }
+            else
+            {
+                amount = 0;
+                textbox_amount.Text = textbox_igv.Text = textbox_total.Text = "S/. 0.00";
+            }
+            if (grid_orderline.RowCount == 0) textbox_amount.Text = textbox_igv.Text = textbox_total.Text = "S/. 0.00";
         }
     }
 }

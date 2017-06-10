@@ -43,6 +43,7 @@
             this.button_search = new System.Windows.Forms.Button();
             this.clientIdentifierLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_delete = new System.Windows.Forms.Button();
             this.textbox_total = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textbox_igv = new System.Windows.Forms.TextBox();
@@ -51,17 +52,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textbox_amount = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.combo_product = new System.Windows.Forms.ComboBox();
             this.numeric_quantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -228,6 +229,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_delete);
             this.groupBox2.Controls.Add(this.textbox_total);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.textbox_igv);
@@ -251,6 +253,20 @@
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Productos";
+            // 
+            // button_delete
+            // 
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(410, 103);
+            this.button_delete.Margin = new System.Windows.Forms.Padding(4);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(161, 48);
+            this.button_delete.TabIndex = 38;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
             // textbox_total
             // 
@@ -350,42 +366,12 @@
             this.Column1,
             this.cost,
             this.Cantidad,
-            this.Column2});
+            this.deleteColumn});
             this.grid_orderline.Location = new System.Drawing.Point(33, 172);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
             this.grid_orderline.Size = new System.Drawing.Size(560, 167);
             this.grid_orderline.TabIndex = 22;
-            // 
-            // Producto
-            // 
-            this.Producto.FillWeight = 141.1049F;
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            // 
-            // Column1
-            // 
-            this.Column1.FillWeight = 141.1049F;
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            // 
-            // cost
-            // 
-            this.cost.FillWeight = 77.87196F;
-            this.cost.HeaderText = "PU";
-            this.cost.Name = "cost";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.FillWeight = 76.14214F;
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 63.7762F;
-            this.Column2.HeaderText = "Eliminar";
-            this.Column2.Name = "Column2";
             // 
             // label7
             // 
@@ -452,6 +438,36 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Producto";
             // 
+            // Producto
+            // 
+            this.Producto.FillWeight = 141.1049F;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 141.1049F;
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            // 
+            // cost
+            // 
+            this.cost.FillWeight = 77.87196F;
+            this.cost.HeaderText = "PU";
+            this.cost.Name = "cost";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.FillWeight = 76.14214F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // deleteColumn
+            // 
+            this.deleteColumn.FillWeight = 63.7762F;
+            this.deleteColumn.HeaderText = "Eliminar";
+            this.deleteColumn.Name = "deleteColumn";
+            // 
             // ClientOrderCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -510,10 +526,11 @@
         private System.Windows.Forms.ComboBox combo_quality;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox combo_doc;
+        private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
     }
 }
