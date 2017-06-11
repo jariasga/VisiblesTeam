@@ -73,11 +73,11 @@ namespace InkaArt.Interface.Purchases
                     string id = dataGridView_rawMaterialsList.Rows[i].Cells[1].Value.ToString();
                     string name = dataGridView_rawMaterialsList.Rows[i].Cells[2].Value.ToString();
                     string unit = dataGridView_rawMaterialsList.Rows[i].Cells[4].Value.ToString();
-                    dataGridView_rawMaterialsList.Rows[i].Cells[5].Value = "Inactivo";
-                    string status = dataGridView_rawMaterialsList.Rows[i].Cells[5].Value.ToString();
                     string description = dataGridView_rawMaterialsList.Rows[i].Cells[3].Value.ToString();
                     string averagePrice = dataGridView_rawMaterialsList.Rows[i].Cells[6].Value.ToString();
-                    control.updateData(id, name, description, unit, status, double.Parse(averagePrice));
+                    control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice));
+                    dataGridView_rawMaterialsList.Rows[i].Cells[5].Value = "Inactivo";
+                    dataGridView_rawMaterialsList.Rows[i].Cells[0].Value = false;
                 }
             }
         }
