@@ -16,7 +16,7 @@ namespace InkaArt.Interface.Sales
         OrderController orderController = new OrderController();
         DataTable saleDocumentList;
         DataTable productList;
-        private int currentClientId;
+        private int currentClientId, currentClientType, currentClientNat;
         private double amount;
         public ClientOrderCreate()
         {
@@ -42,8 +42,6 @@ namespace InkaArt.Interface.Sales
 
         private void ClientOrderCreate_Load(object sender, EventArgs e)
         {
-            saleDocumentList = orderController.GetDocumentTypes();
-            populateCombobox(combo_doc, saleDocumentList, "nombre", "idTipoDocumento");
             productList = orderController.GetProducts();
             populateCombobox(combo_product, productList, "name", "idProduct");
         }
@@ -69,12 +67,7 @@ namespace InkaArt.Interface.Sales
 
         private void button_save_Click(object sender, EventArgs e)
         {
-            int docTypeId = -1;
-            foreach (DataRow row in saleDocumentList.Rows)
-            {
-                if (row["nombre"].ToString().Equals(combo_doc.Text))
-                    docTypeId = int.Parse(row["idTipoDocumento"].ToString());
-            }
+            int docTypeId = textbox_doctype.Text.Equals("Boleta") ? 1 : 2;         
             DataTable orderLine = parseDataGrid(grid_orderline);
             string messageResponse = orderController.makeValidations(textbox_doc.Text,textbox_name.Text, orderLine, "pedido", "");
             if (messageResponse.Equals("OK"))
@@ -139,20 +132,25 @@ namespace InkaArt.Interface.Sales
                 currentClientId = form.SelectedClientId;
                 textbox_doc.Text = form.SelectedClientDoc.ToString();
                 textbox_name.Text = form.SelectedClientName;
+                currentClientType = form.SelectedClientType;
+                currentClientNat = form.SelectedClientTypeNat;
+                if (currentClientType == 0)
+                {
+                    clientIdentifierLabel.Text = "DNI";
+                    textbox_doctype.Text = "Boleta";
+                }
+                else
+                {
+                    clientIdentifierLabel.Text = "RUC";
+                    textbox_doctype.Text = "Factura";
+                }
+                
             }
         }
 
         private void ClientOrderCreate_Shown(object sender, EventArgs e)
         {
 
-        }
-
-        private void combo_doc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (combo_doc.Text.Equals("Boleta"))
-                clientIdentifierLabel.Text = "DNI";
-            else
-                clientIdentifierLabel.Text = "RUC";
         }
 
         private void numeric_quantity_ValueChanged(object sender, EventArgs e)
