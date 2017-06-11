@@ -180,19 +180,6 @@
             // list_workers
             // 
             this.list_workers.FormattingEnabled = true;
-            this.list_workers.Items.AddRange(new object[] {
-            "Trabajador 1",
-            "Trabajador 2",
-            "Trabajador 3",
-            "Trabajador 4",
-            "Trabajador 5",
-            "Trabajador 6",
-            "Trabajador 7",
-            "Trabajador 8",
-            "Trabajador 9",
-            "Trabajador 10",
-            "Trabajador 11",
-            "Trabajador 12"});
             this.list_workers.Location = new System.Drawing.Point(25, 45);
             this.list_workers.Name = "list_workers";
             this.list_workers.Size = new System.Drawing.Size(221, 319);
@@ -203,7 +190,7 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(409, 425);
+            this.button_save.Location = new System.Drawing.Point(546, 417);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(119, 42);
             this.button_save.TabIndex = 32;
@@ -269,24 +256,11 @@
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Pedidos a considerar";
-            this.groupBox2.Visible = false;
             // 
             // list_orders
             // 
             this.list_orders.FormattingEnabled = true;
-            this.list_orders.Items.AddRange(new object[] {
-            "Trabajador 1",
-            "Trabajador 2",
-            "Trabajador 3",
-            "Trabajador 4",
-            "Trabajador 5",
-            "Trabajador 6",
-            "Trabajador 7",
-            "Trabajador 8",
-            "Trabajador 9",
-            "Trabajador 10",
-            "Trabajador 11",
-            "Trabajador 12"});
+            this.list_orders.HorizontalScrollbar = true;
             this.list_orders.Location = new System.Drawing.Point(25, 45);
             this.list_orders.Name = "list_orders";
             this.list_orders.Size = new System.Drawing.Size(221, 319);
@@ -297,7 +271,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(625, 491);
+            this.ClientSize = new System.Drawing.Size(909, 491);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_save);
