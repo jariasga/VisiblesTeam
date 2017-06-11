@@ -86,7 +86,7 @@ namespace InkaArt.Classes
             {
                 adap.Update(data, srcTable);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
                 if (code == 23505) return 23505;

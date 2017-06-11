@@ -118,7 +118,7 @@ namespace InkaArt.Interface.Purchases
             {
                 new MailAddress(textBox_email.Text);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("El email no es valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
