@@ -101,7 +101,7 @@
             this.textBox_name.BackColor = System.Drawing.Color.White;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(24, 94);
-            this.textBox_name.MaxLength = 100;
+            this.textBox_name.MaxLength = 280;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(253, 24);
             this.textBox_name.TabIndex = 12;
@@ -121,7 +121,7 @@
             this.textBox_ruc.BackColor = System.Drawing.Color.White;
             this.textBox_ruc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ruc.Location = new System.Drawing.Point(24, 148);
-            this.textBox_ruc.MaxLength = 7;
+            this.textBox_ruc.MaxLength = 11;
             this.textBox_ruc.Name = "textBox_ruc";
             this.textBox_ruc.Size = new System.Drawing.Size(253, 24);
             this.textBox_ruc.TabIndex = 14;
@@ -241,6 +241,7 @@
             this.textBox_contactName.Name = "textBox_contactName";
             this.textBox_contactName.Size = new System.Drawing.Size(221, 24);
             this.textBox_contactName.TabIndex = 21;
+            this.textBox_contactName.TextChanged += new System.EventHandler(this.verifying_contactname);
             // 
             // label6
             // 
