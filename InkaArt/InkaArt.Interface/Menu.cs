@@ -276,7 +276,7 @@ namespace InkaArt.Interface
                     long ms = ping.Send(BD_Connector.serverAddress).RoundtripTime;
                     this.SetPingStatusText("Reply from server: " + ms + "ms");
                 }
-                catch (Exception Msg)
+                catch (Exception)
                 {
                     this.SetPingStatusText("Server unreacheable");
                 }
