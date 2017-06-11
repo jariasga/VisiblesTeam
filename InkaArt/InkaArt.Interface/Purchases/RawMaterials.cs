@@ -24,6 +24,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_rawMaterialsList.Columns["description"].HeaderText = "Descripción";
             dataGridView_rawMaterialsList.Columns["average_price"].HeaderText = "Precio Promedio";
             dataGridView_rawMaterialsList.Columns["average_price"].Visible = false;
+            
         }
         private void verifying_ids()
         {
@@ -44,7 +45,7 @@ namespace InkaArt.Interface.Purchases
             }
             textBox_id.Text = actualdata;
         }
-        private void desarrolloBusqueda()
+        public void desarrolloBusqueda()
         {
             textBox_name.Text = textBox_name.Text.Trim();
             filter();
@@ -58,7 +59,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_rawMaterialsList.Columns["average_price"].HeaderText = "Precio Promedio";
             dataGridView_rawMaterialsList.Columns["average_price"].Visible = false;
         }
-        private void button_search(object sender, EventArgs e)
+        public void button_search(object sender, EventArgs e)
         {
             desarrolloBusqueda();
         }
@@ -75,29 +76,32 @@ namespace InkaArt.Interface.Purchases
                     string unit = dataGridView_rawMaterialsList.Rows[i].Cells[4].Value.ToString();
                     string description = dataGridView_rawMaterialsList.Rows[i].Cells[3].Value.ToString();
                     string averagePrice = dataGridView_rawMaterialsList.Rows[i].Cells[6].Value.ToString();
-                    if(control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice)) == 1)
+                    try
                     {
-                        dataGridView_rawMaterialsList.Rows[i].Cells[0].Value = false;
-                        desarrolloBusqueda();
+                        control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice));
                     }
-                    else
+                    catch(Exception)
                     {
                         MessageBox.Show("No se pudo actualizar el registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
+
+                    dataGridView_rawMaterialsList.Rows[i].Cells[0].Value = false;
+                    desarrolloBusqueda();
                 }
             }
         }
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_raw_material = new RawMaterialDetail(control);
+            Form new_raw_material = new RawMaterialDetail(control,this);
             new_raw_material.Show();
         }
 
         private void editRawMaterialDetail(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentRawMaterial = dataGridView_rawMaterialsList.CurrentRow;
-            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control);
+            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control,this);
             new_raw_material.Show();
         }
 

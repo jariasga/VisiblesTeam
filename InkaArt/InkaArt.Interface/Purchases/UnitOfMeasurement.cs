@@ -17,15 +17,29 @@ namespace InkaArt.Interface.Purchases
         bool isInEditMode = false;
         UnitOfMeasurementController controlForm;
         UnitOfMeasurementList unitsView;
+        bool creandoDesdeRawMatView = false;
         public UnitOfMeasurement()
         {
-            mode = 1; //Crear unitOfMeasurement
+            mode = 1; //Crear unitOfMeasurement para material
             controlForm = new UnitOfMeasurementController();
             controlForm.getData();
             InitializeComponent();
             isInEditMode = true;
             buttonSave.Text = "🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
+            creandoDesdeRawMatView = true;
+        }
+        public UnitOfMeasurement(UnitOfMeasurementController control)
+        {
+            mode = 1; //Crear unitOfMeasurement para material
+            controlForm = control;
+            controlForm.getData();
+            InitializeComponent();
+            isInEditMode = true;
+            buttonSave.Text = "🖫 Guardar";
+            comboBox_status.SelectedIndex = 0;
+            creandoDesdeRawMatView = true;
+            
         }
         public UnitOfMeasurement(UnitOfMeasurementController control,UnitOfMeasurementList viewFormUnits)
         {
@@ -81,7 +95,11 @@ namespace InkaArt.Interface.Purchases
                 }
                 //hacer el insert
                 controlForm.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
-                unitsView.desarrolloBusqueda();
+                if (!creandoDesdeRawMatView) unitsView.desarrolloBusqueda();
+                else
+                {
+                    controlForm.getData();
+                }
                 DialogResult = DialogResult.OK;
                 this.Close();
                 /*isInEditMode = false;
