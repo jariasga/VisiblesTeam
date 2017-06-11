@@ -12,7 +12,7 @@ namespace InkaArt.Data.Algorithm
 {
     public class Ratio
     {
-        private int id_report;
+        private int id_ratio;
         private DateTime date;
         private int id_worker;
         private int id_job; //Puesto de trabajo = Proceso x Producto
@@ -26,7 +26,7 @@ namespace InkaArt.Data.Algorithm
 
         public int ID
         {
-            get { return id_report; }
+            get { return id_ratio; }
         }
         public DateTime Date
         {
@@ -79,10 +79,25 @@ namespace InkaArt.Data.Algorithm
             //set { time = value; }
         }
 
-        public Ratio(int id_report, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
+        public Ratio (Ratio old_ratio)
+        {
+            this.id_ratio = old_ratio.id_ratio;
+            this.date = old_ratio.date;
+            this.id_worker = old_ratio.id_worker;
+            this.id_job = old_ratio.id_job;
+            this.id_recipe = old_ratio.id_recipe;
+            this.start = old_ratio.start;
+            this.end = old_ratio.end;
+            this.broken = old_ratio.broken;
+            this.produced = old_ratio.produced;
+            this.breakage = old_ratio.breakage;
+            this.time = old_ratio.time;
+        }
+
+        public Ratio (int id_ratio, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
             int broken, int produced, double breakage, double time)
         {
-            this.id_report = id_report;
+            this.id_ratio = id_ratio;
             this.date = date;
             this.id_worker = id_worker;
             this.id_job = id_job;
@@ -95,7 +110,7 @@ namespace InkaArt.Data.Algorithm
             this.time = time;
         }
 
-        public void Insert()
+        public string Insert()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
@@ -103,7 +118,7 @@ namespace InkaArt.Data.Algorithm
 
             NpgsqlCommand command = new NpgsqlCommand("INSERT INTO inkaart.\"Ratio\"(date, id_worker, id_job, id_recipe, " +
                 "start_time, end_time, broken, produced, breakage, time) VALUES(:date, :id_worker, :id_job, :id_recipe, " +
-                ":start_time, :end_time, :broken, :produced, :breakage, :time) RETURNING id_report", connection);
+                ":start_time, :end_time, :broken, :produced, :breakage, :time) RETURNING id_ratio", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
             command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
@@ -116,20 +131,21 @@ namespace InkaArt.Data.Algorithm
             command.Parameters.AddWithValue("breakage", NpgsqlDbType.Double, breakage);
             command.Parameters.AddWithValue("time", NpgsqlDbType.Double, time);
 
-            this.id_report = Convert.ToInt32(command.ExecuteScalar());
-            LogHandler.WriteLine("ID nuevo = " + this.id_report);
+            this.id_ratio = Convert.ToInt32(command.ExecuteScalar());
             connection.Close();
+
+            if (this.id_ratio <= 0) return "Hubo un error al insertar el ratio. ";
+            return "Se insertó el ratio correctamente. ";
         }
 
-        public void Update()
+        public string Update()
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Ratio\" SET date = :date, id_worker = :id_worker, "
                 + "id_job = :id_job, id_recipe = :id_recipe, start_time = :start_time, end_time = :end_time, " +
-                "broken = :broken, produced = :produced, breakage = :breakage, time = :time WHERE id_report = :id_report",
+                "broken = :broken, produced = :produced, breakage = :breakage, time = :time WHERE id_ratio = :id_ratio",
                 connection);
             
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, this.date);
@@ -142,42 +158,55 @@ namespace InkaArt.Data.Algorithm
             command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, this.produced);
             command.Parameters.AddWithValue("breakage", NpgsqlDbType.Double, this.breakage);
             command.Parameters.AddWithValue("time", NpgsqlDbType.Double, this.time);
-            command.Parameters.AddWithValue("id_report", NpgsqlDbType.Integer, this.id_report);
+            command.Parameters.AddWithValue("id_ratio", NpgsqlDbType.Integer, this.id_ratio);
 
-            command.ExecuteNonQuery();
+            int rows_affected = command.ExecuteNonQuery();
             connection.Close();
+
+            if (rows_affected <= 0) return "No se actualizó ningun ratio. ";
+            if (rows_affected == 1) return "Se actualizó el ratio correctamente. ";
+            return "Se encontró más de un ratio para actualizar. Hay que chequear la base de datos para verificar que " +
+                "no haya sucedido nada malo. ";
         }
 
-        public void Delete()
+        public string Delete()
         {
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Ratio\" SET status = :status " + 
-                "WHERE id_report = :id_report", connection);
+                "WHERE id_ratio = :id_ratio", connection);
 
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, false);
-            command.Parameters.AddWithValue("id_report", NpgsqlDbType.Integer, id_report);
+            command.Parameters.AddWithValue("id_ratio", NpgsqlDbType.Integer, id_ratio);
 
-            command.ExecuteNonQuery();
+            int rows_affected = command.ExecuteNonQuery();
             connection.Close();
+
+            if (rows_affected <= 0) return "No se eliminó ningun ratio. ";
+            if (rows_affected == 1) return "El ratio se eliminó correctamente. ";
+            return "Se encontró más de un ratio para eliminar. Hay que chequear la base de datos para verificar que " +
+                "no haya sucedido nada malo. ";
         }
 
-        public int Count()
+        /******************************* FUNCIONES PARA INDEX CONTROLLER *******************************/
+
+        public int CountByWorkerJobAndRecipe()
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT COUNT(id_report) FROM inkaart.\"Ratio\" " + 
-                "WHERE id_worker = :id_worker, id_job = :id_job, id_recipe = :id_recipe");
+            NpgsqlCommand command = new NpgsqlCommand("SELECT COUNT(id_ratio) FROM inkaart.\"Ratio\" " + 
+                "WHERE id_worker = :id_worker AND id_job = :id_job AND id_recipe = :id_recipe AND status = :status",
+                connection);
 
             command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
             command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
             command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
+            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
-            int result = (int)command.ExecuteScalar();
+            int result = Convert.ToInt32(command.ExecuteScalar());
             connection.Close();
 
             return result;
@@ -185,31 +214,26 @@ namespace InkaArt.Data.Algorithm
 
         public void AverageValues(out double average_breakage, out double average_time)
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT AVG(breakage) FROM inkaart.\"Ratio\" " +
-                "WHERE id_worker = :id_worker, id_job = :id_job, id_recipe = :id_recipe", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT avg(breakage) FROM inkaart.\"Ratio\" " +
+                "WHERE id_worker = :id_worker AND id_job = :id_job AND id_recipe = :id_recipe AND status = :status",
+                connection);
 
             command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
             command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
             command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
+            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
             object temp = command.ExecuteScalar();
-            average_breakage = -1;
-            if (temp != null && temp != DBNull.Value) average_breakage = (int)temp;
+            average_breakage = (temp == null || temp == DBNull.Value) ? -1 : (double)temp;
 
-            command = new NpgsqlCommand("SELECT AVG(time) FROM inkaart.\"Ratio\" " +
-                "WHERE id_worker = :id_worker, id_job = :id_job, id_recipe = :id_recipe", connection);
-
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
+            command.CommandText = "SELECT avg(time) FROM inkaart.\"Ratio\" WHERE id_worker = :id_worker AND " + 
+                "id_job = :id_job AND id_recipe = :id_recipe AND status = :status";
 
             temp = command.ExecuteScalar();
-            average_time = -1;
-            if (temp != null && temp != DBNull.Value) average_time = (int)temp;
+            average_time = (temp == null || temp == DBNull.Value) ? -1 : (double)temp;
 
             connection.Close();
         }

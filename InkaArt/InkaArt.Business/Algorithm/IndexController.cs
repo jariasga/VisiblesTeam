@@ -11,7 +11,7 @@ using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
 {
-    class IndexController
+    public class IndexController
     {
         private List<Index> indexes;
 
@@ -25,62 +25,45 @@ namespace InkaArt.Business.Algorithm
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"RatioResume\" WHERE status = 1 " +
-                "ORDER BY id_resume ASC", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status " +
+                "ORDER BY id_index ASC", connection);
+
+            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id_resume = reader.GetInt32(0);
+                int id_index = reader.GetInt32(0);
                 int id_worker = reader.GetInt32(1);
                 int id_job = reader.GetInt32(2);
                 int id_recipe = reader.GetInt32(3);
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
-                Index turn_report_resume = new Index(id_resume, id_worker, id_job, id_recipe,
-                    average_breakage, average_time);
-                indexes.Add(turn_report_resume);
+                Index index = new Index(id_index, id_worker, id_job, id_recipe, average_breakage, average_time);
+                indexes.Add(index);
             }
 
             connection.Close();
         }
 
-        public void Insert(Ratio ratio)
+        public string InsertOrUpdate(Ratio ratio, int initial_count_ratios)
         {
-            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            connection.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("INSERT INTO inkaart.\"RatioResume\"(id_worker, id_job, "
-                    + "id_recipe, average_breakage, average_time) VALUES(:id_worker, :id_job, :id_recipe, "
-                    + ":average_breakage, :average_time)", connection);
-
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe);
-            command.Parameters.AddWithValue("average_breakage", NpgsqlDbType.Double, ratio.Breakage);
-            command.Parameters.AddWithValue("average_time", NpgsqlDbType.Double, ratio.Time);
-
-            command.ExecuteScalar();
-            connection.Close();
+            //Si el número de ratios que cumple los parámetros de ratio es 0, se inserta.
+            if (initial_count_ratios <= 0) return Index.Insert(ratio);
+            //Si el número de ratios que cummple los parámetros es mayor que 0, se actualiza el ya existente.
+            double average_breakage, average_time;
+            ratio.AverageValues(out average_breakage, out average_time);
+            return Index.Update(ratio, average_breakage, average_time);
         }
-
-        public void Update(Ratio ratio, double average_breakage, double average_time)
+        
+        public string UpdateOrDelete(Ratio ratio)
         {
-            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            connection.Open();
-
-            NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"RatioResume\" SET " +
-                "average_breakage = :average_breakage, average_time = :average_time WHERE " +
-                "id_worker = :id_worker, id_job = :id_job, id_recipe = :id_recipe", connection);
-
-            command.Parameters.AddWithValue("average_breakage", NpgsqlDbType.Double, ratio.Breakage);
-            command.Parameters.AddWithValue("average_time", NpgsqlDbType.Double, ratio.Time);
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe);
-
-            command.ExecuteScalar();
-            connection.Close();
+            double average_breakage, average_time;
+            ratio.AverageValues(out average_breakage, out average_time);
+            //Si ambos valores son mayores que cero, entonces se actualiza.
+            if (average_breakage >= 0 && average_time >= 0) return Index.Update(ratio, average_breakage, average_time);
+            //Sino, se procede a realizar un soft deletion.
+            return Index.Delete(ratio);
         }
 
         public void CalculateIndexes(JobController jobs, RecipeController recipes)
@@ -117,10 +100,10 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        public Index GetByID(int id_resume)
+        public Index GetByID(int id_index)
         {
-            foreach (Index resume in indexes)
-                if (resume.ID == id_resume) return resume;
+            foreach (Index index in indexes)
+                if (index.ID == id_index) return index;
             return null;
         }
 

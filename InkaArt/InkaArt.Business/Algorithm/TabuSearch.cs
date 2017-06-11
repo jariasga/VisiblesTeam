@@ -10,7 +10,7 @@ using Npgsql;
 
 namespace InkaArt.Business.Algorithm
 {
-    class TabuSearch
+    public class TabuSearch
     {
         private Simulation simulation;
 
