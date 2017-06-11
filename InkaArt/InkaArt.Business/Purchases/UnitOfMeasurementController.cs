@@ -69,7 +69,7 @@ namespace InkaArt.Business.Purchases
         }
         public void massiveUpload(string filename)
         {
-            table = getData();     // obtenemos la tabla de usuarios
+            table = getData();     // obtenemos la tabla de unidades
 
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
