@@ -121,5 +121,18 @@ namespace InkaArt.Interface.Purchases
                 }
             }
         }
+        private void button_cargamasivaclick(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                control.massiveUpload(dialog.FileName);
+            textBox_abbreviature.Text = "";
+            textBox_id.Text = "";
+            textBox_abbreviature.Text = "";
+            comboBox1.Text = "";
+            desarrolloBusqueda();
+        }
     }
 }
