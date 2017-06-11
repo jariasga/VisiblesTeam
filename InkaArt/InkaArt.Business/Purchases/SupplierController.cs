@@ -53,7 +53,7 @@ namespace InkaArt.Business.Purchases
 
             int rowsAffected = supplier.insertData(data, adap, "Supplier");
         }
-        public int updateData(string id, string nombre, string ruc, string contacto, long telefono, string correo, string direccion, int prioridad, string estado)
+        public int updateData(string id, string nombre, string ruc, string contacto, int telefono, string correo, string direccion, int prioridad, string estado)
         {
             table = data.Tables["Supplier"];
             for (int i = 0; i < table.Rows.Count; i++)
@@ -61,7 +61,7 @@ namespace InkaArt.Business.Purchases
                 if (String.Compare(table.Rows[i]["id_supplier"].ToString(), id) == 0)
                 {
                     supplier.execute(string.Format("UPDATE \"inkaart\".\"Supplier\" " +
-                        "SET name = '{0}', ruc = '{1}', contact = {2}, telephone = {3}, email = {4}, address = {5}, status = '{6}', email = '{7}' " +
+                        "SET name = '{0}', ruc = '{1}', contact = '{2}', telephone = {3}, email = '{4}', address = '{5}', status = '{6}', priority = {7} " +
                         "WHERE id_supplier = {8}", nombre, ruc, contacto, telefono, correo, direccion, estado, prioridad, id));
                     break;
                 }

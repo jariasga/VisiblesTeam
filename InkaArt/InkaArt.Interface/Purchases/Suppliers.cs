@@ -55,12 +55,13 @@ namespace InkaArt.Interface.Purchases
                     string ruc = dataGridView_suppliersList.Rows[i].Cells[3].Value.ToString();
                     string address = dataGridView_suppliersList.Rows[i].Cells[8].Value.ToString();
                     string priority = dataGridView_suppliersList.Rows[i].Cells[9].Value.ToString();
-                    dataGridView_suppliersList.Rows[i].Cells[7].Value = "Inactivo";
-                    string status = dataGridView_suppliersList.Rows[i].Cells[7].Value.ToString();
                     string contactName = dataGridView_suppliersList.Rows[i].Cells[4].Value.ToString();
                     string email = dataGridView_suppliersList.Rows[i].Cells[6].Value.ToString();
                     string telephone = dataGridView_suppliersList.Rows[i].Cells[5].Value.ToString();
-                    control.updateData(idSupplier,name, ruc, contactName, int.Parse(telephone), email, address, int.Parse(priority), status);
+                    if (control.updateData(idSupplier, name, ruc, contactName, int.Parse(telephone), email, address, int.Parse(priority), "Inactivo") == 1)
+                    {
+                        dataGridView_suppliersList.Rows[i].Cells[7].Value = "Inactivo";
+                    }
                     
                 }
             }
@@ -68,7 +69,7 @@ namespace InkaArt.Interface.Purchases
 
         public void editCurrentSupplier(object sender, DataGridViewCellEventArgs e)
         {
-            Form supplierDet = new SupplierDetail(dataGridView_suppliersList.CurrentRow,control);
+            Form supplierDet = new SupplierDetail(dataGridView_suppliersList.CurrentRow,control,this);
             supplierDet.Show();
         }
 

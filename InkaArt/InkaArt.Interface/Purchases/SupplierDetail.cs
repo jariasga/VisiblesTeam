@@ -49,10 +49,11 @@ namespace InkaArt.Interface.Purchases
             suppliersWindow = suppliersView;
             
         }
-        public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm)
+        public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm, Suppliers suppliersView)
         {
             mode = 2; //editar Supplier
             control = controlForm;
+            suppliersWindow = suppliersView;
             control_rs = new RawMaterial_SupplierController();
             InitializeComponent();
             textBox_idSupplier.Text = currentSupplier.Cells[1].Value.ToString();
@@ -226,6 +227,7 @@ namespace InkaArt.Interface.Purchases
                 buttonDelete.Enabled = false;
                 dataGridView_rm_sup.Columns["price"].ReadOnly = true;
                 control.updateData(textBox_idSupplier.Text,textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                suppliersWindow.desarrolloBusqueda();
                 buttonSave.Text = "Editar";
             }
             else if (mode==2)
@@ -254,16 +256,6 @@ namespace InkaArt.Interface.Purchases
                 mode = 2;
                 suppliersWindow.desarrolloBusqueda();
                 Close();
-                /*buttonAdd.Enabled = true;
-                buttonDelete.Enabled = true;
-                DataTable rm_supList = control_rs.getDataSuppliers("", textBox_idSupplier.Text);
-                dataGridView_rm_sup.DataSource = rm_supList;
-                dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
-                dataGridView_rm_sup.Columns["id_raw_material"].ReadOnly = true;
-                dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
-                dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
-                dataGridView_rm_sup.Columns["price"].ReadOnly = true;
-                buttonSave.Text = "Editar";*/
 
             }
         }
@@ -368,7 +360,7 @@ namespace InkaArt.Interface.Purchases
         private void verifying_contactname(object sender, EventArgs e)
         {
             string actualdata = string.Empty;
-            char[] entereddata = textBox_ruc.Text.ToCharArray();
+            char[] entereddata = textBox_contactName.Text.ToCharArray();
             foreach (char aChar in entereddata.AsEnumerable())
             {
                 if (!Char.IsDigit(aChar))
@@ -382,7 +374,7 @@ namespace InkaArt.Interface.Purchases
                     actualdata.Trim();
                 }
             }
-            textBox_ruc.Text = actualdata;
+            textBox_contactName.Text = actualdata;
         }
     }
 }
