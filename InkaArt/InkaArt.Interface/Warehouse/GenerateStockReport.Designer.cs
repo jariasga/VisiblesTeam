@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox_rawMaterial = new System.Windows.Forms.CheckBox();
+            this.checkBox_product = new System.Windows.Forms.CheckBox();
             this.button_generate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.checkBox_rawMaterial);
+            this.groupBox1.Controls.Add(this.checkBox_product);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(36, 34);
             this.groupBox1.Name = "groupBox1";
@@ -47,26 +47,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros para el reporte";
             // 
-            // checkBox2
+            // checkBox_rawMaterial
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(44, 107);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(174, 27);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Materias primas";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox_rawMaterial.AutoSize = true;
+            this.checkBox_rawMaterial.Location = new System.Drawing.Point(44, 107);
+            this.checkBox_rawMaterial.Name = "checkBox_rawMaterial";
+            this.checkBox_rawMaterial.Size = new System.Drawing.Size(174, 27);
+            this.checkBox_rawMaterial.TabIndex = 1;
+            this.checkBox_rawMaterial.Text = "Materias primas";
+            this.checkBox_rawMaterial.UseVisualStyleBackColor = true;
+            this.checkBox_rawMaterial.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // checkBox1
+            // checkBox_product
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(44, 48);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(121, 27);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Productos";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox_product.AutoSize = true;
+            this.checkBox_product.Location = new System.Drawing.Point(44, 48);
+            this.checkBox_product.Name = "checkBox_product";
+            this.checkBox_product.Size = new System.Drawing.Size(121, 27);
+            this.checkBox_product.TabIndex = 0;
+            this.checkBox_product.Text = "Productos";
+            this.checkBox_product.UseVisualStyleBackColor = true;
             // 
             // button_generate
             // 
@@ -100,8 +100,8 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox_rawMaterial;
+        private System.Windows.Forms.CheckBox checkBox_product;
         private System.Windows.Forms.Button button_generate;
     }
 }

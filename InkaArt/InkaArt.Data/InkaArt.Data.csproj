@@ -77,6 +77,7 @@
     <Compile Include="Purchases\RawMaterialData.cs" />
     <Compile Include="Purchases\SupplierData.cs" />
     <Compile Include="Purchases\UnitOfMeasurementData.cs" />
+    <Compile Include="Reports\ReportsData.cs" />
     <Compile Include="Sales\ClientData.cs" />
     <Compile Include="Sales\OrderData.cs" />
     <Compile Include="Security\RoleData.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Warehouse\ProductionItemWarehouseMovementData.cs" />
     <Compile Include="Warehouse\ProductionMovementMovementData.cs" />
     <Compile Include="Warehouse\ProductMovementData.cs" />
+    <Compile Include="Warehouse\PWarehouseData.cs" />
     <Compile Include="Warehouse\RawWarehouseData.cs" />
     <Compile Include="Warehouse\ReasonMovementData.cs" />
     <Compile Include="Warehouse\RMWarehouseData.cs" />

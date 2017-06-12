@@ -98,11 +98,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 32);
+            this.label1.Location = new System.Drawing.Point(610, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(251, 23);
+            this.label1.Size = new System.Drawing.Size(185, 23);
             this.label1.TabIndex = 28;
-            this.label1.Text = "Fecha: 9 de mayo del 2017";
+            this.label1.Text = "9 de mayo del 2017";
             // 
             // button1
             // 
