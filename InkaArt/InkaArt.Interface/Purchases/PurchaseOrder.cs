@@ -18,14 +18,14 @@ namespace InkaArt.Interface.Purchases
             purchaseOrderList = control.getData();
             dataGridView_purchaseOrder.DataSource = purchaseOrderList;
 
-            dataGridView_purchaseOrder.Columns["idOrder"].HeaderText = "ID";
-            dataGridView_purchaseOrder.Columns["idSupplier"].HeaderText = "Proveedor";
+            dataGridView_purchaseOrder.Columns["id_order"].HeaderText = "ID";
+            dataGridView_purchaseOrder.Columns["id_supplier"].HeaderText = "Proveedor";
             dataGridView_purchaseOrder.Columns["status"].HeaderText = "Estado";
-            dataGridView_purchaseOrder.Columns["creationDate"].HeaderText = "Fecha de emisión";
-            dataGridView_purchaseOrder.Columns["deliveryDate"].HeaderText = "Fecha de entrega";
+            dataGridView_purchaseOrder.Columns["creation_date"].HeaderText = "Fecha de emisión";
+            dataGridView_purchaseOrder.Columns["delivery_date"].HeaderText = "Fecha de entrega";
             dataGridView_purchaseOrder.Columns["total"].HeaderText = "Total";
 
-            dataGridView_purchaseOrder.Columns["deliveryDate"].Visible=false;
+            dataGridView_purchaseOrder.Columns["delivery_date"].Visible=false;
         }
 
         private void filter() {
@@ -66,14 +66,14 @@ namespace InkaArt.Interface.Purchases
             filter();
             dataGridView_purchaseOrder.DataSource = purchaseOrderList;
 
-            dataGridView_purchaseOrder.Columns["idOrder"].HeaderText = "ID";
-            dataGridView_purchaseOrder.Columns["idSupplier"].HeaderText = "Proveedor";
+            dataGridView_purchaseOrder.Columns["id_order"].HeaderText = "ID";
+            dataGridView_purchaseOrder.Columns["id_supplier"].HeaderText = "Proveedor";
             dataGridView_purchaseOrder.Columns["status"].HeaderText = "Estado";
-            dataGridView_purchaseOrder.Columns["creationDate"].HeaderText = "Fecha de emisión";
-            dataGridView_purchaseOrder.Columns["deliveryDate"].HeaderText = "Fecha de entrega";
+            dataGridView_purchaseOrder.Columns["creation_date"].HeaderText = "Fecha de emisión";
+            dataGridView_purchaseOrder.Columns["delivery_date"].HeaderText = "Fecha de entrega";
             dataGridView_purchaseOrder.Columns["total"].HeaderText = "Total";
 
-            dataGridView_purchaseOrder.Columns["deliveryDate"].Visible = false;
+            dataGridView_purchaseOrder.Columns["delivery_date"].Visible = false;
 
         }
 

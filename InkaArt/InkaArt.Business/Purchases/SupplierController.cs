@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NpgsqlTypes;
+using System.IO;
 
 namespace InkaArt.Business.Purchases
 {
@@ -62,6 +63,34 @@ namespace InkaArt.Business.Purchases
             
             supplier.updateData(data, adap, "Supplier");
             return 1;
+        }
+        public void massiveUpload(string filename)
+        {
+            table = getData();     // obtenemos la tabla de materia prima
+
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    int phone = 0,prioridad=0, intMod;
+
+                    if (int.TryParse(values[3], out intMod))
+                    {
+                        phone = int.Parse(values[3]);
+                    }
+                    if (int.TryParse(values[6], out intMod))
+                    {
+                        prioridad = int.Parse(values[6]);
+                    }
+
+                    // creamos materia prima
+                    //nombre (0), ruc (1), contacto (2),telefono (3),correo (4),dirección (5),prioridad(6),estado (7)
+                    insertData(values[0], values[1], values[2], phone, values[4],values[5],prioridad,values[7]);
+                }
+            }
         }
     }
 }
