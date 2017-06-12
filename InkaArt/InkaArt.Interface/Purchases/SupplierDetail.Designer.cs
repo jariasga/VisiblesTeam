@@ -47,11 +47,7 @@
             this.textBox_contactName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox_idRawMaterial = new System.Windows.Forms.TextBox();
-            this.textBox_nameRawMaterial = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
@@ -59,6 +55,9 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox_price = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -255,11 +254,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox_idRawMaterial);
-            this.groupBox2.Controls.Add(this.textBox_nameRawMaterial);
-            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.textBox_price);
             this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.comboBox_rawMaterial);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.buttonDelete);
             this.groupBox2.Controls.Add(this.buttonAdd);
             this.groupBox2.Controls.Add(this.dataGridView_rm_sup);
@@ -270,57 +268,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas";
             // 
-            // textBox_idRawMaterial
-            // 
-            this.textBox_idRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_idRawMaterial.Location = new System.Drawing.Point(23, 48);
-            this.textBox_idRawMaterial.Name = "textBox_idRawMaterial";
-            this.textBox_idRawMaterial.Size = new System.Drawing.Size(118, 24);
-            this.textBox_idRawMaterial.TabIndex = 26;
-            this.textBox_idRawMaterial.TextChanged += new System.EventHandler(this.veryfing_id);
-            // 
-            // textBox_nameRawMaterial
-            // 
-            this.textBox_nameRawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_nameRawMaterial.Location = new System.Drawing.Point(162, 48);
-            this.textBox_nameRawMaterial.MaxLength = 280;
-            this.textBox_nameRawMaterial.Name = "textBox_nameRawMaterial";
-            this.textBox_nameRawMaterial.Size = new System.Drawing.Size(250, 24);
-            this.textBox_nameRawMaterial.TabIndex = 26;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(159, 28);
+            this.label11.Location = new System.Drawing.Point(20, 28);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(105, 18);
             this.label11.TabIndex = 44;
             this.label11.Text = "Materia prima";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(20, 28);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(121, 18);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Id Materia prima";
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Gray;
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(324, 76);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(88, 39);
-            this.button3.TabIndex = 41;
-            this.button3.Text = "🔎 Buscar";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button_doSearch);
             // 
             // buttonDelete
             // 
@@ -340,7 +296,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(109, 470);
+            this.buttonAdd.Location = new System.Drawing.Point(305, 46);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(107, 41);
@@ -360,9 +316,9 @@
             this.dataGridView_rm_sup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_rm_sup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Acción});
-            this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 130);
+            this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 109);
             this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
-            this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 326);
+            this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 347);
             this.dataGridView_rm_sup.TabIndex = 10;
             this.dataGridView_rm_sup.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.update_price);
             this.dataGridView_rm_sup.DoubleClick += new System.EventHandler(this.obtain_idEdit);
@@ -411,6 +367,33 @@
             this.label9.Size = new System.Drawing.Size(58, 18);
             this.label9.TabIndex = 25;
             this.label9.Text = "Estado";
+            // 
+            // comboBox_rawMaterial
+            // 
+            this.comboBox_rawMaterial.AllowDrop = true;
+            this.comboBox_rawMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_rawMaterial.FormattingEnabled = true;
+            this.comboBox_rawMaterial.Location = new System.Drawing.Point(23, 54);
+            this.comboBox_rawMaterial.Name = "comboBox_rawMaterial";
+            this.comboBox_rawMaterial.Size = new System.Drawing.Size(128, 26);
+            this.comboBox_rawMaterial.TabIndex = 45;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(173, 28);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 18);
+            this.label10.TabIndex = 46;
+            this.label10.Text = "Precio";
+            // 
+            // textBox_price
+            // 
+            this.textBox_price.Location = new System.Drawing.Point(176, 54);
+            this.textBox_price.Name = "textBox_price";
+            this.textBox_price.Size = new System.Drawing.Size(115, 26);
+            this.textBox_price.TabIndex = 47;
+            this.textBox_price.TextChanged += new System.EventHandler(this.verifying_price);
             // 
             // SupplierDetail
             // 
@@ -476,11 +459,10 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox_idRawMaterial;
-        private System.Windows.Forms.TextBox textBox_nameRawMaterial;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Acción;
+        private System.Windows.Forms.ComboBox comboBox_rawMaterial;
+        private System.Windows.Forms.TextBox textBox_price;
+        private System.Windows.Forms.Label label10;
     }
 }
