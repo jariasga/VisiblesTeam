@@ -392,7 +392,7 @@ namespace InkaArt.Data.Sales
             row["orderStatus"] = orderStatus;
             row["type"] = type;
             row["reason"] = reason;
-            row["totalDev"] = totalDev;
+            if (!totalDev.Equals("")) row["totalDev"] = totalDev;
             table.Rows.Add(row);
             int rowsAffected = insertData(data, adap, "Order");
             return rowsAffected;

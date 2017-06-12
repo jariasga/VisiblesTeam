@@ -142,20 +142,41 @@ namespace InkaArt.Interface.Purchases
             dataGridView_suppliersList.DataSource = suppliersList;
 
             dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
+            dataGridView_suppliersList.Columns["id_supplier"].ReadOnly = true;
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
+            dataGridView_suppliersList.Columns["name"].ReadOnly = true;
             dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
+            dataGridView_suppliersList.Columns["ruc"].ReadOnly = true;
             dataGridView_suppliersList.Columns["contact"].HeaderText = "Contacto";
             dataGridView_suppliersList.Columns["contact"].Visible = false;
             dataGridView_suppliersList.Columns["telephone"].HeaderText = "Teléfono";
             dataGridView_suppliersList.Columns["telephone"].Visible = false;
             dataGridView_suppliersList.Columns["email"].HeaderText = "Correo";
+            dataGridView_suppliersList.Columns["email"].ReadOnly = true;
             dataGridView_suppliersList.Columns["address"].Visible = false;
             dataGridView_suppliersList.Columns["address"].HeaderText = "Dirección";
             dataGridView_suppliersList.Columns["priority"].HeaderText = "Prioridad";
+            dataGridView_suppliersList.Columns["priority"].ReadOnly = true;
             dataGridView_suppliersList.Columns["status"].HeaderText = "Estado";
+            dataGridView_suppliersList.Columns["status"].ReadOnly = true;
         }
         public void button_search(object sender, EventArgs e)
         {
+            desarrolloBusqueda();
+        }
+
+        private void cargaMasiva(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Suppliers File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                control.massiveUpload(dialog.FileName);
+            textBox_id.Text = "";
+            textBox_ruc.Text = "";
+            textBox_supplier.Text = "";
+            textBox_address.Text = "";
+            comboBox_status.Text = "";
             desarrolloBusqueda();
         }
     }

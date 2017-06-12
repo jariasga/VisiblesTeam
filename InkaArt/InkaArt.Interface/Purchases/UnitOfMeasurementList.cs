@@ -124,7 +124,7 @@ namespace InkaArt.Interface.Purchases
         private void button_cargamasivaclick(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Open Users File";
+            dialog.Title = "Open Units File";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
                 control.massiveUpload(dialog.FileName);

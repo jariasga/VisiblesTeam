@@ -17,6 +17,8 @@ namespace InkaArt.Interface.Purchases
         int mode;
         SupplierController control;
         RawMaterial_SupplierController control_rs;
+        RawMaterialController rawMaterialControl;
+        DataTable rawMaterialList;
         bool isInEditMode = false;
         bool editPriceMode = false;
         Suppliers suppliersWindow;
@@ -32,6 +34,8 @@ namespace InkaArt.Interface.Purchases
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
             isInEditMode = true;
+            rawMaterialControl = new RawMaterialController();
+            llenarComboBox();
         }
 
         public SupplierDetail(SupplierController controlForm,Suppliers suppliersView)
@@ -47,7 +51,8 @@ namespace InkaArt.Interface.Purchases
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
             suppliersWindow = suppliersView;
-            
+            rawMaterialControl = new RawMaterialController();
+            llenarComboBox();
         }
         public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm, Suppliers suppliersView)
         {
@@ -77,19 +82,73 @@ namespace InkaArt.Interface.Purchases
             textBox_email.Enabled = false;
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
+            rawMaterialControl = new RawMaterialController();
 
-            llenarMaterias(textBox_idSupplier.Text);
+            llenarComboBox();
+            llenarMateriasProvistas(textBox_idSupplier.Text);
             
         }
-
-        private void llenarMaterias(string idSup)
+        public void llenarComboBox()
         {
-            DataTable rm_supList = control_rs.getDataSuppliers("", textBox_idSupplier.Text);
-            dataGridView_rm_sup.DataSource = rm_supList;
-            dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
-            dataGridView_rm_sup.Columns["id_raw_material"].ReadOnly = true;
-            dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
-            dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
+            filterRawMaterial();
+            for (int i = 0; i < rawMaterialList.Rows.Count; i++)
+                comboBox_rawMaterial.Items.Add(rawMaterialList.Rows[i]["name"].ToString());
+        }
+        public void filterRawMaterial()
+        {
+            //obtengo las materias primas para llenar el combobox
+            DataRow[] rows;
+            rawMaterialList = rawMaterialControl.getData();
+            rows = rawMaterialList.Select("status LIKE 'Activo'");
+            if (rows.Any()) rawMaterialList = rows.CopyToDataTable();
+            else rawMaterialList.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            rawMaterialList.DefaultView.Sort = sortQuery;
+        }
+        
+        private void llenarMateriasProvistas(string idSup)
+        {
+            //obtengo solo las materias provistas por este supplier
+            DataRow[] rows;
+            DataTable rm_supList = control_rs.getData();
+            rows = rm_supList.Select("id_supplier = " + idSup+" AND status = 'Activo'");
+            if (rows.Any()) rm_supList = rows.CopyToDataTable();
+            else rm_supList.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            rm_supList.DefaultView.Sort = sortQuery;
+            
+            dataGridView_rm_sup.Rows.Clear();
+            for(int i = 0; i < rm_supList.Rows.Count; i++)
+            {
+                string id = rm_supList.Rows[i]["id_raw_material"].ToString();
+                string nombre = hallarNombreMat(id);
+                string price = rm_supList.Rows[i]["price"].ToString();
+                string idRM_Sup= rm_supList.Rows[i]["id_rawmaterial_supplier"].ToString();
+                dataGridView_rm_sup.Rows.Add(false, id, nombre, price, idRM_Sup);
+            }
+        }
+        private string hallarNombreMat(string idMat)
+        {
+            DataRow[] rows;
+            DataTable auxiliarLista = rawMaterialControl.getData();
+            rows = auxiliarLista.Select("id_raw_material = "+idMat);
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            if (auxiliarLista.Rows.Count != 0) return auxiliarLista.Rows[0]["name"].ToString();
+            else return "";
+        }
+        private int hallarIdMat()
+        {
+            for (int i = 0; i < rawMaterialList.Rows.Count; i++)
+                {
+                    if (String.Compare(rawMaterialList.Rows[i]["name"].ToString(), comboBox_rawMaterial.Text) == 0)
+                    {
+                        return int.Parse(rawMaterialList.Rows[i]["id_raw_material"].ToString());
+                    }
+                }
+            return -1;
         }
         private void button_add(object sender, EventArgs e)
         {
@@ -98,13 +157,39 @@ namespace InkaArt.Interface.Purchases
                 MessageBox.Show("Primero debe crear el proveedor para agregar las materias primas", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            Form pageAddSupply = new AddSupply(this,control_rs,textBox_idSupplier.Text);
-            pageAddSupply.Show();
+            else if (comboBox_rawMaterial.Text.Length < 1)
+            {
+                MessageBox.Show("Debe seleccionar la materia prima que desee agregar", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else if(textBox_price.Text.Last()== '.')
+            {
+                textBox_price.Text += "0";
+            }
+            else if (double.Parse(textBox_price.Text) < 0.01)
+            {
+                MessageBox.Show("El precio no puede ser 0", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            int idMaterial=hallarIdMat();
+            if (idMaterial == -1) return;
+            control_rs.insertRM_Sup(idMaterial.ToString(), textBox_idSupplier.Text, textBox_price.Text, "Activo");
+            llenarMateriasProvistas(textBox_idSupplier.Text);
         }
 
         private void button_delete(object sender, EventArgs e)
         {
-            
+            for (int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[0].Value) == true)
+                {
+                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[4].Value.ToString();
+                    string idMat = dataGridView_rm_sup.Rows[i].Cells[1].Value.ToString();
+                    string price= dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    control_rs.UpdateRM_Sup(idRMSup,idMat,textBox_idSupplier.Text, price, "Inactivo");
+                }
+            }
+            llenarMateriasProvistas(textBox_idSupplier.Text);
         }
         
 
@@ -243,7 +328,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = true;
                 buttonAdd.Enabled = true;
                 buttonDelete.Enabled = true;
-                dataGridView_rm_sup.Columns["price"].ReadOnly = false;
+                dataGridView_rm_sup.Columns["Precio"].ReadOnly = false;
                 buttonSave.Text = "🖫 Guardar";
             }
             else
@@ -260,6 +345,67 @@ namespace InkaArt.Interface.Purchases
             }
         }
 
+        private void actualizar_precio(int fila)
+        {
+            string id_rm = dataGridView_rm_sup.Rows[fila].Cells[1].Value.ToString();
+            string id_sup = dataGridView_rm_sup.Rows[fila].Cells[2].Value.ToString();
+            string price = dataGridView_rm_sup.Rows[fila].Cells[3].Value.ToString();
+            //control_rs.UpdateRM_Sup(id_rm, id_sup, price);
+        }
+
+        private void obtain_idEdit(object sender, EventArgs e)
+        {
+            if (isInEditMode)
+            {
+                editPriceMode = true;
+            }
+        }
+
+        private void verifying_contactname(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_contactName.Text.ToCharArray();
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if (!Char.IsDigit(aChar))
+                {
+                    actualdata = actualdata + aChar;
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede ingresar letras en el nombre de contacto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_contactName.Text = actualdata;
+        }
+
+        private void verifying_price(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_price.Text.ToCharArray();
+            int cantPuntos = 0;
+            int numDecimales = 0;
+            bool primerCaracter = true;
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if ((Char.IsDigit(aChar) && numDecimales<3)|| (!primerCaracter && aChar=='.' && cantPuntos==0))
+                {
+                    actualdata = actualdata + aChar;
+                    if (primerCaracter) primerCaracter = false;
+                    if (cantPuntos == 1) numDecimales++;
+                    if (aChar == '.') cantPuntos++;
+                }
+                else
+                {
+                    MessageBox.Show("En el precio solo puede ingresar números con hasta dos decimales", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_price.Text = actualdata;
+        }
         private void verifying_number(object sender, EventArgs e)
         {
             string actualdata = string.Empty;
@@ -272,7 +418,7 @@ namespace InkaArt.Interface.Purchases
                 }
                 else
                 {
-                    MessageBox.Show("Solo puede ingresar números en el RUC", "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("Solo puede ingresar números en el RUC", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     actualdata.Replace(aChar, ' ');
                     actualdata.Trim();
                 }
@@ -298,83 +444,6 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_telephone.Text = actualdata;
-        }
-
-        private void veryfing_id(object sender, EventArgs e)
-        {
-            string actualdata = string.Empty;
-            char[] entereddata = textBox_idRawMaterial.Text.ToCharArray();
-            foreach (char aChar in entereddata.AsEnumerable())
-            {
-                if (Char.IsDigit(aChar))
-                {
-                    actualdata = actualdata + aChar;
-                }
-                else
-                {
-                    MessageBox.Show("Solo puede ingresar números en el id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    actualdata.Replace(aChar, ' ');
-                    actualdata.Trim();
-                }
-            }
-            textBox_idRawMaterial.Text = actualdata;
-        }
-
-        private void button_doSearch(object sender, EventArgs e)
-        {
-            DataTable matList;
-            textBox_idRawMaterial.Text = textBox_idRawMaterial.Text.Trim();
-            matList = control_rs.getDataSuppliers(textBox_idRawMaterial.Text, textBox_idSupplier.Text);
-            dataGridView_rm_sup.DataSource = matList;
-            dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
-            dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
-            dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
-            dataGridView_rm_sup.Columns["price"].ReadOnly = false;
-        }
-        
-        private void actualizar_precio(int fila)
-        {
-            string id_rm = dataGridView_rm_sup.Rows[fila].Cells[1].Value.ToString();
-            string id_sup = dataGridView_rm_sup.Rows[fila].Cells[2].Value.ToString();
-            string price = dataGridView_rm_sup.Rows[fila].Cells[3].Value.ToString();
-            //control_rs.UpdateRM_Sup(id_rm, id_sup, price);
-        }
-
-        private void obtain_idEdit(object sender, EventArgs e)
-        {
-            if (isInEditMode)
-            {
-                editPriceMode = true;
-            }
-        }
-
-        private void update_price(object sender, DataGridViewCellEventArgs e)
-        {
-            if (editPriceMode)
-            {                   
-                actualizar_precio(e.RowIndex);
-            }
-            editPriceMode = false;
-        }
-
-        private void verifying_contactname(object sender, EventArgs e)
-        {
-            string actualdata = string.Empty;
-            char[] entereddata = textBox_contactName.Text.ToCharArray();
-            foreach (char aChar in entereddata.AsEnumerable())
-            {
-                if (!Char.IsDigit(aChar))
-                {
-                    actualdata = actualdata + aChar;
-                }
-                else
-                {
-                    MessageBox.Show("Solo puede ingresar letras en el nombre de contacto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    actualdata.Replace(aChar, ' ');
-                    actualdata.Trim();
-                }
-            }
-            textBox_contactName.Text = actualdata;
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using InkaArt.Business.Production;
+using InkaArt.Business.Purchases;
 namespace InkaArt.Interface.Production
 {
     public partial class Recipe : Form
@@ -115,11 +116,11 @@ namespace InkaArt.Interface.Production
                     if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0 && 
                         string.Compare(recipeRawList.Rows[i]["status"].ToString(),"1")==0)
                     {
-                        idRaw = recipeRawList.Rows[i]["idRawMaterial"].ToString();
+                        idRaw = recipeRawList.Rows[i]["id_raw_material"].ToString();
                         countRaw = recipeRawList.Rows[i]["materialCount"].ToString();
                         //buscar nombre de la materia prima
                         for (int j = 0; j < rawMList.Rows.Count; j++)
-                            if (String.Compare(rawMList.Rows[j]["idRawMaterial"].ToString(), idRaw) == 0)
+                            if (String.Compare(rawMList.Rows[j]["id_raw_material"].ToString(), idRaw) == 0)
                             {
                                 nameRaw = rawMList.Rows[j]["name"].ToString();
                                 idUnit = rawMList.Rows[j]["unit"].ToString();
@@ -199,7 +200,7 @@ namespace InkaArt.Interface.Production
                     {
                         if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
                         {
-                            idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
+                            idRaw = rawList.Rows[i]["id_raw_material"].ToString();
                             break;
                         }
                     }
@@ -240,6 +241,11 @@ namespace InkaArt.Interface.Production
                 }
                    
             }
+        }
+
+        private void comboBox_rawMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
