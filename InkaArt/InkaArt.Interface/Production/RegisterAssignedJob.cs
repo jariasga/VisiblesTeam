@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Business.Security;
 using System.Diagnostics;
 using InkaArt.Business.Production;
 namespace InkaArt.Interface.Production
@@ -21,7 +22,7 @@ namespace InkaArt.Interface.Production
             WorkerController controlWorker = new WorkerController();
             DataTable productList = controlProduct.getData();
             DataTable processList = controlProcess.getData();
-            DataTable workerList = controlWorker.getData();
+            DataTable workerList = controlWorker.showData();
 
             textBox_fecha.Text = DateTime.Now.ToShortDateString();
 
@@ -103,7 +104,7 @@ namespace InkaArt.Interface.Production
             if (logout == DialogResult.Yes)
             {
                 WorkerController controlWorker = new WorkerController();
-                DataTable workerList = controlWorker.getData();
+                DataTable workerList = controlWorker.showData();
                 TurnReportController controlReport = new TurnReportController();
 
                 string broken, finished, date, start, end, process, product, idWorker;
