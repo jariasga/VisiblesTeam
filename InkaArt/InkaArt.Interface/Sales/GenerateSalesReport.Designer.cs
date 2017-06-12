@@ -132,7 +132,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerateSalesReport";
             this.Text = "Generar Reporte de Ventas";
-            this.Load += new System.EventHandler(this.GenerateSalesReport_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

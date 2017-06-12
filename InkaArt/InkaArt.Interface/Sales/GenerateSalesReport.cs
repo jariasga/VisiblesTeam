@@ -22,17 +22,12 @@ namespace InkaArt.Interface.Sales
                 comboBox_products.Items.Add(prodList.Rows[i]["name"]);
         }
 
-        private void GenerateSalesReport_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button_generateSalesResport_Click(object sender, EventArgs e)
         {
             int response = validateData();
             if (response == 1)
             {
-                SalesReport sales_form = new SalesReport();
+                SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy HH:MM"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy HH:MM"), comboBox_products.Text);
                 sales_form.Show();
             }
 

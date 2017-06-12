@@ -74,6 +74,7 @@
     <Compile Include="Purchases\RawMaterialData.cs" />
     <Compile Include="Purchases\SupplierData.cs" />
     <Compile Include="Purchases\UnitOfMeasurementData.cs" />
+    <Compile Include="Reports\ReportsData.cs" />
     <Compile Include="Sales\ClientData.cs" />
     <Compile Include="Sales\OrderData.cs" />
     <Compile Include="Security\RoleData.cs" />

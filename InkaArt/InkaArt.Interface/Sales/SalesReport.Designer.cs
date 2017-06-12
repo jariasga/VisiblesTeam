@@ -36,9 +36,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label_todaydate = new System.Windows.Forms.Label();
             this.grid_salesReport = new System.Windows.Forms.DataGridView();
-            this.idDoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label_product = new System.Windows.Forms.Label();
+            this.label_iniDate = new System.Windows.Forms.Label();
+            this.label_finDate = new System.Windows.Forms.Label();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.client = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_salesReport)).BeginInit();
@@ -113,21 +117,52 @@
             this.grid_salesReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid_salesReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_salesReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDoc,
             this.date,
             this.client,
+            this.TipoCliente,
             this.amount,
             this.monto});
-            this.grid_salesReport.Location = new System.Drawing.Point(39, 153);
+            this.grid_salesReport.Location = new System.Drawing.Point(39, 163);
             this.grid_salesReport.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_salesReport.Name = "grid_salesReport";
             this.grid_salesReport.Size = new System.Drawing.Size(820, 255);
             this.grid_salesReport.TabIndex = 28;
             // 
-            // idDoc
+            // label4
             // 
-            this.idDoc.HeaderText = "N° Documento";
-            this.idDoc.Name = "idDoc";
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(449, 265);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 23);
+            this.label4.TabIndex = 29;
+            // 
+            // label_product
+            // 
+            this.label_product.AutoSize = true;
+            this.label_product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_product.Location = new System.Drawing.Point(158, 46);
+            this.label_product.Name = "label_product";
+            this.label_product.Size = new System.Drawing.Size(0, 23);
+            this.label_product.TabIndex = 30;
+            // 
+            // label_iniDate
+            // 
+            this.label_iniDate.AutoSize = true;
+            this.label_iniDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_iniDate.Location = new System.Drawing.Point(178, 103);
+            this.label_iniDate.Name = "label_iniDate";
+            this.label_iniDate.Size = new System.Drawing.Size(0, 23);
+            this.label_iniDate.TabIndex = 31;
+            // 
+            // label_finDate
+            // 
+            this.label_finDate.AutoSize = true;
+            this.label_finDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_finDate.Location = new System.Drawing.Point(593, 103);
+            this.label_finDate.Name = "label_finDate";
+            this.label_finDate.Size = new System.Drawing.Size(0, 23);
+            this.label_finDate.TabIndex = 32;
             // 
             // date
             // 
@@ -138,6 +173,11 @@
             // 
             this.client.HeaderText = "Cliente";
             this.client.Name = "client";
+            // 
+            // TipoCliente
+            // 
+            this.TipoCliente.HeaderText = "Tipo de Cliente";
+            this.TipoCliente.Name = "TipoCliente";
             // 
             // amount
             // 
@@ -155,6 +195,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(899, 553);
+            this.Controls.Add(this.label_finDate);
+            this.Controls.Add(this.label_iniDate);
+            this.Controls.Add(this.label_product);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.grid_salesReport);
             this.Controls.Add(this.label_todaydate);
             this.Controls.Add(this.label2);
@@ -176,9 +220,13 @@
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label_todaydate;
         private System.Windows.Forms.DataGridView grid_salesReport;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDoc;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label label_product;
+        public System.Windows.Forms.Label label_iniDate;
+        public System.Windows.Forms.Label label_finDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn client;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn monto;
     }
