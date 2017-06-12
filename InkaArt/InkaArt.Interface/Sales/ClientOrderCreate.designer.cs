@@ -34,6 +34,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.date_delivery = new System.Windows.Forms.DateTimePicker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textbox_doctype = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_create = new System.Windows.Forms.Button();
             this.textbox_name = new System.Windows.Forms.TextBox();
@@ -42,6 +43,8 @@
             this.button_search = new System.Windows.Forms.Button();
             this.clientIdentifierLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label_stock = new System.Windows.Forms.Label();
+            this.label_stockLabel = new System.Windows.Forms.Label();
             this.button_delete = new System.Windows.Forms.Button();
             this.textbox_total = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,7 +65,6 @@
             this.numeric_quantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textbox_doctype = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -129,6 +131,14 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
+            // 
+            // textbox_doctype
+            // 
+            this.textbox_doctype.Enabled = false;
+            this.textbox_doctype.Location = new System.Drawing.Point(34, 172);
+            this.textbox_doctype.Name = "textbox_doctype";
+            this.textbox_doctype.Size = new System.Drawing.Size(368, 30);
+            this.textbox_doctype.TabIndex = 13;
             // 
             // groupBox1
             // 
@@ -218,6 +228,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label_stock);
+            this.groupBox2.Controls.Add(this.label_stockLabel);
             this.groupBox2.Controls.Add(this.button_delete);
             this.groupBox2.Controls.Add(this.textbox_total);
             this.groupBox2.Controls.Add(this.label10);
@@ -242,6 +254,25 @@
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Productos";
+            // 
+            // label_stock
+            // 
+            this.label_stock.AutoSize = true;
+            this.label_stock.Location = new System.Drawing.Point(94, 118);
+            this.label_stock.Name = "label_stock";
+            this.label_stock.Size = new System.Drawing.Size(0, 23);
+            this.label_stock.TabIndex = 40;
+            this.label_stock.Click += new System.EventHandler(this.label11_Click);
+            // 
+            // label_stockLabel
+            // 
+            this.label_stockLabel.AutoSize = true;
+            this.label_stockLabel.Location = new System.Drawing.Point(32, 118);
+            this.label_stockLabel.Name = "label_stockLabel";
+            this.label_stockLabel.Size = new System.Drawing.Size(66, 23);
+            this.label_stockLabel.TabIndex = 39;
+            this.label_stockLabel.Text = "Stock:";
+            this.label_stockLabel.Visible = false;
             // 
             // button_delete
             // 
@@ -426,6 +457,7 @@
             this.combo_product.Name = "combo_product";
             this.combo_product.Size = new System.Drawing.Size(219, 31);
             this.combo_product.TabIndex = 13;
+            this.combo_product.SelectedIndexChanged += new System.EventHandler(this.combo_product_SelectedIndexChanged);
             // 
             // numeric_quantity
             // 
@@ -456,14 +488,6 @@
             this.label5.Size = new System.Drawing.Size(89, 23);
             this.label5.TabIndex = 16;
             this.label5.Text = "Producto";
-            // 
-            // textbox_doctype
-            // 
-            this.textbox_doctype.Enabled = false;
-            this.textbox_doctype.Location = new System.Drawing.Point(34, 172);
-            this.textbox_doctype.Name = "textbox_doctype";
-            this.textbox_doctype.Size = new System.Drawing.Size(368, 30);
-            this.textbox_doctype.TabIndex = 13;
             // 
             // ClientOrderCreate
             // 
@@ -529,5 +553,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
         private System.Windows.Forms.TextBox textbox_doctype;
+        private System.Windows.Forms.Label label_stock;
+        private System.Windows.Forms.Label label_stockLabel;
     }
 }
