@@ -78,11 +78,13 @@ namespace InkaArt.Interface.Purchases
             buttonCreate.Enabled = false;
 
             control_material_supplier = new RawMaterial_SupplierController();
-            DataTable priceList= control_material_supplier.getDataSuppliers(textBox_id.Text,"");
+            DataTable priceList= filterRawMaterial();
             dataGridView_suppliersPrice.DataSource = priceList;
             dataGridView_suppliersPrice.Columns["id_supplier"].HeaderText = "ID";
             dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";
             dataGridView_suppliersPrice.Columns["id_raw_material"].Visible = false;
+            dataGridView_suppliersPrice.Columns["id_rawmaterial_supplier"].Visible = false;
+            dataGridView_suppliersPrice.Columns["status"].Visible = false;
             double valorPrecio = 0;
             int registros = dataGridView_suppliersPrice.Rows.Count;
             for (int j = 0; j < registros; j++)
@@ -115,7 +117,18 @@ namespace InkaArt.Interface.Purchases
                 }
             }
         }
-        
+        public DataTable filterRawMaterial()
+        {
+            //obtengo las materias primas para llenar el combobox
+            DataRow[] rows;
+            DataTable rawMaterialSupList = control_material_supplier.getData();
+            rows = rawMaterialSupList.Select("status LIKE 'Activo' AND id_raw_material="+ textBox_id.Text);
+            if (rows.Any()) rawMaterialSupList = rows.CopyToDataTable();
+            else rawMaterialSupList.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            rawMaterialSupList.DefaultView.Sort = sortQuery;
+            return rawMaterialSupList;
+        }
         private void button_create(object sender, EventArgs e)
         {
             Form new_unit_of_measurement = new UnitOfMeasurement();
