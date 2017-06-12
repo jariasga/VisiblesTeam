@@ -94,6 +94,7 @@
     <Compile Include="Warehouse\ProductionItemWarehouseMovementController.cs" />
     <Compile Include="Warehouse\ProductionMovementMovementController.cs" />
     <Compile Include="Warehouse\ProductMovementController.cs" />
+    <Compile Include="Warehouse\ProductWarehouseController.cs" />
     <Compile Include="Warehouse\RawMaterialWarehouseController.cs" />
     <Compile Include="Warehouse\ReasonMovementController.cs" />
     <Compile Include="Warehouse\TypeMovementController.cs" />
