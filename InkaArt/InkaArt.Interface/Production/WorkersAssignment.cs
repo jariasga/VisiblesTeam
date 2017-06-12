@@ -16,6 +16,7 @@ namespace InkaArt.Interface.Production
     {
         private SimulationController simulations;
         private WorkerController workers;
+        private OrderController orders;
 
         public WorkersAssignment()
         {
@@ -23,12 +24,20 @@ namespace InkaArt.Interface.Production
 
             workers = new WorkerController();
             workers.Load();
+            orders = new OrderController();
+            orders.Load();
             simulations = new SimulationController();
-            //simulations.Add(new Simulation("simu 1", "0", "0", "0", "0", "0", "0", null)); // prueba
 
+            // set elements
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
             combo_simulations.SelectedIndex = -1;
+            
+            button_config.Text = "+ Crear";
+            button_save.Enabled = false;
+            button_start.Enabled = false;
+            button_delete.Enabled = false;
+            button_report.Enabled = false;
         }
 
         private void WorkersAssignment_Load(object sender, EventArgs e)
@@ -46,11 +55,12 @@ namespace InkaArt.Interface.Production
 
         private void ButtonStartClick(object sender, EventArgs e)
         {
+            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            if (simulation == null) return;
+
             Form new_simultation = new NewSimulation();
             new_simultation.MdiParent = this.MdiParent;
             new_simultation.Show();
-
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
             simulation.Start();
         }
 
@@ -64,7 +74,7 @@ namespace InkaArt.Interface.Production
         private void ButtonConfigClick(object sender, EventArgs e)
         {
             Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers);
+            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers, orders);
             simulation_config.MdiParent = this.MdiParent;
             simulation_config.Show();
         }
@@ -97,6 +107,7 @@ namespace InkaArt.Interface.Production
                 button_save.Enabled = false;
                 button_start.Enabled = false;
                 button_delete.Enabled = false;
+                button_report.Enabled = false;
             }
             else
             {
@@ -104,6 +115,7 @@ namespace InkaArt.Interface.Production
                 button_save.Enabled = true;
                 button_start.Enabled = true;
                 button_delete.Enabled = true;
+                button_report.Enabled = true;
                 if (simulation.AssignmentsToList().Count > 0)
                 {
                     simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
@@ -111,7 +123,7 @@ namespace InkaArt.Interface.Production
                 }
             }
         }
-
+        
         private void simulation_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
