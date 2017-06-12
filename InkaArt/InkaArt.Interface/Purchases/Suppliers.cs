@@ -164,5 +164,20 @@ namespace InkaArt.Interface.Purchases
         {
             desarrolloBusqueda();
         }
+
+        private void cargaMasiva(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Suppliers File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                control.massiveUpload(dialog.FileName);
+            textBox_id.Text = "";
+            textBox_ruc.Text = "";
+            textBox_supplier.Text = "";
+            textBox_address.Text = "";
+            comboBox_status.Text = "";
+            desarrolloBusqueda();
+        }
     }
 }
