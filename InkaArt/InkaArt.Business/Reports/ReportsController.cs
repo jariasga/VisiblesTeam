@@ -22,5 +22,10 @@ namespace InkaArt.Business.Reports
             return reportData.getDataSales(fechaIni, fechaFin, producto);
         }
 
+        public DataTable getDataStocks(int flag)
+        {
+            return reportData.getDataStocks(flag);
+        }
+
     }
 }
