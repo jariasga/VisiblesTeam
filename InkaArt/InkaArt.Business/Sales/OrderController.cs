@@ -16,6 +16,20 @@ namespace InkaArt.Business.Sales
         {
             orderData = new OrderData();
         }
+        public bool verifyStock(int natType, string strStock, string strQuantity)
+        {
+            if (natType == 1) return true;
+            else
+            {
+                int stock = int.Parse(strStock), quantity = int.Parse(strQuantity);
+                return stock >= quantity;
+            }
+        }
+        public float getRightPrice(int natType, string strLocalPrice, string strExportPrice)
+        {
+            float localPrice = float.Parse(strLocalPrice), exportPrice = float.Parse(strExportPrice);
+            return natType == 0 ? localPrice : exportPrice;
+        }
         public DataTable GetOrders(int id = -1, object type = null, string doc = "", string clientName = "", object orderStatus = null)
         {
             long aux, intDoc = -1;

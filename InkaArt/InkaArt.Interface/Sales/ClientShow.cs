@@ -82,12 +82,20 @@ namespace InkaArt.Interface.Sales
                 if (radio_inactive.Checked) state = "0";
                 if (radio_active.Checked) state = "1";
                 string priority = textbox_priority.Text;
-                int response = clientController.UpdateClient(clientId.ToString(), personType, textbox_name.Text, textbox_doc.Text, textbox_doc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
-                if (response >= 0)
+                string messageResponse = clientController.makeValidations(personType, textbox_name.Text, textbox_doc.Text, textbox_doc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
+                if (messageResponse.Equals("OK"))
                 {
-                    MessageBox.Show(this, "El cliente ha sido actualizado correctamente.", "Editar cliente", MessageBoxButtons.OK);
-                    DialogResult = DialogResult.OK;
-                    Close();
+                    int response = clientController.UpdateClient(clientId.ToString(), personType, textbox_name.Text, textbox_doc.Text, textbox_doc.Text, priority, clientType, state, textbox_address.Text, textbox_phone.Text, textbox_contact.Text, textbox_email.Text);
+                    if (response >= 0)
+                    {
+                        MessageBox.Show(this, "El cliente ha sido actualizado correctamente.", "Editar cliente", MessageBoxButtons.OK);
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(this, messageResponse, "Error", MessageBoxButtons.OK);
                 }
             }
         }

@@ -208,6 +208,7 @@
             this.grid_clients.AllowUserToAddRows = false;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grid_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -268,7 +269,7 @@
             // 
             // Cantidad
             // 
-            this.Cantidad.HeaderText = "RUC";
+            this.Cantidad.HeaderText = "Documento";
             this.Cantidad.Name = "Cantidad";
             // 
             // cost
