@@ -25,8 +25,7 @@ namespace InkaArt.Business.Algorithm
         // trabajadores filtrados
         private List<Worker> workers;
         private List<Index> indexes;
-        // pedidos filtrados
-        //private List<Orders> orders;
+        private List<Order> orders;
         private ProcessController processes;
         private JobController jobs;
 
@@ -178,9 +177,22 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
+        public List<Order> Orders
+        {
+            get
+            {
+                return orders;
+            }
+
+            set
+            {
+                orders = value;
+            }
+        }
+
         public Simulation() { }
         
-        public Simulation(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        public Simulation(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers, List<Order> orders)
         {
             this.name = name;
             this.days = int.Parse(days);
@@ -190,6 +202,7 @@ namespace InkaArt.Business.Algorithm
             this.huamanga_stone_weight = double.Parse(huamanga);
             this.retable_weight = double.Parse(retable);
             this.workers = workers;
+            this.orders = orders;
 
             // processes
             processes = new ProcessController();
@@ -198,7 +211,7 @@ namespace InkaArt.Business.Algorithm
             jobs.Load();
         }
 
-        public void Update(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        public void Update(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers, List<Order> orders)
         {
             this.name = name;
             this.days = int.Parse(days);
@@ -208,9 +221,10 @@ namespace InkaArt.Business.Algorithm
             this.huamanga_stone_weight = double.Parse(huamanga);
             this.retable_weight = double.Parse(retable);
             this.workers = workers;
+            this.orders = orders;
         }
         
-        static public string Validate(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        static public string Validate(string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers, List<Order> orders)
         {
             int aux_int;
             double aux_double;
@@ -221,6 +235,8 @@ namespace InkaArt.Business.Algorithm
                 return "Por favor, complete todos los campos antes de continuar";
             if (workers.Count == 0)
                 return "Por favor, considere como mínimo un empleado";
+            if (orders.Count == 0)
+                return "Por favor, considere como mínimo un pedido";
 
             // campos numericos y positivos
 

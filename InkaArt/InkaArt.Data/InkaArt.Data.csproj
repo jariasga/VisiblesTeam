@@ -48,8 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\Assignment.cs" />
+    <Compile Include="Algorithm\Client.cs" />
     <Compile Include="Algorithm\Index.cs" />
     <Compile Include="Algorithm\Job.cs" />
+    <Compile Include="Algorithm\Order.cs" />
+    <Compile Include="Algorithm\OrderProduct.cs" />
     <Compile Include="Algorithm\Process.cs" />
     <Compile Include="Algorithm\Product.cs" />
     <Compile Include="Algorithm\Ratio.cs" />
