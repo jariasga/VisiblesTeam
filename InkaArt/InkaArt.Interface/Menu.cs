@@ -286,8 +286,14 @@ namespace InkaArt.Interface
             }
             else
             {*/
+            try
+            {
                 this.toolStripStatusLabelPingStatus.Text = text;
-            //}
+            }
+            catch (Exception e)
+            {
+                LogHandler.WriteLine(e.ToString());
+            }
         }
     }
 }
