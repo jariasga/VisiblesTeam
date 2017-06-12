@@ -47,7 +47,7 @@ namespace InkaArt.Interface.Sales
             if (e.RowIndex != -1)
             {
                 string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string type = grid_orders.Rows[e.RowIndex].Cells[1].Value.ToString().ToLower();
+                string type = grid_orders.Rows[e.RowIndex].Cells[1].Value.ToString().ToLower();                
                 if (type.Equals("pedido"))
                 {
                     ClientOrderShow show_form = new ClientOrderShow(id);
@@ -101,7 +101,7 @@ namespace InkaArt.Interface.Sales
                 {
                     string idClient = row["idClient"].ToString();
                     string clientName = orderController.getClientName(idClient), clientDoc = orderController.getClientDoc(idClient);
-                    grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"], row["totalAmount"]);
+                    grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"].ToString().ToUpper(), row["totalAmount"]);
                 }
             }
         }

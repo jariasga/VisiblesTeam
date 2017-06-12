@@ -33,6 +33,7 @@ namespace InkaArt.Interface.Sales
             DataTable orderLine;
             foreach (DataRow row in orderObject.Rows)
             {
+                button_fac.Visible = row["orderStatus"].ToString().Equals("despachado");
                 date_deliverydate.Value = Convert.ToDateTime(row["deliveryDate"]);
                 combo_orderstatus.Text = row["orderStatus"].ToString();
                 textbox_amount.Text = row["saleAmount"].ToString();
