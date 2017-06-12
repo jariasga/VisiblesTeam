@@ -18,19 +18,23 @@ namespace InkaArt.Interface.Production
         Simulation simulation;
         ComboBox combo_simulations;
         WorkerController workers;
+        OrderController orders;
 
         public SimulationConfig()
         {
             InitializeComponent();
         }
 
-        public SimulationConfig(SimulationController simulations, Simulation simulation, ComboBox combo, WorkerController workers)
+        public SimulationConfig(SimulationController simulations, Simulation simulation, ComboBox combo, WorkerController workers, OrderController orders)
         {
             InitializeComponent();
 
             this.workers = workers;
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "GetFullName";
+            this.orders = orders;
+            this.list_orders.DataSource = orders.List();
+            this.list_orders.DisplayMember = "Description";
 
             this.simulations = simulations;
             this.simulation = simulation;
@@ -51,7 +55,11 @@ namespace InkaArt.Interface.Production
                     if (simulation.Workers != null && simulation.Workers.Contains((Worker)list_workers.Items[i]))
                         list_workers.SetItemChecked(i, true);
                 }
-                // pedidos
+                for (int i = 0; i < list_orders.Items.Count; i++)
+                {
+                    if (simulation.Orders != null && simulation.Orders.Contains((Order)list_orders.Items[i]))
+                        list_orders.SetItemChecked(i, true);
+                }
 
                 this.Text = "Editar Simulación";
                 return;
@@ -65,21 +73,25 @@ namespace InkaArt.Interface.Production
             string message;
             string action;
             List<Worker> workers = new List<Worker>();
+            List<Order> orders = new List<Order>();
 
             foreach (object item in list_workers.CheckedItems)
             {
                 workers.Add((Worker)item);
             }
-            // filtrar ordenes/pedidos
+            foreach (object item in list_orders.CheckedItems)
+            {
+                orders.Add((Order)item);
+            }
 
             if (simulation == null)
             {
-                message = this.simulations.Insert(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers);
+                message = this.simulations.Insert(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers, orders);
                 action = "creada";
             }
             else
             {
-                message = this.simulations.Update(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers);
+                message = this.simulations.Update(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers, orders);
                 action = "actualizada";
             }
 
