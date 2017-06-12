@@ -309,7 +309,7 @@ namespace InkaArt.Interface.Production
                 //Leer los datos del archivo
                 StreamReader reader = new StreamReader(open_file_dialog.FileName);
                 if (!reader.EndOfStream) reader.ReadLine();
-                for (int line_index = 1; !reader.EndOfStream; line_index++)
+                for (int line_index = 2; !reader.EndOfStream; line_index++)
                 {
                     string line = reader.ReadLine();
                     string[] values = line.Split(';');

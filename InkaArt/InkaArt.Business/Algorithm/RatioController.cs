@@ -15,11 +15,13 @@ namespace InkaArt.Business.Algorithm
     {
         private List<Ratio> ratios;
         private IndexController indexes;
+        private RatioPerDayController ratios_per_day;
 
         public RatioController()
         {
             ratios = new List<Ratio>();
             indexes = new IndexController();
+            ratios_per_day = new RatioPerDayController();
         }
 
         public void Load(DateTime date)
@@ -156,10 +158,11 @@ namespace InkaArt.Business.Algorithm
                 //Con el ID generado, añadir el nuevo ratio en la lista en memoria
                 ratios.Add(ratio);
 
-                //Actualizar resumen de reportes
+                //Actualizar tablas de índices y ratios por día
                 message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
 
-                //Actualizar
+                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                    message += ratios_per_day.InsertOrUpdate(ratio);
                 
                 return ratio.ID;
             }
@@ -195,7 +198,12 @@ namespace InkaArt.Business.Algorithm
 
                 //Actualizar resumen de reportes
                 message += indexes.UpdateOrDelete(old_ratio);
+                if (old_ratio.Job == 3 || old_ratio.Job == 4 || old_ratio.Job == 6)
+                    message += ratios_per_day.UpdateOrDelete(old_ratio);
+
                 message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
+                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                    message += ratios_per_day.InsertOrUpdate(ratio);
 
                 return ratio.ID;
             }
@@ -224,6 +232,8 @@ namespace InkaArt.Business.Algorithm
 
                 //Actualizar resumen de reportes
                 message += indexes.UpdateOrDelete(ratio);
+                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                    message += ratios_per_day.UpdateOrDelete(ratio);
 
                 return true;
             }

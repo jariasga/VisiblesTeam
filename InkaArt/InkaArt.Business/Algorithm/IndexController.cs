@@ -46,25 +46,33 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
+        /************************ INSERTAR O ACTUALIZAR EN LAS TABLAS INDEX Y RATIOPERDAY ************************/
+
         public string InsertOrUpdate(Ratio ratio, int initial_count_ratios)
         {
             //Si el número de ratios que cumple los parámetros de ratio es 0, se inserta.
             if (initial_count_ratios <= 0) return Index.Insert(ratio);
+
             //Si el número de ratios que cummple los parámetros es mayor que 0, se actualiza el ya existente.
             double average_breakage, average_time;
             ratio.AverageValues(out average_breakage, out average_time);
+
             return Index.Update(ratio, average_breakage, average_time);
         }
-        
+
         public string UpdateOrDelete(Ratio ratio)
         {
             double average_breakage, average_time;
             ratio.AverageValues(out average_breakage, out average_time);
+
             //Si ambos valores son mayores que cero, entonces se actualiza.
             if (average_breakage >= 0 && average_time >= 0) return Index.Update(ratio, average_breakage, average_time);
+
             //Sino, se procede a realizar un soft deletion.
             return Index.Delete(ratio);
         }
+
+        /*********************** ALGORITMO ***********************/
 
         public void CalculateIndexes(JobController jobs, RecipeController recipes)
         {

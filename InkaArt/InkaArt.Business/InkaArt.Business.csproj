@@ -61,6 +61,7 @@
     <Compile Include="Algorithm\JobController.cs" />
     <Compile Include="Algorithm\ProcessController.cs" />
     <Compile Include="Algorithm\RatioController.cs" />
+    <Compile Include="Algorithm\RatioPerDayController.cs" />
     <Compile Include="Algorithm\RecipeController.cs" />
     <Compile Include="Algorithm\Simulation.cs" />
     <Compile Include="Algorithm\SimulationController.cs" />

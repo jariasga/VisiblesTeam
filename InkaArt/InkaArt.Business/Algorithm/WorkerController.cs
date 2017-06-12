@@ -43,15 +43,15 @@ namespace InkaArt.Business.Algorithm
 
         public Worker GetByID(int id)
         {
-            for (int i = 0; i < workers.Count; i++)
-                if (workers[i].ID == id) return workers[i];
+            foreach (Worker worker in workers)
+                if (worker.ID == id) return worker;
             return null;
         }
 
         public Worker GetByFullName(string full_name)
         {
-            for (int i = 0; i < workers.Count; i++)
-                if (workers[i].FullName == full_name) return workers[i];
+            foreach (Worker worker in workers)
+                if (worker.FullName == full_name) return worker;
             return null;
         }
 

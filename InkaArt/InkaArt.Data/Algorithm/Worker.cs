@@ -40,10 +40,5 @@ namespace InkaArt.Data.Algorithm
         {
             get { return name + " " + last_name; }
         }
-
-        public string GetFullName
-        {
-            get { return name + " " + last_name; }
-        }
     }
 }
