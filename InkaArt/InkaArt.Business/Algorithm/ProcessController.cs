@@ -10,7 +10,7 @@ using Npgsql;
 
 namespace InkaArt.Business.Algorithm
 {
-    class ProcessController
+    public class ProcessController
     {
         private List<Process> processes;
 

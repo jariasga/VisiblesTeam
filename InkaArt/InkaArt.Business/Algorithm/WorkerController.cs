@@ -27,7 +27,7 @@ namespace InkaArt.Business.Algorithm
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Worker\"", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Worker\" ORDER BY last_name ASC", connection);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -43,15 +43,15 @@ namespace InkaArt.Business.Algorithm
 
         public Worker GetByID(int id)
         {
-            for (int i = 0; i < workers.Count; i++)
-                if (workers[i].ID == id) return workers[i];
+            foreach (Worker worker in workers)
+                if (worker.ID == id) return worker;
             return null;
         }
 
         public Worker GetByFullName(string full_name)
         {
-            for (int i = 0; i < workers.Count; i++)
-                if (workers[i].FullName() == full_name) return workers[i];
+            foreach (Worker worker in workers)
+                if (worker.FullName == full_name) return worker;
             return null;
         }
 
@@ -67,7 +67,7 @@ namespace InkaArt.Business.Algorithm
 
         public List<Worker> List()
         {
-            return workers;
+            return new List<Worker>(workers);
         }
 
     }

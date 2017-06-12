@@ -13,7 +13,7 @@ namespace InkaArt.Business.Algorithm
     //ESTA CLASE SE USA SOLO PARA LA ASIGNACIÓN DE TRABAJADORES Y PARA EL REGISTRO DE INFORMES DE TURNO
     //- Anthony
 
-    class JobController
+    public class JobController
     {
         private List<Job> jobs;
 
@@ -65,6 +65,11 @@ namespace InkaArt.Business.Algorithm
         public Job this[int index]
         {
             get { return jobs[index]; }
+        }
+
+        public List<Job> List()
+        {
+            return new List<Job>(jobs);
         }
     }
 }

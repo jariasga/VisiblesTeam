@@ -15,6 +15,7 @@ namespace InkaArt.Business.Production
         private WorkerData worker;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
+        private DataTable worker_list;
 
         public WorkerController()
         {
@@ -27,11 +28,27 @@ namespace InkaArt.Business.Production
 
             data.Clear();
             data = worker.getData(adapt, "Worker");
+            
+            worker_list = data.Tables[0];
 
-            DataTable workerList = new DataTable();
-            workerList = data.Tables[0];
-
-            return workerList;
+            return worker_list;
         }
+
+        public DataRow GetByID(int id_worker)
+        {
+            return worker_list.Rows.Find(id_worker);
+        }
+
+        public DataRow GetByFullName(string full_name)
+        {
+            foreach (DataRow row in worker_list.Rows)
+            {
+                string row_full_name = row["name"] + "" + row["last_name"];
+                if (full_name == row_full_name) return row;
+            }
+            return null;
+        }
+
+        
     }
 }

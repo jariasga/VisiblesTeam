@@ -151,6 +151,12 @@
     <Compile Include="Production\RegisterAssignedJob.designer.cs">
       <DependentUpon>RegisterAssignedJob.cs</DependentUpon>
     </Compile>
+    <Compile Include="Production\RegisterRatioReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\RegisterRatioReport.designer.cs">
+      <DependentUpon>RegisterRatioReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Production\SimulationConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Production\RegisterAssignedJob.resx">
       <DependentUpon>RegisterAssignedJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Production\RegisterRatioReport.resx">
+      <DependentUpon>RegisterRatioReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\SimulationConfig.resx">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
