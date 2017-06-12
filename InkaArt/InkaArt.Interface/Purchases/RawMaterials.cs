@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
@@ -21,13 +17,14 @@ namespace InkaArt.Interface.Purchases
             rawMaterialList = control.getData();
             dataGridView_rawMaterialsList.DataSource = rawMaterialList;
 
-            dataGridView_rawMaterialsList.Columns["idRawMaterial"].HeaderText = "ID";
+            dataGridView_rawMaterialsList.Columns["id_raw_material"].HeaderText = "ID";
             dataGridView_rawMaterialsList.Columns["name"].HeaderText = "Nombre";
             dataGridView_rawMaterialsList.Columns["unit"].HeaderText = "Unidad";
             dataGridView_rawMaterialsList.Columns["status"].HeaderText = "Estado";
             dataGridView_rawMaterialsList.Columns["description"].HeaderText = "Descripción";
-            dataGridView_rawMaterialsList.Columns["averagePrice"].HeaderText = "Precio Promedio";
-            dataGridView_rawMaterialsList.Columns["averagePrice"].Visible = false;
+            dataGridView_rawMaterialsList.Columns["average_price"].HeaderText = "Precio Promedio";
+            dataGridView_rawMaterialsList.Columns["average_price"].Visible = false;
+            
         }
         private void verifying_ids()
         {
@@ -48,19 +45,23 @@ namespace InkaArt.Interface.Purchases
             }
             textBox_id.Text = actualdata;
         }
-        private void button_search(object sender, EventArgs e)
+        public void desarrolloBusqueda()
         {
             textBox_name.Text = textBox_name.Text.Trim();
             filter();
             dataGridView_rawMaterialsList.DataSource = rawMaterialList;
 
-            dataGridView_rawMaterialsList.Columns["idRawMaterial"].HeaderText = "ID";
+            dataGridView_rawMaterialsList.Columns["id_raw_material"].HeaderText = "ID";
             dataGridView_rawMaterialsList.Columns["name"].HeaderText = "Nombre";
             dataGridView_rawMaterialsList.Columns["unit"].HeaderText = "Unidad";
             dataGridView_rawMaterialsList.Columns["status"].HeaderText = "Estado";
             dataGridView_rawMaterialsList.Columns["description"].HeaderText = "Descripción";
-            dataGridView_rawMaterialsList.Columns["averagePrice"].HeaderText = "Precio Promedio";
-            dataGridView_rawMaterialsList.Columns["averagePrice"].Visible = false;
+            dataGridView_rawMaterialsList.Columns["average_price"].HeaderText = "Precio Promedio";
+            dataGridView_rawMaterialsList.Columns["average_price"].Visible = false;
+        }
+        public void button_search(object sender, EventArgs e)
+        {
+            desarrolloBusqueda();
         }
 
         private void button_delete(object sender, EventArgs e)
@@ -73,25 +74,34 @@ namespace InkaArt.Interface.Purchases
                     string id = dataGridView_rawMaterialsList.Rows[i].Cells[1].Value.ToString();
                     string name = dataGridView_rawMaterialsList.Rows[i].Cells[2].Value.ToString();
                     string unit = dataGridView_rawMaterialsList.Rows[i].Cells[4].Value.ToString();
-                    dataGridView_rawMaterialsList.Rows[i].Cells[5].Value = "Inactivo";
-                    string status = dataGridView_rawMaterialsList.Rows[i].Cells[5].Value.ToString();
                     string description = dataGridView_rawMaterialsList.Rows[i].Cells[3].Value.ToString();
                     string averagePrice = dataGridView_rawMaterialsList.Rows[i].Cells[6].Value.ToString();
-                    control.updateData(id, name, description, unit, status, double.Parse(averagePrice));
+                    try
+                    {
+                        control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice));
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("No se pudo actualizar el registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    dataGridView_rawMaterialsList.Rows[i].Cells[0].Value = false;
+                    desarrolloBusqueda();
                 }
             }
         }
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_raw_material = new RawMaterialDetail(control);
+            Form new_raw_material = new RawMaterialDetail(control,this);
             new_raw_material.Show();
         }
 
         private void editRawMaterialDetail(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentRawMaterial = dataGridView_rawMaterialsList.CurrentRow;
-            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control);
+            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control,this);
             new_raw_material.Show();
         }
 
@@ -121,7 +131,7 @@ namespace InkaArt.Interface.Purchases
             string cadena = "";
             if (textBox_id.Text.Length > 0)
             {
-                cadena = " AND idRawMaterial = "+textBox_id.Text;
+                cadena = " AND id_raw_material = "+textBox_id.Text;
             }
             if (String.Compare(comboBox_status.Text, "Activo") == 0)
             {
@@ -133,8 +143,21 @@ namespace InkaArt.Interface.Purchases
             }
             if (rows.Any()) rawMaterialList = rows.CopyToDataTable();
             else rawMaterialList.Rows.Clear();
-            string sortQuery = string.Format("idRawMaterial");
+            string sortQuery = string.Format("id_raw_material");
             rawMaterialList.DefaultView.Sort = sortQuery;
+        }
+
+        private void button_cargamasivaclic(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                control.massiveUpload(dialog.FileName);
+            textBox_id.Text = "";
+            textBox_name.Text = "";
+            comboBox_status.Text = "";
+            desarrolloBusqueda();
         }
     }
 }
