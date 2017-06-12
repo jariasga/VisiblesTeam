@@ -105,16 +105,39 @@ namespace InkaArt.Interface.Purchases
             string sortQuery = string.Format("id_raw_material");
             rawMaterialList.DefaultView.Sort = sortQuery;
         }
+        
         private void llenarMateriasProvistas(string idSup)
         {
+            //obtengo solo las materias provistas por este supplier
+            DataRow[] rows;
             DataTable rm_supList = control_rs.getData();
-            dataGridView_rm_sup.DataSource = rm_supList;
-            dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
-            dataGridView_rm_sup.Columns["id_raw_material"].ReadOnly = true;
-            dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
-            dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
-            dataGridView_rm_sup.Columns["id_rawmaterial_supplier"].Visible = false;
-            dataGridView_rm_sup.Columns["status"].Visible = false;
+            rows = rm_supList.Select("id_supplier = " + idSup+" AND status = 'Activo'");
+            if (rows.Any()) rm_supList = rows.CopyToDataTable();
+            else rm_supList.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            rm_supList.DefaultView.Sort = sortQuery;
+            
+            dataGridView_rm_sup.Rows.Clear();
+            for(int i = 0; i < rm_supList.Rows.Count; i++)
+            {
+                string id = rm_supList.Rows[i]["id_raw_material"].ToString();
+                string nombre = hallarNombreMat(id);
+                string price = rm_supList.Rows[i]["price"].ToString();
+                string idRM_Sup= rm_supList.Rows[i]["id_rawmaterial_supplier"].ToString();
+                dataGridView_rm_sup.Rows.Add(false, id, nombre, price, idRM_Sup);
+            }
+        }
+        private string hallarNombreMat(string idMat)
+        {
+            DataRow[] rows;
+            DataTable auxiliarLista = rawMaterialControl.getData();
+            rows = auxiliarLista.Select("id_raw_material = "+idMat);
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            if (auxiliarLista.Rows.Count != 0) return auxiliarLista.Rows[0]["name"].ToString();
+            else return "";
         }
         private int hallarIdMat()
         {
@@ -134,6 +157,11 @@ namespace InkaArt.Interface.Purchases
                 MessageBox.Show("Primero debe crear el proveedor para agregar las materias primas", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            else if (comboBox_rawMaterial.Text.Length < 1)
+            {
+                MessageBox.Show("Debe seleccionar la materia prima que desee agregar", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             else if(textBox_price.Text.Last()== '.')
             {
                 textBox_price.Text += "0";
@@ -151,7 +179,17 @@ namespace InkaArt.Interface.Purchases
 
         private void button_delete(object sender, EventArgs e)
         {
-            
+            for (int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[0].Value) == true)
+                {
+                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[4].Value.ToString();
+                    string idMat = dataGridView_rm_sup.Rows[i].Cells[1].Value.ToString();
+                    string price= dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    control_rs.UpdateRM_Sup(idRMSup,idMat,textBox_idSupplier.Text, price, "Inactivo");
+                }
+            }
+            llenarMateriasProvistas(textBox_idSupplier.Text);
         }
         
 
@@ -290,7 +328,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_email.Enabled = true;
                 buttonAdd.Enabled = true;
                 buttonDelete.Enabled = true;
-                dataGridView_rm_sup.Columns["price"].ReadOnly = false;
+                dataGridView_rm_sup.Columns["Precio"].ReadOnly = false;
                 buttonSave.Text = "🖫 Guardar";
             }
             else
@@ -321,15 +359,6 @@ namespace InkaArt.Interface.Purchases
             {
                 editPriceMode = true;
             }
-        }
-
-        private void update_price(object sender, DataGridViewCellEventArgs e)
-        {
-            if (editPriceMode)
-            {                   
-                actualizar_precio(e.RowIndex);
-            }
-            editPriceMode = false;
         }
 
         private void verifying_contactname(object sender, EventArgs e)

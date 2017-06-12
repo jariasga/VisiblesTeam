@@ -33,14 +33,14 @@ namespace InkaArt.Business.Purchases
             return table;
             
          }
-        public void UpdateRM_Sup(string idMat, string idSup, string price,string status)
+        public void UpdateRM_Sup(string idRM_Sup,string idMat, string idSup, string price,string status)
         {
             double douPrice = 0;
             if (!price.Equals("0")) if (double.TryParse(price, out douPrice)) douPrice = double.Parse(price);
             table = data.Tables["RawMaterial-Supplier"];
             rawMaterial_supplier.execute(string.Format("UPDATE \"inkaart\".\"RawMaterial-Supplier\" " +
                         "SET price = {0}, status='{1}'" +
-                        "WHERE id_raw_material = {2} AND id_supplier = {3}", price,status, idMat, idSup));
+                        "WHERE id_rawmaterial_supplier = {2}", price,status, idRM_Sup));
 
             
             rawMaterial_supplier.updateData(data, adap, "RawMaterial-Supplier");

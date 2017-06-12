@@ -142,17 +142,23 @@ namespace InkaArt.Interface.Purchases
             dataGridView_suppliersList.DataSource = suppliersList;
 
             dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
+            dataGridView_suppliersList.Columns["id_supplier"].ReadOnly = true;
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
+            dataGridView_suppliersList.Columns["name"].ReadOnly = true;
             dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
+            dataGridView_suppliersList.Columns["ruc"].ReadOnly = true;
             dataGridView_suppliersList.Columns["contact"].HeaderText = "Contacto";
             dataGridView_suppliersList.Columns["contact"].Visible = false;
             dataGridView_suppliersList.Columns["telephone"].HeaderText = "Teléfono";
             dataGridView_suppliersList.Columns["telephone"].Visible = false;
             dataGridView_suppliersList.Columns["email"].HeaderText = "Correo";
+            dataGridView_suppliersList.Columns["email"].ReadOnly = true;
             dataGridView_suppliersList.Columns["address"].Visible = false;
             dataGridView_suppliersList.Columns["address"].HeaderText = "Dirección";
             dataGridView_suppliersList.Columns["priority"].HeaderText = "Prioridad";
+            dataGridView_suppliersList.Columns["priority"].ReadOnly = true;
             dataGridView_suppliersList.Columns["status"].HeaderText = "Estado";
+            dataGridView_suppliersList.Columns["status"].ReadOnly = true;
         }
         public void button_search(object sender, EventArgs e)
         {
