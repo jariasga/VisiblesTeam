@@ -39,25 +39,25 @@ namespace InkaArt.Business.Algorithm
             simulations.Remove(simulation);
         }
 
-        public string Insert(Simulation simulation, string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        public string Insert(Simulation simulation, string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers, List<Order> orders)
         {
-            string message = Simulation.Validate(name, days, breakage, time, huaco, huamanga, retable, workers);
+            string message = Simulation.Validate(name, days, breakage, time, huaco, huamanga, retable, workers, orders);
 
             if (message.Equals("OK"))
             {
-                simulation = new Simulation(name, days, breakage, time, huaco, huamanga, retable, workers);
+                simulation = new Simulation(name, days, breakage, time, huaco, huamanga, retable, workers, orders);
                 this.simulations.Add(simulation);                
             }
 
             return message;
         }
 
-        public string Update(Simulation simulation, string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers)
+        public string Update(Simulation simulation, string name, string days, string breakage, string time, string huaco, string huamanga, string retable, List<Worker> workers, List<Order> orders)
         {
-            string message = Simulation.Validate(name, days, breakage, time, huaco, huamanga, retable, workers);
+            string message = Simulation.Validate(name, days, breakage, time, huaco, huamanga, retable, workers, orders);
 
             if (message.Equals("OK"))
-                simulation.Update(name, days, breakage, time, huaco, huamanga, retable, workers);
+                simulation.Update(name, days, breakage, time, huaco, huamanga, retable, workers, orders);
 
             return message;
         }

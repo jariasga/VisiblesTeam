@@ -85,8 +85,8 @@ namespace InkaArt.Interface.Purchases
 
         private void button_create(object sender, EventArgs e)
         {
-            Form newRawMaterialWindow = new RawMaterialDetail(control);
-            newRawMaterialWindow.Show();
+            //Form newRawMaterialWindow = new RawMaterialDetail(control);
+            //newRawMaterialWindow.Show();
         }
 
         private void filter()

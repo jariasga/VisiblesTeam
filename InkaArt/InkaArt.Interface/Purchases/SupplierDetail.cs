@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Interface.Purchases;
 using InkaArt.Business.Purchases;
 using System.Net.Mail;
 namespace InkaArt.Interface.Purchases
@@ -18,7 +19,7 @@ namespace InkaArt.Interface.Purchases
         RawMaterial_SupplierController control_rs;
         bool isInEditMode = false;
         bool editPriceMode = false;
-
+        Suppliers suppliersWindow;
         public SupplierDetail()
         {
             mode = 1; //crear Supplier
@@ -28,22 +29,31 @@ namespace InkaArt.Interface.Purchases
             textBox_priority.Text = "0";
             textBox_idSupplier.Enabled = false;
             buttonSave.Text = "🖫 Guardar";
+            buttonAdd.Enabled = false;
+            buttonDelete.Enabled = false;
+            isInEditMode = true;
         }
 
-        public SupplierDetail(SupplierController controlForm)
+        public SupplierDetail(SupplierController controlForm,Suppliers suppliersView)
         {
             mode = 1;
             control = controlForm;
             control_rs = new RawMaterial_SupplierController();
             InitializeComponent();
             textBox_idSupplier.Enabled = false;
+            isInEditMode = true;
             textBox_priority.Text = "0";
             buttonSave.Text = "🖫 Guardar";
+            buttonAdd.Enabled = false;
+            buttonDelete.Enabled = false;
+            suppliersWindow = suppliersView;
+            
         }
-        public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm)
+        public SupplierDetail(DataGridViewRow currentSupplier,SupplierController controlForm, Suppliers suppliersView)
         {
             mode = 2; //editar Supplier
             control = controlForm;
+            suppliersWindow = suppliersView;
             control_rs = new RawMaterial_SupplierController();
             InitializeComponent();
             textBox_idSupplier.Text = currentSupplier.Cells[1].Value.ToString();
@@ -68,17 +78,26 @@ namespace InkaArt.Interface.Purchases
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
 
-            DataTable rm_supList=control_rs.getDataSuppliers("", textBox_idSupplier.Text);
+            llenarMaterias(textBox_idSupplier.Text);
+            
+        }
+
+        private void llenarMaterias(string idSup)
+        {
+            DataTable rm_supList = control_rs.getDataSuppliers("", textBox_idSupplier.Text);
             dataGridView_rm_sup.DataSource = rm_supList;
             dataGridView_rm_sup.Columns["id_raw_material"].HeaderText = "ID";
             dataGridView_rm_sup.Columns["id_raw_material"].ReadOnly = true;
             dataGridView_rm_sup.Columns["price"].HeaderText = "Precio";
             dataGridView_rm_sup.Columns["id_supplier"].Visible = false;
-            
         }
-
         private void button_add(object sender, EventArgs e)
         {
+            if (mode == 1)
+            {
+                MessageBox.Show("Primero debe crear el proveedor para agregar las materias primas", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             Form pageAddSupply = new AddSupply(this,control_rs,textBox_idSupplier.Text);
             pageAddSupply.Show();
         }
@@ -99,12 +118,61 @@ namespace InkaArt.Interface.Purchases
             {
                 new MailAddress(textBox_email.Text);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("El email no es valido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
+        }
+        private string crear_cadenaCampos()
+        {
+            string cadenaDeCampos = "";
+            int numFaltante = 0;
+            if (textBox_name.Text.Length < 1)
+            {
+                cadenaDeCampos += "nombre";
+                numFaltante++;
+            }
+            if (textBox_ruc.Text.Length < 1)
+            {
+                if (numFaltante > 0) cadenaDeCampos += ", ";
+                cadenaDeCampos += "RUC";
+                numFaltante++;
+            }
+            if (textBox_address.Text.Length < 1)
+            {
+                if (numFaltante > 0) cadenaDeCampos += ", ";
+                cadenaDeCampos += "dirección";
+                numFaltante++;
+            }
+            if(comboBox_status.Text.Length < 1)
+            {
+                if (numFaltante > 0) cadenaDeCampos += ", ";
+                cadenaDeCampos += "estado";
+                numFaltante++;
+            }
+            if (textBox_contactName.Text.Length < 1)
+            {
+                if (numFaltante > 0) cadenaDeCampos += ", ";
+                cadenaDeCampos += "contacto";
+                numFaltante++;
+            }
+            if(textBox_email.Text.Length < 1)
+            {
+                if (numFaltante > 0) cadenaDeCampos += ", ";
+                cadenaDeCampos += "correo";
+                numFaltante++;
+            }
+            if (textBox_telephone.Text.Length < 1)
+            {
+                if (numFaltante > 0) cadenaDeCampos += ", ";
+                cadenaDeCampos += "teléfono";
+                numFaltante++;
+            }
+            if (numFaltante == 1) cadenaDeCampos = "Debe llenar el campo: " + cadenaDeCampos + ".";
+            else if (numFaltante > 1) cadenaDeCampos = "Debe llenar los campos: " + cadenaDeCampos + ".";
+            return cadenaDeCampos;
         }
         private bool validating_filled()
         {
@@ -112,10 +180,28 @@ namespace InkaArt.Interface.Purchases
             textBox_address.Text = textBox_address.Text.Trim();
             textBox_contactName.Text = textBox_contactName.Text.Trim();
             textBox_email.Text = textBox_email.Text.Trim();
-
-            if(textBox_name.Text.Length<1 || textBox_address.Text.Length<1 || textBox_contactName.Text.Length<1 || textBox_email.Text.Length<1 || textBox_ruc.Text.Length<1 || textBox_telephone.Text.Length < 1 || comboBox_status.Text.Length<1)
+            string cadena_Error = crear_cadenaCampos();       
+            if (cadena_Error.Length>1)
             {
-                MessageBox.Show("Debe llenar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(cadena_Error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        private bool verifying_length_ruc()
+        {
+            if (textBox_ruc.Text.Length != 11)
+            {
+                MessageBox.Show("El RUC debe tener 11 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        private bool verifying_length_telephone()
+        {
+            if (textBox_ruc.Text.Length != 11)
+            {
+                MessageBox.Show("El teléfono debe tener al menos 7 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -124,7 +210,7 @@ namespace InkaArt.Interface.Purchases
         {
             if (mode==2 && isInEditMode)
             {
-                if (!validating_filled() || !verifying_email())
+                if (!validating_filled() || !verifying_length_ruc()||!verifying_length_telephone() || !verifying_email())
                 {
                     return;
                 }
@@ -140,7 +226,8 @@ namespace InkaArt.Interface.Purchases
                 buttonAdd.Enabled = false;
                 buttonDelete.Enabled = false;
                 dataGridView_rm_sup.Columns["price"].ReadOnly = true;
-                control.updateData(textBox_idSupplier.Text,textBox_name.Text, long.Parse(textBox_ruc.Text), textBox_contactName.Text, long.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                control.updateData(textBox_idSupplier.Text,textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                suppliersWindow.desarrolloBusqueda();
                 buttonSave.Text = "Editar";
             }
             else if (mode==2)
@@ -161,25 +248,14 @@ namespace InkaArt.Interface.Purchases
             }
             else
             {
-                if (!validating_filled() || !verifying_email())
+                if (!validating_filled() || !verifying_length_ruc() ||!verifying_length_telephone()|| !verifying_email())
                 {
                     return;
                 }
-                control.insertData(textBox_name.Text, long.Parse(textBox_ruc.Text), textBox_contactName.Text, long.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                control.insertData(textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                 mode = 2;
-                isInEditMode = false;
-                textBox_name.Enabled = false;
-                textBox_ruc.Enabled = false;
-                textBox_address.Enabled = false;
-                trackBar_priority.Enabled = false;
-                comboBox_status.Enabled = false;
-                textBox_telephone.Enabled = false;
-                textBox_contactName.Enabled = false;
-                textBox_email.Enabled = false;
-                buttonAdd.Enabled = false;
-                buttonDelete.Enabled = false;
-                dataGridView_rm_sup.Columns["price"].ReadOnly = true;
-                buttonSave.Text = "Editar";
+                suppliersWindow.desarrolloBusqueda();
+                Close();
 
             }
         }
@@ -213,7 +289,6 @@ namespace InkaArt.Interface.Purchases
                 if (Char.IsDigit(aChar))
                 {
                     actualdata = actualdata + aChar;
-                    // MessageBox.Show(aChar.ToString());
                 }
                 else
                 {
@@ -280,6 +355,26 @@ namespace InkaArt.Interface.Purchases
                 actualizar_precio(e.RowIndex);
             }
             editPriceMode = false;
+        }
+
+        private void verifying_contactname(object sender, EventArgs e)
+        {
+            string actualdata = string.Empty;
+            char[] entereddata = textBox_contactName.Text.ToCharArray();
+            foreach (char aChar in entereddata.AsEnumerable())
+            {
+                if (!Char.IsDigit(aChar))
+                {
+                    actualdata = actualdata + aChar;
+                }
+                else
+                {
+                    MessageBox.Show("Solo puede ingresar letras en el nombre de contacto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    actualdata.Replace(aChar, ' ');
+                    actualdata.Trim();
+                }
+            }
+            textBox_contactName.Text = actualdata;
         }
     }
 }
