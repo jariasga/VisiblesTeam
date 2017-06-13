@@ -19,6 +19,7 @@ namespace InkaArt.Interface.Sales
         private double amount;
         DataTable saleDocumentList;
         DataTable productList;
+        DataTable orderLine;
         OrderController orderController = new OrderController();
         public DevolutionCreate()
         {
@@ -40,7 +41,6 @@ namespace InkaArt.Interface.Sales
 
         private void populateFields(DataTable orderObject)
         {
-            DataTable orderLine;
             foreach (DataRow row in orderObject.Rows)
             {
                 amount = float.Parse(row["saleAmount"].ToString());
@@ -190,7 +190,18 @@ namespace InkaArt.Interface.Sales
 
         private bool isQuantityBelow()
         {
-            throw new NotImplementedException();
+            int quantity = int.Parse(numeric_quantity.Value.ToString());
+            string selectedProduct = combo_product.SelectedItem.ToString();
+            foreach (DataRow row in orderLine.Rows)
+            {
+                string cellProduct = row["idProduct"].ToString();
+                if (selectedProduct.Contains(cellProduct))
+                {
+                    int cellQuantity = int.Parse(row["quantity"].ToString());
+                    if (cellQuantity < quantity) return true;
+                }
+            }
+            return false;
         }
 
         private bool isProductAdded()
