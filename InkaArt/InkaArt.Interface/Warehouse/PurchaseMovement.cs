@@ -25,6 +25,11 @@ namespace InkaArt.Interface.Warehouse
         {
             this.Close();
         }
+        
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void PurchaseMovement_Load(object sender, EventArgs e)
         {

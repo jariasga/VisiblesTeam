@@ -41,7 +41,7 @@ namespace InkaArt.Interface.Warehouse
         {
             foreach (DataRow row in listList.Rows)
             {
-                dataGridView1.Rows.Add(row["idRawMaterial"], row["name"],"Materia Prima");
+                dataGridView1.Rows.Add(row["id_raw_material"], row["name"],"Materia Prima");
             }
         }
 
@@ -59,7 +59,7 @@ namespace InkaArt.Interface.Warehouse
             DataTable materialList;
             DataTable productList;
             
-            if (textBox_id.Text.Equals("") && textBox_supplier.Text.Equals("") && comboBox_status.SelectedIndex == -1)
+            if (textBox_id.Text.Equals("") && textBox_supplier.Text.Equals("") && comboBox1.SelectedIndex == -1)
             {
                 //Búsqueda en materiales y productos
                 materialList = materialMovementController.GetMaterialMovementList();
@@ -71,8 +71,8 @@ namespace InkaArt.Interface.Warehouse
             else
             {
                 //string materialType = comboBox_status.SelectedIndex.ToString;
-                materialList = materialMovementController.GetMaterialMovementList(textBox_id.Text, textBox_supplier.Text);
                 productList = productMovementController.GetProductMovementList(textBox_id.Text, textBox_supplier.Text);
+                materialList = materialMovementController.GetMaterialMovementList(textBox_id.Text, textBox_supplier.Text);
                 dataGridView1.Rows.Clear();
                 populateDataGridProductMovement(productList);
                 populateDataGridMaterialMovement(materialList);
