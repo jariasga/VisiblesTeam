@@ -1,5 +1,4 @@
-﻿using InkaArt.Data.Algorithm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,82 +8,25 @@ namespace InkaArt.Data.Algorithm
 {
     public class Assignment
     {
-        private Worker worker;
-        private Recipe recipe;
-        private Job job;         // recepy x process
         private DateTime date;
-        private int minitun;
+        private double objective_function_value;
+        //private int tabu_iterations;
+        //private int assigned_workers;
+        private AssignmentLine[,] assignment_lines;
 
-        public Worker Worker
+        public double ObjectiveFunction
         {
-            get
-            {
-                return worker;
-            }
-
-            set
-            {
-                worker = value;
-            }
+            get { return objective_function_value; }
+            set { objective_function_value = value; }
         }
 
-        public Job Job
+        public Assignment(DateTime date, int number_of_workers, int miniturns)
         {
-            get
-            {
-                return job;
-            }
-
-            set
-            {
-                job = value;
-            }
+            this.date = date;
+            this.objective_function_value = 0;
+            this.assignment_lines = new AssignmentLine[number_of_workers, miniturns];
         }
 
-        public Recipe Recipe
-        {
-            get
-            {
-                return recipe;
-            }
 
-            set
-            {
-                recipe = value;
-            }
-        }
-
-        public DateTime Date
-        {
-            get
-            {
-                return date;
-            }
-
-            set
-            {
-                date = value;
-            }
-        }
-
-        public int Minitun
-        {
-            get
-            {
-                return minitun;
-            }
-
-            set
-            {
-                minitun = value;
-            }
-        }
-
-        public Assignment(Worker worker, Recipe recipe, Job job)
-        {
-            this.Worker = worker;
-            this.Recipe = recipe;
-            this.Job = job;
-        }
     }
 }

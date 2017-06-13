@@ -17,7 +17,7 @@ namespace InkaArt.Business.Algorithm
 
         public IndexController()
         {
-            indexes = new List<Index>();
+            this.indexes = new List<Index>();
         }
 
         public void Load()
@@ -74,13 +74,13 @@ namespace InkaArt.Business.Algorithm
 
         /*********************** ALGORITMO ***********************/
 
-        public void CalculateIndexes(JobController jobs, RecipeController recipes)
+        public void CalculateIndexes(JobController jobs, RecipeController recipes, Simulation simulation)
         {
-            double[,] average_breakage_mean = new double[jobs.Count(), recipes.Count()];
-            double[,] average_time_mean = new double[jobs.Count(), recipes.Count()];
-            int[,] average_mean_count = new int[jobs.Count(), recipes.Count()];
+            double[,] average_breakage_mean = new double[jobs.NumberOfJobs, recipes.Count()];
+            double[,] average_time_mean = new double[jobs.NumberOfJobs, recipes.Count()];
+            int[,] average_mean_count = new int[jobs.NumberOfJobs, recipes.Count()];
 
-            for (int i = 0; i < jobs.Count(); i++)
+            for (int i = 0; i < jobs.NumberOfJobs; i++)
             {
                 for (int j = 0; j < recipes.Count(); j++)
                 {
@@ -103,8 +103,9 @@ namespace InkaArt.Business.Algorithm
 
             foreach (Index index in indexes)
             {
-                index.BreakageIndex = index.AverageBreakage / average_breakage_mean[index.Job, index.Recipe];
-                index.TimeIndex = index.AverageTime / average_time_mean[index.Job, index.Recipe];
+                double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job).Product);
+                index.CalculateIndexes(average_breakage_mean[index.Job, index.Recipe], average_time_mean[index.Job, index.Recipe],
+                    simulation.BreakageWeight, simulation.TimeWeight, product_weight);
             }
         }
 
@@ -123,6 +124,16 @@ namespace InkaArt.Business.Algorithm
         public int Count()
         {
             return indexes.Count;
+        }
+
+        public void Add(Index index)
+        {
+            this.indexes.Add(index);
+        }
+
+        public void RemoveFirst()
+        {
+            this.indexes.RemoveAt(0);
         }
 
         public Index FindByWorkerAndJob(Worker worker, Job job)
