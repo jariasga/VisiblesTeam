@@ -88,10 +88,12 @@
     <Compile Include="Warehouse\ProductionItemWarehouseMovementData.cs" />
     <Compile Include="Warehouse\ProductionMovementMovementData.cs" />
     <Compile Include="Warehouse\ProductMovementData.cs" />
+    <Compile Include="Warehouse\PurchaseOrderDetailData.cs" />
     <Compile Include="Warehouse\PWarehouseData.cs" />
     <Compile Include="Warehouse\RawWarehouseData.cs" />
     <Compile Include="Warehouse\ReasonMovementData.cs" />
     <Compile Include="Warehouse\RMWarehouseData.cs" />
+    <Compile Include="Warehouse\StockDocumentData.cs" />
     <Compile Include="Warehouse\TypeMovementData.cs" />
     <Compile Include="Warehouse\WarehouseData.cs" />
     <Compile Include="Warehouse\WarehouseMovementData.cs" />
