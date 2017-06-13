@@ -125,8 +125,10 @@ namespace InkaArt.Interface.Warehouse
 
         private void ButtonCreateClick(object sender, EventArgs e)
         {
-            Form movements = new Movements();
-            movements.Show();
+            var create_date = new Movements();
+            var result = create_date.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -145,6 +147,18 @@ namespace InkaArt.Interface.Warehouse
                 datetime_movement.AllowDrop = true;
             else
                 datetime_movement.AllowDrop = false;
+        }
+
+        private void dataGridMovementsCellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (data_grid_movements.Rows.Count > 0)
+            {
+                string id = data_grid_movements.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var show_form = new WarehouseShow(id);
+                var result = show_form.ShowDialog();
+                if (result == DialogResult.OK)
+                    updateDataGrid();
+            }
         }
     }
 }

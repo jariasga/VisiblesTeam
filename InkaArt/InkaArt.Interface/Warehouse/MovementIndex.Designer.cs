@@ -100,6 +100,7 @@
             this.data_grid_movements.Name = "data_grid_movements";
             this.data_grid_movements.Size = new System.Drawing.Size(680, 199);
             this.data_grid_movements.TabIndex = 49;
+            this.data_grid_movements.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMovementsCellContentDoubleClick);
             // 
             // Id
             // 
