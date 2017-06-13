@@ -417,6 +417,7 @@
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(626, 272);
             this.dataGridView_pedidos.TabIndex = 17;
+            this.dataGridView_pedidos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingresandoFactura);
             // 
             // buttonDelete
             // 
@@ -459,10 +460,12 @@
             // 
             // Eliminar
             // 
+            this.Eliminar.FalseValue = "False";
             this.Eliminar.HeaderText = "";
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.TrueValue = "True";
             this.Eliminar.Width = 68;
             // 
             // id_detail
@@ -488,6 +491,7 @@
             // 
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // Subtotal
             // 
@@ -498,6 +502,7 @@
             // Factura
             // 
             this.Factura.HeaderText = "Factura";
+            this.Factura.MaxInputLength = 9;
             this.Factura.Name = "Factura";
             // 
             // Estado
