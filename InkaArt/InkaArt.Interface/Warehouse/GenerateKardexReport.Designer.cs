@@ -30,14 +30,12 @@
         {
             this.button_generate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_fechaIni = new System.Windows.Forms.DateTimePicker();
+            this.comboBox_products = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +44,7 @@
             this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generate.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(326, 294);
+            this.button_generate.Location = new System.Drawing.Point(327, 301);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(138, 51);
             this.button_generate.TabIndex = 20;
@@ -56,14 +54,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
+            this.groupBox1.Controls.Add(this.dateTimePicker_fechaIni);
+            this.groupBox1.Controls.Add(this.comboBox_products);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(21, 28);
             this.groupBox1.Name = "groupBox1";
@@ -72,54 +68,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros para el reporte";
             // 
-            // dateTimePicker2
+            // dateTimePicker_fechaFin
             // 
-            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(360, 173);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(334, 28);
-            this.dateTimePicker2.TabIndex = 32;
+            this.dateTimePicker_fechaFin.CalendarFont = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(21, 171);
+            this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
+            this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(334, 28);
+            this.dateTimePicker_fechaFin.TabIndex = 32;
             // 
-            // dateTimePicker1
+            // dateTimePicker_fechaIni
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(360, 80);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(334, 28);
-            this.dateTimePicker1.TabIndex = 31;
+            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 78);
+            this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
+            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(334, 28);
+            this.dateTimePicker_fechaIni.TabIndex = 31;
             // 
-            // comboBox2
+            // comboBox_products
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.comboBox_products.FormattingEnabled = true;
+            this.comboBox_products.Items.AddRange(new object[] {
             "Cerámicos",
             "Piedra de Huamanga",
             "Retablos",
             "Todos"});
-            this.comboBox2.Location = new System.Drawing.Point(49, 170);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(212, 31);
-            this.comboBox2.TabIndex = 30;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Nacional",
-            "Internacional",
-            "Todos"});
-            this.comboBox1.Location = new System.Drawing.Point(51, 77);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(210, 31);
-            this.comboBox1.TabIndex = 29;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox_products.Location = new System.Drawing.Point(451, 75);
+            this.comboBox_products.Name = "comboBox_products";
+            this.comboBox_products.Size = new System.Drawing.Size(212, 31);
+            this.comboBox_products.TabIndex = 30;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(356, 145);
+            this.label4.Location = new System.Drawing.Point(17, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(208, 22);
             this.label4.TabIndex = 28;
@@ -129,7 +112,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(356, 52);
+            this.label3.Location = new System.Drawing.Point(17, 50);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(220, 22);
             this.label3.TabIndex = 27;
@@ -139,21 +122,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(47, 145);
+            this.label2.Location = new System.Drawing.Point(449, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(194, 22);
             this.label2.TabIndex = 26;
             this.label2.Text = "Nombre del producto:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(47, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 22);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Tipo de producto:";
             // 
             // GenerateKardexReport
             // 
@@ -174,13 +147,11 @@
         #endregion
         private System.Windows.Forms.Button button_generate;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_fechaIni;
+        private System.Windows.Forms.ComboBox comboBox_products;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_fechaFin;
     }
 }
