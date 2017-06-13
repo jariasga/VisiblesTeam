@@ -46,7 +46,7 @@ namespace InkaArt.Interface.Security
             textBoxUsername.Text = userRow["username"].ToString();
             textBoxDescription.Text = userRow["description"].ToString();
             int statusCombo = Convert.ToInt32(userRow["status"]);
-            comboBoxUserStatus.SelectedItem = statusCombo;
+            comboBoxUserStatus.SelectedIndex = statusCombo;
             rawImage = new Byte[0];
             if (userRow["photo"] != DBNull.Value)
             {
@@ -77,7 +77,7 @@ namespace InkaArt.Interface.Security
 
             textBoxUsername.Enabled = true;
             textBoxUsername.Text = "";
-            comboBoxUserStatus.SelectedIndex = 0;
+            comboBoxUserStatus.SelectedIndex = 1;
             comboBoxUserStatus.Text = "";
             comboBoxRoles.Enabled = true;
             comboBoxRoles.Text = "";
@@ -127,7 +127,7 @@ namespace InkaArt.Interface.Security
                 user.showData();
                 if (validateData())
                 {
-                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, 1, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, comboBoxUserStatus.SelectedIndex, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
                         MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
                     {

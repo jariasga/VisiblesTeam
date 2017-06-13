@@ -394,8 +394,8 @@
             this.comboBoxUserStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUserStatus.FormattingEnabled = true;
             this.comboBoxUserStatus.Items.AddRange(new object[] {
-            "Activo",
             "Bloqueado",
+            "Activo",
             "Cesado"});
             this.comboBoxUserStatus.Location = new System.Drawing.Point(13, 86);
             this.comboBoxUserStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
