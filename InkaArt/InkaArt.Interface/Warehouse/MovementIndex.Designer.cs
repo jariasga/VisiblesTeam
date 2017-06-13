@@ -60,7 +60,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(377, 469);
+            this.buttonDelete.Location = new System.Drawing.Point(359, 469);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(151, 39);
             this.buttonDelete.TabIndex = 51;
@@ -73,7 +73,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(233, 469);
+            this.buttonAdd.Location = new System.Drawing.Point(203, 469);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(151, 39);
@@ -163,7 +163,7 @@
             this.datetime_movement.Location = new System.Drawing.Point(240, 109);
             this.datetime_movement.Name = "datetime_movement";
             this.datetime_movement.ShowCheckBox = true;
-            this.datetime_movement.Size = new System.Drawing.Size(200, 26);
+            this.datetime_movement.Size = new System.Drawing.Size(193, 26);
             this.datetime_movement.TabIndex = 37;
             this.datetime_movement.ValueChanged += new System.EventHandler(this.datetimeMovementValueChanged);
             // 
@@ -285,7 +285,7 @@
             this.buttonSearch.BackColor = System.Drawing.Color.Gray;
             this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
-            this.buttonSearch.Location = new System.Drawing.Point(291, 155);
+            this.buttonSearch.Location = new System.Drawing.Point(276, 155);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(123, 39);
@@ -299,7 +299,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(781, 523);
+            this.ClientSize = new System.Drawing.Size(734, 523);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.data_grid_movements);
