@@ -156,6 +156,10 @@ namespace InkaArt.Interface.Warehouse
             textBox_address.Enabled = true;
             comboBox_RM.Enabled = true;
             comboBox_Producto.Enabled = true;
+            numericUpDown1.Enabled = true;
+            numericUpDown2.Enabled = true;
+            numericUpDown3.Enabled = true;
+            numericUpDown4.Enabled = true;
         }
 
         private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
@@ -179,10 +183,12 @@ namespace InkaArt.Interface.Warehouse
             if (int.Parse(numericUpDown1.Value.ToString()) != 0 && int.Parse(numericUpDown2.Value.ToString()) != 0)
             {
                 control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
+                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 fillGridRawMaterial();
             }else
             {
-                MessageBox.Show("El numero debe ser mayor a cero.");
+                MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -208,11 +214,13 @@ namespace InkaArt.Interface.Warehouse
             if (int.Parse(numericUpDown3.Value.ToString()) != 0 && int.Parse(numericUpDown4.Value.ToString()) != 0)
             {
                 control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
+                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 fillGridProduct();
             }
             else
             {
-                MessageBox.Show("El numero debe ser mayor a cero.");
+                MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -233,8 +241,8 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
             //updateDataGrid();
-            fillGridRawMaterial();
             MessageBox.Show("Materias Primas eliminados", "Eliminar Materia Prima.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            fillGridRawMaterial();
         }
 
         private void dataGridView_RawMaterial_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -259,9 +267,8 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
             //updateDataGrid();
-            fillGridProduct();
             MessageBox.Show("Productos eliminados", "Eliminar Producto.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-
+            fillGridProduct();
         }
     }
 }

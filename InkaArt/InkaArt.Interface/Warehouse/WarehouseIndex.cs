@@ -31,7 +31,7 @@ namespace InkaArt.Interface.Warehouse
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
+            if (dataGridView1.Rows.Count > 0 && e.RowIndex>=0)
             {
                 string id = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 var show_form = new WarehouseShow(id);

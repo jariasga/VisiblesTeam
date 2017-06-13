@@ -27,7 +27,7 @@ namespace InkaArt.Business.Production
             adapt = unit.unitAdapter();
 
             data.Clear();
-            data = unit.getData(adapt, "Worker");
+            data = unit.getData(adapt, "UnitOfMeasurement");
 
             DataTable unitList = new DataTable();
             unitList = data.Tables[0];
