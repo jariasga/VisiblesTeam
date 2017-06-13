@@ -223,7 +223,7 @@ namespace InkaArt.Interface.Warehouse
                                     //agregar en StockDocument
                                     updateInStockDocument(textBox_idFactura.Text, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
                                     //agregar en Movement
-                                    controlMovement.insertPurchaseRmMovement(textBox_idFactura.Text, idWh, dateTimePicker1.Value.ToShortDateString());
+                                    controlMovement.insertPurchaseRmMovement(textBox_idFactura.Text, idWh, dateTimePicker1.Value.ToShortDateString(),int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()),cantidad_ingresar);
 
                                     MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     fillGrid();

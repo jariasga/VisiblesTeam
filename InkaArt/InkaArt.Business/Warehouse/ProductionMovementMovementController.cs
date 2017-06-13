@@ -26,7 +26,7 @@ namespace InkaArt.Business.Warehouse
         }
 
 
-        public void insertPurchaseRmMovement(string idFactura, string idWh, string fecha)
+        public void insertPurchaseRmMovement(string idFactura, string idWh, string fecha,int idItem,int cant)
         {
             NpgsqlDataAdapter adapt;
             DataSet data;
@@ -39,7 +39,7 @@ namespace InkaArt.Business.Warehouse
 
             table = data.Tables["Movement"];
             productionMovementMovementData.execute(string.Format(
-                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"status\", \"idDocumentType\") VALUES({0},  {1}, {2}, {3}, {4}, {5});", idFactura, 2, idWh, 1, 1, 1));
+                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"status\", \"idDocumentType\", \"dateIn\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, {4}, {5}, to_date('{6}', 'DD/MM/YYYY'), {7}, 0, {8});", idFactura, 2, idWh, 1, 1, 1,fecha,idItem,cant));
         }
 
         
