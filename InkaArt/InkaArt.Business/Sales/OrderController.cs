@@ -44,7 +44,7 @@ namespace InkaArt.Business.Sales
             float localPrice = float.Parse(strLocalPrice), exportPrice = float.Parse(strExportPrice);
             return natType == 0 ? localPrice : exportPrice;
         }
-        public DataTable GetOrders(int id = -1, object type = null, string doc = "", string clientName = "", object orderStatus = null)
+        public DataTable GetOrders(int id = -1, object type = null, string doc = "", string clientName = "", object orderStatus = null, DateTime? ini = null, DateTime? end = null)
         {
             long aux, intDoc = -1;
             string strType = "", strOrderStatus = "";
@@ -53,7 +53,7 @@ namespace InkaArt.Business.Sales
             strType = strType.ToLower();
             strOrderStatus = strOrderStatus.ToLower();
             if (!doc.Equals("")) if (long.TryParse(doc, out aux)) intDoc = long.Parse(doc);
-            return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus);
+            return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
         public DataTable GetSalesDocument()
@@ -68,7 +68,7 @@ namespace InkaArt.Business.Sales
             totalAmount = Math.Round(double.Parse(totalAmount), 2).ToString();
             int orderAdded, orderLineAdded;
             orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, totalDev);
-            orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv));
+            orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv), type);
             return orderAdded + orderLineAdded;
         }
 

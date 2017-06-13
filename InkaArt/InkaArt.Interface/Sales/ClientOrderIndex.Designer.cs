@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_orders = new System.Windows.Forms.DataGridView();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,7 +43,7 @@
             this.combo_type = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.date_deliveryDate = new System.Windows.Forms.DateTimePicker();
+            this.date_deliveryDate_ini = new System.Windows.Forms.DateTimePicker();
             this.combo_orderStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textbox_name = new System.Windows.Forms.TextBox();
@@ -53,6 +53,7 @@
             this.button_search = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_create = new System.Windows.Forms.Button();
+            this.date_deliveryDate_end = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orders)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -60,19 +61,19 @@
             // grid_orders
             // 
             this.grid_orders.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.grid_orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_orders.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_orders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_orders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.grid_orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column4,
@@ -143,10 +144,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.date_deliveryDate_end);
             this.groupBox1.Controls.Add(this.combo_type);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.date_deliveryDate);
+            this.groupBox1.Controls.Add(this.date_deliveryDate_ini);
             this.groupBox1.Controls.Add(this.combo_orderStatus);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textbox_name);
@@ -197,16 +199,16 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "Fecha de Entrega";
             // 
-            // date_deliveryDate
+            // date_deliveryDate_ini
             // 
-            this.date_deliveryDate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.date_deliveryDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_deliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliveryDate.Location = new System.Drawing.Point(316, 135);
-            this.date_deliveryDate.Margin = new System.Windows.Forms.Padding(4);
-            this.date_deliveryDate.Name = "date_deliveryDate";
-            this.date_deliveryDate.Size = new System.Drawing.Size(255, 30);
-            this.date_deliveryDate.TabIndex = 23;
+            this.date_deliveryDate_ini.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.date_deliveryDate_ini.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliveryDate_ini.Location = new System.Drawing.Point(316, 135);
+            this.date_deliveryDate_ini.Margin = new System.Windows.Forms.Padding(4);
+            this.date_deliveryDate_ini.Name = "date_deliveryDate_ini";
+            this.date_deliveryDate_ini.Size = new System.Drawing.Size(138, 30);
+            this.date_deliveryDate_ini.TabIndex = 23;
             // 
             // combo_orderStatus
             // 
@@ -314,6 +316,15 @@
             this.button_create.UseVisualStyleBackColor = false;
             this.button_create.Click += new System.EventHandler(this.button_create_Click);
             // 
+            // date_deliveryDate_end
+            // 
+            this.date_deliveryDate_end.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliveryDate_end.Location = new System.Drawing.Point(482, 135);
+            this.date_deliveryDate_end.Name = "date_deliveryDate_end";
+            this.date_deliveryDate_end.Size = new System.Drawing.Size(134, 30);
+            this.date_deliveryDate_end.TabIndex = 28;
+            // 
             // ClientOrderIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -348,7 +359,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker date_deliveryDate;
+        private System.Windows.Forms.DateTimePicker date_deliveryDate_ini;
         private System.Windows.Forms.ComboBox combo_orderStatus;
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.Button button_create;
@@ -360,5 +371,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
+        private System.Windows.Forms.DateTimePicker date_deliveryDate_end;
     }
 }

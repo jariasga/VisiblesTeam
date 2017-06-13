@@ -55,19 +55,37 @@ namespace InkaArt.Data.Sales
 
         }
 
-        public DataTable GetOrders(int id = -1, string type = "", long doc = -1, string clientName = "", string orderStatus = "")
+        public DataTable GetOrders(int id = -1, string type = "", long doc = -1, string clientName = "", string orderStatus = "", DateTime? ini = null, DateTime? end = null)
         {
             adap = orderAdapter();
             byClient(adap,doc,clientName);
             byId(adap,id);
             byType(adap,type);
             byOrderStatus(adap,orderStatus);
+            byDateRange(adap, ini, end);
             adap.SelectCommand.CommandText += ";";
             data.Clear();
             data = getData(adap, "Orders");
             DataTable orderList = new DataTable();
             orderList = data.Tables[0];
             return orderList;
+        }
+
+        private void byDateRange(NpgsqlDataAdapter adap, DateTime? ini = null, DateTime? end = null)
+        {
+            if (!ini.HasValue || !end.HasValue) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "\"deliveryDate\" >= :ini AND \"deliveryDate\" <= :end";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("ini", DbType.Date));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "ini";
+            adap.SelectCommand.Parameters[numParams++].NpgsqlValue = ini;
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("end", DbType.Date));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "end";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = end;
         }
 
         private void byClient(NpgsqlDataAdapter adap, long doc, string clientName)
@@ -245,7 +263,7 @@ namespace InkaArt.Data.Sales
             return saleDocumentId;
         }
 
-        public int InsertOrderLines(DataTable orderLines, double igv)
+        public int InsertOrderLines(DataTable orderLines, double igv, string type)
         {
             adap = orderAdapter();
             data.Clear();
@@ -265,17 +283,39 @@ namespace InkaArt.Data.Sales
                 row = table.NewRow();
                 var cantColumn = r["Cantidad"];
                 if (cantColumn == DBNull.Value) break;
-                float cant = float.Parse(r["Cantidad"].ToString());
+                int cant = int.Parse(r["Cantidad"].ToString());
                 string cali = r["Calidad"].ToString();
+                int currentProductId = getProductId(r["Producto"].ToString());
                 row["quantity"] = cant;
                 row["quality"] = cali;
                 row["idRecipe"] = getRecipeId(getProductId(r["Producto"].ToString()));
-                row["idProduct"] = getProductId(r["Producto"].ToString());
+                row["idProduct"] = currentProductId;
                 row["idOrder"] = orderId;
                 table.Rows.Add(row);
+                updateLogicalStock(currentProductId, cant);
             }
             int rowsAffected = insertData(data, adap, "LineItem");
             return rowsAffected;
+        }
+
+        private int updateLogicalStock(int currentProductId, int cant)
+        {
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = productAdapter();
+
+            myData.Clear();
+            myData = getData(myAdap, "Product");
+
+            DataTable myTable = myData.Tables["Product"];
+            for (int i = 0; i < myTable.Rows.Count; i++)
+            {
+                if (string.Compare(myTable.Rows[i]["idProduct"].ToString(), currentProductId.ToString()) == 0)
+                {
+                    myTable.Rows[i]["logicalStock"] = int.Parse(myTable.Rows[i]["logicalStock"].ToString()) - cant;
+                    break;
+                }
+            }
+            return updateData(myData, myAdap, "Product");
         }
 
         private int getRecipeId(int productId)
