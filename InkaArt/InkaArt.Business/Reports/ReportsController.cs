@@ -31,5 +31,10 @@ namespace InkaArt.Business.Reports
         {
             return reportData.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
         }
+
+        public DataTable getDataSimulation(string name)
+        {
+            return reportData.getDataSimulation(name);
+        }
     }
 }

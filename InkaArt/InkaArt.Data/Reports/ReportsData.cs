@@ -172,5 +172,24 @@ namespace InkaArt.Data.Reports
             return stocksTable;
         }
 
+        public DataTable getDataSimulation(string name)
+        {
+            string command_query = "";
+
+            Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
+            Connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand(command_query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            DataTable simulationTable = new DataTable();
+
+            while (dr.Read())
+            {
+                //simulationTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
+            }
+
+            return simulationTable;
+        }
+
     }
 }

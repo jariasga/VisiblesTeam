@@ -103,11 +103,11 @@
     <Compile Include="Production\GeneratePerformanceReport.designer.cs">
       <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\GenerateSimulationReport.cs">
+    <Compile Include="Production\SimulationReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\GenerateSimulationReport.Designer.cs">
-      <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
+    <Compile Include="Production\SimulationReport.Designer.cs">
+      <DependentUpon>SimulationReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\JobDetails.cs">
       <SubType>Form</SubType>
@@ -480,8 +480,8 @@
     <EmbeddedResource Include="Production\GeneratePerformanceReport.resx">
       <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\GenerateSimulationReport.resx">
-      <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
+    <EmbeddedResource Include="Production\SimulationReport.resx">
+      <DependentUpon>SimulationReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
