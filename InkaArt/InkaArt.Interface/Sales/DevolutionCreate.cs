@@ -166,22 +166,31 @@ namespace InkaArt.Interface.Sales
             if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
             else
             {
-                if (productList.Rows.Count == 0) productList = orderController.GetProducts();
-                foreach (DataRow row in productList.Rows)
+                if (isQuantityBelow()) MessageBox.Show(this, "No puede devolver más de lo que pidio.", "Producto", MessageBoxButtons.OK);
+                else
                 {
-                    var aux = row["idProduct"];
-                    string strAux = aux.ToString();
-                    if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
+                    if (productList.Rows.Count == 0) productList = orderController.GetProducts();
+                    foreach (DataRow row in productList.Rows)
                     {
-                        float price = float.Parse(row["localPrice"].ToString()) + float.Parse(row["basePrice"].ToString());
-                        amount += price * float.Parse(numeric_quantity.Value.ToString());
-                        grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
+                        var aux = row["idProduct"];
+                        string strAux = aux.ToString();
+                        if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
+                        {
+                            float price = float.Parse(row["localPrice"].ToString()) + float.Parse(row["basePrice"].ToString());
+                            amount += price * float.Parse(numeric_quantity.Value.ToString());
+                            grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
+                        }
                     }
+                    textbox_devamount.Text = Math.Round(amount, 2).ToString();
+                    textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
+                    textbox_devtotal.Text = Math.Round((1.18 * amount), 2).ToString();
                 }
-                textbox_devamount.Text = Math.Round(amount, 2).ToString();
-                textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
-                textbox_devtotal.Text = Math.Round((1.18 * amount), 2).ToString();
             }
+        }
+
+        private bool isQuantityBelow()
+        {
+            throw new NotImplementedException();
         }
 
         private bool isProductAdded()
