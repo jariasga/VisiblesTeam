@@ -88,7 +88,7 @@ namespace InkaArt.Interface.Sales
         private void button_save_Click(object sender, EventArgs e)
         {
             DataTable orderLine = parseDataGrid(grid_orderline);
-            string messageResponse = orderController.makeValidations(textbox_doc.Text, textbox_name.Text, orderLine, "devolucion", "",textbox_docid.Text);
+            string messageResponse = orderController.makeValidations(textbox_doc.Text, textbox_name.Text, orderLine, "devolucion", textbox_reason.Text ,textbox_docid.Text);
             if (messageResponse.Equals("OK"))
             {                
                 int response = orderController.AddOrder(clientId, combo_doc.SelectedIndex+1, date_deliverydate.Value, textbox_devamount.Text, textbox_igv.Text, textbox_total.Text, "registrado", 1, orderLine, "devolucion", textbox_reason.Text, textbox_devtotal.Text);

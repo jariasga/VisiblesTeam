@@ -93,6 +93,12 @@ namespace InkaArt.Business.Sales
             return info.Rows[0]["ruc"].ToString();
         }
 
+        public float getRightTotalAmount(DataRow row)
+        {
+            if (row["type"].ToString().Equals("pedido")) return float.Parse(row["totalAmount"].ToString());
+            else return float.Parse(row["totalDev"].ToString());
+        }
+
         public DataTable GetDocumentTypes()
         {
             return orderData.GetDocumentTypes();
