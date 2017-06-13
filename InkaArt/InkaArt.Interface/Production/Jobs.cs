@@ -24,9 +24,9 @@ namespace InkaArt.Interface.Production
 
             for(int i = 0; i < processList.Rows.Count; i++)
             {
-                dataGridView_process.Rows.Add(processList.Rows[i]["idProcess"],
+                dataGridView_process.Rows.Add(processList.Rows[i]["id_process"],
                     processList.Rows[i]["description"],
-                    processList.Rows[i]["position_count"]);
+                    processList.Rows[i]["number_of_jobs"]);
             }
             
         }
@@ -52,9 +52,9 @@ namespace InkaArt.Interface.Production
 
             for (int i = 0; i < processList.Rows.Count; i++)
             {
-                dataGridView_process.Rows.Add(processList.Rows[i]["idProcess"],
+                dataGridView_process.Rows.Add(processList.Rows[i]["id_process"],
                     processList.Rows[i]["description"],
-                    processList.Rows[i]["position_count"]);
+                    processList.Rows[i]["number_of_jobs"]);
             }
         }
 

@@ -15,6 +15,7 @@ namespace InkaArt.Data.Algorithm
         private int id_recipe;
         private int id_product;
         private string description;
+        private string version;
 
         public int ID
         {
@@ -28,12 +29,17 @@ namespace InkaArt.Data.Algorithm
         {
             get { return description; }
         }
+        public string Version
+        {
+            get { return version; }
+        }
 
-        public Recipe(int id_recipe, int id_product, string description)
+        public Recipe(int id_recipe, int id_product, string description, string version)
         {
             this.id_recipe = id_recipe;
             this.id_product = id_product;
             this.description = description;
+            this.version = version;
         }
     }
 }

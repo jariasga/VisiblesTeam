@@ -11,13 +11,17 @@ using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
 {
-    class RatioController
+    public class RatioController
     {
-        List<Ratio> ratios;
+        private List<Ratio> ratios;
+        private IndexController indexes;
+        private RatioPerDayController ratios_per_day;
 
         public RatioController()
         {
             ratios = new List<Ratio>();
+            indexes = new IndexController();
+            ratios_per_day = new RatioPerDayController();
         }
 
         public void Load(DateTime date)
@@ -29,7 +33,7 @@ namespace InkaArt.Business.Algorithm
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date AND "
-                + "status = :status ORDER BY id_report ASC", connection);
+                + "status = :status ORDER BY id_ratio ASC", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
@@ -37,7 +41,7 @@ namespace InkaArt.Business.Algorithm
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id_report = reader.GetInt32(0);
+                int id_ratio = reader.GetInt32(0);
                 int id_worker = reader.GetInt32(2);
                 int id_job = reader.GetInt32(3);
                 int id_recipe = reader.GetInt32(4);
@@ -48,18 +52,18 @@ namespace InkaArt.Business.Algorithm
                 double breakage = reader.GetDouble(9);
                 double time = reader.GetDouble(10);
 
-                ratios.Add(new Ratio(id_report, date, id_worker, id_job, id_recipe, start, end, broken,
+                ratios.Add(new Ratio(id_ratio, date, id_worker, id_job, id_recipe, start, end, broken,
                     produced, breakage, time));
             }
 
             connection.Close();
         }
 
-        public Ratio Verify(int id_report, DateTime date, string worker_text, string job_text, string recipe_text,
+        public Ratio Verify(int id_ratio, DateTime date, string worker_text, string job_text, string recipe_text,
             string start_text, string end_text, string broken_text, string produced_text, WorkerController workers,
             JobController jobs, RecipeController recipes, ref string message)
         {
-            if (id_report < 0)
+            if (id_ratio < 0)
             {
                 message = "El ID del informe de turno no es válido.";
                 return null;
@@ -79,7 +83,7 @@ namespace InkaArt.Business.Algorithm
                 return null;
             }
 
-            Recipe recipe = recipes.GetByDescription(recipe_text);
+            Recipe recipe = recipes.GetByVersion(recipe_text);
             if (recipe == null)
             {
                 message = "La receta seleccionada no es válida.";
@@ -125,20 +129,20 @@ namespace InkaArt.Business.Algorithm
                 return null;
             }
             
-            Ratio ratio = new Ratio(id_report, date, worker.ID, job.ID, recipe.ID, start, end, broken, produced,
+            Ratio ratio = new Ratio(id_ratio, date, worker.ID, job.ID, recipe.ID, start, end, broken, produced,
                 (double)broken / produced, (end - start).TotalMinutes / produced);
             return ratio;
         }
 
-        public int VerifyAndSave(int id_report, DateTime date, string worker, string job, string recipe,
+        public int VerifyAndSave(int id_ratio, DateTime date, string worker, string job, string recipe,
             string start, string end, string broken, string produced, WorkerController workers,
             JobController jobs, RecipeController recipes, ref string message)
         {
-            Ratio ratio = Verify(id_report, date, worker, job, recipe, start, end, broken, produced,
+            Ratio ratio = Verify(id_ratio, date, worker, job, recipe, start, end, broken, produced,
                 workers, jobs, recipes, ref message);
             if (ratio == null) return 0;
 
-            if (id_report == 0) return Insert(ratio, ref message);
+            if (id_ratio == 0) return Insert(ratio, ref message);
             else return Update(ratio, ref message);
         }
 
@@ -146,19 +150,19 @@ namespace InkaArt.Business.Algorithm
         {
             try
             {
-                ratio.Insert();
+                //Para actualizar el resumen de reportes, se necesita conocer la cantidad de ratios actuales.
+                int initial_count_ratios = ratio.CountByWorkerJobAndRecipe();
+
+                //Realizar la operación INSERT en la base de datos
+                message += ratio.Insert();
+                //Con el ID generado, añadir el nuevo ratio en la lista en memoria
                 ratios.Add(ratio);
 
-                //Actualizar resumen de reportes
-                /*int count = ratio.Count();
-                if (count <= 0) resumes.Insert(ratio);
-                else
-                {
-                    double average_breakage, average_time;
-                    ratio.AverageValues(out average_breakage, out average_time);
-                    resumes.Update(ratio, average_breakage, average_time);
-                }*/
-                    
+                //Actualizar tablas de índices y ratios por día
+                message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
+
+                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                    message += ratios_per_day.InsertOrUpdate(ratio);
                 
                 return ratio.ID;
             }
@@ -175,51 +179,61 @@ namespace InkaArt.Business.Algorithm
             try
             {
                 int index = GetIndex(ratio.ID);
-                if (index < 0)
+                if (index < 0 || index >= ratios.Count)
                 {
-                    message = "No se pudo encontrar el ID del informe de turno al intentar actualizarlo.";
+                    message = "No se pudo encontrar el antiguo ratio a la hora de actualizarlo.";
                     return 0;
                 }
-                Ratio old_ratio = ratios[index];
+
+                //Guardamos el ratio anterior en una variable temporal
+                Ratio old_ratio = new Ratio(ratios[index]);
+                //Para actualizar el resumen de reportes, se necesita conocer la cantidad de ratios actuales que cumplen
+                //con los parámetros del nuevo ratio.
+                int initial_count_ratios = ratio.CountByWorkerJobAndRecipe();
+
+                //Se actualiza en base de datos el ratio
+                message += ratio.Update();
+                //Se reemplaza el antiguo ratio por el nuevo en la lista de ratios
                 ratios[index] = ratio;
-                ratios[index].Update();
 
                 //Actualizar resumen de reportes
-                if (old_ratio.Worker == ratio.Worker && old_ratio.Job == ratio.Job && old_ratio.Recipe == ratio.Recipe)
-                {
+                message += indexes.UpdateOrDelete(old_ratio);
+                if (old_ratio.Job == 3 || old_ratio.Job == 4 || old_ratio.Job == 6)
+                    message += ratios_per_day.UpdateOrDelete(old_ratio);
 
-                }
-                else
-                {
-
-                }
-                //resumes.Save(old_ratio, ref message);
-                //resumes.Save(ratio, ref message);
+                message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
+                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                    message += ratios_per_day.InsertOrUpdate(ratio);
 
                 return ratio.ID;
             }
             catch (Exception e)
             {
-                message = "Ocurrió un problema con la base de datos al intentar actualizar un ratio: " + e.Message;
+                message = "Ocurrió un problema al intentar actualizar un ratio: " + e.Message;
                 LogHandler.WriteLine("Excepción al intentar actualizar un ratio: " + e.ToString());
                 return 0;
             }
         }
 
-        public bool Delete(int id_report, ref string message)
+        public bool Delete(int id_ratio, ref string message)
         {
             try
             {
-                int index = GetIndex(id_report);
-                if (index < 0)
+                Ratio ratio = GetById(id_ratio);
+                if (ratio == null)
                 {
                     message = "No se pudo encontrar el ID del informe de turno al intentar eliminarlo.";
                     return false;
                 }
-                ratios[index].Delete();
-                ratios.RemoveAt(index);
+                //Se realiza el soft deletion en la base de datos
+                message += ratio.Delete();
+                //Se retira el ratio de la lista de ratios en memoria
+                ratios.Remove(ratio);
 
                 //Actualizar resumen de reportes
+                message += indexes.UpdateOrDelete(ratio);
+                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                    message += ratios_per_day.UpdateOrDelete(ratio);
 
                 return true;
             }

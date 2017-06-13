@@ -8,17 +8,31 @@ namespace InkaArt.Business.Algorithm
 {
     class Grasp
     {
-        WorkerController workers;
-        JobController jobs;
-        RatioController ratios;
+        private WorkerController workers;
+        private OrderController orders;
+        private JobController jobs;
+        private RecipeController recipes;
+        private IndexController indexes;
 
         public Grasp()
         {
-            workers = new WorkerController();
-            workers.Load();
-            jobs = new JobController();
-            jobs.Load();
-            ratios = new RatioController();
+            this.workers = new WorkerController();
+            this.workers.Load();
+            this.orders = new OrderController();
+            this.orders.Load();
+
+            this.jobs = new JobController();
+            this.jobs.Load();
+            this.recipes = new RecipeController();
+            this.recipes.Load();
+            this.indexes = new IndexController();
+            this.indexes.Load();
+            this.indexes.CalculateIndexes(jobs, recipes);
+        }
+
+        public void GraspAlgorithm()
+        {
+
         }
     }
 }
