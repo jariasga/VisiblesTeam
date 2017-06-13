@@ -26,6 +26,13 @@ namespace InkaArt.Data.Warehouse
             return productMovementAdapter;
         }
 
+        public int updateDataExecute(string queryUpdate)
+        {
+            int a = 5;
+            execute(queryUpdate);
+            return a;
+        }
+
         public DataTable GetData(int id = -1)
         {
             //connect();

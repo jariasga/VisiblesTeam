@@ -14,97 +14,121 @@ namespace InkaArt.Interface.Production
 {
     public partial class SimulationConfig : Form
     {
-        SimulationController simulations;
-        Simulation simulation;
-        ComboBox combo_simulations;
-        WorkerController workers;
-        OrderController orders;
+        private SimulationController simulations;
+        private Simulation simulation;
+        private ComboBox combo_simulations;
+        private WorkerController workers;
+        private OrderController orders;
 
         public SimulationConfig()
         {
             InitializeComponent();
         }
 
-        public SimulationConfig(SimulationController simulations, Simulation simulation, ComboBox combo, WorkerController workers, OrderController orders)
+        public SimulationConfig(SimulationController simulations, Simulation simulation, ComboBox combo_simulations,
+            WorkerController workers, OrderController orders)
         {
             InitializeComponent();
 
             this.workers = workers;
             this.list_workers.DataSource = workers.List();
-            this.list_workers.DisplayMember = "GetFullName";
+            this.list_workers.DisplayMember = "FullName";
+
             this.orders = orders;
             this.list_orders.DataSource = orders.List();
             this.list_orders.DisplayMember = "Description";
 
             this.simulations = simulations;
             this.simulation = simulation;
-            this.combo_simulations = combo;
+            this.combo_simulations = combo_simulations;
+        }
 
-            if (simulation != null)
+        private void SimulationConfig_Load(object sender, EventArgs e)
+        {
+            if (simulation != null) //Creación de una simulación
             {
                 this.textbox_name.Text = simulation.Name;
-                this.textbox_days.Text = simulation.Days.ToString();
-                this.textbox_roture.Text = simulation.BreakageWeight.ToString();
-                this.textbox_time.Text = simulation.TimeWeight.ToString();
-                this.textbox_huacos.Text = simulation.HuacoWeight.ToString();
-                this.textbox_stones.Text = simulation.HuamangaStoneWeight.ToString();
-                this.textbox_altarpieces.Text = simulation.RetableWeight.ToString();
+                this.date_picker_start.Value = simulation.StartDate;
+                this.date_picker_end.Value = simulation.EndDate;
+                this.numeric_breakage.Value = Convert.ToDecimal(simulation.BreakageWeight * 100);
+                this.numeric_time.Value = Convert.ToDecimal(simulation.TimeWeight * 100);
+                this.numeric_huacos.Value = Convert.ToDecimal(simulation.HuacoWeight * 100);
+                this.numeric_stones.Value = Convert.ToDecimal(simulation.HuamangaStoneWeight * 100);
+                this.numeric_altarpiece.Value = Convert.ToDecimal(simulation.RetableWeight * 100);
 
-                for (int i = 0; i < list_workers.Items.Count; i++)
+                for (int i = 0; (simulation.SelectedWorkers != null) && (i < list_workers.Items.Count); i++)
                 {
-                    if (simulation.Workers != null && simulation.Workers.Contains((Worker)list_workers.Items[i]))
+                    if (simulation.SelectedWorkers.Contains((Worker)list_workers.Items[i]))
                         list_workers.SetItemChecked(i, true);
                 }
-                for (int i = 0; i < list_orders.Items.Count; i++)
+                for (int i = 0; (simulation.SelectedOrders != null) && (i < list_orders.Items.Count); i++)
                 {
-                    if (simulation.Orders != null && simulation.Orders.Contains((Order)list_orders.Items[i]))
+                    if (simulation.SelectedOrders.Contains((Order)list_orders.Items[i]))
                         list_orders.SetItemChecked(i, true);
                 }
 
-                this.Text = "Editar Simulación";
-                return;
+                this.Text = "Ver simulación de asignación de trabajadores";
+                this.button_save.Text = "🖫 Guardar cambios";
+            }
+            else
+            {
+                this.date_picker_start.Enabled = true;
+                this.date_picker_end.Enabled = true;
+                this.groupbox_weight.Enabled = true;
+                this.groupbox_workers.Enabled = true;
+                this.groupbox_orders.Enabled = true;
+
+                this.Text = "Nueva simulación de asignación de trabajadores";
+                this.button_save.Text = "▶ Iniciar simulación";
             }
 
-            this.Text = "Crear Simulación";
         }
 
         private void ButtonSaveClick(object sender, EventArgs e)
         {
-            string message;
-            string action;
-            List<Worker> workers = new List<Worker>();
-            List<Order> orders = new List<Order>();
+            WorkerController selected_workers = new WorkerController();
+            foreach (object worker in list_workers.CheckedItems)
+                selected_workers.Add((Worker)worker);
 
-            foreach (object item in list_workers.CheckedItems)
-            {
-                workers.Add((Worker)item);
-            }
-            foreach (object item in list_orders.CheckedItems)
-            {
-                orders.Add((Order)item);
-            }
+            OrderController selected_orders = new OrderController();
+            foreach (object order in list_orders.CheckedItems)
+                selected_orders.Add((Order)order);
 
-            if (simulation == null)
+            if (simulation == null) //Crear una nueva simulación y ejecutar la asignación de trabajadores
             {
-                message = this.simulations.Insert(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers, orders);
-                action = "creada";
-            }
-            else
-            {
-                message = this.simulations.Update(simulation, textbox_name.Text, textbox_days.Text, textbox_roture.Text, textbox_time.Text, textbox_huacos.Text, textbox_stones.Text, textbox_altarpieces.Text, workers, orders);
-                action = "actualizada";
-            }
+                string message = this.simulations.Insert(textbox_name.Text, date_picker_start.Value, date_picker_end.Value,
+                    numeric_breakage.Value, numeric_time.Value, numeric_huacos.Value, numeric_stones.Value,
+                    numeric_altarpiece.Value, selected_workers, selected_orders);
+                if (message != "OK") MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    simulation = this.simulations[this.simulations.Count() - 1];
 
-            if (message.Equals("OK"))
-            {
-                MessageBox.Show(this, "La simulación ha sido " + action + " correctamente.", "Éxito", MessageBoxButtons.OK);
-                DialogResult = DialogResult.OK;
-                Close();
-            }
-            else
-                MessageBox.Show(this, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //Llegó la hora de la verdad
+                    Form loading_screen = new SimulationLoadingScreen(simulation);
+                    //loading_screen.MdiParent = this.MdiParent;
+                    DialogResult result = loading_screen.ShowDialog();
+                    if (result == DialogResult.Cancel) return;
 
-            combo_simulations.DataSource = simulations.BindingList();
+                }
+            }
+            else //Actualizar *solo* el nombre
+            {
+                if (this.textbox_name.Text == null || this.textbox_name.Text == "")
+                {
+                    MessageBox.Show("Por favor, ingrese un nombre válido.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                simulation.Name = this.textbox_name.Text;
+                if (simulation.ID > 0)
+                {
+                    string message = simulation.UpdateName();
+                    if (message != null) MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                MessageBox.Show("Los datos de la simulación fueron actualizados correctamente.", "Inka Art",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }            
         }
 
         private void textbox_huacos_TextChanged(object sender, EventArgs e)

@@ -10,7 +10,7 @@ using Npgsql;
 
 namespace InkaArt.Business.Algorithm
 {
-    class TabuSearch
+    public class TabuSearch
     {
         private Simulation simulation;
 
@@ -89,7 +89,7 @@ namespace InkaArt.Business.Algorithm
             {
                 foreach(Assignment assignment in solution[i])
                 {
-                    Index index = simulation.Indexes.Find(Index.byWorkerAndJob(assignment.Worker, assignment.Job));
+                    Index index = simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
                     // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
                     if (index != null)
                     {

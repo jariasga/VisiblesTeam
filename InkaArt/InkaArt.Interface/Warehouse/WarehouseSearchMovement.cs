@@ -44,6 +44,18 @@ namespace InkaArt.Interface.Warehouse
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             DataTable warehouseList;
+            if (textBox_id.Text != "")
+            {
+                try
+                {
+                    Convert.ToInt32(textBox_id.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Favor de ingresar un valor entero para el id del almacén");
+                    return;
+                }
+            }
 
             if (textBox_id.Text.Equals("") && textBox_supplier.Text.Equals(""))
             {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InkaArt.Data.Warehouse;
+using Npgsql;
 using System.Data;
 
 namespace InkaArt.Business.Warehouse
@@ -24,6 +25,7 @@ namespace InkaArt.Business.Warehouse
             if (!id.Equals("")) if (int.TryParse(id, out intAux)) intId = int.Parse(id);
             return productMovementData.GetData(intId, name,1);
         }
+        
         
     }
 }

@@ -36,12 +36,7 @@ namespace InkaArt.Data.Algorithm
             this.last_name = last_name;
         }
 
-        public string FullName()
-        {
-            return name + " " + last_name;
-        }
-
-        public string GetFullName
+        public string FullName
         {
             get { return name + " " + last_name; }
         }

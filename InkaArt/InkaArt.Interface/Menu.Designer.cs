@@ -1,4 +1,7 @@
-﻿namespace InkaArt.Interface
+﻿using InkaArt.Classes;
+using System;
+
+namespace InkaArt.Interface
 {
     partial class Menu
     {
@@ -13,11 +16,19 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
+                pingThread.Abort();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
+            catch (Exception ex)
+            {
+                LogHandler.WriteLine(ex.ToString());
+            }
         }
 
         #region Windows Form Designer generated code
