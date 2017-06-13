@@ -97,11 +97,11 @@
     <Compile Include="Production\FinalProducts.designer.cs">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\GenerateProductivityReport.cs">
+    <Compile Include="Production\GeneratePerformanceReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\GenerateProductivityReport.designer.cs">
-      <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    <Compile Include="Production\GeneratePerformanceReport.designer.cs">
+      <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\GenerateSimulationReport.cs">
       <SubType>Form</SubType>
@@ -133,11 +133,11 @@
     <Compile Include="Production\ProductionProcess.designer.cs">
       <DependentUpon>ProductionProcess.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\ProductivityReport.cs">
+    <Compile Include="Production\PerformanceReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\ProductivityReport.designer.cs">
-      <DependentUpon>ProductivityReport.cs</DependentUpon>
+    <Compile Include="Production\PerformanceReport.designer.cs">
+      <DependentUpon>PerformanceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\Recipe.cs">
       <SubType>Form</SubType>
@@ -459,8 +459,8 @@
     <EmbeddedResource Include="Production\FinalProducts.resx">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\GenerateProductivityReport.resx">
-      <DependentUpon>GenerateProductivityReport.cs</DependentUpon>
+    <EmbeddedResource Include="Production\GeneratePerformanceReport.resx">
+      <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\GenerateSimulationReport.resx">
       <DependentUpon>GenerateSimulationReport.cs</DependentUpon>
@@ -477,8 +477,8 @@
     <EmbeddedResource Include="Production\ProductionProcess.resx">
       <DependentUpon>ProductionProcess.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\ProductivityReport.resx">
-      <DependentUpon>ProductivityReport.cs</DependentUpon>
+    <EmbeddedResource Include="Production\PerformanceReport.resx">
+      <DependentUpon>PerformanceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\Recipe.resx">
       <DependentUpon>Recipe.cs</DependentUpon>
