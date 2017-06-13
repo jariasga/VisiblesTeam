@@ -132,5 +132,45 @@ namespace InkaArt.Data.Reports
             return stocksTable;
         }
 
+        public DataTable getDataPerformance(string worker, int chosenIndex, string fechaIni, string fechaFin)
+        {
+            string command_query = "select 	ra.\"date\", " +
+                                            "j.\"name\" as jobName, " +
+                                            "re.\"description\" as recipeName, " +
+                                            "ra.\"broken\", " +
+                                            "ra.\"produced\", " +
+                                            "ra.\"time\" " +
+                                    "from   inkaart.\"Ratio\" ra, " +
+                                            "inkaart.\"Process-Product\" j, " +
+                                            "inkaart.\"Recipe\" re " +
+                                    "where  ra.\"id_worker\" = " + chosenIndex.ToString() + "and " +
+                                            "ra.\"date\" >= '" + fechaIni + "' and " +
+                                            "ra.\"date\" <= '" + fechaFin + "' and " +
+                                            "ra.\"id_job\" = j.\"idJob\" and " +
+                                            "ra.\"id_recipe\" = re.\"idRecipe\" ;";            
+
+            Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
+            Connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand(command_query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            DataTable stocksTable = new DataTable();
+            stocksTable.Columns.Add("Fecha", typeof(DateTime));
+            stocksTable.Columns.Add("Puesto", typeof(string));
+            stocksTable.Columns.Add("Receta", typeof(string));
+            stocksTable.Columns.Add("CantidadRota", typeof(int));
+            stocksTable.Columns.Add("CantidadProducida", typeof(int));
+            stocksTable.Columns.Add("Tiempo", typeof(float));
+
+            while (dr.Read())
+            {
+                stocksTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
+            }
+            Connection.Close();
+
+
+            return stocksTable;
+        }
+
     }
 }

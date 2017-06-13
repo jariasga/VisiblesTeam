@@ -27,5 +27,9 @@ namespace InkaArt.Business.Reports
             return reportData.getDataStocks(flag);
         }
 
+        public DataTable getDataPerformance(string worker, int chosenIndex, string fechaIni, string fechaFin)
+        {
+            return reportData.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
+        }
     }
 }
