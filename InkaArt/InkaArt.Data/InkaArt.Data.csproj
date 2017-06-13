@@ -73,6 +73,7 @@
     <Compile Include="Production\WorkerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchases\PurchaseOrderData.cs" />
+    <Compile Include="Purchases\PurchaseOrderDetailData.cs" />
     <Compile Include="Purchases\RawMaterial-SupplierData.cs" />
     <Compile Include="Purchases\RawMaterialData.cs" />
     <Compile Include="Purchases\SupplierData.cs" />

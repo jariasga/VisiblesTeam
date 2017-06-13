@@ -195,12 +195,6 @@
     <Compile Include="Warehouse\PurchaseMovement.Designer.cs">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Purchases\AddSupplyForOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Purchases\AddSupplyForOrder.designer.cs">
-      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
-    </Compile>
     <Compile Include="Purchases\PurchaseOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -516,9 +510,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseMovement.resx">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchases\AddSupplyForOrder.resx">
-      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchases\PurchaseOrder.resx">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
