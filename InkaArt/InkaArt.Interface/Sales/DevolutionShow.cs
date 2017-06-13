@@ -37,6 +37,7 @@ namespace InkaArt.Interface.Sales
                 textbox_devamount.Text = row["saleAmount"].ToString();
                 textbox_igv.Text = row["igv"].ToString();
                 textbox_total.Text = row["totalAmount"].ToString();
+                textbox_devtotal.Text = row["totalDev"].ToString();
                 string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType = "Boleta";
                 textbox_doc.Text = clientDoc;
                 textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
@@ -47,7 +48,7 @@ namespace InkaArt.Interface.Sales
                 foreach (DataRow orderline in orderLine.Rows)
                 {
                     string productId = orderline["idProduct"].ToString();
-                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId);
+                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId, row["idClient"].ToString());
                     grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"]);
                 }
             }

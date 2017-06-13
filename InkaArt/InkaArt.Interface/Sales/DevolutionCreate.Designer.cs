@@ -469,6 +469,7 @@
             // date_deliverydate
             // 
             this.date_deliverydate.Font = new System.Drawing.Font("Arial", 11F);
+            this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(33, 261);
             this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4);
             this.date_deliverydate.Name = "date_deliverydate";

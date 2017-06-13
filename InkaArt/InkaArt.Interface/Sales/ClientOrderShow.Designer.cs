@@ -299,6 +299,7 @@
             this.date_deliverydate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
             this.date_deliverydate.Enabled = false;
             this.date_deliverydate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(33, 76);
             this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4);
             this.date_deliverydate.Name = "date_deliverydate";
@@ -353,6 +354,7 @@
             this.button_fac.Text = "＋ Facturar";
             this.button_fac.UseVisualStyleBackColor = false;
             this.button_fac.Visible = false;
+            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
             // 
             // ClientOrderShow
             // 

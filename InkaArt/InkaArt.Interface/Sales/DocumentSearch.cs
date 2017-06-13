@@ -44,7 +44,8 @@ namespace InkaArt.Interface.Sales
         private void button_select_Click(object sender, EventArgs e)
         {
             int index = grid_documents.CurrentCell.RowIndex;
-            SelectedOrderId = int.Parse(grid_documents.Rows[index].Cells[0].Value.ToString());
+            SelectedOrderId = int.Parse(grid_documents.Rows[index].Cells[5].Value.ToString());
+            SelectedDocumentId = int.Parse(grid_documents.Rows[index].Cells[0].Value.ToString());
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -57,6 +58,14 @@ namespace InkaArt.Interface.Sales
                 DialogResult = DialogResult.OK;
                 Close();
             }
+        }
+
+        private void grid_documents_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectedOrderId = int.Parse(grid_documents.Rows[e.RowIndex].Cells[5].Value.ToString());
+            SelectedDocumentId = int.Parse(grid_documents.Rows[e.RowIndex].Cells[0].Value.ToString());
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace InkaArt.Interface.Sales
 
         private void button_search_Click(object sender, EventArgs e)
         {
-            DataTable orderFiltered = orderController.GetOrders(-1, combo_type.SelectedItem, textbox_doc.Text, textbox_name.Text, combo_orderStatus.SelectedItem);
+            DataTable orderFiltered = orderController.GetOrders(-1, combo_type.SelectedItem, textbox_doc.Text, textbox_name.Text, combo_orderStatus.SelectedItem, date_deliveryDate_ini.Value, date_deliveryDate_end.Value);
             populateDataGrid(orderFiltered);
         }
 
@@ -101,7 +101,8 @@ namespace InkaArt.Interface.Sales
                 {
                     string idClient = row["idClient"].ToString();
                     string clientName = orderController.getClientName(idClient), clientDoc = orderController.getClientDoc(idClient);
-                    grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"].ToString().ToUpper(), row["totalAmount"]);
+                    float totalAmount = orderController.getRightTotalAmount(row);
+                    grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"].ToString().ToUpper(), totalAmount);
                 }
             }
         }
