@@ -80,6 +80,7 @@
     <Compile Include="Production\WorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchases\PurchaseOrderController.cs" />
+    <Compile Include="Purchases\PurchaseOrderDetailController.cs" />
     <Compile Include="Purchases\RawMaterial-SupplierController.cs" />
     <Compile Include="Purchases\RawMaterialController.cs" />
     <Compile Include="Purchases\SupplierController.cs" />
