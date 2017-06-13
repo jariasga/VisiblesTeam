@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace InkaArt.Business.Algorithm
 {
 
-    class Instance
+    public class Instance
     {
         private WorkerController workers;
         private IndexController indexes; 

@@ -121,23 +121,23 @@
     <Compile Include="Production\Jobs.designer.cs">
       <DependentUpon>Jobs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\NewSimulation.cs">
+    <Compile Include="Production\SimulationLoadingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\NewSimulation.Designer.cs">
-      <DependentUpon>NewSimulation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Production\ProductionProcess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Production\ProductionProcess.designer.cs">
-      <DependentUpon>ProductionProcess.cs</DependentUpon>
+    <Compile Include="Production\SimulationLoadingScreen.Designer.cs">
+      <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\PerformanceReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Production\PerformanceReport.designer.cs">
       <DependentUpon>PerformanceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ProductionProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\ProductionProcess.designer.cs">
+      <DependentUpon>ProductionProcess.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\Recipe.cs">
       <SubType>Form</SubType>
@@ -150,6 +150,12 @@
     </Compile>
     <Compile Include="Production\RegisterAssignedJob.designer.cs">
       <DependentUpon>RegisterAssignedJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Production\RegisterRatioReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\RegisterRatioReport.designer.cs">
+      <DependentUpon>RegisterRatioReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\SimulationConfig.cs">
       <SubType>Form</SubType>
@@ -171,6 +177,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\ClientOrderDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDelivery.Designer.cs">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.Designer.cs">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.Designer.cs">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\DocumentSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,12 +218,6 @@
     </Compile>
     <Compile Include="Warehouse\PurchaseMovement.Designer.cs">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Purchases\AddSupplyForOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Purchases\AddSupplyForOrder.designer.cs">
-      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Purchases\PurchaseOrder.cs">
       <SubType>Form</SubType>
@@ -435,17 +453,17 @@
     <Compile Include="Warehouse\WarehouseIndex.Designer.cs">
       <DependentUpon>WarehouseIndex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\WarehouseShow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Warehouse\WarehouseShow.Designer.cs">
-      <DependentUpon>WarehouseShow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Warehouse\WarehouseSearchMovement.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Warehouse\WarehouseSearchMovement.Designer.cs">
       <DependentUpon>WarehouseSearchMovement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WarehouseShow.Designer.cs">
+      <DependentUpon>WarehouseShow.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="GeneralParameters.resx">
       <DependentUpon>GeneralParameters.cs</DependentUpon>
@@ -471,20 +489,23 @@
     <EmbeddedResource Include="Production\Jobs.resx">
       <DependentUpon>Jobs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\NewSimulation.resx">
-      <DependentUpon>NewSimulation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Production\ProductionProcess.resx">
-      <DependentUpon>ProductionProcess.cs</DependentUpon>
+    <EmbeddedResource Include="Production\SimulationLoadingScreen.resx">
+      <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\PerformanceReport.resx">
       <DependentUpon>PerformanceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Production\ProductionProcess.resx">
+      <DependentUpon>ProductionProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\Recipe.resx">
       <DependentUpon>Recipe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\RegisterAssignedJob.resx">
       <DependentUpon>RegisterAssignedJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Production\RegisterRatioReport.resx">
+      <DependentUpon>RegisterRatioReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\SimulationConfig.resx">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
@@ -505,6 +526,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sales\ClientOrderDelivery.resx">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDevolution.resx">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDocuments.resx">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -516,9 +546,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseMovement.resx">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Purchases\AddSupplyForOrder.resx">
-      <DependentUpon>AddSupplyForOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchases\PurchaseOrder.resx">
       <DependentUpon>PurchaseOrder.cs</DependentUpon>
@@ -637,11 +664,11 @@
     <EmbeddedResource Include="Warehouse\WarehouseIndex.resx">
       <DependentUpon>WarehouseIndex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\WarehouseShow.resx">
-      <DependentUpon>WarehouseShow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\WarehouseSearchMovement.resx">
       <DependentUpon>WarehouseSearchMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\WarehouseShow.resx">
+      <DependentUpon>WarehouseShow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
@@ -664,7 +691,7 @@
       <Name>InkaArt.Classes</Name>
     </ProjectReference>
     <ProjectReference Include="..\InkaArt.Data\InkaArt.Data.csproj">
-      <Project>{28dd7710-8f67-4401-aec4-cd8c3e135b82}</Project>
+      <Project>{28DD7710-8F67-4401-AEC4-CD8C3E135B82}</Project>
       <Name>InkaArt.Data</Name>
     </ProjectReference>
   </ItemGroup>

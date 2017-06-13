@@ -25,7 +25,7 @@ namespace InkaArt.Data.Warehouse
             productMovementAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Movement\"", Connection);
             return productMovementAdapter;
         }
-
+        
         public DataTable GetData()
         {
             //connect();
@@ -38,6 +38,11 @@ namespace InkaArt.Data.Warehouse
             DataTable clientList = new DataTable();
             clientList = data.Tables[0];
             return clientList;
+        }
+
+        public void executeQuery(string query)
+        {
+            execute(query);
         }
     }
 }

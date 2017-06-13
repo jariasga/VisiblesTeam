@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InkaArt.Classes;
 using Npgsql;
-using InkaArt.Classes;
-using System.Data;
 
-namespace InkaArt.Data.Warehouse
+namespace InkaArt.Data.Purchases
 {
-    public class PurchaseOrderDetalData:BD_Connector
+    public class PurchaseOrderDetailData : BD_Connector
     {
         public NpgsqlDataAdapter purchaseOrderDetailAdapter()
         {
             NpgsqlDataAdapter purchaseOrderDetailAdapter = new NpgsqlDataAdapter();
             purchaseOrderDetailAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"PurchaseOrderDetail\";", Connection);
+
             return purchaseOrderDetailAdapter;
         }
     }

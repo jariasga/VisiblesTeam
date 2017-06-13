@@ -52,7 +52,7 @@
     <Compile Include="Algorithm\Index.cs" />
     <Compile Include="Algorithm\Job.cs" />
     <Compile Include="Algorithm\Order.cs" />
-    <Compile Include="Algorithm\OrderProduct.cs" />
+    <Compile Include="Algorithm\OrderLineItem.cs" />
     <Compile Include="Algorithm\Process.cs" />
     <Compile Include="Algorithm\Product.cs" />
     <Compile Include="Algorithm\Ratio.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Production\WorkerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchases\PurchaseOrderData.cs" />
+    <Compile Include="Purchases\PurchaseOrderDetailData.cs" />
     <Compile Include="Purchases\RawMaterial-SupplierData.cs" />
     <Compile Include="Purchases\RawMaterialData.cs" />
     <Compile Include="Purchases\SupplierData.cs" />

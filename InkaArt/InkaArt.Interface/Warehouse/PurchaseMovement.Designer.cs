@@ -198,9 +198,10 @@
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(118, 396);
+            this.button2.Location = new System.Drawing.Point(158, 487);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 39);
+            this.button2.Size = new System.Drawing.Size(184, 48);
             this.button2.TabIndex = 46;
             this.button2.Text = "Aceptar";
             this.button2.UseVisualStyleBackColor = false;
@@ -211,10 +212,9 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(309, 396);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDelete.Location = new System.Drawing.Point(412, 487);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(138, 39);
+            this.buttonDelete.Size = new System.Drawing.Size(184, 48);
             this.buttonDelete.TabIndex = 55;
             this.buttonDelete.Text = "Cancelar";
             this.buttonDelete.UseVisualStyleBackColor = false;
@@ -225,7 +225,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(570, 445);
+            this.ClientSize = new System.Drawing.Size(710, 577);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView_orders);

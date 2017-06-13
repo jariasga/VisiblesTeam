@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InkaArt.Data.Algorithm;
 using Npgsql;
 using InkaArt.Classes;
+using NpgsqlTypes;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -20,15 +21,13 @@ namespace InkaArt.Business.Algorithm
         
         public void Load()
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
             // buscamos ordenes activas que aun no hayan sido entregadas
-            string select = "SELECT * FROM inkaart.\"Order\" ";
-            select += "INNER JOIN inkaart.\"Client\" ON(inkaart.\"Order\".\"idClient\" = inkaart.\"Client\".\"idClient\") ";
-            select += "WHERE inkaart.\"Order\".\"bdStatus\" = 1 AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'";
-            NpgsqlCommand command = new NpgsqlCommand(select, connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\" " +
+                "INNER JOIN inkaart.\"Client\" ON(inkaart.\"Order\".\"idClient\" = inkaart.\"Client\".\"idClient\") " +
+                "WHERE inkaart.\"Order\".\"bdStatus\" = 1 AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'", connection);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -45,9 +44,25 @@ namespace InkaArt.Business.Algorithm
                 int id = int.Parse(reader["idOrder"].ToString()); ;
                 DateTime delivery_date = DateTime.Parse(reader["deliveryDate"].ToString());
                 orders.Add(new Order(id, client, delivery_date));
+            }
+            reader.Close();
 
-                // products
-                // no se si para grasp es mejor tener una lista de todas las lineas de pedidos o en un pedido tener una lista de productos
+            foreach (Order order in orders)
+            {
+                //Leer cada detalle del pedido
+                command = new NpgsqlCommand("SELECT \"idLineItem\", \"idRecipe\", quantity FROM inkaart.\"LineItem\" " +
+                    "WHERE \"idOrder\" = :idOrder", connection);
+                command.Parameters.AddWithValue("idOrder", NpgsqlDbType.Integer, order.ID);
+
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    int id_line_item = int.Parse(reader["idLineItem"].ToString());
+                    int id_recipe = int.Parse(reader["idRecipe"].ToString());
+                    int quantity = int.Parse(reader["quantity"].ToString());
+                    order.AddLineItem(new OrderLineItem(id_line_item, id_recipe, quantity));
+                }
+                reader.Close();
             }
 
             connection.Close();
@@ -61,6 +76,11 @@ namespace InkaArt.Business.Algorithm
         public void Add(Order order)
         {
             orders.Add(order);
+        }
+        
+        public bool Contains(Order order)
+        {
+            return this.orders.Contains(order);
         }
 
         public Order this[int index]

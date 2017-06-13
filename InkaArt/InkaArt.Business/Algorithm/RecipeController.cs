@@ -11,7 +11,7 @@ using InkaArt.Data.Algorithm;
 
 namespace InkaArt.Business.Algorithm
 {
-    class RecipeController
+    public class RecipeController
     {
         private List<Recipe> recipes;
 
@@ -36,8 +36,9 @@ namespace InkaArt.Business.Algorithm
             {
                 int id_recipe = reader.GetInt32(0);
                 string description = reader.GetString(1);
+                string version = reader.GetString(2);
                 int id_product = reader.GetInt32(4);
-                recipes.Add(new Recipe(id_recipe, id_product, description));
+                recipes.Add(new Recipe(id_recipe, id_product, description, version));
             }
 
             connection.Close();
@@ -57,6 +58,13 @@ namespace InkaArt.Business.Algorithm
             return null;
         }
 
+        public Recipe GetByVersion(string version)
+        {
+            foreach (Recipe recipe in recipes)
+                if (recipe.Version == version) return recipe;
+            return null;
+        }
+
         public Recipe this[int index]
         {
             get { return recipes[index]; }
@@ -65,6 +73,11 @@ namespace InkaArt.Business.Algorithm
         public int Count()
         {
             return recipes.Count;
+        }
+
+        public List<Recipe> List()
+        {
+            return new List<Recipe>(recipes);
         }
     }
 }

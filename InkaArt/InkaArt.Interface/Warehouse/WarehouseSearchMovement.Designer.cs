@@ -73,6 +73,7 @@
             this.textBox_address.Name = "textBox_address";
             this.textBox_address.Size = new System.Drawing.Size(544, 29);
             this.textBox_address.TabIndex = 28;
+            this.textBox_address.Visible = false;
             // 
             // textBox_id
             // 
@@ -100,6 +101,7 @@
             this.label4.Size = new System.Drawing.Size(91, 23);
             this.label4.TabIndex = 24;
             this.label4.Text = "Dirección";
+            this.label4.Visible = false;
             // 
             // textBox_supplier
             // 

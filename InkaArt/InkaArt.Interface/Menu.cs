@@ -139,13 +139,6 @@ namespace InkaArt.Interface
             reporte_productividad.Show();
         }
 
-        private void añadirInformeDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form job_report = new RegisterAssignedJob();
-            job_report.MdiParent = this;
-            job_report.Show();
-        }
-
         /* Sales */
 
         private void verClientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -214,7 +207,7 @@ namespace InkaArt.Interface
         }
         private void informeDeTurnoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form inform = new RegisterAssignedJob();
+            Form inform = new RegisterRatioReport();
             inform.MdiParent = this;
             inform.Show();
         }
@@ -293,8 +286,14 @@ namespace InkaArt.Interface
             }
             else
             {*/
+            try
+            {
                 this.toolStripStatusLabelPingStatus.Text = text;
-            //}
+            }
+            catch (Exception e)
+            {
+                LogHandler.WriteLine(e.ToString());
+            }
         }
     }
 }

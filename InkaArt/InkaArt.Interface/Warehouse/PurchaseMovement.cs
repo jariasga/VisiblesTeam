@@ -25,6 +25,7 @@ namespace InkaArt.Interface.Warehouse
         {
             this.Close();
         }
+        
 
         private void PurchaseMovement_Load(object sender, EventArgs e)
         {
