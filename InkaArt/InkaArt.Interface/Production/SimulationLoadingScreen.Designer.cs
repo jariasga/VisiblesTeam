@@ -53,7 +53,7 @@
             this.button_cancel.UseVisualStyleBackColor = false;
             this.button_cancel.Click += new System.EventHandler(this.ButtonCancelClick);
             // 
-            // NewSimulation
+            // SimulationLoadingScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -65,8 +65,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "NewSimulation";
-            this.Text = "Nueva simulación de asignación de trabajadores";
+            this.Name = "SimulationLoadingScreen";
+            this.Text = "Ejecutando simulación...";
             this.Load += new System.EventHandler(this.NewSimulation_Load);
             this.ResumeLayout(false);
 

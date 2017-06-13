@@ -26,11 +26,14 @@ namespace InkaArt.Business.Algorithm
         private double retable_weight;
 
         //Trabajadores y pedidos filtrados 
+        private WorkerController workers;
         private WorkerController selected_workers;
+        private OrderController orders;
         private OrderController selected_orders;
         private IndexController indexes;
         private ProcessController processes;
         private JobController jobs;
+        private RecipeController recipes;
 
         // Parametros no configurables por el usuario
         // time
@@ -40,7 +43,7 @@ namespace InkaArt.Business.Algorithm
         private int miniturns = 30;
 
         // Resultados de asignacion
-        List<Assignment[][]> assignments = null;
+        List<AssignmentLine[][]> assignments = null;
 
         /*************************** SETS Y GETS ***************************/
 
@@ -117,7 +120,7 @@ namespace InkaArt.Business.Algorithm
             get { return miniturns; }
             //set { miniturns = value; }
         }
-        public List<Assignment[][]> Assignments
+        public List<AssignmentLine[][]> Assignments
         {
             get { return assignments; }
             //set { assignments = value; }
@@ -126,8 +129,8 @@ namespace InkaArt.Business.Algorithm
         /********** Constructor para nueva simulación de asignación de trabajadores **********/
 
         public Simulation(string name, DateTime date_start, DateTime date_end, int days, double breakage_weight,
-            double time_weight, double huaco_weight, double huamanga_weight, double retable_weight,
-            WorkerController selected_workers, OrderController selected_orders)
+            double time_weight, double huaco_weight, double huamanga_weight, double retable_weight, WorkerController workers,
+            WorkerController selected_workers, OrderController orders, OrderController selected_orders)
         {
             this.id_simulation = 0;
             this.name = name;
@@ -139,13 +142,18 @@ namespace InkaArt.Business.Algorithm
             this.huaco_weight = huaco_weight;
             this.huamanga_stone_weight = huamanga_weight;
             this.retable_weight = retable_weight;
+            this.workers = workers;
             this.selected_workers = selected_workers;
+            this.orders = orders;
             this.selected_orders = selected_orders;
 
+            //ESTO DEBERIA PASARSE COMO PARÁMETRO
             this.processes = new ProcessController();
             this.processes.Load();
             this.jobs = new JobController();
             this.jobs.Load();
+            this.recipes = new RecipeController();
+            this.recipes.Load();
         }
 
         /********** Constructor para lectura de base de datos **********/
@@ -175,7 +183,7 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 1) return huaco_weight;
             if (product_id == 2) return huamanga_stone_weight;
             if (product_id == 3) return retable_weight;
-            return 0;                
+            return 1;                
         }
 
         /********************** ASIGNACIÓN DE TRABAJADORES **********************/
@@ -184,9 +192,16 @@ namespace InkaArt.Business.Algorithm
         {
             start_time = Environment.TickCount;
 
+            //Cálculo de índices
             this.indexes = new IndexController();
             this.indexes.Load();
-            List<Assignment[][]> initial_solution = new List<Assignment[][]>(); // GRASP
+            this.indexes.CalculateIndexes(jobs, recipes, this);
+
+            //GRASP
+            Grasp grasp = new Grasp(this, selected_workers, selected_orders, processes, jobs, recipes, indexes);
+            List<Assignment> solutions = grasp.ExecuteGraspAlgorithm(workers);
+
+            List<AssignmentLine[][]> initial_solution = new List<AssignmentLine[][]>(); // GRASP
             TabuSearch tabu = new TabuSearch(this, initial_solution);
             //tabu.run();
 
@@ -206,21 +221,21 @@ namespace InkaArt.Business.Algorithm
             int miniturn;
             int days = 1;            
 
-            foreach (Assignment[][] day in assignments)
+            foreach (AssignmentLine[][] day in assignments)
             {
-                foreach(Assignment[] worker in day)
+                foreach(AssignmentLine[] worker in day)
                 {
                     miniturn = 0;
-                    foreach (Assignment assignment in worker)
+                    foreach (AssignmentLine assignment in worker)
                     {
-                        assignment.Minitun = miniturn;
+                        assignment.Miniturn = miniturn;
                         assignment.Date = DateTime.Now.AddDays(days);
 
                         NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
                         command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
                         command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
                         command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
-                        command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Minitun));
+                        command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
                         command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
 
                         command.ExecuteNonQuery();
@@ -261,20 +276,20 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        public List<Assignment> AssignmentsToList()
+        public List<AssignmentLine> AssignmentsToList()
         {
-            List<Assignment> list = new List<Assignment>();
+            List<AssignmentLine> list = new List<AssignmentLine>();
 
             if (assignments == null) return list;
-            foreach(Assignment[][] day in assignments)
+            foreach(AssignmentLine[][] day in assignments)
             {
-                foreach(Assignment[] worker in day)
+                foreach(AssignmentLine[] worker in day)
                 {
-                    list.Concat(worker.ToList<Assignment>());
+                    list.Concat(worker.ToList<AssignmentLine>());
                 }
             }
             
-            return list.OrderByDescending(o => o.Minitun).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
+            return list.OrderByDescending(o => o.Miniturn).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
         }
     }
 }

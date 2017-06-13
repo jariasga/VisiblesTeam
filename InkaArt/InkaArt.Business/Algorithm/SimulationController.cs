@@ -1,6 +1,7 @@
 ﻿using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,35 +47,33 @@ namespace InkaArt.Business.Algorithm
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Simulation\" WHERE status = :status", connection);
+            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id_simulation = int.Parse(reader["id_simulation"].ToString());
+                string name = reader["name"].ToString();
+                DateTime date_start = DateTime.Parse(reader["date_start"].ToString());
+                DateTime date_end = DateTime.Parse(reader["date_end"].ToString());
+                int number_of_days = int.Parse(reader["number_of_days"].ToString());
+                /*double breakage_weight;
+                double time_weight;
+                double huaco_weight;
+                double huamanga_weight;
+                double altarpiece_weight;
+                Simulation simulation = new Simulation(id_simulation, name, date_start, date_end, number_of_days, breakage_weight,
+                    time_weight, huaco_weight, huamanga_weight, altarpiece_weight);*/
+            }
+
+            reader.Close();
             connection.Close();
         }
 
-        public string Insert(string name, DateTime date_start, DateTime date_end, decimal breakage_weight, decimal time_weight,
-            decimal huaco_weight, decimal huamanga_weight, decimal altarpiece_weight, WorkerController selected_workers,
-            OrderController selected_orders)
-        {
-            string message = "OK";
-            Simulation simulation = null;
-
-            try
-            {
-                simulation = this.Validate(name, date_start, date_end, breakage_weight, time_weight, huaco_weight,
-                    huamanga_weight, altarpiece_weight, selected_workers, selected_orders);
-                simulations.Add(simulation);
-            }
-            catch (Exception e)
-            {
-                message = e.Message;
-            }
-
-            return message;
-        }
-
-        private Simulation Validate(string name, DateTime date_start, DateTime date_end, decimal breakage, decimal time,
-            decimal huaco, decimal huamanga, decimal altarpiece, WorkerController selected_workers,
-            OrderController selected_orders)
+        public Simulation Validate(string name, DateTime date_start, DateTime date_end, decimal breakage, decimal time,
+            decimal huaco, decimal huamanga, decimal altarpiece, WorkerController workers, WorkerController selected_workers,
+            OrderController orders, OrderController selected_orders)
         {
             //Comprobar los campos obligatorios
             if (name == null || name == "")
@@ -121,7 +120,7 @@ namespace InkaArt.Business.Algorithm
             double altarpiece_weight = Convert.ToDouble(altarpiece) / 100;
             
             return new Simulation(name, date_start.Date, date_end.Date, days, breakage_weight, time_weight, huaco_weight,
-                    huamanga_weight, altarpiece_weight, selected_workers, selected_orders);
+                    huamanga_weight, altarpiece_weight, workers, selected_workers, orders, selected_orders);
         }
 
         //public List<Simulation> List()

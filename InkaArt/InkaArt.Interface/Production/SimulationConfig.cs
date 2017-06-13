@@ -96,20 +96,24 @@ namespace InkaArt.Interface.Production
 
             if (simulation == null) //Crear una nueva simulación y ejecutar la asignación de trabajadores
             {
-                string message = this.simulations.Insert(textbox_name.Text, date_picker_start.Value, date_picker_end.Value,
-                    numeric_breakage.Value, numeric_time.Value, numeric_huacos.Value, numeric_stones.Value,
-                    numeric_altarpiece.Value, selected_workers, selected_orders);
-                if (message != "OK") MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                else
+                try
                 {
-                    simulation = this.simulations[this.simulations.Count() - 1];
+                    Simulation simulation = simulations.Validate(textbox_name.Text, date_picker_start.Value, date_picker_end.Value,
+                        numeric_breakage.Value, numeric_time.Value, numeric_huacos.Value, numeric_stones.Value,
+                        numeric_altarpiece.Value, workers, selected_workers, orders, selected_orders);
 
-                    //Llegó la hora de la verdad
+                    //Llegó la hora de la verdad: ejecutar la simulación de asignación de trabajadores
                     Form loading_screen = new SimulationLoadingScreen(simulation);
-                    //loading_screen.MdiParent = this.MdiParent;
                     DialogResult result = loading_screen.ShowDialog();
                     if (result == DialogResult.Cancel) return;
 
+                    //Habiendo terminado la simulación sin cancelarse, añadirla a la lista y actualizar el combo
+                    simulations.Add(simulation);
+                    combo_simulations.DataSource = simulations.BindingList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else //Actualizar *solo* el nombre

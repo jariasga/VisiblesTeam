@@ -25,10 +25,10 @@ namespace InkaArt.Business.Algorithm
         // solutions
         private int max_iterations;
         private double best_fitness;
-        private List<Assignment[][]> initial_solution;
-        private List<Assignment[][]> best_solution;
+        private List<AssignmentLine[][]> initial_solution;
+        private List<AssignmentLine[][]> best_solution;
 
-        internal List<Assignment[][]> BestSolution
+        internal List<AssignmentLine[][]> BestSolution
         {
             get
             {
@@ -42,12 +42,12 @@ namespace InkaArt.Business.Algorithm
         }
 
         /* Se inicializan los parametros a calibrar */
-        public TabuSearch(Simulation simulation, List<Assignment[][]> initial_solution)
+        public TabuSearch(Simulation simulation, List<AssignmentLine[][]> initial_solution)
         {
             LoadParameters();
             this.simulation = simulation;
             this.initial_solution = initial_solution;
-            this.best_solution = new List<Assignment[][]>();
+            this.best_solution = new List<AssignmentLine[][]>();
         }
 
         public void LoadParameters()
@@ -79,7 +79,7 @@ namespace InkaArt.Business.Algorithm
         /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
            Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
         */
-        public double getFitness(Simulation simulation, Assignment[][] solution)
+        public double getFitness(Simulation simulation, AssignmentLine[][] solution)
         {
             double fitness = 0;
             int assigned_workers = 0;
@@ -87,7 +87,7 @@ namespace InkaArt.Business.Algorithm
 
             for (int i = 0; i < solution.Length; i++)
             {
-                foreach(Assignment assignment in solution[i])
+                foreach(AssignmentLine assignment in solution[i])
                 {
                     Index index = simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
                     // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
@@ -109,14 +109,13 @@ namespace InkaArt.Business.Algorithm
         }
 
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
-        public Assignment[][] getNeighbor(Assignment[][] solution, TabuMove move)
+        public AssignmentLine[][] getNeighbor(AssignmentLine[][] solution, TabuMove move)
         {
-            Assignment[][] neighbor = new Assignment[solution.Length][];
+            AssignmentLine[][] neighbor = new AssignmentLine[solution.Length][];
             solution.CopyTo(neighbor, 0);
-            Random rnd = new Random();
 
             // move attributes
-            int swap_type = rnd.Next(1);
+            int swap_type = Randomizer.NextNumber(0, 1);
             int worker1_index;
             int worker2_index;
             
@@ -124,11 +123,11 @@ namespace InkaArt.Business.Algorithm
             if (true) //(swap_type == 0)
             {
                 // buscamos trabajadores
-                worker1_index = rnd.Next(solution.Length);
-                worker2_index = rnd.Next(solution.Length);
+                worker1_index = Randomizer.NextNumber(0, solution.Length - 1);
+                worker2_index = Randomizer.NextNumber(0, solution.Length - 1);
                 // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
                 while (solution.Length > 1 && worker1_index == worker2_index)
-                    worker2_index = rnd.Next(solution.Length);
+                    worker2_index = Randomizer.NextNumber(0, solution.Length - 1);
                 // intercambiamos valores
                 SwapWorkers(neighbor, worker1_index, worker2_index);
             }
@@ -144,7 +143,7 @@ namespace InkaArt.Business.Algorithm
             return neighbor;
         }
 
-        public void SwapWorkers(Assignment[][] solution, int worker1_index, int worker2_index)
+        public void SwapWorkers(AssignmentLine[][] solution, int worker1_index, int worker2_index)
         {
             Worker worker1 = solution[worker1_index].First().Worker;
             Worker worker2 = solution[worker2_index].First().Worker;
@@ -162,9 +161,9 @@ namespace InkaArt.Business.Algorithm
             for(int day = 0; day < initial_solution.Count; day++)
             {
                 // soluciones
-                Assignment[][] current_solution = new Assignment[initial_solution[day].Length][];
-                Assignment[][] best_day_solution = current_solution;
-                Assignment[][] neighbor = null;
+                AssignmentLine[][] current_solution = new AssignmentLine[initial_solution[day].Length][];
+                AssignmentLine[][] best_day_solution = current_solution;
+                AssignmentLine[][] neighbor = null;
                 initial_solution[day].CopyTo(current_solution, 0);
                 current_solution.CopyTo(best_day_solution, 0);
 
