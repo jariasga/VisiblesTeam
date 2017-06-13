@@ -195,6 +195,12 @@
     <Compile Include="Warehouse\MovementIndex.Designer.cs">
       <DependentUpon>MovementIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\MovementShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\MovementShow.Designer.cs">
+      <DependentUpon>MovementShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\ProductionMovement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -522,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\MovementIndex.resx">
       <DependentUpon>MovementIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\MovementShow.resx">
+      <DependentUpon>MovementShow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ProductionMovement.resx">
       <DependentUpon>ProductionMovement.cs</DependentUpon>

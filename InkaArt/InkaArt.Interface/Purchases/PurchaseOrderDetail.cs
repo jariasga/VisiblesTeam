@@ -213,7 +213,12 @@ namespace InkaArt.Interface.Purchases
             int id_order = int.Parse(textBox_id.Text);
             int id_rm = int.Parse(textBox_idrm.Text);
             int id_sup = int.Parse(textBox_idsupplier.Text);
-            control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), double.Parse(textBox_subtotal.Text), int.Parse(textBox_factura.Text),"Activo");
+            double subTotalNuevo = double.Parse(textBox_subtotal.Text);
+            control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), subTotalNuevo, int.Parse(textBox_factura.Text),"Activo");
+            double total = double.Parse(textBox_total.Text);
+            total += subTotalNuevo;
+            textBox_total.Text = total.ToString();
+            control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
             llenarMateriasPedidas();
         }
         
@@ -226,12 +231,16 @@ namespace InkaArt.Interface.Purchases
                 {
                     int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
                     int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
-                    Double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
+                    double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
                     int id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
                     try
                     {
                         control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Inactivo");
                         dataGridView_pedidos.Rows[i].Cells[0].Value = false;
+                        double totalOr = double.Parse(textBox_total.Text);
+                        totalOr -= subtotalAux;
+                        textBox_total.Text = totalOr.ToString();
+                        control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), totalOr);
                     }
                     catch (Exception)
                     {
@@ -394,7 +403,13 @@ namespace InkaArt.Interface.Purchases
             int valorInt = 0, modInt;
             if (int.TryParse(dataGridView_pedidos.Rows[id_Row].Cells[6].Value.ToString(), out modInt))
             {
-                
+                valorInt=int.Parse(dataGridView_pedidos.Rows[id_Row].Cells[6].Value.ToString());
+                if (valorInt < 0)
+                {
+                    MessageBox.Show("Solo puede colocar números enteros positivos en la factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView_pedidos.Rows[id_Row].Cells[6].Value = "0";
+                    return false;
+                }
             }
             else { 
                 MessageBox.Show("Solo puede colocar números en la factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

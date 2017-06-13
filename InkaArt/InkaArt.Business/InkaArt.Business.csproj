@@ -57,7 +57,6 @@
   <ItemGroup>
     <Compile Include="Algorithm\Grasp.cs" />
     <Compile Include="Algorithm\IndexController.cs" />
-    <Compile Include="Algorithm\Instance.cs" />
     <Compile Include="Algorithm\JobController.cs" />
     <Compile Include="Algorithm\OrderController.cs" />
     <Compile Include="Algorithm\ProcessController.cs" />
@@ -88,6 +87,7 @@
     <Compile Include="Purchases\UnitOfMeasurementController.cs" />
     <Compile Include="Reports\ReportsController.cs" />
     <Compile Include="Sales\ClientController.cs" />
+    <Compile Include="Sales\DocumentTypeController.cs" />
     <Compile Include="Sales\OrderController.cs" />
     <Compile Include="Security\LoginController.cs" />
     <Compile Include="Security\RoleController.cs" />

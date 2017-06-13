@@ -48,5 +48,12 @@ namespace InkaArt.Data.Algorithm
             this.line_items.Add(line_item);
         }
 
+        public bool Completed()
+        {
+            foreach (OrderLineItem line_item in line_items)
+                if (line_item.Produced < line_item.Quantity) return false;
+            return true;
+        }
+
     }
 }

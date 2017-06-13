@@ -19,15 +19,15 @@ namespace InkaArt.Business.Warehouse
             movement_data = new MovementData();
         }
 
-        public DataTable GetMovements(string str_id = null, string str_type = null, string str_reason = null, string str_warehouse = null, string str_date = null, string str_status = null)
+        public DataTable GetMovements(bool filters = false, string str_id = "", string str_type = "", string str_reason = "", string str_warehouse = "", string str_date = null, string str_status = "")
         {
-            if (str_id != null)
+            if (filters)
             {
                 int id = str_id == ""? -1 : int.Parse(str_id);
-                int type = int.Parse(str_type);
-                int reason = int.Parse(str_reason);
-                int warehouse = int.Parse(str_warehouse);
-                int status = int.Parse(str_status);
+                int type = str_type == "" ? -1 : int.Parse(str_type);
+                int reason = str_reason == "" ? -1 : int.Parse(str_reason);
+                int warehouse = str_warehouse == "" ? -1 : int.Parse(str_warehouse);
+                int status = str_status == "" ? -1 : int.Parse(str_status);
 
                 return movement_data.GetMovements(id, type, reason, warehouse, str_date, status);
             }
@@ -37,23 +37,30 @@ namespace InkaArt.Business.Warehouse
 
         public string getReasonDescription(string reason_id)
         {
-            int id = int.Parse(reason_id);
+            int id = reason_id == "" ? -1 : int.Parse(reason_id);
             DataRow reason = movement_data.getMovementReason(id);
             return reason == null? "" : reason["description"].ToString();
         }
 
         public string getTypeDescription(string type_id)
         {
-            int id = int.Parse(type_id);
+            int id = type_id == "" ? -1 : int.Parse(type_id);
             DataRow type = movement_data.getMovementType(id);
             return type == null? "" : type["description"].ToString();
         }
 
         public string getWarehouseName(string warehouse_id)
         {
-            int id = int.Parse(warehouse_id);
+            int id = warehouse_id == "" ? -1 : int.Parse(warehouse_id);
             DataRow warehouse = movement_data.getWarehouse(id);
             return warehouse == null ? "" : warehouse["name"].ToString();
+        }
+
+        public string getItemName(int item_type, string item_id)
+        {
+            int id = item_id == "" ? -1 : int.Parse(item_id);
+            DataRow item = item_type == 0 ? movement_data.getRawMaterial(id) : movement_data.getProduct(id);
+            return item == null ? "" : item["name"].ToString();
         }
 
         public void deleteMovements(List<string> ids)
