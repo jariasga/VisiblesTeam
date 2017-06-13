@@ -27,7 +27,13 @@ namespace InkaArt.Interface.Warehouse
 
             if(reason == "")
             {
-                MessageBox.Show("Por favor ingresar una razón de movimiento");
+                MessageBox.Show("Por favor ingrese una razon del movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (textBox5.Text == "")
+            {
+                MessageBox.Show("Por favor seleccione un almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -40,12 +46,12 @@ namespace InkaArt.Interface.Warehouse
             {
                 if(idWarehouesOrigin == "")
                 {
-                    MessageBox.Show("Por favor seleccione un almacén antes de continuar");
+                    MessageBox.Show("Por favor seleccione un almacén antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if(comboBox1.Text == "")
                 {
-                    MessageBox.Show("Por favor seleccione un tipo de movimiento");
+                    MessageBox.Show("Por favor ingrese un tpo de movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
@@ -53,9 +59,9 @@ namespace InkaArt.Interface.Warehouse
             }
             else
             {
-                if(reason == "Compra")
+                if(reason == "Compra" && string.Compare(comboBox1.Text,"Entrada")==0)
                 {
-                    Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement();
+                    Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(textBox5.Text);
                     formView.Show();
                 }
                 else
@@ -77,11 +83,10 @@ namespace InkaArt.Interface.Warehouse
                             if (reason == "Rotura")
                             {
                                 Form formView = new InkaArt.Interface.Warehouse.breakProduct(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
-                                formView.Show();
-                            }
+                                formView.Show();                            }
                             else
                             {
-                                MessageBox.Show("Por favor seleccione una razón válida de movimiento");
+                                MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }

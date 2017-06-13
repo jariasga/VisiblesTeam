@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NpgsqlTypes;
+using System.IO;
 
 namespace InkaArt.Business.Purchases
 {
@@ -45,28 +46,41 @@ namespace InkaArt.Business.Purchases
             row["description"] = descripcion;
             row["unit"] = unidad;
             row["status"] = estado;
-            row["averagePrice"] = precioPromedio;
+            row["average_price"] = precioPromedio;
 
             table.Rows.Add(row);
 
             int rowsAffected = rawMaterial.insertData(data, adap, "RawMaterial");
         }
-        public void updateData(string id, string nombre, string descripcion, string unidad, string estado, double precioPromedio)
+        public int updateData(string id, string nombre, string descripcion, string unidad, string estado, double precioPromedio)
         {
             table = data.Tables["RawMaterial"];
-            for (int i = 0; i < table.Rows.Count; i++)
+            rawMaterial.execute(string.Format("UPDATE \"inkaart\".\"RawMaterial\" " +
+                        "SET name = '{0}', description = '{1}', unit='{2}',status = '{3}',average_price={4}" +
+                        "WHERE id_raw_material = {5}", nombre, descripcion, unidad, estado, precioPromedio,id));
+           
+            return rawMaterial.updateData(data, adap, "RawMaterial");
+        }
+        public void massiveUpload(string filename)
+        {
+            table = getData();     // obtenemos la tabla de materia prima
+
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
             {
-                if (String.Compare(table.Rows[i]["idRawMaterial"].ToString(), id) == 0)
+                while (!reader.EndOfStream)
                 {
-                    table.Rows[i]["name"] = nombre;
-                    table.Rows[i]["description"] = descripcion;
-                    table.Rows[i]["unit"] = unidad;
-                    table.Rows[i]["status"] = estado;
-                    table.Rows[i]["averagePrice"] = precioPromedio;
-                    break;
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    double precioProm = 0, doubleMod;
+
+                    if (double.TryParse(values[4], out doubleMod)) {
+                        precioProm = double.Parse(values[4]);
+                    }
+                    // creamos materia prima
+                    insertData(values[0], values[1], values[2],values[3],precioProm);
                 }
             }
-            rawMaterial.updateData(data, adap, "RawMaterial");
         }
     }
 }

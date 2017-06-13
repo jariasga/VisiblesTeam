@@ -39,6 +39,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.checkBox_newVer = new System.Windows.Forms.CheckBox();
             this.dataGridView_rawMaterial = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_add = new System.Windows.Forms.Button();
             this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
             this.numericUpDown_count = new System.Windows.Forms.NumericUpDown();
@@ -48,11 +53,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_delete = new System.Windows.Forms.Button();
             this.Nuevo = new System.Windows.Forms.GroupBox();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_count)).BeginInit();
@@ -190,6 +190,39 @@
             this.dataGridView_rawMaterial.TabIndex = 17;
             this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Unidad
+            // 
+            this.Unidad.HeaderText = "Unidad";
+            this.Unidad.Name = "Unidad";
+            this.Unidad.ReadOnly = true;
+            // 
+            // Borrar
+            // 
+            this.Borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Borrar.HeaderText = "Borrar";
+            this.Borrar.Name = "Borrar";
+            this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // button_add
             // 
             this.button_add.BackColor = System.Drawing.Color.Gray;
@@ -212,6 +245,7 @@
             this.comboBox_rawMaterial.Size = new System.Drawing.Size(128, 26);
             this.comboBox_rawMaterial.TabIndex = 22;
             this.comboBox_rawMaterial.Text = "Piedra";
+            this.comboBox_rawMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBox_rawMaterial_SelectedIndexChanged);
             // 
             // numericUpDown_count
             // 
@@ -296,39 +330,6 @@
             this.Nuevo.TabIndex = 29;
             this.Nuevo.TabStop = false;
             this.Nuevo.Text = "Nuevo";
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // Unidad
-            // 
-            this.Unidad.HeaderText = "Unidad";
-            this.Unidad.Name = "Unidad";
-            this.Unidad.ReadOnly = true;
-            // 
-            // Borrar
-            // 
-            this.Borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Borrar.HeaderText = "Borrar";
-            this.Borrar.Name = "Borrar";
-            this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Recipe
             // 

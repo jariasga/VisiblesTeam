@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using InkaArt.Business.Production;
+using InkaArt.Business.Purchases;
 namespace InkaArt.Interface.Production
 {
     public partial class Recipe : Form
@@ -119,7 +120,7 @@ namespace InkaArt.Interface.Production
                         countRaw = recipeRawList.Rows[i]["materialCount"].ToString();
                         //buscar nombre de la materia prima
                         for (int j = 0; j < rawMList.Rows.Count; j++)
-                            if (String.Compare(rawMList.Rows[j]["idRawMaterial"].ToString(), idRaw) == 0)
+                            if (String.Compare(rawMList.Rows[j]["id_raw_material"].ToString(), idRaw) == 0)
                             {
                                 nameRaw = rawMList.Rows[j]["name"].ToString();
                                 idUnit = rawMList.Rows[j]["unit"].ToString();
@@ -127,7 +128,7 @@ namespace InkaArt.Interface.Production
                             }
 
                         for (int j = 0; j < unitList.Rows.Count; j++)
-                            if (String.Compare(unitList.Rows[j]["idUnit"].ToString(), idUnit) == 0)
+                            if (String.Compare(unitList.Rows[j]["id_unit"].ToString(), idUnit) == 0)
                             {
                                 nameUnit = unitList.Rows[j]["name"].ToString();
                                 break;
@@ -176,6 +177,7 @@ namespace InkaArt.Interface.Production
                         comboBox_version.Items.Add(recipeList.Rows[i]["version"].ToString());
                     }
                 }
+                MessageBox.Show("Nueva versión creada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -198,12 +200,12 @@ namespace InkaArt.Interface.Production
                     {
                         if (String.Compare(rawList.Rows[i]["name"].ToString(), comboBox_rawMaterial.SelectedItem.ToString()) == 0)
                         {
-                            idRaw = rawList.Rows[i]["idRawMaterial"].ToString();
+                            idRaw = rawList.Rows[i]["id_raw_material"].ToString();
                             break;
                         }
                     }
-
-                    controlRecipeRaw.insertData(globalIdRecipe, idRaw, count);
+                    DataTable table = controlRecipeRaw.getData();
+                    controlRecipeRaw.insertDataNoAdapter(globalIdRecipe, idRaw, count);
                     fillGrid();
                 }
                 else
@@ -220,6 +222,7 @@ namespace InkaArt.Interface.Production
         private void button_delete_Click(object sender, EventArgs e)
         {
             string id = "";
+            string quantity = "";
             foreach(DataGridViewRow row in dataGridView_rawMaterial.Rows)
             {
                 //fill valores limites
@@ -229,14 +232,20 @@ namespace InkaArt.Interface.Production
                 {
                     if (int.TryParse(row.Cells[0].Value.ToString(),out number)){
                         id = row.Cells[0].Value.ToString();
+                        quantity = row.Cells[2].Value.ToString();
                         RecipeRawMaterialController control = new RecipeRawMaterialController();
-                        control.updateDataNoAdapter(globalIdRecipe, id);
+                        control.updateDataNoAdapter(globalIdRecipe, id,quantity);
                         fillGrid();
                         break;
                     }
                 }
                    
             }
+        }
+
+        private void comboBox_rawMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

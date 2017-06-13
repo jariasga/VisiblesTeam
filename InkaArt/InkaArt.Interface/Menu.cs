@@ -1,21 +1,34 @@
 ﻿using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using InkaArt.Interface.Purchases;
 using InkaArt.Interface.Sales;
 using InkaArt.Interface.Production;
 using InkaArt.Interface.Warehouse;
 using InkaArt.Interface.Security;
+using InkaArt.Business.Security;
+using System.Data;
+using System.Threading;
+using System.Net.NetworkInformation;
+using InkaArt.Classes;
 
 namespace InkaArt.Interface
 {
     public partial class Menu : Form
     {
         private Form login;
-        public static int userID;
+        private RoleController controller;
+        Thread pingThread;
+        delegate void SetPingStatusTextCallback(string text);
         public Menu(Form login)
         {
             InitializeComponent();
             this.login = login;
+            getPermissions();
+            pingThread = new Thread(new ThreadStart(pingStatus));
+            pingThread.IsBackground = true;
+            pingThread.Start();
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,6 +121,7 @@ namespace InkaArt.Interface
         private void listaDeTurnosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form turn_management = new TurnManagement();
+            turn_management.MdiParent = this;
             turn_management.Show();
         }
 
@@ -120,16 +134,9 @@ namespace InkaArt.Interface
 
         private void productividadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form reporte_productividad = new GenerateProductivityReport();
+            Form reporte_productividad = new GeneratePerformanceReport();
             reporte_productividad.MdiParent = this;
             reporte_productividad.Show();
-        }
-
-        private void añadirInformeDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form job_report = new RegisterAssignedJob();
-            job_report.MdiParent = this;
-            job_report.Show();
         }
 
         /* Sales */
@@ -194,13 +201,14 @@ namespace InkaArt.Interface
 
         private void gestionarMovimientosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form movements = new Movements();
+            Form movements = new MovementIndex();
             movements.MdiParent = this;
-            movements.Show();
+            movements.Show();            
         }
+
         private void informeDeTurnoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form inform = new RegisterAssignedJob();
+            Form inform = new RegisterRatioReport();
             inform.MdiParent = this;
             inform.Show();
         }
@@ -217,6 +225,76 @@ namespace InkaArt.Interface
             Form roles = new UserRolesPermissions();
             roles.MdiParent = this;
             roles.Show();
+        }
+
+        private void getPermissions()
+        {
+            controller = new RoleController();
+            DataRow roleRow = controller.getRoleRowbyID(LoginController.roleID);
+            //  Security
+            parámetrosGeneralesToolStripMenuItem.Enabled = (bool)roleRow["security_general_parameters"];
+            listaDeUsuariosToolStripMenuItem.Enabled = (bool)roleRow["security_user_list"];
+            rolesToolStripMenuItem.Enabled = (bool)roleRow["security_roles"];
+            //  Purchases
+            listaDeProveedoresToolStripMenuItem.Enabled = (bool)roleRow["purchases_suppliers"];
+            listaDeMateriasPrimasToolStripMenuItem.Enabled = (bool)roleRow["purchases_raw_materials"];
+            unidadesDeMedidaToolStripMenuItem.Enabled = (bool)roleRow["purchases_unit_of_measure"];
+            verMateriasPrimasToolStripMenuItem.Enabled = (bool)roleRow["purchases_purchase_order"];
+            //  Production
+            listaDeProductosToolStripMenuItem.Enabled = (bool)roleRow["production_final_product"];
+            listaDeProcesosDeProducciónToolStripMenuItem.Enabled = (bool)roleRow["production_production_process"];
+            listaDeTurnosToolStripMenuItem.Enabled = (bool)roleRow["production_production_turn"];
+            asignaciónDeTrabajadoresToolStripMenuItem.Enabled = (bool)roleRow["production_worker_assignment"];
+            informeDeTurnoToolStripMenuItem.Enabled = (bool)roleRow["production_turn_report"];
+            generarReporteDeProductividadToolStripMenuItem.Enabled = (bool)roleRow["production_productivity_report"];
+            //  Sales
+            verClientesToolStripMenuItem.Enabled = (bool)roleRow["sales_clients"];
+            verPedidosToolStripMenuItem.Enabled = (bool)roleRow["sales_orders"];
+            generarReporteToolStripMenuItem.Enabled = (bool)roleRow["sales_generate_report"];
+            //  Warehouse
+            listaDeAlmacenesToolStripMenuItem.Enabled = (bool)roleRow["warehouse_warehouses"];
+            gestionarMovimientosToolStripMenuItem.Enabled = (bool)roleRow["warehouse_movements"];
+            verStocksFísicosYLógicosToolStripMenuItem.Enabled = (bool)roleRow["warehouse_stock_reports"];
+            kardexToolStripMenuItem.Enabled = (bool)roleRow["warehouse_kardex_reports"];
+        }
+
+        private void pingStatus()
+        {
+            Ping ping = new Ping();
+            ping.InitializeLifetimeService();
+
+            while (true)
+            {
+                try
+                {
+                    long ms = ping.Send(BD_Connector.serverAddress).RoundtripTime;
+                    this.SetPingStatusText("Reply from server: " + ms + "ms");
+                }
+                catch (Exception)
+                {
+                    this.SetPingStatusText("Server unreacheable");
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void SetPingStatusText(string text)
+        {
+            /*if (this.toolStripStatusLabelPingStatus.InvokeRequired)
+            {
+                SetPingStatusTextCallback d = new SetPingStatusTextCallback(SetPingStatusText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {*/
+            try
+            {
+                this.toolStripStatusLabelPingStatus.Text = text;
+            }
+            catch (Exception e)
+            {
+                LogHandler.WriteLine(e.ToString());
+            }
         }
     }
 }

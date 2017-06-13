@@ -8,47 +8,57 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
+using InkaArt.Business.Purchases;
 using Npgsql;
 
 namespace InkaArt.Interface.Warehouse
 {
     public partial class WarehouseDetail : Form
     {
+        WarehouseCrud warehouseController;
+
         public WarehouseDetail()
         {
             InitializeComponent();
+            warehouseController = new WarehouseCrud();
+            //fillGridRawMaterial();
         }
-
-        private void buttonAdd_Click(object sender, EventArgs e)
+        
+        private void button_save_Click(object sender, EventArgs e)
         {
-            Form new_add_supply_window = new InkaArt.Interface.Purchases.AddSupply();
-            new_add_supply_window.Show();
+            string messageResponse = warehouseController.makeValidations(textBox_name.Text, textBox_description.Text, textBox_address.Text);
+            if (messageResponse.Equals("OK"))
+            {
+                int response = warehouseController.createWarehouse(textBox_name.Text, textBox_description.Text, textBox_address.Text);
+                if (response >= 0)
+                {
+                    MessageBox.Show(this, "El almacén ha sido agregado correctamente.", "Crear almacén", MessageBoxButtons.OK);
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+            /*else
+            {
+                MessageBox.Show("El almacén no ha sido creado correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
         }
 
-        private void button_return_click(object sender, EventArgs e)
+        private void ClearFields()
         {
-            this.textBox_idWarehouse.Text = "";
-            this.textBox_name.Text = "";
-            this.textBox_description.Text = "";
-            this.textBox_address.Text = "";
-            this.textBox_idRawMaterial.Text = "";
-            this.textBox_nameRawMaterial.Text = "";
-            this.comboBox_status.Text = "";
-            this.Close();
+            textBox_name.Clear();
+            textBox_description.Clear();
+            textBox_address.Clear();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
         {
-            string name = textBox_name.Text;
-            string description = textBox_description.Text;
-            string address = textBox_address.Text;
-
-            WarehouseCrud conn = new WarehouseCrud();
-            conn.createWarehouse(name, description, address, "Activo");
-            MessageBox.Show("Almacén Creado", "Crear almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+           /* var show_form = new AddRawMaterialWarehouse();
+            var result = show_form.ShowDialog();
+           if (result == DialogResult.OK)
+                updateDataGrid();*/
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void WarehouseDetail_Load(object sender, EventArgs e)
         {
 
         }

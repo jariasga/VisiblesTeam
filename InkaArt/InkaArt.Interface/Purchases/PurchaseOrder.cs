@@ -10,27 +10,71 @@ namespace InkaArt.Interface.Purchases
     public partial class PurchaseOrder : Form
     {
         PurchaseOrderController control;
+        DataTable purchaseOrderList;
         public PurchaseOrder()
         {
             InitializeComponent();
             control = new PurchaseOrderController();
-            DataTable purchaseOrderList = control.getData();
+            purchaseOrderList = control.getData();
             dataGridView_purchaseOrder.DataSource = purchaseOrderList;
 
-            dataGridView_purchaseOrder.Columns["idOrder"].HeaderText = "ID";
-            dataGridView_purchaseOrder.Columns["idSupplier"].HeaderText = "Proveedor";
+            dataGridView_purchaseOrder.Columns["id_order"].HeaderText = "ID";
+            dataGridView_purchaseOrder.Columns["id_supplier"].HeaderText = "Proveedor";
             dataGridView_purchaseOrder.Columns["status"].HeaderText = "Estado";
-            dataGridView_purchaseOrder.Columns["creationDate"].HeaderText = "Fecha de emisión";
-            dataGridView_purchaseOrder.Columns["deliveryDate"].HeaderText = "Fecha de entrega";
+            dataGridView_purchaseOrder.Columns["creation_date"].HeaderText = "Fecha de emisión";
+            dataGridView_purchaseOrder.Columns["delivery_date"].HeaderText = "Fecha de entrega";
             dataGridView_purchaseOrder.Columns["total"].HeaderText = "Total";
 
-            dataGridView_purchaseOrder.Columns["deliveryDate"].Visible=false;
+            dataGridView_purchaseOrder.Columns["delivery_date"].Visible=false;
+        }
+
+        private void filter() {
+            DataRow[] rows;
+            purchaseOrderList = control.getData();
+            string cadena = "";
+            if (textBox_id.Text.Length > 0)
+            {
+                cadena = " AND id_order = " + textBox_id.Text;
+            }
+            if (textBox_name.Text.Length > 0)
+            {
+                cadena += " AND id_supplier = " + textBox_name.Text;
+            }
+            /*if (dateTimePicker_creation.Text.Length > 0)
+            {
+                int inicio = int.Parse(dateTimePicker_creation.Value.ToString("yyyyMMdd"));
+                int fin = int.Parse(dateTimePicker_creationEnd.Value.ToString("yyyyMMdd"));
+                cadena += " AND format(cast(creationDate as date), 'yyyyMMdd') <= "+fin+" AND "+inicio+ " <= format(cast(creationDate as date), 'yyyyMMdd')";
+            }*/
+            if (String.Compare(comboBox_status.Text, "Activo") == 0)
+            {
+                rows = purchaseOrderList.Select("status LIKE '" + comboBox_status.Text + "'" + cadena);
+            }
+            else
+            {
+                rows = purchaseOrderList.Select("status LIKE '%" + comboBox_status.Text + "%'" + cadena);
+            }
+            if (rows.Any()) purchaseOrderList = rows.CopyToDataTable();
+            else purchaseOrderList.Rows.Clear();
+            string sortQuery = string.Format("id_order");
+            purchaseOrderList.DefaultView.Sort = sortQuery;
         }
 
         private void button_search(object sender, EventArgs e)
         {
             textBox_name.Text = textBox_name.Text.Trim();
-            
+            filter();
+            dataGridView_purchaseOrder.DataSource = purchaseOrderList;
+
+            dataGridView_purchaseOrder.Columns["id_order"].HeaderText = "ID";
+            dataGridView_purchaseOrder.Columns["id_supplier"].HeaderText = "Proveedor";
+            dataGridView_purchaseOrder.Columns["status"].HeaderText = "Estado";
+            dataGridView_purchaseOrder.Columns["creation_date"].HeaderText = "Fecha de emisión";
+            dataGridView_purchaseOrder.Columns["delivery_date"].HeaderText = "Fecha de entrega";
+            dataGridView_purchaseOrder.Columns["total"].HeaderText = "Total";
+
+            dataGridView_purchaseOrder.Columns["delivery_date"].Visible = false;
+
         }
 
         private void button_add(object sender, EventArgs e)

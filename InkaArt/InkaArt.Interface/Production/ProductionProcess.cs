@@ -34,10 +34,10 @@ namespace InkaArt.Interface.Production
             {
                 if (String.Compare(productProcessesList.Rows[i]["idProduct"].ToString(),id)==0)
                 {
-                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"]);
+                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["id_process"]);
                     for(int j=0;j<processList.Rows.Count;j++)
                     {
-                        if(String.Compare(processList.Rows[j]["idProcess"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
+                        if(String.Compare(processList.Rows[j]["id_process"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
                         {
                             dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"], processList.Rows[j]["description"]);
                             break;
@@ -83,7 +83,7 @@ namespace InkaArt.Interface.Production
                     MessageBox.Show("Los precios no pueden ser menores al precio base, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
-                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
                 MessageBox.Show("Tipo de dato no permitido, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -37,9 +37,11 @@ namespace InkaArt.Interface.Production
                 {
                     for (int j = 0; j < finalProductList.Rows.Count; j++)
                     {
-                        if (String.Compare(finalProductList.Rows[j]["idProduct"].ToString(), productProcessesList.Rows[i]["idProduct"].ToString()) == 0)
+                        if (String.Compare(finalProductList.Rows[j]["idProduct"].ToString(),
+                            productProcessesList.Rows[i]["idProduct"].ToString()) == 0)
                         {
-                            dataGridView_products.Rows.Add(productProcessesList.Rows[i]["idProduct"], finalProductList.Rows[j]["name"]);
+                            dataGridView_products.Rows.Add(productProcessesList.Rows[i]["idProduct"],
+                                finalProductList.Rows[j]["name"]);
                             break;
                         }
                     }
@@ -55,21 +57,23 @@ namespace InkaArt.Interface.Production
         private void button_save_Click(object sender, EventArgs e)
         {
             ProcessController control = new ProcessController();
-            int positionCount;
-            if (int.TryParse(textBox_count.Text, out positionCount))
+            int number_of_jobs;
+            if (int.TryParse(textBox_count.Text, out number_of_jobs))
             {
-                positionCount = int.Parse(textBox_count.Text);
-                if (positionCount >= 0)
+                number_of_jobs = int.Parse(textBox_count.Text);
+                if (number_of_jobs >= 0)
                 {
                     int id = int.Parse(textBox_id.Text);
-                    control.updateDataNoAdapter(id, positionCount);
-                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    control.updateDataNoAdapter(id, number_of_jobs);
+                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                    MessageBox.Show("La cantidad de turnos no puede ser negativo, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("La cantidad de turnos no puede ser negativo, por favor ingrese un valor válido.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-                MessageBox.Show("Formato de datos no válido, por favor verifique los valores.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Formato de datos no válido, por favor verifique los valores.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
     }
