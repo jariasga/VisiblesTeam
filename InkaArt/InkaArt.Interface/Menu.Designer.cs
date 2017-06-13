@@ -315,7 +315,7 @@
             // 
             this.gestionarMovimientosToolStripMenuItem.Name = "gestionarMovimientosToolStripMenuItem";
             this.gestionarMovimientosToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
-            this.gestionarMovimientosToolStripMenuItem.Text = "Gestión de Movimientos";
+            this.gestionarMovimientosToolStripMenuItem.Text = "Movimientos";
             this.gestionarMovimientosToolStripMenuItem.Click += new System.EventHandler(this.gestionarMovimientosToolStripMenuItem_Click);
             // 
             // toolStripSeparator9

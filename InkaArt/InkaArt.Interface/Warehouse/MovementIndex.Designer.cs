@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DateTimePicker date_movement;
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.data_grid_movements = new System.Windows.Forms.DataGridView();
@@ -51,7 +50,7 @@
             this.Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            date_movement = new System.Windows.Forms.DateTimePicker();
+            this.datetime_movement = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_movements)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -104,12 +103,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.datetime_movement);
             this.groupBox1.Controls.Add(this.combobox_reason);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.combobox_status);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.combobox_type);
-            this.groupBox1.Controls.Add(date_movement);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.combobox_warehouse);
             this.groupBox1.Controls.Add(this.textbox_id);
@@ -195,16 +194,6 @@
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.ButtonSearchClick);
-            // 
-            // date_movement
-            // 
-            date_movement.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            date_movement.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            date_movement.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            date_movement.Location = new System.Drawing.Point(240, 110);
-            date_movement.Name = "date_movement";
-            date_movement.Size = new System.Drawing.Size(192, 26);
-            date_movement.TabIndex = 31;
             // 
             // combobox_type
             // 
@@ -295,6 +284,13 @@
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // datetime_movement
+            // 
+            this.datetime_movement.Location = new System.Drawing.Point(240, 109);
+            this.datetime_movement.Name = "datetime_movement";
+            this.datetime_movement.Size = new System.Drawing.Size(200, 26);
+            this.datetime_movement.TabIndex = 37;
+            // 
             // MovementIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,5 +334,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Almacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.DateTimePicker datetime_movement;
     }
 }

@@ -18,10 +18,10 @@ namespace InkaArt.Business.Warehouse
         {
             movement_data = new MovementData();
         }
-        
+
         public DataTable GetMovements(string str_id = null, string str_type = null, string str_reason = null, string str_warehouse = null, string str_date = null, string str_status = null)
         {
-            if(str_id != null)
+            if (str_id != null)
             {
                 int id = int.Parse(str_id);
                 int type = int.Parse(str_type);
@@ -29,7 +29,7 @@ namespace InkaArt.Business.Warehouse
                 int warehouse = int.Parse(str_warehouse);
                 int status = int.Parse(str_status);
                 return movement_data.GetMovements(id, type, reason, warehouse, str_date, status);
-            }            
+            }
 
             return movement_data.GetMovements();
         }
@@ -51,4 +51,6 @@ namespace InkaArt.Business.Warehouse
             int id = int.Parse(warehouse_id);
             return movement_data.getWarehouse(id)["name"].ToString();
         }
+
+    }
 }

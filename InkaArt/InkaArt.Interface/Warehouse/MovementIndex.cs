@@ -42,6 +42,24 @@ namespace InkaArt.Interface.Warehouse
             }
         }
 
+        private void populateComboType()
+        {
+            MovementTypeController type_controller = new MovementTypeController();
+            DataTable types = type_controller.GetMovementTypes();
+            combobox_type.DataSource = types;
+            combobox_type.DisplayMember = "description";
+            combobox_type.ValueMember = "idMovementType";
+        }
+
+        private void populateComboReason()
+        {
+            MovementTypeController type_controller = new MovementTypeController();
+            DataTable types = type_controller.GetMovementTypes();
+            combobox_type.DataSource = types;
+            combobox_type.DisplayMember = "description";
+            combobox_type.ValueMember = "idMovementType";
+        }
+
         private void MovementIndex_Load(object sender, EventArgs e)
         {
 
@@ -49,7 +67,7 @@ namespace InkaArt.Interface.Warehouse
 
         private void ButtonSearchClick(object sender, EventArgs e)
         {
-            DataTable filtered = movement_controller.GetMovements(textbox_id.Text, combobox_type.SelectedItem, combobox_reason.SelectedItem, combobox_warehouse.SelectedItem, date_movement.Text, combobox_status.Text);
+            DataTable filtered = movement_controller.GetMovements(textbox_id.Text, combobox_type.SelectedValue.ToString(), combobox_reason.SelectedValue.ToString(), combobox_warehouse.SelectedValue.ToString(), datetime_movement.Value.ToString(), combobox_status.Text);
             populateDataGrid(filtered);
         }
 
@@ -70,6 +88,11 @@ namespace InkaArt.Interface.Warehouse
         }
 
         private void combobox_status_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void date_movement_DropDown(object sender, EventArgs e)
         {
 
         }

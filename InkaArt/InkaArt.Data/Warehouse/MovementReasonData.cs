@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InkaArt.Data.Warehouse
 {
-    class MovementReasonData : BD_Connector
+    public class MovementReasonData : BD_Connector
     {
 
         private string table_name;
