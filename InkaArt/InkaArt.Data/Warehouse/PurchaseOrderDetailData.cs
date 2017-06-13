@@ -9,7 +9,7 @@ using System.Data;
 
 namespace InkaArt.Data.Warehouse
 {
-    public class PurchaseOrderDetailData:BD_Connector
+    public class PurchaseOrderDetalData:BD_Connector
     {
         public NpgsqlDataAdapter purchaseOrderDetailAdapter()
         {

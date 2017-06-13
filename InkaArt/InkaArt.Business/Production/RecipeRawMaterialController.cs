@@ -73,7 +73,7 @@ namespace InkaArt.Business.Production
             table = getData();
             updateQuery = "UPDATE inkaart.\"Recipe-RawMaterial\" SET ";
             updateQuery = updateQuery + "status = 0 ";
-            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + "AND \"idRawMaterial\"= "+ idRawMaterial+
+            updateQuery = updateQuery + " WHERE \"idRecipe\"= " + idRecipe + " AND \"idRawMaterial\"= "+ idRawMaterial+
                 " AND \"materialCount\"= " + quantity + " ;";
             recipeRawMaterial.execute(updateQuery);
         }

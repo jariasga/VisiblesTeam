@@ -82,6 +82,11 @@ namespace InkaArt.Business.Warehouse
             return pWarehouse.updateData(data, adapt, "Product-Warehouse");
         }
 
+        public void updateStock(string idWh, string idRm, int logico, int fisico)
+        {
+
+        }
+
 
 
 

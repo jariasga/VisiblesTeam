@@ -11,7 +11,7 @@ using InkaArt.Data.Warehouse;
 
 namespace InkaArt.Business.Warehouse
 {
-    public class PurchaseOrderDetailController
+    public class PurchaseOrderDetailControllr
     {
         private PurchaseOrderDetailData purchaseOrderDetail;
         private NpgsqlDataAdapter adap;
@@ -19,7 +19,7 @@ namespace InkaArt.Business.Warehouse
         private DataTable table;
         private DataRow row;
 
-        public PurchaseOrderDetailController()
+        public PurchaseOrderDetailControllr()
         {
             purchaseOrderDetail = new PurchaseOrderDetailData();
             data = new DataSet();
