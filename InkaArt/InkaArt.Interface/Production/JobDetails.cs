@@ -65,7 +65,7 @@ namespace InkaArt.Interface.Production
                 {
                     int id = int.Parse(textBox_id.Text);
                     control.updateDataNoAdapter(id, number_of_jobs);
-                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                     MessageBox.Show("La cantidad de turnos no puede ser negativo, por favor ingrese un valor válido.",

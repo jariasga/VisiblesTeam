@@ -102,7 +102,10 @@ namespace InkaArt.Interface.Production
                         desc = textBox_desc.Text.ToString();
 
                         control.updateData(id, ini, fin, desc);
-                    }else
+                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fillGrid();
+                    }
+                    else
                         MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
