@@ -174,7 +174,15 @@ namespace InkaArt.Data.Reports
 
         public DataTable getDataSimulation(string name)
         {
-            string command_query = "";
+            string command_query = "select  a.\"date\", "+
+                                            "a.\"tabu_iterations\", "+
+                                            "a.\"huacos_produced\", "+
+                                            "a.\"huamanga_produced\", "+
+                                            "a.\"altarpiece_produced\", "+
+                                            "a.\"assigned_workers\" "+
+                                    "from   inkaart.\"Assignment\" a, inkaart.\"Simulation\" s "+
+                                    "where  a.\"id_simulation\" = s.\"id_simulation\" "+
+                                            "and s.\"name\" = '" + name + "'; ";
 
             Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
             Connection.Open();
@@ -182,10 +190,16 @@ namespace InkaArt.Data.Reports
             NpgsqlDataReader dr = command.ExecuteReader();
 
             DataTable simulationTable = new DataTable();
+            simulationTable.Columns.Add("Fecha", typeof(DateTime));
+            simulationTable.Columns.Add("Iteraciones", typeof(int));
+            simulationTable.Columns.Add("Huacos", typeof(string));
+            simulationTable.Columns.Add("Piedras", typeof(string));
+            simulationTable.Columns.Add("Retablos", typeof(string));
+            simulationTable.Columns.Add("Trabajadores", typeof(int));
 
             while (dr.Read())
             {
-                //simulationTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
+                simulationTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
             }
 
             return simulationTable;

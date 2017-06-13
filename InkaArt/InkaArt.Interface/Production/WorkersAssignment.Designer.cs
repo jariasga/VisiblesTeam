@@ -78,7 +78,7 @@
             this.label_select.AutoSize = true;
             this.label_select.Location = new System.Drawing.Point(21, 20);
             this.label_select.Name = "label_select";
-            this.label_select.Size = new System.Drawing.Size(173, 18);
+            this.label_select.Size = new System.Drawing.Size(214, 23);
             this.label_select.TabIndex = 43;
             this.label_select.Text = "Seleccionar simulación:";
             // 
@@ -87,7 +87,7 @@
             this.combo_simulations.FormattingEnabled = true;
             this.combo_simulations.Location = new System.Drawing.Point(200, 17);
             this.combo_simulations.Name = "combo_simulations";
-            this.combo_simulations.Size = new System.Drawing.Size(212, 26);
+            this.combo_simulations.Size = new System.Drawing.Size(212, 31);
             this.combo_simulations.TabIndex = 44;
             this.combo_simulations.SelectedIndexChanged += new System.EventHandler(this.ComboSimulationsSelectedIndexChanged);
             // 
@@ -156,10 +156,10 @@
             // simulation_tab_assignment
             // 
             this.simulation_tab_assignment.Controls.Add(this.simulation_grid);
-            this.simulation_tab_assignment.Location = new System.Drawing.Point(4, 27);
+            this.simulation_tab_assignment.Location = new System.Drawing.Point(4, 32);
             this.simulation_tab_assignment.Name = "simulation_tab_assignment";
             this.simulation_tab_assignment.Padding = new System.Windows.Forms.Padding(3);
-            this.simulation_tab_assignment.Size = new System.Drawing.Size(913, 362);
+            this.simulation_tab_assignment.Size = new System.Drawing.Size(913, 357);
             this.simulation_tab_assignment.TabIndex = 1;
             this.simulation_tab_assignment.Text = "Asignaciones";
             this.simulation_tab_assignment.UseVisualStyleBackColor = true;
@@ -180,7 +180,7 @@
             // 
             // WorkersAssignment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(968, 536);
