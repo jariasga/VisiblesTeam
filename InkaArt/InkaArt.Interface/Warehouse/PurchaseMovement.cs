@@ -26,10 +26,6 @@ namespace InkaArt.Interface.Warehouse
             this.Close();
         }
         
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void PurchaseMovement_Load(object sender, EventArgs e)
         {
@@ -95,18 +91,36 @@ namespace InkaArt.Interface.Warehouse
             for(int i=0;i<stockDocList.Rows.Count;i++)
                 if(string.Compare(idRm,stockDocList.Rows[i]["product_id"].ToString())==0 &&
                     string.Compare(idFactura, stockDocList.Rows[i]["idDocument"].ToString()) == 0 &&
-                    string.Compare("materia prima", stockDocList.Rows[i]["product_type"].ToString()) == 0)
+                    string.Compare("materia_prima", stockDocList.Rows[i]["product_type"].ToString()) == 0)
                 {
-                    respuesta = stockDocList.Rows[i]["product_stock"].ToString(); 
+                    respuesta = stockDocList.Rows[i]["product_stock"].ToString();
+                     
                     break;
                 }
 
             return respuesta;
         }
 
+        public void updateInStockDocument(string idFactura, string idRm, int cantidad)
+        {
+            StockDocumentController control = new StockDocumentController();
+
+            string aux = howMuchCanIMove(idFactura, idRm);
+            if (string.Compare(aux, "falso") == 0)//no existe el registro, entonces agregar la fila
+            {
+                //insert
+                control.insertData(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+            }else//si existe el registro
+            {
+                int nuevo = int.Parse(aux) - cantidad;
+                //update
+                control.updateStock(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+            }
+        }
+
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            InkaArt.Business.Warehouse.PurchaseOrderDetailController controlOrderRm = new InkaArt.Business.Warehouse.PurchaseOrderDetailController();
+            PurchaseOrderDetailController controlOrderRm = new PurchaseOrderDetailController();
             DataTable orderList = controlOrderRm.getData();
 
             string idOrder = textBox_idFactura.Text;
@@ -137,6 +151,72 @@ namespace InkaArt.Interface.Warehouse
             textBox_supplier.Text = nameSup;
 
             
+        }
+
+        private int maxInWarehouse(string idWh, string idRm, ref int stockFisico,ref int stockLogico)
+        {
+            //stox maximo - cantidadFisica
+            int rpta = 0;
+            RawMaterialWarehouseController control = new RawMaterialWarehouseController();
+            DataTable table = control.getData();
+            for(int i = 0; i < table.Rows.Count; i++)
+            {
+                if(string.Compare(idWh,table.Rows[i]["idWarehouse"].ToString())==0 &&
+                    string.Compare(idRm, table.Rows[i]["idRawMaterial"].ToString()) == 0 &&
+                    string.Compare("Activo", table.Rows[i]["state"].ToString()) == 0)
+                {
+                    stockFisico = int.Parse(table.Rows[i]["currentStock"].ToString());
+                    stockLogico = int.Parse(table.Rows[i]["virtualStock"].ToString());
+                    rpta = int.Parse(table.Rows[i]["maximunStock"].ToString())-stockFisico;
+                    break;
+                }
+            }
+            return rpta;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int cantidad_ingresar=0;
+            int cant_necesaria;
+            for(int i = 0; i < dataGridView_orders.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dataGridView_orders.Rows[i].Cells[5].Value))
+                {
+                    if (int.TryParse(dataGridView_orders.Rows[i].Cells[4].Value.ToString(), out cantidad_ingresar))//es un valor numerico
+                    {
+                        cantidad_ingresar = int.Parse(dataGridView_orders.Rows[i].Cells[4].Value.ToString());
+                        cant_necesaria = int.Parse(dataGridView_orders.Rows[i].Cells[3].Value.ToString());
+                        if (cant_necesaria >= cantidad_ingresar)
+                        {
+                            int stockFisico=0;
+                            int stockLogico = 0;
+                            int cantMax = maxInWarehouse(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(),ref stockFisico,ref stockLogico);
+                            if (cantMax >= cantidad_ingresar)
+                            {
+                                //AUMENTAR
+                                RawMaterialWarehouseController controlRmW = new RawMaterialWarehouseController();
+                                ProductionMovementMovementController controlMovement = new ProductionMovementMovementController();
+
+                                //agregar en RM-WH
+                                controlRmW.updateStock(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), stockLogico + cantidad_ingresar, stockFisico+ cantidad_ingresar);
+                                //agregar en StockDocument
+                                updateInStockDocument(textBox_idFactura.Text, dataGridView_orders.Rows[i].Cells[0].Value.ToString(),cant_necesaria- cantidad_ingresar);
+                                //agregar en Movement
+                                controlMovement.insertPurchaseRmMovement(textBox_idFactura.Text, idWh, dateTimePicker1.Value.ToShortDateString());
+
+
+                            }
+                            else
+                                MessageBox.Show("el almacen no tiene espacio necesario para ese elemento.");
+
+                        }
+                        else
+                            MessageBox.Show("la cantidad excede lo necesario.");
+                    }
+                    else
+                        MessageBox.Show("cantidad no valida.");
+                }
+            }
         }
     }
 }

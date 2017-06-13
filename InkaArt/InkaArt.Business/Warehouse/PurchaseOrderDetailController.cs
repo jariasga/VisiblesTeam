@@ -11,17 +11,17 @@ using InkaArt.Data.Warehouse;
 
 namespace InkaArt.Business.Warehouse
 {
-    public class PurchaseOrderDetailController
+    public class PurchaseOrderDetailControllr
     {
-        private InkaArt.Data.Warehouse.PurchaseOrderDetailData purchaseOrderDetail;
+        private PurchaseOrderDetailData purchaseOrderDetail;
         private NpgsqlDataAdapter adap;
         private DataSet data;
         private DataTable table;
         private DataRow row;
 
-        public PurchaseOrderDetailController()
+        public PurchaseOrderDetailControllr()
         {
-            purchaseOrderDetail = new InkaArt.Data.Warehouse.PurchaseOrderDetailData();
+            purchaseOrderDetail = new PurchaseOrderDetailData();
             data = new DataSet();
         }
 

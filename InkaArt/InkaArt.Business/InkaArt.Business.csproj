@@ -94,6 +94,9 @@
     <Compile Include="Security\UserController.cs" />
     <Compile Include="Security\WorkerController.cs" />
     <Compile Include="Warehouse\MaterialMovementController.cs" />
+    <Compile Include="Warehouse\MovementController.cs" />
+    <Compile Include="Warehouse\MovementReasonController.cs" />
+    <Compile Include="Warehouse\MovementTypeController.cs" />
     <Compile Include="Warehouse\ProductionItemMovementController.cs" />
     <Compile Include="Warehouse\ProductionItemWarehouseMovementController.cs" />
     <Compile Include="Warehouse\ProductionMovementMovementController.cs" />
