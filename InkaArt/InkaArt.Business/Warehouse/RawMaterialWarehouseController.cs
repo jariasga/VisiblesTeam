@@ -80,5 +80,21 @@ namespace InkaArt.Business.Warehouse
 
             return rmWarehouse.updateData(data, adapt, "RawMaterial-Warehouse");            
         }
+
+        public void updateStock(string idWh, string idRm, int logico, int fisico)
+        {
+            adapt = rmWarehouse.rmWarehouseAdapter();
+
+            string updateQuery;
+            string logStr = logico.ToString();
+            string fidStr = fisico.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"RawMaterial-Warehouse\" SET ";
+            updateQuery = updateQuery + "\"currentStock\"= " + logStr + ", ";
+            updateQuery = updateQuery + "\"virtualStock\" = " + fidStr;
+            updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idRawMaterial\"= " + idRm + " AND state = 'Activo'"+" ;";
+            rmWarehouse.execute(updateQuery);
+
+        }
     }
 }
