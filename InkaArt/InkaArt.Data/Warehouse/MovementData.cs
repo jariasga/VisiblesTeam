@@ -23,9 +23,15 @@ namespace InkaArt.Data.Warehouse
             table_name = "Movement";
         }
 
-        public DataTable GetMovements(int id = -1, int type = -1, int reason = -1, int warehouse = -1, string date = null, int status = -1)
+        public NpgsqlDataAdapter movementAdapter()
         {
-             
+            NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
+            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"" + table_name + "\"", Connection);
+            return orderAdapter;
+        }
+
+        public DataTable GetMovements(int id = -1, int type = -1, int reason = -1, int warehouse = -1, string date = null, int status = -1)
+        {             
             adap = movementAdapter();
 
             byId(adap, id);
@@ -61,7 +67,7 @@ namespace InkaArt.Data.Warehouse
         
         private void byType(NpgsqlDataAdapter adap, int type)
         {
-            if (type == 0) return;
+            if (type == -1) return;
 
             int numParams = adap.SelectCommand.Parameters.Count();
             if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
@@ -76,7 +82,7 @@ namespace InkaArt.Data.Warehouse
 
         private void byReason(NpgsqlDataAdapter adap, int reason)
         {
-            if (reason == 0) return;
+            if (reason == -1) return;
 
             int numParams = adap.SelectCommand.Parameters.Count();
             if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
@@ -91,7 +97,7 @@ namespace InkaArt.Data.Warehouse
 
         private void byWarehouse(NpgsqlDataAdapter adap, int warehouse)
         {
-            if (warehouse == 0) return;
+            if (warehouse == -1) return;
 
             int numParams = adap.SelectCommand.Parameters.Count();
             if (numParams == 0) adap.SelectCommand.CommandText += " WHERE (";
@@ -113,22 +119,22 @@ namespace InkaArt.Data.Warehouse
 
         private void byDate(NpgsqlDataAdapter adap, string date)
         {
-            //if (reason == 0) return;
+            if (date == null) return;
 
-            //int numParams = adap.SelectCommand.Parameters.Count();
-            //if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
-            //else adap.SelectCommand.CommandText += " AND ";
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
 
-            //adap.SelectCommand.CommandText += "\"idMovementReason\" = :idMovementReason";
-            //adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idMovementReason", DbType.Int32));
-            //adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
-            //adap.SelectCommand.Parameters[numParams].SourceColumn = "idMovementReason";
-            //adap.SelectCommand.Parameters[numParams].NpgsqlValue = reason;
+            adap.SelectCommand.CommandText += "\"dateIn\" = to_date(:dateIn,'DD/MM/YYYY')";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("dateIn", DbType.String));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "dateIn";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = date;
         }
 
         private void byStatus(NpgsqlDataAdapter adap, int status)
         {
-            if (status == 0) return;
+            if (status == -1) return;
 
             int numParams = adap.SelectCommand.Parameters.Count();
             if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
@@ -148,27 +154,17 @@ namespace InkaArt.Data.Warehouse
             data = getData(adap, "Movement");
             table = data.Tables["Movement"];
 
-            foreach (string id in movements)
+            for (int i = 0; i < table.Rows.Count; i++)
             {
-                for (int i = 0; i < table.Rows.Count; i++)
+                if (movements.Contains(table.Rows[i]["idMovement"].ToString()))//string.Compare(table.Rows[i]["idMovement"].ToString(), id) == 0)
                 {
-                    if (string.Compare(table.Rows[i]["idMovement"].ToString(), id) == 0)
-                    {
-                        table.Rows[i]["status"] = 0;
-                        break;
-                    }
+                    table.Rows[i]["status"] = 0;
                 }
             }
+
             updateData(data, adap, "Movement");
         }
-
-        public NpgsqlDataAdapter movementAdapter()
-        {
-            NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
-            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"" + table_name + "\"", Connection);
-            return orderAdapter;
-        }
-        
+                
         public DataRow getWarehouse(int warehouse_id)
         {
             WarehouseData warehouse_data = new WarehouseData();
@@ -177,31 +173,31 @@ namespace InkaArt.Data.Warehouse
             warehouse_data.byId(warehouse_adap, warehouse_id);
             warehouse_adap.SelectCommand.CommandText += ";";
             warehouse_dataset.Clear();
-            warehouse_dataset = warehouse_data.getData(adap, "Warehouse");
+            warehouse_dataset = warehouse_data.getData(warehouse_adap, "Warehouse");
             
             return warehouse_dataset.Tables[0].Rows[0];
         }
 
         public DataRow getMovementType(int type_id)
         {
-            MovementReasonData type_data = new MovementReasonData();
+            MovementTypeData type_data = new MovementTypeData();
             DataSet type_dataset = new DataSet();
-            NpgsqlDataAdapter type_adap = type_data.movementReasonAdapter();
+            NpgsqlDataAdapter type_adap = type_data.movementTypeAdapter();
             type_data.byId(type_adap, type_id);
             type_dataset.Clear();
-            type_dataset = type_data.getData(adap);
+            type_dataset = type_data.getData(type_adap);
 
             return type_dataset.Tables[0].Rows[0];
         }
 
         public DataRow getMovementReason(int reason_id)
         {
-            MovementTypeData reason_data = new MovementTypeData();
+            MovementReasonData reason_data = new MovementReasonData();
             DataSet reason_dataset = new DataSet();
-            NpgsqlDataAdapter reason_adap = reason_data.movementTypeAdapter();
+            NpgsqlDataAdapter reason_adap = reason_data.movementReasonAdapter();
             reason_data.byId(reason_adap, reason_id);
             reason_dataset.Clear();
-            reason_dataset = reason_data.getData(adap, "Warehouse");
+            reason_dataset = reason_data.getData(reason_adap);
 
             return reason_dataset.Tables[0].Rows[0];
         }

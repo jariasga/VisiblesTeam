@@ -23,11 +23,12 @@ namespace InkaArt.Business.Warehouse
         {
             if (str_id != null)
             {
-                int id = int.Parse(str_id);
+                int id = str_id == ""? -1 : int.Parse(str_id);
                 int type = int.Parse(str_type);
                 int reason = int.Parse(str_reason);
                 int warehouse = int.Parse(str_warehouse);
                 int status = int.Parse(str_status);
+
                 return movement_data.GetMovements(id, type, reason, warehouse, str_date, status);
             }
 
@@ -37,20 +38,27 @@ namespace InkaArt.Business.Warehouse
         public string getReasonDescription(string reason_id)
         {
             int id = int.Parse(reason_id);
-            return movement_data.getMovementReason(id)["description"].ToString();
+            DataRow reason = movement_data.getMovementReason(id);
+            return reason == null? "" : reason["description"].ToString();
         }
 
         public string getTypeDescription(string type_id)
         {
             int id = int.Parse(type_id);
-            return movement_data.getMovementType(id)["description"].ToString();
+            DataRow type = movement_data.getMovementType(id);
+            return type == null? "" : type["description"].ToString();
         }
 
         public string getWarehouseName(string warehouse_id)
         {
             int id = int.Parse(warehouse_id);
-            return movement_data.getWarehouse(id)["name"].ToString();
+            DataRow warehouse = movement_data.getWarehouse(id);
+            return warehouse == null ? "" : warehouse["name"].ToString();
         }
 
+        public void deleteMovements(List<string> ids)
+        {
+            movement_data.deleteMovements(ids);
+        }
     }
 }

@@ -20,11 +20,16 @@ namespace InkaArt.Interface.Warehouse
         public MovementIndex()
         {
             InitializeComponent();
+        }
 
+        private void MovementIndex_Load(object sender, EventArgs e)
+        {
+            datetime_movement.Checked = false;
+            datetime_movement.AllowDrop = false;
             initializeComboType();
             initializeComboReason();
             initializeComboWarehouse();
-            initializeComboStatus();
+            initializeComboStatus();            
             updateDataGrid();
         }
 
@@ -88,27 +93,40 @@ namespace InkaArt.Interface.Warehouse
             combobox_status.ValueMember = "Key";
             combobox_status.SelectedValue = -1;
         }
-
-        private void MovementIndex_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void ButtonSearchClick(object sender, EventArgs e)
         {
-            DataTable filtered = movement_controller.GetMovements(textbox_id.Text, combobox_type.SelectedValue.ToString(), combobox_reason.SelectedValue.ToString(), combobox_warehouse.SelectedValue.ToString(), datetime_movement.Value.ToString(), combobox_status.SelectedValue.ToString());
+            string date = datetime_movement.Checked ? datetime_movement.Value.ToShortDateString() : null;
+            DataTable filtered = movement_controller.GetMovements(textbox_id.Text, getComboString(combobox_type), getComboString(combobox_reason), getComboString(combobox_warehouse), date, getComboString(combobox_status));
             populateDataGrid(filtered);
+        }
+
+        private string getComboString(ComboBox combo)
+        {
+            return combo.SelectedValue != null ? combo.SelectedValue.ToString() : "-1";
         }
 
         private void ButtonDeleteClick(object sender, EventArgs e)
         {
+            List<string> ids = new List<string>();
+            int registros = data_grid_movements.Rows.Count;
+
+            for (int i = 0; i < registros; i++)
+            {
+                if (Convert.ToBoolean(data_grid_movements.Rows[i].Cells[5].Value) == true)
+                    ids.Add(data_grid_movements.Rows[i].Cells[0].Value.ToString());
+            }
+            movement_controller.deleteMovements(ids);
+            updateDataGrid();
+
+            MessageBox.Show("Almacenes eliminados", "Eliminar almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
 
         }
 
         private void ButtonCreateClick(object sender, EventArgs e)
         {
-
-
+            Form movements = new Movements();
+            movements.Show();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -120,10 +138,13 @@ namespace InkaArt.Interface.Warehouse
         {
 
         }
-
-        private void date_movement_DropDown(object sender, EventArgs e)
+        
+        private void datetimeMovementValueChanged(object sender, EventArgs e)
         {
-
+            if (datetime_movement.Checked)
+                datetime_movement.AllowDrop = true;
+            else
+                datetime_movement.AllowDrop = false;
         }
     }
 }

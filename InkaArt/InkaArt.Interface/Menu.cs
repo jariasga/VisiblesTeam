@@ -210,11 +210,9 @@ namespace InkaArt.Interface
         {
             Form movements = new MovementIndex();
             movements.MdiParent = this;
-            movements.Show();
-            //Form movements = new Movements();
-            //movements.MdiParent = this;
-            //movements.Show();
+            movements.Show();            
         }
+
         private void informeDeTurnoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form inform = new RegisterAssignedJob();

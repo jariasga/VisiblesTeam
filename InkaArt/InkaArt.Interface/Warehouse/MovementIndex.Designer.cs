@@ -31,7 +31,19 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.data_grid_movements = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.datetime_movement = new System.Windows.Forms.DateTimePicker();
+            this.combobox_reason = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.combobox_status = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.combobox_type = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.combobox_warehouse = new System.Windows.Forms.ComboBox();
             this.textbox_id = new System.Windows.Forms.TextBox();
@@ -39,18 +51,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.combobox_type = new System.Windows.Forms.ComboBox();
-            this.combobox_status = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.combobox_reason = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.datetime_movement = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_movements)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -101,6 +101,39 @@
             this.data_grid_movements.Size = new System.Drawing.Size(680, 199);
             this.data_grid_movements.TabIndex = 49;
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Tipo";
+            this.type.Name = "type";
+            // 
+            // reason
+            // 
+            this.reason.HeaderText = "Razón";
+            this.reason.Name = "reason";
+            // 
+            // Almacen
+            // 
+            this.Almacen.HeaderText = "Almacén";
+            this.Almacen.Name = "Almacen";
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.datetime_movement);
@@ -123,6 +156,72 @@
             this.groupBox1.TabIndex = 48;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // datetime_movement
+            // 
+            this.datetime_movement.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datetime_movement.Location = new System.Drawing.Point(240, 109);
+            this.datetime_movement.Name = "datetime_movement";
+            this.datetime_movement.ShowCheckBox = true;
+            this.datetime_movement.Size = new System.Drawing.Size(200, 26);
+            this.datetime_movement.TabIndex = 37;
+            this.datetime_movement.ValueChanged += new System.EventHandler(this.datetimeMovementValueChanged);
+            // 
+            // combobox_reason
+            // 
+            this.combobox_reason.Font = new System.Drawing.Font("Arial", 11F);
+            this.combobox_reason.FormattingEnabled = true;
+            this.combobox_reason.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.combobox_reason.Location = new System.Drawing.Point(456, 49);
+            this.combobox_reason.Name = "combobox_reason";
+            this.combobox_reason.Size = new System.Drawing.Size(193, 25);
+            this.combobox_reason.TabIndex = 36;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(453, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 18);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Razón";
+            // 
+            // combobox_status
+            // 
+            this.combobox_status.Font = new System.Drawing.Font("Arial", 11F);
+            this.combobox_status.FormattingEnabled = true;
+            this.combobox_status.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.combobox_status.Location = new System.Drawing.Point(456, 110);
+            this.combobox_status.Name = "combobox_status";
+            this.combobox_status.Size = new System.Drawing.Size(193, 25);
+            this.combobox_status.TabIndex = 34;
+            this.combobox_status.SelectedIndexChanged += new System.EventHandler(this.combobox_status_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(453, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 18);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Estado";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // combobox_type
+            // 
+            this.combobox_type.Font = new System.Drawing.Font("Arial", 11F);
+            this.combobox_type.FormattingEnabled = true;
+            this.combobox_type.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.combobox_type.Location = new System.Drawing.Point(240, 49);
+            this.combobox_type.Name = "combobox_type";
+            this.combobox_type.Size = new System.Drawing.Size(193, 25);
+            this.combobox_type.TabIndex = 32;
             // 
             // label2
             // 
@@ -194,102 +293,6 @@
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.ButtonSearchClick);
-            // 
-            // combobox_type
-            // 
-            this.combobox_type.Font = new System.Drawing.Font("Arial", 11F);
-            this.combobox_type.FormattingEnabled = true;
-            this.combobox_type.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.combobox_type.Location = new System.Drawing.Point(240, 49);
-            this.combobox_type.Name = "combobox_type";
-            this.combobox_type.Size = new System.Drawing.Size(193, 25);
-            this.combobox_type.TabIndex = 32;
-            // 
-            // combobox_status
-            // 
-            this.combobox_status.Font = new System.Drawing.Font("Arial", 11F);
-            this.combobox_status.FormattingEnabled = true;
-            this.combobox_status.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.combobox_status.Location = new System.Drawing.Point(456, 110);
-            this.combobox_status.Name = "combobox_status";
-            this.combobox_status.Size = new System.Drawing.Size(193, 25);
-            this.combobox_status.TabIndex = 34;
-            this.combobox_status.SelectedIndexChanged += new System.EventHandler(this.combobox_status_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(453, 89);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 18);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "Estado";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // combobox_reason
-            // 
-            this.combobox_reason.Font = new System.Drawing.Font("Arial", 11F);
-            this.combobox_reason.FormattingEnabled = true;
-            this.combobox_reason.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.combobox_reason.Location = new System.Drawing.Point(456, 49);
-            this.combobox_reason.Name = "combobox_reason";
-            this.combobox_reason.Size = new System.Drawing.Size(193, 25);
-            this.combobox_reason.TabIndex = 36;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(453, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 18);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Razón";
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "Tipo";
-            this.type.Name = "type";
-            // 
-            // reason
-            // 
-            this.reason.HeaderText = "Razón";
-            this.reason.Name = "reason";
-            // 
-            // Almacen
-            // 
-            this.Almacen.HeaderText = "Almacén";
-            this.Almacen.Name = "Almacen";
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // datetime_movement
-            // 
-            this.datetime_movement.Location = new System.Drawing.Point(240, 109);
-            this.datetime_movement.Name = "datetime_movement";
-            this.datetime_movement.Size = new System.Drawing.Size(200, 26);
-            this.datetime_movement.TabIndex = 37;
             // 
             // MovementIndex
             // 

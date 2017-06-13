@@ -127,17 +127,17 @@
     <Compile Include="Production\NewSimulation.Designer.cs">
       <DependentUpon>NewSimulation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\ProductionProcess.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Production\ProductionProcess.designer.cs">
-      <DependentUpon>ProductionProcess.cs</DependentUpon>
-    </Compile>
     <Compile Include="Production\PerformanceReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Production\PerformanceReport.designer.cs">
       <DependentUpon>PerformanceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ProductionProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\ProductionProcess.designer.cs">
+      <DependentUpon>ProductionProcess.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\Recipe.cs">
       <SubType>Form</SubType>
@@ -480,11 +480,11 @@
     <EmbeddedResource Include="Production\NewSimulation.resx">
       <DependentUpon>NewSimulation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\ProductionProcess.resx">
-      <DependentUpon>ProductionProcess.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Production\PerformanceReport.resx">
       <DependentUpon>PerformanceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Production\ProductionProcess.resx">
+      <DependentUpon>ProductionProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\Recipe.resx">
       <DependentUpon>Recipe.cs</DependentUpon>
