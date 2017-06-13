@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -70,5 +71,14 @@ namespace InkaArt.Business.Algorithm
             return new List<Worker>(workers);
         }
 
+        public void Add(Worker worker)
+        {
+            this.workers.Add(worker);
+        }
+
+        public bool Contains(Worker worker)
+        {
+            return this.workers.Contains(worker);
+        }
     }
 }

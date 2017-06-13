@@ -15,6 +15,7 @@ namespace InkaArt.Interface.Production
     public partial class WorkersAssignment : Form
     {
         private SimulationController simulations;
+        private Simulation current_simulation;
         private WorkerController workers;
         private OrderController orders;
 
@@ -22,46 +23,29 @@ namespace InkaArt.Interface.Production
         {
             InitializeComponent();
 
-            workers = new WorkerController();
-            workers.Load();
-            orders = new OrderController();
-            orders.Load();
-            simulations = new SimulationController();
-
-            // set elements
-            combo_simulations.DataSource = simulations.BindingList();
-            combo_simulations.DisplayMember = "Name";
-            combo_simulations.SelectedIndex = -1;
-            
-            button_config.Text = "+ Crear";
-            button_save.Enabled = false;
-            button_start.Enabled = false;
-            button_delete.Enabled = false;
-            button_report.Enabled = false;
+            this.workers = new WorkerController();
+            this.orders = new OrderController();
+            this.simulations = new SimulationController();
         }
 
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
-            //Temporal
-            //string[] data = new string[5];
-            //data[0] = "09/05/2017";
-            //data[1] = "Tallado de piedras";
-            //data[2] = "";
-            //data[3] = "Moldeado de huacos";
-            //data[4] = "Pintado de retablos";
-            //simulation_grid.Rows.Add(data);
+            this.workers.Load();
+            this.orders.Load();
+            this.simulations.Load();
 
+            combo_simulations.DataSource = simulations.BindingList();
+            combo_simulations.DisplayMember = "Name";
+            combo_simulations.SelectedIndex = -1;
         }
 
-        private void ButtonStartClick(object sender, EventArgs e)
+        private void ButtonConfigClick(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
-            if (simulation == null) return;
+            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
 
-            Form new_simultation = new NewSimulation();
-            new_simultation.MdiParent = this.MdiParent;
-            new_simultation.Show();
-            simulation.Start();
+            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers, orders);
+            simulation_config.MdiParent = this.MdiParent;
+            simulation_config.Show();
         }
 
         private void ButtonSaveClick(object sender, EventArgs e)
@@ -69,14 +53,6 @@ namespace InkaArt.Interface.Production
             //Guardar simulación en BD
             Simulation simulation = (Simulation)combo_simulations.SelectedItem;
             simulation.Save();
-        }
-
-        private void ButtonConfigClick(object sender, EventArgs e)
-        {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers, orders);
-            simulation_config.MdiParent = this.MdiParent;
-            simulation_config.Show();
         }
 
         private void ButtonReportClick(object sender, EventArgs e)
@@ -101,19 +77,19 @@ namespace InkaArt.Interface.Production
         {
             Simulation simulation = (Simulation) combo_simulations.SelectedItem;
 
-            if (combo_simulations.SelectedIndex == -1 || simulation == null)
+            if (combo_simulations.SelectedIndex < 0 || simulation == null)
             {
-                button_config.Text = "+ Crear";
+                button_config.Text = "+ Nueva simulación";
+                button_config.BackColor = Color.SteelBlue;
                 button_save.Enabled = false;
-                button_start.Enabled = false;
                 button_delete.Enabled = false;
                 button_report.Enabled = false;
             }
             else
             {
-                button_config.Text = "🖉 Editar";
+                button_config.Text = "Ver detalles de asignación";
+                button_config.BackColor = Color.Gray;
                 button_save.Enabled = true;
-                button_start.Enabled = true;
                 button_delete.Enabled = true;
                 button_report.Enabled = true;
                 if (simulation.AssignmentsToList().Count > 0)

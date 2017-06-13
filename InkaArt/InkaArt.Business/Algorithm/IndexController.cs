@@ -125,5 +125,12 @@ namespace InkaArt.Business.Algorithm
             return indexes.Count;
         }
 
+        public Index FindByWorkerAndJob(Worker worker, Job job)
+        {
+            if (worker == null || job == null) return null;
+            foreach (Index index in indexes)
+                if (index.Worker == worker.ID && index.Job == job.ID) return index;
+            return null;
+        }
     }
 }

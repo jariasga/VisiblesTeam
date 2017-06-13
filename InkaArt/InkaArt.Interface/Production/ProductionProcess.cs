@@ -34,10 +34,10 @@ namespace InkaArt.Interface.Production
             {
                 if (String.Compare(productProcessesList.Rows[i]["idProduct"].ToString(),id)==0)
                 {
-                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"]);
+                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["id_process"]);
                     for(int j=0;j<processList.Rows.Count;j++)
                     {
-                        if(String.Compare(processList.Rows[j]["idProcess"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
+                        if(String.Compare(processList.Rows[j]["id_process"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
                         {
                             dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"], processList.Rows[j]["description"]);
                             break;

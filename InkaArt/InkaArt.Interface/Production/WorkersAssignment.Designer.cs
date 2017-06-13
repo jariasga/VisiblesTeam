@@ -30,7 +30,6 @@
         {
             this.button_config = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
-            this.button_start = new System.Windows.Forms.Button();
             this.label_select = new System.Windows.Forms.Label();
             this.combo_simulations = new System.Windows.Forms.ComboBox();
             this.button_report = new System.Windows.Forms.Button();
@@ -52,39 +51,27 @@
             this.button_config.BackColor = System.Drawing.Color.SteelBlue;
             this.button_config.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_config.ForeColor = System.Drawing.Color.White;
-            this.button_config.Location = new System.Drawing.Point(130, 468);
+            this.button_config.Location = new System.Drawing.Point(24, 468);
             this.button_config.Name = "button_config";
-            this.button_config.Size = new System.Drawing.Size(121, 43);
+            this.button_config.Size = new System.Drawing.Size(200, 43);
             this.button_config.TabIndex = 32;
-            this.button_config.Text = "+ Crear";
+            this.button_config.Text = "+ Nueva simulación";
             this.button_config.UseVisualStyleBackColor = false;
             this.button_config.Click += new System.EventHandler(this.ButtonConfigClick);
             // 
             // button_delete
             // 
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Enabled = false;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(704, 468);
+            this.button_delete.Location = new System.Drawing.Point(757, 468);
             this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(121, 43);
+            this.button_delete.Size = new System.Drawing.Size(188, 43);
             this.button_delete.TabIndex = 39;
-            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.Text = "🗑 Eliminar simulación";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.ButtonDeleteClick);
-            // 
-            // button_start
-            // 
-            this.button_start.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_start.ForeColor = System.Drawing.Color.White;
-            this.button_start.Location = new System.Drawing.Point(257, 468);
-            this.button_start.Name = "button_start";
-            this.button_start.Size = new System.Drawing.Size(121, 43);
-            this.button_start.TabIndex = 40;
-            this.button_start.Text = "▶ Iniciar";
-            this.button_start.UseVisualStyleBackColor = false;
-            this.button_start.Click += new System.EventHandler(this.ButtonStartClick);
             // 
             // label_select
             // 
@@ -107,9 +94,10 @@
             // button_report
             // 
             this.button_report.BackColor = System.Drawing.Color.Gray;
+            this.button_report.Enabled = false;
             this.button_report.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_report.ForeColor = System.Drawing.Color.White;
-            this.button_report.Location = new System.Drawing.Point(511, 468);
+            this.button_report.Location = new System.Drawing.Point(527, 468);
             this.button_report.Name = "button_report";
             this.button_report.Size = new System.Drawing.Size(187, 43);
             this.button_report.TabIndex = 45;
@@ -179,13 +167,14 @@
             // button_save
             // 
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Enabled = false;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(384, 468);
+            this.button_save.Location = new System.Drawing.Point(271, 468);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(121, 43);
+            this.button_save.Size = new System.Drawing.Size(209, 43);
             this.button_save.TabIndex = 47;
-            this.button_save.Text = "🖫 Guardar";
+            this.button_save.Text = "🖫 Guardar simulación";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
@@ -196,7 +185,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(968, 536);
             this.Controls.Add(this.button_save);
-            this.Controls.Add(this.button_start);
             this.Controls.Add(this.simulation_tab_control);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_report);
@@ -218,7 +206,6 @@
 
         #endregion
         private System.Windows.Forms.Button button_delete;
-        private System.Windows.Forms.Button button_start;
         private System.Windows.Forms.Button button_config;
         private System.Windows.Forms.Label label_select;
         private System.Windows.Forms.ComboBox combo_simulations;

@@ -121,11 +121,11 @@
     <Compile Include="Production\Jobs.designer.cs">
       <DependentUpon>Jobs.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\NewSimulation.cs">
+    <Compile Include="Production\SimulationLoadingScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\NewSimulation.Designer.cs">
-      <DependentUpon>NewSimulation.cs</DependentUpon>
+    <Compile Include="Production\SimulationLoadingScreen.Designer.cs">
+      <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\ProductionProcess.cs">
       <SubType>Form</SubType>
@@ -177,6 +177,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\ClientOrderDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDelivery.Designer.cs">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.Designer.cs">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.Designer.cs">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\DocumentSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -477,8 +495,8 @@
     <EmbeddedResource Include="Production\Jobs.resx">
       <DependentUpon>Jobs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\NewSimulation.resx">
-      <DependentUpon>NewSimulation.cs</DependentUpon>
+    <EmbeddedResource Include="Production\SimulationLoadingScreen.resx">
+      <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\ProductionProcess.resx">
       <DependentUpon>ProductionProcess.cs</DependentUpon>
@@ -514,6 +532,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sales\ClientOrderDelivery.resx">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDevolution.resx">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDocuments.resx">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </EmbeddedResource>

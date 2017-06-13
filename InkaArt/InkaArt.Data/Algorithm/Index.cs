@@ -68,15 +68,6 @@ namespace InkaArt.Data.Algorithm
             this.average_time = average_time;
         }
 
-        public static Predicate<Index> byWorkerAndJob(Worker worker, Job job)
-        {
-            return delegate (Index index)
-            {
-                if (worker == null || job == null) return false;
-                return index.id_worker.Equals(worker.ID) && index.id_job.Equals(job.ID);
-            };
-        }
-
         public static string Insert(Ratio ratio)
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
