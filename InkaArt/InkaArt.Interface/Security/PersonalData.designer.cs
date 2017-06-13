@@ -49,20 +49,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBoxIDRol = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBoxRoles = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxUserStatus = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelUsuario = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.comboBoxUserTurn = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxUserPosition = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.groupBox1.SuspendLayout();
@@ -70,7 +65,6 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,7 +125,6 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(13, 31);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -295,14 +288,14 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.textBoxIDRol);
-            this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.textBoxDescription);
+            this.tabPage2.Controls.Add(this.textBoxUsername);
+            this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.comboBoxRoles);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.comboBoxUserStatus);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.textBoxUsername);
             this.tabPage2.Controls.Add(this.labelUsuario);
             this.tabPage2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
@@ -325,6 +318,26 @@
             this.textBoxIDRol.Size = new System.Drawing.Size(45, 26);
             this.textBoxIDRol.TabIndex = 21;
             // 
+            // textBoxDescription
+            // 
+            this.textBoxDescription.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxDescription.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDescription.Location = new System.Drawing.Point(12, 202);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxDescription.Name = "textBoxDescription";
+            this.textBoxDescription.Size = new System.Drawing.Size(165, 26);
+            this.textBoxDescription.TabIndex = 10;
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxUsername.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxUsername.Location = new System.Drawing.Point(12, 30);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(165, 26);
+            this.textBoxUsername.TabIndex = 7;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -335,16 +348,6 @@
             this.label12.Size = new System.Drawing.Size(49, 20);
             this.label12.TabIndex = 22;
             this.label12.Text = "ID Rol:";
-            // 
-            // textBoxDescription
-            // 
-            this.textBoxDescription.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxDescription.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDescription.Location = new System.Drawing.Point(12, 202);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(165, 26);
-            this.textBoxDescription.TabIndex = 10;
             // 
             // label11
             // 
@@ -388,11 +391,12 @@
             // 
             this.comboBoxUserStatus.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBoxUserStatus.DisplayMember = "Activo";
+            this.comboBoxUserStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxUserStatus.FormattingEnabled = true;
             this.comboBoxUserStatus.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
+            "Activo",
+            "Bloqueado",
+            "Cesado"});
             this.comboBoxUserStatus.Location = new System.Drawing.Point(13, 86);
             this.comboBoxUserStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxUserStatus.Name = "comboBoxUserStatus";
@@ -410,16 +414,6 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Estado:";
             // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxUsername.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUsername.Location = new System.Drawing.Point(12, 30);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(165, 26);
-            this.textBoxUsername.TabIndex = 7;
-            // 
             // labelUsuario
             // 
             this.labelUsuario.AutoSize = true;
@@ -430,61 +424,6 @@
             this.labelUsuario.Size = new System.Drawing.Size(58, 20);
             this.labelUsuario.TabIndex = 14;
             this.labelUsuario.Text = "Usuario:";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.comboBoxUserTurn);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.textBoxUserPosition);
-            this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(373, 240);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Info. Laboral";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxUserTurn
-            // 
-            this.comboBoxUserTurn.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.comboBoxUserTurn.FormattingEnabled = true;
-            this.comboBoxUserTurn.Location = new System.Drawing.Point(11, 83);
-            this.comboBoxUserTurn.Name = "comboBoxUserTurn";
-            this.comboBoxUserTurn.Size = new System.Drawing.Size(345, 28);
-            this.comboBoxUserTurn.TabIndex = 11;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(7, 59);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 20);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Turno:";
-            // 
-            // textBoxUserPosition
-            // 
-            this.textBoxUserPosition.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxUserPosition.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUserPosition.Location = new System.Drawing.Point(11, 28);
-            this.textBoxUserPosition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBoxUserPosition.Name = "textBoxUserPosition";
-            this.textBoxUserPosition.Size = new System.Drawing.Size(345, 26);
-            this.textBoxUserPosition.TabIndex = 9;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(7, 3);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(123, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Puesto de Trabajo:";
             // 
             // tabPage4
             // 
@@ -543,8 +482,6 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -554,6 +491,8 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBoxUser;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox textBoxAddress;
@@ -569,23 +508,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox textBoxIDRol;
+        private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.TextBox textBoxUsername;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBoxRoles;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxUserStatus;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.Label labelUsuario;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBoxUserPosition;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxUserTurn;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBoxRoles;
-        private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBoxIDRol;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage4;
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
     }
