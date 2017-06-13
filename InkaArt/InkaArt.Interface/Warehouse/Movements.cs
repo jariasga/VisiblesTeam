@@ -76,7 +76,8 @@ namespace InkaArt.Interface.Warehouse
                         {
                             if (reason == "Rotura")
                             {
-                                MessageBox.Show("Ventana aún no definida");
+                                Form formView = new InkaArt.Interface.Warehouse.breakProduct(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                                formView.Show();
                             }
                             else
                             {
