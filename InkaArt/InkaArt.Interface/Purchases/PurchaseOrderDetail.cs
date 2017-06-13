@@ -137,7 +137,7 @@ namespace InkaArt.Interface.Purchases
         {
             //obtengo todas las lineas de pedido de esta orden
             DataRow[] rows;
-            DataTable lineaPedidosList = control_detail.getData();
+            lineaPedidosList = control_detail.getData();
             rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status = 'Activo'");
             if (rows.Any()) lineaPedidosList = rows.CopyToDataTable();
             else lineaPedidosList.Rows.Clear();
@@ -345,13 +345,14 @@ namespace InkaArt.Interface.Purchases
             }
             textBox_factura.Text = actualdata;
         }
-
+        
         private void mostrarOtrosCampos(object sender, EventArgs e)
         {
             int iCombo = comboBoxRawMaterialName.SelectedIndex;
             textBox_idrm.Text= rmList.Rows[iCombo]["id_raw_material"].ToString();
             idUnit.Text = rmList.Rows[iCombo]["unit"].ToString();
-            unitAbrev.Text=hallarNombreUnit(int.Parse(idUnit.Text));            
+            unitAbrev.Text=hallarNombreUnit(int.Parse(idUnit.Text));
+            textBox_price.Text = hallarPrecio(textBox_idrm.Text);            
         }
         private string hallarNombreUnit(int idUnit)
         {
@@ -364,6 +365,19 @@ namespace InkaArt.Interface.Purchases
             unitList.DefaultView.Sort = sortQuery;
             string nombUnit = "";
             if (unitList.Rows.Count > 0) nombUnit = unitList.Rows[0]["name"].ToString();
+            return nombUnit;
+        }
+        private string hallarPrecio(string idMat)
+        {
+            DataRow[] rows;
+            rawMat_supList = control_rm_sup.getData();
+            rows = rawMat_supList.Select("id_raw_material = " + idMat+" AND id_supplier = "+textBox_idsupplier.Text+ " AND status = 'Activo'");
+            if (rows.Any()) rawMat_supList = rows.CopyToDataTable();
+            else rawMat_supList.Rows.Clear();
+            string sortQuery = string.Format("id_rawmaterial_supplier");
+            rawMat_supList.DefaultView.Sort = sortQuery;
+            string nombUnit = "0";
+            if (rawMat_supList.Rows.Count > 0) nombUnit = rawMat_supList.Rows[0]["price"].ToString();
             return nombUnit;
         }
         private int hallarId()
