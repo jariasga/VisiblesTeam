@@ -36,6 +36,8 @@
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_select = new System.Windows.Forms.Button();
             this.button_cancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_clients)).BeginInit();
@@ -43,8 +45,10 @@
             // 
             // grid_clients
             // 
+            this.grid_clients.AllowUserToAddRows = false;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grid_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -61,7 +65,9 @@
             this.Cantidad,
             this.cost,
             this.delete,
-            this.Column1});
+            this.Column1,
+            this.Column2,
+            this.Column3});
             this.grid_clients.Location = new System.Drawing.Point(36, 71);
             this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_clients.Name = "grid_clients";
@@ -94,6 +100,18 @@
             // 
             this.Column1.HeaderText = "Prioridad";
             this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Tipo Cliente";
+            this.Column2.Name = "Column2";
+            this.Column2.Visible = false;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Tipo Nacionalidad";
+            this.Column3.Name = "Column3";
+            this.Column3.Visible = false;
             // 
             // button_select
             // 
@@ -143,12 +161,14 @@
         #endregion
 
         private System.Windows.Forms.DataGridView grid_clients;
+        private System.Windows.Forms.Button button_select;
+        private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.Button button_select;
-        private System.Windows.Forms.Button button_cancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

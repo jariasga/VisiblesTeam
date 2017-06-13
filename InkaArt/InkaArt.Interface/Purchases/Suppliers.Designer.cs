@@ -44,6 +44,7 @@
             this.textBox_supplier = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.button_cargamasiva = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +77,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(398, 445);
+            this.buttonDelete.Location = new System.Drawing.Point(305, 445);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(151, 39);
             this.buttonDelete.TabIndex = 40;
@@ -89,7 +90,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(231, 445);
+            this.buttonAdd.Location = new System.Drawing.Point(158, 445);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(142, 39);
@@ -236,12 +237,27 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
+            // button_cargamasiva
+            // 
+            this.button_cargamasiva.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_cargamasiva.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_cargamasiva.ForeColor = System.Drawing.Color.White;
+            this.button_cargamasiva.Location = new System.Drawing.Point(461, 445);
+            this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
+            this.button_cargamasiva.Name = "button_cargamasiva";
+            this.button_cargamasiva.Size = new System.Drawing.Size(124, 39);
+            this.button_cargamasiva.TabIndex = 50;
+            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.UseVisualStyleBackColor = false;
+            this.button_cargamasiva.Click += new System.EventHandler(this.cargaMasiva);
+            // 
             // Suppliers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(756, 501);
+            this.Controls.Add(this.button_cargamasiva);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
@@ -274,5 +290,6 @@
         private System.Windows.Forms.TextBox textBox_address;
         private System.Windows.Forms.ComboBox comboBox_status;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.Button button_cargamasiva;
     }
 }

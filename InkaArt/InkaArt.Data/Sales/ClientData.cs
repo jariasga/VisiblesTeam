@@ -167,7 +167,7 @@ namespace InkaArt.Data.Sales
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
         }
 
-        public int UpdateClient(string id, int personType, string name, int ruc, int dni, int priority, int type, int state, string address, int phone, string contact, string email)
+        public int UpdateClient(string id, int personType, string name, long ruc, long dni, int priority, int type, int state, string address, int phone, string contact, string email)
         {
             adap = clientAdapter();
 

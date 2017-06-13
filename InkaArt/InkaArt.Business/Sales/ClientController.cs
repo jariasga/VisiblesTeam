@@ -41,8 +41,8 @@ namespace InkaArt.Business.Sales
         public int UpdateClient(string id, string personType, string name, string ruc, string dni, string priority, string type, string state, string address, string phone, string contact, string email)
         {
             int personTypeInt = int.Parse(personType);
-            int rucInt = int.Parse(ruc);
-            int dniInt = int.Parse(dni);
+            long rucInt = long.Parse(ruc);
+            long dniInt = long.Parse(dni);
             int stateInt = int.Parse(state);
             int typeInt = int.Parse(type);
             int priorityInt = int.Parse(priority);

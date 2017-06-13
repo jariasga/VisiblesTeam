@@ -36,6 +36,10 @@
             this.textbox_amount = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,10 +53,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button_delete = new System.Windows.Forms.Button();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_fac = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orderline)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -159,6 +160,26 @@
             this.grid_orderline.RowHeadersVisible = false;
             this.grid_orderline.Size = new System.Drawing.Size(560, 203);
             this.grid_orderline.TabIndex = 22;
+            // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "PU";
+            this.Column2.Name = "Column2";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
             // 
             // groupBox1
             // 
@@ -319,25 +340,19 @@
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
-            // Producto
+            // button_fac
             // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "PU";
-            this.Column2.Name = "Column2";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
+            this.button_fac.BackColor = System.Drawing.Color.Gray;
+            this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_fac.ForeColor = System.Drawing.Color.White;
+            this.button_fac.Location = new System.Drawing.Point(679, 543);
+            this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_fac.Name = "button_fac";
+            this.button_fac.Size = new System.Drawing.Size(143, 48);
+            this.button_fac.TabIndex = 39;
+            this.button_fac.Text = "＋ Facturar";
+            this.button_fac.UseVisualStyleBackColor = false;
+            this.button_fac.Visible = false;
             // 
             // ClientOrderShow
             // 
@@ -345,6 +360,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1203, 620);
+            this.Controls.Add(this.button_fac);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -391,5 +407,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.Button button_fac;
     }
 }

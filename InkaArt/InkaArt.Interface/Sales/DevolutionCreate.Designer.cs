@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_delete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.textbox_reason = new System.Windows.Forms.TextBox();
             this.combo_quality = new System.Windows.Forms.ComboBox();
@@ -40,9 +41,10 @@
             this.textbox_devamount = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.combo_product = new System.Windows.Forms.ComboBox();
@@ -75,6 +77,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button_delete);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.textbox_reason);
             this.groupBox2.Controls.Add(this.combo_quality);
@@ -93,13 +96,27 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox2.Location = new System.Drawing.Point(515, 18);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(620, 560);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Devolución";
+            // 
+            // button_delete
+            // 
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(393, 110);
+            this.button_delete.Margin = new System.Windows.Forms.Padding(4);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(161, 48);
+            this.button_delete.TabIndex = 39;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
             // label12
             // 
@@ -116,7 +133,7 @@
             this.textbox_reason.BackColor = System.Drawing.Color.White;
             this.textbox_reason.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_reason.Location = new System.Drawing.Point(268, 377);
-            this.textbox_reason.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_reason.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_reason.Multiline = true;
             this.textbox_reason.Name = "textbox_reason";
             this.textbox_reason.Size = new System.Drawing.Size(324, 153);
@@ -131,7 +148,7 @@
             "Estandar",
             "Económico"});
             this.combo_quality.Location = new System.Drawing.Point(261, 65);
-            this.combo_quality.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combo_quality.Margin = new System.Windows.Forms.Padding(4);
             this.combo_quality.Name = "combo_quality";
             this.combo_quality.Size = new System.Drawing.Size(219, 31);
             this.combo_quality.TabIndex = 29;
@@ -141,7 +158,7 @@
             this.textbox_devtotal.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_devtotal.Enabled = false;
             this.textbox_devtotal.Location = new System.Drawing.Point(32, 498);
-            this.textbox_devtotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_devtotal.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_devtotal.Name = "textbox_devtotal";
             this.textbox_devtotal.Size = new System.Drawing.Size(219, 30);
             this.textbox_devtotal.TabIndex = 28;
@@ -162,7 +179,7 @@
             this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Location = new System.Drawing.Point(33, 438);
-            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_igv.Name = "textbox_igv";
             this.textbox_igv.Size = new System.Drawing.Size(219, 30);
             this.textbox_igv.TabIndex = 26;
@@ -183,7 +200,7 @@
             this.textbox_devamount.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_devamount.Enabled = false;
             this.textbox_devamount.Location = new System.Drawing.Point(33, 377);
-            this.textbox_devamount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_devamount.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_devamount.Name = "textbox_devamount";
             this.textbox_devamount.Size = new System.Drawing.Size(219, 30);
             this.textbox_devamount.TabIndex = 21;
@@ -191,6 +208,7 @@
             // 
             // grid_orderline
             // 
+            this.grid_orderline.AllowUserToAddRows = false;
             this.grid_orderline.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -206,9 +224,10 @@
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
+            this.Column1,
             this.cost,
             this.Cantidad,
-            this.delete});
+            this.deleteColumn});
             this.grid_orderline.Location = new System.Drawing.Point(33, 171);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
@@ -220,9 +239,14 @@
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            // 
             // cost
             // 
-            this.cost.HeaderText = "Precio Unitario";
+            this.cost.HeaderText = "PU";
             this.cost.Name = "cost";
             // 
             // Cantidad
@@ -230,10 +254,10 @@
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             // 
-            // delete
+            // deleteColumn
             // 
-            this.delete.HeaderText = "Eliminar";
-            this.delete.Name = "delete";
+            this.deleteColumn.HeaderText = "Eliminar";
+            this.deleteColumn.Name = "deleteColumn";
             // 
             // label7
             // 
@@ -248,6 +272,7 @@
             // button_add
             // 
             this.button_add.BackColor = System.Drawing.Color.Gray;
+            this.button_add.Enabled = false;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
             this.button_add.Location = new System.Drawing.Point(243, 110);
@@ -257,6 +282,7 @@
             this.button_add.TabIndex = 21;
             this.button_add.Text = "＋ Agregar";
             this.button_add.UseVisualStyleBackColor = false;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
             // combo_product
             // 
@@ -267,7 +293,7 @@
             "Piedra de Huamanga",
             "Huaco"});
             this.combo_product.Location = new System.Drawing.Point(33, 65);
-            this.combo_product.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combo_product.Margin = new System.Windows.Forms.Padding(4);
             this.combo_product.Name = "combo_product";
             this.combo_product.Size = new System.Drawing.Size(219, 31);
             this.combo_product.TabIndex = 13;
@@ -276,10 +302,12 @@
             // 
             this.numeric_quantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numeric_quantity.Location = new System.Drawing.Point(487, 66);
-            this.numeric_quantity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numeric_quantity.Margin = new System.Windows.Forms.Padding(4);
             this.numeric_quantity.Name = "numeric_quantity";
             this.numeric_quantity.Size = new System.Drawing.Size(107, 30);
             this.numeric_quantity.TabIndex = 19;
+            this.numeric_quantity.ValueChanged += new System.EventHandler(this.numeric_quantity_ValueChanged);
+            this.numeric_quantity.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numeric_quantity_KeyUp);
             // 
             // label1
             // 
@@ -319,9 +347,9 @@
             this.groupBox1.Controls.Add(this.clientIdentifierLabel);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(39, 415);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(445, 224);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
@@ -332,7 +360,7 @@
             this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_name.Enabled = false;
             this.textbox_name.Location = new System.Drawing.Point(33, 148);
-            this.textbox_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_name.Name = "textbox_name";
             this.textbox_name.Size = new System.Drawing.Size(368, 30);
             this.textbox_name.TabIndex = 19;
@@ -352,7 +380,7 @@
             this.textbox_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_doc.Enabled = false;
             this.textbox_doc.Location = new System.Drawing.Point(33, 74);
-            this.textbox_doc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_doc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_doc.Name = "textbox_doc";
             this.textbox_doc.Size = new System.Drawing.Size(368, 30);
             this.textbox_doc.TabIndex = 17;
@@ -394,9 +422,9 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox3.Location = new System.Drawing.Point(39, 18);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(445, 389);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
@@ -407,7 +435,7 @@
             this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total.Enabled = false;
             this.textbox_total.Location = new System.Drawing.Point(32, 321);
-            this.textbox_total.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_total.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_total.Name = "textbox_total";
             this.textbox_total.Size = new System.Drawing.Size(369, 30);
             this.textbox_total.TabIndex = 30;
@@ -423,7 +451,7 @@
             "Boleta",
             "Factura"});
             this.combo_doc.Location = new System.Drawing.Point(33, 68);
-            this.combo_doc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combo_doc.Margin = new System.Windows.Forms.Padding(4);
             this.combo_doc.Name = "combo_doc";
             this.combo_doc.Size = new System.Drawing.Size(369, 31);
             this.combo_doc.TabIndex = 36;
@@ -442,7 +470,7 @@
             // 
             this.date_deliverydate.Font = new System.Drawing.Font("Arial", 11F);
             this.date_deliverydate.Location = new System.Drawing.Point(33, 261);
-            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4);
             this.date_deliverydate.Name = "date_deliverydate";
             this.date_deliverydate.Size = new System.Drawing.Size(368, 29);
             this.date_deliverydate.TabIndex = 12;
@@ -452,7 +480,7 @@
             this.textbox_docid.BackColor = System.Drawing.Color.White;
             this.textbox_docid.Enabled = false;
             this.textbox_docid.Location = new System.Drawing.Point(33, 133);
-            this.textbox_docid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_docid.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_docid.Name = "textbox_docid";
             this.textbox_docid.Size = new System.Drawing.Size(368, 30);
             this.textbox_docid.TabIndex = 6;
@@ -512,7 +540,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button_save);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DevolutionCreate";
             this.Text = "Registro de Devolución";
             this.Load += new System.EventHandler(this.DevolutionCreate_Load);
@@ -534,10 +562,6 @@
         private System.Windows.Forms.TextBox textbox_devtotal;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView grid_orderline;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn delete;
         private System.Windows.Forms.Button button_add;
         private System.Windows.Forms.ComboBox combo_product;
         private System.Windows.Forms.NumericUpDown numeric_quantity;
@@ -567,5 +591,11 @@
         private System.Windows.Forms.ComboBox combo_quality;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textbox_reason;
+        private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
     }
 }
