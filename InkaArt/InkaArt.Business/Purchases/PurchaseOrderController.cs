@@ -50,10 +50,11 @@ namespace InkaArt.Business.Purchases
         }
         public void updateData(string id,int proveedor, string estado, DateTime creacion, DateTime entrega, double total)
         {
+            
             table = data.Tables["PurcharseOrder"];
             purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
-                        "SET id_supplier = {0}, status = '{1}', creation_date = '{2}', delivery_date = '{3}', total = {4} " +
-                        "WHERE id_order = {5}", proveedor, estado, creacion, entrega, total, id));
+                        "SET id_supplier = {0}, status = '{1}', creation_date = to_date('{2}','DD/MM/YYYY'), delivery_date = to_date('{3}','DD/MM/YYYY'), total = {4} " +
+                        "WHERE id_order = {5}", proveedor, estado, creacion.ToString(), entrega.ToString(), total, id));
 
            /* for (int i = 0; i < table.Rows.Count; i++)
             {
