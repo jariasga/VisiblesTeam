@@ -37,14 +37,14 @@
             this.textBox_idFactura = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView_orders = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantidadPorMover = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantMovement = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_orders)).BeginInit();
             this.SuspendLayout();
@@ -157,32 +157,6 @@
             this.dataGridView_orders.Size = new System.Drawing.Size(535, 171);
             this.dataGridView_orders.TabIndex = 45;
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.SteelBlue;
-            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(118, 396);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(138, 39);
-            this.button2.TabIndex = 46;
-            this.button2.Text = "Aceptar";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
-            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(309, 396);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(138, 39);
-            this.buttonDelete.TabIndex = 55;
-            this.buttonDelete.Text = "Cancelar";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
             // Id
             // 
             this.Id.HeaderText = "Id Item";
@@ -251,7 +225,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(570, 445);
+            this.ClientSize = new System.Drawing.Size(710, 577);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView_orders);

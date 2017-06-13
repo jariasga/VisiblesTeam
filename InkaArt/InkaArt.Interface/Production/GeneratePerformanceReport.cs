@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Algorithm;
+//using InkaArt.Business.Security;
 
 namespace InkaArt.Interface.Production
 {
@@ -23,7 +24,7 @@ namespace InkaArt.Interface.Production
             //comboBox_workers.Items.Clear();
             foreach (var worker in workerControl.List())
             {
-                comboBox_workers.Items.Add(worker.GetFullName);
+                comboBox_workers.Items.Add(worker.Name + " " + worker.LastName);
                 indexList.Add(worker.ID);
             }
             

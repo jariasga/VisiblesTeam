@@ -60,7 +60,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(377, 469);
+            this.buttonDelete.Location = new System.Drawing.Point(359, 469);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(151, 39);
             this.buttonDelete.TabIndex = 51;
@@ -73,7 +73,7 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(212, 469);
+            this.buttonAdd.Location = new System.Drawing.Point(203, 469);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(151, 39);
@@ -160,7 +160,7 @@
             // datetime_movement
             // 
             this.datetime_movement.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datetime_movement.Location = new System.Drawing.Point(240, 113);
+            this.datetime_movement.Location = new System.Drawing.Point(240, 109);
             this.datetime_movement.Name = "datetime_movement";
             this.datetime_movement.ShowCheckBox = true;
             this.datetime_movement.Size = new System.Drawing.Size(193, 26);
@@ -174,7 +174,7 @@
             this.combobox_reason.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
-            this.combobox_reason.Location = new System.Drawing.Point(456, 50);
+            this.combobox_reason.Location = new System.Drawing.Point(456, 49);
             this.combobox_reason.Name = "combobox_reason";
             this.combobox_reason.Size = new System.Drawing.Size(193, 25);
             this.combobox_reason.TabIndex = 36;
@@ -195,7 +195,7 @@
             this.combobox_status.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
-            this.combobox_status.Location = new System.Drawing.Point(456, 113);
+            this.combobox_status.Location = new System.Drawing.Point(456, 110);
             this.combobox_status.Name = "combobox_status";
             this.combobox_status.Size = new System.Drawing.Size(193, 25);
             this.combobox_status.TabIndex = 34;
@@ -218,7 +218,7 @@
             this.combobox_type.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
-            this.combobox_type.Location = new System.Drawing.Point(240, 50);
+            this.combobox_type.Location = new System.Drawing.Point(240, 49);
             this.combobox_type.Name = "combobox_type";
             this.combobox_type.Size = new System.Drawing.Size(193, 25);
             this.combobox_type.TabIndex = 32;
@@ -239,7 +239,7 @@
             this.combobox_warehouse.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
-            this.combobox_warehouse.Location = new System.Drawing.Point(25, 114);
+            this.combobox_warehouse.Location = new System.Drawing.Point(25, 110);
             this.combobox_warehouse.Name = "combobox_warehouse";
             this.combobox_warehouse.Size = new System.Drawing.Size(192, 25);
             this.combobox_warehouse.TabIndex = 27;
@@ -285,7 +285,7 @@
             this.buttonSearch.BackColor = System.Drawing.Color.Gray;
             this.buttonSearch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
-            this.buttonSearch.Location = new System.Drawing.Point(278, 155);
+            this.buttonSearch.Location = new System.Drawing.Point(276, 155);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(123, 39);
@@ -299,7 +299,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(781, 523);
+            this.ClientSize = new System.Drawing.Size(734, 523);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.data_grid_movements);

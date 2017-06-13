@@ -103,7 +103,7 @@ namespace InkaArt.Data.Warehouse
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = address;
         }
 
-        private void byId(NpgsqlDataAdapter adap, int id)
+        public void byId(NpgsqlDataAdapter adap, int id)
         {
             if (id == -1) return; //If there is no id, just return dude
             int numParams = adap.SelectCommand.Parameters.Count();
