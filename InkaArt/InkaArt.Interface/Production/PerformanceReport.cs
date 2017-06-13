@@ -25,7 +25,6 @@ namespace InkaArt.Interface.Production
         {
             label_nameWorker.Text = worker;
             label_today.Text = DateTime.Now.ToString("M/d/yyyy");
-            label2.Text = chosenIndex.ToString();
             DataTable performanceReportList = reportControl.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
             populateDataGrid(performanceReportList);           
         }
