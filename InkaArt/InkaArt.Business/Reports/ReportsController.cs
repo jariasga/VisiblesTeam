@@ -36,5 +36,9 @@ namespace InkaArt.Business.Reports
         {
             return reportData.getDataSimulation(name);
         }
+        public DataTable getDataMovements()
+        {
+            return reportData.getDataMovements();
+        }
     }
 }

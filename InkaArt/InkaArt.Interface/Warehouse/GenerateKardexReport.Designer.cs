@@ -88,11 +88,6 @@
             // comboBox_products
             // 
             this.comboBox_products.FormattingEnabled = true;
-            this.comboBox_products.Items.AddRange(new object[] {
-            "Cerámicos",
-            "Piedra de Huamanga",
-            "Retablos",
-            "Todos"});
             this.comboBox_products.Location = new System.Drawing.Point(451, 75);
             this.comboBox_products.Name = "comboBox_products";
             this.comboBox_products.Size = new System.Drawing.Size(212, 31);
@@ -104,9 +99,9 @@
             this.label4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(17, 143);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(208, 22);
+            this.label4.Size = new System.Drawing.Size(203, 22);
             this.label4.TabIndex = 28;
-            this.label4.Text = "Fecha final del periodo:";
+            this.label4.Text = "Fecha final del periodo";
             // 
             // label3
             // 
@@ -114,9 +109,9 @@
             this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(17, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(220, 22);
+            this.label3.Size = new System.Drawing.Size(215, 22);
             this.label3.TabIndex = 27;
-            this.label3.Text = "Fecha inicial del periodo:";
+            this.label3.Text = "Fecha inicial del periodo";
             // 
             // label2
             // 
@@ -124,9 +119,9 @@
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(449, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(194, 22);
+            this.label2.Size = new System.Drawing.Size(189, 22);
             this.label2.TabIndex = 26;
-            this.label2.Text = "Nombre del producto:";
+            this.label2.Text = "Nombre del producto";
             // 
             // GenerateKardexReport
             // 

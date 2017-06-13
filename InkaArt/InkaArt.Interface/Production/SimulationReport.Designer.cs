@@ -30,17 +30,17 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label_todaydate = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label_simulationName = new System.Windows.Forms.Label();
-            this.label_simulationTime = new System.Windows.Forms.Label();
             this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iteraciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_huacos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_stones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_altarpieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_workers = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label_todaydate = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label_simulationName = new System.Windows.Forms.Label();
+            this.label_simulationTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,6 +76,42 @@
             this.simulation_grid.Size = new System.Drawing.Size(996, 335);
             this.simulation_grid.TabIndex = 2;
             // 
+            // report_date
+            // 
+            this.report_date.HeaderText = "Fecha";
+            this.report_date.Name = "report_date";
+            this.report_date.ReadOnly = true;
+            // 
+            // iteraciones
+            // 
+            this.iteraciones.HeaderText = "N° iteraciones tabu";
+            this.iteraciones.Name = "iteraciones";
+            this.iteraciones.ReadOnly = true;
+            // 
+            // report_huacos
+            // 
+            this.report_huacos.HeaderText = "Huacos producidos";
+            this.report_huacos.Name = "report_huacos";
+            this.report_huacos.ReadOnly = true;
+            // 
+            // report_stones
+            // 
+            this.report_stones.HeaderText = "Piedras de Huamanga producidas";
+            this.report_stones.Name = "report_stones";
+            this.report_stones.ReadOnly = true;
+            // 
+            // report_altarpieces
+            // 
+            this.report_altarpieces.HeaderText = "Retablos producidos";
+            this.report_altarpieces.Name = "report_altarpieces";
+            this.report_altarpieces.ReadOnly = true;
+            // 
+            // report_workers
+            // 
+            this.report_workers.HeaderText = "# trabajadores asignados";
+            this.report_workers.Name = "report_workers";
+            this.report_workers.ReadOnly = true;
+            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
@@ -85,7 +121,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 44);
             this.button1.TabIndex = 32;
-            this.button1.Text = "🖶 Imprimir";
+            this.button1.Text = "Exportar";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // label_todaydate
@@ -124,42 +160,6 @@
             this.label_simulationTime.Name = "label_simulationTime";
             this.label_simulationTime.Size = new System.Drawing.Size(0, 22);
             this.label_simulationTime.TabIndex = 37;
-            // 
-            // report_date
-            // 
-            this.report_date.HeaderText = "Fecha";
-            this.report_date.Name = "report_date";
-            this.report_date.ReadOnly = true;
-            // 
-            // iteraciones
-            // 
-            this.iteraciones.HeaderText = "N° iteraciones tabu";
-            this.iteraciones.Name = "iteraciones";
-            this.iteraciones.ReadOnly = true;
-            // 
-            // report_huacos
-            // 
-            this.report_huacos.HeaderText = "Huacos producidos";
-            this.report_huacos.Name = "report_huacos";
-            this.report_huacos.ReadOnly = true;
-            // 
-            // report_stones
-            // 
-            this.report_stones.HeaderText = "Piedras de Huamanga producidas";
-            this.report_stones.Name = "report_stones";
-            this.report_stones.ReadOnly = true;
-            // 
-            // report_altarpieces
-            // 
-            this.report_altarpieces.HeaderText = "Retablos producidos";
-            this.report_altarpieces.Name = "report_altarpieces";
-            this.report_altarpieces.ReadOnly = true;
-            // 
-            // report_workers
-            // 
-            this.report_workers.HeaderText = "# trabajadores asignados";
-            this.report_workers.Name = "report_workers";
-            this.report_workers.ReadOnly = true;
             // 
             // SimulationReport
             // 
