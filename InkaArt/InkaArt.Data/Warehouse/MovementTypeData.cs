@@ -11,6 +11,7 @@ namespace InkaArt.Data.Warehouse
 {
     class MovementTypeData : BD_Connector
     {
+        private string table_name;
         private DataSet data;
         private DataTable table;
         private DataRow row;
@@ -19,15 +20,16 @@ namespace InkaArt.Data.Warehouse
         public MovementTypeData()
         {
             data = new DataSet();
+            table_name = "MovementType";
         }
 
-        public DataTable GetMovements()
+        public DataTable GetMovementTypes()
         {
-            adap = movementAdapter();
+            adap = movementTypeAdapter();
             adap.SelectCommand.CommandText += ";";
 
             data.Clear();
-            data = getData(adap, "MovementType");
+            data = getData(adap, table_name);
             DataTable movement_list = new DataTable();
             movement_list = data.Tables[0];
             return movement_list;
@@ -48,12 +50,16 @@ namespace InkaArt.Data.Warehouse
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
         }
 
-
-        public NpgsqlDataAdapter movementAdapter()
+        public NpgsqlDataAdapter movementTypeAdapter()
         {
             NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
-            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"DocumentType\"", Connection);
+            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"" + table_name + "\"", Connection);
             return orderAdapter;
+        }
+
+        public DataSet getData(NpgsqlDataAdapter adapter)
+        {
+            return getData(adapter, table_name);
         }
     }
 }

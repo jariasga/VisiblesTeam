@@ -84,6 +84,9 @@
     <Compile Include="Security\UserData.cs" />
     <Compile Include="Security\WorkerData.cs" />
     <Compile Include="Warehouse\MaterialMovementData.cs" />
+    <Compile Include="Warehouse\MovementData.cs" />
+    <Compile Include="Warehouse\MovementReasonData.cs" />
+    <Compile Include="Warehouse\MovementTypeData.cs" />
     <Compile Include="Warehouse\ProductionItemMovementData.cs" />
     <Compile Include="Warehouse\ProductionItemWarehouseMovementData.cs" />
     <Compile Include="Warehouse\ProductionMovementMovementData.cs" />

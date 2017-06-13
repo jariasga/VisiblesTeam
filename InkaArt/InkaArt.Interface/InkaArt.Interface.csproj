@@ -183,6 +183,12 @@
     <Compile Include="Warehouse\ExchangeMovement.Designer.cs">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\MovementIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\MovementIndex.Designer.cs">
+      <DependentUpon>MovementIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\ProductionMovement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -510,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\MovementIndex.resx">
+      <DependentUpon>MovementIndex.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ProductionMovement.resx">
       <DependentUpon>ProductionMovement.cs</DependentUpon>

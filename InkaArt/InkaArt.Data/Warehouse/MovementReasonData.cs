@@ -58,5 +58,10 @@ namespace InkaArt.Data.Warehouse
             orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"" + table_name + "\"", Connection);
             return orderAdapter;
         }
+
+        public DataSet getData(NpgsqlDataAdapter adapter)
+        {
+            return getData(adapter, table_name);
+        }
     }
 }
