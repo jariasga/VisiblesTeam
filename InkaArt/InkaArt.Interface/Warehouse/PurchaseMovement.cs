@@ -120,7 +120,7 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            PurchaseOrderDetailController controlOrderRm = new PurchaseOrderDetailController();
+            Business.Warehouse.PurchaseOrderDetailController controlOrderRm = new Business.Warehouse.PurchaseOrderDetailController();
             DataTable orderList = controlOrderRm.getData();
 
             string idOrder = textBox_idFactura.Text;
