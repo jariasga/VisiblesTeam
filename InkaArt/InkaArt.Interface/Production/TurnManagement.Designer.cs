@@ -131,6 +131,7 @@
             // checkBox_nuevoTurno
             // 
             this.checkBox_nuevoTurno.AutoSize = true;
+            this.checkBox_nuevoTurno.Enabled = false;
             this.checkBox_nuevoTurno.Location = new System.Drawing.Point(32, 175);
             this.checkBox_nuevoTurno.Name = "checkBox_nuevoTurno";
             this.checkBox_nuevoTurno.Size = new System.Drawing.Size(113, 22);
