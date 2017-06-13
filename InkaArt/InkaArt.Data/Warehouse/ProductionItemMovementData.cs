@@ -53,5 +53,43 @@ namespace InkaArt.Data.Warehouse
             adap.SelectCommand.Parameters[numParams].SourceColumn = "idProduct";
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
         }
+
+        public int WatchDocument(string query)
+        {
+            connect();
+            NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
+
+            //query = "Select * from inkaart.\"Warehouse\"";
+            NpgsqlCommand command = new NpgsqlCommand(query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            int rowIndex=0;
+
+            while (dr.Read())
+            {                
+                rowIndex++;
+            }
+            closeConnection();
+            return rowIndex;
+        }        
+
+        public NpgsqlDataReader GetLoteData(string query)
+        {
+            connect();
+            NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
+
+            //query = "Select * from inkaart.\"Warehouse\"";
+            NpgsqlCommand command = new NpgsqlCommand(query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            //closeConnection();
+            return dr;
+        }
+
+        public void insertData2(string query="")
+        {
+            execute(query);
+        }
+
     }
 }

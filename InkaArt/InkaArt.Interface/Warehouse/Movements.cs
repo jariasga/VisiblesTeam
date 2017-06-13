@@ -25,12 +25,29 @@ namespace InkaArt.Interface.Warehouse
         {
             string reason = comboBox2.Text;
 
+            if(reason == "")
+            {
+                MessageBox.Show("Por favor ingresar una razón de movimiento");
+                return;
+            }
+
+            string nameWarehouseOrigin;
+            string idWarehouesOrigin;
+            nameWarehouseOrigin = textBox6.Text;
+            idWarehouesOrigin = textBox5.Text;
+
             if (reason == "Produccion")
             {
-                string nameWarehouseOrigin;
-                string idWarehouesOrigin;
-                nameWarehouseOrigin = textBox6.Text;
-                idWarehouesOrigin = textBox5.Text;
+                if(idWarehouesOrigin == "")
+                {
+                    MessageBox.Show("Por favor seleccione un almacén antes de continuar");
+                    return;
+                }
+                if(comboBox1.Text == "")
+                {
+                    MessageBox.Show("Por favor seleccione un tipo de movimiento");
+                    return;
+                }
                 Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
                 formView.Show();
             }
@@ -45,14 +62,14 @@ namespace InkaArt.Interface.Warehouse
                 {
                     if (reason == "Venta")
                     {
-                        Form formView = new InkaArt.Interface.Warehouse.SaleMovementcs();
+                        Form formView = new InkaArt.Interface.Warehouse.SaleMovementcs(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
                         formView.Show();
                     }
                     else
                     {
                         if (reason == "Traslado")
                         {
-                            Form formView = new InkaArt.Interface.Warehouse.ExchangeMovement();
+                            Form formView = new InkaArt.Interface.Warehouse.ExchangeMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
                             formView.Show();
                         }
                         else
@@ -114,6 +131,11 @@ namespace InkaArt.Interface.Warehouse
             {
                 comboBox1.Items.Add(row["description"]);
             }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

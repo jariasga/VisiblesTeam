@@ -25,6 +25,17 @@ namespace InkaArt.Data.Warehouse
             return productMovementAdapter;
         }
 
+        //public NpgsqlDataReader GetLoteData(int idLote)
+        //{
+        //    //connect();
+
+        //    //string query = "select product_name, products_job_3, products_job_4, products_job_6 from RatioPerDay where id = " + idLote;
+
+        //    DataTable clientList = new DataTable();
+        //    clientList = data.Tables[0];
+        //    return clientList;
+        //}
+
         public DataTable GetData(int id = -1, string name = "", int state = -1)
         {
             //connect();

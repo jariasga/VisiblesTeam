@@ -45,9 +45,22 @@
             this.label9 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MovementCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -62,7 +75,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(25, 181);
+            this.groupBox1.Location = new System.Drawing.Point(754, 559);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(755, 270);
             this.groupBox1.TabIndex = 5;
@@ -75,6 +88,7 @@
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(179, 30);
             this.numericUpDown2.TabIndex = 37;
+            this.numericUpDown2.Visible = false;
             // 
             // textBox4
             // 
@@ -83,6 +97,7 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(401, 30);
             this.textBox4.TabIndex = 27;
+            this.textBox4.Visible = false;
             // 
             // label11
             // 
@@ -101,19 +116,21 @@
             this.label7.Size = new System.Drawing.Size(160, 23);
             this.label7.TabIndex = 26;
             this.label7.Text = "Tipo de Producto";
+            this.label7.Visible = false;
             // 
             // button_create
             // 
             this.button_create.BackColor = System.Drawing.Color.SteelBlue;
             this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create.ForeColor = System.Drawing.Color.White;
-            this.button_create.Location = new System.Drawing.Point(59, 93);
+            this.button_create.Location = new System.Drawing.Point(10, 28);
             this.button_create.Margin = new System.Windows.Forms.Padding(2);
             this.button_create.Name = "button_create";
             this.button_create.Size = new System.Drawing.Size(204, 48);
             this.button_create.TabIndex = 25;
             this.button_create.Text = "Buscar";
             this.button_create.UseVisualStyleBackColor = false;
+            this.button_create.Visible = false;
             this.button_create.Click += new System.EventHandler(this.button_create_Click);
             // 
             // textBox2
@@ -123,6 +140,7 @@
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(401, 30);
             this.textBox2.TabIndex = 3;
+            this.textBox2.Visible = false;
             // 
             // textBox1
             // 
@@ -131,6 +149,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(401, 30);
             this.textBox1.TabIndex = 2;
+            this.textBox1.Visible = false;
             // 
             // label2
             // 
@@ -140,6 +159,7 @@
             this.label2.Size = new System.Drawing.Size(85, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Nombre:";
+            this.label2.Visible = false;
             // 
             // label1
             // 
@@ -149,6 +169,7 @@
             this.label1.Size = new System.Drawing.Size(124, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Identificador:";
+            this.label1.Visible = false;
             // 
             // groupBox3
             // 
@@ -227,12 +248,108 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(25, 171);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(769, 326);
+            this.groupBox2.TabIndex = 36;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Lote de Producción";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Gray;
+            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(699, 24);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 38);
+            this.button1.TabIndex = 57;
+            this.button1.Text = "🔎 Buscar";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(411, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 23);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Nro Lote";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(503, 29);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(188, 30);
+            this.textBox3.TabIndex = 34;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idProduct,
+            this.ProductName,
+            this.Cant,
+            this.CurrentCant,
+            this.MovementCant,
+            this.Modificar});
+            this.dataGridView1.Location = new System.Drawing.Point(6, 78);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(753, 230);
+            this.dataGridView1.TabIndex = 57;
+            // 
+            // idProduct
+            // 
+            this.idProduct.HeaderText = "Id Producto";
+            this.idProduct.Name = "idProduct";
+            this.idProduct.ReadOnly = true;
+            // 
+            // ProductName
+            // 
+            this.ProductName.HeaderText = "Producto";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            // 
+            // Cant
+            // 
+            this.Cant.HeaderText = "Cantidad Total";
+            this.Cant.Name = "Cant";
+            this.Cant.ReadOnly = true;
+            // 
+            // CurrentCant
+            // 
+            this.CurrentCant.HeaderText = "Cantidad por mover";
+            this.CurrentCant.Name = "CurrentCant";
+            this.CurrentCant.ReadOnly = true;
+            // 
+            // MovementCant
+            // 
+            this.MovementCant.HeaderText = "Cantidad a mover";
+            this.MovementCant.Name = "MovementCant";
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            // 
             // ProductionMovement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(806, 589);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox3);
@@ -244,6 +361,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -267,5 +387,16 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MovementCant;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
     }
 }
