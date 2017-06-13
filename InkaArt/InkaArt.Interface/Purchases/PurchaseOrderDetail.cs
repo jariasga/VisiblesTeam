@@ -22,6 +22,7 @@ namespace InkaArt.Interface.Purchases
         int mode;
         string listaMaterialesIds;
         bool isInEditMode = true;
+        bool enProcesoDeLlenado = true;
         public PurchaseOrderDetail()
         {
             mode = 1;
@@ -135,6 +136,7 @@ namespace InkaArt.Interface.Purchases
         }
         private void llenarMateriasPedidas()
         {
+            enProcesoDeLlenado = true;
             //obtengo todas las lineas de pedido de esta orden
             DataRow[] rows;
             lineaPedidosList = control_detail.getData();
@@ -150,13 +152,26 @@ namespace InkaArt.Interface.Purchases
             {
                 string id_detail = lineaPedidosList.Rows[i]["id_detail"].ToString();
                 string id_raw_material = lineaPedidosList.Rows[i]["id_raw_material"].ToString();
-                string nombre = id_raw_material;
+                string nombre = buscarNombre(id_raw_material);
                 string quantity = lineaPedidosList.Rows[i]["quantity"].ToString();
                 string amount = lineaPedidosList.Rows[i]["amount"].ToString();
                 string id_factura = lineaPedidosList.Rows[i]["id_factura"].ToString();
                 string status = lineaPedidosList.Rows[i]["status"].ToString();
                 dataGridView_pedidos.Rows.Add(false, id_detail,id_raw_material,nombre,quantity,amount,id_factura,status);
             }
+            enProcesoDeLlenado = false;
+        }
+        private string buscarNombre(string id_raw)
+        {
+            DataRow[] rows;
+            DataTable auxiliarLista = control_rm.getData();
+            rows = auxiliarLista.Select("id_raw_material = " + id_raw);
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            if (auxiliarLista.Rows.Count != 0) return auxiliarLista.Rows[0]["name"].ToString();
+            else return "";
         }
         private void obtenerMateriasDelSupplier()
         {
@@ -205,7 +220,26 @@ namespace InkaArt.Interface.Purchases
         /* delete */
         private void button_delete(object sender, EventArgs e)
         {
-            
+            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[0].Value))
+                {
+                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
+                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
+                    Double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
+                    int id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
+                    try
+                    {
+                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Inactivo");
+                        dataGridView_pedidos.Rows[i].Cells[0].Value = false;
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            }
+            llenarMateriasPedidas();
         }
 
         private void textBox_supplier_TextChanged(object sender, EventArgs e)
@@ -354,6 +388,40 @@ namespace InkaArt.Interface.Purchases
             unitAbrev.Text=hallarNombreUnit(int.Parse(idUnit.Text));
             textBox_price.Text = hallarPrecio(textBox_idrm.Text);            
         }
+
+        private bool validarNumFactura(int id_Row)
+        {
+            int valorInt = 0, modInt;
+            if (int.TryParse(dataGridView_pedidos.Rows[id_Row].Cells[6].Value.ToString(), out modInt))
+            {
+                
+            }
+            else { 
+                MessageBox.Show("Solo puede colocar números en la factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dataGridView_pedidos.Rows[id_Row].Cells[6].Value = "0";
+                return false;
+            }        
+            return true;
+        }
+        private void ingresandoFactura(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!enProcesoDeLlenado)
+            {
+                //validando que sea correcto
+                int currentId = dataGridView_pedidos.CurrentCell.RowIndex;
+                
+                if (dataGridView_pedidos.CurrentCell.ColumnIndex == 6 && validarNumFactura(currentId))
+                {
+                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[1].Value.ToString());
+                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[4].Value.ToString());
+                    Double subtotalAux = double.Parse(dataGridView_pedidos.Rows[currentId].Cells[5].Value.ToString());
+                    int id_facturaAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[6].Value.ToString());
+                    control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Activo");
+                    llenarMateriasPedidas();
+                }
+            }
+        }
+
         private string hallarNombreUnit(int idUnit)
         {
             DataRow[] rows;
