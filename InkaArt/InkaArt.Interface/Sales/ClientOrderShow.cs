@@ -15,11 +15,13 @@ namespace InkaArt.Interface.Sales
     {
         int orderId;
         OrderController orderController;
+        DataTable orderLine;
         public ClientOrderShow(string id)
         {
             InitializeComponent();
             orderId = int.Parse(id);
             orderController = new OrderController();
+            orderLine = new DataTable();
         }
 
         private void ClientOrderShow_Load(object sender, EventArgs e)
@@ -30,7 +32,6 @@ namespace InkaArt.Interface.Sales
 
         private void populateFields(DataTable orderObject)
         {
-            DataTable orderLine;
             foreach (DataRow row in orderObject.Rows)
             {
                 button_fac.Visible = row["orderStatus"].ToString().Equals("despachado");
@@ -49,7 +50,7 @@ namespace InkaArt.Interface.Sales
                 foreach (DataRow orderline in orderLine.Rows)
                 {
                     string productId = orderline["idProduct"].ToString();
-                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId);
+                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId,row["idClient"].ToString());
                     grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"]);
                 }
             }
@@ -67,6 +68,15 @@ namespace InkaArt.Interface.Sales
         private void button_doc_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_fac_Click(object sender, EventArgs e)
+        {
+            int response = orderController.AddSaleDocument(combo_doc.SelectedIndex, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, orderId, orderLine);
+            if (response >= 0)
+            {
+                MessageBox.Show(this, "Se ha generado el documento de venta exitosamente", "Documento de Venta", MessageBoxButtons.OK);
+            }
         }
     }
 }

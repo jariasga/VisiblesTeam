@@ -43,12 +43,13 @@ namespace InkaArt.Interface.Sales
             DataTable orderLine;
             foreach (DataRow row in orderObject.Rows)
             {
+                amount = float.Parse(row["saleAmount"].ToString());
                 clientId = int.Parse(row["idClient"].ToString());
                 date_deliverydate.Value = Convert.ToDateTime(row["deliveryDate"]);
                 textbox_devamount.Text = row["saleAmount"].ToString();
                 textbox_docid.Text = salesDocumentId.ToString();
                 textbox_igv.Text = row["igv"].ToString();
-                textbox_total.Text = row["totalAmount"].ToString();
+                textbox_total.Text = textbox_devtotal.Text = row["totalAmount"].ToString();
                 string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType = "Boleta";
                 textbox_doc.Text = clientDoc;
                 textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
@@ -58,7 +59,7 @@ namespace InkaArt.Interface.Sales
                 foreach (DataRow orderline in orderLine.Rows)
                 {
                     string productId = orderline["idProduct"].ToString();
-                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId);
+                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId, row["idClient"].ToString());
                     grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"]);
                 }
             }
@@ -127,6 +128,16 @@ namespace InkaArt.Interface.Sales
         private void button_delete_Click(object sender, EventArgs e)
         {
             double remAmount = 0;
+            int currentRowAmount = grid_orderline.RowCount;
+            for (int i = currentRowAmount - 1; i > 0; i--)
+            {
+                DataGridViewRow row = grid_orderline.Rows[i];
+                if (Convert.ToBoolean(row.Cells[deleteColumn.Index].Value) == true)
+                {
+                    remAmount += Math.Round((double.Parse(row.Cells[2].Value.ToString()) * double.Parse(row.Cells[3].Value.ToString())), 2);
+                    grid_orderline.Rows.RemoveAt(row.Index);
+                }
+            }
             foreach (DataGridViewRow row in grid_orderline.Rows)
             {
                 if (Convert.ToBoolean(row.Cells[deleteColumn.Index].Value) == true)
@@ -152,21 +163,36 @@ namespace InkaArt.Interface.Sales
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            if (productList.Rows.Count == 0) productList = orderController.GetProducts();
-            foreach (DataRow row in productList.Rows)
+            if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
+            else
             {
-                var aux = row["idProduct"];
-                string strAux = aux.ToString();
-                if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
+                if (productList.Rows.Count == 0) productList = orderController.GetProducts();
+                foreach (DataRow row in productList.Rows)
                 {
-                    float price = float.Parse(row["localPrice"].ToString()) + float.Parse(row["basePrice"].ToString());
-                    amount += price * float.Parse(numeric_quantity.Value.ToString());
-                    grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
+                    var aux = row["idProduct"];
+                    string strAux = aux.ToString();
+                    if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
+                    {
+                        float price = float.Parse(row["localPrice"].ToString()) + float.Parse(row["basePrice"].ToString());
+                        amount += price * float.Parse(numeric_quantity.Value.ToString());
+                        grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
+                    }
                 }
+                textbox_devamount.Text = Math.Round(amount, 2).ToString();
+                textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
+                textbox_devtotal.Text = Math.Round((1.18 * amount), 2).ToString();
             }
-            textbox_devamount.Text = Math.Round(amount, 2).ToString();
-            textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
-            textbox_devtotal.Text = Math.Round((1.18 * amount), 2).ToString();
+        }
+
+        private bool isProductAdded()
+        {
+            string selectedProduct = combo_product.SelectedItem.ToString();
+            foreach (DataGridViewRow row in grid_orderline.Rows)
+            {
+                string cellProduct = row.Cells[0].Value.ToString();
+                if (selectedProduct.Contains(cellProduct)) return true;
+            }
+            return false;
         }
 
         private void numeric_quantity_KeyUp(object sender, KeyEventArgs e)

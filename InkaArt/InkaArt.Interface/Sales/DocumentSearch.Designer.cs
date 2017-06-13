@@ -59,6 +59,7 @@
             this.grid_documents.Size = new System.Drawing.Size(881, 472);
             this.grid_documents.TabIndex = 0;
             this.grid_documents.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_documents_CellContentDoubleClick);
+            this.grid_documents.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_documents_CellDoubleClick);
             // 
             // Column1
             // 
