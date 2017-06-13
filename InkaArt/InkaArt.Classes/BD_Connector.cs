@@ -9,21 +9,23 @@ using System.ComponentModel;
 
 namespace InkaArt.Classes
 {
-
     public class BD_Connector
     {
         private NpgsqlConnection connection;
         private static NpgsqlConnectionStringBuilder connectionString;
-        private string serverAddress;
-        private string databaseName;
+        public static string serverAddress;
+        public static string databaseName;
         private string uid, pwd;
         private int port;
         public BD_Connector()
         {
             ConnectionString = new NpgsqlConnectionStringBuilder();
 
-            ConnectionString.Host = "skeletpiece.homeip.net";
-            ConnectionString.Database = "desarrolloprogramas1";
+            serverAddress = "skeletpiece.homeip.net";
+            databaseName = "desarrolloprogramas1";
+
+            ConnectionString.Host = serverAddress;
+            ConnectionString.Database = databaseName;
             ConnectionString.Username = "admin";
             ConnectionString.Password = "fae48";
             ConnectionString.Pooling = true;
@@ -84,7 +86,7 @@ namespace InkaArt.Classes
             {
                 adap.Update(data, srcTable);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
                 if (code == 23505) return 23505;

@@ -10,17 +10,21 @@ using System.Windows.Forms;
 
 namespace InkaArt.Interface.Production
 {
-    public partial class GenerateProductivityReport : Form
+    public partial class NewSimulation : Form
     {
-        public GenerateProductivityReport()
+        public NewSimulation()
         {
             InitializeComponent();
         }
 
-        private void button_generate_Click(object sender, EventArgs e)
+        private void button_delete_Click(object sender, EventArgs e)
         {
-            ProductivityReport productivity_form = new ProductivityReport();
-            productivity_form.Show();
+            this.Close();
+        }
+
+        private void button_start_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

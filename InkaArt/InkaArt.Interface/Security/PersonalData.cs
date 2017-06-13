@@ -103,6 +103,10 @@ namespace InkaArt.Interface.Security
 
         private bool validateData()
         {
+            int i, j;
+            if (int.TryParse(textBoxDNI.Text, out i) != true) return false;
+            if (int.TryParse(textBoxPhone.Text, out j) != true) return false;
+
             if (textBoxName.Text == "") return false;
             if (textBoxLastName.Text == "") return false;
             if (textBoxDNI.Text == "" || Convert.ToInt32(textBoxDNI.Text) < 0) return false;
@@ -113,6 +117,7 @@ namespace InkaArt.Interface.Security
             if (textBoxUsername.Text == "") return false;
             if (textBoxDescription.Text == "") return false;
             if (textBoxIDRol.Text == "") return false;
+            
             return true;
         }
         private void buttonSave_Click(object sender, EventArgs e)
@@ -141,11 +146,11 @@ namespace InkaArt.Interface.Security
                 {
                     if (validateData())
                     {
-                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                        int userID = worker.getUserID(textBoxUsername.Text);
+                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage, userID) == 23505)
                             MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else
                         {
-                            int userID = worker.getUserID(textBoxUsername.Text);
                             worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
                         }
                     }else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -30,7 +30,7 @@
         {
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBoxPermissions = new System.Windows.Forms.CheckedListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxNewRole = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -70,16 +70,14 @@
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // checkedListBox1
+            // checkedListBoxPermissions
             // 
-            this.checkedListBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Permissions ...."});
-            this.checkedListBox1.Location = new System.Drawing.Point(6, 135);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(268, 88);
-            this.checkedListBox1.TabIndex = 7;
+            this.checkedListBoxPermissions.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.checkedListBoxPermissions.FormattingEnabled = true;
+            this.checkedListBoxPermissions.Location = new System.Drawing.Point(6, 135);
+            this.checkedListBoxPermissions.Name = "checkedListBoxPermissions";
+            this.checkedListBoxPermissions.Size = new System.Drawing.Size(268, 88);
+            this.checkedListBoxPermissions.TabIndex = 7;
             // 
             // groupBox1
             // 
@@ -91,7 +89,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBoxDescription);
             this.groupBox1.Controls.Add(this.buttonSave);
-            this.groupBox1.Controls.Add(this.checkedListBox1);
+            this.groupBox1.Controls.Add(this.checkedListBoxPermissions);
             this.groupBox1.Controls.Add(this.buttonCancel);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
@@ -189,7 +187,7 @@
 
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBoxPermissions;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxDescription;

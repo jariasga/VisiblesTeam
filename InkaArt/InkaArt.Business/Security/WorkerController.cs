@@ -29,7 +29,6 @@ namespace InkaArt.Business.Security
         }
         public DataTable showData()
         {
-
             adap = worker.workerAdapter();
 
             data = worker.getData(adap, "Worker");

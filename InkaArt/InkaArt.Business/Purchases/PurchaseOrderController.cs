@@ -39,10 +39,10 @@ namespace InkaArt.Business.Purchases
             table = data.Tables["PurcharseOrder"];
             row = table.NewRow();
 
-            row["idSupplier"] = proveedor;
+            row["id_supplier"] = proveedor;
             row["status"] = estado;
-            row["creationDate"] = creacion;
-            row["deliveryDate"] = entrega;
+            row["creation_date"] = creacion;
+            row["delivery_date"] = entrega;
             row["total"] = total;
             table.Rows.Add(row);
 
@@ -51,18 +51,22 @@ namespace InkaArt.Business.Purchases
         public void updateData(string id,int proveedor, string estado, DateTime creacion, DateTime entrega, double total)
         {
             table = data.Tables["PurcharseOrder"];
-            for (int i = 0; i < table.Rows.Count; i++)
+            purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
+                        "SET id_supplier = {0}, status = '{1}', creation_date = '{2}', delivery_date = '{3}', total = {4} " +
+                        "WHERE id_order = {5}", proveedor, estado, creacion, entrega, total, id));
+
+           /* for (int i = 0; i < table.Rows.Count; i++)
             {
                 if (String.Compare(table.Rows[i]["idOrder"].ToString(), id) == 0)
                 {
                     table.Rows[i]["idSupplier"] = proveedor;
                     table.Rows[i]["status"] = estado;
-                    table.Rows[i]["creationDate"] = creacion;
-                    table.Rows[i]["deliveryDate"] = entrega;
+                    table.Rows[i]["creation_date"] = creacion;
+                    table.Rows[i]["delivery_date"] = entrega;
                     table.Rows[i]["total"] = total;
                     break;
                 }
-            }
+            }*/
             purchaseOrder.updateData(data, adap, "PurcharseOrder");
         }
     }

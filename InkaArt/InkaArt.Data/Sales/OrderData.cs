@@ -19,22 +19,166 @@ namespace InkaArt.Data.Sales
         {
             data = new DataSet();
         }
-        public DataTable GetOrders()
+        public DataTable GetOrders(int id = -1, string type = "", long doc = -1, string clientName = "", string orderStatus = "")
         {
             adap = orderAdapter();
+            byClient(adap,doc,clientName);
+            byId(adap,id);
+            byType(adap,type);
+            byOrderStatus(adap,orderStatus);
+            adap.SelectCommand.CommandText += ";";
             data.Clear();
             data = getData(adap, "Orders");
-            //Tengo el id del cliente, ahora tengo que buscar el campo RUC/DNI en la tabla cliente.
             DataTable orderList = new DataTable();
             orderList = data.Tables[0];
             return orderList;
         }
 
+        private void byClient(NpgsqlDataAdapter adap, long doc, string clientName)
+        {
+            if (doc == -1 && clientName.Equals("")) return;
+            int id = getClientId(doc,clientName);
+            if (id != -1)
+            {
+                int numParams = adap.SelectCommand.Parameters.Count();
+                if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+                else adap.SelectCommand.CommandText += " AND ";
+                adap.SelectCommand.CommandText += "\"idClient\" = :idClient";
+                adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idClient", DbType.Int32));
+                adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+                adap.SelectCommand.Parameters[numParams].SourceColumn = "idClient";
+                adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
+            }
+        }
+
+        public DataTable GetSalesDocument()
+        {
+            adap = salesDocumentAdapter();
+            data.Clear();
+            data = getData(adap, "SalesDocument");
+            DataTable salesDocuments = new DataTable();
+            salesDocuments = data.Tables[0];
+            return salesDocuments;
+        }
+
+        public void deleteOrders(List<string> selectedOrders)
+        {
+            adap = orderAdapter();
+
+            data.Clear();
+            data = getData(adap, "Order");
+
+            table = data.Tables["Order"];
+
+            foreach (string id in selectedOrders)
+            {
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    if (string.Compare(table.Rows[i]["idOrder"].ToString(), id) == 0)
+                    {
+                        table.Rows[i]["bdStatus"] = 0;
+                        break;
+                    }
+                }
+            }
+            updateData(data, adap, "Order");
+        }
+
+        private int getClientId(long doc, string clientName)
+        {
+            NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curAdap = clientAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE ";
+            if (doc != -1 && !clientName.Equals(""))
+            {
+                clientName = "%" + clientName + "%";
+                curAdap.SelectCommand.CommandText += "ruc = :ruc AND ";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("ruc", DbType.Int64));
+                curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[0].SourceColumn = "ruc";
+                curAdap.SelectCommand.Parameters[0].NpgsqlValue = doc;
+                curAdap.SelectCommand.CommandText += "name LIKE :name;";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
+                curAdap.SelectCommand.Parameters[1].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[1].SourceColumn = "name";
+                curAdap.SelectCommand.Parameters[1].NpgsqlValue = clientName;
+            }
+            else if (doc != -1 && clientName.Equals(""))
+            {
+                curAdap.SelectCommand.CommandText += "ruc = :ruc;";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("ruc", DbType.Int64));
+                curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[0].SourceColumn = "ruc";
+                curAdap.SelectCommand.Parameters[0].NpgsqlValue = doc;
+            }
+            else if (doc == -1 && !clientName.Equals(""))
+            {
+                clientName = "%" + clientName + "%";
+                curAdap.SelectCommand.CommandText += "name LIKE :name;";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
+                curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[0].SourceColumn = "name";
+                curAdap.SelectCommand.Parameters[0].NpgsqlValue = clientName;
+            }
+            curData.Clear();
+            curData = getData(curAdap, "Client");
+            DataTable client = new DataTable();
+            client = curData.Tables[0];
+            if (client.Rows.Count == 0) return -1;
+            return int.Parse(client.Rows[0]["idClient"].ToString());
+        }
+
+        private void byOrderStatus(NpgsqlDataAdapter adap, string orderStatus)
+        {
+            if (orderStatus.Equals("")) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "orderStatus LIKE :orderStatus";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("orderStatus", DbType.AnsiStringFixedLength));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "orderStatus";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = orderStatus;
+
+        }
+        private void byType(NpgsqlDataAdapter adap, string type)
+        {
+            if (type.Equals("")) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "type LIKE :type";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("type", DbType.AnsiStringFixedLength));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "type";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = type;
+        }
+
+        private void byId(NpgsqlDataAdapter adap, int id)
+        {
+            if (id == -1) return;
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "\"idOrder\" = :idOrder";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "idOrder";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
+        }
+
         public NpgsqlDataAdapter orderAdapter()
         {
             NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
-            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\";", Connection);
+            orderAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\"", Connection);
             return orderAdapter;
+        }
+        public NpgsqlDataAdapter salesDocumentAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"SalesDocument\";", Connection);
+            return adapter;
         }
         public NpgsqlDataAdapter orderIdAdapter()
         {
@@ -63,6 +207,7 @@ namespace InkaArt.Data.Sales
             DataRow rowOrder = order.Rows[index - 1];
             int orderId = int.Parse(rowOrder["idOrder"].ToString());
             adap = insertOrderLineAdapter();
+            adap.SelectCommand.CommandText += ";";
             data.Clear();
             data = getData(adap, "LineItem");
             table = data.Tables["LineItem"];
@@ -115,7 +260,56 @@ namespace InkaArt.Data.Sales
             int id = int.Parse(row["idProduct"].ToString());
             return id;
         }
+        public string getProductPU(int id)
+        {
+            NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curAdap = productAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE \"idProduct\" = :idProduct;";
+            curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+            curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
+            curAdap.SelectCommand.Parameters[0].NpgsqlValue = id;
+            curData.Clear();
+            curData = getData(curAdap, "Product");
+            DataTable orderLine = new DataTable();
+            orderLine = curData.Tables[0];
+            string pu = (double.Parse(orderLine.Rows[0]["localPrice"].ToString()) + double.Parse(orderLine.Rows[0]["basePrice"].ToString())).ToString();
+            return pu;
+        }
 
+        public string getProductName(int id)
+        {
+            NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curAdap = productAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE \"idProduct\" = :idProduct;";
+            curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+            curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
+            curAdap.SelectCommand.Parameters[0].NpgsqlValue = id;
+            curData.Clear();
+            curData = getData(curAdap, "Product");
+            DataTable orderLine = new DataTable();
+            orderLine = curData.Tables[0];            
+            return orderLine.Rows[0]["name"].ToString();
+        }
+        public DataTable getOrderLines(int idOrder)
+        {
+            NpgsqlDataAdapter curAdapter = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curAdapter = insertOrderLineAdapter();
+            curAdapter.SelectCommand.CommandText += " WHERE \"idOrder\" = :idOrder;";
+            curAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            curAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdapter.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+            curAdapter.SelectCommand.Parameters[0].NpgsqlValue = idOrder;
+            curData.Clear();
+            curData = getData(curAdapter, "LineItem");
+            DataTable orderLines = new DataTable();
+            orderLines = curData.Tables[0];
+            return orderLines;
+        }
         public NpgsqlDataAdapter productIdAdapter()
         {
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
@@ -137,14 +331,8 @@ namespace InkaArt.Data.Sales
         public NpgsqlDataAdapter productAdapter()
         {
             NpgsqlDataAdapter productAdapter = new NpgsqlDataAdapter();
-            productAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Product\";", Connection);
+            productAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Product\"", Connection);
             return productAdapter;
-        }
-        public NpgsqlDataAdapter insertDocumentAdapter()
-        {
-            NpgsqlDataAdapter insertDocumentAdapter = new NpgsqlDataAdapter();
-            insertDocumentAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"SalesDocument\";", Connection);
-            return insertDocumentAdapter;
         }
         public NpgsqlDataAdapter insertOrderAdapter()
         {
@@ -155,8 +343,14 @@ namespace InkaArt.Data.Sales
         public NpgsqlDataAdapter insertOrderLineAdapter()
         {
             NpgsqlDataAdapter insertOrderLineAdapter = new NpgsqlDataAdapter();
-            insertOrderLineAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"LineItem\";", Connection);
+            insertOrderLineAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"LineItem\"", Connection);
             return insertOrderLineAdapter;
+        }
+        public NpgsqlDataAdapter clientAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Client\"", Connection);
+            return adapter;
         }
         public DataTable GetDocumentTypes()
         {
@@ -174,7 +368,7 @@ namespace InkaArt.Data.Sales
         {
 
             adap = productAdapter();
-
+            adap.SelectCommand.CommandText += ";";
             data.Clear();
             data = getData(adap, "Product");
 
@@ -182,23 +376,7 @@ namespace InkaArt.Data.Sales
             productList = data.Tables[0];
             return productList;
         }
-        public int InsertSaleDocument(int documentTypeId, float saleAmount, float igv, float totalAmount)
-        {
-            adap = insertDocumentAdapter();
-            data.Clear();
-            data = getData(adap, "SalesDocument");
-            table = data.Tables["SalesDocument"];
-            row = table.NewRow();
-            row["idDocumentType"] = documentTypeId;
-            row["amount"] = saleAmount;
-            row["igv"] = igv;
-            row["totalAmount"] = totalAmount;
-            table.Rows.Add(row);
-
-            int rowsAffected = insertData(data, adap, "SalesDocument");
-            return rowsAffected;
-        }
-        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus)
+        public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type, string reason, string totalDev)
         {
             adap = insertOrderAdapter();
             data.Clear();
@@ -207,11 +385,14 @@ namespace InkaArt.Data.Sales
             row = table.NewRow();
             row["idClient"] = idClient;
             row["deliveryDate"] = deliveryDate;
-            row["saleAmount"] = totalAmount;
+            row["saleAmount"] = saleAmount;
             row["igv"] = igv;
             row["totalAmount"] = totalAmount;
             row["bdStatus"] = bdStatus;
             row["orderStatus"] = orderStatus;
+            row["type"] = type;
+            row["reason"] = reason;
+            if (!totalDev.Equals("")) row["totalDev"] = totalDev;
             table.Rows.Add(row);
             int rowsAffected = insertData(data, adap, "Order");
             return rowsAffected;

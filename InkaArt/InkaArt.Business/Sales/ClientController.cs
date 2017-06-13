@@ -41,8 +41,8 @@ namespace InkaArt.Business.Sales
         public int UpdateClient(string id, string personType, string name, string ruc, string dni, string priority, string type, string state, string address, string phone, string contact, string email)
         {
             int personTypeInt = int.Parse(personType);
-            int rucInt = int.Parse(ruc);
-            int dniInt = int.Parse(dni);
+            long rucInt = long.Parse(ruc);
+            long dniInt = long.Parse(dni);
             int stateInt = int.Parse(state);
             int typeInt = int.Parse(type);
             int priorityInt = int.Parse(priority);
@@ -61,16 +61,12 @@ namespace InkaArt.Business.Sales
                 {
                     case 0:
                         return "Ingrese un RUC válido";
-                    case 1:
-                        return "El RUC debe ser numérico";
-                    case 2:
-                        return "El RUC debe ser de 10 cifras";
                 }
             }
             else if (personType.Equals("1"))
             {
                 if (!int.TryParse(dni, out aux))
-                    return "El DNI debe ser numérico";
+                    return "Ingrese un DNI válido";
             }
             else
             {
@@ -88,6 +84,12 @@ namespace InkaArt.Business.Sales
                 return "Seleccione un estado";
             return "OK";
         }
+
+        public void deleteClients(List<string> selectedClients)
+        {
+            clientData.deleteClients(selectedClients);
+        }
+
         public bool validateTrackBar(string value)
         {
             int aux;
@@ -135,7 +137,7 @@ namespace InkaArt.Business.Sales
             }
             else
             {
-                return 1;
+                return 0;
             }
         }
     }

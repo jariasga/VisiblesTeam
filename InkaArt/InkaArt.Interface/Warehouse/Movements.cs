@@ -55,7 +55,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 if(reason == "Compra")
                 {
-                    Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement();
+                    Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(textBox5.Text);
                     formView.Show();
                 }
                 else

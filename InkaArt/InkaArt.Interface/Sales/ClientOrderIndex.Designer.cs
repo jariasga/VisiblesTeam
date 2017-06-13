@@ -31,23 +31,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_orders = new System.Windows.Forms.DataGridView();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_create_dev = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.combo_type = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.date_deliveryDate = new System.Windows.Forms.DateTimePicker();
+            this.combo_orderStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textbox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textbox_doc = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button_search = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
@@ -61,6 +62,7 @@
             this.grid_orders.AllowUserToAddRows = false;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grid_orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_orders.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -73,12 +75,13 @@
             this.grid_orders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid_orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4,
             this.Tipo,
             this.cost,
             this.Cantidad,
             this.Column1,
             this.Column3,
-            this.Column2});
+            this.deleteColumn});
             this.grid_orders.Location = new System.Drawing.Point(45, 244);
             this.grid_orders.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orders.Name = "grid_orders";
@@ -86,6 +89,11 @@
             this.grid_orders.Size = new System.Drawing.Size(891, 255);
             this.grid_orders.TabIndex = 24;
             this.grid_orders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_orders_CellDoubleClick);
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "ID";
+            this.Column4.Name = "Column4";
             // 
             // Tipo
             // 
@@ -112,12 +120,12 @@
             this.Column3.HeaderText = "Monto";
             this.Column3.Name = "Column3";
             // 
-            // Column2
+            // deleteColumn
             // 
-            this.Column2.HeaderText = "Eliminar";
-            this.Column2.Name = "Column2";
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.deleteColumn.HeaderText = "Eliminar";
+            this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.deleteColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button_create_dev
             // 
@@ -135,15 +143,15 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.combo_type);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.date_deliveryDate);
+            this.groupBox1.Controls.Add(this.combo_orderStatus);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.textbox_name);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textbox_doc);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.button_search);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
@@ -156,18 +164,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // comboBox1
+            // combo_type
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.combo_type.BackColor = System.Drawing.Color.White;
+            this.combo_type.FormattingEnabled = true;
+            this.combo_type.Items.AddRange(new object[] {
             "Pedido",
             "Devolución"});
-            this.comboBox1.Location = new System.Drawing.Point(32, 62);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(255, 31);
-            this.comboBox1.TabIndex = 27;
+            this.combo_type.Location = new System.Drawing.Point(32, 62);
+            this.combo_type.Margin = new System.Windows.Forms.Padding(4);
+            this.combo_type.Name = "combo_type";
+            this.combo_type.Size = new System.Drawing.Size(255, 31);
+            this.combo_type.TabIndex = 27;
             // 
             // label5
             // 
@@ -189,26 +197,30 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "Fecha de Entrega";
             // 
-            // dateTimePicker2
+            // date_deliveryDate
             // 
-            this.dateTimePicker2.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(316, 135);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(255, 30);
-            this.dateTimePicker2.TabIndex = 23;
+            this.date_deliveryDate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.date_deliveryDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate.Location = new System.Drawing.Point(316, 135);
+            this.date_deliveryDate.Margin = new System.Windows.Forms.Padding(4);
+            this.date_deliveryDate.Name = "date_deliveryDate";
+            this.date_deliveryDate.Size = new System.Drawing.Size(255, 30);
+            this.date_deliveryDate.TabIndex = 23;
             // 
-            // comboBox2
+            // combo_orderStatus
             // 
-            this.comboBox2.BackColor = System.Drawing.Color.White;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(32, 135);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(255, 31);
-            this.comboBox2.TabIndex = 22;
-            this.comboBox2.Text = "Producción";
+            this.combo_orderStatus.BackColor = System.Drawing.Color.White;
+            this.combo_orderStatus.FormattingEnabled = true;
+            this.combo_orderStatus.Items.AddRange(new object[] {
+            "Registrado",
+            "Producción",
+            "Entrega Parcial",
+            "Entregado"});
+            this.combo_orderStatus.Location = new System.Drawing.Point(32, 135);
+            this.combo_orderStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.combo_orderStatus.Name = "combo_orderStatus";
+            this.combo_orderStatus.Size = new System.Drawing.Size(255, 31);
+            this.combo_orderStatus.TabIndex = 22;
             // 
             // label3
             // 
@@ -220,15 +232,14 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "Estado";
             // 
-            // textBox3
+            // textbox_name
             // 
-            this.textBox3.BackColor = System.Drawing.Color.White;
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(603, 62);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(255, 30);
-            this.textBox3.TabIndex = 19;
+            this.textbox_name.BackColor = System.Drawing.Color.White;
+            this.textbox_name.Location = new System.Drawing.Point(603, 62);
+            this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_name.Name = "textbox_name";
+            this.textbox_name.Size = new System.Drawing.Size(255, 30);
+            this.textbox_name.TabIndex = 19;
             // 
             // label2
             // 
@@ -240,15 +251,14 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Nombre Cliente";
             // 
-            // textBox2
+            // textbox_doc
             // 
-            this.textBox2.BackColor = System.Drawing.Color.White;
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(316, 62);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(255, 30);
-            this.textBox2.TabIndex = 17;
+            this.textbox_doc.BackColor = System.Drawing.Color.White;
+            this.textbox_doc.Location = new System.Drawing.Point(316, 62);
+            this.textbox_doc.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_doc.Name = "textbox_doc";
+            this.textbox_doc.Size = new System.Drawing.Size(255, 30);
+            this.textbox_doc.TabIndex = 17;
             // 
             // label1
             // 
@@ -256,9 +266,9 @@
             this.label1.Location = new System.Drawing.Point(312, 36);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 23);
+            this.label1.Size = new System.Drawing.Size(175, 23);
             this.label1.TabIndex = 16;
-            this.label1.Text = "RUC Cliente";
+            this.label1.Text = "Documento Cliente";
             // 
             // button_search
             // 
@@ -328,24 +338,25 @@
         private System.Windows.Forms.DataGridView grid_orders;
         private System.Windows.Forms.Button button_create_dev;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textbox_name;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textbox_doc;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_search;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.DateTimePicker date_deliveryDate;
+        private System.Windows.Forms.ComboBox combo_orderStatus;
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.Button button_create;
+        private System.Windows.Forms.ComboBox combo_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
     }
 }

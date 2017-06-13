@@ -17,7 +17,6 @@ namespace InkaArt.Business.Security
         public static string userName, firstName, lastName;
         public LoginController()
         {
-
             user = new UserController();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
@@ -40,6 +39,7 @@ namespace InkaArt.Business.Security
                 userName = userDB;
                 keyDB = row["password"].ToString();
                 userID = Convert.ToInt32(row["id_user"]);
+                roleID = Convert.ToInt32(row["id_role"]);
             }
             else
             {
@@ -50,9 +50,6 @@ namespace InkaArt.Business.Security
 
             if (string.Equals(key, keyDB) & string.Equals(loginUsername, userDB))
             {
-                //  ToDo - GET ROLES
-
-                //  GRANT ACCESS
                 verified = true;
             }
             return verified;

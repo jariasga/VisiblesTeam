@@ -10,13 +10,14 @@ using Npgsql;
 
 namespace InkaArt.Business.Production
 {
-    public class RawMaterialController
+    public class RawMaterialController_old
     {
         private RawMaterialData rawMaterial;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
+        private DataTable rawMaterialList;
 
-        public RawMaterialController()
+        public RawMaterialController_old()
         {
             rawMaterial = new RawMaterialData();
             data = new DataSet();
@@ -27,9 +28,8 @@ namespace InkaArt.Business.Production
 
             data.Clear();
             data = rawMaterial.getData(adapt, "RawMaterial");
-
-            DataTable rawMaterialList = new DataTable();
-            rawMaterialList = data.Tables[0];
+            
+            rawMaterialList = data.Tables["RawMaterial"];
 
             return rawMaterialList;
         }

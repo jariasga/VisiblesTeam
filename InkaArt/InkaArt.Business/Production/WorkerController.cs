@@ -10,13 +10,13 @@ using Npgsql;
 
 namespace InkaArt.Business.Production
 {
-    public class WorkerController
+    public class WorkerController2
     {
         private WorkerData worker;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
 
-        public WorkerController()
+        public WorkerController2()
         {
             worker = new WorkerData();
             data = new DataSet();
