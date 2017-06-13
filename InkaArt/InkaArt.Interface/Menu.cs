@@ -134,7 +134,7 @@ namespace InkaArt.Interface
 
         private void productividadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form reporte_productividad = new GenerateProductivityReport();
+            Form reporte_productividad = new GeneratePerformanceReport();
             reporte_productividad.MdiParent = this;
             reporte_productividad.Show();
         }

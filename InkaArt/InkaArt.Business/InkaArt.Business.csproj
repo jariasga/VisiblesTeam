@@ -98,8 +98,10 @@
     <Compile Include="Warehouse\ProductionMovementMovementController.cs" />
     <Compile Include="Warehouse\ProductMovementController.cs" />
     <Compile Include="Warehouse\ProductWarehouseController.cs" />
+    <Compile Include="Warehouse\PurchaseOrderDetailController.cs" />
     <Compile Include="Warehouse\RawMaterialWarehouseController.cs" />
     <Compile Include="Warehouse\ReasonMovementController.cs" />
+    <Compile Include="Warehouse\StockDocumentController.cs" />
     <Compile Include="Warehouse\TypeMovementController.cs" />
     <Compile Include="Warehouse\WarehouseCrud.cs" />
     <Compile Include="Warehouse\WarehouseMovementController.cs" />
