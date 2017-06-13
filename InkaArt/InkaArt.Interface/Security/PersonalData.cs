@@ -147,7 +147,7 @@ namespace InkaArt.Interface.Security
                     if (validateData())
                     {
                         int userID = worker.getUserID(textBoxUsername.Text);
-                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage, userID) == 23505)
+                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, comboBoxUserStatus.SelectedIndex, Convert.ToInt32(textBoxIDRol.Text), rawImage, userID) == 23505)
                             MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else
                         {
