@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -12,7 +13,7 @@ namespace InkaArt.Business.Algorithm
     {
         public static int MaxIterations = 1000;
         public static double Alpha = 0.2;
-        
+
         private WorkerController selected_workers;
         private OrderController selected_orders;
         private JobController jobs;
@@ -33,15 +34,29 @@ namespace InkaArt.Business.Algorithm
 
         public List<Assignment> ExecuteGraspAlgorithm(WorkerController original_workers_list)
         {
+            int[] workers_for_job = new int[jobs.NumberOfJobs];
+            for (int i = 0; i < indexes.Count(); i++)
+            {
+                int job_index = jobs.GetIndex(indexes[i].Job);
+                workers_for_job[job_index]++;
+            }
+            for (int i = 0; i < jobs.NumberOfJobs; i++)
+            {
+                MessageBox.Show("Job " + jobs[i].ID + ": " + workers_for_job[i]);
+            }
+
             List<Assignment> assignments = new List<Assignment>();
 
             for (int day = 0; day < simulation.Days; day++)
             {
+                
                 Assignment selected_assignment = null;
 
                 //Generar (Iterations) soluciones, guardando siempre la mejor
                 for (int iteration = 0; iteration < MaxIterations; iteration++)
                 {
+                    //MessageBox.Show("ITERACION " + (iteration + 1));
+
                     Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers.Count(),
                         simulation.Miniturns);
                     IndexController candidates = GenerateCandidates(original_workers_list);
@@ -50,13 +65,15 @@ namespace InkaArt.Business.Algorithm
 
                     //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
                     //por la nueva asignación generada.
-                    if (assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
+                    if (selected_assignment == null || assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
                         selected_assignment = assignment;
                 }
 
                 //Añadir la mejor asignación de trabajadores de un día a la lista
                 assignments.Add(selected_assignment);
             }
+
+            MessageBox.Show("Fin grasp");
 
             return assignments;
         }
@@ -68,13 +85,21 @@ namespace InkaArt.Business.Algorithm
 
             for (int construction = 1; selected_orders.Count() > 0 && candidates.Count() > 0; construction++)
             {
+                LogHandler.WriteLine("Iteracion de construccion " + construction);
+                LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
+
                 //Seleccionar el producto a fabricar si es que nos acabamos el producto
                 if (current_product_jobs.Count <= 0) SelectJobsPerProduct(current_product_jobs, order_recipes);
 
                 //Obtener una lista de los trabajadores más eficientes
                 IndexController rcl = GenerateReleaseCandidateList(candidates, assignment, iteration,
                     current_product_jobs);
-                if (rcl.Count() <= 0) break;
+                //Si no se pudo realizar el producto, borrar el producto y 
+                if (rcl.Count() <= 0)
+                {
+                    current_product_jobs.Clear();
+                    break;
+                }
 
                 //Escoger un trabajador al azar e incorporarlo en la solución
                 Index chosen = rcl[Randomizer.NextNumber(0, rcl.Count() - 1)];
@@ -84,11 +109,12 @@ namespace InkaArt.Business.Algorithm
                 int worker_index = selected_workers.GetIndex(chosen.Worker);
                 int number_of_miniturns = Convert.ToInt32(chosen.AverageTime / simulation.MiniturnLength);
                 if (assignment.AddLine(assignment_line, worker_index, number_of_miniturns) == false)
-                    continue;
+                    break;
 
                 assignment.ObjectiveFunction += chosen.CostValue(assignment.ObjectiveFunction, iteration);
-                if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) continue;
+                if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) break;
 
+                LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
                 //Quitar los candidatos necesarios
                 if (assignment.IsWorkerFull(worker_index))
                 {
@@ -99,6 +125,8 @@ namespace InkaArt.Business.Algorithm
                     }
                 }
                 candidates.Remove(chosen);
+
+                LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
 
                 //Si la orden se completó, removerla de la lista
                 if (selected_orders[0].Completed()) selected_orders.RemoveFirst();
