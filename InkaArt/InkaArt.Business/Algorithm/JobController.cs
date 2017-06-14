@@ -71,5 +71,12 @@ namespace InkaArt.Business.Algorithm
         {
             return new List<Job>(jobs);
         }
+
+        public int GetIndex(int id_job)
+        {
+            for (int i = 0; i < jobs.Count; i++)
+                if (jobs[i].ID == id_job) return i;
+            return -1;
+        }
     }
 }
