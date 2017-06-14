@@ -85,9 +85,9 @@
             this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(81, 252);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 22);
+            this.label3.Size = new System.Drawing.Size(100, 22);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Trabajador:";
+            this.label3.Text = "Trabajador";
             // 
             // label2
             // 
@@ -95,9 +95,9 @@
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(81, 148);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 22);
+            this.label2.Size = new System.Drawing.Size(115, 22);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Fecha de fin:";
+            this.label2.Text = "Fecha de fin";
             // 
             // label1
             // 
@@ -105,9 +105,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(81, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 22);
+            this.label1.Size = new System.Drawing.Size(138, 22);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Fecha de inicio:";
+            this.label1.Text = "Fecha de inicio";
             // 
             // button_generate
             // 

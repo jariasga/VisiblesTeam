@@ -1,4 +1,5 @@
 ﻿using InkaArt.Classes;
+using InkaArt.Data.Production;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -201,6 +202,24 @@ namespace InkaArt.Data.Warehouse
 
             return reason_dataset.Tables[0].Rows[0];
         }
-        
+
+        public DataRow getProduct(int product_id)
+        {
+            FinalProductData product_data = new FinalProductData();
+            DataTable product_datatable = new DataTable();
+            product_datatable = product_data.GetProducts(product_id);
+
+            return product_datatable.Rows[0];
+        }
+
+        public DataRow getRawMaterial(int raw_id)
+        {
+            RawMaterialData raw_data = new RawMaterialData();
+            DataTable raw_datatable = new DataTable();
+            raw_datatable = raw_data.GetRawMaterial(raw_id);
+
+            return raw_datatable.Rows[0];
+        }
+
     }
 }

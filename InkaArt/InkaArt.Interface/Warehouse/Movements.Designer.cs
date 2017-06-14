@@ -70,6 +70,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(251, 80);
             this.textBox3.TabIndex = 33;
+            this.textBox3.Visible = false;
             // 
             // label6
             // 
@@ -79,6 +80,7 @@
             this.label6.Size = new System.Drawing.Size(117, 23);
             this.label6.TabIndex = 32;
             this.label6.Text = "Comentario:";
+            this.label6.Visible = false;
             // 
             // comboBox2
             // 

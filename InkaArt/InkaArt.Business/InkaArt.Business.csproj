@@ -87,6 +87,7 @@
     <Compile Include="Purchases\UnitOfMeasurementController.cs" />
     <Compile Include="Reports\ReportsController.cs" />
     <Compile Include="Sales\ClientController.cs" />
+    <Compile Include="Sales\DocumentTypeController.cs" />
     <Compile Include="Sales\OrderController.cs" />
     <Compile Include="Security\LoginController.cs" />
     <Compile Include="Security\RoleController.cs" />

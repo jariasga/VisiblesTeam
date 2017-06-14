@@ -205,5 +205,57 @@ namespace InkaArt.Data.Reports
             return simulationTable;
         }
 
+        public DataTable getDataMovements()
+        {
+            string command_query =  "select 	m.\"dateIn\", "+
+                                                "m.\"idMovement\", "+
+                                                "mt.\"description\" as movType, "+
+                                                "mn.\"description\" as movName, "+
+                                                "a.\"name\" as warehouseName, "+
+                                                "r.\"name\" as itemName, "+   
+                                                "m.\"quantity\" "+
+                                    "from       inkaart.\"Movement\" m, inkaart.\"Warehouse\" a, inkaart.\"RawMaterial\" r, "+
+                                                "inkaart.\"MovementName\" mn, inkaart.\"MovementType\" mt "+
+                                    "where      m.\"idWarehouse\" = a.\"idWarehouse\" "+
+                                    "and        m.\"idItem\" = r.\"id_raw_material\" "+
+                                    "and        m.\"idMovementType\" = mt.\"idMovementType\" "+
+                                    "and        m.\"idMovementReason\" = mn.\"idMovName\" "+
+                                    "UNION "+
+                                    "select     m.\"dateIn\", "+
+                                                "m.\"idMovement\", "+
+                                                "mt.\"description\" as movType, " +
+                                                "mn.\"description\" as movName, " +
+                                                "a.\"name\" as warehouseName, " +
+                                                "p.\"name\" as itemName, " +
+                                                "m.\"quantity\" " +
+                                    "from        inkaart.\"Movement\" m, inkaart.\"Warehouse\" a, inkaart.\"Product\" p, "+
+                                                "inkaart.\"MovementName\" mn, inkaart.\"MovementType\" mt "+
+                                    "where       m.\"idWarehouse\" = a.\"idWarehouse\" "+
+                                    "and         m.\"idItem\" = p.\"idProduct\"  " +
+                                    "and         m.\"idMovementType\" = mt.\"idMovementType\"  " +
+                                    "and         m.\"idMovementReason\" = mn.\"idMovName\"; ";
+
+            Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
+            Connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand(command_query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            DataTable movementsTable = new DataTable();
+            movementsTable.Columns.Add("Fecha", typeof(DateTime));
+            movementsTable.Columns.Add("IdMovimiento", typeof(int));
+            movementsTable.Columns.Add("TipoMovimiento", typeof(string));
+            movementsTable.Columns.Add("Razon", typeof(string));
+            movementsTable.Columns.Add("Almacen", typeof(string));
+            movementsTable.Columns.Add("Item", typeof(string));
+            movementsTable.Columns.Add("Cantidad", typeof(int));
+
+            while (dr.Read())
+            {
+                movementsTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5], dr[6]);
+            }
+
+            return movementsTable;
+        }
+
     }
 }

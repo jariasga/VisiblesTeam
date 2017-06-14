@@ -97,7 +97,7 @@ namespace InkaArt.Interface.Warehouse
         private void ButtonSearchClick(object sender, EventArgs e)
         {
             string date = datetime_movement.Checked ? datetime_movement.Value.ToShortDateString() : null;
-            DataTable filtered = movement_controller.GetMovements(textbox_id.Text, getComboString(combobox_type), getComboString(combobox_reason), getComboString(combobox_warehouse), date, getComboString(combobox_status));
+            DataTable filtered = movement_controller.GetMovements(true, textbox_id.Text, getComboString(combobox_type), getComboString(combobox_reason), getComboString(combobox_warehouse), date, getComboString(combobox_status));
             populateDataGrid(filtered);
         }
 
@@ -125,8 +125,10 @@ namespace InkaArt.Interface.Warehouse
 
         private void ButtonCreateClick(object sender, EventArgs e)
         {
-            Form movements = new Movements();
-            movements.Show();
+            var create_date = new Movements();
+            var result = create_date.ShowDialog();
+            if (result == DialogResult.OK)
+                updateDataGrid();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -145,6 +147,18 @@ namespace InkaArt.Interface.Warehouse
                 datetime_movement.AllowDrop = true;
             else
                 datetime_movement.AllowDrop = false;
+        }
+
+        private void dataGridMovementsCellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (data_grid_movements.Rows.Count > 0)
+            {
+                string id = data_grid_movements.Rows[e.RowIndex].Cells[0].Value.ToString();
+                var show_form = new MovementShow(id);
+                var result = show_form.ShowDialog();
+                if (result == DialogResult.OK)
+                    updateDataGrid();
+            }
         }
     }
 }

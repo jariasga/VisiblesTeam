@@ -83,9 +83,9 @@
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(467, 51);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 23);
+            this.label3.Size = new System.Drawing.Size(89, 23);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Producto:";
+            this.label3.Text = "Producto";
             // 
             // label2
             // 
@@ -93,9 +93,9 @@
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(24, 133);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 23);
+            this.label2.Size = new System.Drawing.Size(105, 23);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Fecha final:";
+            this.label2.Text = "Fecha final";
             // 
             // dateTimePicker_fechaFin
             // 
@@ -111,9 +111,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(24, 51);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 23);
+            this.label1.Size = new System.Drawing.Size(117, 23);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Fecha inicial:";
+            this.label1.Text = "Fecha inicial";
             // 
             // dateTimePicker_fechaIni
             // 

@@ -7,29 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Business.Reports;
 
 namespace InkaArt.Interface.Warehouse
 {
     public partial class KardexReport : Form
     {
+        private ReportsController reportControl = new ReportsController();
+
         public KardexReport()
         {
             InitializeComponent();
+            showData();
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        public void showData()
         {
-
+            label_todaydate.Text = DateTime.Now.ToString("M/d/yyyy");
+            
+            DataTable movementsReportList = reportControl.getDataMovements();
+            populateDataGrid(movementsReportList);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void populateDataGrid(DataTable salesReportList)
         {
-
-        }
-
-        private void grid_out_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            dataGridView_movements.Rows.Clear();
+            foreach (DataRow row in salesReportList.Rows)
+            {
+                dataGridView_movements.Rows.Add(row["Fecha"], row["IdMovimiento"], row["TipoMovimiento"], row["Razon"], row["Almacen"], row["Item"], row["Cantidad"]);
+            }
         }
     }
 }

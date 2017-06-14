@@ -121,7 +121,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 51);
             this.button1.TabIndex = 31;
-            this.button1.Text = "🖶 Imprimir";
+            this.button1.Text = "Exportar";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // label1
