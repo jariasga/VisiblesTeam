@@ -146,6 +146,7 @@ namespace InkaArt.Interface.Warehouse
                             int productType = 1;//0:materia prima | 1:producto
                             int isExchange = -1;//-1:No es intercambio | otro:es intercambio
                             productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd,cantMov, productType);
+                            //productionItemWarehouseMovementController.updateOrder(idPedido);
                             exito++;
                         }
                     }
@@ -156,6 +157,7 @@ namespace InkaArt.Interface.Warehouse
                 }
                 numRows++;
             }
+            productionItemWarehouseMovementController.updateOrder(idPedido);
 
             //cantMov = Convert.ToInt32(numericUpDown2.Value);
             if (exito > 0)

@@ -25,6 +25,23 @@ namespace InkaArt.Business.Warehouse
             data = new DataSet();
         }
 
+        public void updateOrder(int idOrder)
+        {
+            string query = "";
+            int remainOrder = 0;
+
+            query = "select \"idDocument\", sum(\"product_stock\") as suma from inkaart.\"StockDocument\" where \"vez\" = 0 and \"idDocument\" = " + idOrder + " group by 1;";
+            
+            remainOrder = productionItemWarehouseMovementData.selectQuery(query);
+
+            if (remainOrder == 0)
+            {
+                query = "Update inkaart.\"Order\" set \"orderStatus\" = 'despachado' where \"idOrder\" = " + idOrder + ";";
+                productionItemWarehouseMovementData.execute(query);
+            }
+            
+        }
+
         public DataTable GetProductionItemWarehouseMovementList(string idWarehouse = "",string idProduct = "")
         {
             int intId = -1, intAux,intId2 = -1;
