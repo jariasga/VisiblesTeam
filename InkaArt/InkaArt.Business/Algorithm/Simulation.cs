@@ -39,8 +39,10 @@ namespace InkaArt.Business.Algorithm
         // time
         private int start_time;                      // milisegundos
         private int end_time;
-        private int limit_time = 1000 * 60 * 5;      // 1000 milisegundos * 60 segundos * 5 (maximo 5 miutos)
-        private int miniturns = 30;
+        private int limit_time = 1000 * 60 * 5;      // 1000 milisegundos * 60 segundos * 5 minutos como máximo
+
+        private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
+        private int miniturn_length = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
 
         // Resultados de asignacion
         List<AssignmentLine[][]> assignments = null;
@@ -119,6 +121,10 @@ namespace InkaArt.Business.Algorithm
         {
             get { return miniturns; }
             //set { miniturns = value; }
+        }
+        public int MiniturnLength
+        {
+            get { return miniturn_length; }
         }
         public List<AssignmentLine[][]> Assignments
         {

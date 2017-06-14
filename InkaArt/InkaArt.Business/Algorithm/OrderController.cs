@@ -104,6 +104,5 @@ namespace InkaArt.Business.Algorithm
         {
             return this.orders;
         }
-
     }
 }

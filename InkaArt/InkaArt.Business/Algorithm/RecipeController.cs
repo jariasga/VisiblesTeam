@@ -57,6 +57,13 @@ namespace InkaArt.Business.Algorithm
                 if (recipe.Description == description) return recipe;
             return null;
         }
+        
+        public int GetIndex(int id_recipe)
+        {
+            for (int i = 0; i < recipes.Count; i++)
+                if (recipes[i].ID == id_recipe) return i;
+            return -1;
+        }
 
         public Recipe GetByVersion(string version)
         {
