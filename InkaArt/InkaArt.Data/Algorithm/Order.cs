@@ -48,11 +48,32 @@ namespace InkaArt.Data.Algorithm
             this.line_items.Add(line_item);
         }
 
+        public bool UpdateLineItem(int id_recipe)
+        {
+            foreach (OrderLineItem line_item in line_items)
+                if (line_item.Recipe == id_recipe)
+                {
+                    line_item.Produced++;
+                    return true;
+                }
+            return false;
+        }
+
         public bool Completed()
         {
             foreach (OrderLineItem line_item in line_items)
                 if (line_item.Produced < line_item.Quantity) return false;
             return true;
+        }
+
+        public OrderLineItem this[int index]
+        {
+            get { return this.line_items[index]; }
+        }
+
+        public int NumberOfLineItems
+        {
+            get { return this.line_items.Count; }
         }
 
     }

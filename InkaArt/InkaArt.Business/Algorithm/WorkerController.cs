@@ -80,5 +80,12 @@ namespace InkaArt.Business.Algorithm
         {
             return this.workers.Contains(worker);
         }
+
+        public int GetIndex(int id_worker)
+        {
+            for (int i = 0; i < workers.Count; i++)
+                if (workers[i].ID == id_worker) return i;
+            return -1;
+        }
     }
 }
