@@ -22,7 +22,7 @@ namespace InkaArt.Data.Algorithm
             this.worker2 = null;
         }
 
-        public TabuMove(int type, Assignment[][] solution, int worker1, int worker2)
+        public TabuMove(int type, AssignmentLine[][] solution, int worker1, int worker2)
         {
             this.type = type;
             // process

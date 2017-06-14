@@ -34,11 +34,11 @@ namespace InkaArt.Interface.Purchases
             string cadena = "";
             if (textBox_id.Text.Length > 0)
             {
-                cadena = " AND idOrder = " + textBox_id.Text;
+                cadena = " AND id_order = " + textBox_id.Text;
             }
             if (textBox_name.Text.Length > 0)
             {
-                cadena += " AND idSupplier = " + textBox_name.Text;
+                cadena += " AND id_supplier = " + textBox_name.Text;
             }
             /*if (dateTimePicker_creation.Text.Length > 0)
             {
@@ -56,7 +56,7 @@ namespace InkaArt.Interface.Purchases
             }
             if (rows.Any()) purchaseOrderList = rows.CopyToDataTable();
             else purchaseOrderList.Rows.Clear();
-            string sortQuery = string.Format("idOrder");
+            string sortQuery = string.Format("id_order");
             purchaseOrderList.DefaultView.Sort = sortQuery;
         }
 

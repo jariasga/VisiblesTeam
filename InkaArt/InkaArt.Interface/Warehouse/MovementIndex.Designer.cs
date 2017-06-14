@@ -100,6 +100,7 @@
             this.data_grid_movements.Name = "data_grid_movements";
             this.data_grid_movements.Size = new System.Drawing.Size(680, 199);
             this.data_grid_movements.TabIndex = 49;
+            this.data_grid_movements.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMovementsCellContentDoubleClick);
             // 
             // Id
             // 
@@ -111,26 +112,31 @@
             // 
             this.type.HeaderText = "Tipo";
             this.type.Name = "type";
+            this.type.ReadOnly = true;
             // 
             // reason
             // 
             this.reason.HeaderText = "Razón";
             this.reason.Name = "reason";
+            this.reason.ReadOnly = true;
             // 
             // Almacen
             // 
             this.Almacen.HeaderText = "Almacén";
             this.Almacen.Name = "Almacen";
+            this.Almacen.ReadOnly = true;
             // 
             // Fecha
             // 
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
             // 
             // Eliminar
             // 
             this.Eliminar.HeaderText = "Eliminar";
             this.Eliminar.Name = "Eliminar";
+            this.Eliminar.ReadOnly = true;
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
