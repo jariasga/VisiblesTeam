@@ -103,7 +103,9 @@
     <Compile Include="Warehouse\WarehouseData.cs" />
     <Compile Include="Warehouse\WarehouseMovementData.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>
