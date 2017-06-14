@@ -103,12 +103,6 @@
     <Compile Include="Production\GeneratePerformanceReport.designer.cs">
       <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\SimulationReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Production\SimulationReport.Designer.cs">
-      <DependentUpon>SimulationReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Production\JobDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +157,12 @@
     <Compile Include="Production\SimulationLoadingScreen.Designer.cs">
       <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Production\SimulationReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\SimulationReport.Designer.cs">
+      <DependentUpon>SimulationReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Production\TurnManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +182,12 @@
     </Compile>
     <Compile Include="Sales\DocumentSearch.Designer.cs">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\breakProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\breakProduct.Designer.cs">
+      <DependentUpon>breakProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\ExchangeMovement.cs">
       <SubType>Form</SubType>
@@ -474,9 +480,6 @@
     <EmbeddedResource Include="Production\GeneratePerformanceReport.resx">
       <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\SimulationReport.resx">
-      <DependentUpon>SimulationReport.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -504,6 +507,9 @@
     <EmbeddedResource Include="Production\SimulationLoadingScreen.resx">
       <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Production\SimulationReport.resx">
+      <DependentUpon>SimulationReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Production\TurnManagement.resx">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -522,6 +528,9 @@
     </Compile>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\breakProduct.resx">
+      <DependentUpon>breakProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>

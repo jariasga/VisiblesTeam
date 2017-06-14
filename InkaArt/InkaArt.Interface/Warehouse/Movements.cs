@@ -82,12 +82,11 @@ namespace InkaArt.Interface.Warehouse
                         {
                             if (reason == "Rotura")
                             {
-                                MessageBox.Show("Ventana aun no definida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                                Form formView = new InkaArt.Interface.Warehouse.breakProduct(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                                formView.Show();                            }
                             else
                             {
                                 MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                             }
                         }
                     }
