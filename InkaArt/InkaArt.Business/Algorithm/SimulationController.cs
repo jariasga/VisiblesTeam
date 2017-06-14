@@ -44,7 +44,7 @@ namespace InkaArt.Business.Algorithm
         public void Load()
         {
             //OBTENER DATOS DE BASE DE DATOS
-            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            /*NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Simulation\" WHERE status = :status", connection);
@@ -64,11 +64,11 @@ namespace InkaArt.Business.Algorithm
                 double huamanga_weight;
                 double altarpiece_weight;
                 Simulation simulation = new Simulation(id_simulation, name, date_start, date_end, number_of_days, breakage_weight,
-                    time_weight, huaco_weight, huamanga_weight, altarpiece_weight);*/
+                    time_weight, huaco_weight, huamanga_weight, altarpiece_weight);
             }
 
             reader.Close();
-            connection.Close();
+            connection.Close();*/
         }
 
         public Simulation Validate(string name, DateTime date_start, DateTime date_end, decimal breakage, decimal time,

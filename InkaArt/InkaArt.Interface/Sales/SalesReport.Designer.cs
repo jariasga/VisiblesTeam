@@ -36,15 +36,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label_todaydate = new System.Windows.Forms.Label();
             this.grid_salesReport = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label_product = new System.Windows.Forms.Label();
-            this.label_iniDate = new System.Windows.Forms.Label();
-            this.label_finDate = new System.Windows.Forms.Label();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.client = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label_product = new System.Windows.Forms.Label();
+            this.label_iniDate = new System.Windows.Forms.Label();
+            this.label_finDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_salesReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +57,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 51);
             this.button1.TabIndex = 19;
-            this.button1.Text = "🖶 Imprimir";
+            this.button1.Text = "Exportar";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // label1
@@ -128,6 +128,31 @@
             this.grid_salesReport.Size = new System.Drawing.Size(820, 255);
             this.grid_salesReport.TabIndex = 28;
             // 
+            // date
+            // 
+            this.date.HeaderText = "Fecha";
+            this.date.Name = "date";
+            // 
+            // client
+            // 
+            this.client.HeaderText = "Cliente";
+            this.client.Name = "client";
+            // 
+            // TipoCliente
+            // 
+            this.TipoCliente.HeaderText = "Tipo de Cliente";
+            this.TipoCliente.Name = "TipoCliente";
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "Cantidad";
+            this.amount.Name = "amount";
+            // 
+            // monto
+            // 
+            this.monto.HeaderText = "Monto (S/.)";
+            this.monto.Name = "monto";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -163,31 +188,6 @@
             this.label_finDate.Name = "label_finDate";
             this.label_finDate.Size = new System.Drawing.Size(0, 23);
             this.label_finDate.TabIndex = 32;
-            // 
-            // date
-            // 
-            this.date.HeaderText = "Fecha";
-            this.date.Name = "date";
-            // 
-            // client
-            // 
-            this.client.HeaderText = "Cliente";
-            this.client.Name = "client";
-            // 
-            // TipoCliente
-            // 
-            this.TipoCliente.HeaderText = "Tipo de Cliente";
-            this.TipoCliente.Name = "TipoCliente";
-            // 
-            // amount
-            // 
-            this.amount.HeaderText = "Cantidad";
-            this.amount.Name = "amount";
-            // 
-            // monto
-            // 
-            this.monto.HeaderText = "Monto (S/.)";
-            this.monto.Name = "monto";
             // 
             // SalesReport
             // 

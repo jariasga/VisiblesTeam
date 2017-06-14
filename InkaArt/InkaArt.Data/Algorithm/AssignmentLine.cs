@@ -48,5 +48,6 @@ namespace InkaArt.Data.Algorithm
             this.Recipe = recipe;
             this.Job = job;
         }
+
     }
 }
