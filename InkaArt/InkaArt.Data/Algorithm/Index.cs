@@ -19,6 +19,7 @@ namespace InkaArt.Data.Algorithm
         private double average_time;
         private double breakage_index;
         private double time_index;
+        private double loss_index;
 
         public int ID
         {
@@ -54,6 +55,11 @@ namespace InkaArt.Data.Algorithm
         public double TimeIndex
         {
             get { return time_index; }
+            set { time_index = value; }
+        }
+        public double LossIndex
+        {
+            get { return loss_index; }
             set { time_index = value; }
         }
 
@@ -137,6 +143,21 @@ namespace InkaArt.Data.Algorithm
             if (rows_affected == 1) return "El índice se eliminó correctamente. ";
             return "Se encontró más de un índice para eliminar. Hay que chequear la base de datos para verificar que " +
                 "no haya sucedido nada malo. ";
+        }
+
+        /*********************************** ASIGNACIÓN DE TRABAJADORES ***********************************/
+
+        public void CalculateIndexes(double average_breakage_mean, double average_time_mean, double breakage_weight,
+            double time_weight, double product_weight)
+        {
+            breakage_index = average_breakage / average_breakage_mean;
+            time_index = average_time / average_time_mean;
+            loss_index = (breakage_index * breakage_weight + time_index * time_weight) / product_weight;
+        }
+
+        public double CostValue(double objective_function_value, int iteration)
+        {
+            return (this.loss_index - objective_function_value) / (iteration + 1);
         }
     }
 }

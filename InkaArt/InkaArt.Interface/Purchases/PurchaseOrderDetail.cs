@@ -394,7 +394,13 @@ namespace InkaArt.Interface.Purchases
             int valorInt = 0, modInt;
             if (int.TryParse(dataGridView_pedidos.Rows[id_Row].Cells[6].Value.ToString(), out modInt))
             {
-                
+                valorInt=int.Parse(dataGridView_pedidos.Rows[id_Row].Cells[6].Value.ToString());
+                if (valorInt < 0)
+                {
+                    MessageBox.Show("Solo puede colocar números enteros positivos en la factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    dataGridView_pedidos.Rows[id_Row].Cells[6].Value = "0";
+                    return false;
+                }
             }
             else { 
                 MessageBox.Show("Solo puede colocar números en la factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

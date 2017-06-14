@@ -57,9 +57,9 @@ namespace InkaArt.Business.Algorithm
             return null;
         }
 
-        public int Count()
+        public int NumberOfJobs
         {
-            return jobs.Count();
+            get { return jobs.Count; }
         }
 
         public Job this[int index]

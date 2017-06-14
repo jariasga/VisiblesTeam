@@ -18,7 +18,14 @@ namespace InkaArt.Business.Algorithm
         {
             orders = new List<Order>();
         }
-        
+
+        public OrderController(OrderController original_orders)
+        {
+            this.orders = new List<Order>(original_orders.orders);
+            //Ordenar pedidos por día y luego por prioridad del cliente
+            this.orders = this.orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
+        }
+
         public void Load()
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
@@ -67,7 +74,7 @@ namespace InkaArt.Business.Algorithm
 
             connection.Close();
         }
-        
+
         public int Count()
         {
             return orders.Count();
@@ -75,9 +82,14 @@ namespace InkaArt.Business.Algorithm
 
         public void Add(Order order)
         {
-            orders.Add(order);
+            this.orders.Add(order);
         }
-        
+
+        public void RemoveFirst()
+        {
+            this.orders.RemoveAt(0);
+        }
+
         public bool Contains(Order order)
         {
             return this.orders.Contains(order);
@@ -85,13 +97,13 @@ namespace InkaArt.Business.Algorithm
 
         public Order this[int index]
         {
-            get { return orders[index]; }
+            get { return this.orders[index]; }
         }
 
         public List<Order> List()
         {
-            return orders;
+            return this.orders;
         }
-    }
 
+    }
 }
