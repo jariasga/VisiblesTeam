@@ -16,6 +16,20 @@ namespace InkaArt.Business.Sales
         {
             orderData = new OrderData();
         }
+
+        public int AddSaleDocument(int selectedDoc, string strAmount, string strIgv, string strTotal, int orderId, DataTable orderLines)
+        {
+            float amount = float.Parse(strAmount), igv = float.Parse(strIgv), total = float.Parse(strTotal);
+            int responseSD, responseLI = 0;
+            responseSD = orderData.InsertSaleDocument(++selectedDoc,amount,igv,total,orderId);
+            string idSaleDocument = orderData.getSaleDocumentId().ToString();
+            foreach (DataRow orderline in orderLines.Rows)
+            {
+                string idLineItem = orderline["idLineItem"].ToString();
+                responseLI += orderData.UpdateLineItem(idLineItem, idSaleDocument);
+            }
+            return responseSD + responseLI;
+        }
         public bool verifyStock(int natType, string strStock, string strQuantity)
         {
             if (natType == 1) return true;
@@ -30,7 +44,7 @@ namespace InkaArt.Business.Sales
             float localPrice = float.Parse(strLocalPrice), exportPrice = float.Parse(strExportPrice);
             return natType == 0 ? localPrice : exportPrice;
         }
-        public DataTable GetOrders(int id = -1, object type = null, string doc = "", string clientName = "", object orderStatus = null)
+        public DataTable GetOrders(int id = -1, object type = null, string doc = "", string clientName = "", object orderStatus = null, DateTime? ini = null, DateTime? end = null)
         {
             long aux, intDoc = -1;
             string strType = "", strOrderStatus = "";
@@ -39,7 +53,7 @@ namespace InkaArt.Business.Sales
             strType = strType.ToLower();
             strOrderStatus = strOrderStatus.ToLower();
             if (!doc.Equals("")) if (long.TryParse(doc, out aux)) intDoc = long.Parse(doc);
-            return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus);
+            return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
         public DataTable GetSalesDocument()
@@ -54,7 +68,7 @@ namespace InkaArt.Business.Sales
             totalAmount = Math.Round(double.Parse(totalAmount), 2).ToString();
             int orderAdded, orderLineAdded;
             orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, totalDev);
-            orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv));
+            orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv), type);
             return orderAdded + orderLineAdded;
         }
 
@@ -79,6 +93,12 @@ namespace InkaArt.Business.Sales
             return info.Rows[0]["ruc"].ToString();
         }
 
+        public float getRightTotalAmount(DataRow row)
+        {
+            if (row["type"].ToString().Equals("pedido")) return float.Parse(row["totalAmount"].ToString());
+            else return float.Parse(row["totalDev"].ToString());
+        }
+
         public DataTable GetDocumentTypes()
         {
             return orderData.GetDocumentTypes();
@@ -87,15 +107,17 @@ namespace InkaArt.Business.Sales
         {
             return orderData.GetProducts();
         }
-        public string getProductPU(string id)
+        public string getProductPU(string id, string idClient)
         {
             int parsedID = int.Parse(id);
-            return orderData.getProductPU(parsedID);
+            int parsedIdClient = int.Parse(idClient);
+            return orderData.getProductPU(parsedID, parsedIdClient);
         }        
 
         public string makeValidations(string clientDoc, string clientName, DataTable orderLines, string type, string reason, string docId = "null")
         {
-            if (clientDoc.Equals("") || clientName.Equals("")) return "Debe seleccionar un cliente antes de continuar.";
+            if (type.Equals("pedido")) if (clientDoc.Equals("") || clientName.Equals("")) return "Debe seleccionar un cliente antes de continuar.";
+            if (type.Equals("devolucion")) if (docId.Equals("")) return "Debe seleccionar un pedido antes de continuar.";
             if (orderLines.Rows.Count == 0) return "Debe añadir productos para realizar un pedido.";
             if (type.Equals("devolucion") && reason.Equals("")) return "Debe ingresar un motivo para continuar.";
             if (type.Equals("devolucion") && docId.Equals("")) return "Debe seleccionar un documento de venta para continuar.";

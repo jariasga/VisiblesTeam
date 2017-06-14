@@ -63,7 +63,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.buttonAdd_Product = new System.Windows.Forms.Button();
             this.dataGridView_Product = new System.Windows.Forms.DataGridView();
-            this.buttonDelete_Product = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +71,7 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.idPW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonDelete_Product = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage_rawMaterial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -89,7 +89,7 @@
             this.button_edit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_edit.ForeColor = System.Drawing.Color.White;
             this.button_edit.Location = new System.Drawing.Point(78, 319);
-            this.button_edit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_edit.Margin = new System.Windows.Forms.Padding(2);
             this.button_edit.Name = "button_edit";
             this.button_edit.Size = new System.Drawing.Size(95, 34);
             this.button_edit.TabIndex = 56;
@@ -103,7 +103,7 @@
             this.textBox_address.Enabled = false;
             this.textBox_address.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_address.Location = new System.Drawing.Point(28, 180);
-            this.textBox_address.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_address.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_address.Multiline = true;
             this.textBox_address.Name = "textBox_address";
             this.textBox_address.Size = new System.Drawing.Size(197, 127);
@@ -126,7 +126,7 @@
             this.textBox_description.Enabled = false;
             this.textBox_description.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_description.Location = new System.Drawing.Point(28, 89);
-            this.textBox_description.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_description.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_description.Multiline = true;
             this.textBox_description.Name = "textBox_description";
             this.textBox_description.Size = new System.Drawing.Size(197, 61);
@@ -149,7 +149,7 @@
             this.textBox_name.Enabled = false;
             this.textBox_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_name.Location = new System.Drawing.Point(28, 36);
-            this.textBox_name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_name.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(197, 24);
             this.textBox_name.TabIndex = 51;
@@ -170,7 +170,7 @@
             this.tabControl1.Controls.Add(this.tabPage_rawMaterial);
             this.tabControl1.Controls.Add(this.tabPage_Products);
             this.tabControl1.Location = new System.Drawing.Point(249, 20);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(630, 365);
@@ -188,9 +188,9 @@
             this.tabPage_rawMaterial.Controls.Add(this.label7);
             this.tabPage_rawMaterial.Controls.Add(this.label6);
             this.tabPage_rawMaterial.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_rawMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage_rawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_rawMaterial.Name = "tabPage_rawMaterial";
-            this.tabPage_rawMaterial.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage_rawMaterial.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage_rawMaterial.Size = new System.Drawing.Size(622, 339);
             this.tabPage_rawMaterial.TabIndex = 0;
             this.tabPage_rawMaterial.Text = "Materias Primas";
@@ -198,16 +198,18 @@
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.Enabled = false;
             this.numericUpDown2.Location = new System.Drawing.Point(320, 37);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown2.TabIndex = 65;
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Enabled = false;
             this.numericUpDown1.Location = new System.Drawing.Point(175, 40);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown1.TabIndex = 58;
@@ -241,7 +243,7 @@
             this.borrar,
             this.IdRMW});
             this.dataGridView_RawMaterial.Location = new System.Drawing.Point(22, 76);
-            this.dataGridView_RawMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView_RawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView_RawMaterial.Name = "dataGridView_RawMaterial";
             this.dataGridView_RawMaterial.Size = new System.Drawing.Size(584, 210);
             this.dataGridView_RawMaterial.TabIndex = 55;
@@ -296,7 +298,7 @@
             this.buttonDelete_RawMaterial.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_RawMaterial.ForeColor = System.Drawing.Color.White;
             this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(264, 305);
-            this.buttonDelete_RawMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete_RawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_RawMaterial.Name = "buttonDelete_RawMaterial";
             this.buttonDelete_RawMaterial.Size = new System.Drawing.Size(106, 32);
             this.buttonDelete_RawMaterial.TabIndex = 63;
@@ -321,7 +323,7 @@
             this.comboBox_RM.Enabled = false;
             this.comboBox_RM.FormattingEnabled = true;
             this.comboBox_RM.Location = new System.Drawing.Point(22, 39);
-            this.comboBox_RM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_RM.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_RM.Name = "comboBox_RM";
             this.comboBox_RM.Size = new System.Drawing.Size(128, 21);
             this.comboBox_RM.TabIndex = 61;
@@ -360,9 +362,9 @@
             this.tabPage_Products.Controls.Add(this.dataGridView_Product);
             this.tabPage_Products.Controls.Add(this.buttonDelete_Product);
             this.tabPage_Products.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_Products.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage_Products.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_Products.Name = "tabPage_Products";
-            this.tabPage_Products.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage_Products.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage_Products.Size = new System.Drawing.Size(622, 339);
             this.tabPage_Products.TabIndex = 1;
             this.tabPage_Products.Text = "Productos";
@@ -370,16 +372,18 @@
             // 
             // numericUpDown3
             // 
+            this.numericUpDown3.Enabled = false;
             this.numericUpDown3.Location = new System.Drawing.Point(328, 42);
-            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown3.TabIndex = 80;
             // 
             // numericUpDown4
             // 
+            this.numericUpDown4.Enabled = false;
             this.numericUpDown4.Location = new System.Drawing.Point(183, 45);
-            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown4.TabIndex = 77;
@@ -401,7 +405,7 @@
             this.comboBox_Producto.Enabled = false;
             this.comboBox_Producto.FormattingEnabled = true;
             this.comboBox_Producto.Location = new System.Drawing.Point(31, 44);
-            this.comboBox_Producto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_Producto.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Producto.Name = "comboBox_Producto";
             this.comboBox_Producto.Size = new System.Drawing.Size(128, 21);
             this.comboBox_Producto.TabIndex = 79;
@@ -458,24 +462,10 @@
             this.dataGridViewCheckBoxColumn1,
             this.idPW});
             this.dataGridView_Product.Location = new System.Drawing.Point(22, 76);
-            this.dataGridView_Product.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView_Product.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView_Product.Name = "dataGridView_Product";
             this.dataGridView_Product.Size = new System.Drawing.Size(584, 210);
             this.dataGridView_Product.TabIndex = 65;
-            // 
-            // buttonDelete_Product
-            // 
-            this.buttonDelete_Product.BackColor = System.Drawing.Color.Firebrick;
-            this.buttonDelete_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_Product.Location = new System.Drawing.Point(280, 305);
-            this.buttonDelete_Product.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonDelete_Product.Name = "buttonDelete_Product";
-            this.buttonDelete_Product.Size = new System.Drawing.Size(106, 32);
-            this.buttonDelete_Product.TabIndex = 73;
-            this.buttonDelete_Product.Text = "🗑 Eliminar";
-            this.buttonDelete_Product.UseVisualStyleBackColor = false;
-            this.buttonDelete_Product.Click += new System.EventHandler(this.buttonDelete_Product_Click);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -527,6 +517,20 @@
             this.idPW.ReadOnly = true;
             this.idPW.Visible = false;
             // 
+            // buttonDelete_Product
+            // 
+            this.buttonDelete_Product.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonDelete_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete_Product.ForeColor = System.Drawing.Color.White;
+            this.buttonDelete_Product.Location = new System.Drawing.Point(280, 305);
+            this.buttonDelete_Product.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDelete_Product.Name = "buttonDelete_Product";
+            this.buttonDelete_Product.Size = new System.Drawing.Size(106, 32);
+            this.buttonDelete_Product.TabIndex = 73;
+            this.buttonDelete_Product.Text = "🗑 Eliminar";
+            this.buttonDelete_Product.UseVisualStyleBackColor = false;
+            this.buttonDelete_Product.Click += new System.EventHandler(this.buttonDelete_Product_Click);
+            // 
             // WarehouseShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,9 +545,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WarehouseShow";
-            this.Text = "WarehouseShow";
+            this.Text = "Vista Almacen";
             this.Load += new System.EventHandler(this.WarehouseShow_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage_rawMaterial.ResumeLayout(false);

@@ -31,12 +31,12 @@ namespace InkaArt.Interface.Production
             populateDataGrid(simulationReportList);
         }
 
-        private void populateDataGrid(DataTable salesReportList)
+        private void populateDataGrid(DataTable simulationReportList)
         {
             simulation_grid.Rows.Clear();
-            foreach (DataRow row in salesReportList.Rows)
+            foreach (DataRow row in simulationReportList.Rows)
             {
-                //simulation_grid.Rows.Add(row["FechaEntrega"], row["Cliente"], row["TipoCliente"], row["Cantidad"], row["MontoTotal"]);
+                simulation_grid.Rows.Add(row["Fecha"], row["Iteraciones"], row["Huacos"], row["Piedras"], row["Retablos"], row["Trabajadores"]);
             }
         }
     }

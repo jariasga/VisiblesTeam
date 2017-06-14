@@ -116,7 +116,7 @@ namespace InkaArt.Interface.Production
                     if (String.Compare(recipeRawList.Rows[i]["idRecipe"].ToString(), idRecipe) == 0 && 
                         string.Compare(recipeRawList.Rows[i]["status"].ToString(),"1")==0)
                     {
-                        idRaw = recipeRawList.Rows[i]["id_raw_material"].ToString();
+                        idRaw = recipeRawList.Rows[i]["idRawMaterial"].ToString();
                         countRaw = recipeRawList.Rows[i]["materialCount"].ToString();
                         //buscar nombre de la materia prima
                         for (int j = 0; j < rawMList.Rows.Count; j++)
@@ -128,7 +128,7 @@ namespace InkaArt.Interface.Production
                             }
 
                         for (int j = 0; j < unitList.Rows.Count; j++)
-                            if (String.Compare(unitList.Rows[j]["idUnit"].ToString(), idUnit) == 0)
+                            if (String.Compare(unitList.Rows[j]["id_unit"].ToString(), idUnit) == 0)
                             {
                                 nameUnit = unitList.Rows[j]["name"].ToString();
                                 break;

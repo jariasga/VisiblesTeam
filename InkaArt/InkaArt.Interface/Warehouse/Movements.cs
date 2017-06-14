@@ -27,7 +27,13 @@ namespace InkaArt.Interface.Warehouse
 
             if(reason == "")
             {
-                MessageBox.Show("Por favor ingresar una razón de movimiento");
+                MessageBox.Show("Por favor ingrese una razon del movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (textBox5.Text == "")
+            {
+                MessageBox.Show("Por favor seleccione un almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -40,12 +46,12 @@ namespace InkaArt.Interface.Warehouse
             {
                 if(idWarehouesOrigin == "")
                 {
-                    MessageBox.Show("Por favor seleccione un almacén antes de continuar");
+                    MessageBox.Show("Por favor seleccione un almacén antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if(comboBox1.Text == "")
                 {
-                    MessageBox.Show("Por favor seleccione un tipo de movimiento");
+                    MessageBox.Show("Por favor ingrese un tpo de movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
@@ -76,11 +82,12 @@ namespace InkaArt.Interface.Warehouse
                         {
                             if (reason == "Rotura")
                             {
-                                MessageBox.Show("Ventana aún no definida");
+                                MessageBox.Show("Ventana aun no definida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             else
                             {
-                                MessageBox.Show("Por favor seleccione una razón válida de movimiento");
+                                MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                             }
                         }
                     }
