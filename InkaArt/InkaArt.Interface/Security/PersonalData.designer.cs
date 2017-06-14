@@ -177,6 +177,7 @@
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(165, 26);
             this.textBoxPhone.TabIndex = 4;
+            this.textBoxPhone.TextChanged += new System.EventHandler(this.textBoxPhone_TextChanged);
             // 
             // textBoxEmail
             // 
@@ -198,6 +199,7 @@
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(165, 26);
             this.textBoxDNI.TabIndex = 3;
+            this.textBoxDNI.TextChanged += new System.EventHandler(this.textBoxDNI_TextChanged_1);
             // 
             // textBoxLastName
             // 

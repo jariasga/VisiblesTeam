@@ -155,8 +155,7 @@ namespace InkaArt.Interface.Security
                             this.Close();
                         }
                     }else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
+                }                
             }
         }
 
@@ -212,6 +211,19 @@ namespace InkaArt.Interface.Security
                 pictureBoxUser.Image = new Bitmap(photo.FileName);
                 pictureBoxUser.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+        }
+
+        private void textBoxDNI_TextChanged_1(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBoxDNI.Text, "[^0-9]"))            
+                textBoxDNI.Text = textBoxDNI.Text.Remove(textBoxDNI.Text.Length - 1);
+            
+        }
+
+        private void textBoxPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBoxDNI.Text, "[^0-9]"))
+                textBoxDNI.Text = textBoxDNI.Text.Remove(textBoxDNI.Text.Length - 1);
         }
     }
 }
