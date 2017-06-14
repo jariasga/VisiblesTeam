@@ -56,6 +56,7 @@ namespace InkaArt.Business.Warehouse
             row["virtualStock"] = 0;
             row["currentStock"] = 0;
             row["state"] = "Activo";
+            row["breaks"] = 0;
 
             table.Rows.Add(row);
             int rowsAffected = pWarehouse.insertData(data, adapt, "Product-Warehouse");
