@@ -97,7 +97,7 @@ namespace InkaArt.Interface.Warehouse
         private void ButtonSearchClick(object sender, EventArgs e)
         {
             string date = datetime_movement.Checked ? datetime_movement.Value.ToShortDateString() : null;
-            DataTable filtered = movement_controller.GetMovements(textbox_id.Text, getComboString(combobox_type), getComboString(combobox_reason), getComboString(combobox_warehouse), date, getComboString(combobox_status));
+            DataTable filtered = movement_controller.GetMovements(true, textbox_id.Text, getComboString(combobox_type), getComboString(combobox_reason), getComboString(combobox_warehouse), date, getComboString(combobox_status));
             populateDataGrid(filtered);
         }
 
@@ -154,7 +154,7 @@ namespace InkaArt.Interface.Warehouse
             if (data_grid_movements.Rows.Count > 0)
             {
                 string id = data_grid_movements.Rows[e.RowIndex].Cells[0].Value.ToString();
-                var show_form = new WarehouseShow(id);
+                var show_form = new MovementShow(id);
                 var result = show_form.ShowDialog();
                 if (result == DialogResult.OK)
                     updateDataGrid();
