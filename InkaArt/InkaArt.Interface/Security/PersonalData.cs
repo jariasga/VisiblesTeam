@@ -35,7 +35,6 @@ namespace InkaArt.Interface.Security
             textBoxPhone.Text = dataGridV.SelectedRows[0].Cells["phone"].Value.ToString();
             textBoxAddress.Text = dataGridV.SelectedRows[0].Cells["address"].Value.ToString();
             textBoxEmail.Text = dataGridV.SelectedRows[0].Cells["email"].Value.ToString();
-            comboBoxUserTurn.Text = dataGridV.SelectedRows[0].Cells["turn"].Value.ToString();
             worker = workerC;
             user = userC;
             role = roleC;
@@ -46,7 +45,8 @@ namespace InkaArt.Interface.Security
             int roleID = Convert.ToInt32(userRow["id_role"].ToString());
             textBoxUsername.Text = userRow["username"].ToString();
             textBoxDescription.Text = userRow["description"].ToString();
-            comboBoxUserStatus.Text = userRow["status"].ToString();
+            int statusCombo = Convert.ToInt32(userRow["status"]);
+            comboBoxUserStatus.SelectedIndex = statusCombo;
             rawImage = new Byte[0];
             if (userRow["photo"] != DBNull.Value)
             {
@@ -60,7 +60,6 @@ namespace InkaArt.Interface.Security
             comboBoxRoles.Text = roleRow["description"].ToString();
 
             textBoxUsername.Enabled = false;
-            comboBoxUserStatus.Enabled = false;
             comboBoxRoles.Enabled = true;
 
             buttonSave.Text = "Guardar";
@@ -78,7 +77,7 @@ namespace InkaArt.Interface.Security
 
             textBoxUsername.Enabled = true;
             textBoxUsername.Text = "";
-            comboBoxUserStatus.Enabled = true;
+            comboBoxUserStatus.SelectedIndex = 1;
             comboBoxUserStatus.Text = "";
             comboBoxRoles.Enabled = true;
             comboBoxRoles.Text = "";
@@ -128,12 +127,13 @@ namespace InkaArt.Interface.Security
                 user.showData();
                 if (validateData())
                 {
-                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, 1, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, comboBoxUserStatus.SelectedIndex, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
                         MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
                     {
                         worker.insertData(textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), worker.getUserID(textBoxUsername.Text), Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
                         worker.sendPassword(textBoxEmail.Text, textBoxUsername.Text, password);
+                        this.Close();
                     }
                 }
                 else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -147,17 +147,16 @@ namespace InkaArt.Interface.Security
                     if (validateData())
                     {
                         int userID = worker.getUserID(textBoxUsername.Text);
-                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, 1, Convert.ToInt32(textBoxIDRol.Text), rawImage, userID) == 23505)
+                        if (user.updateData(textBoxUsername.Text, textBoxDescription.Text, comboBoxUserStatus.SelectedIndex, Convert.ToInt32(textBoxIDRol.Text), rawImage, userID) == 23505)
                             MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         else
                         {
                             worker.updateData(workerID, textBoxName.Text, textBoxLastName.Text, Convert.ToInt32(textBoxDNI.Text.Trim()), Convert.ToInt32(1), userID, Convert.ToInt32(textBoxPhone.Text.Trim()), textBoxAddress.Text, textBoxEmail.Text);
+                            this.Close();
                         }
                     }else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                
+                }                
             }
-            this.Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -212,6 +211,19 @@ namespace InkaArt.Interface.Security
                 pictureBoxUser.Image = new Bitmap(photo.FileName);
                 pictureBoxUser.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+        }
+
+        private void textBoxDNI_TextChanged_1(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBoxDNI.Text, "[^0-9]"))            
+                textBoxDNI.Text = textBoxDNI.Text.Remove(textBoxDNI.Text.Length - 1);
+            
+        }
+
+        private void textBoxPhone_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBoxDNI.Text, "[^0-9]"))
+                textBoxDNI.Text = textBoxDNI.Text.Remove(textBoxDNI.Text.Length - 1);
         }
     }
 }
