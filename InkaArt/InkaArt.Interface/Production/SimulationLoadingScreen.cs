@@ -15,19 +15,18 @@ namespace InkaArt.Interface.Production
     public partial class SimulationLoadingScreen : Form
     {
         private Simulation simulation;
-        private bool canceled;
-
+        private Thread simulation_thread;
+        
         public SimulationLoadingScreen(Simulation simulation)
         {
             InitializeComponent();
             this.simulation = simulation;
-            this.canceled = false;
         }
 
 
         private void NewSimulation_Load(object sender, EventArgs e)
         {
-            Thread simulation_thread = new Thread(simulation.Start);
+            simulation_thread = new Thread(simulation.Start);
             simulation_thread.Start();
         }
 
@@ -36,7 +35,31 @@ namespace InkaArt.Interface.Production
             DialogResult result = MessageBox.Show("¿Está seguro de cancelar la simulación de la asignación de trabajadores?",
                 "Inka Art", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (result == DialogResult.Yes) this.canceled = true;
+            if (result == DialogResult.No) return;
+
+            try
+            {
+                simulation_thread.Abort();
+            }
+            catch (Exception) { }
+            finally
+            {
+                this.Close();
+            }
+        }
+
+        private void SimulationLoadingScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Está seguro de cancelar la simulación de la asignación de trabajadores?",
+                "Inka Art", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.No) e.Cancel = true;
+
+            try
+            {
+                simulation_thread.Abort();
+            }
+            catch (Exception) { }
         }
     }
 }
