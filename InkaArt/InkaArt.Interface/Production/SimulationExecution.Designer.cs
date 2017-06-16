@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Production
 {
-    partial class SimulationLoadingScreen
+    partial class SimulationExecution
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.progress_bar = new System.Windows.Forms.ProgressBar();
             this.button_cancel = new System.Windows.Forms.Button();
+            this.label_state = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.label_time = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progress_bar
             // 
-            this.progress_bar.Location = new System.Drawing.Point(13, 13);
+            this.progress_bar.Location = new System.Drawing.Point(13, 46);
             this.progress_bar.Margin = new System.Windows.Forms.Padding(4);
             this.progress_bar.Name = "progress_bar";
             this.progress_bar.Size = new System.Drawing.Size(616, 37);
@@ -45,36 +49,65 @@
             this.button_cancel.BackColor = System.Drawing.Color.Firebrick;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(226, 57);
+            this.button_cancel.Location = new System.Drawing.Point(221, 90);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(192, 44);
             this.button_cancel.TabIndex = 40;
             this.button_cancel.Text = "Cancelar simulación";
             this.button_cancel.UseVisualStyleBackColor = false;
-            this.button_cancel.Click += new System.EventHandler(this.ButtonCancelClick);
+            this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
-            // SimulationLoadingScreen
+            // label_state
+            // 
+            this.label_state.AutoSize = true;
+            this.label_state.Location = new System.Drawing.Point(12, 15);
+            this.label_state.Name = "label_state";
+            this.label_state.Size = new System.Drawing.Size(178, 18);
+            this.label_state.TabIndex = 41;
+            this.label_state.Text = "Estado de la simulación:";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // label_time
+            // 
+            this.label_time.AutoSize = true;
+            this.label_time.Location = new System.Drawing.Point(480, 15);
+            this.label_time.Name = "label_time";
+            this.label_time.Size = new System.Drawing.Size(64, 18);
+            this.label_time.TabIndex = 42;
+            this.label_time.Text = "Tiempo:";
+            // 
+            // SimulationExecution
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(642, 111);
+            this.ClientSize = new System.Drawing.Size(642, 146);
+            this.Controls.Add(this.label_time);
+            this.Controls.Add(this.label_state);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.progress_bar);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SimulationLoadingScreen";
+            this.Name = "SimulationExecution";
             this.Text = "Ejecutando simulación...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimulationLoadingScreen_FormClosing);
             this.Load += new System.EventHandler(this.NewSimulation_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button button_cancel;
-        public System.Windows.Forms.ProgressBar progress_bar;
+        private System.Windows.Forms.Label label_state;
+        private System.Windows.Forms.ProgressBar progress_bar;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label label_time;
     }
 }

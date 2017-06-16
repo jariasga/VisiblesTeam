@@ -106,10 +106,13 @@ namespace InkaArt.Business.Algorithm
                 int job_index = jobs.GetIndex(index.Job);
                 int recipe_index = recipes.GetIndex(index.Recipe);
                 double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job).Product);
+
                 index.CalculateIndexes(average_breakage_mean[job_index, recipe_index], average_time_mean[job_index, recipe_index],
                     simulation.BreakageWeight, simulation.TimeWeight, product_weight);
             }
         }
+
+        /********************************* FUNCIONES AUXILIARES *********************************/
 
         public Index GetByID(int id_index)
         {

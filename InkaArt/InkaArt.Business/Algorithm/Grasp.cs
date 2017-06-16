@@ -11,8 +11,8 @@ namespace InkaArt.Business.Algorithm
 {
     public class Grasp
     {
-        public static int MaxIterations = 1000;
-        public static double Alpha = 0.2;
+        public const int NumberOfIterations = 1000;
+        public const double Alpha = 0.2;
 
         private WorkerController selected_workers;
         private OrderController selected_orders;
@@ -21,69 +21,53 @@ namespace InkaArt.Business.Algorithm
         private IndexController indexes;
         private Simulation simulation;
 
-        public Grasp(Simulation simulation, WorkerController selected_workers, OrderController selected_orders,
-            ProcessController processes, JobController jobs, RecipeController recipes, IndexController indexes)
+        public Grasp(Simulation simulation, JobController jobs, RecipeController recipes, IndexController indexes)
         {
-            this.selected_workers = selected_workers;
-            this.selected_orders = new OrderController(selected_orders);
+            this.simulation = simulation;
+            this.selected_workers = simulation.SelectedWorkers;
+            this.selected_orders = new OrderController(simulation.SelectedOrders);
             this.jobs = jobs;
             this.recipes = recipes;
             this.indexes = indexes;
-            this.simulation = simulation;
         }
 
-        public List<Assignment> ExecuteGraspAlgorithm(WorkerController original_workers_list)
+        public Assignment ExecuteGraspAlgorithm(int day, int[] elapsed_time)
         {
-            int[] workers_for_job = new int[jobs.NumberOfJobs];
-            for (int i = 0; i < indexes.Count(); i++)
+            Assignment selected_assignment = null;
+
+            //Generar (Iterations) soluciones, guardando siempre la mejor
+            for (int iteration = 0; elapsed_time[0] < Simulation.LimitTime && iteration < Grasp.NumberOfIterations; iteration++)
             {
-                int job_index = jobs.GetIndex(indexes[i].Job);
-                workers_for_job[job_index]++;
-            }
-            for (int i = 0; i < jobs.NumberOfJobs; i++)
-            {
-                MessageBox.Show("Job " + jobs[i].ID + ": " + workers_for_job[i]);
-            }
+                DateTime date = simulation.StartDate.AddDays(day);
+                Assignment assignment = new Assignment(date, selected_workers.Count(), simulation.Miniturns);
+                IndexController candidates = this.GenerateCandidates();
 
-            List<Assignment> assignments = new List<Assignment>();
+                this.ExecuteGraspConstructionPhase(assignment, candidates, iteration, elapsed_time);
 
-            for (int day = 0; day < simulation.Days; day++)
-            {
-                
-                Assignment selected_assignment = null;
-
-                //Generar (Iterations) soluciones, guardando siempre la mejor
-                for (int iteration = 0; iteration < MaxIterations; iteration++)
-                {
-                    //MessageBox.Show("ITERACION " + (iteration + 1));
-
-                    Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers.Count(),
-                        simulation.Miniturns);
-                    IndexController candidates = GenerateCandidates(original_workers_list);
-
-                    ExecuteGraspConstructionPhase(assignment, candidates, iteration);
-
-                    //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
-                    //por la nueva asignación generada.
-                    if (selected_assignment == null || assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
-                        selected_assignment = assignment;
-                }
-
-                //Añadir la mejor asignación de trabajadores de un día a la lista
-                assignments.Add(selected_assignment);
+                //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
+                //por la nueva asignación generada.
+                if (selected_assignment == null || assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
+                    selected_assignment = assignment;
             }
 
-            MessageBox.Show("Fin grasp");
-
-            return assignments;
+            return selected_assignment;
         }
 
-        private void ExecuteGraspConstructionPhase(Assignment assignment, IndexController candidates, int iteration)
+        private IndexController GenerateCandidates()
+        {
+            IndexController candidates = new IndexController();
+            for (int i = 0; i < indexes.Count(); i++)
+                if (selected_workers.GetByID(indexes[i].Worker) != null) candidates.Add(indexes[i]);
+            return candidates;
+        }
+
+        private void ExecuteGraspConstructionPhase(Assignment assignment, IndexController candidates, int iteration, int[] elapsed_time)
         {
             List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
             List<Job> current_product_jobs = new List<Job>();
 
-            for (int construction = 1; selected_orders.Count() > 0 && candidates.Count() > 0; construction++)
+            for (int construction = 1; elapsed_time[0] < Simulation.LimitTime && selected_orders.Count() > 0 && candidates.Count() > 0;
+                construction++)
             {
                 LogHandler.WriteLine("Iteracion de construccion " + construction);
                 LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
@@ -147,17 +131,6 @@ namespace InkaArt.Business.Algorithm
             
             for (int i = 0; i < jobs.NumberOfJobs; i++)
                 if (jobs[i].Product == recipe.Product) current_product_jobs.Add(jobs[i]);
-        }
-
-        private IndexController GenerateCandidates(WorkerController original_workers_list)
-        {
-            IndexController candidates = new IndexController();
-            for (int i = 0; i < indexes.Count(); i++)
-            {
-                Worker index_worker = original_workers_list.GetByID(indexes[i].Worker);
-                if (selected_workers.Contains(index_worker)) candidates.Add(indexes[i]);
-            }
-            return candidates;
         }
 
         private IndexController GenerateReleaseCandidateList(IndexController candidates, Assignment assignment,
