@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -25,10 +26,10 @@ namespace InkaArt.Business.Algorithm
         // solutions
         private int max_iterations;
         private double best_fitness;
-        private List<AssignmentLine[][]> initial_solution;
-        private List<AssignmentLine[][]> best_solution;
+        private List<Assignment> initial_solution;
+        private List<Assignment> best_solution;
 
-        internal List<AssignmentLine[][]> BestSolution
+        internal List<Assignment> BestSolution
         {
             get
             {
@@ -42,23 +43,24 @@ namespace InkaArt.Business.Algorithm
         }
 
         /* Se inicializan los parametros a calibrar */
-        public TabuSearch(Simulation simulation, List<AssignmentLine[][]> initial_solution)
+        public TabuSearch(Simulation simulation, List<Assignment> solution)
         {
-            LoadParameters();
+            loadParameters();            
             this.simulation = simulation;
-            this.initial_solution = initial_solution;
-            this.best_solution = new List<AssignmentLine[][]>();
+            this.initial_solution = solution;
+            this.best_solution = new List<Assignment>();
+            MessageBox.Show("Inicializacion de Tabu");
         }
 
-        public void LoadParameters()
+        public bool loadParameters()
         {
+            bool read = false;
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
-
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TabuParameters\"", connection);
-
             NpgsqlDataReader reader = command.ExecuteReader();
+
             while (reader.Read())
             {
                 // reactive tabu list
@@ -71,36 +73,41 @@ namespace InkaArt.Business.Algorithm
 
                 // neighbor
                 this.neighbor_checks = reader.GetInt32(4);     // cantidad maxima de vecinos a evaluar                
+                read = true; 
             }
-
             connection.Close();
-        }
 
+            return read;
+        }
+        
         /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
            Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
         */
-        public double getFitness(Simulation simulation, AssignmentLine[][] solution)
+        public double getFitness(Simulation simulation, Assignment solution)
         {
             double fitness = 0;
             int assigned_workers = 0;
             double product_weight;
 
-            for (int i = 0; i < solution.Length; i++)
+            for (int worker_index = 0; worker_index < solution.NumberOfWorkers; worker_index++)
             {
-                foreach(AssignmentLine assignment in solution[i])
+                for (int miniturn_index = 0; miniturn_index < solution.Miniturns; miniturn_index++)
                 {
-                    Index index = simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
-                    // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
-                    if (index != null)
-                    {
-                        assigned_workers++;
-                        // buscamos el peso del producto (producto = primer digito del procesoxproducto id)
-                        
-                        product_weight = simulation.ProductWeight(assignment.Job.Product);
-                        // sumamos el indice de perdida
-                        fitness += (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight)
-                            / product_weight;
-                    }
+                    AssignmentLine assignment = solution[worker_index, miniturn_index];
+                    if (assignment != null) {
+                        Index index = simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
+                        // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
+                        if (index != null)
+                        {
+                            assigned_workers++;
+                            // buscamos el peso del producto (producto = primer digito del procesoxproducto id)
+
+                            product_weight = simulation.ProductWeight(assignment.Job.Product);
+                            // sumamos el indice de perdida
+                            fitness += (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight)
+                                / product_weight;
+                        }
+                    }                    
                 }
             }
 
@@ -109,10 +116,9 @@ namespace InkaArt.Business.Algorithm
         }
 
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
-        public AssignmentLine[][] getNeighbor(AssignmentLine[][] solution, TabuMove move)
+        public Assignment getNeighbor(Assignment solution, TabuMove move)
         {
-            AssignmentLine[][] neighbor = new AssignmentLine[solution.Length][];
-            solution.CopyTo(neighbor, 0);
+            Assignment neighbor = new Assignment(solution);
 
             // move attributes
             int swap_type = Randomizer.NextNumber(0, 1);
@@ -123,11 +129,11 @@ namespace InkaArt.Business.Algorithm
             if (true) //(swap_type == 0)
             {
                 // buscamos trabajadores
-                worker1_index = Randomizer.NextNumber(0, solution.Length - 1);
-                worker2_index = Randomizer.NextNumber(0, solution.Length - 1);
+                worker1_index = Randomizer.NextNumber(0, solution.NumberOfWorkers - 1);
+                worker2_index = Randomizer.NextNumber(0, solution.Miniturns - 1);
                 // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-                while (solution.Length > 1 && worker1_index == worker2_index)
-                    worker2_index = Randomizer.NextNumber(0, solution.Length - 1);
+                while (solution.NumberOfWorkers > 1 && worker1_index == worker2_index)
+                    worker2_index = Randomizer.NextNumber(0, solution.NumberOfWorkers - 1);
                 // intercambiamos valores
                 SwapWorkers(neighbor, worker1_index, worker2_index);
             }
@@ -143,15 +149,16 @@ namespace InkaArt.Business.Algorithm
             return neighbor;
         }
 
-        public void SwapWorkers(AssignmentLine[][] solution, int worker1_index, int worker2_index)
+        public void SwapWorkers(Assignment solution, int worker1_index, int worker2_index)
         {
-            Worker worker1 = solution[worker1_index].First().Worker;
-            Worker worker2 = solution[worker2_index].First().Worker;
+            AssignmentLine ass = solution[worker1_index, 0];
+            Worker worker1 = ass.Worker;
+            Worker worker2 = solution[worker2_index,0].Worker;
 
             for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
             {
-                solution[worker1_index][miniturn].Worker = worker2;
-                solution[worker2_index][miniturn].Worker = worker1;
+                solution[worker1_index,miniturn].Worker = worker2;
+                solution[worker2_index,miniturn].Worker = worker1;
             }
         }
 
@@ -161,11 +168,9 @@ namespace InkaArt.Business.Algorithm
             for(int day = 0; day < initial_solution.Count; day++)
             {
                 // soluciones
-                AssignmentLine[][] current_solution = new AssignmentLine[initial_solution[day].Length][];
-                AssignmentLine[][] best_day_solution = current_solution;
-                AssignmentLine[][] neighbor = null;
-                initial_solution[day].CopyTo(current_solution, 0);
-                current_solution.CopyTo(best_day_solution, 0);
+                Assignment current_solution = new Assignment(initial_solution[day]);
+                Assignment best_day_solution = new Assignment(initial_solution[day]);
+                Assignment neighbor = null;
 
                 // condicion de meseta: contador de iteraciones sin mejora en best_solution
                 int iter_count = 0;
@@ -176,6 +181,7 @@ namespace InkaArt.Business.Algorithm
 
                 // fitness
                 double initial_fitness = getFitness(simulation, current_solution);
+                MessageBox.Show("Fitness");
                 double current_fitness = initial_fitness;
                 double neighbor_fitness = 0;
                 best_fitness = current_fitness;
@@ -259,6 +265,7 @@ namespace InkaArt.Business.Algorithm
                     current_fitness = neighbor_fitness;
                 }
                 best_solution.Add(best_day_solution);
+                MessageBox.Show("Paso un dia");
             }            
         }
         

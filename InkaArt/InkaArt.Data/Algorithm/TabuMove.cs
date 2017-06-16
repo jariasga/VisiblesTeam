@@ -22,20 +22,20 @@ namespace InkaArt.Data.Algorithm
             this.worker2 = null;
         }
 
-        public TabuMove(int type, AssignmentLine[][] solution, int worker1, int worker2)
+        public TabuMove(int type, Assignment solution, int worker1, int worker2)
         {
             this.type = type;
             // process
             if (type == 0)
             {
-                this.worker1 = new Tuple<int, int>(worker1, solution[worker1][0].Job.Process);
-                this.worker2 = new Tuple<int, int>(worker2, solution[worker2][0].Job.Process);
+                this.worker1 = new Tuple<int, int>(worker1, solution[worker1,0].Job.Process);
+                this.worker2 = new Tuple<int, int>(worker2, solution[worker2,0].Job.Process);
             }
             // product 
             else
             {
-                this.worker1 = new Tuple<int, int>(worker1, solution[worker1][type].Recipe.Product);
-                this.worker2 = new Tuple<int, int>(worker2, solution[worker2][type].Recipe.Product);
+                this.worker1 = new Tuple<int, int>(worker1, solution[worker1,type].Recipe.Product);
+                this.worker2 = new Tuple<int, int>(worker2, solution[worker2,type].Recipe.Product);
             }
 
         }

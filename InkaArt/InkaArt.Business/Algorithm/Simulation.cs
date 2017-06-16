@@ -208,11 +208,10 @@ namespace InkaArt.Business.Algorithm
             Grasp grasp = new Grasp(this, selected_workers, selected_orders, processes, jobs, recipes, indexes);
             List<Assignment> solutions = grasp.ExecuteGraspAlgorithm(workers);
 
-            List<AssignmentLine[][]> initial_solution = new List<AssignmentLine[][]>(); // GRASP
-            TabuSearch tabu = new TabuSearch(this, initial_solution);
-            //tabu.run();
+            TabuSearch tabu = new TabuSearch(this, solutions);
+            tabu.run();
 
-            assignments = tabu.BestSolution;
+            //assignments = tabu.BestSolution;
 
             end_time = Environment.TickCount;
         }
