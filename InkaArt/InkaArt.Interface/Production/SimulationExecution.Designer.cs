@@ -34,6 +34,7 @@
             this.label_state = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.label_time = new System.Windows.Forms.Label();
+            this.background_simulation = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // progress_bar
@@ -80,6 +81,11 @@
             this.label_time.TabIndex = 42;
             this.label_time.Text = "Tiempo:";
             // 
+            // background_simulation
+            // 
+            this.background_simulation.WorkerReportsProgress = true;
+            this.background_simulation.WorkerSupportsCancellation = true;
+            // 
             // SimulationExecution
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -105,9 +111,10 @@
 
         #endregion
         private System.Windows.Forms.Button button_cancel;
-        private System.Windows.Forms.Label label_state;
-        private System.Windows.Forms.ProgressBar progress_bar;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Label label_time;
+        public System.Windows.Forms.Label label_state;
+        public System.Windows.Forms.ProgressBar progress_bar;
+        public System.Windows.Forms.Label label_time;
+        private System.ComponentModel.BackgroundWorker background_simulation;
     }
 }

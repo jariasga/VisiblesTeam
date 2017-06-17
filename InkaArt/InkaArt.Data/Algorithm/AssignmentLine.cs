@@ -16,8 +16,8 @@ namespace InkaArt.Data.Algorithm
 
         private TimeSpan start_time;
         private TimeSpan end_time;
-        private int total_miniturns;
 
+        private int total_miniturns;
         private int produced;    //Cantidad producida
 
         public Worker Worker

@@ -31,11 +31,11 @@ namespace InkaArt.Business.Algorithm
             this.indexes = indexes;
         }
 
-        public Assignment ExecuteGraspAlgorithm(int day, int[] elapsed_time)
+        public Assignment ExecuteGraspAlgorithm(int day, ref int elapsed_time)
         {
             Assignment selected_assignment = null;
             
-            for (int iteration = 0; elapsed_time[0] < Simulation.LimitTime && iteration < Grasp.NumberOfIterations; iteration++)
+            for (int iteration = 0; elapsed_time < Simulation.LimitTime && iteration < Grasp.NumberOfIterations; iteration++)
             {
                 Assignment assignment = new Assignment(simulation.StartDate.AddDays(day));
 
@@ -44,7 +44,7 @@ namespace InkaArt.Business.Algorithm
                 for (int i = 0; i < indexes.Count(); i++)
                     if (selected_workers.GetByID(indexes[i].Worker.ID) != null) candidates.Add(indexes[i]);
 
-                this.ExecuteGraspConstructionPhase(assignment, candidates, iteration, elapsed_time);
+                this.ExecuteGraspConstructionPhase(assignment, candidates, iteration, ref elapsed_time);
 
                 //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
                 //por la nueva asignación generada.
@@ -55,12 +55,12 @@ namespace InkaArt.Business.Algorithm
             return selected_assignment;
         }
 
-        private void ExecuteGraspConstructionPhase(Assignment assignment, List<Index> candidates, int iteration, int[] elapsed_time)
+        private void ExecuteGraspConstructionPhase(Assignment assignment, List<Index> candidates, int iteration, ref int elapsed_time)
         {
             List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
             List<Job> current_product_jobs = new List<Job>();
 
-            for (int construction = 1; elapsed_time[0] < Simulation.LimitTime && selected_orders.Count() > 0 && candidates.Count() > 0;
+            for (int construction = 1; elapsed_time < Simulation.LimitTime && selected_orders.Count() > 0 && candidates.Count() > 0;
                 construction++)
             {
                 LogHandler.WriteLine("Iteracion de construccion " + construction);
