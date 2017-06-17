@@ -223,6 +223,12 @@
     <Compile Include="Warehouse\ProductionMovement.Designer.cs">
       <DependentUpon>ProductionMovement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\PurchaseBillDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\PurchaseBillDetail.Designer.cs">
+      <DependentUpon>PurchaseBillDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\PurchaseMovement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -553,6 +559,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ProductionMovement.resx">
       <DependentUpon>ProductionMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\PurchaseBillDetail.resx">
+      <DependentUpon>PurchaseBillDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseMovement.resx">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
