@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_export = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,17 +48,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.grid_salesReport)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // button_export
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(365, 466);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 51);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Exportar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_export.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.ForeColor = System.Drawing.Color.White;
+            this.button_export.Location = new System.Drawing.Point(365, 466);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(154, 51);
+            this.button_export.TabIndex = 19;
+            this.button_export.Text = "Exportar";
+            this.button_export.UseVisualStyleBackColor = false;
+            this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // label1
             // 
@@ -204,7 +205,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_export);
             this.Name = "SalesReport";
             this.Text = "Reporte de Ventas";
             ((System.ComponentModel.ISupportInitialize)(this.grid_salesReport)).EndInit();
@@ -214,7 +215,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_export;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

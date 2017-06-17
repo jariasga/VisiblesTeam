@@ -48,9 +48,9 @@ namespace InkaArt.Interface.Production
                 Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
                 Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
                 app.Visible = true;
-                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.Sheets["Reporte de Desempeño"];
                 worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Records";
+                worksheet.Name = "Reporte de Desempeño";
 
                 try
                 {
@@ -81,7 +81,7 @@ namespace InkaArt.Interface.Production
                     if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         workbook.SaveAs(saveDialog.FileName);
-                        MessageBox.Show("Export Successful", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (System.Exception ex)
