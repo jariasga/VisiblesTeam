@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_orders = new System.Windows.Forms.DataGridView();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,9 +40,9 @@
             this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_create_dev = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.date_deliveryDate_end = new System.Windows.Forms.DateTimePicker();
             this.combo_type = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.date_deliveryDate_ini = new System.Windows.Forms.DateTimePicker();
             this.combo_orderStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.button_search = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_create = new System.Windows.Forms.Button();
-            this.date_deliveryDate_end = new System.Windows.Forms.DateTimePicker();
+            this.checkbox_enabledate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orders)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,19 +61,19 @@
             // grid_orders
             // 
             this.grid_orders.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.grid_orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_orders.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_orders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_orders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.grid_orders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column4,
@@ -144,10 +144,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkbox_enabledate);
             this.groupBox1.Controls.Add(this.date_deliveryDate_end);
             this.groupBox1.Controls.Add(this.combo_type);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.date_deliveryDate_ini);
             this.groupBox1.Controls.Add(this.combo_orderStatus);
             this.groupBox1.Controls.Add(this.label3);
@@ -166,13 +166,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // date_deliveryDate_end
+            // 
+            this.date_deliveryDate_end.Enabled = false;
+            this.date_deliveryDate_end.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliveryDate_end.Location = new System.Drawing.Point(482, 135);
+            this.date_deliveryDate_end.Name = "date_deliveryDate_end";
+            this.date_deliveryDate_end.Size = new System.Drawing.Size(134, 30);
+            this.date_deliveryDate_end.TabIndex = 28;
+            // 
             // combo_type
             // 
             this.combo_type.BackColor = System.Drawing.Color.White;
             this.combo_type.FormattingEnabled = true;
             this.combo_type.Items.AddRange(new object[] {
             "Pedido",
-            "Devolución"});
+            "Devolucion"});
             this.combo_type.Location = new System.Drawing.Point(32, 62);
             this.combo_type.Margin = new System.Windows.Forms.Padding(4);
             this.combo_type.Name = "combo_type";
@@ -189,19 +199,10 @@
             this.label5.TabIndex = 25;
             this.label5.Text = "Tipo";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(312, 110);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(167, 23);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Fecha de Entrega";
-            // 
             // date_deliveryDate_ini
             // 
             this.date_deliveryDate_ini.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.date_deliveryDate_ini.Enabled = false;
             this.date_deliveryDate_ini.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_deliveryDate_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliveryDate_ini.Location = new System.Drawing.Point(316, 135);
@@ -316,14 +317,16 @@
             this.button_create.UseVisualStyleBackColor = false;
             this.button_create.Click += new System.EventHandler(this.button_create_Click);
             // 
-            // date_deliveryDate_end
+            // checkbox_enabledate
             // 
-            this.date_deliveryDate_end.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_deliveryDate_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliveryDate_end.Location = new System.Drawing.Point(482, 135);
-            this.date_deliveryDate_end.Name = "date_deliveryDate_end";
-            this.date_deliveryDate_end.Size = new System.Drawing.Size(134, 30);
-            this.date_deliveryDate_end.TabIndex = 28;
+            this.checkbox_enabledate.AutoSize = true;
+            this.checkbox_enabledate.Location = new System.Drawing.Point(316, 106);
+            this.checkbox_enabledate.Name = "checkbox_enabledate";
+            this.checkbox_enabledate.Size = new System.Drawing.Size(189, 27);
+            this.checkbox_enabledate.TabIndex = 29;
+            this.checkbox_enabledate.Text = "Fecha de Entrega";
+            this.checkbox_enabledate.UseVisualStyleBackColor = true;
+            this.checkbox_enabledate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // ClientOrderIndex
             // 
@@ -358,7 +361,6 @@
         private System.Windows.Forms.Button button_search;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker date_deliveryDate_ini;
         private System.Windows.Forms.ComboBox combo_orderStatus;
         private System.Windows.Forms.Button button_delete;
@@ -372,5 +374,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
         private System.Windows.Forms.DateTimePicker date_deliveryDate_end;
+        private System.Windows.Forms.CheckBox checkbox_enabledate;
     }
 }

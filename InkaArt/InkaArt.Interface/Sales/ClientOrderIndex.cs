@@ -21,7 +21,9 @@ namespace InkaArt.Interface.Sales
 
         private void button_search_Click(object sender, EventArgs e)
         {
-            DataTable orderFiltered = orderController.GetOrders(-1, combo_type.SelectedItem, textbox_doc.Text, textbox_name.Text, combo_orderStatus.SelectedItem, date_deliveryDate_ini.Value, date_deliveryDate_end.Value);
+            DataTable orderFiltered;
+            if (checkbox_enabledate.Checked) orderFiltered = orderController.GetOrders(-1, combo_type.SelectedItem, textbox_doc.Text, textbox_name.Text, combo_orderStatus.SelectedItem, date_deliveryDate_ini.Value, date_deliveryDate_end.Value);
+            else orderFiltered = orderController.GetOrders(-1, combo_type.SelectedItem, textbox_doc.Text, textbox_name.Text, combo_orderStatus.SelectedItem);
             populateDataGrid(orderFiltered);
         }
 
@@ -105,6 +107,11 @@ namespace InkaArt.Interface.Sales
                     grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"].ToString().ToUpper(), totalAmount);
                 }
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+                date_deliveryDate_ini.Enabled = date_deliveryDate_end.Enabled = checkbox_enabledate.Checked;
         }
     }
 }
