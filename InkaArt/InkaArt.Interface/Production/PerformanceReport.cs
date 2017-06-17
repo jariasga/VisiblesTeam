@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Reports;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
 
 namespace InkaArt.Interface.Production
 {
     public partial class PerformanceReport : Form
     {
-        private ReportsController reportControl = new ReportsController();
+        private ReportsController reportControl = new ReportsController();        
 
         public PerformanceReport(string worker, int chosenIndex, string fechaIni, string fechaFin)
         {
@@ -25,11 +27,11 @@ namespace InkaArt.Interface.Production
         {
             label_nameWorker.Text = worker;
             label_today.Text = DateTime.Now.ToString("M/d/yyyy");
-            DataTable performanceReportList = reportControl.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
+            System.Data.DataTable performanceReportList = reportControl.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
             populateDataGrid(performanceReportList);           
         }
 
-        private void populateDataGrid(DataTable performanceReportList)
+        private void populateDataGrid(System.Data.DataTable performanceReportList)
         {
             dataGridView_performance.Rows.Clear();
             foreach (DataRow row in performanceReportList.Rows)
@@ -38,7 +40,7 @@ namespace InkaArt.Interface.Production
             }               
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_export_Click(object sender, EventArgs e)
         {
             try
             {
@@ -46,9 +48,9 @@ namespace InkaArt.Interface.Production
                 Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
                 Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
                 app.Visible = true;
-                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.Sheets["Reporte de Desempeño"];
                 worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Records";
+                worksheet.Name = "Reporte de Desempeño";
 
                 try
                 {
@@ -79,7 +81,7 @@ namespace InkaArt.Interface.Production
                     if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         workbook.SaveAs(saveDialog.FileName);
-                        MessageBox.Show("Export Successful", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (System.Exception ex)
