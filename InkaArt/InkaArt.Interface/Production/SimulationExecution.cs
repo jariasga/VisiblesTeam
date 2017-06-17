@@ -19,12 +19,14 @@ namespace InkaArt.Interface.Production
         private Simulation simulation;
         private Thread simulation_thread;
         private int[] elapsed_seconds;
+        private WorkerController workers;
 
-        public SimulationExecution(Simulation simulation)
+        public SimulationExecution(Simulation simulation, WorkerController workers)
         {
             InitializeComponent();
             this.simulation = simulation;
             this.elapsed_seconds = new int[1];
+            this.workers = workers;
         }
 
         private void NewSimulation_Load(object sender, EventArgs e)
@@ -51,10 +53,10 @@ namespace InkaArt.Interface.Production
             RecipeController recipes = new RecipeController();
             recipes.Load();
             this.progress_bar.Value += 20;
-            IndexController indexes = new IndexController();
+            IndexController indexes = new IndexController(workers, jobs, recipes);
             indexes.Load();
             this.progress_bar.Value += 20;
-            indexes.CalculateIndexes(jobs, recipes, simulation);
+            indexes.CalculateIndexes(simulation);
             this.progress_bar.Value += 20;
 
             this.label_state.Text = "Estado de la simulación: Asignando trabajadores...";
@@ -63,11 +65,11 @@ namespace InkaArt.Interface.Production
             //Algoritmo GRASP
 
             Grasp grasp = new Grasp(simulation, jobs, recipes, indexes);
-            List<Assignment> assignments = new List<Assignment>();
+            List<Assignment> initial_assignments = new List<Assignment>();
 
             for (int day = 0; elapsed_seconds[0] < Simulation.LimitTime && day < simulation.Days; day++)
             {
-                assignments.Add(grasp.ExecuteGraspAlgorithm(day, elapsed_seconds));
+                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, elapsed_seconds));
                 this.progress_bar.Value += Convert.ToInt32(100.0 / day);
             }
 
@@ -76,9 +78,11 @@ namespace InkaArt.Interface.Production
 
             //Algoritmo de Búsqueda Tabú
 
-            //TabuSearch tabu = new TabuSearch(simulation, assignments);
+            //TabuSearch tabu = new TabuSearch(simulation, initial_assignments);
             //tabu.run();
             //assignments = tabu.BestSolution;
+
+            this.timer.Stop();
 
             //Finalizar
             MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);

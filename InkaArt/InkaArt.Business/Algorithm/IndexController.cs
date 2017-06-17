@@ -15,9 +15,17 @@ namespace InkaArt.Business.Algorithm
     {
         private List<Index> indexes;
 
-        public IndexController()
+        private WorkerController workers;
+        private JobController jobs;
+        private RecipeController recipes;
+
+        public IndexController(WorkerController workers, JobController jobs, RecipeController recipes)
         {
             this.indexes = new List<Index>();
+
+            this.workers = workers;
+            this.jobs = jobs;
+            this.recipes = recipes;
         }
 
         public void Load()
@@ -25,21 +33,19 @@ namespace InkaArt.Business.Algorithm
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status " +
-                "ORDER BY id_index ASC", connection);
-
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status ORDER BY id_index ASC", connection);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 int id_index = reader.GetInt32(0);
-                int id_worker = reader.GetInt32(1);
-                int id_job = reader.GetInt32(2);
-                int id_recipe = reader.GetInt32(3);
+                Worker worker = workers.GetByID(reader.GetInt32(1));
+                Job job = jobs.GetByID(reader.GetInt32(2));
+                Recipe recipe = recipes.GetByID(reader.GetInt32(3));
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
-                Index index = new Index(id_index, id_worker, id_job, id_recipe, average_breakage, average_time);
+                Index index = new Index(id_index, worker, job, recipe, average_breakage, average_time);
                 indexes.Add(index);
             }
 
@@ -74,19 +80,19 @@ namespace InkaArt.Business.Algorithm
 
         /*********************** ALGORITMO ***********************/
 
-        public void CalculateIndexes(JobController jobs, RecipeController recipes, Simulation simulation)
+        public void CalculateIndexes(Simulation simulation)
         {
-            double[,] average_breakage_mean = new double[jobs.NumberOfJobs, recipes.Count()];
-            double[,] average_time_mean = new double[jobs.NumberOfJobs, recipes.Count()];
-            int[,] average_mean_count = new int[jobs.NumberOfJobs, recipes.Count()];
+            double[,] average_breakage_mean = new double[jobs.NumberOfJobs, recipes.NumberOfRecipes];
+            double[,] average_time_mean = new double[jobs.NumberOfJobs, recipes.NumberOfRecipes];
+            int[,] average_mean_count = new int[jobs.NumberOfJobs, recipes.NumberOfRecipes];
 
             for (int i = 0; i < jobs.NumberOfJobs; i++)
             {
-                for (int j = 0; j < recipes.Count(); j++)
+                for (int j = 0; j < recipes.NumberOfRecipes; j++)
                 {
                     foreach (Index index in indexes)
                     {
-                        if (index.Job == jobs[i].ID && index.Recipe == recipes[j].ID)
+                        if (index.Job.ID == jobs[i].ID && index.Recipe.ID == recipes[j].ID)
                         {
                             average_mean_count[i, j]++;
                             average_breakage_mean[i, j] += index.AverageBreakage;
@@ -103,9 +109,9 @@ namespace InkaArt.Business.Algorithm
 
             foreach (Index index in indexes)
             {
-                int job_index = jobs.GetIndex(index.Job);
-                int recipe_index = recipes.GetIndex(index.Recipe);
-                double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job).Product);
+                int job_index = jobs.GetIndex(index.Job.ID);
+                int recipe_index = recipes.GetIndex(index.Recipe.ID);
+                double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
 
                 index.CalculateIndexes(average_breakage_mean[job_index, recipe_index], average_time_mean[job_index, recipe_index],
                     simulation.BreakageWeight, simulation.TimeWeight, product_weight);
@@ -150,7 +156,7 @@ namespace InkaArt.Business.Algorithm
         {
             if (worker == null || job == null) return null;
             foreach (Index index in indexes)
-                if (index.Worker == worker.ID && index.Job == job.ID) return index;
+                if (index.Worker.ID == worker.ID && index.Job.ID == job.ID) return index;
             return null;
         }
     }

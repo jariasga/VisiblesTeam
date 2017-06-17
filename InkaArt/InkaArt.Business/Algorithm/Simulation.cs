@@ -14,6 +14,7 @@ namespace InkaArt.Business.Algorithm
     public class Simulation
     {
         public const int LimitTime = 300;      //60 segundos * 5 minutos como máximo
+        public const int MiniturnLength = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
 
         private int id_simulation;
         private string name;
@@ -33,7 +34,6 @@ namespace InkaArt.Business.Algorithm
         private OrderController selected_orders;
 
         private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
-        private int miniturn_length = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
 
         // Resultados de asignacion
         List<AssignmentLine[][]> assignments = null;
@@ -97,10 +97,6 @@ namespace InkaArt.Business.Algorithm
         {
             get { return miniturns; }
             //set { miniturns = value; }
-        }
-        public int MiniturnLength
-        {
-            get { return miniturn_length; }
         }
         public List<AssignmentLine[][]> Assignments
         {
@@ -173,14 +169,14 @@ namespace InkaArt.Business.Algorithm
                     miniturn = 0;
                     foreach (AssignmentLine assignment in worker)
                     {
-                        assignment.Miniturn = miniturn;
+                        //assignment.Miniturn = miniturn;
                         assignment.Date = DateTime.Now.AddDays(days);
 
                         NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
                         command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
                         command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
                         command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
-                        command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
+                        //command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
                         command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
 
                         command.ExecuteNonQuery();
@@ -234,7 +230,7 @@ namespace InkaArt.Business.Algorithm
                 }
             }
             
-            return list.OrderByDescending(o => o.Miniturn).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
+            return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
         }
     }
 }
