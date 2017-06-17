@@ -48,9 +48,10 @@
             // 
             this.label_today.AutoSize = true;
             this.label_today.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_today.Location = new System.Drawing.Point(743, 9);
+            this.label_today.Location = new System.Drawing.Point(557, 7);
+            this.label_today.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_today.Name = "label_today";
-            this.label_today.Size = new System.Drawing.Size(0, 23);
+            this.label_today.Size = new System.Drawing.Size(0, 18);
             this.label_today.TabIndex = 29;
             // 
             // dataGridView_performance
@@ -76,10 +77,10 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dataGridView_performance.Location = new System.Drawing.Point(30, 89);
-            this.dataGridView_performance.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.dataGridView_performance.Location = new System.Drawing.Point(22, 72);
+            this.dataGridView_performance.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.dataGridView_performance.Name = "dataGridView_performance";
-            this.dataGridView_performance.Size = new System.Drawing.Size(952, 275);
+            this.dataGridView_performance.Size = new System.Drawing.Size(714, 223);
             this.dataGridView_performance.TabIndex = 30;
             // 
             // Fecha
@@ -117,20 +118,23 @@
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
             this.button1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(425, 383);
+            this.button1.Location = new System.Drawing.Point(319, 311);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 51);
+            this.button1.Size = new System.Drawing.Size(116, 41);
             this.button1.TabIndex = 31;
             this.button1.Text = "Exportar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 33);
+            this.label1.Location = new System.Drawing.Point(20, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 23);
+            this.label1.Size = new System.Drawing.Size(87, 18);
             this.label1.TabIndex = 32;
             this.label1.Text = "Trabajador:";
             // 
@@ -138,22 +142,24 @@
             // 
             this.label_nameWorker.AutoSize = true;
             this.label_nameWorker.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_nameWorker.Location = new System.Drawing.Point(143, 33);
+            this.label_nameWorker.Location = new System.Drawing.Point(107, 27);
+            this.label_nameWorker.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_nameWorker.Name = "label_nameWorker";
-            this.label_nameWorker.Size = new System.Drawing.Size(0, 23);
+            this.label_nameWorker.Size = new System.Drawing.Size(0, 18);
             this.label_nameWorker.TabIndex = 33;
             // 
             // PerformanceReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1010, 446);
+            this.ClientSize = new System.Drawing.Size(758, 362);
             this.Controls.Add(this.label_nameWorker);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView_performance);
             this.Controls.Add(this.label_today);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PerformanceReport";
             this.Text = "Reporte de Rendimiento";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_performance)).EndInit();
