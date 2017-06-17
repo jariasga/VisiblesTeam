@@ -57,11 +57,15 @@
     <Reference Include="GMap.NET.WindowsForms">
       <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Client.Education, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
@@ -108,12 +112,6 @@
     </Compile>
     <Compile Include="Production\GeneratePerformanceReport.designer.cs">
       <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Production\SimulationReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Production\SimulationReport.Designer.cs">
-      <DependentUpon>SimulationReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\JobDetails.cs">
       <SubType>Form</SubType>
@@ -169,6 +167,12 @@
     <Compile Include="Production\SimulationLoadingScreen.Designer.cs">
       <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Production\SimulationReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Production\SimulationReport.Designer.cs">
+      <DependentUpon>SimulationReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Production\TurnManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +192,12 @@
     </Compile>
     <Compile Include="Sales\DocumentSearch.Designer.cs">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\breakProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\breakProduct.Designer.cs">
+      <DependentUpon>breakProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\ExchangeMovement.cs">
       <SubType>Form</SubType>
@@ -480,9 +490,6 @@
     <EmbeddedResource Include="Production\GeneratePerformanceReport.resx">
       <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\SimulationReport.resx">
-      <DependentUpon>SimulationReport.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -510,6 +517,9 @@
     <EmbeddedResource Include="Production\SimulationLoadingScreen.resx">
       <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Production\SimulationReport.resx">
+      <DependentUpon>SimulationReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Production\TurnManagement.resx">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -528,6 +538,9 @@
     </Compile>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\breakProduct.resx">
+      <DependentUpon>breakProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>

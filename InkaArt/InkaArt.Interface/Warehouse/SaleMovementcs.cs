@@ -85,6 +85,11 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("Favor de ingresar un valor entero para el almacén");
                 return;
             }
+            if (idWare < 0)
+            {
+                MessageBox.Show("Favor de ingresar un valor válido para el almacén");
+                return;
+            }
             try
             {
                 idPedido = Convert.ToInt32(textBox3.Text);
@@ -94,7 +99,11 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("Favor de ingresar un valor entero para el número de lote de producción");
                 return;
             }
-
+            if (idPedido < 0)
+            {
+                MessageBox.Show("Favor de ingresar un valor válido para el número de pedido");
+                return;
+            }
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 bool s = Convert.ToBoolean(row.Cells[5].Value);
@@ -112,12 +121,18 @@ namespace InkaArt.Interface.Warehouse
                         MessageBox.Show("Favor de ingresar un valor entero para el número de productos a mover. Linea: " + (numRows + 1));
                         return;
                     }
+                    if (cantMov < 0)
+                    {
+                        MessageBox.Show("Favor de ingresar un valor válido para la cantidad a mover");
+                        continue;
+                    }
+
                     maxMov = Convert.ToInt32(row.Cells[3].Value);
 
                     if (cantMov <= maxMov)
                     {
                         //Aumentar stock físico y lógico del almacén 
-                        exito2 = productionItemWarehouseMovementController.updateData(idProd, idWare, cantMov, "Salida");
+                        exito2 = productionItemWarehouseMovementController.updateData(idProd, idWare, cantMov, "Salida","OK");
                         if (exito2 == 1)
                         {
                             //Aumentar stock físico y lógico del producto
@@ -128,7 +143,10 @@ namespace InkaArt.Interface.Warehouse
                             int movemenType = 13; //Indica que es una salida
                             int movementReason = 2;//Indica que es un movimiento por venta
                             int documentTypes = 4;//Indica que el documento relacionado es un número de pedido
-                            productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes);
+                            int productType = 1;//0:materia prima | 1:producto
+                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                            productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd,cantMov, productType);
+                            //productionItemWarehouseMovementController.updateOrder(idPedido);
                             exito++;
                         }
                     }
@@ -139,6 +157,7 @@ namespace InkaArt.Interface.Warehouse
                 }
                 numRows++;
             }
+            productionItemWarehouseMovementController.updateOrder(idPedido);
 
             //cantMov = Convert.ToInt32(numericUpDown2.Value);
             if (exito > 0)

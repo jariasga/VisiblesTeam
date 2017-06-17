@@ -103,8 +103,10 @@ namespace InkaArt.Business.Algorithm
 
             foreach (Index index in indexes)
             {
+                int job_index = jobs.GetIndex(index.Job);
+                int recipe_index = recipes.GetIndex(index.Recipe);
                 double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job).Product);
-                index.CalculateIndexes(average_breakage_mean[index.Job, index.Recipe], average_time_mean[index.Job, index.Recipe],
+                index.CalculateIndexes(average_breakage_mean[job_index, recipe_index], average_time_mean[job_index, recipe_index],
                     simulation.BreakageWeight, simulation.TimeWeight, product_weight);
             }
         }
@@ -134,6 +136,11 @@ namespace InkaArt.Business.Algorithm
         public void RemoveFirst()
         {
             this.indexes.RemoveAt(0);
+        }
+
+        public void Remove(Index index)
+        {
+            this.indexes.Remove(index);
         }
 
         public Index FindByWorkerAndJob(Worker worker, Job job)

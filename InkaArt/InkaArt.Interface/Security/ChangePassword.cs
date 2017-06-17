@@ -24,7 +24,7 @@ namespace InkaArt.Interface.Security
             bool pass = verify.checkCredentials(LoginController.userName, textbox_password_old.Text);
             if (pass)
             {
-                if (string.Equals(textbox_password_new_1.Text, textbox_password_new_2.Text))
+                if (string.Equals(textbox_password_new_1.Text, textbox_password_new_2.Text) & verifyPasswordRequeriments())
                 {
                     user.updatePassword(LoginController.userID, textbox_password_new_2.Text);
                     DialogResult goodPassword = MessageBox.Show("Se cambió la contraseña", "Inka Art",
@@ -33,7 +33,7 @@ namespace InkaArt.Interface.Security
                 }
                 else
                 {
-                    DialogResult badPassword = MessageBox.Show("Las contraseñas no coinciden", "Inka Art",
+                    DialogResult badPassword = MessageBox.Show("Las contraseñas no coinciden y/o no cumple con los requisitos", "Inka Art",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textbox_password_new_1.Text = "";
                     textbox_password_new_2.Text = "";
@@ -45,6 +45,21 @@ namespace InkaArt.Interface.Security
                 DialogResult badPassword = MessageBox.Show("La contraseña ingresada es incorrecta", "Inka Art",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool verifyPasswordRequeriments()
+        {
+            bool upper = false, lower = false, number = false, lengh = false;
+            char[] pass = textbox_password_new_1.Text.ToCharArray();
+
+            for (int i = 0; i < pass.GetLength(0); i++)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^A-Z]")) upper = true;
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^a-z]")) lower = true;
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^0-9]")) number = true;
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^A-Z]")) lengh = true;
+            }
+            return upper & lower & number & lengh & (pass.GetLength(0) > 5);
         }
     }
 }

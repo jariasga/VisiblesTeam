@@ -67,14 +67,14 @@
             this.MinimizeBox = false;
             this.Name = "SimulationLoadingScreen";
             this.Text = "Ejecutando simulación...";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimulationLoadingScreen_FormClosing);
             this.Load += new System.EventHandler(this.NewSimulation_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ProgressBar progress_bar;
         private System.Windows.Forms.Button button_cancel;
+        public System.Windows.Forms.ProgressBar progress_bar;
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -12,7 +13,7 @@ namespace InkaArt.Business.Algorithm
     {
         public static int MaxIterations = 1000;
         public static double Alpha = 0.2;
-        
+
         private WorkerController selected_workers;
         private OrderController selected_orders;
         private JobController jobs;
@@ -33,39 +34,38 @@ namespace InkaArt.Business.Algorithm
 
         public List<Assignment> ExecuteGraspAlgorithm(WorkerController original_workers_list)
         {
+            int[] workers_for_job = new int[jobs.NumberOfJobs];
+            for (int i = 0; i < indexes.Count(); i++)
+            {
+                int job_index = jobs.GetIndex(indexes[i].Job);
+                workers_for_job[job_index]++;
+            }
+            for (int i = 0; i < jobs.NumberOfJobs; i++)
+            {
+                MessageBox.Show("Job " + jobs[i].ID + ": " + workers_for_job[i]);
+            }
+
             List<Assignment> assignments = new List<Assignment>();
 
             for (int day = 0; day < simulation.Days; day++)
             {
+                
                 Assignment selected_assignment = null;
 
                 //Generar (Iterations) soluciones, guardando siempre la mejor
                 for (int iteration = 0; iteration < MaxIterations; iteration++)
                 {
+                    //MessageBox.Show("ITERACION " + (iteration + 1));
+
                     Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers.Count(),
                         simulation.Miniturns);
                     IndexController candidates = GenerateCandidates(original_workers_list);
-                    List<Job> current_product_jobs = new List<Job>();
 
-                    for (int construction = 1; selected_orders.Count() > 0 && candidates.Count() > 0; construction++)
-                    {
-                        //Seleccionar el producto a fabricar si es que nos acabamos el producto
-                        if (current_product_jobs.Count <= 0) SelectJobsPerProduct(current_product_jobs, selected_orders[0]);
-
-                        //Obtener una lista de los trabajadores más eficientes
-                        IndexController rcl = GenerateReleaseCandidateList(candidates, assignment, iteration,
-                            current_product_jobs);
-                        //Escoger un trabajador al azar e incorporarlo en la solución
-                        Index chosen = rcl[Randomizer.NextNumber(0, rcl.Count() - 1)];
-                        
-
-                        //Si la orden se completó, removerla de la lista
-                        if (selected_orders[0].Completed()) selected_orders.RemoveFirst();
-                    }
+                    ExecuteGraspConstructionPhase(assignment, candidates, iteration);
 
                     //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
                     //por la nueva asignación generada.
-                    if (assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
+                    if (selected_assignment == null || assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
                         selected_assignment = assignment;
                 }
 
@@ -73,7 +73,80 @@ namespace InkaArt.Business.Algorithm
                 assignments.Add(selected_assignment);
             }
 
+            MessageBox.Show("Fin grasp");
+
             return assignments;
+        }
+
+        private void ExecuteGraspConstructionPhase(Assignment assignment, IndexController candidates, int iteration)
+        {
+            List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
+            List<Job> current_product_jobs = new List<Job>();
+
+            for (int construction = 1; selected_orders.Count() > 0 && candidates.Count() > 0; construction++)
+            {
+                LogHandler.WriteLine("Iteracion de construccion " + construction);
+                LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
+
+                //Seleccionar el producto a fabricar si es que nos acabamos el producto
+                if (current_product_jobs.Count <= 0) SelectJobsPerProduct(current_product_jobs, order_recipes);
+
+                //Obtener una lista de los trabajadores más eficientes
+                IndexController rcl = GenerateReleaseCandidateList(candidates, assignment, iteration,
+                    current_product_jobs);
+                //Si no se pudo realizar el producto, borrar el producto y 
+                if (rcl.Count() <= 0)
+                {
+                    current_product_jobs.Clear();
+                    break;
+                }
+
+                //Escoger un trabajador al azar e incorporarlo en la solución
+                Index chosen = rcl[Randomizer.NextNumber(0, rcl.Count() - 1)];
+
+                AssignmentLine assignment_line = new AssignmentLine(selected_workers.GetByID(chosen.Worker),
+                    recipes.GetByID(chosen.Recipe), jobs.GetByID(chosen.Job));
+                int worker_index = selected_workers.GetIndex(chosen.Worker);
+                int number_of_miniturns = Convert.ToInt32(chosen.AverageTime / simulation.MiniturnLength);
+                if (assignment.AddLine(assignment_line, worker_index, number_of_miniturns) == false)
+                    break;
+
+                assignment.ObjectiveFunction += chosen.CostValue(assignment.ObjectiveFunction, iteration);
+                if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) break;
+
+                LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
+                //Quitar los candidatos necesarios
+                if (assignment.IsWorkerFull(worker_index))
+                {
+                    for (int i = 0; i < candidates.Count();)
+                    {
+                        if (candidates[i].Worker == chosen.Worker) candidates.Remove(candidates[i]);
+                        else i++;
+                    }
+                }
+                candidates.Remove(chosen);
+
+                LogHandler.WriteLine("# ordenes = " + selected_orders.Count() + ", # candidatos = " + candidates.Count());
+
+                //Si la orden se completó, removerla de la lista
+                if (selected_orders[0].Completed()) selected_orders.RemoveFirst();
+            }
+        }
+
+        private List<Recipe> GetOrderRecipes(Order order)
+        {
+            List<Recipe> order_recipes = new List<Recipe>();
+            for (int i = 0; i < order.NumberOfLineItems; i++)
+                order_recipes.Add(recipes.GetByID(order[i].Recipe));
+            return order_recipes;
+        }
+
+        private void SelectJobsPerProduct(List<Job> current_product_jobs, List<Recipe> order_recipes)
+        {
+            Recipe recipe = order_recipes[Randomizer.NextNumber(0, order_recipes.Count - 1)];
+            
+            for (int i = 0; i < jobs.NumberOfJobs; i++)
+                if (jobs[i].Product == recipe.Product) current_product_jobs.Add(jobs[i]);
         }
 
         private IndexController GenerateCandidates(WorkerController original_workers_list)
@@ -85,15 +158,6 @@ namespace InkaArt.Business.Algorithm
                 if (selected_workers.Contains(index_worker)) candidates.Add(indexes[i]);
             }
             return candidates;
-        }
-
-        private void SelectJobsPerProduct(List<Job> current_product_jobs, Order order)
-        {
-            //FALTA ALGO AQUÍ PARA SELECCIONAR LOS PRODUCTOS DE UNA ORDEN
-
-            Job job = jobs.GetByID(Randomizer.NextNumber(1, jobs.NumberOfJobs));
-            for (int i = 0; i < jobs.NumberOfJobs; i++)
-                if (jobs[i].Product == job.Product) current_product_jobs.Add(jobs[i]);
         }
 
         private IndexController GenerateReleaseCandidateList(IndexController candidates, Assignment assignment,

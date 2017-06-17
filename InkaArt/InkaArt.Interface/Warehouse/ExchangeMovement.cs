@@ -57,14 +57,14 @@ namespace InkaArt.Interface.Warehouse
 
             int exito2 = 0,exito3=0,exito=0;
             //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-            exito3 = productionItemWarehouseMovementController.updateData(idWarehouseOrigin, idWarehouseDestiny, cantMov, "Salida");
+            exito3 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseOrigin, cantMov, "Salida","OK");
             if(exito3 == 1)
             {
-                exito2 = productionItemWarehouseMovementController.updateData(idWarehouseDestiny, idWarehouseDestiny, cantMov, "Entrada");
+                exito2 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseDestiny, cantMov, "Entrada");
             }
             if(exito2 != 1) //Si el almacén destino no admite el producto se revierte el movimiento
             {
-                productionItemWarehouseMovementController.updateData(idWarehouseOrigin, idWarehouseDestiny, cantMov, "Entrada");
+                productionItemWarehouseMovementController.updateData(idItem, idWarehouseOrigin, cantMov, "Entrada");
             }
             
             if (exito2 == 1 && exito3 == 1)
@@ -74,7 +74,9 @@ namespace InkaArt.Interface.Warehouse
                 int movementReason = 5;//Indica que es un movimiento por traslado entre almacenes
                 int documentTypes = 5;//Indica que no hay documento relacionado porque es una transferencia
                 int idDocument = -1;//No se genera documento porque es una transferencia
-                productionItemWarehouseMovementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny);
+                int productType = 1;//0:materia prima | 1:producto
+                int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                productionItemWarehouseMovementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem,cantMov,productType);
                 exito++;
             }
             if (exito > 0)

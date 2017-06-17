@@ -45,7 +45,7 @@ namespace InkaArt.Interface.Production
             try
             {
                 Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
                 Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
                 app.Visible = true;
                 worksheet = workbook.Sheets["Sheet1"];
@@ -73,7 +73,7 @@ namespace InkaArt.Interface.Production
                         }
                     }
 
-                    //Getting the location and file name of the excel to save from user. 
+                    //Getting the location and file name of the excel to save from user.
                     SaveFileDialog saveDialog = new SaveFileDialog();
                     saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
                     saveDialog.FilterIndex = 2;
@@ -98,6 +98,5 @@ namespace InkaArt.Interface.Production
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
-
     }
 }

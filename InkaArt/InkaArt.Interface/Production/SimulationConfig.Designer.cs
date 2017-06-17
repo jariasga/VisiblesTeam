@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.groupbox_weight = new System.Windows.Forms.GroupBox();
+            this.numeric_altarpiece = new System.Windows.Forms.NumericUpDown();
+            this.numeric_stones = new System.Windows.Forms.NumericUpDown();
+            this.numeric_huacos = new System.Windows.Forms.NumericUpDown();
+            this.numeric_time = new System.Windows.Forms.NumericUpDown();
+            this.numeric_breakage = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -38,28 +43,23 @@
             this.list_workers = new System.Windows.Forms.CheckedListBox();
             this.button_save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_end = new System.Windows.Forms.Label();
+            this.date_picker_end = new System.Windows.Forms.DateTimePicker();
+            this.label_start = new System.Windows.Forms.Label();
+            this.date_picker_start = new System.Windows.Forms.DateTimePicker();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupbox_orders = new System.Windows.Forms.GroupBox();
             this.list_orders = new System.Windows.Forms.CheckedListBox();
-            this.numeric_breakage = new System.Windows.Forms.NumericUpDown();
-            this.numeric_time = new System.Windows.Forms.NumericUpDown();
-            this.numeric_huacos = new System.Windows.Forms.NumericUpDown();
-            this.numeric_stones = new System.Windows.Forms.NumericUpDown();
-            this.numeric_altarpiece = new System.Windows.Forms.NumericUpDown();
-            this.date_picker_start = new System.Windows.Forms.DateTimePicker();
-            this.label_start = new System.Windows.Forms.Label();
-            this.label_end = new System.Windows.Forms.Label();
-            this.date_picker_end = new System.Windows.Forms.DateTimePicker();
             this.groupbox_weight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_altarpiece)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_stones)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_huacos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_time)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_breakage)).BeginInit();
             this.groupbox_workers.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupbox_orders.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_breakage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_time)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_huacos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_stones)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_altarpiece)).BeginInit();
             this.SuspendLayout();
             // 
             // groupbox_weight
@@ -81,6 +81,76 @@
             this.groupbox_weight.TabIndex = 0;
             this.groupbox_weight.TabStop = false;
             this.groupbox_weight.Text = "Pesos o relevancias";
+            // 
+            // numeric_altarpiece
+            // 
+            this.numeric_altarpiece.DecimalPlaces = 2;
+            this.numeric_altarpiece.Location = new System.Drawing.Point(176, 209);
+            this.numeric_altarpiece.Name = "numeric_altarpiece";
+            this.numeric_altarpiece.Size = new System.Drawing.Size(104, 26);
+            this.numeric_altarpiece.TabIndex = 40;
+            this.numeric_altarpiece.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numeric_altarpiece.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // numeric_stones
+            // 
+            this.numeric_stones.DecimalPlaces = 2;
+            this.numeric_stones.Location = new System.Drawing.Point(176, 167);
+            this.numeric_stones.Name = "numeric_stones";
+            this.numeric_stones.Size = new System.Drawing.Size(104, 26);
+            this.numeric_stones.TabIndex = 35;
+            this.numeric_stones.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numeric_stones.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // numeric_huacos
+            // 
+            this.numeric_huacos.DecimalPlaces = 2;
+            this.numeric_huacos.Location = new System.Drawing.Point(176, 126);
+            this.numeric_huacos.Name = "numeric_huacos";
+            this.numeric_huacos.Size = new System.Drawing.Size(104, 26);
+            this.numeric_huacos.TabIndex = 30;
+            this.numeric_huacos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numeric_huacos.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // numeric_time
+            // 
+            this.numeric_time.DecimalPlaces = 2;
+            this.numeric_time.Location = new System.Drawing.Point(176, 73);
+            this.numeric_time.Name = "numeric_time";
+            this.numeric_time.Size = new System.Drawing.Size(104, 26);
+            this.numeric_time.TabIndex = 25;
+            this.numeric_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numeric_time.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // numeric_breakage
+            // 
+            this.numeric_breakage.DecimalPlaces = 2;
+            this.numeric_breakage.Location = new System.Drawing.Point(176, 31);
+            this.numeric_breakage.Name = "numeric_breakage";
+            this.numeric_breakage.Size = new System.Drawing.Size(104, 26);
+            this.numeric_breakage.TabIndex = 20;
+            this.numeric_breakage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numeric_breakage.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // label4
             // 
@@ -145,6 +215,7 @@
             // 
             // list_workers
             // 
+            this.list_workers.CheckOnClick = true;
             this.list_workers.FormattingEnabled = true;
             this.list_workers.Location = new System.Drawing.Point(15, 31);
             this.list_workers.Name = "list_workers";
@@ -178,6 +249,42 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pesos o relevancias";
             // 
+            // label_end
+            // 
+            this.label_end.AutoSize = true;
+            this.label_end.Location = new System.Drawing.Point(9, 137);
+            this.label_end.Name = "label_end";
+            this.label_end.Size = new System.Drawing.Size(84, 18);
+            this.label_end.TabIndex = 24;
+            this.label_end.Text = "Fecha final";
+            // 
+            // date_picker_end
+            // 
+            this.date_picker_end.Enabled = false;
+            this.date_picker_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_picker_end.Location = new System.Drawing.Point(130, 133);
+            this.date_picker_end.Name = "date_picker_end";
+            this.date_picker_end.Size = new System.Drawing.Size(150, 26);
+            this.date_picker_end.TabIndex = 15;
+            // 
+            // label_start
+            // 
+            this.label_start.AutoSize = true;
+            this.label_start.Location = new System.Drawing.Point(9, 101);
+            this.label_start.Name = "label_start";
+            this.label_start.Size = new System.Drawing.Size(115, 18);
+            this.label_start.TabIndex = 1;
+            this.label_start.Text = "Fecha de inicio";
+            // 
+            // date_picker_start
+            // 
+            this.date_picker_start.Enabled = false;
+            this.date_picker_start.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_picker_start.Location = new System.Drawing.Point(130, 97);
+            this.date_picker_start.Name = "date_picker_start";
+            this.date_picker_start.Size = new System.Drawing.Size(150, 26);
+            this.date_picker_start.TabIndex = 10;
+            // 
             // textbox_name
             // 
             this.textbox_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -209,118 +316,13 @@
             // 
             // list_orders
             // 
+            this.list_orders.CheckOnClick = true;
             this.list_orders.FormattingEnabled = true;
             this.list_orders.HorizontalScrollbar = true;
             this.list_orders.Location = new System.Drawing.Point(16, 31);
             this.list_orders.Name = "list_orders";
             this.list_orders.Size = new System.Drawing.Size(240, 340);
             this.list_orders.TabIndex = 50;
-            // 
-            // numeric_breakage
-            // 
-            this.numeric_breakage.DecimalPlaces = 2;
-            this.numeric_breakage.Location = new System.Drawing.Point(176, 31);
-            this.numeric_breakage.Name = "numeric_breakage";
-            this.numeric_breakage.Size = new System.Drawing.Size(104, 26);
-            this.numeric_breakage.TabIndex = 20;
-            this.numeric_breakage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numeric_breakage.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numeric_time
-            // 
-            this.numeric_time.DecimalPlaces = 2;
-            this.numeric_time.Location = new System.Drawing.Point(176, 73);
-            this.numeric_time.Name = "numeric_time";
-            this.numeric_time.Size = new System.Drawing.Size(104, 26);
-            this.numeric_time.TabIndex = 25;
-            this.numeric_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numeric_time.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numeric_huacos
-            // 
-            this.numeric_huacos.DecimalPlaces = 2;
-            this.numeric_huacos.Location = new System.Drawing.Point(176, 126);
-            this.numeric_huacos.Name = "numeric_huacos";
-            this.numeric_huacos.Size = new System.Drawing.Size(104, 26);
-            this.numeric_huacos.TabIndex = 30;
-            this.numeric_huacos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numeric_huacos.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numeric_stones
-            // 
-            this.numeric_stones.DecimalPlaces = 2;
-            this.numeric_stones.Location = new System.Drawing.Point(176, 167);
-            this.numeric_stones.Name = "numeric_stones";
-            this.numeric_stones.Size = new System.Drawing.Size(104, 26);
-            this.numeric_stones.TabIndex = 35;
-            this.numeric_stones.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numeric_stones.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numeric_altarpiece
-            // 
-            this.numeric_altarpiece.DecimalPlaces = 2;
-            this.numeric_altarpiece.Location = new System.Drawing.Point(176, 209);
-            this.numeric_altarpiece.Name = "numeric_altarpiece";
-            this.numeric_altarpiece.Size = new System.Drawing.Size(104, 26);
-            this.numeric_altarpiece.TabIndex = 40;
-            this.numeric_altarpiece.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numeric_altarpiece.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // date_picker_start
-            // 
-            this.date_picker_start.Enabled = false;
-            this.date_picker_start.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_picker_start.Location = new System.Drawing.Point(130, 97);
-            this.date_picker_start.Name = "date_picker_start";
-            this.date_picker_start.Size = new System.Drawing.Size(150, 26);
-            this.date_picker_start.TabIndex = 10;
-            // 
-            // label_start
-            // 
-            this.label_start.AutoSize = true;
-            this.label_start.Location = new System.Drawing.Point(9, 101);
-            this.label_start.Name = "label_start";
-            this.label_start.Size = new System.Drawing.Size(115, 18);
-            this.label_start.TabIndex = 1;
-            this.label_start.Text = "Fecha de inicio";
-            // 
-            // label_end
-            // 
-            this.label_end.AutoSize = true;
-            this.label_end.Location = new System.Drawing.Point(9, 137);
-            this.label_end.Name = "label_end";
-            this.label_end.Size = new System.Drawing.Size(84, 18);
-            this.label_end.TabIndex = 24;
-            this.label_end.Text = "Fecha final";
-            // 
-            // date_picker_end
-            // 
-            this.date_picker_end.Enabled = false;
-            this.date_picker_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_picker_end.Location = new System.Drawing.Point(130, 133);
-            this.date_picker_end.Name = "date_picker_end";
-            this.date_picker_end.Size = new System.Drawing.Size(150, 26);
-            this.date_picker_end.TabIndex = 15;
             // 
             // SimulationConfig
             // 
@@ -340,15 +342,15 @@
             this.Load += new System.EventHandler(this.SimulationConfig_Load);
             this.groupbox_weight.ResumeLayout(false);
             this.groupbox_weight.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_altarpiece)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_stones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_huacos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_time)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numeric_breakage)).EndInit();
             this.groupbox_workers.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupbox_orders.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_breakage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_time)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_huacos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_stones)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_altarpiece)).EndInit();
             this.ResumeLayout(false);
 
         }

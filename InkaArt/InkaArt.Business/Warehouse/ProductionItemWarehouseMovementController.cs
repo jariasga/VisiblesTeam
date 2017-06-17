@@ -25,6 +25,23 @@ namespace InkaArt.Business.Warehouse
             data = new DataSet();
         }
 
+        public void updateOrder(int idOrder)
+        {
+            string query = "";
+            int remainOrder = 0;
+
+            query = "select \"idDocument\", sum(\"product_stock\") as suma from inkaart.\"StockDocument\" where \"vez\" = 0 and \"idDocument\" = " + idOrder + " group by 1;";
+            
+            remainOrder = productionItemWarehouseMovementData.selectQuery(query);
+
+            if (remainOrder == 0)
+            {
+                query = "Update inkaart.\"Order\" set \"orderStatus\" = 'despachado' where \"idOrder\" = " + idOrder + ";";
+                productionItemWarehouseMovementData.execute(query);
+            }
+            
+        }
+
         public DataTable GetProductionItemWarehouseMovementList(string idWarehouse = "",string idProduct = "")
         {
             int intId = -1, intAux,intId2 = -1;
@@ -58,17 +75,17 @@ namespace InkaArt.Business.Warehouse
             productionItemMovementData.closeConnection();*/
         }
 
-        public void insertMovement(int idLote, int movement_type, int idWare, int id_reason, int document_type,int idWareDestiny = -1)
+        public void insertMovement(int idLote, int movement_type, int idWare, int id_reason, int document_type,int idWareDestiny, int idItem, int cantMov, int itemType)
         {
             //ProductionItemWarehouseMovementData cnn = new ProductionItemWarehouseMovementData();
             string query = "";
             if (idWareDestiny == -1)
             {
-                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\") values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1);";
+                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idItem\",\"itemType\",\"quantity\" ) values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1,"+ idItem+","+cantMov+","+itemType+");";
             }
             else
             {
-                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idWarehouseDestiny\") values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1," + idWareDestiny + ");";
+                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idWarehouseDestiny\",\"idItem\",\"itemType\",\"quantity\") values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1," + idWareDestiny + "," + idItem + "," + cantMov + "," + itemType + ");";
             }
             productionItemWarehouseMovementData.updateDataExecute(query);
         }
@@ -92,7 +109,7 @@ namespace InkaArt.Business.Warehouse
             productionItemWarehouseMovementData.closeConnection();
         }
 
-        public int updateData(int idProd, int idWarehouse, int numMov, string typeMovement)
+        public int updateData(int idProd, int idWarehouse, int numMov, string typeMovement,string stateItem = "")
         {
             //productionItemWarehouseMovementData.connect();
             adapt = productionItemWarehouseMovementData.ProductionItemWarehouseAdapter();
@@ -104,72 +121,133 @@ namespace InkaArt.Business.Warehouse
             int makeUpdate = 1;
             int stockAct = -1,maxStock = -1, minStock=9999;//Stock físico
             int logicStock = -1;//Stock lógico
-            int filModified = 0;
+            int filModified = 0,filModified2=0;
             
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 if ((Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == idProd) && (Convert.ToInt32(table.Rows[i]["idWarehouse"].ToString()) == idWarehouse))
                 {
-                    if (typeMovement == "Entrada")
+                    if (stateItem == "OK")
                     {
-                        stockAct = Convert.ToInt32(table.Rows[i]["currentStock"]);
-                        maxStock = Convert.ToInt32(table.Rows[i]["maximunStock"]);
-                        stockAct = stockAct + numMov;
-
-                        if(stockAct> maxStock)
-                        {
-                            MessageBox.Show("Error: El límite máximo de stock es: "+ maxStock+".");
-                            return -2;
-                        }
-
-                        logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
-                        logicStock = logicStock + numMov;
-
-                        table.Rows[i]["currentStock"] = stockAct;
-                        table.Rows[i]["virtualStock"] = logicStock;
-
-                        filModified++;
-
-                        break;
-                    }
-                    else
-                    {
-                        if (typeMovement == "Salida")
+                        if (typeMovement == "Entrada")
                         {
                             stockAct = Convert.ToInt32(table.Rows[i]["currentStock"]);
-                            minStock = Convert.ToInt32(table.Rows[i]["minimunStock"]);
+                            maxStock = Convert.ToInt32(table.Rows[i]["maximunStock"]);
+                            stockAct = stockAct + numMov;
 
-                            logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
-
-                            if (stockAct - numMov < 0)
+                            if (stockAct > maxStock)
                             {
-                                MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
+                                MessageBox.Show("Error: El límite máximo de stock es: " + maxStock + ".");
                                 return -2;
                             }
-                            else
-                            {
-                                stockAct = stockAct - numMov;
-                                if (stockAct<minStock)
-                                {
-                                    MessageBox.Show("No se puede tener menos del mínimo stock: "+ minStock);
-                                    return -2;
-                                }
-                                table.Rows[i]["currentStock"] = stockAct;
-                            }
+
+                            logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
+                            logicStock = logicStock + numMov;
+
+                            table.Rows[i]["currentStock"] = stockAct;
+                            table.Rows[i]["virtualStock"] = logicStock;
+
                             filModified++;
+
                             break;
                         }
                         else
                         {
-                            /*DEFINIR LA ENTRADA Y SALIDA DE PRODUCTOS*/
-                            stockAct = 1;
-                            logicStock = 1;
+                            if (typeMovement == "Salida")
+                            {
+                                stockAct = Convert.ToInt32(table.Rows[i]["currentStock"]);
+                                minStock = Convert.ToInt32(table.Rows[i]["minimunStock"]);
+
+                                logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
+
+                                if (stockAct - numMov < 0)
+                                {
+                                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
+                                    return -2;
+                                }
+                                else
+                                {
+                                    stockAct = stockAct - numMov;
+                                    if (stockAct < minStock)
+                                    {
+                                        MessageBox.Show("No se puede tener menos del mínimo stock: " + minStock);
+                                        return -2;
+                                    }
+                                    table.Rows[i]["currentStock"] = stockAct;
+                                }
+                                filModified++;
+                                break;
+                            }
+                            else
+                            {
+                                /*DEFINIR LA ENTRADA Y SALIDA DE PRODUCTOS*/
+                                stockAct = 1;
+                                logicStock = 1;
+                            }
+                            filModified++;
                         }
-                        filModified++;
+                    }
+                    else
+                    {
+                        if (typeMovement == "Entrada")
+                        {
+                            stockAct = Convert.ToInt32(table.Rows[i]["breaks"]);
+                            maxStock = Convert.ToInt32(table.Rows[i]["maximunStock"]);
+                            stockAct = stockAct + numMov;
+
+                            if (stockAct > maxStock)
+                            {
+                                MessageBox.Show("Error: El límite máximo de stock es: " + maxStock + ".");
+                                return -2;
+                            }
+
+                            logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
+
+                            table.Rows[i]["currentStock"] = stockAct;
+
+                            filModified2++;
+
+                            break;
+                        }
+                        else
+                        {
+                            if (typeMovement == "Salida")
+                            {
+                                stockAct = Convert.ToInt32(table.Rows[i]["breaks"]);
+                                minStock = Convert.ToInt32(table.Rows[i]["minimunStock"]);
+
+                                logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
+
+                                if (stockAct - numMov < 0)
+                                {
+                                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
+                                    return -2;
+                                }
+                                else
+                                {
+                                    stockAct = stockAct - numMov;
+                                    if (stockAct < minStock)
+                                    {
+                                        MessageBox.Show("No se puede tener menos del mínimo stock: " + minStock);
+                                        return -2;
+                                    }
+                                    table.Rows[i]["currentStock"] = stockAct;
+                                }
+                                filModified2++;
+                                break;
+                            }
+                            else
+                            {
+                                /*DEFINIR LA ENTRADA Y SALIDA DE PRODUCTOS*/
+                                stockAct = 1;
+                                logicStock = 1;
+                            }
+                            filModified2++;
+                        }
                     }
                 }
             }
-            if (filModified == 0)
+            if (filModified == 0 && filModified2 == 0)
             {
                 return -1;
             }
@@ -177,7 +255,15 @@ namespace InkaArt.Business.Warehouse
             {
                 //int rowUpdated = productionItemWarehouseMovementData.updateData(data, adapt, "Product-Warehouse");
                 //update inkaart."Product-Warehouse" set "currentStock" = 10, "virtualStock" = 10 where "idWarehouse" = 31 and "idProduct" = 1;
-                string updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + stockAct + ", \"virtualStock\" = " + logicStock + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + ";";
+                string updateQuery="";
+                if (filModified > 0)
+                {
+                    updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + stockAct + ", \"virtualStock\" = " + logicStock + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + " ;";
+                }
+                if (filModified2 > 0)
+                {
+                    updateQuery = "update inkaart.\"Product-Warehouse\" set \"breaks\" = " + stockAct + ", \"virtualStock\" = " + logicStock + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + " ;";
+                }
                 productionItemWarehouseMovementData.updateDataExecute(updateQuery);
             }
             return 1;
