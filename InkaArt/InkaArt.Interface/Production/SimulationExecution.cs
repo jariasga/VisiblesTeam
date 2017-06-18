@@ -30,6 +30,7 @@ namespace InkaArt.Interface.Production
 
         private void NewSimulation_Load(object sender, EventArgs e)
         {
+            this.timer.Start();
             background_simulation.RunWorkerAsync();
         }
 
@@ -38,30 +39,21 @@ namespace InkaArt.Interface.Production
         private void background_simulation_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker background_worker = sender as BackgroundWorker;
-            this.timer.Start();
+            background_worker.ReportProgress(0, "Estado de la simulación: Cargando datos...");
 
-            //label_state(1, "Estado de la simulación: Cargando datos...");
-            //progress_bar_reset();
-
-            //Carga de controladores 
+            //Carga de controladores
 
             ProcessController processes = new ProcessController();
             processes.Load();
-            //progress_bar_update(20);
             JobController jobs = new JobController();
             jobs.Load();
-            //progress_bar_update(20);
             RecipeController recipes = new RecipeController();
             recipes.Load();
-            //progress_bar_update(20);
             IndexController indexes = new IndexController(workers, jobs, recipes);
             indexes.Load();
-            //progress_bar_update(20);
             indexes.CalculateIndexes(simulation);
-            //progress_bar_update(20);
 
-            //label_state("Estado de la simulación: Asignando trabajadores...");
-            //progress_bar_reset();
+            background_worker.ReportProgress(0, "Estado de la simulación: Asignando trabajadores...");
 
             //Algoritmo GRASP
 
@@ -71,11 +63,10 @@ namespace InkaArt.Interface.Production
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
                 initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
-                //progress_bar_update(Convert.ToInt32(100.0 / day));
+                background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
             }
 
-            //label_state("Estado de la simulación: Optimizando la asignación de trabajadores...");
-            //progress_bar_reset();
+            background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
             //Algoritmo de Búsqueda Tabú
 
@@ -87,7 +78,8 @@ namespace InkaArt.Interface.Production
 
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            if (e.UserState == null) this.progress_bar.Value += e.ProgressPercentage;
+            if (e.UserState != null) this.label_state.Text = e.UserState.ToString();
         }
 
         private void background_simulation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -103,7 +95,7 @@ namespace InkaArt.Interface.Production
         private void timer_Tick(object sender, EventArgs e)
         {
             this.elapsed_seconds++;
-            this.label_time.Text = string.Format("Tiempo: {0:2}:{1:2} s", elapsed_seconds / 60, elapsed_seconds % 60);
+            this.label_time.Text = string.Format("Tiempo: {0:00}:{1:00} s", elapsed_seconds / 60, elapsed_seconds % 60);
         }
 
         private void button_cancel_Click(object sender, EventArgs e)
@@ -113,7 +105,7 @@ namespace InkaArt.Interface.Production
 
         private void SimulationLoadingScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (elapsed_seconds >= Simulation.LimitTime) return;
+            if (!background_simulation.IsBusy || elapsed_seconds >= Simulation.LimitTime) return;
 
             DialogResult result = MessageBox.Show("¿Está seguro de cancelar la simulación de la asignación de trabajadores?",
                 "Inka Art", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);

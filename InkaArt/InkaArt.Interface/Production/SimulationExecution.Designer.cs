@@ -42,7 +42,8 @@
             this.progress_bar.Location = new System.Drawing.Point(13, 46);
             this.progress_bar.Margin = new System.Windows.Forms.Padding(4);
             this.progress_bar.Name = "progress_bar";
-            this.progress_bar.Size = new System.Drawing.Size(616, 37);
+            this.progress_bar.Size = new System.Drawing.Size(756, 37);
+            this.progress_bar.Step = 1;
             this.progress_bar.TabIndex = 0;
             // 
             // button_cancel
@@ -50,7 +51,7 @@
             this.button_cancel.BackColor = System.Drawing.Color.Firebrick;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(221, 90);
+            this.button_cancel.Location = new System.Drawing.Point(280, 90);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(192, 44);
             this.button_cancel.TabIndex = 40;
@@ -75,23 +76,27 @@
             // label_time
             // 
             this.label_time.AutoSize = true;
-            this.label_time.Location = new System.Drawing.Point(480, 15);
+            this.label_time.Location = new System.Drawing.Point(632, 15);
             this.label_time.Name = "label_time";
-            this.label_time.Size = new System.Drawing.Size(64, 18);
+            this.label_time.Size = new System.Drawing.Size(137, 18);
             this.label_time.TabIndex = 42;
-            this.label_time.Text = "Tiempo:";
+            this.label_time.Text = "Tiempo: 00 m 00 s";
+            this.label_time.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // background_simulation
             // 
             this.background_simulation.WorkerReportsProgress = true;
             this.background_simulation.WorkerSupportsCancellation = true;
+            this.background_simulation.DoWork += new System.ComponentModel.DoWorkEventHandler(this.background_simulation_DoWork);
+            this.background_simulation.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.background_simulation_ProgressChanged);
+            this.background_simulation.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.background_simulation_RunWorkerCompleted);
             // 
             // SimulationExecution
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(642, 146);
+            this.ClientSize = new System.Drawing.Size(782, 146);
             this.Controls.Add(this.label_time);
             this.Controls.Add(this.label_state);
             this.Controls.Add(this.button_cancel);
@@ -112,9 +117,9 @@
         #endregion
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Timer timer;
-        public System.Windows.Forms.Label label_state;
-        public System.Windows.Forms.ProgressBar progress_bar;
-        public System.Windows.Forms.Label label_time;
         private System.ComponentModel.BackgroundWorker background_simulation;
+        private System.Windows.Forms.Label label_time;
+        private System.Windows.Forms.Label label_state;
+        private System.Windows.Forms.ProgressBar progress_bar;
     }
 }
