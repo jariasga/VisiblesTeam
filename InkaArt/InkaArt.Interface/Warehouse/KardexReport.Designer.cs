@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_export = new System.Windows.Forms.Button();
             this.dataGridView_movements = new System.Windows.Forms.DataGridView();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,17 +43,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_movements)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // button_export
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(555, 502);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 51);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Exportar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_export.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.ForeColor = System.Drawing.Color.White;
+            this.button_export.Location = new System.Drawing.Point(555, 502);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(154, 51);
+            this.button_export.TabIndex = 18;
+            this.button_export.Text = "Exportar";
+            this.button_export.UseVisualStyleBackColor = false;
+            this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // dataGridView_movements
             // 
@@ -137,7 +138,7 @@
             this.ClientSize = new System.Drawing.Size(1263, 578);
             this.Controls.Add(this.label_todaydate);
             this.Controls.Add(this.dataGridView_movements);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_export);
             this.ForeColor = System.Drawing.Color.Black;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "KardexReport";
@@ -149,7 +150,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_export;
         private System.Windows.Forms.DataGridView dataGridView_movements;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMov;
