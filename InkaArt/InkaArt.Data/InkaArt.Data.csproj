@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithm\Assignment.cs" />
     <Compile Include="Algorithm\AssignmentLine.cs" />
     <Compile Include="Algorithm\Client.cs" />
     <Compile Include="Algorithm\Index.cs" />
@@ -59,6 +58,7 @@
     <Compile Include="Algorithm\Recipe.cs" />
     <Compile Include="Algorithm\TabuMove.cs" />
     <Compile Include="Algorithm\TabuQueue.cs" />
+    <Compile Include="Algorithm\Turn.cs" />
     <Compile Include="Algorithm\Worker.cs" />
     <Compile Include="Production\FinalProductData.cs" />
     <Compile Include="Production\ProcessData.cs" />

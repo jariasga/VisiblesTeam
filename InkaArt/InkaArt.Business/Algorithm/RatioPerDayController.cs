@@ -29,7 +29,7 @@ namespace InkaArt.Business.Algorithm
                 "WHERE date = :date AND id_product = :id_product", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, ratio.Date);
-            command.Parameters.AddWithValue("id_product", NpgsqlDbType.Integer, jobs.GetByID(ratio.Job).Product);
+            command.Parameters.AddWithValue("id_product", NpgsqlDbType.Integer, ratio.Job.Product);
 
             int count_date = Convert.ToInt32(command.ExecuteScalar());
 
@@ -70,7 +70,7 @@ namespace InkaArt.Business.Algorithm
 
             command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, ratio.Produced);
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, ratio.Date);
-            command.Parameters.AddWithValue("id_product", NpgsqlDbType.Integer, jobs.GetByID(ratio.Job).Product);
+            command.Parameters.AddWithValue("id_product", NpgsqlDbType.Integer, ratio.Job.Product);
 
             int rows_affected = command.ExecuteNonQuery();
             connection.Close();

@@ -12,11 +12,13 @@ namespace InkaArt.Data.Algorithm
     public class Index
     {
         private int id_index;
-        private int id_worker;
-        private int id_job;
-        private int id_recipe;
+        private Worker worker;
+        private Job job;
+        private Recipe recipe;
+
         private double average_breakage;
         private double average_time;
+
         private double breakage_index;
         private double time_index;
         private double loss_index;
@@ -25,17 +27,17 @@ namespace InkaArt.Data.Algorithm
         {
             get { return id_index; }
         }
-        public int Worker
+        public Worker Worker
         {
-            get { return id_worker; }
+            get { return worker; }
         }
-        public int Job
+        public Job Job
         {
-            get { return id_job; }
+            get { return job; }
         }
-        public int Recipe
+        public Recipe Recipe
         {
-            get { return id_recipe; }
+            get { return recipe; }
         }
         public double AverageBreakage
         {
@@ -63,13 +65,12 @@ namespace InkaArt.Data.Algorithm
             set { time_index = value; }
         }
 
-        public Index(int id_index, int id_worker, int id_job, int id_recipe, double average_breakage,
-            double average_time)
+        public Index(int id_index, Worker worker, Job job, Recipe recipe, double average_breakage, double average_time)
         {
             this.id_index = id_index;
-            this.id_worker = id_worker;
-            this.id_job = id_job;
-            this.id_recipe = id_recipe;
+            this.worker = worker;
+            this.job = job;
+            this.recipe = recipe;
             this.average_breakage = average_breakage;
             this.average_time = average_time;
         }
@@ -84,9 +85,9 @@ namespace InkaArt.Data.Algorithm
                 "VALUES(:id_worker, :id_job, :id_recipe, :average_breakage, :average_time) RETURNING id_index",
                 connection);
 
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe.ID);
             command.Parameters.AddWithValue("average_breakage", NpgsqlDbType.Double, ratio.Breakage);
             command.Parameters.AddWithValue("average_time", NpgsqlDbType.Double, ratio.Time);
 
@@ -110,9 +111,9 @@ namespace InkaArt.Data.Algorithm
 
             command.Parameters.AddWithValue("average_breakage", NpgsqlDbType.Double, average_breakage);
             command.Parameters.AddWithValue("average_time", NpgsqlDbType.Double, average_time);
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe.ID);
 
             int rows_affected = command.ExecuteNonQuery();
             connection.Close();
@@ -132,9 +133,9 @@ namespace InkaArt.Data.Algorithm
                 "WHERE id_worker = :id_worker AND id_job = :id_job AND id_recipe = :id_recipe", connection);
 
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, false);
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, ratio.Worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, ratio.Job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, ratio.Recipe.ID);
 
             int rows_affected = command.ExecuteNonQuery();
             connection.Close();
@@ -150,9 +151,9 @@ namespace InkaArt.Data.Algorithm
         public void CalculateIndexes(double average_breakage_mean, double average_time_mean, double breakage_weight,
             double time_weight, double product_weight)
         {
-            breakage_index = average_breakage / average_breakage_mean;
-            time_index = average_time / average_time_mean;
-            loss_index = (breakage_index * breakage_weight + time_index * time_weight) / product_weight;
+            this.breakage_index = this.average_breakage / average_breakage_mean;
+            this.time_index = this.average_time / average_time_mean;
+            this.loss_index = (this.breakage_index * breakage_weight + this.time_index * time_weight) / product_weight;
         }
 
         public double CostValue(double objective_function_value, int iteration)
