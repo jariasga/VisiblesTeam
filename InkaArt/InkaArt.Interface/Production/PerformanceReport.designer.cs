@@ -38,7 +38,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_export = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label_nameWorker = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_performance)).BeginInit();
@@ -76,10 +76,10 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dataGridView_performance.Location = new System.Drawing.Point(30, 89);
+            this.dataGridView_performance.Location = new System.Drawing.Point(29, 89);
             this.dataGridView_performance.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.dataGridView_performance.Name = "dataGridView_performance";
-            this.dataGridView_performance.Size = new System.Drawing.Size(952, 275);
+            this.dataGridView_performance.Size = new System.Drawing.Size(952, 274);
             this.dataGridView_performance.TabIndex = 30;
             // 
             // Fecha
@@ -112,23 +112,25 @@
             this.Column3.HeaderText = "Tiempo";
             this.Column3.Name = "Column3";
             // 
-            // button1
+            // button_export
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(425, 383);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(154, 51);
-            this.button1.TabIndex = 31;
-            this.button1.Text = "Exportar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_export.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.ForeColor = System.Drawing.Color.White;
+            this.button_export.Location = new System.Drawing.Point(425, 383);
+            this.button_export.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(155, 50);
+            this.button_export.TabIndex = 31;
+            this.button_export.Text = "Exportar";
+            this.button_export.UseVisualStyleBackColor = false;
+            this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 33);
+            this.label1.Location = new System.Drawing.Point(27, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 23);
             this.label1.TabIndex = 32;
@@ -148,12 +150,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1010, 446);
+            this.ClientSize = new System.Drawing.Size(1011, 446);
             this.Controls.Add(this.label_nameWorker);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_export);
             this.Controls.Add(this.dataGridView_performance);
             this.Controls.Add(this.label_today);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PerformanceReport";
             this.Text = "Reporte de Rendimiento";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_performance)).EndInit();
@@ -166,7 +169,7 @@
 
         private System.Windows.Forms.Label label_today;
         private System.Windows.Forms.DataGridView dataGridView_performance;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_export;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_nameWorker;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
