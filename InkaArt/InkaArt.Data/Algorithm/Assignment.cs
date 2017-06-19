@@ -27,6 +27,7 @@ namespace InkaArt.Data.Algorithm
         public AssignmentLine this[int worker_index, int miniturn_index]
         {
             get { return this.assignment_lines[worker_index, miniturn_index]; }
+            set { this.assignment_lines[worker_index, miniturn_index] = value; }
         }
 
         public int NumberOfWorkers

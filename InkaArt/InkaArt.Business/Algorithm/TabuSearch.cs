@@ -151,14 +151,20 @@ namespace InkaArt.Business.Algorithm
 
         public void SwapWorkers(Assignment solution, int worker1_index, int worker2_index)
         {
-            AssignmentLine ass = solution[worker1_index, 0];
-            Worker worker1 = ass.Worker;
-            Worker worker2 = solution[worker2_index,0].Worker;
+            Worker worker1 = simulation.SelectedWorkers[worker1_index];
+            Worker worker2 = simulation.SelectedWorkers[worker2_index];
 
             for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
             {
-                solution[worker1_index,miniturn].Worker = worker2;
-                solution[worker2_index,miniturn].Worker = worker1;
+                AssignmentLine assignment1, assignment2;
+
+                assignment1 = solution[worker1_index, miniturn];
+                if (assignment1 != null) assignment1.Worker = worker2;
+                solution[worker2_index, miniturn] = assignment1;
+
+                assignment2 = solution[worker2_index, miniturn];
+                if (assignment2 != null) assignment2.Worker = worker1;
+                solution[worker1_index, miniturn] = assignment2;                
             }
         }
 
