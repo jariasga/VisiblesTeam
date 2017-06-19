@@ -13,7 +13,11 @@ namespace InkaArt.Data.Algorithm
         private Worker worker;
         private Recipe recipe;
         private Job job;         //Proceso por producto
-        private int miniturn;
+
+        private TimeSpan start_time;
+        private TimeSpan end_time;
+
+        private int total_miniturns;
         private int produced;    //Cantidad producida
 
         public Worker Worker
@@ -36,10 +40,15 @@ namespace InkaArt.Data.Algorithm
             get { return date; }
             set { date = value; }
         }
-        public int Miniturn
+        public int TotalMiniturns
         {
-            get { return miniturn; }
-            set { miniturn = value; }
+            get { return total_miniturns; }
+            set { total_miniturns = value; }
+        }
+        public int Produced
+        {
+            get { return produced; }
+            set { produced = value; }
         }
 
         public AssignmentLine(Worker worker, Recipe recipe, Job job)
@@ -49,5 +58,13 @@ namespace InkaArt.Data.Algorithm
             this.Job = job;
         }
 
+        public AssignmentLine(DateTime date, Worker worker, Recipe recipe, Job job, int total_miniturns)
+        {
+            this.date = date;
+            this.worker = worker;
+            this.recipe = recipe;
+            this.job = job;
+            this.total_miniturns = total_miniturns;
+        }
     }
 }

@@ -120,7 +120,7 @@ namespace InkaArt.Business.Algorithm
             double altarpiece_weight = Convert.ToDouble(altarpiece) / 100;
             
             return new Simulation(name, date_start.Date, date_end.Date, days, breakage_weight, time_weight, huaco_weight,
-                    huamanga_weight, altarpiece_weight, workers, selected_workers, orders, selected_orders);
+                    huamanga_weight, altarpiece_weight, selected_workers, selected_orders);
         }
 
         //public List<Simulation> List()

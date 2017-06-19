@@ -13,6 +13,9 @@ namespace InkaArt.Business.Algorithm
 {
     public class Simulation
     {
+        public const int LimitTime = 300;      //60 segundos * 5 minutos como máximo
+        public const int MiniturnLength = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
+
         private int id_simulation;
         private string name;
         private DateTime date_start;
@@ -27,23 +30,10 @@ namespace InkaArt.Business.Algorithm
         private double retable_weight;
 
         //Trabajadores y pedidos filtrados 
-        private WorkerController workers;
         private WorkerController selected_workers;
-        private OrderController orders;
         private OrderController selected_orders;
-        private IndexController indexes;
-        private ProcessController processes;
-        private JobController jobs;
-        private RecipeController recipes;
-
-        // Parametros no configurables por el usuario
-        // time
-        private int start_time;                      // milisegundos
-        private int end_time;
-        private int limit_time = 1000 * 60 * 5;      // 1000 milisegundos * 60 segundos * 5 minutos como máximo
 
         private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
-        private int miniturn_length = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
 
         // Resultados de asignacion
         List<AssignmentLine[][]> assignments = null;
@@ -83,11 +73,6 @@ namespace InkaArt.Business.Algorithm
             get { return selected_orders; }
             //set { selected_orders = value; }
         }
-        public IndexController Indexes
-        {
-            get { return indexes; }
-            //set { indexes = value; }
-        }
         public double BreakageWeight
         {
             get { return breakage_weight; }
@@ -108,24 +93,10 @@ namespace InkaArt.Business.Algorithm
         {
             get { return retable_weight; }
         }
-        public int StartTime
-        {
-            get { return start_time; }
-            //set { start_time = value; }
-        }
-        public int LimitTime
-        {
-            get { return limit_time; }
-            //set { limit_time = value; }
-        }
         public int Miniturns
         {
             get { return miniturns; }
             //set { miniturns = value; }
-        }
-        public int MiniturnLength
-        {
-            get { return miniturn_length; }
         }
         public List<AssignmentLine[][]> Assignments
         {
@@ -136,8 +107,8 @@ namespace InkaArt.Business.Algorithm
         /********** Constructor para nueva simulación de asignación de trabajadores **********/
 
         public Simulation(string name, DateTime date_start, DateTime date_end, int days, double breakage_weight,
-            double time_weight, double huaco_weight, double huamanga_weight, double retable_weight, WorkerController workers,
-            WorkerController selected_workers, OrderController orders, OrderController selected_orders)
+            double time_weight, double huaco_weight, double huamanga_weight, double retable_weight, WorkerController selected_workers,
+            OrderController selected_orders)
         {
             this.id_simulation = 0;
             this.name = name;
@@ -149,18 +120,8 @@ namespace InkaArt.Business.Algorithm
             this.huaco_weight = huaco_weight;
             this.huamanga_stone_weight = huamanga_weight;
             this.retable_weight = retable_weight;
-            this.workers = workers;
             this.selected_workers = selected_workers;
-            this.orders = orders;
             this.selected_orders = selected_orders;
-
-            //ESTO DEBERIA PASARSE COMO PARÁMETRO
-            this.processes = new ProcessController();
-            this.processes.Load();
-            this.jobs = new JobController();
-            this.jobs.Load();
-            this.recipes = new RecipeController();
-            this.recipes.Load();
         }
 
         /********** Constructor para lectura de base de datos **********/
@@ -180,9 +141,6 @@ namespace InkaArt.Business.Algorithm
             this.retable_weight = retable_weight;
             this.selected_workers = null;
             this.selected_orders = null;
-            this.indexes = null;
-            this.processes = null;
-            this.jobs = null;
         }
 
         public double ProductWeight(int product_id)
@@ -191,30 +149,6 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 2) return huamanga_stone_weight;
             if (product_id == 3) return retable_weight;
             return 1;                
-        }
-
-        /********************** ASIGNACIÓN DE TRABAJADORES **********************/
-
-        public void Start()
-        {
-            start_time = Environment.TickCount;
-
-            //Cálculo de índices
-            this.indexes = new IndexController();
-            this.indexes.Load();
-            this.indexes.CalculateIndexes(jobs, recipes, this);
-
-            //GRASP
-            Grasp grasp = new Grasp(this, selected_workers, selected_orders, processes, jobs, recipes, indexes);
-            List<Assignment> solutions = grasp.ExecuteGraspAlgorithm(workers);
-
-            List<AssignmentLine[][]> initial_solution = new List<AssignmentLine[][]>(); // GRASP
-            TabuSearch tabu = new TabuSearch(this, initial_solution);
-            //tabu.run();
-
-            assignments = tabu.BestSolution;
-
-            end_time = Environment.TickCount;
         }
 
         /******************* GUARDADO EN BASE DE DATOS *******************/
@@ -235,14 +169,14 @@ namespace InkaArt.Business.Algorithm
                     miniturn = 0;
                     foreach (AssignmentLine assignment in worker)
                     {
-                        assignment.Miniturn = miniturn;
+                        //assignment.Miniturn = miniturn;
                         assignment.Date = DateTime.Now.AddDays(days);
 
                         NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
                         command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
                         command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
                         command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
-                        command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
+                        //command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
                         command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
 
                         command.ExecuteNonQuery();
@@ -296,7 +230,7 @@ namespace InkaArt.Business.Algorithm
                 }
             }
             
-            return list.OrderByDescending(o => o.Miniturn).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
+            return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
         }
     }
 }
