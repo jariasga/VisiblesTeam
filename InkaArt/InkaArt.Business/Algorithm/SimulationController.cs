@@ -78,9 +78,9 @@ namespace InkaArt.Business.Algorithm
             //Comprobar los campos obligatorios
             if (name == null || name == "")
                 throw new Exception("Por favor, ingrese un nombre válido.");
-            if (selected_workers == null || selected_workers.Count() <= 0)
+            if (selected_workers == null || selected_workers.NumberOfWorkers <= 0)
                 throw new Exception("Por favor, considere como mínimo un empleado.");
-            if (selected_orders == null || selected_orders.Count() <= 0)
+            if (selected_orders == null || selected_orders.NumberOfOrders <= 0)
                 throw new Exception("Por favor, considere como mínimo un pedido.");
 
             //Fechas de inicio y final

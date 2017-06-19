@@ -35,8 +35,7 @@ namespace InkaArt.Business.Algorithm
 
         private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
 
-        // Resultados de asignacion
-        List<AssignmentLine[][]> assignments = null;
+        private List<Assignment> assignments;
 
         /*************************** SETS Y GETS ***************************/
 
@@ -98,7 +97,7 @@ namespace InkaArt.Business.Algorithm
             get { return miniturns; }
             //set { miniturns = value; }
         }
-        public List<AssignmentLine[][]> Assignments
+        public List<Assignment> Assignments
         {
             get { return assignments; }
             //set { assignments = value; }
@@ -155,38 +154,38 @@ namespace InkaArt.Business.Algorithm
 
         public void Save()
         {
-            if (assignments == null) return;
-            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            connection.Open();
+            //if (assignments == null) return;
+            //NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            //connection.Open();
 
-            int miniturn;
-            int days = 1;            
+            //int miniturn;
+            //int days = 1;            
 
-            foreach (AssignmentLine[][] day in assignments)
-            {
-                foreach(AssignmentLine[] worker in day)
-                {
-                    miniturn = 0;
-                    foreach (AssignmentLine assignment in worker)
-                    {
-                        //assignment.Miniturn = miniturn;
-                        assignment.Date = DateTime.Now.AddDays(days);
+            //foreach (AssignmentLine[][] day in assignments)
+            //{
+            //    foreach(AssignmentLine[] worker in day)
+            //    {
+            //        miniturn = 0;
+            //        foreach (AssignmentLine assignment in worker)
+            //        {
+            //            //assignment.Miniturn = miniturn;
+            //            assignment.Date = DateTime.Now.AddDays(days);
 
-                        NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
-                        command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
-                        command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
-                        command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
-                        //command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
-                        command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
+            //            NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
+            //            command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
+            //            command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
+            //            command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
+            //            //command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
+            //            command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
 
-                        command.ExecuteNonQuery();
-                        miniturn++;
-                    }
-                }
-                days++;                
-            }           
+            //            command.ExecuteNonQuery();
+            //            miniturn++;
+            //        }
+            //    }
+            //    days++;                
+            //}           
             
-            connection.Close();
+            //connection.Close();
         }
 
         public string UpdateName()
@@ -217,20 +216,20 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        public List<AssignmentLine> AssignmentsToList()
-        {
-            List<AssignmentLine> list = new List<AssignmentLine>();
+        //public List<AssignmentLine> AssignmentsToList()
+        //{
+        //    //List<AssignmentLine> list = new List<AssignmentLine>();
 
-            if (assignments == null) return list;
-            foreach(AssignmentLine[][] day in assignments)
-            {
-                foreach(AssignmentLine[] worker in day)
-                {
-                    list.Concat(worker.ToList<AssignmentLine>());
-                }
-            }
+        //    //if (assignments == null) return list;
+        //    //foreach(AssignmentLine[][] day in assignments)
+        //    //{
+        //    //    foreach(AssignmentLine[] worker in day)
+        //    //    {
+        //    //        list.Concat(worker.ToList<AssignmentLine>());
+        //    //    }
+        //    //}
             
-            return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
-        }
+        //    //return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
+        //}
     }
 }

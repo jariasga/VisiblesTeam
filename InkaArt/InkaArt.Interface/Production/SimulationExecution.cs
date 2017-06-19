@@ -53,6 +53,12 @@ namespace InkaArt.Interface.Production
             indexes.Load();
             indexes.CalculateIndexes(simulation);
 
+            //Temporal: Determinar el tiempo total del turno y los miniturnos
+            Turn turn = null;
+            for (int i = 0; i < workers.NumberOfWorkers; i++)
+                if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
+            int total_miniturns = turn.TotalMinutes / Simulation.MiniturnLength;
+
             background_worker.ReportProgress(0, "Estado de la simulación: Asignando trabajadores...");
 
             //Algoritmo GRASP
@@ -62,7 +68,7 @@ namespace InkaArt.Interface.Production
 
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
-                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
+                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, total_miniturns, ref elapsed_seconds));
                 background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
             }
 

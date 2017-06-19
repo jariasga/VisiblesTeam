@@ -58,7 +58,8 @@ namespace InkaArt.Interface.Production
 
                 for (int i = 0; (simulation.SelectedWorkers != null) && (i < list_workers.Items.Count); i++)
                 {
-                    if (simulation.SelectedWorkers.Contains((Worker)list_workers.Items[i]))
+                    Worker worker = (Worker)list_workers.Items[i];
+                    if (simulation.SelectedWorkers.GetByID(worker.ID) != null)
                         list_workers.SetItemChecked(i, true);
                 }
                 for (int i = 0; (simulation.SelectedOrders != null) && (i < list_orders.Items.Count); i++)

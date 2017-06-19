@@ -13,6 +13,10 @@ namespace InkaArt.Data.Algorithm
         private TimeSpan end_time;
         private string description;
 
+        public int ID
+        {
+            get { return id_turn; }
+        }
         public int TotalMinutes
         {
             get { return Convert.ToInt32((end_time - start_time).TotalMinutes); }

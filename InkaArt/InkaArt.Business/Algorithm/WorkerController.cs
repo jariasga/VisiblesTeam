@@ -68,9 +68,9 @@ namespace InkaArt.Business.Algorithm
             return null;
         }
 
-        public int Count()
+        public int NumberOfWorkers
         {
-            return workers.Count();
+            get { return workers.Count; }
         }
 
         public Worker this[int index]
@@ -86,11 +86,6 @@ namespace InkaArt.Business.Algorithm
         public void Add(Worker worker)
         {
             this.workers.Add(worker);
-        }
-
-        public bool Contains(Worker worker)
-        {
-            return this.workers.Contains(worker);
         }
 
         public int GetIndex(int id_worker)

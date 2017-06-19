@@ -19,6 +19,7 @@ namespace InkaArt.Data.Algorithm
         private string name;
         private int id_process;
         private int id_product;
+        private int order;
 
         public int ID
         {
@@ -37,12 +38,13 @@ namespace InkaArt.Data.Algorithm
             get { return id_product; }
         }
 
-        public Job(int id_job, string name, int id_process, int id_product)
+        public Job(int id_job, string name, int id_process, int id_product, int order)
         {
             this.id_job = id_job;
             this.name = name;
             this.id_process = id_process;
             this.id_product = id_product;
+            this.order = order;
         }
 
     }
