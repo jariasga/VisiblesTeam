@@ -19,6 +19,17 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
             idWh = id;
+            fillCombo();
+        }
+
+        private void fillCombo()
+        {
+            PurchaseOrderController control = new PurchaseOrderController();
+            DataTable OcList = control.getData();
+
+            for (int i = 0; i < OcList.Rows.Count; i++)
+                if (OcList.Rows[i]["status"].ToString() == "Pendiente")
+                    comboBox_OC.Items.Add(OcList.Rows[i]["id_order"].ToString());
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -101,35 +112,88 @@ namespace InkaArt.Interface.Warehouse
             return respuesta;
         }
 
+        private void actualizaLinea(string idLinea)
+        {
+            PurchaseOrderDetailController control = new PurchaseOrderDetailController();
+            DataTable ocDetailList = control.getData();
+
+            int id_linea = int.Parse(idLinea);
+
+            for (int i = 0; i < ocDetailList.Rows.Count; i++)
+                if (ocDetailList.Rows[i]["id_detail"].ToString() == idLinea)
+                    //updete del controller
+                    control.updateLineaEntregada(id_linea);
+        }
+
+        private void actualizaOrdenes()
+        {
+            PurchaseOrderController control = new PurchaseOrderController();
+            DataTable OcList = control.getData();
+
+            int id_orden = int.Parse(comboBox_OC.SelectedItem.ToString());
+            int estado_terminado = 0;
+            for (int i = 0; i < dataGridView_details.Rows.Count; i++)
+                if (dataGridView_details.Rows[i].Cells[1].Value.ToString() != "Facturado" &&
+                    dataGridView_details.Rows[i].Cells[1].Value.ToString() != "Entregado")
+                    estado_terminado = 1;
+            if (estado_terminado == 0)
+                //update del controlador orden de compra
+                control.updateOrdenEntregada(id_orden);
+
+        }
+
         private string fillGrid() //devuelve el idSupplier
         {
             PurchaseOrderDetailController controlOrderRm = new PurchaseOrderDetailController();
             DataTable orderList = controlOrderRm.getData();
 
-            string idOrder = textBox_idFactura.Text;
+            string idOrder = comboBox_OC.SelectedItem.ToString();
             string idRM, idSup, quantity, name, quantityLeft;
             idRM = quantity = name = idSup = quantityLeft = "";
             bool encontre_fac = false;
 
             dataGridView_orders.Rows.Clear();
+            dataGridView_details.Rows.Clear();
 
             for (int i = 0; i < orderList.Rows.Count; i++)
             {
-                if (string.Compare(idOrder, orderList.Rows[i]["id_factura"].ToString()) == 0)
+                if (string.Compare(idOrder, orderList.Rows[i]["id_order"].ToString()) == 0 &&
+                    orderList.Rows[i]["status"].ToString()!= "Inactivo")
                 {
                     encontre_fac = true;
                     idRM = orderList.Rows[i]["id_raw_material"].ToString();
-                    if (canIStoreThisMaterial(idRM))
+                    name = giveme_rawName(idRM);
+                    idSup = orderList.Rows[i]["id_suppliers"].ToString();
+                    if (orderList.Rows[i]["status"].ToString() == "Enviado")//llenar el datagrid de detalle de la orden
                     {
-                        name = giveme_rawName(idRM);
-                        quantity = orderList.Rows[i]["quantity"].ToString();
-                        quantityLeft = howMuchCanIMove(idOrder, idRM);
-                        idSup = orderList.Rows[i]["id_suppliers"].ToString();
-                        if (string.Compare(quantityLeft, "falso") == 0)//si no esta en la tabla su valor es igual a quantity
-                            quantityLeft = quantity;
+  
+                        if (canIStoreThisMaterial(idRM))
+                        {                      
+                            quantity = orderList.Rows[i]["quantity"].ToString();                   
+                            quantityLeft = howMuchCanIMove(idOrder, idRM);                            
+                            if (string.Compare(quantityLeft, "falso") == 0)//si no esta en la tabla su valor es igual a quantity
+                                quantityLeft = quantity;
+                            if (int.Parse(quantityLeft) == 0)//si ya no hay mas por mover verifica si actualiza la orden total a entregada
+                            {
+                                //la linea pasa a entregada y verifica el total
+                                actualizaLinea(orderList.Rows[i]["id_detail"].ToString());
+                                actualizaOrdenes();
+                                //orderList = controlOrderRm.getData();
 
-                        dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "", false);
+                            }
+                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "", false,orderList.Rows[i]["id_detail"].ToString());
+                        }
+
                     }
+                    else
+                    {
+                        if (orderList.Rows[i]["status"].ToString() == "Facturado" || orderList.Rows[i]["status"].ToString() == "Entregado")
+                        {
+                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                        }
+                    }
+
                 }
             }
             if (encontre_fac == false)
@@ -157,11 +221,11 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int aux_idFactura;
+            int aux_idOc;
             string idSup = "";
 
             dataGridView_orders.Rows.Clear();
-            if (int.TryParse(textBox_idFactura.Text,out aux_idFactura))
+            if (int.TryParse(comboBox_OC.SelectedItem.ToString(),out aux_idOc))
             {
                 //fill grid
                 idSup = fillGrid();
@@ -221,12 +285,13 @@ namespace InkaArt.Interface.Warehouse
                                     //agregar en RM-WH
                                     controlRmW.updateStock(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), stockLogico + cantidad_ingresar, stockFisico + cantidad_ingresar);
                                     //agregar en StockDocument
-                                    updateInStockDocument(textBox_idFactura.Text, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
+                                    updateInStockDocument(comboBox_OC.SelectedItem.ToString(), dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
                                     //agregar en Movement
-                                    controlMovement.insertPurchaseRmMovement(textBox_idFactura.Text, idWh, dateTimePicker1.Value.ToShortDateString(),int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()),cantidad_ingresar);
+                                    controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, dateTimePicker1.Value.ToShortDateString(),int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()),cantidad_ingresar);
 
                                     MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     fillGrid();
+
                                 }
                                 else
                                     MessageBox.Show("El almacen no tiene espacio necesario para ese elemento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -242,5 +307,25 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
         }
+
+        private void comboBox_OC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux_idOc;
+            string idSup = "";
+
+            dataGridView_orders.Rows.Clear();
+            //TODO que solo salgan las listas "Enviadas"
+            if (int.TryParse(comboBox_OC.SelectedItem.ToString(), out aux_idOc))
+            {
+                //fill grid
+                idSup = fillGrid();
+                string nameSup = giveme_supplierName(idSup);
+                textBox_supplier.Text = nameSup;
+            }
+            else
+                MessageBox.Show("Por favor ingrese un numero de factura válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+
     }
 }

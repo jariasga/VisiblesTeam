@@ -70,5 +70,13 @@ namespace InkaArt.Business.Purchases
             }*/
             purchaseOrder.updateData(data, adap, "PurcharseOrder");
         }
+
+        public void updateOrdenEntregada(int id_order)
+        {
+            table = data.Tables["PurcharseOrder"];
+            purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
+                "SET status = 'Entregado' " +
+                "WHERE id_order = {0}", id_order));
+        }
     }
 }
