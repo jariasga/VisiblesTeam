@@ -162,7 +162,7 @@ namespace InkaArt.Interface.Purchases
             //obtengo todas las lineas de pedido de esta orden
             DataRow[] rows;
             lineaPedidosList = control_detail.getData();
-            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status = 'Activo'");
+            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status NOT IN ('Inactivo')");
             if (rows.Any()) lineaPedidosList = rows.CopyToDataTable();
             else lineaPedidosList.Rows.Clear();
             string sortQuery = string.Format("id_detail");
@@ -245,7 +245,7 @@ namespace InkaArt.Interface.Purchases
             double subTotalNuevo = double.Parse(textBox_subtotal.Text);
             try
             {
-                control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), subTotalNuevo, 0, "Activo");
+                control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), subTotalNuevo, 0, "Borrador");
                 textBox_subtotal.Text = "0";
                 textBox_cantidad.Text = "0";
                 textBox_price.Text = "0";
