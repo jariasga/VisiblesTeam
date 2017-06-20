@@ -84,10 +84,13 @@ namespace InkaArt.Interface.Warehouse
                             {
                                 Form formView = new InkaArt.Interface.Warehouse.breakProduct(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
                                 formView.Show();                            }
-                            else
+                            else  if (reason == "Hallazgo")
                             {
-                                MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                Form formView = new InkaArt.Interface.Warehouse.MovementFindIn(idWarehouesOrigin);
+                                formView.Show();
                             }
+                            else
+                                MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
