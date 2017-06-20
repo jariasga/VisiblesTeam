@@ -53,6 +53,7 @@
             this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MovementCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -301,6 +302,7 @@
             this.idProduct,
             this.ProductName,
             this.Cant,
+            this.stockWarehouse,
             this.CurrentCant,
             this.MovementCant,
             this.Modificar});
@@ -326,6 +328,12 @@
             this.Cant.HeaderText = "Cantidad Total";
             this.Cant.Name = "Cant";
             this.Cant.ReadOnly = true;
+            // 
+            // stockWarehouse
+            // 
+            this.stockWarehouse.HeaderText = "Stock en Almacén";
+            this.stockWarehouse.Name = "stockWarehouse";
+            this.stockWarehouse.ReadOnly = true;
             // 
             // CurrentCant
             // 
@@ -395,6 +403,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
         private System.Windows.Forms.DataGridViewTextBoxColumn MovementCant;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;

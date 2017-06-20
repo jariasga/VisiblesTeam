@@ -86,7 +86,7 @@ namespace InkaArt.Business.Algorithm
                     LogHandler.WriteLine("Hubo un assignment line que devolvió nulo... Worker = {0}, Job = {1}. Recipe = {2}.", chosen_candidate.Worker.FullName,
                         chosen_candidate.Job.Name, chosen_candidate.Recipe.Description + " " + chosen_candidate.Recipe.Version);
                     LogHandler.WriteLine("RCL count = {0}, Current_Jobs count = {1}, Current_Product = {2}", rcl.Count, current_product_jobs.Count, current_product.Count);
-                    this.RemoveWorkers(candidates, chosen_candidate.Worker);
+                    //this.RemoveWorkers(candidates, chosen_candidate.Worker, current_deleted_indexes);
                     break;
                 }
                 current_product.Add(new_assignment_line);
@@ -95,14 +95,26 @@ namespace InkaArt.Business.Algorithm
                 current_product_jobs.Remove(chosen_candidate.Job);
 
                 //Actualizar las variables y quitar los candidatos necesarios
-                if (assignment.IsWorkerFull(chosen_candidate.Worker, current_product)) this.RemoveWorkers(candidates, chosen_candidate.Worker);
+                if (assignment.IsWorkerFull(chosen_candidate.Worker, current_product)) this.RemoveWorkers(candidates, chosen_candidate.Worker, current_deleted_indexes);
                 current_deleted_indexes.Add(new Index(chosen_candidate));
                 candidates.Remove(chosen_candidate);
 
-                //if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) break;
+                if (current_product_jobs.Count <= 0)
+                {
+                    int order_line_index = GetOrderLineItemIndex(chosen_candidate);
+                    if (order_line_index < 0) break;
+                    int produced = this.AddAssignmentLines(assignment, current_product, order_line_index);
+                    if (selected_orders[0][order_line_index].Produced >= selected_orders[0][order_line_index].Quantity)
+                        order_recipes.RemoveAll(recipe => recipe.ID == chosen_candidate.Recipe.ID);
+                    else break;
+                }
 
-                //Si la orden se completó, removerla de la lista
-                if (selected_orders[0].Completed()) selected_orders.RemoveAt(0);
+                //Si la orden se completó, removerla de la lista y actualizar la lista de recetas
+                if (selected_orders[0].Completed())
+                {
+                    selected_orders.RemoveAt(0);
+                    order_recipes = GetOrderRecipes(selected_orders[0]);
+                }
             }
         }
 
@@ -131,20 +143,60 @@ namespace InkaArt.Business.Algorithm
             }
 
             //Calcular el máximo y el mínimo costo de los candidatos que podrían pertenecer al RCL
-            double min = rcl.Min(index => index.CostValue(objective_function, iteration));
-            double max = rcl.Max(index => index.CostValue(objective_function, iteration));
+            double min = double.MaxValue;
+            double max = double.MinValue;
+            for (int i = 0; i < rcl.Count; i++)
+            {
+                double cost_value = rcl[i].CostValue(objective_function, iteration);
+                if (cost_value > max) max = cost_value;
+                if (cost_value < min) min = cost_value; 
+            }
 
             //Obtener el rango del RCL y quitar los índices del RCL que no estén en el rango
             double max_rcl = min + Alpha * (max - min);
-            rcl.RemoveAll(index => (index.CostValue(objective_function, iteration) < min || index.CostValue(objective_function, iteration) > max_rcl));
+            for (int i = rcl.Count - 1; i >= 0; i--)
+            {
+                double cost_value = rcl[i].CostValue(objective_function, iteration);
+                if (cost_value < min || cost_value > max_rcl) rcl.RemoveAt(i);
+            }
 
             return rcl;
         }
 
-        private void RemoveWorkers(List<Index> candidates, Worker worker)
+        private int GetOrderLineItemIndex(Index chosen_candidate)
+        {
+            for (int i = 0; i < selected_orders[0].NumberOfLineItems; i++)
+                if (selected_orders[0][i].Recipe == chosen_candidate.Recipe.ID) return i;
+            return -1;
+        }
+
+        private int AddAssignmentLines(Assignment assignment, List<AssignmentLine> current_product, int order_line_index)
+        {
+            int produced = selected_orders[0][order_line_index].Quantity - selected_orders[0][order_line_index].Produced;
+            current_product.OrderBy(line => line.Job.Order);
+
+            for (int i = 0; i < current_product.Count; i++)
+            {
+                if (current_product[i].Produced < produced) produced = current_product[i].Produced;
+                //RECALCULAR TIEMPOS: FALTA
+            }
+            for (int i = 0; i < current_product.Count; i++)
+            {
+                current_product[i].Produced = produced;
+                for (int j = 0; j < current_product[i].TotalMiniturnsUsed; j++)
+                    assignment[selected_workers.GetIndex(current_product[i].Worker.ID), current_product[i].MiniturnStart + j] = current_product[i];
+            }
+            return produced;
+        }
+
+        private void RemoveWorkers(List<Index> candidates, Worker worker, List<Index> current_deleted_indexes)
         {
             for (int i = candidates.Count - 1; i >= 0; i--)
-                if (candidates[i].Worker.ID == worker.ID) candidates.Remove(candidates[i]);
+                if (candidates[i].Worker.ID == worker.ID)
+                {
+                    current_deleted_indexes.Add(candidates[i]);
+                    candidates.Remove(candidates[i]);
+                }
         }
 
     }

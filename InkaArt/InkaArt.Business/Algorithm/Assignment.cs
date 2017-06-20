@@ -73,11 +73,6 @@ namespace InkaArt.Business.Algorithm
         {
             throw new NotImplementedException();
         }
-        
-        public void AddAssignmentLines(List<AssignmentLine> assignment_lines)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool IsWorkerFull(Worker worker, List<AssignmentLine> temp_assignment_lines)
         {
