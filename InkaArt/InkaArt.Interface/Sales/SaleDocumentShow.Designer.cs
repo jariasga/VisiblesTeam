@@ -38,7 +38,6 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button_see = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_documents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,12 +71,14 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid_documents.DefaultCellStyle = dataGridViewCellStyle4;
-            this.grid_documents.Location = new System.Drawing.Point(50, 159);
+            this.grid_documents.Location = new System.Drawing.Point(34, 39);
+            this.grid_documents.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grid_documents.Name = "grid_documents";
             this.grid_documents.ReadOnly = true;
             this.grid_documents.RowTemplate.Height = 24;
-            this.grid_documents.Size = new System.Drawing.Size(889, 356);
+            this.grid_documents.Size = new System.Drawing.Size(667, 324);
             this.grid_documents.TabIndex = 2;
+            this.grid_documents.UseWaitCursor = true;
             this.grid_documents.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_documents_CellDoubleClick);
             // 
             // Column1
@@ -115,12 +116,12 @@
             this.button_cancel.BackColor = System.Drawing.Color.Gray;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(491, 534);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_cancel.Location = new System.Drawing.Point(364, 379);
+            this.button_cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_cancel.Name = "button_cancel";
-            this.button_cancel.Size = new System.Drawing.Size(200, 48);
+            this.button_cancel.Size = new System.Drawing.Size(150, 39);
             this.button_cancel.TabIndex = 32;
-            this.button_cancel.Text = "＋ Cancelar";
+            this.button_cancel.Text = "🗙 Cancelar";
             this.button_cancel.UseVisualStyleBackColor = false;
             // 
             // button_see
@@ -128,41 +129,31 @@
             this.button_see.BackColor = System.Drawing.Color.SteelBlue;
             this.button_see.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_see.ForeColor = System.Drawing.Color.White;
-            this.button_see.Location = new System.Drawing.Point(270, 534);
-            this.button_see.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_see.Location = new System.Drawing.Point(198, 379);
+            this.button_see.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_see.Name = "button_see";
-            this.button_see.Size = new System.Drawing.Size(200, 48);
+            this.button_see.Size = new System.Drawing.Size(150, 39);
             this.button_see.TabIndex = 31;
-            this.button_see.Text = "＋ Ver";
+            this.button_see.Text = "🔍 Ver";
             this.button_see.UseVisualStyleBackColor = false;
             this.button_see.Click += new System.EventHandler(this.button_see_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(374, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(203, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Documentos de Venta";
-            // 
             // SaleDocumentShow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(981, 604);
+            this.ClientSize = new System.Drawing.Size(736, 446);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_see);
             this.Controls.Add(this.grid_documents);
-            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SaleDocumentShow";
-            this.Text = "SaleDocumentShow";
+            this.Text = "Documentos de Venta";
+            this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.SaleDocumentShow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_documents)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -175,6 +166,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Button button_see;
-        private System.Windows.Forms.Label label1;
     }
 }
