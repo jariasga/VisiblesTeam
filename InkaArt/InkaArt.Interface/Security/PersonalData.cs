@@ -103,20 +103,55 @@ namespace InkaArt.Interface.Security
         private bool validateData()
         {
             int i, j;
-            if (int.TryParse(textBoxDNI.Text, out i) != true) return false;
-            if (int.TryParse(textBoxPhone.Text, out j) != true) return false;
+            if (int.TryParse(textBoxDNI.Text, out i) != true)
+            {
+                MessageBox.Show("Por favor ingrese un DNI", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (int.TryParse(textBoxPhone.Text, out j) != true)
+            {
+                MessageBox.Show("Por favor Ingrese un teléfono", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
-            if (textBoxName.Text == "") return false;
-            if (textBoxLastName.Text == "") return false;
+            if (textBoxName.Text == "")
+            {
+                MessageBox.Show("Por favor ingrese un nombre", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (textBoxLastName.Text == "")
+            {
+                MessageBox.Show("Por favor ingrese un apellido", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             if (textBoxDNI.Text == "" || Convert.ToInt32(textBoxDNI.Text) < 0) return false;
             if (textBoxPhone.Text == "" || Convert.ToInt32(textBoxPhone.Text) < 0) return false;
-            if (textBoxAddress.Text == "") return false;
-            if (textBoxEmail.Text == "")return false;
+            if (textBoxAddress.Text == "")
+            {
+                MessageBox.Show("Por favor ingrese una dirección", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (textBoxEmail.Text == "")
+            {
+                MessageBox.Show("Por favor ingrese un email", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
 
-            if (textBoxUsername.Text == "") return false;
-            if (textBoxDescription.Text == "") return false;
-            if (textBoxIDRol.Text == "") return false;
-            
+            if (textBoxUsername.Text == "")
+            {
+                MessageBox.Show("Por favor ingrese un usuario", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (textBoxDescription.Text == "")
+            {
+                MessageBox.Show("Por favor ingrese una descripción", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (textBoxIDRol.Text == "")
+            {
+                MessageBox.Show("Por favor seleccione un rol", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return true;
         }
         private void buttonSave_Click(object sender, EventArgs e)
@@ -127,7 +162,7 @@ namespace InkaArt.Interface.Security
                 user.showData();
                 if (validateData())
                 {
-                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, comboBoxUserStatus.SelectedIndex, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 23505)
+                    if (user.insertData(textBoxUsername.Text, textBoxDescription.Text, comboBoxUserStatus.SelectedIndex, ref password, Convert.ToInt32(textBoxIDRol.Text), rawImage) == 0)
                         MessageBox.Show("El usuario ingresado ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
                     {
@@ -136,7 +171,7 @@ namespace InkaArt.Interface.Security
                         this.Close();
                     }
                 }
-                else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //else MessageBox.Show("Por favor, complete todos los campos correctamente antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 
             }
@@ -217,7 +252,6 @@ namespace InkaArt.Interface.Security
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(textBoxDNI.Text, "[^0-9]"))            
                 textBoxDNI.Text = textBoxDNI.Text.Remove(textBoxDNI.Text.Length - 1);
-            
         }
 
         private void textBoxPhone_TextChanged(object sender, EventArgs e)

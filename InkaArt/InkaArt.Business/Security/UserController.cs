@@ -63,9 +63,12 @@ namespace InkaArt.Business.Security
         {
             table = data.Tables["User"];
 
+            user.insertPhoto(photo, userID);
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
                 "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
                 "WHERE id_user = {4}", username, status, description, role, userID));
+
+            
             
             /* TODO
             row = getUserRow(username);

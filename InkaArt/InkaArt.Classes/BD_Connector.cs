@@ -79,7 +79,6 @@ namespace InkaArt.Classes
 
         public int callAdapter(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            int code = 0;
             if (Connection.State != System.Data.ConnectionState.Open) connect();
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
             adap.UpdateCommand = builder.GetUpdateCommand();
@@ -91,16 +90,18 @@ namespace InkaArt.Classes
 
             try
             {
-                adap.Update(data, srcTable);
+                return adap.Update(data, srcTable);
             }
             catch (Exception)
             {
-                code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
-                if (code == 23505) return 23505;
+                //code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
+                //if (code == 23505) return 23505;
             }
-
-            closeConnection();
-            return code;
+            finally
+            {
+                closeConnection();
+            }
+            return 0;
         }
 
         public void closeConnection()
