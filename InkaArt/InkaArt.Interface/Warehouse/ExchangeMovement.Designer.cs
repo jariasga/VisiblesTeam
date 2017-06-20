@@ -51,6 +51,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -197,6 +198,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox8);
             this.groupBox2.Controls.Add(this.numericUpDown2);
             this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.label11);
@@ -220,6 +222,7 @@
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(179, 30);
             this.numericUpDown2.TabIndex = 37;
+            this.numericUpDown2.Visible = false;
             // 
             // textBox4
             // 
@@ -295,6 +298,14 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Identificador:";
             // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(58, 221);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.ReadOnly = true;
+            this.textBox8.Size = new System.Drawing.Size(239, 30);
+            this.textBox8.TabIndex = 38;
+            // 
             // ExchangeMovement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -344,5 +355,6 @@
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox8;
     }
 }

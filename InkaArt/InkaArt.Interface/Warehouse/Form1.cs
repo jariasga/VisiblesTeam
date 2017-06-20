@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Npgsql;
 using InkaArt.Business.Warehouse;
 
 namespace InkaArt.Interface.Warehouse
@@ -19,7 +20,11 @@ namespace InkaArt.Interface.Warehouse
         TextBox text1New;
         TextBox text2New;
         TextBox text3New;
+        TextBox text8New;
+        string idWarehouseOrigin;
+        string idWarehouseDestiny;
 
+        private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
         private MaterialMovementController materialMovementController = new MaterialMovementController();
         private ProductMovementController productMovementController = new ProductMovementController();
 
@@ -29,11 +34,14 @@ namespace InkaArt.Interface.Warehouse
         }
 
         //public Form1(ref TextBox text1, ref TextBox text2,ref  TextBox text3)
-        public Form1( TextBox text1,  TextBox text2,  TextBox text3)
+        public Form1( TextBox text1,  TextBox text2,  TextBox text3, string warehouseOrigin, string warehouseDestiny, TextBox text8)
         {
             text1New = text1;
             text2New = text2;
             text3New = text3;
+            text8New = text8;
+            idWarehouseOrigin = warehouseOrigin;
+            idWarehouseDestiny = warehouseDestiny;
             InitializeComponent();
         }
 
@@ -82,15 +90,26 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            int aux = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[3].Value);
+                bool s = Convert.ToBoolean(row.Cells[4].Value);
 
                 if (s == true)
                 {
                     id = Convert.ToInt32(row.Cells[0].Value);
                     name = Convert.ToString(row.Cells[1].Value);
                     productType = Convert.ToString(row.Cells[2].Value);
+                    try
+                    {
+                        aux = Convert.ToInt32(row.Cells[3].Value);
+                        text8New.Text = Convert.ToString(aux);
+                    }
+                    catch
+                    {
+
+                    }
+                    
                     break;
                 }
             }
@@ -107,6 +126,31 @@ namespace InkaArt.Interface.Warehouse
             text2New.Text = "";
             text3New.Text = "";
             this.Close();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            NpgsqlDataReader datos;
+
+            datos = productionItemMovementController.getProductWarehouseWarehouse(idWarehouseOrigin, idWarehouseDestiny);
+            int rowIndex = 0;
+
+
+            dataGridView1.Rows.Clear();
+
+            //Muestra los datos en el gridview
+            while (datos.Read())
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                row.Cells[0].Value = datos[0];
+                row.Cells[1].Value = datos[1];
+                row.Cells[2].Value = datos[2];
+                dataGridView1.Rows.Add(row);
+                rowIndex++;
+            }
+            productionItemMovementController.closeConnection();
+
+
         }
     }
 }
