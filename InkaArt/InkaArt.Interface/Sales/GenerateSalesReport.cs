@@ -35,7 +35,7 @@ namespace InkaArt.Interface.Sales
 
         private int validateData()
         {
-            if (dateTimePicker_fechaIni.Value >= dateTimePicker_fechaFin.Value)
+            if (dateTimePicker_fechaIni.Value > dateTimePicker_fechaFin.Value)
             {
                 MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
