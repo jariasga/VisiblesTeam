@@ -80,6 +80,9 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
             textBox_id.Text = currentPurchaseOrder.Cells[1].Value.ToString();
             textBox_idsupplier.Text = currentPurchaseOrder.Cells[7].Value.ToString();
+            if (string.Compare(currentPurchaseOrder.Cells[6].Value.ToString(), "Entregado")==0){
+                comboBox_status.Items.Add(currentPurchaseOrder.Cells[6].Value.ToString());
+            }
             comboBox_status.Text = currentPurchaseOrder.Cells[6].Value.ToString();
             dateTimePicker_creation.Value = DateTime.Parse(currentPurchaseOrder.Cells[3].Value.ToString());
             dateTimePicker_delivery.Value = DateTime.Parse(currentPurchaseOrder.Cells[4].Value.ToString());
@@ -88,6 +91,7 @@ namespace InkaArt.Interface.Purchases
             dateTimePicker_creation.Enabled = false;
             dateTimePicker_delivery.Enabled = false;
             comboBox_status.Enabled = false;
+            
             comboBox_supplier.Enabled = false;
             button_add.Enabled = false;
             buttonDelete.Enabled = false;
@@ -349,7 +353,7 @@ namespace InkaArt.Interface.Purchases
             int numero = tablaAuxiliar.Rows.Count;
             int comprobar = 5;
             if (numero < 5) comprobar = numero;
-            for (int i = 1; i < comprobar; i++)
+            for (int i = 1; i <= comprobar; i++)
             {
                 if (String.Compare(tablaAuxiliar.Rows[numero - i]["id_supplier"].ToString(), id_supplier) == 0)
                 {
