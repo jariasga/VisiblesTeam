@@ -162,6 +162,7 @@
             // 
             // grid_orderline
             // 
+            this.grid_orderline.AllowUserToAddRows = false;
             this.grid_orderline.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -183,6 +184,7 @@
             this.grid_orderline.Location = new System.Drawing.Point(33, 68);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
+            this.grid_orderline.ReadOnly = true;
             this.grid_orderline.Size = new System.Drawing.Size(560, 183);
             this.grid_orderline.TabIndex = 22;
             // 
@@ -190,21 +192,25 @@
             // 
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // cost
             // 
             this.cost.HeaderText = "Precio Unitario";
             this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
             // 
             // Cantidad
             // 
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // delete
             // 
             this.delete.HeaderText = "Eliminar";
             this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
             // 
             // label7
             // 

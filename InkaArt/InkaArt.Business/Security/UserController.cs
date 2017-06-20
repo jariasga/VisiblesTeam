@@ -38,11 +38,11 @@ namespace InkaArt.Business.Security
             return table;
         }
 
-        public int updatePassword(int idUser, string password)
+        public int updatePassword(int idUser, string password, bool passReset)
         {
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
-                "SET password = '{0}' " +
-                "WHERE id_user = '{1}'", sha.encrypt(password), idUser));
+                "SET password = '{0}', need_pass_reset = {1} " +
+                "WHERE id_user = '{2}'", sha.encrypt(password), passReset, idUser));
 
             /* TODO
             row = getUserRow(username);
@@ -113,10 +113,13 @@ namespace InkaArt.Business.Security
             adap = user.userAdapter();
             adap.SelectCommand.Parameters[0].NpgsqlValue = username;
 
-            data.Clear();
+            if (data != null) data.Clear();
             data = user.getData(adap, "User");
-
-            if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
+            if (data != null)
+            {
+                if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
+                else return null;
+            }
             else return null;
         }
         
@@ -165,7 +168,7 @@ namespace InkaArt.Business.Security
             {
                 string newPass = sha.getMiniSHA();
                 worker.sendPassword(row["email"].ToString(), username, newPass);
-                updatePassword(idUser, newPass);
+                updatePassword(idUser, newPass, true);
             }
         }
     }

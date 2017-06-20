@@ -61,14 +61,15 @@ namespace InkaArt.Business.Sales
             return orderData.GetSalesDocument();
         }
 
-        public int AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines, string type, string reason = "", string totalDev = "")
+        public int AddOrder(int idClient, int documentTypeId, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, DataTable orderLines, string type, bool isClientSelected = false, int clientType = -1, string reason = "", string totalDev = "")
         {
+            if (documentTypeId != -1) documentTypeId++;
             saleAmount = Math.Round(double.Parse(saleAmount), 2).ToString();
             igv = Math.Round(double.Parse(igv), 2).ToString();
             totalAmount = Math.Round(double.Parse(totalAmount), 2).ToString();
             int orderAdded, orderLineAdded;
             orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, totalDev);
-            orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv), type);
+            orderLineAdded = orderData.InsertOrderLines(orderLines, double.Parse(igv), type, isClientSelected, clientType);
             return orderAdded + orderLineAdded;
         }
 
@@ -79,6 +80,7 @@ namespace InkaArt.Business.Sales
 
         public string getClientName(string v)
         {
+            if (v.Equals("-1")) return "Inka Art";
             ClientController cc = new ClientController();
             DataTable info = new DataTable();
             info = cc.GetClients(v);
@@ -87,6 +89,7 @@ namespace InkaArt.Business.Sales
 
         public string getClientDoc(string v)
         {
+            if (v.Equals("-1")) return "23021804923";
             ClientController cc = new ClientController();
             DataTable info = new DataTable();
             info = cc.GetClients(v);
@@ -116,7 +119,6 @@ namespace InkaArt.Business.Sales
 
         public string makeValidations(string clientDoc, string clientName, DataTable orderLines, string type, string reason, string docId = "null")
         {
-            if (type.Equals("pedido")) if (clientDoc.Equals("") || clientName.Equals("")) return "Debe seleccionar un cliente antes de continuar.";
             if (type.Equals("devolucion")) if (docId.Equals("")) return "Debe seleccionar un pedido antes de continuar.";
             if (orderLines.Rows.Count == 0) return "Debe añadir productos para realizar un pedido.";
             if (type.Equals("devolucion") && reason.Equals("")) return "Debe ingresar un motivo para continuar.";
@@ -129,9 +131,16 @@ namespace InkaArt.Business.Sales
             int parsedID = int.Parse(id);
             return orderData.getProductName(parsedID);
         }
+
         public DataTable getOrderLines(string id)
         {
             return orderData.getOrderLines(int.Parse(id));
+        }
+
+        public DataTable getProductRecipe(object id)
+        {
+            int intId = int.Parse(id.ToString());
+            return orderData.getProductRecipe(intId);
         }
     }
 }

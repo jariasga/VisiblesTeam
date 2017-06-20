@@ -47,12 +47,19 @@ namespace InkaArt.Classes
 
         public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
-            if (Connection == null) connect();
-            adapter.SelectCommand.Connection = Connection;
-            DataSet data = new DataSet();
-            adapter.Fill(data, srcTable);
-            closeConnection();
-            return data;
+            try
+            {
+                if (Connection == null) connect();
+                adapter.SelectCommand.Connection = Connection;
+                DataSet data = new DataSet();
+                adapter.Fill(data, srcTable);
+                closeConnection();
+                return data;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
