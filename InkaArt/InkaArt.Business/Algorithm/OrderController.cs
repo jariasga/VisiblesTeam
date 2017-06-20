@@ -90,6 +90,11 @@ namespace InkaArt.Business.Algorithm
             this.orders.RemoveAt(index);
         }
 
+        public void RemoveAll(Predicate<Order> match)
+        {
+            this.orders.RemoveAll(match);
+        }
+
         public bool Contains(Order order)
         {
             return this.orders.Contains(order);
