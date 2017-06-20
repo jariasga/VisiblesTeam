@@ -73,7 +73,7 @@ namespace InkaArt.Interface.Sales
         private void button_save_Click(object sender, EventArgs e)
         {   
             DataTable orderLine = parseDataGrid(grid_orderline);
-            string messageResponse = orderController.makeValidations(textbox_doc.Text,textbox_name.Text, orderLine, "pedido", "");
+            string messageResponse = orderController.makeValidations(textbox_doc.Text,textbox_name.Text, orderLine, "pedido", "", date_delivery.Value);
             if (messageResponse.Equals("OK"))
             {
                 int response = orderController.AddOrder(currentClientId, combo_doctype.SelectedIndex, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, orderState, 1, orderLine, "pedido", isClientSelected, currentClientType);
@@ -234,6 +234,11 @@ namespace InkaArt.Interface.Sales
                     populateCombobox(combo_quality, recipes, "version", "idRecipe");
                 }
             }
+        }
+
+        private void date_delivery_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void numeric_quantity_KeyUp(object sender, KeyEventArgs e)

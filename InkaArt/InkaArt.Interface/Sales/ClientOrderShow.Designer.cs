@@ -36,15 +36,11 @@
             this.textbox_amount = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textbox_ruc = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_doc = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.combo_doc = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,6 +51,11 @@
             this.button_delete = new System.Windows.Forms.Button();
             this.button_fac = new System.Windows.Forms.Button();
             this.button_seedoc = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orderline)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -75,7 +76,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(629, 478);
+            this.groupBox2.Size = new System.Drawing.Size(674, 478);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Productos";
@@ -154,45 +155,22 @@
             this.Producto,
             this.Column1,
             this.Column2,
+            this.Column3,
             this.Cantidad});
             this.grid_orderline.Location = new System.Drawing.Point(33, 48);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
             this.grid_orderline.ReadOnly = true;
             this.grid_orderline.RowHeadersVisible = false;
-            this.grid_orderline.Size = new System.Drawing.Size(560, 203);
+            this.grid_orderline.Size = new System.Drawing.Size(625, 203);
             this.grid_orderline.TabIndex = 22;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "PU";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.textbox_name);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textbox_ruc);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label_doc);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(37, 389);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
@@ -233,15 +211,15 @@
             this.textbox_ruc.Size = new System.Drawing.Size(368, 30);
             this.textbox_ruc.TabIndex = 17;
             // 
-            // label1
+            // label_doc
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 38);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 23);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "RUC";
+            this.label_doc.AutoSize = true;
+            this.label_doc.Location = new System.Drawing.Point(28, 38);
+            this.label_doc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_doc.Name = "label_doc";
+            this.label_doc.Size = new System.Drawing.Size(109, 23);
+            this.label_doc.TabIndex = 16;
+            this.label_doc.Text = "Documento";
             // 
             // groupBox3
             // 
@@ -376,6 +354,40 @@
             this.button_seedoc.UseVisualStyleBackColor = false;
             this.button_seedoc.Visible = false;
             // 
+            // Producto
+            // 
+            this.Producto.FillWeight = 150F;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 60F;
+            this.Column2.HeaderText = "PU";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.FillWeight = 70F;
+            this.Column3.HeaderText = "Producido";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.FillWeight = 70F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
             // ClientOrderShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -411,7 +423,7 @@
         private System.Windows.Forms.TextBox textbox_name;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textbox_ruc;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_doc;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DateTimePicker date_deliverydate;
         private System.Windows.Forms.Label label6;
@@ -426,11 +438,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textbox_amount;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button_fac;
+        private System.Windows.Forms.Button button_seedoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.Button button_fac;
-        private System.Windows.Forms.Button button_seedoc;
     }
 }

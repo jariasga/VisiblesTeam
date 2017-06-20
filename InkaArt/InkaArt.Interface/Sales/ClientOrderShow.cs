@@ -43,9 +43,13 @@ namespace InkaArt.Interface.Sales
                 string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType="Boleta";
                 textbox_ruc.Text = clientDoc;
                 textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
-                if (clientDoc.Length == 11) docType = "Factura";
+                if (clientDoc.Length == 11)
+                {
+                    docType = "Factura";
+                    label_doc.Text = "RUC";
+                }
+                else label_doc.Text = "DNI";
                 combo_doc.Text = docType;
-                
                 orderLine = orderController.getOrderLines(row["idOrder"].ToString());
                 foreach (DataRow orderline in orderLine.Rows)
                 {
