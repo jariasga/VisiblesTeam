@@ -17,7 +17,6 @@ namespace InkaArt.Interface.Purchases
             control = new SupplierController();
             suppliersList = control.getData();
             dataGridView_suppliersList.DataSource = suppliersList;
-
             dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
             dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
@@ -58,13 +57,18 @@ namespace InkaArt.Interface.Purchases
                     string contactName = dataGridView_suppliersList.Rows[i].Cells[4].Value.ToString();
                     string email = dataGridView_suppliersList.Rows[i].Cells[6].Value.ToString();
                     string telephone = dataGridView_suppliersList.Rows[i].Cells[5].Value.ToString();
-                    if (control.updateData(idSupplier, name, ruc, contactName, int.Parse(telephone), email, address, int.Parse(priority), "Inactivo") == 1)
+                    try {
+                        control.updateData(idSupplier, name, ruc, contactName, int.Parse(telephone), email, address, int.Parse(priority), "Inactivo");
+                    }
+                    catch (Exception)
                     {
-                        dataGridView_suppliersList.Rows[i].Cells[7].Value = "Inactivo";
+                        MessageBox.Show("No se pudo eliminar al proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        continue;
                     }
                     
                 }
             }
+            desarrolloBusqueda();
         }
 
         public void editCurrentSupplier(object sender, DataGridViewCellEventArgs e)

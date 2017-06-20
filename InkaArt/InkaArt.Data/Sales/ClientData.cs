@@ -37,7 +37,7 @@ namespace InkaArt.Data.Sales
             return clientUpdateAdapter;
         }
 
-        public int InsertClient(int personType, string name, long ruc, long dni, int priority, int type, int state, string address, int phone, string contact, string email)
+        public int InsertClient(int personType, string name, long ruc, long dni, int priority, int type, int state, string address, long phone, string contact, string email)
         {
             adap = clientAdapter();
             data.Clear();
@@ -147,7 +147,7 @@ namespace InkaArt.Data.Sales
             int numParams = adap.SelectCommand.Parameters.Count();
             if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
             else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "name LIKE :name";
+            adap.SelectCommand.CommandText += "UPPER(name) LIKE UPPER(:name)";
             adap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
             adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
             adap.SelectCommand.Parameters[numParams].SourceColumn = "name";
@@ -167,7 +167,7 @@ namespace InkaArt.Data.Sales
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = id;
         }
 
-        public int UpdateClient(string id, int personType, string name, long ruc, long dni, int priority, int type, int state, string address, int phone, string contact, string email)
+        public int UpdateClient(string id, int personType, string name, long ruc, long dni, int priority, int type, int state, string address, long phone, string contact, string email)
         {
             adap = clientAdapter();
 

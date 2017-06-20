@@ -205,9 +205,10 @@ namespace InkaArt.Data.Reports
             return simulationTable;
         }
 
-        public DataTable getDataMovements()
+        public DataTable getDataMovements(string fechaIni, string fechaFin, List<string> items, List<string> warehouses)
         {
-            string command_query =  "select 	m.\"dateIn\", "+
+            string command_query =  "WITH tablaKardex as ";
+            command_query +=        "(select 	m.\"dateIn\", "+
                                                 "m.\"idMovement\", "+
                                                 "mt.\"description\" as movType, "+
                                                 "mn.\"description\" as movName, "+
@@ -233,7 +234,20 @@ namespace InkaArt.Data.Reports
                                     "where       m.\"idWarehouse\" = a.\"idWarehouse\" "+
                                     "and         m.\"idItem\" = p.\"idProduct\"  " +
                                     "and         m.\"idMovementType\" = mt.\"idMovementType\"  " +
-                                    "and         m.\"idMovementReason\" = mn.\"idMovName\"; ";
+                                    "and         m.\"idMovementReason\" = mn.\"idMovName\") "+
+                                    "select * 	from tablaKardex "+
+                                    "where		\"dateIn\" >= '" + fechaIni + "' "+
+                                    "and         \"dateIn\" <= '" + fechaFin + "' ";
+
+            if (items.Count > 0)
+            {
+                command_query +=    "and	    itemName in ('"+String.Join("' , '",items)+"')";
+            }
+            if (warehouses.Count > 0)
+            {
+                command_query += "and        warehouseName in ('" + String.Join("' , '", warehouses) + "')";
+            }
+            command_query += ";";
 
             Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
             Connection.Open();

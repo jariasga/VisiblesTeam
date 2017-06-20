@@ -31,8 +31,8 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_purchaseOrder = new System.Windows.Forms.DataGridView();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_creationEnd = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_creation = new System.Windows.Forms.DateTimePicker();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
@@ -43,7 +43,14 @@
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.id_order = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delivery_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -83,20 +90,19 @@
             this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_purchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_purchaseOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Eliminar});
+            this.Eliminar,
+            this.id_order,
+            this.suppName,
+            this.creation_date,
+            this.delivery_date,
+            this.total,
+            this.status,
+            this.id_supplier});
             this.dataGridView_purchaseOrder.Location = new System.Drawing.Point(23, 186);
             this.dataGridView_purchaseOrder.Name = "dataGridView_purchaseOrder";
             this.dataGridView_purchaseOrder.Size = new System.Drawing.Size(774, 272);
             this.dataGridView_purchaseOrder.TabIndex = 8;
             this.dataGridView_purchaseOrder.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editPurchaseOrder);
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.Width = 40;
             // 
             // groupBox1
             // 
@@ -118,6 +124,15 @@
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(453, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(163, 18);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Fecha de emisión (fin)";
             // 
             // dateTimePicker_creationEnd
             // 
@@ -145,9 +160,9 @@
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
             "",
-            "Pendiente",
+            "Borrador",
+            "Enviado",
             "Entregado",
-            "Por pagar",
             "Inactivo"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);
             this.comboBox_status.Name = "comboBox_status";
@@ -225,14 +240,60 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
             // 
-            // label2
+            // Eliminar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(453, 89);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(163, 18);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "Fecha de emisión (fin)";
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.Width = 40;
+            // 
+            // id_order
+            // 
+            this.id_order.HeaderText = "ID";
+            this.id_order.Name = "id_order";
+            this.id_order.ReadOnly = true;
+            // 
+            // suppName
+            // 
+            this.suppName.HeaderText = "Proveedor";
+            this.suppName.Name = "suppName";
+            this.suppName.ReadOnly = true;
+            this.suppName.Width = 250;
+            // 
+            // creation_date
+            // 
+            this.creation_date.HeaderText = "Fecha de emisión";
+            this.creation_date.Name = "creation_date";
+            this.creation_date.ReadOnly = true;
+            this.creation_date.Width = 150;
+            // 
+            // delivery_date
+            // 
+            this.delivery_date.HeaderText = "Fecha de entrega";
+            this.delivery_date.Name = "delivery_date";
+            this.delivery_date.ReadOnly = true;
+            this.delivery_date.Visible = false;
+            // 
+            // total
+            // 
+            this.total.HeaderText = "Total";
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.Width = 80;
+            // 
+            // id_supplier
+            // 
+            this.id_supplier.HeaderText = "ID Prov";
+            this.id_supplier.Name = "id_supplier";
+            this.id_supplier.ReadOnly = true;
+            this.id_supplier.Visible = false;
             // 
             // PurchaseOrder
             // 
@@ -271,7 +332,14 @@
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DateTimePicker dateTimePicker_creation;
         private System.Windows.Forms.DateTimePicker dateTimePicker_creationEnd;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_order;
+        private System.Windows.Forms.DataGridViewTextBoxColumn suppName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creation_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn delivery_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_supplier;
     }
 }

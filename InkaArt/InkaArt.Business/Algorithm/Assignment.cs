@@ -16,7 +16,7 @@ namespace InkaArt.Business.Algorithm
         private int huacos_produced;
         private int huamanga_produced;
         private int altarpiece_produced;
-
+		
         private int total_miniturns; //Total de miniturnos de un día
         private WorkerController selected_workers;
 
@@ -29,7 +29,17 @@ namespace InkaArt.Business.Algorithm
             get { return objective_function_value; }
             set { objective_function_value = value; }
         }
-
+        public int TotalMiniturns
+        {
+            get { return total_miniturns; }
+        }
+		
+        public AssignmentLine this[int worker_index, int miniturn_index]
+        {
+            get { return this.assignment_lines[worker_index, miniturn_index]; }
+            set { this.assignment_lines[worker_index, miniturn_index] = value; }
+        }
+        
         public Assignment(DateTime date, WorkerController selected_workers, int total_miniturns)
         {
             this.date = date;
@@ -41,7 +51,29 @@ namespace InkaArt.Business.Algorithm
             this.altarpiece_produced = 0;
             this.selected_workers = selected_workers;
         }
+        
+        public Assignment(Assignment assignment)
+        {
+            this.date = assignment.date;
+            this.objective_function_value = assignment.objective_function_value;
+            this.assignment_lines = (AssignmentLine[,]) assignment.assignment_lines.Clone();
 
+            this.huacos_produced = assignment.huacos_produced;
+            this.huamanga_produced = assignment.huamanga_produced;
+            this.altarpiece_produced = assignment.altarpiece_produced;
+        }
+
+        public int getProcessId(int worker_index)
+        {
+            int id = -1;
+            return id;
+        }
+		
+        internal int getProductId(int worker1, int type)
+        {
+            throw new NotImplementedException();
+        }
+        
         public void AddAssignmentLines(List<AssignmentLine> assignment_lines)
         {
             throw new NotImplementedException();
@@ -58,7 +90,7 @@ namespace InkaArt.Business.Algorithm
 
             return (assigned_miniturns >= total_miniturns);
         }
-
+		
         public AssignmentLine GetNextAssignmentLine(Index chosen_candidate)
         {
             int worker_index = selected_workers.GetIndex(chosen_candidate.Worker.ID), next_miniturn;
