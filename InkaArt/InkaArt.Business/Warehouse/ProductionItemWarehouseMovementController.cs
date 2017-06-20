@@ -104,7 +104,7 @@ namespace InkaArt.Business.Warehouse
                 newStock = currentStock - movement;
             }
 
-            query = "update inkaart.\"StockDocument\" set \"product_stock\" = " + newStock + "where \"idDocument\" = " + idLote + " and \"product_id\" = " + idProd + " and \"product_type\" = 'producto';";
+            query = "update inkaart.\"StockDocument\" set \"product_stock\" = " + newStock + " where \"idDocument\" = " + idLote + " and \"product_id\" = " + idProd + " and \"documentType\" = 'LOTE';";  
             productionItemWarehouseMovementData.updateDataExecute(query);
             productionItemWarehouseMovementData.closeConnection();
         }
@@ -162,7 +162,7 @@ namespace InkaArt.Business.Warehouse
 
                                 if (stockAct - numMov < 0)
                                 {
-                                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
+                                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items en este almacén, no puede mover: " + numMov + " items.");
                                     return -2;
                                 }
                                 else

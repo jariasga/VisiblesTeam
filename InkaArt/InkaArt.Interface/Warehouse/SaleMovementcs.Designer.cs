@@ -35,17 +35,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MovementCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MovementCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MovementQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -131,47 +133,15 @@
             this.idProduct,
             this.ProductName,
             this.Cant,
+            this.StockWarehouse,
             this.CurrentCant,
             this.MovementCant,
+            this.MovementQuantity,
             this.Modificar});
             this.dataGridView1.Location = new System.Drawing.Point(6, 78);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(753, 230);
             this.dataGridView1.TabIndex = 57;
-            // 
-            // idProduct
-            // 
-            this.idProduct.HeaderText = "Id Producto";
-            this.idProduct.Name = "idProduct";
-            this.idProduct.ReadOnly = true;
-            // 
-            // ProductName
-            // 
-            this.ProductName.HeaderText = "Producto";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            // 
-            // Cant
-            // 
-            this.Cant.HeaderText = "Cantidad Total";
-            this.Cant.Name = "Cant";
-            this.Cant.ReadOnly = true;
-            // 
-            // CurrentCant
-            // 
-            this.CurrentCant.HeaderText = "Cantidad por mover";
-            this.CurrentCant.Name = "CurrentCant";
-            this.CurrentCant.ReadOnly = true;
-            // 
-            // MovementCant
-            // 
-            this.MovementCant.HeaderText = "Cantidad a mover";
-            this.MovementCant.Name = "MovementCant";
-            // 
-            // Modificar
-            // 
-            this.Modificar.HeaderText = "Modificar";
-            this.Modificar.Name = "Modificar";
             // 
             // groupBox3
             // 
@@ -221,6 +191,52 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Nombre";
             // 
+            // idProduct
+            // 
+            this.idProduct.HeaderText = "Id Producto";
+            this.idProduct.Name = "idProduct";
+            this.idProduct.ReadOnly = true;
+            // 
+            // ProductName
+            // 
+            this.ProductName.HeaderText = "Producto";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            // 
+            // Cant
+            // 
+            this.Cant.HeaderText = "Cantidad Total";
+            this.Cant.Name = "Cant";
+            this.Cant.ReadOnly = true;
+            // 
+            // StockWarehouse
+            // 
+            this.StockWarehouse.HeaderText = "Stock en Almacén";
+            this.StockWarehouse.Name = "StockWarehouse";
+            this.StockWarehouse.ReadOnly = true;
+            // 
+            // CurrentCant
+            // 
+            this.CurrentCant.HeaderText = "Stock en Almacén";
+            this.CurrentCant.Name = "CurrentCant";
+            this.CurrentCant.ReadOnly = true;
+            // 
+            // MovementCant
+            // 
+            this.MovementCant.HeaderText = "Cantidad por mover";
+            this.MovementCant.Name = "MovementCant";
+            this.MovementCant.ReadOnly = true;
+            // 
+            // MovementQuantity
+            // 
+            this.MovementQuantity.HeaderText = "Cantidad a mover";
+            this.MovementQuantity.Name = "MovementQuantity";
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            // 
             // SaleMovementcs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -250,16 +266,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MovementCant;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MovementCant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MovementQuantity;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
     }
 }
