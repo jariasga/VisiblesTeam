@@ -132,9 +132,11 @@ namespace InkaArt.Data.Reports
             return stocksTable;
         }
 
-        public DataTable getDataPerformance(string worker, int chosenIndex, string fechaIni, string fechaFin)
+        public DataTable getDataPerformance(List<string> workersList, string fechaIni, string fechaFin)
         {
-            string command_query = "select 	ra.\"date\", " +
+            string command_query =  "WITH tablaPerformance as ";
+            command_query +=        "(select ra.\"date\", " +
+                                            "w.\"first_name\"||' '||w.\"last_name\" as fullName, " +
                                             "j.\"name\" as jobName, " +
                                             "re.\"description\" as recipeName, " +
                                             "ra.\"broken\", " +
@@ -142,34 +144,42 @@ namespace InkaArt.Data.Reports
                                             "ra.\"time\" " +
                                     "from   inkaart.\"Ratio\" ra, " +
                                             "inkaart.\"Process-Product\" j, " +
-                                            "inkaart.\"Recipe\" re " +
-                                    "where  ra.\"id_worker\" = " + chosenIndex.ToString() + "and " +
-                                            "ra.\"date\" >= '" + fechaIni + "' and " +
-                                            "ra.\"date\" <= '" + fechaFin + "' and " +
-                                            "ra.\"id_job\" = j.\"idJob\" and " +
-                                            "ra.\"id_recipe\" = re.\"idRecipe\" ;";            
+                                            "inkaart.\"Recipe\" re, " +
+                                            "inkaart.\"Worker\" w "+
+                                    "where  ra.\"id_job\" = j.\"idJob\" and " +
+                                            "ra.\"id_recipe\" = re.\"idRecipe\") ";
+            command_query +=        "select * 	from tablaPerformance " +
+                                    "where		\"date\" >= '" + fechaIni + "' " +
+                                    "and         \"date\" <= '" + fechaFin + "' ";
+
+            if (workersList.Count > 0)
+            {
+                command_query += "and	    fullName in ('" + String.Join("' , '", workersList) + "')";
+            }
+            command_query += ";";
 
             Connection = new NpgsqlConnection(ConnectionString.ConnectionString);
             Connection.Open();
             NpgsqlCommand command = new NpgsqlCommand(command_query, Connection);
             NpgsqlDataReader dr = command.ExecuteReader();
 
-            DataTable stocksTable = new DataTable();
-            stocksTable.Columns.Add("Fecha", typeof(DateTime));
-            stocksTable.Columns.Add("Puesto", typeof(string));
-            stocksTable.Columns.Add("Receta", typeof(string));
-            stocksTable.Columns.Add("CantidadRota", typeof(int));
-            stocksTable.Columns.Add("CantidadProducida", typeof(int));
-            stocksTable.Columns.Add("Tiempo", typeof(float));
+            DataTable performanceTable = new DataTable();
+            performanceTable.Columns.Add("Fecha", typeof(DateTime));
+            performanceTable.Columns.Add("Trabajador", typeof(string));
+            performanceTable.Columns.Add("Puesto", typeof(string));
+            performanceTable.Columns.Add("Receta", typeof(string));
+            performanceTable.Columns.Add("CantidadRota", typeof(int));
+            performanceTable.Columns.Add("CantidadProducida", typeof(int));
+            performanceTable.Columns.Add("Tiempo", typeof(float));
 
             while (dr.Read())
             {
-                stocksTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5]);
+                performanceTable.Rows.Add(dr[0], dr[1], dr[2], dr[3], dr[4], dr[5], dr[6]);
             }
             Connection.Close();
 
 
-            return stocksTable;
+            return performanceTable;
         }
 
         public DataTable getDataSimulation(string name)
