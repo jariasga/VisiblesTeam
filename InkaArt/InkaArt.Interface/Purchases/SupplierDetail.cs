@@ -33,6 +33,10 @@ namespace InkaArt.Interface.Purchases
             buttonSave.Text = "🖫 Guardar";
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
+            comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
+            comboBox_rawMaterial.Enabled = false;
+            textBox_price.Enabled = false;
             isInEditMode = true;
             rawMaterialControl = new RawMaterialController();
             llenarComboBox();
@@ -45,12 +49,16 @@ namespace InkaArt.Interface.Purchases
             control_rs = new RawMaterial_SupplierController();
             InitializeComponent();
             textBox_idSupplier.Enabled = false;
-            isInEditMode = true;
+            comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
             textBox_priority.Text = "0";
             buttonSave.Text = "🖫 Guardar";
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
+            comboBox_rawMaterial.Enabled = false;
+            textBox_price.Enabled = false;
             suppliersWindow = suppliersView;
+            isInEditMode = true;
             rawMaterialControl = new RawMaterialController();
             llenarComboBox();
         }
@@ -299,21 +307,16 @@ namespace InkaArt.Interface.Purchases
                 {
                     return;
                 }
-                isInEditMode = false;
-                textBox_name.Enabled = false;
-                textBox_ruc.Enabled = false;
-                textBox_address.Enabled = false;
-                trackBar_priority.Enabled = false;
-                comboBox_status.Enabled = false;
-                textBox_telephone.Enabled = false;
-                textBox_contactName.Enabled = false;
-                textBox_email.Enabled = false;
-                buttonAdd.Enabled = false;
-                buttonDelete.Enabled = false;
-                dataGridView_rm_sup.Columns["price"].ReadOnly = true;
-                control.updateData(textBox_idSupplier.Text,textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
-                suppliersWindow.desarrolloBusqueda();
-                buttonSave.Text = "Editar";
+                try
+                {
+                    control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                    suppliersWindow.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+
+                }
+                this.Close();
             }
             else if (mode==2)
             {
@@ -325,6 +328,8 @@ namespace InkaArt.Interface.Purchases
                 comboBox_status.Enabled = true;
                 textBox_telephone.Enabled = true;
                 textBox_contactName.Enabled = true;
+                textBox_price.Enabled = true;
+                comboBox_rawMaterial.Enabled = true;
                 textBox_email.Enabled = true;
                 buttonAdd.Enabled = true;
                 buttonDelete.Enabled = true;
@@ -337,11 +342,32 @@ namespace InkaArt.Interface.Purchases
                 {
                     return;
                 }
-                control.insertData(textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
-                mode = 2;
-                suppliersWindow.desarrolloBusqueda();
-                Close();
-
+                try
+                {
+                    control.insertData(textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
+                    textBox_idSupplier.Text = obtenerIdSupplierNuevo(textBox_name.Text, textBox_ruc.Text,int.Parse(textBox_priority.Text));
+                    mode = 2;
+                    isInEditMode = true;
+                    textBox_name.Enabled = true;
+                    textBox_ruc.Enabled = true;
+                    textBox_address.Enabled = true;
+                    trackBar_priority.Enabled = true;
+                    comboBox_status.Enabled = true;
+                    textBox_telephone.Enabled = true;
+                    comboBox_rawMaterial.Enabled = true;
+                    textBox_price.Enabled = true;
+                    textBox_contactName.Enabled = true;
+                    textBox_email.Enabled = true;
+                    buttonAdd.Enabled = true;
+                    buttonDelete.Enabled = true;
+                    dataGridView_rm_sup.Columns["Precio"].ReadOnly = false;
+                    suppliersWindow.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo crear el proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
             }
         }
 
@@ -363,6 +389,7 @@ namespace InkaArt.Interface.Purchases
 
         private void verifying_contactname(object sender, EventArgs e)
         {
+            if (!isInEditMode) return;
             string actualdata = string.Empty;
             char[] entereddata = textBox_contactName.Text.ToCharArray();
             foreach (char aChar in entereddata.AsEnumerable())
@@ -444,6 +471,33 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_telephone.Text = actualdata;
+        }
+        private string obtenerIdSupplierNuevo(string name,string ruc, int priority)
+        {
+            
+            DataRow[] rows;
+            DataTable tablaAuxiliar = control.getData();
+            rows = tablaAuxiliar.Select("status LIKE 'Activo'");
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            int comprobar = 5;
+            if (numero < 5) comprobar = numero;
+            for(int i = 1; i < comprobar; i++)
+            {
+                if(String.Compare(tablaAuxiliar.Rows[numero-i]["name"].ToString(),name)==0 && String.Compare(tablaAuxiliar.Rows[numero - i]["ruc"].ToString(), ruc) == 0 && priority==int.Parse(tablaAuxiliar.Rows[numero - i]["priority"].ToString()))
+                {
+                    return tablaAuxiliar.Rows[numero - i]["id_supplier"].ToString();
+                }
+            }
+            return "";
+        }
+
+        private void limpiarPrecio(object sender, EventArgs e)
+        {
+            textBox_price.Text = "";
         }
     }
 }
