@@ -76,7 +76,7 @@ namespace InkaArt.Interface.Purchases
             if (auxiliarLista.Rows.Count != 0) return auxiliarLista.Rows[0]["name"].ToString();
             else return "";
         }
-        private void desarrolloBusqueda()
+        public void desarrolloBusqueda()
         {
             textBox_name.Text = textBox_name.Text.Trim();
             filter();
@@ -101,7 +101,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_add(object sender, EventArgs e)
         {
-            Form purchaseDetail = new PurchaseOrderDetail(control);
+            Form purchaseDetail = new PurchaseOrderDetail(control,this);
             purchaseDetail.Show();
         }
 
@@ -143,7 +143,7 @@ namespace InkaArt.Interface.Purchases
         private void editPurchaseOrder(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentPurchaseOrder = dataGridView_purchaseOrder.CurrentRow;
-            Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder,control);
+            Form purchaseDetail = new PurchaseOrderDetail(currentPurchaseOrder,control,this);
             purchaseDetail.Show();
         }
 
