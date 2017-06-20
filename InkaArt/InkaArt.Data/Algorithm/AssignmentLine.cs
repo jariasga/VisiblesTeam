@@ -16,7 +16,7 @@ namespace InkaArt.Data.Algorithm
         private int miniturn_start;
         private int total_miniturns_used;
         private int produced;    //Cantidad producida
-
+                
         public Worker Worker
         {
             get { return worker; }

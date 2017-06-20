@@ -95,7 +95,7 @@ namespace InkaArt.Interface.Production
                 /*if (simulation.AssignmentsToList().Count > 0)
                 {
                     simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
-                    { Column1 = o.Date, Column2 = o.Worker.FullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description }).ToList();
+                    { Column1 = o.Date, Column2 = o.Worker.FullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description, Column5 = o.Production }).ToList();
                 }*/
             }
         }

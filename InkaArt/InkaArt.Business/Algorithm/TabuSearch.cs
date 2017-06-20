@@ -31,7 +31,7 @@ namespace InkaArt.Business.Algorithm
         private List<Assignment> initial_solution;
         private List<Assignment> best_solution;
 
-        internal List<Assignment> BestSolution
+        public List<Assignment> BestSolution
         {
             get { return best_solution; }
             set { best_solution = value; }

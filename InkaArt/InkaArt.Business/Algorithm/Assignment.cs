@@ -32,8 +32,7 @@ namespace InkaArt.Business.Algorithm
             {
                 miniturns = value;
             }
-        }
-
+        }        
 
         public DateTime Date
         {
@@ -76,12 +75,24 @@ namespace InkaArt.Business.Algorithm
         public int getProcessId(int worker_index)
         {
             int id = -1;
+
+            for(int i = 0; i < miniturns; i++)
+            {
+                if (assignment_lines[worker_index, i] != null)
+                    return assignment_lines[worker_index, i].Job.Process;
+            }
+
             return id;
         }
 
-        internal int getProductId(int worker1, int type)
+        public int getProductId(int worker, int miniturn)
         {
-            throw new NotImplementedException();
+            int id = -1;
+
+            if (assignment_lines[worker, miniturn] != null)
+                return assignment_lines[worker, miniturn].Job.Product;
+
+            return id;
         }
         
         public void AddAssignmentLines(List<AssignmentLine> assignment_lines, WorkerController selected_workers)

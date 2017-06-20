@@ -28,6 +28,18 @@ namespace InkaArt.Business.Algorithm
             this.recipes = recipes;
         }
 
+        public IndexController()
+        {
+            this.indexes = new List<Index>();
+
+            this.workers = new WorkerController();
+            this.workers.Load();
+            this.jobs = new JobController();
+            this.jobs.Load();
+            this.recipes = new RecipeController();
+            this.recipes.Load();
+        }
+
         public void Load()
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
@@ -157,6 +169,14 @@ namespace InkaArt.Business.Algorithm
             if (worker == null || job == null) return null;
             foreach (Index index in indexes)
                 if (index.Worker.ID == worker.ID && index.Job.ID == job.ID) return index;
+            return null;
+        }
+
+        public Index FindByWorkerJobAndRecipe(Worker worker, Job job, Recipe recipe)
+        {
+            if (worker == null || job == null || recipe == null) return null;
+            foreach (Index index in indexes)
+                if (index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID) return index;
             return null;
         }
     }

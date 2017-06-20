@@ -83,7 +83,8 @@ namespace InkaArt.Interface.Production
                 tabu.run(ref elapsed_seconds, day);
                 background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
             }
-            //assignments = tabu.BestSolution;
+
+            simulation.Assignments = tabu.BestSolution;
 
         }
 

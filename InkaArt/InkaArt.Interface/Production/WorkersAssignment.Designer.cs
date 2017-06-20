@@ -34,13 +34,14 @@
             this.combo_simulations = new System.Windows.Forms.ComboBox();
             this.button_report = new System.Windows.Forms.Button();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
+            this.simulation_tab_control = new System.Windows.Forms.TabControl();
+            this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
+            this.button_save = new System.Windows.Forms.Button();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulation_tab_control = new System.Windows.Forms.TabControl();
-            this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
-            this.button_save = new System.Windows.Forms.Button();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.simulation_tab_control.SuspendLayout();
             this.simulation_tab_assignment.SuspendLayout();
@@ -78,7 +79,7 @@
             this.label_select.AutoSize = true;
             this.label_select.Location = new System.Drawing.Point(21, 20);
             this.label_select.Name = "label_select";
-            this.label_select.Size = new System.Drawing.Size(214, 23);
+            this.label_select.Size = new System.Drawing.Size(173, 18);
             this.label_select.TabIndex = 43;
             this.label_select.Text = "Seleccionar simulación:";
             // 
@@ -87,7 +88,7 @@
             this.combo_simulations.FormattingEnabled = true;
             this.combo_simulations.Location = new System.Drawing.Point(200, 17);
             this.combo_simulations.Name = "combo_simulations";
-            this.combo_simulations.Size = new System.Drawing.Size(212, 31);
+            this.combo_simulations.Size = new System.Drawing.Size(212, 26);
             this.combo_simulations.TabIndex = 44;
             this.combo_simulations.SelectedIndexChanged += new System.EventHandler(this.ComboSimulationsSelectedIndexChanged);
             // 
@@ -115,7 +116,8 @@
             this.Column1,
             this.Column2,
             this.Column3,
-            this.Column4});
+            this.Column4,
+            this.Cantidad});
             this.simulation_grid.Location = new System.Drawing.Point(24, 23);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.simulation_grid.Name = "simulation_grid";
@@ -123,6 +125,40 @@
             this.simulation_grid.Size = new System.Drawing.Size(860, 309);
             this.simulation_grid.TabIndex = 1;
             this.simulation_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulation_grid_CellContentClick);
+            // 
+            // simulation_tab_control
+            // 
+            this.simulation_tab_control.Controls.Add(this.simulation_tab_assignment);
+            this.simulation_tab_control.Location = new System.Drawing.Point(24, 59);
+            this.simulation_tab_control.Name = "simulation_tab_control";
+            this.simulation_tab_control.SelectedIndex = 0;
+            this.simulation_tab_control.Size = new System.Drawing.Size(921, 393);
+            this.simulation_tab_control.TabIndex = 46;
+            // 
+            // simulation_tab_assignment
+            // 
+            this.simulation_tab_assignment.Controls.Add(this.simulation_grid);
+            this.simulation_tab_assignment.Location = new System.Drawing.Point(4, 27);
+            this.simulation_tab_assignment.Name = "simulation_tab_assignment";
+            this.simulation_tab_assignment.Padding = new System.Windows.Forms.Padding(3);
+            this.simulation_tab_assignment.Size = new System.Drawing.Size(913, 362);
+            this.simulation_tab_assignment.TabIndex = 1;
+            this.simulation_tab_assignment.Text = "Asignaciones";
+            this.simulation_tab_assignment.UseVisualStyleBackColor = true;
+            // 
+            // button_save
+            // 
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Enabled = false;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(271, 468);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(209, 43);
+            this.button_save.TabIndex = 47;
+            this.button_save.Text = "🖫 Guardar simulación";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
             // Column1
             // 
@@ -144,43 +180,14 @@
             this.Column4.HeaderText = "Receta";
             this.Column4.Name = "Column4";
             // 
-            // simulation_tab_control
+            // Cantidad
             // 
-            this.simulation_tab_control.Controls.Add(this.simulation_tab_assignment);
-            this.simulation_tab_control.Location = new System.Drawing.Point(24, 59);
-            this.simulation_tab_control.Name = "simulation_tab_control";
-            this.simulation_tab_control.SelectedIndex = 0;
-            this.simulation_tab_control.Size = new System.Drawing.Size(921, 393);
-            this.simulation_tab_control.TabIndex = 46;
-            // 
-            // simulation_tab_assignment
-            // 
-            this.simulation_tab_assignment.Controls.Add(this.simulation_grid);
-            this.simulation_tab_assignment.Location = new System.Drawing.Point(4, 32);
-            this.simulation_tab_assignment.Name = "simulation_tab_assignment";
-            this.simulation_tab_assignment.Padding = new System.Windows.Forms.Padding(3);
-            this.simulation_tab_assignment.Size = new System.Drawing.Size(913, 357);
-            this.simulation_tab_assignment.TabIndex = 1;
-            this.simulation_tab_assignment.Text = "Asignaciones";
-            this.simulation_tab_assignment.UseVisualStyleBackColor = true;
-            // 
-            // button_save
-            // 
-            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_save.Enabled = false;
-            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(271, 468);
-            this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(209, 43);
-            this.button_save.TabIndex = 47;
-            this.button_save.Text = "🖫 Guardar simulación";
-            this.button_save.UseVisualStyleBackColor = false;
-            this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
             // 
             // WorkersAssignment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(968, 536);
@@ -218,5 +225,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
     }
 }

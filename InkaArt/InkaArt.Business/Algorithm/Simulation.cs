@@ -100,7 +100,7 @@ namespace InkaArt.Business.Algorithm
         public List<Assignment> Assignments
         {
             get { return assignments; }
-            //set { assignments = value; }
+            set { assignments = value; }
         }
 
         /********** Constructor para nueva simulación de asignación de trabajadores **********/
