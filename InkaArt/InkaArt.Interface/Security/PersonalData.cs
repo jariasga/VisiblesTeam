@@ -55,6 +55,7 @@ namespace InkaArt.Interface.Security
                 pictureBoxUser.Image = Image.FromStream(photoMem);
             }
 
+            fillBasicData();
             DataRow roleRow = role.getRoleRowbyID(roleID);
             textBoxIDRol.Text = roleID.ToString();
             comboBoxRoles.Text = roleRow["description"].ToString();
@@ -62,8 +63,7 @@ namespace InkaArt.Interface.Security
             textBoxUsername.Enabled = false;
             comboBoxRoles.Enabled = true;
 
-            buttonSave.Text = "Guardar";
-            fillBasicData();
+            buttonSave.Text = "Guardar";            
         }
         public PersonalData(UserController userC, WorkerController workerC, RoleController roleC)
         {

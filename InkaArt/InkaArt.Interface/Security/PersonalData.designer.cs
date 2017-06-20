@@ -369,10 +369,6 @@
             this.comboBoxRoles.DisplayMember = "Activo";
             this.comboBoxRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRoles.FormattingEnabled = true;
-            this.comboBoxRoles.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
             this.comboBoxRoles.Location = new System.Drawing.Point(12, 144);
             this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxRoles.Name = "comboBoxRoles";

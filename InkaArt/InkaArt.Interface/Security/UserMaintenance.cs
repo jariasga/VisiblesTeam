@@ -60,7 +60,8 @@ namespace InkaArt.Interface.Security
             dialog.Title = "Open Users File";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
-                user.massiveUpload(dialog.FileName, worker);     
+                user.massiveUpload(dialog.FileName, worker);
+            showTable();
         }
 
         private void dataGridViewUserMaintenance_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
