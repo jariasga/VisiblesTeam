@@ -48,15 +48,12 @@ namespace InkaArt.Data.Algorithm
             this.line_items.Add(line_item);
         }
 
-        public bool UpdateLineItem(int id_recipe)
+        public bool UpdateLineItem(Recipe recipe, int produced)
         {
-            foreach (OrderLineItem line_item in line_items)
-                if (line_item.Recipe == id_recipe)
-                {
-                    line_item.Produced++;
-                    return true;
-                }
-            return false;
+            OrderLineItem line_item = line_items.Find(item => item.Recipe == recipe.ID);
+            if (line_item == null) return false;
+            line_item.Produced += produced;
+            return true;
         }
 
         public bool Completed()
