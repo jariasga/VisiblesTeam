@@ -43,8 +43,6 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox_factura = new System.Windows.Forms.TextBox();
             this.textBox_idrm = new System.Windows.Forms.TextBox();
             this.textBox_subtotal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -133,7 +131,6 @@
             this.comboBox_status.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {
-            "",
             "Borrador",
             "Enviado",
             "Entregado",
@@ -235,8 +232,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.textBox_factura);
             this.groupBox2.Controls.Add(this.textBox_idrm);
             this.groupBox2.Controls.Add(this.textBox_subtotal);
             this.groupBox2.Controls.Add(this.label11);
@@ -259,27 +254,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas pedidas";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(406, 88);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(94, 18);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "Nro. Factura";
-            // 
-            // textBox_factura
-            // 
-            this.textBox_factura.BackColor = System.Drawing.Color.White;
-            this.textBox_factura.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_factura.Location = new System.Drawing.Point(409, 111);
-            this.textBox_factura.MaxLength = 9;
-            this.textBox_factura.Name = "textBox_factura";
-            this.textBox_factura.Size = new System.Drawing.Size(118, 24);
-            this.textBox_factura.TabIndex = 28;
-            this.textBox_factura.Text = "0";
-            this.textBox_factura.TextChanged += new System.EventHandler(this.verifying_factura);
-            // 
             // textBox_idrm
             // 
             this.textBox_idrm.Enabled = false;
@@ -294,7 +268,7 @@
             this.textBox_subtotal.BackColor = System.Drawing.Color.White;
             this.textBox_subtotal.Enabled = false;
             this.textBox_subtotal.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_subtotal.Location = new System.Drawing.Point(265, 111);
+            this.textBox_subtotal.Location = new System.Drawing.Point(409, 111);
             this.textBox_subtotal.Name = "textBox_subtotal";
             this.textBox_subtotal.Size = new System.Drawing.Size(118, 24);
             this.textBox_subtotal.TabIndex = 26;
@@ -304,7 +278,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(260, 90);
+            this.label11.Location = new System.Drawing.Point(406, 90);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 18);
             this.label11.TabIndex = 25;
@@ -342,9 +316,9 @@
             this.textBox_price.BackColor = System.Drawing.Color.White;
             this.textBox_price.Enabled = false;
             this.textBox_price.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_price.Location = new System.Drawing.Point(138, 111);
+            this.textBox_price.Location = new System.Drawing.Point(211, 111);
             this.textBox_price.Name = "textBox_price";
-            this.textBox_price.Size = new System.Drawing.Size(106, 24);
+            this.textBox_price.Size = new System.Drawing.Size(172, 24);
             this.textBox_price.TabIndex = 21;
             this.textBox_price.Text = "0";
             this.textBox_price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -352,7 +326,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(138, 90);
+            this.label9.Location = new System.Drawing.Point(211, 90);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 18);
             this.label9.TabIndex = 20;
@@ -363,7 +337,7 @@
             this.textBox_cantidad.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_cantidad.Location = new System.Drawing.Point(16, 111);
             this.textBox_cantidad.Name = "textBox_cantidad";
-            this.textBox_cantidad.Size = new System.Drawing.Size(102, 24);
+            this.textBox_cantidad.Size = new System.Drawing.Size(168, 24);
             this.textBox_cantidad.TabIndex = 19;
             this.textBox_cantidad.Text = "0";
             this.textBox_cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -371,6 +345,7 @@
             // 
             // comboBoxRawMaterialName
             // 
+            this.comboBoxRawMaterialName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRawMaterialName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRawMaterialName.FormattingEnabled = true;
             this.comboBoxRawMaterialName.Location = new System.Drawing.Point(94, 54);
@@ -567,8 +542,6 @@
         private System.Windows.Forms.TextBox textBox_idrm;
         private System.Windows.Forms.TextBox textBox_subtotal;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox_factura;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_detail;
         private System.Windows.Forms.DataGridViewTextBoxColumn idRawMat;
