@@ -54,12 +54,27 @@ namespace InkaArt.Interface.Security
 
             for (int i = 0; i < pass.GetLength(0); i++)
             {
-                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^A-Z]")) upper = true;
-                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^a-z]")) lower = true;
-                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^0-9]")) number = true;
-                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "[^A-Z]")) lengh = true;
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "(?:[A-Z])")) upper = true;
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "(?:[a-z])")) lower = true;
+                if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "(?:[0-9])")) number = true;
+                if (textbox_password_new_1.Text.Length > 7) lengh = true;
             }
             return upper & lower & number & lengh & (pass.GetLength(0) > 5);
+        }
+
+        private void textbox_password_new_1_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "(?:[A-Z])")) labelUpperChar.ForeColor = System.Drawing.Color.Green;
+            else labelUpperChar.ForeColor = System.Drawing.Color.Black;
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "(?:[a-z])")) labelLowerChar.ForeColor = System.Drawing.Color.Green;
+            else labelLowerChar.ForeColor = System.Drawing.Color.Black;
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox_password_new_1.Text, "(?:[0-9])")) labelNumberChar.ForeColor = System.Drawing.Color.Green;
+            else labelNumberChar.ForeColor = System.Drawing.Color.Black;
+
+            if (textbox_password_new_1.Text.Length > 7) label8Char.ForeColor = System.Drawing.Color.Green;
+            else label8Char.ForeColor = System.Drawing.Color.Black;
         }
     }
 }

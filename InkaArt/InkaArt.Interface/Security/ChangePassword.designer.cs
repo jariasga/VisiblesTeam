@@ -35,6 +35,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textbox_password_new_2 = new System.Windows.Forms.TextBox();
             this.button_change = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label8Char = new System.Windows.Forms.Label();
+            this.labelUpperChar = new System.Windows.Forms.Label();
+            this.labelLowerChar = new System.Windows.Forms.Label();
+            this.labelNumberChar = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_password
@@ -78,6 +84,7 @@
             this.textbox_password_new_1.PasswordChar = '*';
             this.textbox_password_new_1.Size = new System.Drawing.Size(165, 26);
             this.textbox_password_new_1.TabIndex = 6;
+            this.textbox_password_new_1.TextChanged += new System.EventHandler(this.textbox_password_new_1_TextChanged);
             // 
             // label2
             // 
@@ -105,14 +112,64 @@
             this.button_change.BackColor = System.Drawing.Color.SteelBlue;
             this.button_change.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_change.ForeColor = System.Drawing.Color.White;
-            this.button_change.Location = new System.Drawing.Point(166, 170);
+            this.button_change.Location = new System.Drawing.Point(328, 193);
             this.button_change.Margin = new System.Windows.Forms.Padding(2);
             this.button_change.Name = "button_change";
-            this.button_change.Size = new System.Drawing.Size(178, 39);
+            this.button_change.Size = new System.Drawing.Size(165, 39);
             this.button_change.TabIndex = 9;
             this.button_change.Text = "Cambiar contraseña";
             this.button_change.UseVisualStyleBackColor = false;
             this.button_change.Click += new System.EventHandler(this.button_change_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.labelNumberChar);
+            this.groupBox1.Controls.Add(this.labelLowerChar);
+            this.groupBox1.Controls.Add(this.labelUpperChar);
+            this.groupBox1.Controls.Add(this.label8Char);
+            this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(39, 160);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(271, 109);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Requisitos";
+            // 
+            // label8Char
+            // 
+            this.label8Char.AutoSize = true;
+            this.label8Char.Location = new System.Drawing.Point(6, 22);
+            this.label8Char.Name = "label8Char";
+            this.label8Char.Size = new System.Drawing.Size(151, 20);
+            this.label8Char.TabIndex = 0;
+            this.label8Char.Text = "- Al menos 8 caracteres";
+            // 
+            // labelUpperChar
+            // 
+            this.labelUpperChar.AutoSize = true;
+            this.labelUpperChar.Location = new System.Drawing.Point(6, 42);
+            this.labelUpperChar.Name = "labelUpperChar";
+            this.labelUpperChar.Size = new System.Drawing.Size(166, 20);
+            this.labelUpperChar.TabIndex = 1;
+            this.labelUpperChar.Text = "- Al menos una mayúscula";
+            // 
+            // labelLowerChar
+            // 
+            this.labelLowerChar.AutoSize = true;
+            this.labelLowerChar.Location = new System.Drawing.Point(6, 62);
+            this.labelLowerChar.Name = "labelLowerChar";
+            this.labelLowerChar.Size = new System.Drawing.Size(162, 20);
+            this.labelLowerChar.TabIndex = 2;
+            this.labelLowerChar.Text = "- Al menos una minúscula";
+            // 
+            // labelNumberChar
+            // 
+            this.labelNumberChar.AutoSize = true;
+            this.labelNumberChar.Location = new System.Drawing.Point(6, 82);
+            this.labelNumberChar.Name = "labelNumberChar";
+            this.labelNumberChar.Size = new System.Drawing.Size(141, 20);
+            this.labelNumberChar.TabIndex = 3;
+            this.labelNumberChar.Text = "- Al menos un número";
             // 
             // ChangePassword
             // 
@@ -120,7 +177,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(535, 236);
+            this.ClientSize = new System.Drawing.Size(535, 297);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_change);
             this.Controls.Add(this.textbox_password_new_2);
             this.Controls.Add(this.label2);
@@ -133,6 +191,8 @@
             this.MaximizeBox = false;
             this.Name = "ChangePassword";
             this.Text = "Cambiar contraseña";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,5 +206,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textbox_password_new_2;
         private System.Windows.Forms.Button button_change;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labelLowerChar;
+        private System.Windows.Forms.Label labelUpperChar;
+        private System.Windows.Forms.Label label8Char;
+        private System.Windows.Forms.Label labelNumberChar;
     }
 }
