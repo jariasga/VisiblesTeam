@@ -37,7 +37,7 @@ namespace InkaArt.Business.Algorithm
             
             for (int iteration = 0; elapsed_time < Simulation.LimitTime && selected_orders.NumberOfOrders > 0 && iteration < Grasp.NumberOfIterations; iteration++)
             {
-                Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers.NumberOfWorkers, total_miniturns);
+                Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers, total_miniturns);
 
                 //Inicializar la lista de candidatos para ser asignados
                 List<Index> candidates = new List<Index>();
@@ -51,7 +51,7 @@ namespace InkaArt.Business.Algorithm
                         //selected_orders[i].UpdateStatus();
                         selected_orders.RemoveAt(i);
                         i--;
-                   } 
+                   }
 
                 //Ejecutar la fase de construcción del algoritmo GRASP.
                 this.ExecuteGraspConstructionPhase(assignment, candidates, iteration, ref elapsed_time);
@@ -71,12 +71,12 @@ namespace InkaArt.Business.Algorithm
             List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
             List<AssignmentLine> current_product = new List<AssignmentLine>();
             List<Job> current_product_jobs = new List<Job>();
+            List<Index> current_deleted_indexes = new List<Index>();
 
             for (int construction = 1; elapsed_time < Simulation.LimitTime && selected_orders.NumberOfOrders > 0 && candidates.Count > 0; construction++)
             {
-                //Obtener una lista de los trabajadores más eficientes
+                //Obtener una lista de los trabajadores más eficientes. Si no se pudo realizar el producto, borrar el producto y quitar las asignaciones realizadas
                 List<Index> rcl = GenerateReleaseCandidateList(candidates, order_recipes, current_product, current_product_jobs, assignment.ObjectiveFunction, iteration);
-                //Si no se pudo realizar el producto, borrar el producto y quitar las asignaciones realizadas
                 if (rcl.Count() <= 0)
                 {
                     current_product.Clear();
@@ -85,18 +85,18 @@ namespace InkaArt.Business.Algorithm
                 }
 
                 //Escoger un trabajador al azar e incorporarlo en la solución
-                Index chosen = rcl[Randomizer.NextNumber(0, rcl.Count() - 1)];
+                Index chosen_candidate = rcl[Randomizer.NextNumber(0, rcl.Count - 1)];
+                AssignmentLine new_assignment_line = assignment.GetNextAssignmentLine(chosen_candidate);
+                if (new_assignment_line == null) break;
+                current_product.Add(new_assignment_line);
+                assignment.ObjectiveFunction += chosen_candidate.CostValue(assignment.ObjectiveFunction, iteration);
 
-                AssignmentLine assignment_line = new AssignmentLine(chosen.Worker, chosen.Recipe, chosen.Job);
-                //int number_of_miniturns = Convert.ToInt32(chosen.AverageTime / Simulation.MiniturnLength);
-                //Añadir línea
+                //Actualizar las variables y quitar los candidatos necesarios
+                if (assignment.IsWorkerFull(chosen_candidate.Worker, current_product)) this.RemoveWorkers(candidates, chosen_candidate.Worker);
+                current_deleted_indexes.Add(new Index(chosen_candidate));
+                candidates.Remove(chosen_candidate);
 
-                assignment.ObjectiveFunction += chosen.CostValue(assignment.ObjectiveFunction, iteration);
                 //if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) break;
-
-                //Quitar los candidatos necesarios
-                if (assignment.IsWorkerFull(chosen.Worker, current_product, selected_workers)) this.RemoveWorkers(candidates, chosen.Worker);
-                candidates.Remove(chosen);
 
                 //Si la orden se completó, removerla de la lista
                 if (selected_orders[0].Completed()) selected_orders.RemoveAt(0);
@@ -147,14 +147,6 @@ namespace InkaArt.Business.Algorithm
             return rcl;
         }
 
-        private void SelectJobsPerProduct(List<Job> current_product_jobs, List<Recipe> order_recipes)
-        {
-            Recipe recipe = order_recipes[Randomizer.NextNumber(0, order_recipes.Count - 1)];
-
-            for (int i = 0; i < jobs.NumberOfJobs; i++)
-                if (jobs[i].Product == recipe.Product) current_product_jobs.Add(jobs[i]);
-        }
-
         private void RemoveWorkers(List<Index> candidates, Worker worker)
         {
             for (int i = 0; i < candidates.Count;)
@@ -163,6 +155,7 @@ namespace InkaArt.Business.Algorithm
                 else i++;
             }
         }
+
     }
 }
  
