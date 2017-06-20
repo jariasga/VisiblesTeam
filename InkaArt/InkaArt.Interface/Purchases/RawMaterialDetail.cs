@@ -34,7 +34,7 @@ namespace InkaArt.Interface.Purchases
             textBox_averagePrice.Enabled = false;
             buttonSave.Text="🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
-
+            comboBox_status.Enabled = false;
             control_units = new UnitOfMeasurementController();
             unitsList = control_units.getData();
             for (int i = 0; i < unitsList.Rows.Count; i++)
@@ -52,6 +52,7 @@ namespace InkaArt.Interface.Purchases
             buttonSave.Text = "🖫 Guardar";
             textBox_averagePrice.Enabled = false;
             comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
             ventanaRM = viewRMList;
             control_units = new UnitOfMeasurementController();
             unitsList = control_units.getData();
@@ -96,7 +97,7 @@ namespace InkaArt.Interface.Purchases
             for (int i = 0; i < unitsList.Rows.Count; i++)
             {
                 comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
-                if (String.Compare(unitsList.Rows[i]["id_unit"].ToString(), currentRawMaterial.Cells[4].Value.ToString())==0)
+                if (String.Compare(unitsList.Rows[i]["id_unit"].ToString(), currentRawMaterial.Cells[7].Value.ToString())==0)
                 {
                     comboBox_unit.Text = unitsList.Rows[i]["name"].ToString();
                 }
@@ -203,9 +204,16 @@ namespace InkaArt.Interface.Purchases
                 buttonSave.Text = "Editar";
                 int indexUnit=comboBox_unit.SelectedIndex;
                 string id_unit_selected = unitsList.Rows[indexUnit]["id_unit"].ToString();
-                control_material.insertData(textBox_name.Text, textBox_description.Text, id_unit_selected, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
-                ventanaRM.desarrolloBusqueda();
-                Close();
+                try
+                {
+                    control_material.insertData(textBox_name.Text, textBox_description.Text, id_unit_selected, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
+                    ventanaRM.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                this.Close();
             }
             else if(mode==2 && isInEditMode)
             {
@@ -222,8 +230,16 @@ namespace InkaArt.Interface.Purchases
                 isInEditMode = false;
                 int indexUnit = comboBox_unit.SelectedIndex;
                 string id_unit_selected = unitsList.Rows[indexUnit]["id_unit"].ToString();
-                control_material.updateData(textBox_id.Text,textBox_name.Text, textBox_description.Text, id_unit_selected, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
-                ventanaRM.desarrolloBusqueda();
+                try
+                {
+                    control_material.updateData(textBox_id.Text, textBox_name.Text, textBox_description.Text, id_unit_selected, comboBox_status.Text, Double.Parse(textBox_averagePrice.Text));
+                    ventanaRM.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                this.Close();
             }
             else
             {

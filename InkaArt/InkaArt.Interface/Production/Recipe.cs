@@ -46,7 +46,8 @@ namespace InkaArt.Interface.Production
             DataTable rawMList = controlRawM.getData();
             //agregar datos al combobox rawmaterial
             for (int i = 0; i < rawMList.Rows.Count; i++)
-                comboBox_rawMaterial.Items.Add(rawMList.Rows[i]["name"].ToString());
+                if(rawMList.Rows[i]["status"].ToString()=="Activo")
+                    comboBox_rawMaterial.Items.Add(rawMList.Rows[i]["name"].ToString());
             comboBox_rawMaterial.SelectedIndex = 1;
 
         }

@@ -54,6 +54,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_fac = new System.Windows.Forms.Button();
+            this.button_seedoc = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orderline)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -157,6 +158,7 @@
             this.grid_orderline.Location = new System.Drawing.Point(33, 48);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
+            this.grid_orderline.ReadOnly = true;
             this.grid_orderline.RowHeadersVisible = false;
             this.grid_orderline.Size = new System.Drawing.Size(560, 203);
             this.grid_orderline.TabIndex = 22;
@@ -165,21 +167,25 @@
             // 
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Calidad";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "PU";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Cantidad
             // 
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -332,7 +338,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(829, 543);
+            this.button_delete.Location = new System.Drawing.Point(947, 543);
             this.button_delete.Margin = new System.Windows.Forms.Padding(4);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(143, 48);
@@ -346,7 +352,7 @@
             this.button_fac.BackColor = System.Drawing.Color.Gray;
             this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_fac.ForeColor = System.Drawing.Color.White;
-            this.button_fac.Location = new System.Drawing.Point(679, 543);
+            this.button_fac.Location = new System.Drawing.Point(797, 543);
             this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_fac.Name = "button_fac";
             this.button_fac.Size = new System.Drawing.Size(143, 48);
@@ -356,12 +362,27 @@
             this.button_fac.Visible = false;
             this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
             // 
+            // button_seedoc
+            // 
+            this.button_seedoc.BackColor = System.Drawing.Color.Gray;
+            this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_seedoc.ForeColor = System.Drawing.Color.White;
+            this.button_seedoc.Location = new System.Drawing.Point(602, 543);
+            this.button_seedoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_seedoc.Name = "button_seedoc";
+            this.button_seedoc.Size = new System.Drawing.Size(189, 48);
+            this.button_seedoc.TabIndex = 40;
+            this.button_seedoc.Text = "＋ Ver Documento";
+            this.button_seedoc.UseVisualStyleBackColor = false;
+            this.button_seedoc.Visible = false;
+            // 
             // ClientOrderShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1203, 620);
+            this.Controls.Add(this.button_seedoc);
             this.Controls.Add(this.button_fac);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.groupBox2);
@@ -410,5 +431,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.Button button_fac;
+        private System.Windows.Forms.Button button_seedoc;
     }
 }
