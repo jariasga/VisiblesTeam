@@ -17,6 +17,9 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
             control = new UnitOfMeasurementController();
             unitsList = control.getData();
+            string sortQuery = string.Format("id_unit");
+            unitsList.DefaultView.Sort = sortQuery;
+
             dataGridView_unitOfMeasurement.DataSource = unitsList;
 
             dataGridView_unitOfMeasurement.Columns["id_unit"].HeaderText = "ID";
@@ -24,11 +27,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
             dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void button_create(object sender, EventArgs e)
         {
@@ -115,9 +114,15 @@ namespace InkaArt.Interface.Purchases
                     string name = dataGridView_unitOfMeasurement.Rows[i].Cells[2].Value.ToString();
                     string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
                     string status = dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value.ToString();
-                    control.updateData(idUnit,name, abbrev, "Inactivo");
-                    dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value = "Inactivo";
-                    dataGridView_unitOfMeasurement.Rows[i].Cells[0].Value = false;
+                    try { 
+                        control.updateData(idUnit,name, abbrev, "Inactivo");
+                        desarrolloBusqueda();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("No se pudo eliminar la unidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                 }
             }
         }

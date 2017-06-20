@@ -15,6 +15,8 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
             control = new RawMaterialController();
             rawMaterialList = control.getData();
+            string sortQuery = string.Format("id_raw_material");
+            rawMaterialList.DefaultView.Sort = sortQuery;
             dataGridView_rawMaterialsList.DataSource = rawMaterialList;
 
             dataGridView_rawMaterialsList.Columns["id_raw_material"].HeaderText = "ID";
@@ -79,15 +81,14 @@ namespace InkaArt.Interface.Purchases
                     try
                     {
                         control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice));
+                        desarrolloBusqueda();
                     }
                     catch(Exception)
                     {
                         MessageBox.Show("No se pudo actualizar el registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        continue;
                     }
-
-                    dataGridView_rawMaterialsList.Rows[i].Cells[0].Value = false;
-                    desarrolloBusqueda();
+                    
                 }
             }
         }
