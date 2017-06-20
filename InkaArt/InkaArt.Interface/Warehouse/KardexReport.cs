@@ -15,24 +15,25 @@ namespace InkaArt.Interface.Warehouse
     {
         private ReportsController reportControl = new ReportsController();
 
-        public KardexReport()
+        public KardexReport(string fechaIni, string fechaFin, List<string> items, List<string> warehouses)
         {
             InitializeComponent();
-            showData();
+            showData(fechaIni, fechaFin, items, warehouses);
         }
 
-        public void showData()
+        public void showData(string fechaIni, string fechaFin, List<string> items, List<string> warehouses)
         {
-            label_todaydate.Text = DateTime.Now.ToString("M/d/yyyy");
+            label_todaydate.Text = DateTime.Now.ToString("dd/MM/yyyy");
             
-            DataTable movementsReportList = reportControl.getDataMovements();
+            DataTable movementsReportList = reportControl.getDataMovements(fechaIni,  fechaFin, items, warehouses);
             populateDataGrid(movementsReportList);
         }
 
-        private void populateDataGrid(DataTable salesReportList)
+        private void populateDataGrid(DataTable movementsReportList)
         {
             dataGridView_movements.Rows.Clear();
-            foreach (DataRow row in salesReportList.Rows)
+            dataGridView_movements.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
+            foreach (DataRow row in movementsReportList.Rows)
             {
                 dataGridView_movements.Rows.Add(row["Fecha"], row["IdMovimiento"], row["TipoMovimiento"], row["Razon"], row["Almacen"], row["Item"], row["Cantidad"]);
             }

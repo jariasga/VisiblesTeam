@@ -37,7 +37,7 @@ namespace InkaArt.Business.Purchases
             row["id_suppliers"] = id_suppliers;
             row["quantity"] = quantity;
             row["amount"] = amount;
-            row["id_factura"] = factura;
+            if(factura!=0) row["id_factura"] = factura;
             row["status"]=status;
             table.Rows.Add(row);
 
