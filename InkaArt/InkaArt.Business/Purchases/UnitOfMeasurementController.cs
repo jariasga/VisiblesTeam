@@ -48,17 +48,7 @@ namespace InkaArt.Business.Purchases
             unitOfMeasurement.execute(string.Format("UPDATE \"inkaart\".\"UnitOfMeasurement\" " +
                         "SET name = '{0}', abbreviature = '{1}', status = '{2}'" +
                         "WHERE id_unit = {3}", nombre, abreviatura, estado, id));
-
-            /*            for (int i = 0; i < table.Rows.Count; i++)
-                        {
-                            if (String.Compare(table.Rows[i]["idUnit"].ToString(), id) == 0)
-                            {
-                                table.Rows[i]["name"] = nombre;
-                                table.Rows[i]["abbreviature"] = abreviatura;
-                                table.Rows[i]["status"] = estado;
-                                break;
-                            }
-                        }*/
+            
             unitOfMeasurement.updateData(data,adap, "UnitOfMeasurement");
         }
         public void massiveUpload(string filename)
