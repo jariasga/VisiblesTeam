@@ -20,21 +20,77 @@ namespace InkaArt.Data.Sales
             data = new DataSet();
         }
 
-        public int UpdateLineItem(string id, string idSaleDocument)
+        public int UpdateLineItem(string id, bool lineComplete)
         {
-            adap = orderLineAdapter();
-            data.Clear();
-            data = getData(adap, "LineItem");
-            table = data.Tables["LineItem"];
+            NpgsqlDataAdapter myAdap = orderLineAdapter();
+            DataSet myData = getData(myAdap, "LineItem");
+            table = myData.Tables["LineItem"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 if (string.Compare(table.Rows[i]["idLineItem"].ToString(), id) == 0)
                 {
-                    table.Rows[i]["idSaleDocument"] = idSaleDocument;
+                    int invoiced, finished;
+                    invoiced = int.Parse(table.Rows[i]["quantityInvoiced"].ToString());
+                    finished = int.Parse(table.Rows[i]["quantityProduced"].ToString());
+                    table.Rows[i]["quantityInvoiced"] = invoiced + finished;
+                    table.Rows[i]["quantityProduced"] = 0;
+                    if (lineComplete) table.Rows[i]["lineStatus"] = "facturado";
+                    else table.Rows[i]["lineStatus"] = "parcial";
                     break;
                 }
             }
-            return updateData(data, adap, "LineItem");
+            return updateData(myData, myAdap, "LineItem");
+        }
+
+        public int AddLineXDocument(string idLineItem,int finished, float pu, string idSaleDocument)
+        {
+            NpgsqlDataAdapter myAdap = lineXDocumentAdapter();
+            DataSet myData = getData(myAdap, "Line-Document");
+            table = myData.Tables["Line-Document"];
+            row = table.NewRow();
+            row["idLineItem"] = idLineItem;
+            row["finished"] = finished;
+            row["pu"] = pu;
+            row["idSaleDocument"] = idSaleDocument;
+            table.Rows.Add(row);
+            int rowsAffected = insertData(myData, myAdap, "Line-Document");
+            return rowsAffected;
+        }
+
+        public void updateOrderStatus(string orderId, string orderStatus)
+        {
+            NpgsqlDataAdapter myAdap = orderAdapter();
+            DataSet myData = getData(myAdap, "Order");
+            table = data.Tables["Order"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (string.Compare(table.Rows[i]["idOrder"].ToString(), orderId) == 0)
+                {
+                    table.Rows[i]["orderStatus"] = orderStatus;
+                    break;
+                }
+            }
+            updateData(myData, myAdap, "Client");
+        
+        }
+
+        public string getProductId(int idLineItem)
+        {
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = orderLineAdapter();
+            myAdap.SelectCommand.CommandText += "WHERE \"idLineItem\" = :idLineItem;";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idLineItem", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idLineItem";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = idLineItem;
+
+            myData.Clear();
+            myData = getData(myAdap, "LineItem");
+
+            DataTable list = new DataTable();
+            list = myData.Tables[0];
+            string productId = list.Rows[0]["idProduct"].ToString();
+            return productId;
         }
 
         public int InsertSaleDocument(int idDocType, float amount, float igv, float total, int orderId)
@@ -105,9 +161,17 @@ namespace InkaArt.Data.Sales
             }
         }
 
-        public DataTable GetSalesDocument()
+        public DataTable GetSalesDocument(int orderId = -1)
         {
             adap = salesDocumentAdapter();
+            if (orderId != -1)
+            {
+                adap.SelectCommand.CommandText += " WHERE \"idOrder\" = :idOrder;";
+                adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+                adap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+                adap.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+                adap.SelectCommand.Parameters[0].NpgsqlValue = orderId;
+            }
             data.Clear();
             data = getData(adap, "SalesDocument");
             DataTable salesDocuments = new DataTable();
@@ -249,7 +313,7 @@ namespace InkaArt.Data.Sales
         public NpgsqlDataAdapter salesDocumentAdapter()
         {
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
-            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"SalesDocument\";", Connection);
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"SalesDocument\"", Connection);
             return adapter;
         }
         public NpgsqlDataAdapter orderIdAdapter()
@@ -281,7 +345,7 @@ namespace InkaArt.Data.Sales
             return saleDocumentId;
         }
 
-        public int InsertOrderLines(DataTable orderLines, double igv, string type, bool isClientSelected, int clientType)
+        public int InsertOrderLines(DataTable orderLines, double igv, string type, bool isClientSelected, int clientNat)
         {
             adap = orderAdapter();
             data.Clear();
@@ -302,15 +366,26 @@ namespace InkaArt.Data.Sales
                 var cantColumn = r["Cantidad"];
                 if (cantColumn == DBNull.Value) break;
                 int cant = int.Parse(r["Cantidad"].ToString());
-                string cali = r["Calidad"].ToString();
-                int currentProductId = getProductId(r["Producto"].ToString());
+                string cali = r["Calidad"].ToString(), lineStatus = "registrado";
+                int currentProductId = getProductId(r["Producto"].ToString()), produced = 0;
                 row["quantity"] = cant;
                 row["quality"] = cali;
                 row["idRecipe"] = getRecipeId(getProductId(r["Producto"].ToString()));
                 row["idProduct"] = currentProductId;
                 row["idOrder"] = orderId;
+                if (isClientSelected)
+                {
+                    if (clientNat == 0)
+                    {
+                        updateLogicalStock(currentProductId, cant, type);
+                        lineStatus = "despachado";
+                        produced = cant;
+                    }
+                }
+                row["quantityProduced"] = produced;
+                row["lineStatus"] = lineStatus;
+                row["quantityInvoiced"] = 0;
                 table.Rows.Add(row);
-                if (isClientSelected && clientType == 0) updateLogicalStock(currentProductId, cant, type);
             }
             int rowsAffected = insertData(data, adap, "LineItem");
             return rowsAffected;
@@ -481,6 +556,14 @@ namespace InkaArt.Data.Sales
             adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"LineItem\"", Connection);
             return adapter;
         }
+
+        public NpgsqlDataAdapter lineXDocumentAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Line-Document\"", Connection);
+            return adapter;
+        }
+
         public NpgsqlDataAdapter clientAdapter()
         {
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
@@ -501,7 +584,6 @@ namespace InkaArt.Data.Sales
         }
         public DataTable GetProducts()
         {
-
             adap = productAdapter();
             adap.SelectCommand.CommandText += ";";
             data.Clear();
@@ -510,6 +592,21 @@ namespace InkaArt.Data.Sales
             DataTable productList = new DataTable();
             productList = data.Tables[0];
             return productList;
+        }
+        public DataTable getLineXDocument(int idSaleDocument)
+        {
+            adap = lineXDocumentAdapter();
+            adap.SelectCommand.CommandText += " WHERE \"idSaleDocument\" = :idSaleDocument;";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idSaleDocument", DbType.Int32));
+            adap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[0].SourceColumn = "idSaleDocument";
+            adap.SelectCommand.Parameters[0].NpgsqlValue = idSaleDocument;
+            data.Clear();
+            data = getData(adap, "Line-Document");
+
+            DataTable lineList = new DataTable();
+            lineList = data.Tables[0];
+            return lineList;
         }
         public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type, string reason, string totalDev)
         {
