@@ -121,16 +121,17 @@ namespace InkaArt.Business.Warehouse
             if (!id.Equals("")) if (int.TryParse(id, out intAux)) intIdOrder = int.Parse(idProductOrder);
             queryDocument = "select * from inkaart.\"StockDocument\" where \"documentType\" = 'PEDIDO' and \"idDocument\" = " + idProductOrder + ";";
             int cant = productionItemMovementData.WatchDocument(queryDocument);
-            if (cant == 0) //Si no existe ese documento registrado se procede a registrarlo - en este caso se registra el LOTE de producción
-            {
+            //if (cant == 0) //Si no existe ese documento registrado se procede a registrarlo - en este caso se registra el LOTE de producción
+            //{
+            //Incluso si es que el documento existe lo eliminamos y volvemos a insertar pues puede sufrir actualizaciones en el camino.
                 string deleteQuery = "", insertNewTable = "";
-                deleteQuery = "delete from inkaart.\"temporaryStock\";";
+                deleteQuery = "delete from inkaart.\"temporaryStock\" where \"documentType\" = 'PEDIDO' and \"idDocument\" = " + idProductOrder + ";";
                 productionItemMovementData.insertData2(deleteQuery);
                 insertNewTable = "insert into inkaart.\"temporaryStock\" (\"idDocument\",\"idProduct\",\"stock\") select \"idOrder\",\"idProduct\", sum(\"quantity\") FROM inkaart.\"LineItem\" WHERE \"idOrder\" = " + intIdOrder + " group by 1,2;";
                 productionItemMovementData.insertData2(insertNewTable);
                 insertQuery = "insert into inkaart.\"StockDocument\"  (\"idDocument\", \"product_id\",\"product_stock\",\"documentType\",\"product_type\") select \"idDocument\", \"idProduct\", \"stock\", 'PEDIDO','producto' FROM inkaart.\"temporaryStock\";";
                 productionItemMovementData.insertData2(insertQuery);
-            }
+            //}
 
             if (!id.Equals("")) if (int.TryParse(id, out intAux)) intId = int.Parse(id);
 
