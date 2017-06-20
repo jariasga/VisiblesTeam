@@ -32,7 +32,7 @@ namespace InkaArt.Classes
             ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 
-        public void connect()
+        protected void connect()
         {
             try
             {
