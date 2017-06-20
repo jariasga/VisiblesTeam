@@ -183,6 +183,24 @@ namespace InkaArt.Data.Sales
             return int.Parse(client.Rows[0]["idClient"].ToString());
         }
 
+        public DataTable getProductRecipe(int id)
+        {
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = recipeAdapter();
+            myAdap.SelectCommand.CommandText += "WHERE \"idProduct\" = :idProduct;";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = id;
+
+            myData.Clear();
+            myData = getData(myAdap, "Recipe");
+
+            DataTable recipeList = new DataTable();
+            recipeList = myData.Tables[0];
+            return recipeList;
+        }
+
         private void byOrderStatus(NpgsqlDataAdapter adap, string orderStatus)
         {
             if (orderStatus.Equals("")) return;
@@ -263,7 +281,7 @@ namespace InkaArt.Data.Sales
             return saleDocumentId;
         }
 
-        public int InsertOrderLines(DataTable orderLines, double igv, string type)
+        public int InsertOrderLines(DataTable orderLines, double igv, string type, bool isClientSelected, int clientType)
         {
             adap = orderAdapter();
             data.Clear();
@@ -292,13 +310,13 @@ namespace InkaArt.Data.Sales
                 row["idProduct"] = currentProductId;
                 row["idOrder"] = orderId;
                 table.Rows.Add(row);
-                updateLogicalStock(currentProductId, cant);
+                if (isClientSelected && clientType == 0) updateLogicalStock(currentProductId, cant, type);
             }
             int rowsAffected = insertData(data, adap, "LineItem");
             return rowsAffected;
         }
 
-        private int updateLogicalStock(int currentProductId, int cant)
+        private int updateLogicalStock(int currentProductId, int cant, string type)
         {
             DataSet myData = new DataSet();
             NpgsqlDataAdapter myAdap = productAdapter();
@@ -427,6 +445,7 @@ namespace InkaArt.Data.Sales
             adapter.SelectCommand.Parameters[0].SourceColumn = "name";
             return adapter;
         }
+
         public NpgsqlDataAdapter recipeIdAdapter()
         {
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
@@ -436,6 +455,14 @@ namespace InkaArt.Data.Sales
             adapter.SelectCommand.Parameters[0].SourceColumn = "idProduct";
             return adapter;
         }
+
+        public NpgsqlDataAdapter recipeAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Recipe\"", Connection);
+            return adapter;
+        }
+
         public NpgsqlDataAdapter productAdapter()
         {
             NpgsqlDataAdapter productAdapter = new NpgsqlDataAdapter();
@@ -491,7 +518,7 @@ namespace InkaArt.Data.Sales
             data = getData(adap, "Order");
             table = data.Tables["Order"];
             row = table.NewRow();
-            row["idClient"] = idClient;
+            if (idClient != -1) row["idClient"] = idClient;
             row["deliveryDate"] = deliveryDate;
             row["saleAmount"] = saleAmount;
             row["igv"] = igv;

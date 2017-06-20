@@ -55,6 +55,7 @@
             this.Column6});
             this.grid_documents.Location = new System.Drawing.Point(41, 56);
             this.grid_documents.Name = "grid_documents";
+            this.grid_documents.ReadOnly = true;
             this.grid_documents.RowTemplate.Height = 24;
             this.grid_documents.Size = new System.Drawing.Size(881, 472);
             this.grid_documents.TabIndex = 0;
@@ -65,31 +66,37 @@
             // 
             this.Column1.HeaderText = "ID";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Tipo";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "Monto";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "IGV";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "Total";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // Column6
             // 
             this.Column6.HeaderText = "ID Pedido";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // button_cancel
             // 

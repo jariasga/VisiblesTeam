@@ -34,8 +34,8 @@ namespace InkaArt.Interface.Sales
             grid_clients.Rows.Clear();
             foreach (DataRow row in clientList.Rows)
             {
-                string status = row["status"].ToString().Equals("1") ? "Activo" : "Inactivo";
-                if (status.Equals("Activo")) grid_clients.Rows.Add(row["idClient"], row["ruc"], row["name"], status, row["priority"], row["clientType"], row["type"]);
+                string nat = row["type"].ToString().Equals("0") ? "Nacional" : "Internacional";
+                if (row["status"].ToString().Equals("1")) grid_clients.Rows.Add(row["idClient"], row["ruc"], row["name"], nat, row["priority"], row["clientType"], row["type"]);
             }
         }
 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_delete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -213,14 +213,14 @@
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -231,6 +231,7 @@
             this.grid_orderline.Location = new System.Drawing.Point(33, 171);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
+            this.grid_orderline.ReadOnly = true;
             this.grid_orderline.Size = new System.Drawing.Size(560, 167);
             this.grid_orderline.TabIndex = 22;
             // 
@@ -238,26 +239,31 @@
             // 
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Calidad";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // cost
             // 
             this.cost.HeaderText = "PU";
             this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
             // 
             // Cantidad
             // 
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // deleteColumn
             // 
             this.deleteColumn.HeaderText = "Eliminar";
             this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.ReadOnly = true;
             // 
             // label7
             // 
@@ -468,6 +474,7 @@
             // 
             // date_deliverydate
             // 
+            this.date_deliverydate.Enabled = false;
             this.date_deliverydate.Font = new System.Drawing.Font("Arial", 11F);
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(33, 261);

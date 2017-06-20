@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_save = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.date_delivery = new System.Windows.Forms.DateTimePicker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textbox_doctype = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_create = new System.Windows.Forms.Button();
             this.textbox_name = new System.Windows.Forms.TextBox();
@@ -65,6 +64,7 @@
             this.numeric_quantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.combo_doctype = new System.Windows.Forms.ComboBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,6 +95,7 @@
             this.label3.Size = new System.Drawing.Size(187, 23);
             this.label3.TabIndex = 4;
             this.label3.Text = "Documento de pago";
+            this.label3.Visible = false;
             // 
             // label6
             // 
@@ -119,7 +120,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textbox_doctype);
+            this.groupBox3.Controls.Add(this.combo_doctype);
             this.groupBox3.Controls.Add(this.date_delivery);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label3);
@@ -132,14 +133,6 @@
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
-            // 
-            // textbox_doctype
-            // 
-            this.textbox_doctype.Enabled = false;
-            this.textbox_doctype.Location = new System.Drawing.Point(34, 172);
-            this.textbox_doctype.Name = "textbox_doctype";
-            this.textbox_doctype.Size = new System.Drawing.Size(368, 30);
-            this.textbox_doctype.TabIndex = 13;
             // 
             // groupBox1
             // 
@@ -335,10 +328,6 @@
             // 
             this.combo_quality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_quality.FormattingEnabled = true;
-            this.combo_quality.Items.AddRange(new object[] {
-            "Premium",
-            "Estandar",
-            "Económico"});
             this.combo_quality.Location = new System.Drawing.Point(261, 65);
             this.combo_quality.Margin = new System.Windows.Forms.Padding(4);
             this.combo_quality.Name = "combo_quality";
@@ -351,9 +340,9 @@
             this.label1.Location = new System.Drawing.Point(256, 38);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 23);
+            this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 24;
-            this.label1.Text = "Calidad";
+            this.label1.Text = "Versión";
             // 
             // textbox_amount
             // 
@@ -373,14 +362,14 @@
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -391,6 +380,7 @@
             this.grid_orderline.Location = new System.Drawing.Point(33, 172);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
+            this.grid_orderline.ReadOnly = true;
             this.grid_orderline.Size = new System.Drawing.Size(560, 167);
             this.grid_orderline.TabIndex = 22;
             // 
@@ -399,30 +389,35 @@
             this.Producto.FillWeight = 141.1049F;
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.FillWeight = 141.1049F;
             this.Column1.HeaderText = "Calidad";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // cost
             // 
             this.cost.FillWeight = 77.87196F;
             this.cost.HeaderText = "PU";
             this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
             // 
             // Cantidad
             // 
             this.Cantidad.FillWeight = 76.14214F;
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // deleteColumn
             // 
             this.deleteColumn.FillWeight = 63.7762F;
             this.deleteColumn.HeaderText = "Eliminar";
             this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.ReadOnly = true;
             // 
             // label7
             // 
@@ -490,6 +485,19 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Producto";
             // 
+            // combo_doctype
+            // 
+            this.combo_doctype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_doctype.FormattingEnabled = true;
+            this.combo_doctype.Items.AddRange(new object[] {
+            "Boleta",
+            "Factura"});
+            this.combo_doctype.Location = new System.Drawing.Point(34, 172);
+            this.combo_doctype.Name = "combo_doctype";
+            this.combo_doctype.Size = new System.Drawing.Size(367, 31);
+            this.combo_doctype.TabIndex = 13;
+            this.combo_doctype.Visible = false;
+            // 
             // ClientOrderCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -553,8 +561,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
-        private System.Windows.Forms.TextBox textbox_doctype;
         private System.Windows.Forms.Label label_stock;
         private System.Windows.Forms.Label label_stockLabel;
+        private System.Windows.Forms.ComboBox combo_doctype;
     }
 }
