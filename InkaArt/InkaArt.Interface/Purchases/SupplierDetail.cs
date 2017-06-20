@@ -38,6 +38,7 @@ namespace InkaArt.Interface.Purchases
             comboBox_rawMaterial.Enabled = false;
             textBox_price.Enabled = false;
             isInEditMode = true;
+            dataGridView_rm_sup.Enabled = false;
             rawMaterialControl = new RawMaterialController();
             llenarComboBox();
         }
@@ -56,6 +57,7 @@ namespace InkaArt.Interface.Purchases
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
             comboBox_rawMaterial.Enabled = false;
+            dataGridView_rm_sup.Enabled = false;
             textBox_price.Enabled = false;
             suppliersWindow = suppliersView;
             isInEditMode = true;
@@ -87,6 +89,8 @@ namespace InkaArt.Interface.Purchases
             comboBox_status.Enabled = false;
             textBox_telephone.Enabled = false;
             textBox_contactName.Enabled = false;
+            comboBox_rawMaterial.Enabled = false;
+            textBox_price.Enabled = false;
             textBox_email.Enabled = false;
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
@@ -94,7 +98,8 @@ namespace InkaArt.Interface.Purchases
 
             llenarComboBox();
             llenarMateriasProvistas(textBox_idSupplier.Text);
-            
+            dataGridView_rm_sup.Enabled = false;
+
         }
         public void llenarComboBox()
         {
@@ -330,6 +335,7 @@ namespace InkaArt.Interface.Purchases
                 textBox_contactName.Enabled = true;
                 textBox_price.Enabled = true;
                 comboBox_rawMaterial.Enabled = true;
+                dataGridView_rm_sup.Enabled = true;
                 textBox_email.Enabled = true;
                 buttonAdd.Enabled = true;
                 buttonDelete.Enabled = true;
@@ -357,6 +363,7 @@ namespace InkaArt.Interface.Purchases
                     comboBox_rawMaterial.Enabled = true;
                     textBox_price.Enabled = true;
                     textBox_contactName.Enabled = true;
+                    dataGridView_rm_sup.Enabled = true;
                     textBox_email.Enabled = true;
                     buttonAdd.Enabled = true;
                     buttonDelete.Enabled = true;
