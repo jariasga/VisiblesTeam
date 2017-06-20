@@ -32,7 +32,8 @@ namespace InkaArt.Interface.Warehouse
             DataTable rmList = controlRM.getData();
             for (int i = 0; i< rmList.Rows.Count; i++)
             {
-                comboBox_RM.Items.Add(rmList.Rows[i]["name"]);
+                if(rmList.Rows[i]["status"].ToString()=="Activo")
+                    comboBox_RM.Items.Add(rmList.Rows[i]["name"]);
             }
             comboBox_RM.SelectedIndex = 1;
             FinalProductController controlP = new FinalProductController();
@@ -180,15 +181,31 @@ namespace InkaArt.Interface.Warehouse
                     break;
                 }
             }
-            if (int.Parse(numericUpDown1.Value.ToString()) != 0 && int.Parse(numericUpDown2.Value.ToString()) != 0)
+            int min, max;
+            min = max = 0;
+            if (int.TryParse(numericUpDown1.Value.ToString(),out min) && int.TryParse(numericUpDown2.Value.ToString(),out max))
             {
-                control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
-                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                min = int.Parse(numericUpDown1.Value.ToString());
+                max = int.Parse(numericUpDown2.Value.ToString());
 
-                fillGridRawMaterial();
-            }else
+                if (min != 0 && max != 0)
+                {
+                    if (max > min)
+                    {
+                        control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
+                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fillGridRawMaterial();
+                    }else
+                        MessageBox.Show("El valor máximo debe ser mayor al mínimo, por favor ingrese un nuevo máximo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
+                    MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
             {
-                MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El valor no es un número entero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -211,15 +228,31 @@ namespace InkaArt.Interface.Warehouse
                     break;
                 }
             }
-            if (int.Parse(numericUpDown3.Value.ToString()) != 0 && int.Parse(numericUpDown4.Value.ToString()) != 0)
+            int min, max;
+            min = max = 0;
+            if (int.TryParse(numericUpDown3.Value.ToString(), out min) && int.TryParse(numericUpDown4.Value.ToString(), out max))
             {
-                control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
-                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                fillGridProduct();
+
+                min = int.Parse(numericUpDown1.Value.ToString());
+                max = int.Parse(numericUpDown2.Value.ToString());
+
+                if (min != 0 && max != 0)
+                {
+                    if (max > min)
+                    {
+                        control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
+                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fillGridProduct();
+                    }else
+                        MessageBox.Show("El valor máximo debe ser mayor al mínimo, por favor ingrese un nuevo máximo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
             else
             {
-                MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El valor no es un número entero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
         }
