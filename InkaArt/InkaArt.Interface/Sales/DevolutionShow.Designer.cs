@@ -334,6 +334,7 @@
             // 
             // date_deliverydate
             // 
+            this.date_deliverydate.Enabled = false;
             this.date_deliverydate.Font = new System.Drawing.Font("Arial", 11F);
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(32, 194);
