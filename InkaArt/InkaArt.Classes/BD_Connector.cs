@@ -32,7 +32,7 @@ namespace InkaArt.Classes
             ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 
-        public void connect()
+        protected void connect()
         {
             try
             {
@@ -47,12 +47,19 @@ namespace InkaArt.Classes
 
         public DataSet getData(NpgsqlDataAdapter adapter, string srcTable)
         {
-            if (Connection == null) connect();
-            adapter.SelectCommand.Connection = Connection;
-            DataSet data = new DataSet();
-            adapter.Fill(data, srcTable);
-            closeConnection();
-            return data;
+            try
+            {
+                if (Connection == null) connect();
+                adapter.SelectCommand.Connection = Connection;
+                DataSet data = new DataSet();
+                adapter.Fill(data, srcTable);
+                closeConnection();
+                return data;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public int updateData(DataSet data, NpgsqlDataAdapter adap, string srcTable)
@@ -72,7 +79,6 @@ namespace InkaArt.Classes
 
         public int callAdapter(DataSet data, NpgsqlDataAdapter adap, string srcTable)
         {
-            int code = 0;
             if (Connection.State != System.Data.ConnectionState.Open) connect();
             NpgsqlCommandBuilder builder = new NpgsqlCommandBuilder(adap);
             adap.UpdateCommand = builder.GetUpdateCommand();
@@ -84,16 +90,18 @@ namespace InkaArt.Classes
 
             try
             {
-                adap.Update(data, srcTable);
+                return adap.Update(data, srcTable);
             }
             catch (Exception)
             {
-                code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
-                if (code == 23505) return 23505;
+                //code = System.Runtime.InteropServices.Marshal.GetExceptionCode();
+                //if (code == 23505) return 23505;
             }
-
-            closeConnection();
-            return code;
+            finally
+            {
+                closeConnection();
+            }
+            return 0;
         }
 
         public void closeConnection()

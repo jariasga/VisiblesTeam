@@ -39,6 +39,7 @@
             this.buttonCreate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxDescription = new System.Windows.Forms.ComboBox();
+            this.buttonMassiveUpload = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +82,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonMassiveUpload);
             this.groupBox1.Controls.Add(this.textBoxNewRole);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBoxIDRole);
@@ -165,6 +167,20 @@
             this.comboBoxDescription.TabIndex = 8;
             this.comboBoxDescription.SelectedIndexChanged += new System.EventHandler(this.comboBoxDescription_SelectedIndexChanged);
             // 
+            // buttonMassiveUpload
+            // 
+            this.buttonMassiveUpload.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonMassiveUpload.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMassiveUpload.ForeColor = System.Drawing.Color.White;
+            this.buttonMassiveUpload.Location = new System.Drawing.Point(245, 17);
+            this.buttonMassiveUpload.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMassiveUpload.Name = "buttonMassiveUpload";
+            this.buttonMassiveUpload.Size = new System.Drawing.Size(29, 27);
+            this.buttonMassiveUpload.TabIndex = 16;
+            this.buttonMassiveUpload.Text = "+";
+            this.buttonMassiveUpload.UseVisualStyleBackColor = false;
+            this.buttonMassiveUpload.Click += new System.EventHandler(this.buttonMassiveUpload_Click);
+            // 
             // UserRolesPermissions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -196,5 +212,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxNewRole;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonMassiveUpload;
     }
 }

@@ -49,7 +49,7 @@ namespace InkaArt.Business.Purchases
         {
             double douPrice = 0;
             if (!price.Equals("0")) if (double.TryParse(price, out douPrice)) douPrice = double.Parse(price);
-            
+            getData();
             table = data.Tables["RawMaterial-Supplier"];
             row = table.NewRow();
 

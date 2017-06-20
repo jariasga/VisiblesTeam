@@ -13,8 +13,6 @@ namespace InkaArt.Data.Warehouse
     {
         private string table_name;
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
         private NpgsqlDataAdapter adap;
 
         public MovementTypeData()

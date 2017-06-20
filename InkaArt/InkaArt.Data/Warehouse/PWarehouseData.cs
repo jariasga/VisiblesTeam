@@ -12,9 +12,6 @@ namespace InkaArt.Data.Warehouse
     public class PWarehouseData:BD_Connector
     {
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
-        private NpgsqlDataAdapter adap;
 
         public PWarehouseData()
         {
