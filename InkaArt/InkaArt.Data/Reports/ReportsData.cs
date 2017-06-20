@@ -101,7 +101,7 @@ namespace InkaArt.Data.Reports
             command_query += "  select typeItem, " +
                                     "idItem, " +
                                     "wr.\"name\" as nameItem, " +
-                                    "wr.\"name\" as nameWarehouse, " +
+                                    "w.\"name\" as nameWarehouse, " +
                                     "\"currentStock\", " +
                                     "\"virtualStock\", " +
                                     "unit " +
