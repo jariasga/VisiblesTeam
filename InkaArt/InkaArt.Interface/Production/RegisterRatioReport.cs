@@ -27,10 +27,12 @@ namespace InkaArt.Interface.Production
         public RegisterRatioReport()
         {
             InitializeComponent();
+
             workers = new WorkerController();
             jobs = new JobController();
             recipes = new RecipeController();
-            ratios = new RatioController();
+            ratios = new RatioController(workers, jobs, recipes);
+
             grid_modified_items = new List<int>();
         }
 
@@ -92,9 +94,9 @@ namespace InkaArt.Interface.Production
                 {
                     string[] parameters = new string[8];
                     parameters[0] = ratios[i].ID.ToString();
-                    parameters[1] = workers.GetByID(ratios[i].Worker).FullName;
-                    parameters[2] = jobs.GetByID(ratios[i].Job).Name;
-                    parameters[3] = recipes.GetByID(ratios[i].Recipe).Version;
+                    parameters[1] = ratios[i].Worker.FullName;
+                    parameters[2] = ratios[i].Job.Name;
+                    parameters[3] = ratios[i].Recipe.Version;
                     parameters[4] = ratios[i].Start.ToString();
                     parameters[5] = ratios[i].End.ToString();
                     parameters[6] = ratios[i].Broken.ToString();
@@ -117,7 +119,7 @@ namespace InkaArt.Interface.Production
             if (job != null)
             {
                 combobox_recipe.Items.Clear();
-                for (int i = 0; i < recipes.Count(); i++)
+                for (int i = 0; i < recipes.NumberOfRecipes; i++)
                 {
                     if (recipes[i].Product == job.Product)
                         combobox_recipe.Items.Add(recipes[i]);

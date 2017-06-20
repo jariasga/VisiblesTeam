@@ -13,10 +13,12 @@ namespace InkaArt.Data.Algorithm
     public class Ratio
     {
         private int id_ratio;
+
         private DateTime date;
-        private int id_worker;
-        private int id_job; //Puesto de trabajo = Proceso x Producto
-        private int id_recipe;
+        private Worker worker;
+        private Job job; //Puesto de trabajo = Proceso x Producto
+        private Recipe recipe;
+
         private TimeSpan start;
         private TimeSpan end;
         private int broken;
@@ -31,42 +33,38 @@ namespace InkaArt.Data.Algorithm
         public DateTime Date
         {
             get { return date; }
-            //set { date = value; }
         }
-        public int Worker
+        public Worker Worker
         {
-            get { return id_worker; }
-            //set { id_worker = value; }
+            get { return worker; }
         }
-        public int Job
+        public Job Job
         {
-            get { return id_job; }
-            //set { id_job = value; }
+            get { return job; }
         }
-        public int Recipe
+        public Recipe Recipe
         {
-            get { return id_recipe; }
-            //set { id_recipe = value; }
+            get { return recipe; }
         }
         public TimeSpan Start
         {
             get { return start; }
-            set { start = value; }
+            //set { start = value; }
         }
         public TimeSpan End
         {
             get { return end; }
-            set { end = value; }
+            //set { end = value; }
         }
         public int Broken
         {
             get { return broken; }
-            set { broken = value; }
+            //set { broken = value; }
         }
         public int Produced
         {
             get { return produced; }
-            set { produced = value; }
+            //set { produced = value; }
         }
         public double Breakage
         {
@@ -83,9 +81,9 @@ namespace InkaArt.Data.Algorithm
         {
             this.id_ratio = old_ratio.id_ratio;
             this.date = old_ratio.date;
-            this.id_worker = old_ratio.id_worker;
-            this.id_job = old_ratio.id_job;
-            this.id_recipe = old_ratio.id_recipe;
+            this.worker = old_ratio.worker;
+            this.job = old_ratio.job;
+            this.recipe = old_ratio.recipe;
             this.start = old_ratio.start;
             this.end = old_ratio.end;
             this.broken = old_ratio.broken;
@@ -94,14 +92,14 @@ namespace InkaArt.Data.Algorithm
             this.time = old_ratio.time;
         }
 
-        public Ratio (int id_ratio, DateTime date, int id_worker, int id_job, int id_recipe, TimeSpan start, TimeSpan end,
+        public Ratio (int id_ratio, DateTime date, Worker worker, Job job, Recipe recipe, TimeSpan start, TimeSpan end,
             int broken, int produced, double breakage, double time)
         {
             this.id_ratio = id_ratio;
             this.date = date;
-            this.id_worker = id_worker;
-            this.id_job = id_job;
-            this.id_recipe = id_recipe;
+            this.worker = worker;
+            this.job = job;
+            this.recipe = recipe;
             this.start = start;
             this.end = end;
             this.broken = broken;
@@ -121,9 +119,9 @@ namespace InkaArt.Data.Algorithm
                 ":start_time, :end_time, :broken, :produced, :breakage, :time) RETURNING id_ratio", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, recipe.ID);
             command.Parameters.AddWithValue("start_time", NpgsqlDbType.Time, start);
             command.Parameters.AddWithValue("end_time", NpgsqlDbType.Time, end);
             command.Parameters.AddWithValue("broken", NpgsqlDbType.Integer, broken);
@@ -149,9 +147,9 @@ namespace InkaArt.Data.Algorithm
                 connection);
             
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, this.date);
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, this.id_worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, this.id_job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, this.id_recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, this.worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, this.job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, this.recipe.ID);
             command.Parameters.AddWithValue("start_time", NpgsqlDbType.Time, this.start);
             command.Parameters.AddWithValue("end_time", NpgsqlDbType.Time, this.end);
             command.Parameters.AddWithValue("broken", NpgsqlDbType.Integer, this.broken);
@@ -201,9 +199,9 @@ namespace InkaArt.Data.Algorithm
                 "WHERE id_worker = :id_worker AND id_job = :id_job AND id_recipe = :id_recipe AND status = :status",
                 connection);
 
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, recipe.ID);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
             int result = Convert.ToInt32(command.ExecuteScalar());
@@ -221,9 +219,9 @@ namespace InkaArt.Data.Algorithm
                 "WHERE id_worker = :id_worker AND id_job = :id_job AND id_recipe = :id_recipe AND status = :status",
                 connection);
 
-            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, id_worker);
-            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, id_job);
-            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, id_recipe);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, recipe.ID);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
 
             object temp = command.ExecuteScalar();

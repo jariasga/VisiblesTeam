@@ -14,26 +14,36 @@ namespace InkaArt.Business.Algorithm
     public class RatioController
     {
         private List<Ratio> ratios;
+
+        private WorkerController workers;
+        private JobController jobs;
+        private RecipeController recipes;
+
         private IndexController indexes;
         private RatioPerDayController ratios_per_day;
 
-        public RatioController()
+        public RatioController(WorkerController workers, JobController jobs, RecipeController recipes)
         {
-            ratios = new List<Ratio>();
-            indexes = new IndexController();
-            ratios_per_day = new RatioPerDayController();
+            this.ratios = new List<Ratio>();
+
+            this.workers = workers;
+            this.jobs = jobs;
+            this.recipes = recipes;
+
+            this.indexes = new IndexController(workers, jobs, recipes);
+            this.ratios_per_day = new RatioPerDayController();
         }
 
         public void Load(DateTime date)
         {
-            ratios.Clear();
+            this.ratios.Clear();
 
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date AND "
-                + "status = :status ORDER BY id_ratio ASC", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE date = :date AND status = :status "
+                + "ORDER BY id_ratio ASC", connection);
 
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
@@ -41,10 +51,10 @@ namespace InkaArt.Business.Algorithm
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id_ratio = reader.GetInt32(0);
-                int id_worker = reader.GetInt32(2);
-                int id_job = reader.GetInt32(3);
-                int id_recipe = reader.GetInt32(4);
+                int id_ratio = Convert.ToInt32(reader["id_ratio"]);
+                Worker worker = workers.GetByID(Convert.ToInt32(reader["id_worker"]));
+                Job job = jobs.GetByID(Convert.ToInt32(reader["id_job"]));
+                Recipe recipe = recipes.GetByID(Convert.ToInt32(reader["id_recipe"]));
                 TimeSpan start = reader.GetTimeSpan(5);
                 TimeSpan end = reader.GetTimeSpan(6);
                 int broken = reader.GetInt32(7);
@@ -52,8 +62,7 @@ namespace InkaArt.Business.Algorithm
                 double breakage = reader.GetDouble(9);
                 double time = reader.GetDouble(10);
 
-                ratios.Add(new Ratio(id_ratio, date, id_worker, id_job, id_recipe, start, end, broken,
-                    produced, breakage, time));
+                ratios.Add(new Ratio(id_ratio, date, worker, job, recipe, start, end, broken, produced, breakage, time));
             }
 
             connection.Close();
@@ -129,7 +138,7 @@ namespace InkaArt.Business.Algorithm
                 return null;
             }
             
-            Ratio ratio = new Ratio(id_ratio, date, worker.ID, job.ID, recipe.ID, start, end, broken, produced,
+            Ratio ratio = new Ratio(id_ratio, date, worker, job, recipe, start, end, broken, produced,
                 (double)broken / produced, (end - start).TotalMinutes / produced);
             return ratio;
         }
@@ -138,8 +147,7 @@ namespace InkaArt.Business.Algorithm
             string start, string end, string broken, string produced, WorkerController workers,
             JobController jobs, RecipeController recipes, ref string message)
         {
-            Ratio ratio = Verify(id_ratio, date, worker, job, recipe, start, end, broken, produced,
-                workers, jobs, recipes, ref message);
+            Ratio ratio = Verify(id_ratio, date, worker, job, recipe, start, end, broken, produced, workers, jobs, recipes, ref message);
             if (ratio == null) return 0;
 
             if (id_ratio == 0) return Insert(ratio, ref message);
@@ -161,7 +169,7 @@ namespace InkaArt.Business.Algorithm
                 //Actualizar tablas de índices y ratios por día
                 message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
 
-                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                if (ratio.Job.ID == 3 || ratio.Job.ID == 4 || ratio.Job.ID == 6)
                     message += ratios_per_day.InsertOrUpdate(ratio);
                 
                 return ratio.ID;
@@ -198,11 +206,11 @@ namespace InkaArt.Business.Algorithm
 
                 //Actualizar resumen de reportes
                 message += indexes.UpdateOrDelete(old_ratio);
-                if (old_ratio.Job == 3 || old_ratio.Job == 4 || old_ratio.Job == 6)
+                if (old_ratio.Job.ID == 3 || old_ratio.Job.ID == 4 || old_ratio.Job.ID == 6)
                     message += ratios_per_day.UpdateOrDelete(old_ratio);
 
                 message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
-                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                if (ratio.Job.ID == 3 || ratio.Job.ID == 4 || ratio.Job.ID == 6)
                     message += ratios_per_day.InsertOrUpdate(ratio);
 
                 return ratio.ID;
@@ -232,7 +240,7 @@ namespace InkaArt.Business.Algorithm
 
                 //Actualizar resumen de reportes
                 message += indexes.UpdateOrDelete(ratio);
-                if (ratio.Job == 3 || ratio.Job == 4 || ratio.Job == 6)
+                if (ratio.Job.ID == 3 || ratio.Job.ID == 4 || ratio.Job.ID == 6)
                     message += ratios_per_day.UpdateOrDelete(ratio);
 
                 return true;

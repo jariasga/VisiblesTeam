@@ -78,9 +78,9 @@ namespace InkaArt.Business.Algorithm
             //Comprobar los campos obligatorios
             if (name == null || name == "")
                 throw new Exception("Por favor, ingrese un nombre válido.");
-            if (selected_workers == null || selected_workers.Count() <= 0)
+            if (selected_workers == null || selected_workers.NumberOfWorkers <= 0)
                 throw new Exception("Por favor, considere como mínimo un empleado.");
-            if (selected_orders == null || selected_orders.Count() <= 0)
+            if (selected_orders == null || selected_orders.NumberOfOrders <= 0)
                 throw new Exception("Por favor, considere como mínimo un pedido.");
 
             //Fechas de inicio y final
@@ -120,7 +120,7 @@ namespace InkaArt.Business.Algorithm
             double altarpiece_weight = Convert.ToDouble(altarpiece) / 100;
             
             return new Simulation(name, date_start.Date, date_end.Date, days, breakage_weight, time_weight, huaco_weight,
-                    huamanga_weight, altarpiece_weight, workers, selected_workers, orders, selected_orders);
+                    huamanga_weight, altarpiece_weight, selected_workers, selected_orders);
         }
 
         //public List<Simulation> List()
