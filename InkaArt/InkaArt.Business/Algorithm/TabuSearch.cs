@@ -84,31 +84,22 @@ namespace InkaArt.Business.Algorithm
         {
             double fitness = 0;
             int assigned_workers = 0;
-            double product_weight;
+            AssignmentLine current_assignment = null;
 
-            for (int worker_index = 0; worker_index < simulation.SelectedWorkers.Count(); worker_index++)
+            for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
             {
                 for (int miniturn_index = 0; miniturn_index < solution.TotalMiniturns; miniturn_index++)
                 {
                     AssignmentLine assignment = solution[worker_index, miniturn_index];
-                    if (assignment != null) {
-                        Index index = indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
-                        // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
-                        if (index != null)
-                        {
-                            assigned_workers++;
-                            // buscamos el peso del producto (producto = primer digito del procesoxproducto id)
-
-                            product_weight = simulation.ProductWeight(assignment.Job.Product);
-                            // sumamos el indice de perdida
-                            fitness += (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight)
-                                / product_weight;
-                        }
-                    }                    
+                    if (assignment == null || assignment.Equals(current_assignment)) continue;
+                    Index index = indexes.Find(assignment.Worker, assignment.Job, assignment.Recipe);
+                    if (index == null) continue;
+                    assigned_workers++;
+                    fitness += index.LossIndex;
                 }
             }
 
-            // dividimos lo acumulado solo entre los trabajadores asignados
+            //Dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
         }
 

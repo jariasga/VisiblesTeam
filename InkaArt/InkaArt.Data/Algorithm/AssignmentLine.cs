@@ -58,5 +58,11 @@ namespace InkaArt.Data.Algorithm
             this.produced = produced;
             this.total_miniturns_used = total_miniturns_used;
         }
+
+        public bool Equals(AssignmentLine other)
+        {
+            if (this == null || other == null) return false;
+            return (this.worker.ID == other.worker.ID && this.job.ID == other.job.ID && this.recipe.ID == other.recipe.ID);
+        }
     }
 }
