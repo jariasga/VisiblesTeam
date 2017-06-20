@@ -54,12 +54,12 @@ namespace InkaArt.Business.Purchases
            purchaseOrderDetail.updateData(data, adap, "PurchaseOrderDetail");
         }
 
-        public void updateLineaEntregada(int id_detail)
+        public void updateLineaEntregada(int id_detail, int id_factura)
         {
             table = data.Tables["PurchaseOrderDetail"];
             purchaseOrderDetail.execute(string.Format("UPDATE \"inkaart\".\"PurchaseOrderDetail\" " +
-                "SET status = 'Entregado' " +
-                "WHERE id_detail = {0}", id_detail));
+                "SET status = 'Entregado', id_factura = {0} " +
+                "WHERE id_detail = {1}", id_factura,id_detail));
         }
     }
 }
