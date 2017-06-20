@@ -17,7 +17,9 @@ namespace InkaArt.Interface.Purchases
         SupplierController control_supplier;
         RawMaterial_SupplierController control_rm_sup;
         RawMaterialController control_rm;
+        string estadoInicial = "";
         UnitOfMeasurementController control_unit;
+        PurchaseOrder ventanaListaOrdenes;
         DataTable supList,rawMat_supList,rmList,unitList,lineaPedidosList;
         int mode;
         string listaMaterialesIds;
@@ -30,48 +32,72 @@ namespace InkaArt.Interface.Purchases
             control_supplier = new SupplierController();
             InitializeComponent();
             button_add.Enabled = false;
+            comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
             buttonDelete.Enabled = true;
             buttonSave.Enabled = true;
             dateTimePicker_creation.Value = DateTime.Now;
             dateTimePicker_delivery.Value = DateTime.Today.AddDays(8);
+            dataGridView_pedidos.Enabled = false;
+            comboBoxRawMaterialName.Enabled = false;
+            textBox_cantidad.Enabled = false;
             textBox_total.Text = "0";
             buttonSave.Text = "🖫 Guardar";
         }
-        public PurchaseOrderDetail(PurchaseOrderController controlForm)
+        public PurchaseOrderDetail(PurchaseOrderController controlForm,PurchaseOrder ventana)
         {
             mode = 1;
+            ventanaListaOrdenes = ventana;
             control = controlForm;
             InitializeComponent();
             button_add.Enabled = false;
             buttonDelete.Enabled = true;
             buttonSave.Enabled = true;
+            dataGridView_pedidos.Enabled = false;
+            comboBoxRawMaterialName.Enabled = false;
+            comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
+            textBox_cantidad.Enabled = false;
+            buttonDelete.Enabled = false;
             dateTimePicker_creation.Value = DateTime.Now;
             dateTimePicker_delivery.Value = DateTime.Today.AddDays(8);
             textBox_total.Text = "0";
             textBox_cantidad.Text = "0";
             buttonSave.Text = "🖫 Guardar";
             control_supplier = new SupplierController();
+            control_detail = new PurchaseOrderDetailController();
+            control_rm = new RawMaterialController();
+            control_rm_sup = new RawMaterial_SupplierController();
+            control_unit = new UnitOfMeasurementController();
             llenarComboBoxSuppliers();
         }
-        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder, PurchaseOrderController controlForm)
+        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder, PurchaseOrderController controlForm,PurchaseOrder ventana)
         {
             mode = 2;
+            isInEditMode = false;
+            ventanaListaOrdenes = ventana;
             control = controlForm;
             InitializeComponent();
             textBox_id.Text = currentPurchaseOrder.Cells[1].Value.ToString();
-            textBox_idsupplier.Text = currentPurchaseOrder.Cells[2].Value.ToString();
-            comboBox_status.Text = currentPurchaseOrder.Cells[3].Value.ToString();
-            dateTimePicker_creation.Value = (DateTime) currentPurchaseOrder.Cells[4].Value;
-            dateTimePicker_delivery.Value = (DateTime)currentPurchaseOrder.Cells[5].Value;
-            textBox_total.Text = currentPurchaseOrder.Cells[6].Value.ToString();
+            textBox_idsupplier.Text = currentPurchaseOrder.Cells[7].Value.ToString();
+            if (string.Compare(currentPurchaseOrder.Cells[6].Value.ToString(), "Entregado")==0){
+                comboBox_status.Items.Add(currentPurchaseOrder.Cells[6].Value.ToString());
+            }
+            comboBox_status.Text = currentPurchaseOrder.Cells[6].Value.ToString();
+            dateTimePicker_creation.Value = DateTime.Parse(currentPurchaseOrder.Cells[3].Value.ToString());
+            dateTimePicker_delivery.Value = DateTime.Parse(currentPurchaseOrder.Cells[4].Value.ToString());
+            textBox_total.Text = currentPurchaseOrder.Cells[5].Value.ToString();
             textBox_idsupplier.Enabled = false;
             dateTimePicker_creation.Enabled = false;
             dateTimePicker_delivery.Enabled = false;
             comboBox_status.Enabled = false;
+            
             comboBox_supplier.Enabled = false;
             button_add.Enabled = false;
             buttonDelete.Enabled = false;
             textBox_cantidad.Enabled = false;
+            dataGridView_pedidos.Enabled = false;
+            comboBoxRawMaterialName.Enabled = false;
             control_supplier = new SupplierController();
             buscarNombreSupplier(textBox_idsupplier.Text);
             control_detail = new PurchaseOrderDetailController();
@@ -79,7 +105,9 @@ namespace InkaArt.Interface.Purchases
             control_rm_sup = new RawMaterial_SupplierController();
             control_unit = new UnitOfMeasurementController();
             obtenerMateriasDelSupplier();
+            estadoInicial=comboBox_status.Text;
             llenarMateriasPedidas();
+            if (string.Compare(comboBox_status.Text, "Inactivo") == 0) buttonSave.Visible = false;
         }
         private void filterSupplier()
         {
@@ -140,7 +168,7 @@ namespace InkaArt.Interface.Purchases
             //obtengo todas las lineas de pedido de esta orden
             DataRow[] rows;
             lineaPedidosList = control_detail.getData();
-            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status = 'Activo'");
+            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status NOT IN ('Inactivo')");
             if (rows.Any()) lineaPedidosList = rows.CopyToDataTable();
             else lineaPedidosList.Rows.Clear();
             string sortQuery = string.Format("id_detail");
@@ -205,7 +233,14 @@ namespace InkaArt.Interface.Purchases
                 MessageBox.Show("Debe escoger alguna materia prima", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (double.Parse(textBox_subtotal.Text) < 0.01)
+            textBox_cantidad.Text = textBox_cantidad.Text.Trim();
+            if(textBox_cantidad.Text.Length==0 || int.Parse(textBox_cantidad.Text) == 0)
+            {
+                MessageBox.Show("No se puede agregar un pedido con cantidad cero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            textBox_subtotal.Text = textBox_subtotal.Text.Trim();
+            if (textBox_subtotal.Text.Length==0 || double.Parse(textBox_subtotal.Text) < 0.01)
             {
                 MessageBox.Show("No se puede agregar un pedido con subtotal cero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -214,7 +249,18 @@ namespace InkaArt.Interface.Purchases
             int id_rm = int.Parse(textBox_idrm.Text);
             int id_sup = int.Parse(textBox_idsupplier.Text);
             double subTotalNuevo = double.Parse(textBox_subtotal.Text);
-            control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), subTotalNuevo, int.Parse(textBox_factura.Text),"Activo");
+            try
+            {
+                control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), subTotalNuevo, 0, "Borrador");
+                textBox_subtotal.Text = "0";
+                textBox_cantidad.Text = "0";
+                textBox_price.Text = "0";
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo agregar la línea de pedido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             double total = double.Parse(textBox_total.Text);
             total += subTotalNuevo;
             textBox_total.Text = total.ToString();
@@ -232,7 +278,8 @@ namespace InkaArt.Interface.Purchases
                     int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
                     int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
                     double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
-                    int id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
+                    int id_facturaAux = 0;
+                    if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length>0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
                     try
                     {
                         control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Inactivo");
@@ -241,6 +288,7 @@ namespace InkaArt.Interface.Purchases
                         totalOr -= subtotalAux;
                         textBox_total.Text = totalOr.ToString();
                         control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), totalOr);
+                        
                     }
                     catch (Exception)
                     {
@@ -249,6 +297,7 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             llenarMateriasPedidas();
+            ventanaListaOrdenes.desarrolloBusqueda();
         }
 
         private void textBox_supplier_TextChanged(object sender, EventArgs e)
@@ -292,6 +341,27 @@ namespace InkaArt.Interface.Purchases
                 return true;
 
         }
+        private string buscarValorId(string id_supplier)
+        {
+            DataRow[] rows;
+            DataTable tablaAuxiliar = control.getData();
+            rows = tablaAuxiliar.Select("status LIKE 'Borrador'");
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_order");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            int comprobar = 5;
+            if (numero < 5) comprobar = numero;
+            for (int i = 1; i <= comprobar; i++)
+            {
+                if (String.Compare(tablaAuxiliar.Rows[numero - i]["id_supplier"].ToString(), id_supplier) == 0)
+                {
+                    return tablaAuxiliar.Rows[numero - i]["id_order"].ToString();
+                }
+            }
+            return "";
+        }
         private void button_save(object sender, EventArgs e)
         {
             if (mode == 1)
@@ -310,11 +380,22 @@ namespace InkaArt.Interface.Purchases
                 comboBox_status.Enabled = false;
                 button_add.Enabled = false;
                 buttonDelete.Enabled = false;
-                //hacer insert
-                control.inserData(int.Parse(textBox_idsupplier.Text),comboBox_status.Text,DateTime.Parse(dateTimePicker_creation.Text),DateTime.Parse(dateTimePicker_delivery.Text),double.Parse(textBox_total.Text));
-                Close();
+                try
+                {
+                    //hacer insert
+                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    ventanaListaOrdenes.desarrolloBusqueda();
+                    textBox_id.Text = buscarValorId(textBox_idsupplier.Text);
+                    obtenerMateriasDelSupplier();
+                    llenarMateriasPedidas();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo crear la orden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
             }
-            else if(mode==2 && isInEditMode)
+            else if (mode == 2 && isInEditMode)
             {
                 if (!validating_alldata())
                 {
@@ -329,18 +410,35 @@ namespace InkaArt.Interface.Purchases
                 button_add.Enabled = false;
                 buttonDelete.Enabled = false;
                 //hacer update
-                control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                try {
+                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
+                        if(string.Compare(comboBox_status.Text, "Inactivo") == 0) pasarTodasLasLineasAEstado("Inactivo");
+                        else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
+                        estadoInicial = comboBox_status.Text;
+                    }
+                    ventanaListaOrdenes.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                this.Close();
             }
             else
             {
                 isInEditMode = true;
                 buttonSave.Text = "🖫 Guardar";
-                dateTimePicker_creation.Enabled = true;
-                dateTimePicker_delivery.Enabled = true;
-                textBox_cantidad.Enabled = true;
-                button_add.Enabled = true;
-                buttonDelete.Enabled = true;
-                comboBox_status.Enabled = true;
+                if (string.Compare(comboBox_status.Text, "Borrador") == 0) {
+                    dateTimePicker_creation.Enabled = true;
+                    dateTimePicker_delivery.Enabled = true;
+                    comboBox_status.Enabled = true;
+                    textBox_cantidad.Enabled = true;
+                    button_add.Enabled = true;
+                    buttonDelete.Enabled = true;
+                    comboBoxRawMaterialName.Enabled = true;
+                }
+                dataGridView_pedidos.Enabled = true;
 
             }
         }
@@ -367,28 +465,7 @@ namespace InkaArt.Interface.Purchases
             double precio = double.Parse(textBox_price.Text);
             double subtotal = precio * cantidad;
             textBox_subtotal.Text = subtotal.ToString();
-        }
-
-        private void verifying_factura(object sender, EventArgs e)
-        {
-            string actualdata = string.Empty;
-            char[] entereddata = textBox_factura.Text.ToCharArray();
-            foreach (char aChar in entereddata.AsEnumerable())
-            {
-                if (Char.IsDigit(aChar))
-                {
-                    actualdata = actualdata + aChar;
-                }
-                else
-                {
-                    MessageBox.Show("Solo puede números en la factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    actualdata.Replace(aChar, ' ');
-                    actualdata.Trim();
-                }
-            }
-            textBox_factura.Text = actualdata;
-        }
-        
+        }       
         private void mostrarOtrosCampos(object sender, EventArgs e)
         {
             int iCombo = comboBoxRawMaterialName.SelectedIndex;
@@ -397,7 +474,29 @@ namespace InkaArt.Interface.Purchases
             unitAbrev.Text=hallarNombreUnit(int.Parse(idUnit.Text));
             textBox_price.Text = hallarPrecio(textBox_idrm.Text);            
         }
-
+        private void pasarTodasLasLineasAEstado(string nuevoEstado)
+        {
+            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            {
+                int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
+                int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
+                double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
+                int id_facturaAux = 0;
+                if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length > 0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
+                try
+                {
+                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, nuevoEstado);
+                        dataGridView_pedidos.Rows[i].Cells[0].Value = false;
+                }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            
+            llenarMateriasPedidas();
+            ventanaListaOrdenes.desarrolloBusqueda();
+        }
         private bool validarNumFactura(int id_Row)
         {
             int valorInt = 0, modInt;
@@ -417,24 +516,6 @@ namespace InkaArt.Interface.Purchases
                 return false;
             }        
             return true;
-        }
-        private void ingresandoFactura(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!enProcesoDeLlenado)
-            {
-                //validando que sea correcto
-                int currentId = dataGridView_pedidos.CurrentCell.RowIndex;
-                
-                if (dataGridView_pedidos.CurrentCell.ColumnIndex == 6 && validarNumFactura(currentId))
-                {
-                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[1].Value.ToString());
-                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[4].Value.ToString());
-                    Double subtotalAux = double.Parse(dataGridView_pedidos.Rows[currentId].Cells[5].Value.ToString());
-                    int id_facturaAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[6].Value.ToString());
-                    control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Activo");
-                    llenarMateriasPedidas();
-                }
-            }
         }
 
         private string hallarNombreUnit(int idUnit)

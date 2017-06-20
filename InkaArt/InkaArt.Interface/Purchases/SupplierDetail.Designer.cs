@@ -47,21 +47,21 @@
             this.textBox_contactName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox_price = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.comboBox_status = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox_price = new System.Windows.Forms.TextBox();
             this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id_materiaPrima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idrmsup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -272,6 +272,34 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas";
             // 
+            // textBox_price
+            // 
+            this.textBox_price.Location = new System.Drawing.Point(176, 54);
+            this.textBox_price.Name = "textBox_price";
+            this.textBox_price.Size = new System.Drawing.Size(115, 26);
+            this.textBox_price.TabIndex = 47;
+            this.textBox_price.TextChanged += new System.EventHandler(this.verifying_price);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(173, 28);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 18);
+            this.label10.TabIndex = 46;
+            this.label10.Text = "Precio";
+            // 
+            // comboBox_rawMaterial
+            // 
+            this.comboBox_rawMaterial.AllowDrop = true;
+            this.comboBox_rawMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_rawMaterial.FormattingEnabled = true;
+            this.comboBox_rawMaterial.Location = new System.Drawing.Point(23, 54);
+            this.comboBox_rawMaterial.Name = "comboBox_rawMaterial";
+            this.comboBox_rawMaterial.Size = new System.Drawing.Size(128, 26);
+            this.comboBox_rawMaterial.TabIndex = 45;
+            this.comboBox_rawMaterial.SelectedIndexChanged += new System.EventHandler(this.limpiarPrecio);
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -330,6 +358,39 @@
             this.dataGridView_rm_sup.TabIndex = 10;
             this.dataGridView_rm_sup.DoubleClick += new System.EventHandler(this.obtain_idEdit);
             // 
+            // Acción
+            // 
+            this.Acción.HeaderText = "";
+            this.Acción.Name = "Acción";
+            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Acción.Width = 50;
+            // 
+            // id_materiaPrima
+            // 
+            this.id_materiaPrima.HeaderText = "ID";
+            this.id_materiaPrima.Name = "id_materiaPrima";
+            this.id_materiaPrima.ReadOnly = true;
+            this.id_materiaPrima.Width = 80;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 110;
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            // 
+            // idrmsup
+            // 
+            this.idrmsup.HeaderText = "Id RM Sup";
+            this.idrmsup.Name = "idrmsup";
+            this.idrmsup.Visible = false;
+            // 
             // buttonSave
             // 
             this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
@@ -366,66 +427,6 @@
             this.label9.Size = new System.Drawing.Size(58, 18);
             this.label9.TabIndex = 25;
             this.label9.Text = "Estado";
-            // 
-            // comboBox_rawMaterial
-            // 
-            this.comboBox_rawMaterial.AllowDrop = true;
-            this.comboBox_rawMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_rawMaterial.FormattingEnabled = true;
-            this.comboBox_rawMaterial.Location = new System.Drawing.Point(23, 54);
-            this.comboBox_rawMaterial.Name = "comboBox_rawMaterial";
-            this.comboBox_rawMaterial.Size = new System.Drawing.Size(128, 26);
-            this.comboBox_rawMaterial.TabIndex = 45;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(173, 28);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(54, 18);
-            this.label10.TabIndex = 46;
-            this.label10.Text = "Precio";
-            // 
-            // textBox_price
-            // 
-            this.textBox_price.Location = new System.Drawing.Point(176, 54);
-            this.textBox_price.Name = "textBox_price";
-            this.textBox_price.Size = new System.Drawing.Size(115, 26);
-            this.textBox_price.TabIndex = 47;
-            this.textBox_price.TextChanged += new System.EventHandler(this.verifying_price);
-            // 
-            // Acción
-            // 
-            this.Acción.HeaderText = "";
-            this.Acción.Name = "Acción";
-            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Acción.Width = 50;
-            // 
-            // id_materiaPrima
-            // 
-            this.id_materiaPrima.HeaderText = "ID";
-            this.id_materiaPrima.Name = "id_materiaPrima";
-            this.id_materiaPrima.ReadOnly = true;
-            this.id_materiaPrima.Width = 80;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Width = 110;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            // 
-            // idrmsup
-            // 
-            this.idrmsup.HeaderText = "Id RM Sup";
-            this.idrmsup.Name = "idrmsup";
-            this.idrmsup.Visible = false;
             // 
             // SupplierDetail
             // 

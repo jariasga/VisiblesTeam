@@ -19,6 +19,17 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
             idWh = id;
+            fillCombo();
+        }
+
+        private void fillCombo()
+        {
+            PurchaseOrderController control = new PurchaseOrderController();
+            DataTable OcList = control.getData();
+
+            for (int i = 0; i < OcList.Rows.Count; i++)
+                if (OcList.Rows[i]["status"].ToString() == "Enviado")
+                    comboBox_OC.Items.Add(OcList.Rows[i]["id_order"].ToString());
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -101,35 +112,89 @@ namespace InkaArt.Interface.Warehouse
             return respuesta;
         }
 
-        private string fillGrid() //devuelve el idSupplier
+        private void actualizaLinea(string idLinea, int id_factura)
+        {
+            PurchaseOrderDetailController control = new PurchaseOrderDetailController();
+            DataTable ocDetailList = control.getData();
+            if (id_factura != 0)
+            {
+                int id_linea = int.Parse(idLinea);
+                for (int i = 0; i < ocDetailList.Rows.Count; i++)
+                    if (ocDetailList.Rows[i]["id_detail"].ToString() == idLinea)
+                        //updete del controller
+                        control.updateLineaEntregada(id_linea,id_factura);
+            }
+        }
+
+        private void actualizaOrdenes()
+        {
+            PurchaseOrderController control = new PurchaseOrderController();
+            DataTable OcList = control.getData();
+
+            int id_orden = int.Parse(comboBox_OC.SelectedItem.ToString());
+            int estado_terminado = 0;
+            for (int i = 0; i < dataGridView_details.Rows.Count; i++)
+                if (dataGridView_details.Rows[i].Cells[1].Value.ToString() != "Facturado" &&
+                    dataGridView_details.Rows[i].Cells[1].Value.ToString() != "Entregado")
+                    estado_terminado = 1;
+            if (estado_terminado == 0)
+                //update del controlador orden de compra
+                control.updateOrdenEntregada(id_orden);
+
+        }
+
+        private string fillGrid(int idFactura) //devuelve el idSupplier
         {
             PurchaseOrderDetailController controlOrderRm = new PurchaseOrderDetailController();
             DataTable orderList = controlOrderRm.getData();
 
-            string idOrder = textBox_idFactura.Text;
+            string idOrder = comboBox_OC.SelectedItem.ToString();
             string idRM, idSup, quantity, name, quantityLeft;
             idRM = quantity = name = idSup = quantityLeft = "";
             bool encontre_fac = false;
 
             dataGridView_orders.Rows.Clear();
+            dataGridView_details.Rows.Clear();
 
             for (int i = 0; i < orderList.Rows.Count; i++)
             {
-                if (string.Compare(idOrder, orderList.Rows[i]["id_factura"].ToString()) == 0)
+                if (string.Compare(idOrder, orderList.Rows[i]["id_order"].ToString()) == 0 &&
+                    orderList.Rows[i]["status"].ToString()!= "Inactivo")
                 {
                     encontre_fac = true;
                     idRM = orderList.Rows[i]["id_raw_material"].ToString();
-                    if (canIStoreThisMaterial(idRM))
+                    name = giveme_rawName(idRM);
+                    idSup = orderList.Rows[i]["id_suppliers"].ToString();
+                    if (orderList.Rows[i]["status"].ToString() == "Enviado")//llenar el datagrid de detalle de la orden
                     {
-                        name = giveme_rawName(idRM);
-                        quantity = orderList.Rows[i]["quantity"].ToString();
-                        quantityLeft = howMuchCanIMove(idOrder, idRM);
-                        idSup = orderList.Rows[i]["id_suppliers"].ToString();
-                        if (string.Compare(quantityLeft, "falso") == 0)//si no esta en la tabla su valor es igual a quantity
-                            quantityLeft = quantity;
+  
+                        if (canIStoreThisMaterial(idRM))
+                        {                      
+                            quantity = orderList.Rows[i]["quantity"].ToString();                   
+                            quantityLeft = howMuchCanIMove(idOrder, idRM);                            
+                            if (string.Compare(quantityLeft, "falso") == 0)//si no esta en la tabla su valor es igual a quantity
+                                quantityLeft = quantity;
+                            if (int.Parse(quantityLeft) == 0)//si ya no hay mas por mover verifica si actualiza la orden total a entregada
+                            {
+                                //la linea pasa a entregada y verifica el total
+                                actualizaLinea(orderList.Rows[i]["id_detail"].ToString(),idFactura);
+                                actualizaOrdenes();
+                                //orderList = controlOrderRm.getData();
 
-                        dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "", false);
+                            }
+                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "","", false,orderList.Rows[i]["id_detail"].ToString());
+                        }
+
                     }
+                    else
+                    {
+                        if (orderList.Rows[i]["status"].ToString() == "Facturado" || orderList.Rows[i]["status"].ToString() == "Entregado")
+                        {
+                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                        }
+                    }
+
                 }
             }
             if (encontre_fac == false)
@@ -157,14 +222,14 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int aux_idFactura;
+            int aux_idOc;
             string idSup = "";
 
             dataGridView_orders.Rows.Clear();
-            if (int.TryParse(textBox_idFactura.Text,out aux_idFactura))
+            if (int.TryParse(comboBox_OC.SelectedItem.ToString(),out aux_idOc))
             {
                 //fill grid
-                idSup = fillGrid();
+                idSup = fillGrid(0);
                 string nameSup = giveme_supplierName(idSup);
                 textBox_supplier.Text = nameSup;
            }
@@ -197,50 +262,105 @@ namespace InkaArt.Interface.Warehouse
         {
             int cantidad_ingresar=0;
             int cant_necesaria;
+            int idFactura;
             for(int i = 0; i < dataGridView_orders.Rows.Count; i++)
             {
-                if (Convert.ToBoolean(dataGridView_orders.Rows[i].Cells[5].Value))
+                if (Convert.ToBoolean(dataGridView_orders.Rows[i].Cells[6].Value))
                 {
                     if (int.TryParse(dataGridView_orders.Rows[i].Cells[4].Value.ToString(), out cantidad_ingresar))//es un valor numerico
                     {
                         if (int.Parse(dataGridView_orders.Rows[i].Cells[4].Value.ToString()) > 0)
                         {
-                            cantidad_ingresar = int.Parse(dataGridView_orders.Rows[i].Cells[4].Value.ToString());
-                            cant_necesaria = int.Parse(dataGridView_orders.Rows[i].Cells[3].Value.ToString());
-                            if (cant_necesaria >= cantidad_ingresar)
+                            if (int.TryParse(dataGridView_orders.Rows[i].Cells[5].Value.ToString(), out idFactura))
                             {
-                                int stockFisico = 0;
-                                int stockLogico = 0;
-                                int cantMax = maxInWarehouse(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), ref stockFisico, ref stockLogico);
-                                if (cantMax >= cantidad_ingresar)
+                                idFactura = int.Parse(dataGridView_orders.Rows[i].Cells[5].Value.ToString());
+
+                                if (idFactura > 0)
                                 {
-                                    //AUMENTAR
-                                    RawMaterialWarehouseController controlRmW = new RawMaterialWarehouseController();
-                                    ProductionMovementMovementController controlMovement = new ProductionMovementMovementController();
+                                    cantidad_ingresar = int.Parse(dataGridView_orders.Rows[i].Cells[4].Value.ToString());
+                                    cant_necesaria = int.Parse(dataGridView_orders.Rows[i].Cells[3].Value.ToString());
+                                    if (cant_necesaria >= cantidad_ingresar)
+                                    {
+                                        int stockFisico = 0;
+                                        int stockLogico = 0;
+                                        int cantMax = maxInWarehouse(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), ref stockFisico, ref stockLogico);
+                                        if (cantMax >= cantidad_ingresar)
+                                        {
+                                            //AUMENTAR
+                                            RawMaterialWarehouseController controlRmW = new RawMaterialWarehouseController();
+                                            ProductionMovementMovementController controlMovement = new ProductionMovementMovementController();
 
-                                    //agregar en RM-WH
-                                    controlRmW.updateStock(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), stockLogico + cantidad_ingresar, stockFisico + cantidad_ingresar);
-                                    //agregar en StockDocument
-                                    updateInStockDocument(textBox_idFactura.Text, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
-                                    //agregar en Movement
-                                    controlMovement.insertPurchaseRmMovement(textBox_idFactura.Text, idWh, dateTimePicker1.Value.ToShortDateString(),int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()),cantidad_ingresar);
+                                            //agregar en RM-WH
+                                            controlRmW.updateStock(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), stockLogico + cantidad_ingresar, stockFisico + cantidad_ingresar);
+                                            //agregar en StockDocument
+                                            updateInStockDocument(comboBox_OC.SelectedItem.ToString(), dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
+                                            //agregar en Movement
+                                            controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, dateTimePicker1.Value.ToShortDateString(), int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()), cantidad_ingresar);
 
-                                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    fillGrid();
+                                            MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            fillGrid(idFactura);
+                                            reload();
+
+                                        }
+                                        else
+                                            MessageBox.Show("El almacen no tiene espacio necesario para ese elemento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    else
+                                        MessageBox.Show("La cantidad excede lo necesario, por favor ingrese otro valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                                 }
                                 else
-                                    MessageBox.Show("El almacen no tiene espacio necesario para ese elemento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show("El numero de Factura no puede ser cero, por favor ingrese otro valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                             }
                             else
-                                MessageBox.Show("La cantidad excede lo necesario, por favor ingrese otro valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Debe ingresar un numero de factura válida, por favor ingrese otro valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            
                         }
                         else
                             MessageBox.Show("El valor a mover debe ser mayor a cero, por favor ingrese otro valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     }
                     else
                         MessageBox.Show("Cantidad no válida, por favor verifique el valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
+        private void comboBox_OC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int aux_idOc;
+            string idSup = "";
+
+            dataGridView_orders.Rows.Clear();
+            //TODO que solo salgan las listas "Enviadas"
+            if (int.TryParse(comboBox_OC.SelectedItem.ToString(), out aux_idOc))
+            {
+                //fill grid
+                idSup = fillGrid(0);
+                string nameSup = giveme_supplierName(idSup);
+                textBox_supplier.Text = nameSup;
+            }
+            else
+                MessageBox.Show("Por favor ingrese un numero de factura válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+
+        private void reload()
+        {
+            int aux_idOc;
+            string idSup = "";
+
+            dataGridView_orders.Rows.Clear();
+            //TODO que solo salgan las listas "Enviadas"
+            if (int.TryParse(comboBox_OC.SelectedItem.ToString(), out aux_idOc))
+            {
+                //fill grid
+                idSup = fillGrid(0);
+                string nameSup = giveme_supplierName(idSup);
+                textBox_supplier.Text = nameSup;
+            }
+        }
+
     }
 }

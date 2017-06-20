@@ -58,7 +58,8 @@ namespace InkaArt.Interface.Production
 
                 for (int i = 0; (simulation.SelectedWorkers != null) && (i < list_workers.Items.Count); i++)
                 {
-                    if (simulation.SelectedWorkers.Contains((Worker)list_workers.Items[i]))
+                    Worker worker = (Worker)list_workers.Items[i];
+                    if (simulation.SelectedWorkers.GetByID(worker.ID) != null)
                         list_workers.SetItemChecked(i, true);
                 }
                 for (int i = 0; (simulation.SelectedOrders != null) && (i < list_orders.Items.Count); i++)
@@ -103,7 +104,7 @@ namespace InkaArt.Interface.Production
                         numeric_altarpiece.Value, workers, selected_workers, orders, selected_orders);
 
                     //Llegó la hora de la verdad: ejecutar la simulación de asignación de trabajadores
-                    Form loading_screen = new SimulationLoadingScreen(simulation);
+                    Form loading_screen = new SimulationExecution(simulation, workers);
                     DialogResult result = loading_screen.ShowDialog();
                     if (result == DialogResult.Cancel) return;
 

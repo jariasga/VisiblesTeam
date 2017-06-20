@@ -36,7 +36,7 @@
             this.report_stones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_altarpieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_workers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_export = new System.Windows.Forms.Button();
             this.label_todaydate = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_simulationName = new System.Windows.Forms.Label();
@@ -112,17 +112,18 @@
             this.report_workers.Name = "report_workers";
             this.report_workers.ReadOnly = true;
             // 
-            // button1
+            // button_export
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(491, 510);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 44);
-            this.button1.TabIndex = 32;
-            this.button1.Text = "Exportar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button_export.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.ForeColor = System.Drawing.Color.White;
+            this.button_export.Location = new System.Drawing.Point(491, 510);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(155, 44);
+            this.button_export.TabIndex = 32;
+            this.button_export.Text = "Exportar";
+            this.button_export.UseVisualStyleBackColor = false;
+            this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // label_todaydate
             // 
@@ -171,7 +172,7 @@
             this.Controls.Add(this.label_simulationName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label_todaydate);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_export);
             this.Controls.Add(this.simulation_grid);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -187,7 +188,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView simulation_grid;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_export;
         public System.Windows.Forms.Label label_todaydate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_simulationName;

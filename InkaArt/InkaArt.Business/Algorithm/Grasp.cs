@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
     public class Grasp
     {
-        public static int MaxIterations = 1000;
-        public static double Alpha = 0.2;
-        
+        public const int NumberOfIterations = 1000;
+        public const double Alpha = 0.2;
+
         private WorkerController selected_workers;
         private OrderController selected_orders;
         private JobController jobs;
@@ -20,88 +21,88 @@ namespace InkaArt.Business.Algorithm
         private IndexController indexes;
         private Simulation simulation;
 
-        public Grasp(Simulation simulation, WorkerController selected_workers, OrderController selected_orders,
-            ProcessController processes, JobController jobs, RecipeController recipes, IndexController indexes)
+        public Grasp(Simulation simulation, JobController jobs, RecipeController recipes, IndexController indexes)
         {
-            this.selected_workers = selected_workers;
-            this.selected_orders = new OrderController(selected_orders);
+            this.simulation = simulation;
+            this.selected_workers = simulation.SelectedWorkers;
+            this.selected_orders = new OrderController(simulation.SelectedOrders);
             this.jobs = jobs;
             this.recipes = recipes;
             this.indexes = indexes;
-            this.simulation = simulation;
         }
 
-        public List<Assignment> ExecuteGraspAlgorithm(WorkerController original_workers_list)
+        public Assignment ExecuteGraspAlgorithm(int day, int total_miniturns, ref int elapsed_time)
         {
-            List<Assignment> assignments = new List<Assignment>();
-
-            for (int day = 0; day < simulation.Days; day++)
+            Assignment best_assignment = null;
+            
+            for (int iteration = 0; elapsed_time < Simulation.LimitTime && selected_orders.NumberOfOrders > 0 && iteration < Grasp.NumberOfIterations; iteration++)
             {
-                Assignment selected_assignment = null;
+                Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers, total_miniturns);
 
-                //Generar (Iterations) soluciones, guardando siempre la mejor
-                for (int iteration = 0; iteration < MaxIterations; iteration++)
-                {
-                    Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers.Count(),
-                        simulation.Miniturns);
-                    IndexController candidates = GenerateCandidates(original_workers_list);
+                //Inicializar la lista de candidatos para ser asignados
+                List<Index> candidates = new List<Index>();
+                for (int i = 0; i < indexes.Count(); i++)
+                    if (selected_workers.GetByID(indexes[i].Worker.ID) != null) candidates.Add(indexes[i]);
 
-                    ExecuteGraspConstructionPhase(assignment, candidates, iteration);
+                selected_orders.RemoveAll(order => order.DeliveryDate.Date < assignment.Date.Date);
+                if (selected_orders.NumberOfOrders <= 0) return best_assignment;
 
-                    //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
-                    //por la nueva asignación generada.
-                    if (assignment.ObjectiveFunction < selected_assignment.ObjectiveFunction)
-                        selected_assignment = assignment;
-                }
+                //Ejecutar la fase de construcción del algoritmo GRASP.
+                this.ExecuteGraspConstructionPhase(assignment, candidates, iteration, ref elapsed_time);
 
-                //Añadir la mejor asignación de trabajadores de un día a la lista
-                assignments.Add(selected_assignment);
+                //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día
+                //por la nueva asignación generada.
+                if (best_assignment == null || assignment.ObjectiveFunction < best_assignment.ObjectiveFunction)
+                    best_assignment = assignment;
             }
 
-            return assignments;
+            return best_assignment;
         }
 
-        private void ExecuteGraspConstructionPhase(Assignment assignment, IndexController candidates, int iteration)
+        private void ExecuteGraspConstructionPhase(Assignment assignment, List<Index> candidates, int iteration, ref int elapsed_time)
         {
+            //Inicializar las variables principales
             List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
+            List<AssignmentLine> current_product = new List<AssignmentLine>();
             List<Job> current_product_jobs = new List<Job>();
+            List<Index> current_deleted_indexes = new List<Index>();
 
-            for (int construction = 1; selected_orders.Count() > 0 && candidates.Count() > 0; construction++)
+            for (int construction = 1; elapsed_time < Simulation.LimitTime && selected_orders.NumberOfOrders > 0 && candidates.Count > 0; construction++)
             {
-                //Seleccionar el producto a fabricar si es que nos acabamos el producto
-                if (current_product_jobs.Count <= 0) SelectJobsPerProduct(current_product_jobs, order_recipes);
-
-                //Obtener una lista de los trabajadores más eficientes
-                IndexController rcl = GenerateReleaseCandidateList(candidates, assignment, iteration,
-                    current_product_jobs);
-                if (rcl.Count() <= 0) break;
+                //Obtener una lista de los trabajadores más eficientes. Si no se pudo realizar el producto, borrar el producto y quitar las asignaciones realizadas
+                List<Index> rcl = GenerateReleaseCandidateList(candidates, order_recipes, current_product, current_product_jobs, assignment.ObjectiveFunction, iteration);
+                if (rcl.Count() <= 0)
+                {
+                    current_product.Clear();
+                    current_product_jobs.Clear();
+                    break;
+                }
 
                 //Escoger un trabajador al azar e incorporarlo en la solución
-                Index chosen = rcl[Randomizer.NextNumber(0, rcl.Count() - 1)];
-
-                AssignmentLine assignment_line = new AssignmentLine(selected_workers.GetByID(chosen.Worker),
-                    recipes.GetByID(chosen.Recipe), jobs.GetByID(chosen.Job));
-                int worker_index = selected_workers.GetIndex(chosen.Worker);
-                int number_of_miniturns = Convert.ToInt32(chosen.AverageTime / simulation.MiniturnLength);
-                if (assignment.AddLine(assignment_line, worker_index, number_of_miniturns) == false)
-                    continue;
-
-                assignment.ObjectiveFunction += chosen.CostValue(assignment.ObjectiveFunction, iteration);
-                if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) continue;
-
-                //Quitar los candidatos necesarios
-                if (assignment.IsWorkerFull(worker_index))
+                Index chosen_candidate = rcl[Randomizer.NextNumber(0, rcl.Count - 1)];
+                AssignmentLine new_assignment_line = assignment.GetNextAssignmentLine(chosen_candidate);
+                if (new_assignment_line == null)
                 {
-                    for (int i = 0; i < candidates.Count();)
-                    {
-                        if (candidates[i].Worker == chosen.Worker) candidates.Remove(candidates[i]);
-                        else i++;
-                    }
+                    LogHandler.WriteLine("Hubo un assignment line que devolvió nulo... Worker = {0}, Job = {1}. Recipe = {2}.", chosen_candidate.Worker.FullName,
+                        chosen_candidate.Job.Name, chosen_candidate.Recipe.Description + " " + chosen_candidate.Recipe.Version);
+                    LogHandler.WriteLine("RCL count = {0}, Current_Jobs count = {1}, Current_Product = {2}", rcl.Count, current_product_jobs.Count, current_product.Count);
+                    this.RemoveWorkers(candidates, chosen_candidate.Worker);
+                    break;
                 }
-                candidates.Remove(chosen);
+                current_product.Add(new_assignment_line);
+                if (current_product_jobs.Count <= 0) current_product_jobs = jobs.GetJobsByProduct(chosen_candidate.Recipe.Product);
+                assignment.ObjectiveFunction += chosen_candidate.CostValue(assignment.ObjectiveFunction, iteration);
+                current_product_jobs.Remove(chosen_candidate.Job);
+
+                //Actualizar las variables y quitar los candidatos necesarios
+                if (assignment.IsWorkerFull(chosen_candidate.Worker, current_product)) this.RemoveWorkers(candidates, chosen_candidate.Worker);
+                current_deleted_indexes.Add(new Index(chosen_candidate));
+                candidates.Remove(chosen_candidate);
+
+                //if (selected_orders[0].UpdateLineItem(chosen.Recipe) == false) break;
 
                 //Si la orden se completó, removerla de la lista
-                if (selected_orders[0].Completed()) selected_orders.RemoveFirst();
+                if (selected_orders[0].Completed()) selected_orders.RemoveAt(0);
             }
         }
 
@@ -113,57 +114,39 @@ namespace InkaArt.Business.Algorithm
             return order_recipes;
         }
 
-        private void SelectJobsPerProduct(List<Job> current_product_jobs, List<Recipe> order_recipes)
-        {
-            Recipe recipe = order_recipes[Randomizer.NextNumber(0, order_recipes.Count - 1)];
-            
-            for (int i = 0; i < jobs.NumberOfJobs; i++)
-                if (jobs[i].Product == recipe.Product) current_product_jobs.Add(jobs[i]);
-        }
-
-        private IndexController GenerateCandidates(WorkerController original_workers_list)
-        {
-            IndexController candidates = new IndexController();
-            for (int i = 0; i < indexes.Count(); i++)
-            {
-                Worker index_worker = original_workers_list.GetByID(indexes[i].Worker);
-                if (selected_workers.Contains(index_worker)) candidates.Add(indexes[i]);
-            }
-            return candidates;
-        }
-
-        private IndexController GenerateReleaseCandidateList(IndexController candidates, Assignment assignment,
-            int iteration, List<Job> current_product_jobs)
+        private List<Index> GenerateReleaseCandidateList(List<Index> candidates, List<Recipe> order_recipes, List<AssignmentLine> current_product, List<Job> current_product_jobs,
+            double objective_function, int iteration)
         {
             //Inicializar el RCL con los candidatos asociados al producto y receta a producir
-            IndexController rcl = new IndexController();
-            for (int i = 0; i < candidates.Count(); i++)
+            List<Index> rcl = new List<Index>();
+            for (int i = 0; i < candidates.Count; i++)
             {
-                Job job = jobs.GetByID(candidates[i].Job);
-                if (current_product_jobs.Contains(job)) rcl.Add(candidates[i]);
+                //Si current_product_jobs no tiene datos (y por tanto current_product tampoco), añadir los candidatos cuya receta esté dentro de la lista de recetas de la orden actual.
+                if (current_product_jobs.Count <= 0 && order_recipes.Contains(candidates[i].Recipe))
+                    rcl.Add(candidates[i]);
+                //Si current_product está con datos (y por tanto, current_product_jobs también), añadir los candidatos cuyo puesto de trabajo esté dentro de la lista de puestos para el producto
+                //y cuya receta sea la misma que el producto que estamos elaborando.
+                if (current_product.Count > 0 && current_product_jobs.Contains(candidates[i].Job) && candidates[i].Recipe.ID == current_product[0].Recipe.ID)
+                    rcl.Add(candidates[i]);
             }
 
             //Calcular el máximo y el mínimo costo de los candidatos que podrían pertenecer al RCL
-            double min = double.MaxValue;
-            double max = double.MinValue;
-            for (int i = 0; i < rcl.Count(); i++)
-            {
-                double cost_value = rcl[i].CostValue(assignment.ObjectiveFunction, iteration);
-                if (cost_value < min) min = cost_value;
-                if (cost_value > max) max = cost_value;
-            }
+            double min = rcl.Min(index => index.CostValue(objective_function, iteration));
+            double max = rcl.Max(index => index.CostValue(objective_function, iteration));
 
             //Obtener el rango del RCL y quitar los índices del RCL que no estén en el rango
             double max_rcl = min + Alpha * (max - min);
-            for (int i = 0; i < rcl.Count();)
-            {
-                double cost_value = rcl[i].CostValue(assignment.ObjectiveFunction, iteration);
-
-                if (cost_value >= min && cost_value <= max_rcl) i++;
-                else rcl.RemoveFirst();
-            }
+            rcl.RemoveAll(index => (index.CostValue(objective_function, iteration) < min || index.CostValue(objective_function, iteration) > max_rcl));
 
             return rcl;
         }
+
+        private void RemoveWorkers(List<Index> candidates, Worker worker)
+        {
+            for (int i = candidates.Count - 1; i >= 0; i--)
+                if (candidates[i].Worker.ID == worker.ID) candidates.Remove(candidates[i]);
+        }
+
     }
 }
+ 

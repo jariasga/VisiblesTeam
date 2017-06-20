@@ -57,6 +57,16 @@
     <Reference Include="GMap.NET.WindowsForms">
       <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
     </Reference>
@@ -151,11 +161,11 @@
     <Compile Include="Production\SimulationConfig.designer.cs">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\SimulationLoadingScreen.cs">
+    <Compile Include="Production\SimulationExecution.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\SimulationLoadingScreen.Designer.cs">
-      <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
+    <Compile Include="Production\SimulationExecution.Designer.cs">
+      <DependentUpon>SimulationExecution.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\SimulationReport.cs">
       <SubType>Form</SubType>
@@ -182,6 +192,24 @@
     </Compile>
     <Compile Include="Sales\DocumentSearch.Designer.cs">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentDetail.Designer.cs">
+      <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentShow.Designer.cs">
+      <DependentUpon>SaleDocumentShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Security\ConnectWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\ConnectWarning.Designer.cs">
+      <DependentUpon>ConnectWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\breakProduct.cs">
       <SubType>Form</SubType>
@@ -504,8 +532,8 @@
     <EmbeddedResource Include="Production\SimulationConfig.resx">
       <DependentUpon>SimulationConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\SimulationLoadingScreen.resx">
-      <DependentUpon>SimulationLoadingScreen.cs</DependentUpon>
+    <EmbeddedResource Include="Production\SimulationExecution.resx">
+      <DependentUpon>SimulationExecution.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\SimulationReport.resx">
       <DependentUpon>SimulationReport.cs</DependentUpon>
@@ -528,6 +556,15 @@
     </Compile>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\SaleDocumentDetail.resx">
+      <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\SaleDocumentShow.resx">
+      <DependentUpon>SaleDocumentShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\ConnectWarning.resx">
+      <DependentUpon>ConnectWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\breakProduct.resx">
       <DependentUpon>breakProduct.cs</DependentUpon>
@@ -671,6 +708,7 @@
       <DependentUpon>WarehouseShow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -706,6 +744,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

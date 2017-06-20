@@ -56,11 +56,16 @@ namespace InkaArt.Interface.Security
                 stockReport = returnCheckState(checkedListBoxPermissions.GetItemCheckState(18));
                 kardexReport = returnCheckState(checkedListBoxPermissions.GetItemCheckState(19));
 
-                role.insertData(textBoxNewRole.Text, generalParameters, userList, roles,
+                if (filter() == 0)
+                {
+                    int verInserted = role.insertData(textBoxNewRole.Text, generalParameters, userList, roles,
                     suppliers, rawMaterials, unitOfmeasure, purcharseOrder,
                     finalProduct, productionProcess, productionTurn, workerAssignment, turnReport, productivityReport,
                     clients, orders, generateReport,
                     warehouse, movements, stockReport, kardexReport);
+                    if (verInserted == 1) MessageBox.Show("Se creó el nuevo rol", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else MessageBox.Show("El nombre del rol ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             textBoxNewRole.Text = "";
             listRoles();
@@ -104,11 +109,17 @@ namespace InkaArt.Interface.Security
                 stockReport = returnCheckState(checkedListBoxPermissions.GetItemCheckState(18));
                 kardexReport = returnCheckState(checkedListBoxPermissions.GetItemCheckState(19));
 
-                role.updateData(Convert.ToInt32(textBoxIDRole.Text), textBoxNewRole.Text, generalParameters, userList, roles,
+                if ((filter() == 1 && string.Equals(textBoxNewRole.Text, comboBoxDescription.Text))|| filter() == 0)
+                {
+                    int verInserted = role.updateData(Convert.ToInt32(textBoxIDRole.Text), textBoxNewRole.Text, generalParameters, userList, roles,
                         suppliers, rawMaterials, unitOfmeasure, purcharseOrder,
                         finalProduct, productionProcess, productionTurn, workerAssignment, turnReport, productivityReport,
                         clients, orders, generateReport,
                         warehouse, movements, stockReport, kardexReport);
+                    if (verInserted == 1) MessageBox.Show("Se guardó el rol", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else MessageBox.Show("El nombre del rol ya existe", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
                 listRoles();
                 comboBoxDescription.Text = textBoxNewRole.Text;
             }
@@ -122,6 +133,7 @@ namespace InkaArt.Interface.Security
         private void comboBoxDescription_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxIDRole.Text = table.Rows[comboBoxDescription.SelectedIndex]["id_role"].ToString();
+            textBoxNewRole.Text = table.Rows[comboBoxDescription.SelectedIndex]["description"].ToString();
             fillPermissions();
         }
 
@@ -195,6 +207,24 @@ namespace InkaArt.Interface.Security
                 checkedListBoxPermissions.Items.Add("19. Reporte de Stocks", (bool)row["warehouse_stock_reports"]);
                 checkedListBoxPermissions.Items.Add("20. Reporte de Kardex", (bool)row["warehouse_kardex_reports"]);
             }
+        }
+
+        public int filter()
+        {
+            DataRow[] rows;
+            table = role.showData();
+            rows = table.Select("description = '" + textBoxNewRole.Text + "'");
+            return rows.Count();
+        }
+
+        private void buttonMassiveUpload_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Users File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                role.massiveUpload(dialog.FileName);
+            listRoles();
         }
     }
 }

@@ -16,8 +16,10 @@ namespace InkaArt.Interface.Sales
         OrderController orderController = new OrderController();
         DataTable saleDocumentList;
         DataTable productList;
-        private int currentClientId, currentClientType, currentClientNat;
+        private int currentClientId = -1, currentClientType, currentClientNat;
         private double amount;
+        private string orderState = "registrado";
+        private bool isClientSelected = false;
         public ClientOrderCreate()
         {
             InitializeComponent();
@@ -45,6 +47,8 @@ namespace InkaArt.Interface.Sales
             productList = orderController.GetProducts();
             populateCombobox(combo_product, productList, "name", "idProduct");
             label_stock.Visible = label_stockLabel.Visible = false;
+            DataTable recipes = orderController.getProductRecipe(combo_product.SelectedValue);
+            populateCombobox(combo_quality, recipes, "version", "idRecipe");
         }
 
         private void populateCombobox(ComboBox combo, DataTable dataSource, string displayParam, string valueParam)
@@ -67,13 +71,12 @@ namespace InkaArt.Interface.Sales
         }
 
         private void button_save_Click(object sender, EventArgs e)
-        {
-            int docTypeId = textbox_doctype.Text.Equals("Boleta") ? 1 : 2;         
+        {   
             DataTable orderLine = parseDataGrid(grid_orderline);
-            string messageResponse = orderController.makeValidations(textbox_doc.Text,textbox_name.Text, orderLine, "pedido", "");
+            string messageResponse = orderController.makeValidations(textbox_doc.Text,textbox_name.Text, orderLine, "pedido", "", date_delivery.Value);
             if (messageResponse.Equals("OK"))
             {
-                int response = orderController.AddOrder(currentClientId, docTypeId, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, "registrado", 1, orderLine, "pedido");
+                int response = orderController.AddOrder(currentClientId, combo_doctype.SelectedIndex, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, orderState, 1, orderLine, "pedido", isClientSelected, currentClientNat);
                 if (response >= 0)
                 {
                     MessageBox.Show(this, "El pedido ha sido registrado con éxito.", "Registrar Pedido", MessageBoxButtons.OK);
@@ -130,21 +133,24 @@ namespace InkaArt.Interface.Sales
             var result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
+                isClientSelected = true;
+                label3.Visible = combo_doctype.Visible = true;
                 currentClientId = form.SelectedClientId;
                 textbox_doc.Text = form.SelectedClientDoc.ToString();
                 textbox_name.Text = form.SelectedClientName;
                 currentClientType = form.SelectedClientType;
                 currentClientNat = form.SelectedClientTypeNat;
-                if (currentClientType == 0)
+                if (currentClientType == 1)
                 {
                     clientIdentifierLabel.Text = "DNI";
-                    textbox_doctype.Text = "Boleta";
+                    combo_doctype.SelectedIndex = 0;
                 }
                 else
                 {
                     clientIdentifierLabel.Text = "RUC";
-                    textbox_doctype.Text = "Factura";
+                    combo_doctype.SelectedIndex = 1;
                 }
+                combo_doctype.Enabled = false;
                 if (currentClientNat == 0)
                 {
                     label_stock.Visible = label_stockLabel.Visible = true;
@@ -155,6 +161,7 @@ namespace InkaArt.Interface.Sales
                             label_stock.Text = row["logicalStock"].ToString();
                         }
                     }
+                    orderState = "despachado";
                 }
                 else
                     label_stock.Visible = label_stockLabel.Visible = false;
@@ -173,37 +180,30 @@ namespace InkaArt.Interface.Sales
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            if (textbox_doc.Text.Equals("") || textbox_name.Text.Equals(""))
-            {
-                MessageBox.Show(this, "Primero debe seleccionar un cliente", "Agregar productos", MessageBoxButtons.OK);
-            }
+            if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
             else
             {
-                if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
-                else
+                bool canAdd = true;
+                if (productList.Rows.Count == 0) productList = orderController.GetProducts();
+                foreach (DataRow row in productList.Rows)
                 {
-                    bool canAdd;
-                    if (productList.Rows.Count == 0) productList = orderController.GetProducts();
-                    foreach (DataRow row in productList.Rows)
+                    var aux = row["idProduct"];
+                    string strAux = aux.ToString();
+                    if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                     {
-                        var aux = row["idProduct"];
-                        string strAux = aux.ToString();
-                        if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
+                        if (isClientSelected) canAdd = orderController.verifyStock(currentClientNat, row["logicalStock"].ToString(), numeric_quantity.Value.ToString());
+                        if (canAdd)
                         {
-                            canAdd = orderController.verifyStock(currentClientNat, row["logicalStock"].ToString(), numeric_quantity.Value.ToString());
-                            if (canAdd)
-                            {
-                                float price = orderController.getRightPrice(currentClientNat, row["localPrice"].ToString(), row["exportPrice"].ToString());
-                                amount += price * float.Parse(numeric_quantity.Value.ToString());
-                                grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
-                            }
-                            else MessageBox.Show(this, "La cantidad supera al stock disponible", "Stock", MessageBoxButtons.OK);
+                            float price = orderController.getRightPrice(currentClientNat, row["localPrice"].ToString(), row["exportPrice"].ToString());
+                            amount = orderController.updateAmount(amount,price, numeric_quantity.Value);
+                            grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
                         }
+                        else MessageBox.Show(this, "La cantidad supera al stock disponible", "Stock", MessageBoxButtons.OK);
                     }
-                    textbox_amount.Text = Math.Round(amount, 2).ToString();
-                    textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
-                    textbox_total.Text = Math.Round((1.18 * amount), 2).ToString();
                 }
+                textbox_amount.Text = orderController.getPolishedAmount(amount);
+                textbox_igv.Text = orderController.getPolishedIGV(amount);
+                textbox_total.Text = orderController.getPolishedTotal(amount);
             }
         }
 
@@ -230,8 +230,15 @@ namespace InkaArt.Interface.Sales
                 if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                 {
                     label_stock.Text = row["logicalStock"].ToString();
+                    DataTable recipes = orderController.getProductRecipe(row["idProduct"]);
+                    populateCombobox(combo_quality, recipes, "version", "idRecipe");
                 }
             }
+        }
+
+        private void date_delivery_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void numeric_quantity_KeyUp(object sender, KeyEventArgs e)

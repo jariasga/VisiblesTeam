@@ -118,5 +118,17 @@ namespace InkaArt.Interface.Sales
             textbox_priority.Enabled = true;
             trackbar_priority.Enabled = true;
         }
+
+        private void radio_juridic_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radio_juridic.Checked)
+                documentLabel.Text = "RUC";
+        }
+
+        private void radio_natural_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radio_natural.Checked)
+                documentLabel.Text = "DNI";
+        }
     }
 }

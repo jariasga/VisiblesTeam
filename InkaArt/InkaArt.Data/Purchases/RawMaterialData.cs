@@ -12,8 +12,6 @@ namespace InkaArt.Data.Purchases
     public class RawMaterialData : BD_Connector
     {
         private DataSet data;
-        private DataTable table;
-        private DataRow row;
         private NpgsqlDataAdapter adap;
 
         public NpgsqlDataAdapter rawMaterialAdapter()

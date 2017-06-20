@@ -9,11 +9,12 @@ namespace InkaArt.Data.Algorithm
 {
     public class AssignmentLine
     {
-        private DateTime date;
         private Worker worker;
         private Recipe recipe;
         private Job job;         //Proceso por producto
-        private int miniturn;
+
+        private int miniturn_start;
+        private int total_miniturns_used;
         private int produced;    //Cantidad producida
 
         public Worker Worker
@@ -31,23 +32,37 @@ namespace InkaArt.Data.Algorithm
             get { return recipe; }
             set { recipe = value; }
         }
-        public DateTime Date
+        public int MiniturnStart
         {
-            get { return date; }
-            set { date = value; }
-        }
-        public int Miniturn
-        {
-            get { return miniturn; }
-            set { miniturn = value; }
+            get { return miniturn_start; }
+            set { miniturn_start = value; }
         }
 
-        public AssignmentLine(Worker worker, Recipe recipe, Job job)
+        public int TotalMiniturnsUsed
         {
-            this.Worker = worker;
-            this.Recipe = recipe;
-            this.Job = job;
+            get { return total_miniturns_used; }
+            set { total_miniturns_used = value; }
+        }
+        public int Produced
+        {
+            get { return produced; }
+            set { produced = value; }
         }
 
+        public AssignmentLine(Worker worker, Recipe recipe, Job job, int miniturn_start, int total_miniturns_used, int produced)
+        {
+            this.worker = worker;
+            this.recipe = recipe;
+            this.job = job;
+            this.miniturn_start = miniturn_start;
+            this.produced = produced;
+            this.total_miniturns_used = total_miniturns_used;
+        }
+
+        public bool Equals(AssignmentLine other)
+        {
+            if (this == null || other == null) return false;
+            return (this.worker.ID == other.worker.ID && this.job.ID == other.job.ID && this.recipe.ID == other.recipe.ID);
+        }
     }
 }

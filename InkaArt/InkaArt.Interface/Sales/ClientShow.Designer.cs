@@ -298,6 +298,7 @@
             this.radio_natural.TabIndex = 38;
             this.radio_natural.Text = "Natural";
             this.radio_natural.UseVisualStyleBackColor = true;
+            this.radio_natural.CheckedChanged += new System.EventHandler(this.radio_natural_CheckedChanged);
             // 
             // radio_juridic
             // 
@@ -309,6 +310,7 @@
             this.radio_juridic.TabIndex = 37;
             this.radio_juridic.Text = "Jurídica";
             this.radio_juridic.UseVisualStyleBackColor = true;
+            this.radio_juridic.CheckedChanged += new System.EventHandler(this.radio_juridic_CheckedChanged);
             // 
             // textbox_priority
             // 

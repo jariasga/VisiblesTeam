@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\Assignment.cs" />
     <Compile Include="Algorithm\Grasp.cs" />
     <Compile Include="Algorithm\IndexController.cs" />
     <Compile Include="Algorithm\JobController.cs" />
@@ -110,7 +111,9 @@
     <Compile Include="Warehouse\WarehouseCrud.cs" />
     <Compile Include="Warehouse\WarehouseMovementController.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InkaArt.Classes\InkaArt.Classes.csproj">
       <Project>{5615d3b3-9283-4141-b935-cbd59627ec0a}</Project>

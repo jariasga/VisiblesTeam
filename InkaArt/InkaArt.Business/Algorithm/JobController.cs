@@ -33,11 +33,12 @@ namespace InkaArt.Business.Algorithm
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id_job = reader.GetInt32(2);
-                string name = reader.GetString(3);
-                int id_process = reader.GetInt32(1);
-                int id_product = reader.GetInt32(0);
-                jobs.Add(new Job(id_job, name, id_process, id_product));
+                int id_job = Convert.ToInt32(reader["idJob"]);
+                string name = reader["name"].ToString();
+                int id_process = Convert.ToInt32(reader["idProcess"]);
+                int id_product = Convert.ToInt32(reader["idProduct"]);
+                int order = Convert.ToInt32(reader["order"]);
+                jobs.Add(new Job(id_job, name, id_process, id_product, order));
             }
 
             connection.Close();
@@ -77,6 +78,11 @@ namespace InkaArt.Business.Algorithm
             for (int i = 0; i < jobs.Count; i++)
                 if (jobs[i].ID == id_job) return i;
             return -1;
+        }
+
+        public List<Job> GetJobsByProduct(int id_product)
+        {
+            return jobs.FindAll(job => job.Product == id_product);
         }
     }
 }
