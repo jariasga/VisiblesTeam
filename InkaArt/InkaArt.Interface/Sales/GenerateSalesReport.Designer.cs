@@ -49,9 +49,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dateTimePicker_fechaIni);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(22, 33);
+            this.groupBox1.Location = new System.Drawing.Point(22, 28);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(755, 223);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(566, 181);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros para el reporte";
@@ -61,9 +63,10 @@
             this.button_generateSalesResport.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generateSalesResport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generateSalesResport.ForeColor = System.Drawing.Color.White;
-            this.button_generateSalesResport.Location = new System.Drawing.Point(505, 136);
+            this.button_generateSalesResport.Location = new System.Drawing.Point(379, 110);
+            this.button_generateSalesResport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_generateSalesResport.Name = "button_generateSalesResport";
-            this.button_generateSalesResport.Size = new System.Drawing.Size(138, 51);
+            this.button_generateSalesResport.Size = new System.Drawing.Size(104, 41);
             this.button_generateSalesResport.TabIndex = 22;
             this.button_generateSalesResport.Text = "Generar";
             this.button_generateSalesResport.UseVisualStyleBackColor = false;
@@ -72,18 +75,20 @@
             // comboBox_products
             // 
             this.comboBox_products.FormattingEnabled = true;
-            this.comboBox_products.Location = new System.Drawing.Point(471, 77);
+            this.comboBox_products.Location = new System.Drawing.Point(353, 63);
+            this.comboBox_products.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox_products.Name = "comboBox_products";
-            this.comboBox_products.Size = new System.Drawing.Size(225, 31);
+            this.comboBox_products.Size = new System.Drawing.Size(170, 26);
             this.comboBox_products.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(467, 51);
+            this.label3.Location = new System.Drawing.Point(350, 41);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 23);
+            this.label3.Size = new System.Drawing.Size(71, 18);
             this.label3.TabIndex = 7;
             this.label3.Text = "Producto";
             // 
@@ -91,45 +96,50 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 133);
+            this.label2.Location = new System.Drawing.Point(18, 108);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 23);
+            this.label2.Size = new System.Drawing.Size(84, 18);
             this.label2.TabIndex = 5;
             this.label2.Text = "Fecha final";
             // 
             // dateTimePicker_fechaFin
             // 
             this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(28, 159);
+            this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(21, 129);
+            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
-            this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(340, 28);
+            this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(256, 24);
             this.dateTimePicker_fechaFin.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 51);
+            this.label1.Location = new System.Drawing.Point(18, 41);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 23);
+            this.label1.Size = new System.Drawing.Size(96, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Fecha inicial";
             // 
             // dateTimePicker_fechaIni
             // 
             this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(28, 77);
+            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 63);
+            this.dateTimePicker_fechaIni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
-            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(340, 28);
+            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(256, 24);
             this.dateTimePicker_fechaIni.TabIndex = 4;
             // 
             // GenerateSalesReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(811, 297);
+            this.ClientSize = new System.Drawing.Size(613, 241);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "GenerateSalesReport";
             this.Text = "Generar Reporte de Ventas";
             this.groupBox1.ResumeLayout(false);

@@ -32,6 +32,8 @@
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_basePrice = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.textBox_stock = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_product = new System.Windows.Forms.TextBox();
@@ -44,8 +46,6 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox_basePrice = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_productProceses)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +100,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Basicos";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // textBox_basePrice
+            // 
+            this.textBox_basePrice.Enabled = false;
+            this.textBox_basePrice.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_basePrice.Location = new System.Drawing.Point(22, 181);
+            this.textBox_basePrice.Name = "textBox_basePrice";
+            this.textBox_basePrice.ReadOnly = true;
+            this.textBox_basePrice.Size = new System.Drawing.Size(202, 24);
+            this.textBox_basePrice.TabIndex = 27;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(20, 160);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(95, 18);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Precio Base";
             // 
             // textBox_stock
             // 
@@ -212,40 +232,20 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(226, 364);
+            this.button_save.Location = new System.Drawing.Point(219, 372);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(103, 42);
+            this.button_save.Size = new System.Drawing.Size(121, 42);
             this.button_save.TabIndex = 16;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(20, 160);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 18);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Precio Base";
-            // 
-            // textBox_basePrice
-            // 
-            this.textBox_basePrice.Enabled = false;
-            this.textBox_basePrice.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_basePrice.Location = new System.Drawing.Point(22, 181);
-            this.textBox_basePrice.Name = "textBox_basePrice";
-            this.textBox_basePrice.ReadOnly = true;
-            this.textBox_basePrice.Size = new System.Drawing.Size(202, 24);
-            this.textBox_basePrice.TabIndex = 27;
             // 
             // ProductionProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(564, 424);
+            this.ClientSize = new System.Drawing.Size(564, 437);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox1);

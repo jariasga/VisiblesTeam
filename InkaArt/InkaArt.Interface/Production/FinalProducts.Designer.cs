@@ -56,7 +56,7 @@
             this.Stock,
             this.Detalles,
             this.Receta});
-            this.dataGridView_finalProductList.Location = new System.Drawing.Point(34, 57);
+            this.dataGridView_finalProductList.Location = new System.Drawing.Point(33, 36);
             this.dataGridView_finalProductList.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_finalProductList.Name = "dataGridView_finalProductList";
             this.dataGridView_finalProductList.Size = new System.Drawing.Size(836, 242);
@@ -116,9 +116,9 @@
             this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
             this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_refresh.ForeColor = System.Drawing.Color.White;
-            this.button_refresh.Location = new System.Drawing.Point(363, 315);
+            this.button_refresh.Location = new System.Drawing.Point(387, 300);
             this.button_refresh.Name = "button_refresh";
-            this.button_refresh.Size = new System.Drawing.Size(103, 42);
+            this.button_refresh.Size = new System.Drawing.Size(131, 42);
             this.button_refresh.TabIndex = 21;
             this.button_refresh.Text = "Actualizar";
             this.button_refresh.UseVisualStyleBackColor = false;
@@ -129,7 +129,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(883, 391);
+            this.ClientSize = new System.Drawing.Size(905, 375);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.dataGridView_finalProductList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
