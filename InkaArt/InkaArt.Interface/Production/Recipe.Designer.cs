@@ -225,7 +225,7 @@
             // 
             // button_add
             // 
-            this.button_add.BackColor = System.Drawing.Color.Gray;
+            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
             this.button_add.Location = new System.Drawing.Point(333, 30);
@@ -233,7 +233,7 @@
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(97, 39);
             this.button_add.TabIndex = 26;
-            this.button_add.Text = "＋ Agregar";
+            this.button_add.Text = "🖫 Guardar";
             this.button_add.UseVisualStyleBackColor = false;
             this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
