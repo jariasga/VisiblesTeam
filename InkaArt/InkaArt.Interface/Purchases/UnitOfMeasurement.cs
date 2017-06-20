@@ -27,6 +27,7 @@ namespace InkaArt.Interface.Purchases
             isInEditMode = true;
             buttonSave.Text = "🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
             creandoDesdeRawMatView = true;
         }
         public UnitOfMeasurement(UnitOfMeasurementController control)
@@ -38,6 +39,7 @@ namespace InkaArt.Interface.Purchases
             isInEditMode = true;
             buttonSave.Text = "🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
             creandoDesdeRawMatView = true;
             
         }

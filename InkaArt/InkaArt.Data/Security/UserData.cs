@@ -21,5 +21,33 @@ namespace InkaArt.Data.Security
             
             return userAdapter;
         }
+
+        public int insertPhoto(System.Byte[] photo, int userID)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand("UPDATE \"inkaart\".\"User\" " +
+                "SET photo = @photo " +
+                "WHERE id_user = @id_user");
+            cmd.Parameters.Add(new NpgsqlParameter("photo", NpgsqlTypes.NpgsqlDbType.Bytea));
+            cmd.Parameters.Add(new NpgsqlParameter("id_user", NpgsqlTypes.NpgsqlDbType.Integer));
+            cmd.Parameters[0].Direction = ParameterDirection.Input;
+            cmd.Parameters[1].Direction = ParameterDirection.Input;
+            cmd.Parameters[0].NpgsqlValue = photo;
+            cmd.Parameters[1].NpgsqlValue = userID;
+            cmd.Connection = Connection;
+            try
+            {
+                cmd.Connection.Open();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                closeConnection();
+            }
+            return 0;
+        }
     }
 }

@@ -37,9 +37,9 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView_products = new System.Windows.Forms.DataGridView();
-            this.button_save = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_products)).BeginInit();
             this.SuspendLayout();
@@ -52,21 +52,22 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_id);
-            this.groupBox1.Location = new System.Drawing.Point(12, 31);
+            this.groupBox1.Location = new System.Drawing.Point(32, 31);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(247, 226);
+            this.groupBox1.Size = new System.Drawing.Size(268, 242);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Basicos";
             // 
             // textBox_process
             // 
+            this.textBox_process.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox_process.Enabled = false;
             this.textBox_process.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_process.Location = new System.Drawing.Point(21, 118);
             this.textBox_process.Name = "textBox_process";
             this.textBox_process.ReadOnly = true;
-            this.textBox_process.Size = new System.Drawing.Size(204, 24);
+            this.textBox_process.Size = new System.Drawing.Size(220, 24);
             this.textBox_process.TabIndex = 23;
             // 
             // label4
@@ -84,7 +85,7 @@
             this.textBox_count.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_count.Location = new System.Drawing.Point(22, 183);
             this.textBox_count.Name = "textBox_count";
-            this.textBox_count.Size = new System.Drawing.Size(205, 24);
+            this.textBox_count.Size = new System.Drawing.Size(219, 24);
             this.textBox_count.TabIndex = 21;
             // 
             // label2
@@ -103,25 +104,26 @@
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(19, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 18);
+            this.label1.Size = new System.Drawing.Size(23, 18);
             this.label1.TabIndex = 13;
-            this.label1.Text = "Id";
+            this.label1.Text = "ID";
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_id.Location = new System.Drawing.Point(23, 58);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.ReadOnly = true;
-            this.textBox_id.Size = new System.Drawing.Size(204, 24);
+            this.textBox_id.Size = new System.Drawing.Size(218, 24);
             this.textBox_id.TabIndex = 14;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(286, 31);
+            this.label5.Location = new System.Drawing.Point(306, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(156, 18);
             this.label5.TabIndex = 16;
@@ -136,24 +138,11 @@
             this.dataGridView_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
             this.Nombre});
-            this.dataGridView_products.Location = new System.Drawing.Point(289, 53);
+            this.dataGridView_products.Location = new System.Drawing.Point(307, 53);
             this.dataGridView_products.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_products.Name = "dataGridView_products";
-            this.dataGridView_products.Size = new System.Drawing.Size(244, 204);
+            this.dataGridView_products.Size = new System.Drawing.Size(268, 220);
             this.dataGridView_products.TabIndex = 17;
-            // 
-            // button_save
-            // 
-            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(221, 280);
-            this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(103, 42);
-            this.button_save.TabIndex = 18;
-            this.button_save.Text = "🖫 Guardar";
-            this.button_save.UseVisualStyleBackColor = false;
-            this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
             // Producto
             // 
@@ -167,12 +156,25 @@
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
+            // button_save
+            // 
+            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_save.ForeColor = System.Drawing.Color.White;
+            this.button_save.Location = new System.Drawing.Point(236, 290);
+            this.button_save.Name = "button_save";
+            this.button_save.Size = new System.Drawing.Size(134, 42);
+            this.button_save.TabIndex = 18;
+            this.button_save.Text = "🖫 Guardar";
+            this.button_save.UseVisualStyleBackColor = false;
+            this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
             // JobDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(557, 334);
+            this.ClientSize = new System.Drawing.Size(607, 360);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.dataGridView_products);
             this.Controls.Add(this.label5);

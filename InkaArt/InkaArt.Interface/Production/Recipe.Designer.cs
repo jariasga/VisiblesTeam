@@ -68,7 +68,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_id);
-            this.groupBox1.Location = new System.Drawing.Point(13, 28);
+            this.groupBox1.Location = new System.Drawing.Point(21, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
@@ -81,7 +81,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(29, 153);
+            this.label5.Location = new System.Drawing.Point(19, 153);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 18);
@@ -91,28 +91,29 @@
             // comboBox_version
             // 
             this.comboBox_version.FormattingEnabled = true;
-            this.comboBox_version.Location = new System.Drawing.Point(32, 174);
+            this.comboBox_version.Location = new System.Drawing.Point(22, 174);
             this.comboBox_version.Name = "comboBox_version";
-            this.comboBox_version.Size = new System.Drawing.Size(171, 26);
+            this.comboBox_version.Size = new System.Drawing.Size(181, 26);
             this.comboBox_version.TabIndex = 24;
             this.comboBox_version.SelectedIndexChanged += new System.EventHandler(this.comboBox_version_SelectedIndexChanged);
             // 
             // textBox_product
             // 
+            this.textBox_product.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox_product.Enabled = false;
             this.textBox_product.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_product.Location = new System.Drawing.Point(31, 106);
+            this.textBox_product.Location = new System.Drawing.Point(21, 106);
             this.textBox_product.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_product.Name = "textBox_product";
             this.textBox_product.ReadOnly = true;
-            this.textBox_product.Size = new System.Drawing.Size(174, 24);
+            this.textBox_product.Size = new System.Drawing.Size(182, 24);
             this.textBox_product.TabIndex = 23;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(29, 84);
+            this.label2.Location = new System.Drawing.Point(19, 84);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 18);
@@ -123,37 +124,38 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 23);
+            this.label1.Location = new System.Drawing.Point(18, 23);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(20, 18);
+            this.label1.Size = new System.Drawing.Size(23, 18);
             this.label1.TabIndex = 13;
-            this.label1.Text = "Id";
+            this.label1.Text = "ID";
             // 
             // textBox_id
             // 
+            this.textBox_id.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_id.Location = new System.Drawing.Point(31, 45);
+            this.textBox_id.Location = new System.Drawing.Point(21, 45);
             this.textBox_id.Margin = new System.Windows.Forms.Padding(4);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.ReadOnly = true;
-            this.textBox_id.Size = new System.Drawing.Size(172, 24);
+            this.textBox_id.Size = new System.Drawing.Size(182, 24);
             this.textBox_id.TabIndex = 14;
             // 
             // textbox_newVer
             // 
             this.textbox_newVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_newVer.Location = new System.Drawing.Point(30, 88);
+            this.textbox_newVer.Location = new System.Drawing.Point(19, 93);
             this.textbox_newVer.Name = "textbox_newVer";
-            this.textbox_newVer.Size = new System.Drawing.Size(172, 24);
+            this.textbox_newVer.Size = new System.Drawing.Size(184, 24);
             this.textbox_newVer.TabIndex = 28;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(28, 66);
+            this.label6.Location = new System.Drawing.Point(17, 71);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(169, 18);
@@ -163,7 +165,7 @@
             // checkBox_newVer
             // 
             this.checkBox_newVer.AutoSize = true;
-            this.checkBox_newVer.Location = new System.Drawing.Point(32, 26);
+            this.checkBox_newVer.Location = new System.Drawing.Point(19, 35);
             this.checkBox_newVer.Name = "checkBox_newVer";
             this.checkBox_newVer.Size = new System.Drawing.Size(128, 22);
             this.checkBox_newVer.TabIndex = 26;
@@ -183,10 +185,10 @@
             this.Cantidad,
             this.Unidad,
             this.Borrar});
-            this.dataGridView_rawMaterial.Location = new System.Drawing.Point(15, 84);
+            this.dataGridView_rawMaterial.Location = new System.Drawing.Point(19, 84);
             this.dataGridView_rawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_rawMaterial.Name = "dataGridView_rawMaterial";
-            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(545, 184);
+            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(545, 321);
             this.dataGridView_rawMaterial.TabIndex = 17;
             this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -225,39 +227,39 @@
             // 
             // button_add
             // 
-            this.button_add.BackColor = System.Drawing.Color.Gray;
+            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
             this.button_add.Location = new System.Drawing.Point(333, 30);
             this.button_add.Margin = new System.Windows.Forms.Padding(2);
             this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(97, 39);
+            this.button_add.Size = new System.Drawing.Size(114, 39);
             this.button_add.TabIndex = 26;
-            this.button_add.Text = "＋ Agregar";
+            this.button_add.Text = "🖫 Guardar";
             this.button_add.UseVisualStyleBackColor = false;
             this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
             // comboBox_rawMaterial
             // 
             this.comboBox_rawMaterial.FormattingEnabled = true;
-            this.comboBox_rawMaterial.Location = new System.Drawing.Point(15, 42);
+            this.comboBox_rawMaterial.Location = new System.Drawing.Point(19, 42);
             this.comboBox_rawMaterial.Name = "comboBox_rawMaterial";
-            this.comboBox_rawMaterial.Size = new System.Drawing.Size(128, 26);
+            this.comboBox_rawMaterial.Size = new System.Drawing.Size(142, 26);
             this.comboBox_rawMaterial.TabIndex = 22;
             this.comboBox_rawMaterial.Text = "Piedra";
             this.comboBox_rawMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBox_rawMaterial_SelectedIndexChanged);
             // 
             // numericUpDown_count
             // 
-            this.numericUpDown_count.Location = new System.Drawing.Point(193, 43);
+            this.numericUpDown_count.Location = new System.Drawing.Point(183, 43);
             this.numericUpDown_count.Name = "numericUpDown_count";
-            this.numericUpDown_count.Size = new System.Drawing.Size(68, 26);
+            this.numericUpDown_count.Size = new System.Drawing.Size(114, 26);
             this.numericUpDown_count.TabIndex = 25;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(189, 23);
+            this.label4.Location = new System.Drawing.Point(180, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 18);
             this.label4.TabIndex = 24;
@@ -266,7 +268,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 23);
+            this.label3.Location = new System.Drawing.Point(16, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 18);
             this.label3.TabIndex = 23;
@@ -277,10 +279,10 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(53, 126);
+            this.button_save.Location = new System.Drawing.Point(50, 132);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(107, 39);
+            this.button_save.Size = new System.Drawing.Size(119, 39);
             this.button_save.TabIndex = 27;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
@@ -295,11 +297,11 @@
             this.groupBox2.Controls.Add(this.comboBox_rawMaterial);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.numericUpDown_count);
-            this.groupBox2.Location = new System.Drawing.Point(280, 73);
+            this.groupBox2.Location = new System.Drawing.Point(256, 24);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(568, 302);
+            this.groupBox2.Size = new System.Drawing.Size(586, 427);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Receta";
@@ -310,9 +312,9 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(464, 30);
+            this.button_delete.Location = new System.Drawing.Point(451, 30);
             this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(96, 39);
+            this.button_delete.Size = new System.Drawing.Size(113, 39);
             this.button_delete.TabIndex = 50;
             this.button_delete.Text = "🗑 Borrar";
             this.button_delete.UseVisualStyleBackColor = false;
@@ -324,9 +326,9 @@
             this.Nuevo.Controls.Add(this.textbox_newVer);
             this.Nuevo.Controls.Add(this.checkBox_newVer);
             this.Nuevo.Controls.Add(this.button_save);
-            this.Nuevo.Location = new System.Drawing.Point(13, 268);
+            this.Nuevo.Location = new System.Drawing.Point(21, 252);
             this.Nuevo.Name = "Nuevo";
-            this.Nuevo.Size = new System.Drawing.Size(227, 187);
+            this.Nuevo.Size = new System.Drawing.Size(227, 199);
             this.Nuevo.TabIndex = 29;
             this.Nuevo.TabStop = false;
             this.Nuevo.Text = "Nuevo";
@@ -336,7 +338,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(868, 479);
+            this.ClientSize = new System.Drawing.Size(865, 472);
             this.Controls.Add(this.Nuevo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
