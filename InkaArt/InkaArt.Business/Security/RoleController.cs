@@ -3,6 +3,7 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,9 +124,26 @@ namespace InkaArt.Business.Security
             table = showData();
             DataRow[] rows;
             rows = table.Select("id_role = " + id);
-            row = rows[0];
-
+            if (rows.Count() > 0 ) row = rows[0];
             return row;
+        }
+
+        public void massiveUpload(string filename)
+        {
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    int roleCreated = insertData(values[0], bool.Parse(values[1]), bool.Parse(values[2]), bool.Parse(values[3]), 
+                        bool.Parse(values[4]), bool.Parse(values[5]), bool.Parse(values[6]), bool.Parse(values[7]),
+                        bool.Parse(values[8]), bool.Parse(values[9]), bool.Parse(values[10]), bool.Parse(values[11]), bool.Parse(values[12]), bool.Parse(values[13]),
+                        bool.Parse(values[14]), bool.Parse(values[15]), bool.Parse(values[16]),
+                        bool.Parse(values[17]), bool.Parse(values[18]), bool.Parse(values[19]), bool.Parse(values[20]));
+                }
+            }
         }
     }
 }

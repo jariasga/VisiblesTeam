@@ -19,16 +19,30 @@ namespace InkaArt.Interface
     {
         private Form login;
         private RoleController controller;
-        Thread pingThread;
+        Thread pingThread, checkConnectorThread;
         delegate void SetPingStatusTextCallback(string text);
+        delegate void showConnectWarningCallBack(bool value);
+        private string pingText;
         public Menu(Form login)
         {
             InitializeComponent();
             this.login = login;
+            if (LoginController.needPassChange)
+            {
+                Form change_password = new ChangePassword();
+                change_password.ControlBox = false;
+                change_password.ShowDialog(this);
+            }
             getPermissions();
             pingThread = new Thread(new ThreadStart(pingStatus));
             pingThread.IsBackground = true;
             pingThread.Start();
+
+            checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
+            checkConnectorThread.IsBackground = true;
+            checkConnectorThread.Start();
+
+            toolStripProgressBarPing.Maximum = 1000;
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,11 +282,17 @@ namespace InkaArt.Interface
                 try
                 {
                     long ms = ping.Send(BD_Connector.serverAddress).RoundtripTime;
-                    this.SetPingStatusText("Reply from server: " + ms + "ms");
+                    SetPingStatusText("Reply from server: " + ms + "ms");
+                    int pValue = 1000 - (int)ms;
+                    if (pValue < 0) pValue = 0;
+                    if (toolStripProgressBarPing.GetCurrentParent().InvokeRequired)
+                    {
+                        toolStripProgressBarPing.GetCurrentParent().Invoke(new MethodInvoker(delegate { toolStripProgressBarPing.Value = pValue; }));
+                    }
                 }
                 catch (Exception)
                 {
-                    this.SetPingStatusText("Server unreacheable");
+                    SetPingStatusText("Server unreacheable");
                 }
                 Thread.Sleep(1000);
             }
@@ -280,20 +300,57 @@ namespace InkaArt.Interface
 
         private void SetPingStatusText(string text)
         {
-            /*if (this.toolStripStatusLabelPingStatus.InvokeRequired)
-            {
-                SetPingStatusTextCallback d = new SetPingStatusTextCallback(SetPingStatusText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {*/
             try
             {
-                this.toolStripStatusLabelPingStatus.Text = text;
+                toolStripStatusLabelPingStatus.Text = text;
             }
             catch (Exception e)
             {
                 LogHandler.WriteLine(e.ToString());
+            }
+            finally
+            {
+                pingText = text;
+            }
+        }
+
+        private void preventUserInteract()
+        {
+            while (true)
+            {
+                try
+                {
+                    if (string.Equals(pingText, "Server unreacheable"))
+                        showConnectWarning(true);
+                    else
+                        showConnectWarning(false);
+                }
+                catch (Exception e)
+                {
+                    LogHandler.WriteLine(e.ToString());
+                }
+                Thread.Sleep(50);
+            }
+        }
+
+        private void showConnectWarning(bool value)
+        {
+            if (this.InvokeRequired)
+            {
+                showConnectWarningCallBack d = new showConnectWarningCallBack(showConnectWarning);
+                this.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                //  Ojo aqui    vvv
+                Form conn = new ConnectWarning(5000);
+                if (value)
+                {
+                    if (conn.IsDisposed == true) conn = new ConnectWarning(5000);
+                    conn.ShowDialog(this);
+                }
+                else conn.Close();
+                conn.Dispose();
             }
         }
     }

@@ -103,6 +103,7 @@
             this.pictureBoxUser.Location = new System.Drawing.Point(401, 58);
             this.pictureBoxUser.Name = "pictureBoxUser";
             this.pictureBoxUser.Size = new System.Drawing.Size(120, 150);
+            this.pictureBoxUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxUser.TabIndex = 13;
             this.pictureBoxUser.TabStop = false;
             this.pictureBoxUser.Click += new System.EventHandler(this.pictureBoxUser_Click);
@@ -366,11 +367,8 @@
             // 
             this.comboBoxRoles.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBoxRoles.DisplayMember = "Activo";
+            this.comboBoxRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRoles.FormattingEnabled = true;
-            this.comboBoxRoles.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
             this.comboBoxRoles.Location = new System.Drawing.Point(12, 144);
             this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxRoles.Name = "comboBoxRoles";

@@ -193,6 +193,12 @@
     <Compile Include="Sales\DocumentSearch.Designer.cs">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Security\ConnectWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Security\ConnectWarning.Designer.cs">
+      <DependentUpon>ConnectWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\breakProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -538,6 +544,9 @@
     </Compile>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Security\ConnectWarning.resx">
+      <DependentUpon>ConnectWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\breakProduct.resx">
       <DependentUpon>breakProduct.cs</DependentUpon>
