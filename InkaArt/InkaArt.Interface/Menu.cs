@@ -334,7 +334,6 @@ namespace InkaArt.Interface
 
         private void showConnectWarning(bool value)
         {
-            bool active = false;
             if (this.InvokeRequired)
             {
                 showConnectWarningCallBack d = new showConnectWarningCallBack(showConnectWarning);
@@ -343,19 +342,12 @@ namespace InkaArt.Interface
             else
             {
                 Form conn = new ConnectWarning(5000);
-                if (value /*&& !active*/)
+                if (value)
                 {
                     if (conn.IsDisposed == true) conn = new ConnectWarning(5000);
                     conn.ShowDialog(this);
-                    active = true;
                 }
                 else conn.Close();
-
-                //if (!value && active)
-                //{
-                //    conn.Close();
-                //    active = false;
-                //}
             }
         }
     }
