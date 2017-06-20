@@ -79,5 +79,10 @@ namespace InkaArt.Business.Algorithm
                 if (jobs[i].ID == id_job) return i;
             return -1;
         }
+
+        public List<Job> GetJobsByProduct(int id_product)
+        {
+            return jobs.FindAll(job => job.Product == id_product);
+        }
     }
 }

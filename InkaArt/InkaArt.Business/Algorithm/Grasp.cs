@@ -44,14 +44,8 @@ namespace InkaArt.Business.Algorithm
                 for (int i = 0; i < indexes.Count(); i++)
                     if (selected_workers.GetByID(indexes[i].Worker.ID) != null) candidates.Add(indexes[i]);
 
-                //Si alguna orden no se pudo completar, sacarla de la lista.
-                for (int i = 0; i < selected_orders.NumberOfOrders; i++)
-                    if (selected_orders[i].DeliveryDate.Date > assignment.Date.Date && !selected_orders[i].Completed())
-                    {
-                        //selected_orders[i].UpdateStatus();
-                        selected_orders.RemoveAt(i);
-                        i--;
-                   }
+                selected_orders.RemoveAll(order => order.DeliveryDate.Date < assignment.Date.Date);
+                if (selected_orders.NumberOfOrders <= 0) return best_assignment;
 
                 //Ejecutar la fase de construcción del algoritmo GRASP.
                 this.ExecuteGraspConstructionPhase(assignment, candidates, iteration, ref elapsed_time);
@@ -87,9 +81,18 @@ namespace InkaArt.Business.Algorithm
                 //Escoger un trabajador al azar e incorporarlo en la solución
                 Index chosen_candidate = rcl[Randomizer.NextNumber(0, rcl.Count - 1)];
                 AssignmentLine new_assignment_line = assignment.GetNextAssignmentLine(chosen_candidate);
-                if (new_assignment_line == null) break;
+                if (new_assignment_line == null)
+                {
+                    LogHandler.WriteLine("Hubo un assignment line que devolvió nulo... Worker = {0}, Job = {1}. Recipe = {2}.", chosen_candidate.Worker.FullName,
+                        chosen_candidate.Job.Name, chosen_candidate.Recipe.Description + " " + chosen_candidate.Recipe.Version);
+                    LogHandler.WriteLine("RCL count = {0}, Current_Jobs count = {1}, Current_Product = {2}", rcl.Count, current_product_jobs.Count, current_product.Count);
+                    this.RemoveWorkers(candidates, chosen_candidate.Worker);
+                    break;
+                }
                 current_product.Add(new_assignment_line);
+                if (current_product_jobs.Count <= 0) current_product_jobs = jobs.GetJobsByProduct(chosen_candidate.Recipe.Product);
                 assignment.ObjectiveFunction += chosen_candidate.CostValue(assignment.ObjectiveFunction, iteration);
+                current_product_jobs.Remove(chosen_candidate.Job);
 
                 //Actualizar las variables y quitar los candidatos necesarios
                 if (assignment.IsWorkerFull(chosen_candidate.Worker, current_product)) this.RemoveWorkers(candidates, chosen_candidate.Worker);
@@ -119,41 +122,29 @@ namespace InkaArt.Business.Algorithm
             for (int i = 0; i < candidates.Count; i++)
             {
                 //Si current_product_jobs no tiene datos (y por tanto current_product tampoco), añadir los candidatos cuya receta esté dentro de la lista de recetas de la orden actual.
-                if (current_product_jobs.Count <= 0 && order_recipes.Contains(candidates[i].Recipe)) rcl.Add(candidates[i]);
+                if (current_product_jobs.Count <= 0 && order_recipes.Contains(candidates[i].Recipe))
+                    rcl.Add(candidates[i]);
                 //Si current_product está con datos (y por tanto, current_product_jobs también), añadir los candidatos cuyo puesto de trabajo esté dentro de la lista de puestos para el producto
                 //y cuya receta sea la misma que el producto que estamos elaborando.
-                if (current_product.Count > 0 && current_product_jobs.Contains(candidates[i].Job) && candidates[i].Recipe.ID == current_product[0].Recipe.ID) rcl.Add(candidates[i]);
+                if (current_product.Count > 0 && current_product_jobs.Contains(candidates[i].Job) && candidates[i].Recipe.ID == current_product[0].Recipe.ID)
+                    rcl.Add(candidates[i]);
             }
 
             //Calcular el máximo y el mínimo costo de los candidatos que podrían pertenecer al RCL
-            double min = double.MaxValue;
-            double max = double.MinValue;
-            for (int i = 0; i < rcl.Count; i++)
-            {
-                double cost_value = rcl[i].CostValue(objective_function, iteration);
-                if (cost_value < min) min = cost_value;
-                if (cost_value > max) max = cost_value;
-            }
+            double min = rcl.Min(index => index.CostValue(objective_function, iteration));
+            double max = rcl.Max(index => index.CostValue(objective_function, iteration));
 
             //Obtener el rango del RCL y quitar los índices del RCL que no estén en el rango
             double max_rcl = min + Alpha * (max - min);
-            for (int i = 0; i < rcl.Count;)
-            {
-                double cost_value = rcl[i].CostValue(objective_function, iteration);
-                if (cost_value >= min && cost_value <= max_rcl) i++;
-                else rcl.RemoveAt(i);
-            }
+            rcl.RemoveAll(index => (index.CostValue(objective_function, iteration) < min || index.CostValue(objective_function, iteration) > max_rcl));
 
             return rcl;
         }
 
         private void RemoveWorkers(List<Index> candidates, Worker worker)
         {
-            for (int i = 0; i < candidates.Count;)
-            {
+            for (int i = candidates.Count - 1; i >= 0; i--)
                 if (candidates[i].Worker.ID == worker.ID) candidates.Remove(candidates[i]);
-                else i++;
-            }
         }
 
     }
