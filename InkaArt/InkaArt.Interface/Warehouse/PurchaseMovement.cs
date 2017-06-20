@@ -28,7 +28,7 @@ namespace InkaArt.Interface.Warehouse
             DataTable OcList = control.getData();
 
             for (int i = 0; i < OcList.Rows.Count; i++)
-                if (OcList.Rows[i]["status"].ToString() == "Pendiente")
+                if (OcList.Rows[i]["status"].ToString() == "Enviado")
                     comboBox_OC.Items.Add(OcList.Rows[i]["id_order"].ToString());
         }
 
@@ -183,7 +183,7 @@ namespace InkaArt.Interface.Warehouse
 
                             }
                             dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
-                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "", false,orderList.Rows[i]["id_detail"].ToString());
+                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "","", false,orderList.Rows[i]["id_detail"].ToString());
                         }
 
                     }
@@ -299,6 +299,7 @@ namespace InkaArt.Interface.Warehouse
 
                                             MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                             fillGrid(idFactura);
+                                            reload();
 
                                         }
                                         else
@@ -343,6 +344,22 @@ namespace InkaArt.Interface.Warehouse
             else
                 MessageBox.Show("Por favor ingrese un numero de factura válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+        }
+
+        private void reload()
+        {
+            int aux_idOc;
+            string idSup = "";
+
+            dataGridView_orders.Rows.Clear();
+            //TODO que solo salgan las listas "Enviadas"
+            if (int.TryParse(comboBox_OC.SelectedItem.ToString(), out aux_idOc))
+            {
+                //fill grid
+                idSup = fillGrid(0);
+                string nameSup = giveme_supplierName(idSup);
+                textBox_supplier.Text = nameSup;
+            }
         }
 
     }
