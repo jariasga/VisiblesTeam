@@ -43,20 +43,6 @@ namespace InkaArt.Business.Security
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
                 "SET password = '{0}', need_pass_reset = {1} " +
                 "WHERE id_user = '{2}'", sha.encrypt(password), passReset, idUser));
-
-            /* TODO
-            row = getUserRow(username);
-
-            row["username"] = username;
-            //row["password"] = sha.encrypt(password);
-            row["status"] = status;
-            row["description"] = description;
-            row["id_role"] = role;
-            
-            int rowsAffected = user.updateData(data, adap, "User");
-
-            return rowsAffected;
-            */
         }
 
         public int updateData(string username, string description, int status, int role, System.Byte[] photo, int userID)
@@ -67,22 +53,6 @@ namespace InkaArt.Business.Security
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
                 "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
                 "WHERE id_user = {4}", username, status, description, role, userID));
-
-            
-            
-            /* TODO
-            row = getUserRow(username);
-
-            row["username"] = username;
-            //row["password"] = sha.encrypt(password);
-            row["status"] = status;
-            row["description"] = description;
-            row["id_role"] = role;
-            
-            int rowsAffected = user.updateData(data, adap, "User");
-
-            return rowsAffected;
-            */
         }
 
         public int insertData(string username, string description, int status, ref string password, int role, System.Byte [] photo)
@@ -101,6 +71,7 @@ namespace InkaArt.Business.Security
             row["status"] = status;
             row["description"] = description;
             row["id_role"] = role;
+            row["need_pass_reset"] = true;
             if (photo != null) row["photo"] = photo;
 
             //  Add the row created into the table

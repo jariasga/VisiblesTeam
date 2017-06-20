@@ -20,7 +20,7 @@ namespace InkaArt.Interface.Security
             timer = new Timer();
             timer.Interval = interval;
             timer.Tick += CloseForm;
-            timer.Start();
+            timer.Start();  //  Perdón si se cae, pero es porque se crea muchas veces este form (Ver linea 345 en Menu.cs)
         }
         private void CloseForm(object sender, EventArgs e)
         {

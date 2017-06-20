@@ -300,13 +300,6 @@ namespace InkaArt.Interface
 
         private void SetPingStatusText(string text)
         {
-            /*if (this.toolStripStatusLabelPingStatus.InvokeRequired)
-            {
-                SetPingStatusTextCallback d = new SetPingStatusTextCallback(SetPingStatusText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {*/
             try
             {
                 toolStripStatusLabelPingStatus.Text = text;
@@ -349,6 +342,7 @@ namespace InkaArt.Interface
             }
             else
             {
+                //  Ojo aqui    vvv
                 Form conn = new ConnectWarning(5000);
                 if (value)
                 {
@@ -356,6 +350,7 @@ namespace InkaArt.Interface
                     conn.ShowDialog(this);
                 }
                 else conn.Close();
+                conn.Dispose();
             }
         }
     }

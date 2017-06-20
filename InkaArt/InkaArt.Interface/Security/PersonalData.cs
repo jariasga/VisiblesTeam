@@ -78,7 +78,7 @@ namespace InkaArt.Interface.Security
             textBoxUsername.Enabled = true;
             textBoxUsername.Text = "";
             comboBoxUserStatus.SelectedIndex = 1;
-            comboBoxUserStatus.Text = "";
+            comboBoxUserStatus.Enabled = false;
             comboBoxRoles.Enabled = true;
             comboBoxRoles.Text = "";
 
@@ -239,7 +239,7 @@ namespace InkaArt.Interface.Security
         {
             OpenFileDialog photo = new OpenFileDialog();
             photo.Title = "Open photo";
-            photo.Filter = "JPG files (*.jpg)|*.jpg|GIF files (*.gif)|*.gif";
+            photo.Filter = "JPG files (*.jpg)|*.jpg|GIF files (*.gif)|*.gif|PNG files (*.png)|*.png";
             if (photo.ShowDialog(this) == DialogResult.OK)
             {
                 rawImage = File.ReadAllBytes(photo.FileName);
