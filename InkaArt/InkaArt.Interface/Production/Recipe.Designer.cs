@@ -53,6 +53,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_delete = new System.Windows.Forms.Button();
             this.Nuevo = new System.Windows.Forms.GroupBox();
+            this.massive_recipe = new System.Windows.Forms.Button();
+            this.massive_details = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_count)).BeginInit();
@@ -188,7 +190,7 @@
             this.dataGridView_rawMaterial.Location = new System.Drawing.Point(19, 84);
             this.dataGridView_rawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_rawMaterial.Name = "dataGridView_rawMaterial";
-            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(545, 321);
+            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(545, 233);
             this.dataGridView_rawMaterial.TabIndex = 17;
             this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -301,7 +303,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(586, 427);
+            this.groupBox2.Size = new System.Drawing.Size(586, 345);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Receta";
@@ -333,12 +335,42 @@
             this.Nuevo.TabStop = false;
             this.Nuevo.Text = "Nuevo";
             // 
+            // massive_recipe
+            // 
+            this.massive_recipe.BackColor = System.Drawing.Color.SteelBlue;
+            this.massive_recipe.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.massive_recipe.ForeColor = System.Drawing.Color.White;
+            this.massive_recipe.Location = new System.Drawing.Point(389, 384);
+            this.massive_recipe.Margin = new System.Windows.Forms.Padding(2);
+            this.massive_recipe.Name = "massive_recipe";
+            this.massive_recipe.Size = new System.Drawing.Size(142, 39);
+            this.massive_recipe.TabIndex = 29;
+            this.massive_recipe.Text = "Carga Recetas";
+            this.massive_recipe.UseVisualStyleBackColor = false;
+            this.massive_recipe.Click += new System.EventHandler(this.massive_recipe_Click);
+            // 
+            // massive_details
+            // 
+            this.massive_details.BackColor = System.Drawing.Color.SteelBlue;
+            this.massive_details.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.massive_details.ForeColor = System.Drawing.Color.White;
+            this.massive_details.Location = new System.Drawing.Point(584, 384);
+            this.massive_details.Margin = new System.Windows.Forms.Padding(2);
+            this.massive_details.Name = "massive_details";
+            this.massive_details.Size = new System.Drawing.Size(133, 39);
+            this.massive_details.TabIndex = 30;
+            this.massive_details.Text = "Carga Detalles";
+            this.massive_details.UseVisualStyleBackColor = false;
+            this.massive_details.Click += new System.EventHandler(this.massive_details_Click);
+            // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(865, 472);
+            this.Controls.Add(this.massive_details);
+            this.Controls.Add(this.massive_recipe);
             this.Controls.Add(this.Nuevo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -386,5 +418,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Borrar;
+        private System.Windows.Forms.Button massive_recipe;
+        private System.Windows.Forms.Button massive_details;
     }
 }

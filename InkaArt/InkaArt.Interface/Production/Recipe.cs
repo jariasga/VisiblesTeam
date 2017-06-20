@@ -248,5 +248,54 @@ namespace InkaArt.Interface.Production
         {
 
         }
+
+        private void massive_recipe_Click(object sender, EventArgs e)
+        {
+            RecipeController control = new RecipeController();
+            DataTable recipeList = control.getData();
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Suppliers File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (control.massiveUpload(dialog.FileName)==0)
+                {
+                    recipeList = control.getData();
+                    comboBox_version.Items.Clear();
+                    //agregar datos a combobox version
+                    for (int i = 0; i < recipeList.Rows.Count; i++)
+                    {
+                        if (String.Compare(recipeList.Rows[i]["idProduct"].ToString(), textBox_id.Text) == 0)
+                        {
+                            comboBox_version.Items.Add(recipeList.Rows[i]["version"].ToString());
+                        }
+                    }
+                    MessageBox.Show("Recetas cargadas de manera exitosa.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                else
+                    MessageBox.Show("No se pudo cargar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void massive_details_Click(object sender, EventArgs e)
+        {
+            RecipeRawMaterialController control = new RecipeRawMaterialController();
+            DataTable recipeList = control.getData();
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Suppliers File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (control.massiveUpload(dialog.FileName) == 0)
+                    MessageBox.Show("Detalle de recetas cargadas de manera exitosa.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("No se pudo cargar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
     }
 }
