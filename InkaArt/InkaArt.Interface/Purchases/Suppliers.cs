@@ -17,7 +17,6 @@ namespace InkaArt.Interface.Purchases
             control = new SupplierController();
             suppliersList = control.getData();
             dataGridView_suppliersList.DataSource = suppliersList;
-
             dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
             dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
