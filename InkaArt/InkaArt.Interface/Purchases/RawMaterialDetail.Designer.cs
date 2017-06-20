@@ -45,6 +45,12 @@
             this.comboBox_unit = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdRM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDRMSup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersPrice)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -160,11 +166,22 @@
             // 
             // dataGridView_suppliersPrice
             // 
+            this.dataGridView_suppliersPrice.AllowUserToAddRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToDeleteRows = false;
+            this.dataGridView_suppliersPrice.AllowUserToResizeRows = false;
             this.dataGridView_suppliersPrice.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView_suppliersPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_suppliersPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_suppliersPrice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Proveedor,
+            this.Precio,
+            this.IdRM,
+            this.Estado,
+            this.IDRMSup});
             this.dataGridView_suppliersPrice.Location = new System.Drawing.Point(15, 26);
             this.dataGridView_suppliersPrice.Name = "dataGridView_suppliersPrice";
+            this.dataGridView_suppliersPrice.ReadOnly = true;
             this.dataGridView_suppliersPrice.Size = new System.Drawing.Size(383, 382);
             this.dataGridView_suppliersPrice.TabIndex = 13;
             // 
@@ -220,10 +237,13 @@
             // 
             // comboBox_unit
             // 
+            this.comboBox_unit.AllowDrop = true;
             this.comboBox_unit.BackColor = System.Drawing.Color.White;
+            this.comboBox_unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_unit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_unit.FormattingEnabled = true;
             this.comboBox_unit.Location = new System.Drawing.Point(17, 259);
+            this.comboBox_unit.MaxDropDownItems = 20;
             this.comboBox_unit.Name = "comboBox_unit";
             this.comboBox_unit.Size = new System.Drawing.Size(125, 25);
             this.comboBox_unit.TabIndex = 13;
@@ -248,6 +268,39 @@
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Proveedores";
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            // 
+            // Proveedor
+            // 
+            this.Proveedor.HeaderText = "Proveedor";
+            this.Proveedor.Name = "Proveedor";
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            // 
+            // IdRM
+            // 
+            this.IdRM.HeaderText = "IDRM";
+            this.IdRM.Name = "IdRM";
+            this.IdRM.Visible = false;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.Visible = false;
+            // 
+            // IDRMSup
+            // 
+            this.IDRMSup.HeaderText = "IDRMSup";
+            this.IDRMSup.Name = "IDRMSup";
+            this.IDRMSup.Visible = false;
             // 
             // RawMaterialDetail
             // 
@@ -287,5 +340,11 @@
         private System.Windows.Forms.ComboBox comboBox_unit;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdRM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDRMSup;
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace InkaArt.Interface
+﻿using InkaArt.Classes;
+using System;
+
+namespace InkaArt.Interface
 {
     partial class Menu
     {
@@ -13,11 +16,19 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            try
             {
-                components.Dispose();
+                pingThread.Abort();
+                if (disposing && (components != null))
+                {
+                    components.Dispose();
+                }
+                base.Dispose(disposing);
             }
-            base.Dispose(disposing);
+            catch (Exception ex)
+            {
+                LogHandler.WriteLine(ex.ToString());
+            }
         }
 
         #region Windows Form Designer generated code
@@ -32,6 +43,7 @@
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parámetrosGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.modificarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +75,9 @@
             this.kardexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.status_strip = new System.Windows.Forms.StatusStrip();
             this.status_label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBarPing = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabelPingStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_strip.SuspendLayout();
             this.status_strip.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +125,13 @@
             this.listaDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.listaDeUsuariosToolStripMenuItem.Text = "Lista de usuarios";
             this.listaDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.listaDeUsuariosToolStripMenuItem_Click);
+            // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.rolesToolStripMenuItem.Text = "Roles";
+            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -197,53 +217,53 @@
             // 
             this.listaDeProductosToolStripMenuItem.Font = new System.Drawing.Font("Arial", 11F);
             this.listaDeProductosToolStripMenuItem.Name = "listaDeProductosToolStripMenuItem";
-            this.listaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.listaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.listaDeProductosToolStripMenuItem.Text = "Productos Finales";
             this.listaDeProductosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProductosToolStripMenuItem_Click);
             // 
             // listaDeProcesosDeProducciónToolStripMenuItem
             // 
             this.listaDeProcesosDeProducciónToolStripMenuItem.Name = "listaDeProcesosDeProducciónToolStripMenuItem";
-            this.listaDeProcesosDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.listaDeProcesosDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.listaDeProcesosDeProducciónToolStripMenuItem.Text = "Procesos de Producción";
             this.listaDeProcesosDeProducciónToolStripMenuItem.Click += new System.EventHandler(this.listaDeProcesosDeProducciónToolStripMenuItem_Click);
             // 
             // listaDeTurnosToolStripMenuItem
             // 
             this.listaDeTurnosToolStripMenuItem.Name = "listaDeTurnosToolStripMenuItem";
-            this.listaDeTurnosToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.listaDeTurnosToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.listaDeTurnosToolStripMenuItem.Text = "Turnos de Producción";
             this.listaDeTurnosToolStripMenuItem.Click += new System.EventHandler(this.listaDeTurnosToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(306, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(286, 6);
             // 
             // asignaciónDeTrabajadoresToolStripMenuItem
             // 
             this.asignaciónDeTrabajadoresToolStripMenuItem.Name = "asignaciónDeTrabajadoresToolStripMenuItem";
-            this.asignaciónDeTrabajadoresToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.asignaciónDeTrabajadoresToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.asignaciónDeTrabajadoresToolStripMenuItem.Text = "Asignación de Trabajadores";
             this.asignaciónDeTrabajadoresToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeTrabajadoresToolStripMenuItem_Click);
             // 
             // informeDeTurnoToolStripMenuItem
             // 
             this.informeDeTurnoToolStripMenuItem.Name = "informeDeTurnoToolStripMenuItem";
-            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.informeDeTurnoToolStripMenuItem.Text = "Informe de Turno";
             this.informeDeTurnoToolStripMenuItem.Click += new System.EventHandler(this.informeDeTurnoToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(306, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(286, 6);
             // 
             // generarReporteDeProductividadToolStripMenuItem
             // 
             this.generarReporteDeProductividadToolStripMenuItem.Name = "generarReporteDeProductividadToolStripMenuItem";
-            this.generarReporteDeProductividadToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.generarReporteDeProductividadToolStripMenuItem.Text = "Generar Reporte de Productividad...";
+            this.generarReporteDeProductividadToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
+            this.generarReporteDeProductividadToolStripMenuItem.Text = "Generar Reporte de Desempeño";
             this.generarReporteDeProductividadToolStripMenuItem.Click += new System.EventHandler(this.productividadToolStripMenuItem_Click);
             // 
             // ventasToolStripMenuItem
@@ -306,7 +326,7 @@
             // 
             this.gestionarMovimientosToolStripMenuItem.Name = "gestionarMovimientosToolStripMenuItem";
             this.gestionarMovimientosToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
-            this.gestionarMovimientosToolStripMenuItem.Text = "Gestión de Movimientos";
+            this.gestionarMovimientosToolStripMenuItem.Text = "Movimientos";
             this.gestionarMovimientosToolStripMenuItem.Click += new System.EventHandler(this.gestionarMovimientosToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
@@ -332,7 +352,9 @@
             // 
             this.status_strip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.status_label});
+            this.status_label,
+            this.toolStripProgressBarPing,
+            this.toolStripStatusLabelPingStatus});
             this.status_strip.Location = new System.Drawing.Point(0, 644);
             this.status_strip.Name = "status_strip";
             this.status_strip.Size = new System.Drawing.Size(998, 22);
@@ -345,21 +367,25 @@
             this.status_label.Size = new System.Drawing.Size(32, 17);
             this.status_label.Text = "Listo";
             // 
+            // toolStripProgressBarPing
+            // 
+            this.toolStripProgressBarPing.Name = "toolStripProgressBarPing";
+            this.toolStripProgressBarPing.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabelPingStatus
+            // 
+            this.toolStripStatusLabelPingStatus.Name = "toolStripStatusLabelPingStatus";
+            this.toolStripStatusLabelPingStatus.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabelPingStatus.Text = "toolStripStatusLabel1";
+            // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 25);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(4);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 619);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
-            // 
-            // rolesToolStripMenuItem
-            // 
-            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
-            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.rolesToolStripMenuItem.Text = "Roles";
-            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
             // 
             // Menu
             // 
@@ -372,7 +398,7 @@
             this.Controls.Add(this.menu_strip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menu_strip;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
@@ -426,5 +452,7 @@
         private System.Windows.Forms.ToolStripMenuItem informeDeTurnoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarPing;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelPingStatus;
     }
 }

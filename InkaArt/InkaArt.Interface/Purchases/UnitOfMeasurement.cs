@@ -16,17 +16,34 @@ namespace InkaArt.Interface.Purchases
         int mode;
         bool isInEditMode = false;
         UnitOfMeasurementController controlForm;
+        UnitOfMeasurementList unitsView;
+        bool creandoDesdeRawMatView = false;
         public UnitOfMeasurement()
         {
-            mode = 1; //Crear unitOfMeasurement
+            mode = 1; //Crear unitOfMeasurement para material
             controlForm = new UnitOfMeasurementController();
             controlForm.getData();
             InitializeComponent();
             isInEditMode = true;
             buttonSave.Text = "🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
+            creandoDesdeRawMatView = true;
         }
         public UnitOfMeasurement(UnitOfMeasurementController control)
+        {
+            mode = 1; //Crear unitOfMeasurement para material
+            controlForm = control;
+            controlForm.getData();
+            InitializeComponent();
+            isInEditMode = true;
+            buttonSave.Text = "🖫 Guardar";
+            comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
+            creandoDesdeRawMatView = true;
+            
+        }
+        public UnitOfMeasurement(UnitOfMeasurementController control,UnitOfMeasurementList viewFormUnits)
         {
             mode = 1; //Crear unitOfMeasurement
             controlForm = control;
@@ -34,9 +51,10 @@ namespace InkaArt.Interface.Purchases
             isInEditMode = true;
             buttonSave.Text = "🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
+            unitsView = viewFormUnits;
         }
 
-        public UnitOfMeasurement(DataGridViewRow currentUnitOfMeasurement,UnitOfMeasurementController control)
+        public UnitOfMeasurement(DataGridViewRow currentUnitOfMeasurement,UnitOfMeasurementController control, UnitOfMeasurementList viewFormUnits)
         {
             mode = 2; //Editar unitOfMeasurement
             isInEditMode = false;
@@ -49,6 +67,8 @@ namespace InkaArt.Interface.Purchases
             textBox_abbreviation.Enabled = false;
             textBox_nameUnit.Enabled = false;
             comboBox_status.Enabled = false;
+
+            unitsView = viewFormUnits;
         }
         private bool validating_data()
         {
@@ -64,8 +84,6 @@ namespace InkaArt.Interface.Purchases
 
         private void button_cancel(object sender, EventArgs e)
         {
-            this.cleaningWindow();
-            /*Closing the window*/
             this.Close();
         }
 
@@ -78,13 +96,21 @@ namespace InkaArt.Interface.Purchases
                     return;
                 }
                 //hacer el insert
-                controlForm.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
-                isInEditMode = false;
-                textBox_abbreviation.Enabled = false;
-                textBox_nameUnit.Enabled = false;
-                comboBox_status.Enabled = false;
-                buttonSave.Text="Editar";
-                mode = 2;
+                try
+                {
+                    controlForm.insertData(textBox_nameUnit.Text, textBox_abbreviation.Text, comboBox_status.Text);
+                    if (!creandoDesdeRawMatView) unitsView.desarrolloBusqueda();
+                    else
+                    {
+                        controlForm.getData();
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                DialogResult = DialogResult.OK;
+                this.Close();
             }
             else if (mode==2 && isInEditMode)
             {
@@ -92,13 +118,17 @@ namespace InkaArt.Interface.Purchases
                 {
                     return;
                 }
-                //hacer el update
-                controlForm.updateData(textBox_id.Text,textBox_nameUnit.Text, textBox_abbreviation.Text,comboBox_status.Text);
-                isInEditMode = false;
-                textBox_abbreviation.Enabled = false;
-                textBox_nameUnit.Enabled = false;
-                comboBox_status.Enabled = false;
-                buttonSave.Text = "Editar";
+                try
+                {
+                    //hacer el update
+                    controlForm.updateData(textBox_id.Text, textBox_nameUnit.Text, textBox_abbreviation.Text, comboBox_status.Text);
+                    unitsView.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                this.Close();
             }
             else
             {
@@ -108,11 +138,6 @@ namespace InkaArt.Interface.Purchases
                 textBox_abbreviation.Enabled = true;
                 comboBox_status.Enabled = true;
             }
-        }
-        private void cleaningWindow()
-        {
-            textBox_nameUnit.Text = "";
-            textBox_abbreviation.Text = "";
         }
     }
 }

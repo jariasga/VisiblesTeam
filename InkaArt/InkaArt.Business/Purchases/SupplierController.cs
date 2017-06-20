@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NpgsqlTypes;
+using System.IO;
 
 namespace InkaArt.Business.Purchases
 {
@@ -23,8 +24,7 @@ namespace InkaArt.Business.Purchases
             supplier = new SupplierData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
-
-            supplier.connect();
+            
             adap = supplier.supplierAdapter();
 
             data.Reset();
@@ -35,15 +35,14 @@ namespace InkaArt.Business.Purchases
 
             return supplierList;
         }
-        public void insertData(string nombre, int ruc,string contacto,int telefono,string correo,string direccion,int prioridad,string estado)
+        public void insertData(string nombre, string ruc,string contacto,int telefono,string correo,string direccion,int prioridad,string estado)
         {
-            supplier.connect();
 
             table = data.Tables["Supplier"];
             row = table.NewRow();
             
             row["name"] = nombre;
-            row["RUC"] = ruc;
+            row["ruc"] = ruc;
             row["contact"] = contacto;
             row["telephone"] = telefono;
             row["email"] = correo;
@@ -54,30 +53,44 @@ namespace InkaArt.Business.Purchases
             table.Rows.Add(row);
 
             int rowsAffected = supplier.insertData(data, adap, "Supplier");
-
-            supplier.closeConnection();
         }
-        public void updateData(string id, string nombre, int ruc, string contacto, int telefono, string correo, string direccion, int prioridad, string estado)
+        public int updateData(string id, string nombre, string ruc, string contacto, int telefono, string correo, string direccion, int prioridad, string estado)
         {
-            supplier.connect();
             table = data.Tables["Supplier"];
-            for (int i = 0; i < table.Rows.Count; i++)
+            supplier.execute(string.Format("UPDATE \"inkaart\".\"Supplier\" " +
+                        "SET name = '{0}', ruc = '{1}', contact = '{2}', telephone = {3}, email = '{4}', address = '{5}', status = '{6}', priority = {7} " +
+                        "WHERE id_supplier = {8}", nombre, ruc, contacto, telefono, correo, direccion, estado, prioridad, id));
+            
+            supplier.updateData(data, adap, "Supplier");
+            return 1;
+        }
+        public void massiveUpload(string filename)
+        {
+            table = getData();     // obtenemos la tabla de materia prima
+
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
             {
-                if (String.Compare(table.Rows[i]["idSupplier"].ToString(), id) == 0)
+                while (!reader.EndOfStream)
                 {
-                    table.Rows[i]["name"] = nombre;
-                    table.Rows[i]["RUC"] = ruc;
-                    table.Rows[i]["contact"] = contacto;
-                    table.Rows[i]["telephone"] = telefono;
-                    table.Rows[i]["email"] = correo;
-                    table.Rows[i]["address"] = direccion;
-                    table.Rows[i]["status"] = estado;
-                    table.Rows[i]["priority"] = prioridad;
-                    break;
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    int phone = 0,prioridad=0, intMod;
+
+                    if (int.TryParse(values[3], out intMod))
+                    {
+                        phone = int.Parse(values[3]);
+                    }
+                    if (int.TryParse(values[6], out intMod))
+                    {
+                        prioridad = int.Parse(values[6]);
+                    }
+
+                    // creamos materia prima
+                    //nombre (0), ruc (1), contacto (2),telefono (3),correo (4),dirección (5),prioridad(6),estado (7)
+                    insertData(values[0], values[1], values[2], phone, values[4],values[5],prioridad,values[7]);
                 }
             }
-            supplier.updateData(data, adap, "Supplier");
-            supplier.closeConnection();
         }
     }
 }

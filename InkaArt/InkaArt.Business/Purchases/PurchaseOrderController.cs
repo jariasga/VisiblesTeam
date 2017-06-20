@@ -1,12 +1,7 @@
 ﻿using InkaArt.Data.Purchases;
 using Npgsql;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NpgsqlTypes;
 
 namespace InkaArt.Business.Purchases
 {
@@ -24,7 +19,6 @@ namespace InkaArt.Business.Purchases
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
 
-            purchaseOrder.connect();
             adap = purchaseOrder.purchaseOrderAdapter();
 
             data.Reset();
@@ -32,45 +26,41 @@ namespace InkaArt.Business.Purchases
 
             DataTable purchaseOrderList = new DataTable();
             purchaseOrderList = data.Tables[0];
-            purchaseOrder.closeConnection();
             return purchaseOrderList;
         }
         public void inserData(int proveedor,string estado,DateTime creacion, DateTime entrega,double total)
         {
-            purchaseOrder.connect();
 
             table = data.Tables["PurcharseOrder"];
             row = table.NewRow();
 
-            row["idSupplier"] = proveedor;
+            row["id_supplier"] = proveedor;
             row["status"] = estado;
-            row["creationDate"] = creacion;
-            row["deliveryDate"] = entrega;
+            row["creation_date"] = creacion;
+            row["delivery_date"] = entrega;
             row["total"] = total;
             table.Rows.Add(row);
 
             int rowsAffected = purchaseOrder.insertData(data, adap, "PurcharseOrder");
-
-            purchaseOrder.closeConnection();
         }
         public void updateData(string id,int proveedor, string estado, DateTime creacion, DateTime entrega, double total)
         {
-            purchaseOrder.connect();
+            
             table = data.Tables["PurcharseOrder"];
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                if (String.Compare(table.Rows[i]["idOrder"].ToString(), id) == 0)
-                {
-                    table.Rows[i]["idSupplier"] = proveedor;
-                    table.Rows[i]["status"] = estado;
-                    table.Rows[i]["creationDate"] = creacion;
-                    table.Rows[i]["deliveryDate"] = entrega;
-                    table.Rows[i]["total"] = total;
-                    break;
-                }
-            }
+            purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
+                        "SET id_supplier = {0}, status = '{1}', creation_date = to_date('{2}','DD/MM/YYYY'), delivery_date = to_date('{3}','DD/MM/YYYY'), total = {4} " +
+                        "WHERE id_order = {5}", proveedor, estado, creacion.ToString(), entrega.ToString(), total, id));
+
+           
             purchaseOrder.updateData(data, adap, "PurcharseOrder");
-            purchaseOrder.closeConnection();
+        }
+
+        public void updateOrdenEntregada(int id_order)
+        {
+            table = data.Tables["PurcharseOrder"];
+            purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
+                "SET status = 'Entregado' " +
+                "WHERE id_order = {0}", id_order));
         }
     }
 }

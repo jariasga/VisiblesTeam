@@ -10,44 +10,76 @@ namespace InkaArt.Interface.Purchases
     public partial class UnitOfMeasurementList : Form
     {
         UnitOfMeasurementController control;
+        DataTable unitsList;
+        bool canReturn = false;
         public UnitOfMeasurementList()
         {
             InitializeComponent();
             control = new UnitOfMeasurementController();
-            DataTable unitOfMeasurementsList = control.getData();
-            dataGridView_unitOfMeasurement.DataSource = unitOfMeasurementsList;
+            unitsList = control.getData();
+            string sortQuery = string.Format("id_unit");
+            unitsList.DefaultView.Sort = sortQuery;
 
-            dataGridView_unitOfMeasurement.Columns["idUnit"].HeaderText = "ID";
+            dataGridView_unitOfMeasurement.DataSource = unitsList;
+
+            dataGridView_unitOfMeasurement.Columns["id_unit"].HeaderText = "ID";
             dataGridView_unitOfMeasurement.Columns["name"].HeaderText = "Nombre";
             dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
             dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_unit_of_measurement = new UnitOfMeasurement(control);
+            Form new_unit_of_measurement = new UnitOfMeasurement(control,this);
             new_unit_of_measurement.Show();
         }
 
-        private void button_search(object sender, EventArgs e)
+        public void filter()
         {
-            textBox_abbreviature.Text=textBox_abbreviature.Text.Trim();
+            DataRow[] rows;
+            unitsList = control.getData();
+            string cadena = "";
+            if (textBox_id.Text.Length > 0)
+            {
+                cadena = " AND id_unit = " + textBox_id.Text;
+            }
+            if (String.Compare(comboBox1.Text, "Activo") == 0)
+            {
+                rows = unitsList.Select("name LIKE '%" + textBox_name.Text + "%' AND abbreviature LIKE '%" + textBox_abbreviature.Text +"%' AND status LIKE '" +comboBox1.Text + "'" + cadena);
+            }
+            else
+            {
+                rows = unitsList.Select("name LIKE '%" + textBox_name.Text + "%' AND abbreviature LIKE '%" + textBox_abbreviature.Text + "%' AND status LIKE '%" + comboBox1.Text + "%'" + cadena);
+            }
+            if (rows.Any()) unitsList = rows.CopyToDataTable();
+            else unitsList.Rows.Clear();
+            string sortQuery = string.Format("id_unit");
+            unitsList.DefaultView.Sort = sortQuery;
+        }
+        public void desarrolloBusqueda()
+        {
+            textBox_abbreviature.Text = textBox_abbreviature.Text.Trim();
             textBox_id.Text = textBox_id.Text.Trim();
             textBox_name.Text = textBox_name.Text.Trim();
-            if(textBox_abbreviature.Text.Length<1 && textBox_id.Text.Length<1 && textBox_name.Text.Length < 1)
-            {
-                return;
-            }
+
+            filter();
+            dataGridView_unitOfMeasurement.DataSource = unitsList;
+
+            dataGridView_unitOfMeasurement.Columns["id_unit"].HeaderText = "ID";
+            dataGridView_unitOfMeasurement.Columns["name"].HeaderText = "Nombre";
+            dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
+            dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
+            canReturn = true;
+        }
+        private void button_search(object sender, EventArgs e)
+        {
+            desarrolloBusqueda();
         }
 
         private void editUnitOfMeasurement(object sender, DataGridViewCellEventArgs e)
         {
-            Form new_unit_of_measurement = new UnitOfMeasurement(dataGridView_unitOfMeasurement.CurrentRow,control);
+            Form new_unit_of_measurement = new UnitOfMeasurement(dataGridView_unitOfMeasurement.CurrentRow,control,this);
             new_unit_of_measurement.Show();
         }
 
@@ -81,11 +113,31 @@ namespace InkaArt.Interface.Purchases
                     string idUnit = dataGridView_unitOfMeasurement.Rows[i].Cells[1].Value.ToString();
                     string name = dataGridView_unitOfMeasurement.Rows[i].Cells[2].Value.ToString();
                     string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
-                    dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value = "Inactivo";
                     string status = dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value.ToString();
-                    control.updateData(idUnit,name, abbrev, status);
+                    try { 
+                        control.updateData(idUnit,name, abbrev, "Inactivo");
+                        desarrolloBusqueda();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("No se pudo eliminar la unidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                 }
             }
+        }
+        private void button_cargamasivaclick(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Units File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                control.massiveUpload(dialog.FileName);
+            textBox_abbreviature.Text = "";
+            textBox_id.Text = "";
+            textBox_abbreviature.Text = "";
+            comboBox1.Text = "";
+            desarrolloBusqueda();
         }
     }
 }

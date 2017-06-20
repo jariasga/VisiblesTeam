@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combobox_priority = new System.Windows.Forms.ComboBox();
             this.textbox_id = new System.Windows.Forms.TextBox();
@@ -48,7 +48,7 @@
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_create = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -206,18 +206,19 @@
             // grid_clients
             // 
             this.grid_clients.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grid_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_clients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_clients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid_clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_clients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -225,10 +226,11 @@
             this.cost,
             this.delete,
             this.Column1,
-            this.Column3});
+            this.deleteColumn});
             this.grid_clients.Location = new System.Drawing.Point(47, 257);
             this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_clients.Name = "grid_clients";
+            this.grid_clients.ReadOnly = true;
             this.grid_clients.Size = new System.Drawing.Size(859, 255);
             this.grid_clients.TabIndex = 27;
             this.grid_clients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentClick);
@@ -237,33 +239,39 @@
             // 
             this.Producto.HeaderText = "ID";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // Cantidad
             // 
-            this.Cantidad.HeaderText = "RUC";
+            this.Cantidad.HeaderText = "Documento";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // cost
             // 
             this.cost.HeaderText = "Nombre";
             this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
             // 
             // delete
             // 
             this.delete.HeaderText = "Estado";
             this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Prioridad";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
-            // Column3
+            // deleteColumn
             // 
-            this.Column3.HeaderText = "Eliminar";
-            this.Column3.Name = "Column3";
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.deleteColumn.HeaderText = "Eliminar";
+            this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.ReadOnly = true;
+            this.deleteColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.deleteColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button_create
             // 
@@ -291,6 +299,7 @@
             this.button_delete.TabIndex = 38;
             this.button_delete.Text = "🗑 Eliminar";
             this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
             // ClientsIndex
             // 
@@ -335,6 +344,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn deleteColumn;
     }
 }

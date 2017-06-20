@@ -3,6 +3,7 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace InkaArt.Business.Security
         private DataRow row;
         public DataTable showData()
         {
-            role.connect();
 
             adap = role.roleAdapter();
 
@@ -35,15 +35,42 @@ namespace InkaArt.Business.Security
             return table;
         }
 
-        public int insertData(string description)
+        public int insertData(string description, bool generalParameters, bool userList, bool roles,
+            bool suppliers, bool rawMaterials, bool unitOfmeasure, bool purcharseOrder, 
+            bool finalProduct, bool productionProcess, bool productionTurn, bool workerAssignment, bool turnReport, bool productivityReport,
+            bool clients, bool orders, bool generateReport,
+            bool warehouse, bool movements, bool stockReport, bool kardexReport)
         {
-            role.connect();
-
             table = data.Tables["Role"];
 
             row = table.NewRow();
 
             row["description"] = description;
+            //  Security
+            row["security_general_parameters"] = generalParameters;
+            row["security_user_list"] = userList;
+            row["security_roles"] = roles;
+            //  Purchases
+            row["purchases_suppliers"] = suppliers;
+            row["purchases_raw_materials"] = rawMaterials;
+            row["purchases_unit_of_measure"] = unitOfmeasure;
+            row["purchases_purchase_order"] = purcharseOrder;
+            //  Production
+            row["production_final_product"] = finalProduct;
+            row["production_production_process"] = productionProcess;
+            row["production_production_turn"] = productionTurn;
+            row["production_worker_assignment"] = workerAssignment;
+            row["production_turn_report"] = turnReport;
+            row["production_productivity_report"] = productivityReport;
+            //  Sales
+            row["sales_clients"] = clients;
+            row["sales_orders"] = orders;
+            row["sales_generate_report"] = generateReport;
+            //  Warehouse
+            row["warehouse_warehouses"] = warehouse;
+            row["warehouse_movements"] = movements;
+            row["warehouse_stock_reports"] = stockReport;
+            row["warehouse_kardex_reports"] = kardexReport;
 
             table.Rows.Add(row);
 
@@ -51,15 +78,42 @@ namespace InkaArt.Business.Security
             return rowsAffected;
         }
 
-        public int updateData(int roleID, string description)
+        public int updateData(int roleID, string description, bool generalParameters, bool userList, bool roles,
+            bool suppliers, bool rawMaterials, bool unitOfmeasure, bool purcharseOrder,
+            bool finalProduct, bool productionProcess, bool productionTurn, bool workerAssignment, bool turnReport, bool productivityReport,
+            bool clients, bool orders, bool generateReport,
+            bool warehouse, bool movements, bool stockReport, bool kardexReport)
         {
-            role.connect();
-
             table = data.Tables["Role"];
 
             row = getRoleRowbyID(roleID);
             
             row["description"] = description;
+            //  Security
+            row["security_general_parameters"] = generalParameters;
+            row["security_user_list"] = userList;
+            row["security_roles"] = roles;
+            //  Purchases
+            row["purchases_suppliers"] = suppliers;
+            row["purchases_raw_materials"] = rawMaterials;
+            row["purchases_unit_of_measure"] = unitOfmeasure;
+            row["purchases_purchase_order"] = purcharseOrder;
+            //  Production
+            row["production_final_product"] = finalProduct;
+            row["production_production_process"] = productionProcess;
+            row["production_production_turn"] = productionTurn;
+            row["production_worker_assignment"] = workerAssignment;
+            row["production_turn_report"] = turnReport;
+            row["production_productivity_report"] = productivityReport;
+            //  Sales
+            row["sales_clients"] = clients;
+            row["sales_orders"] = orders;
+            row["sales_generate_report"] = generateReport;
+            //  Warehouse
+            row["warehouse_warehouses"] = warehouse;
+            row["warehouse_movements"] = movements;
+            row["warehouse_stock_reports"] = stockReport;
+            row["warehouse_kardex_reports"] = kardexReport;
 
             int rowsAffected = role.updateData(data, adap, "Role");
             return rowsAffected;
@@ -70,14 +124,26 @@ namespace InkaArt.Business.Security
             table = showData();
             DataRow[] rows;
             rows = table.Select("id_role = " + id);
-            row = rows[0];
-
+            if (rows.Count() > 0 ) row = rows[0];
             return row;
         }
 
-        public void filterData()
+        public void massiveUpload(string filename)
         {
-
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    int roleCreated = insertData(values[0], bool.Parse(values[1]), bool.Parse(values[2]), bool.Parse(values[3]), 
+                        bool.Parse(values[4]), bool.Parse(values[5]), bool.Parse(values[6]), bool.Parse(values[7]),
+                        bool.Parse(values[8]), bool.Parse(values[9]), bool.Parse(values[10]), bool.Parse(values[11]), bool.Parse(values[12]), bool.Parse(values[13]),
+                        bool.Parse(values[14]), bool.Parse(values[15]), bool.Parse(values[16]),
+                        bool.Parse(values[17]), bool.Parse(values[18]), bool.Parse(values[19]), bool.Parse(values[20]));
+                }
+            }
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InkaArt.Business.Purchases;
 using System.Windows.Forms;
 
@@ -13,20 +9,14 @@ namespace InkaArt.Interface.Purchases
     public partial class RawMaterials : Form
     {
         RawMaterialController control;
+        UnitOfMeasurementController controlUnit;
+        DataTable rawMaterialList;
         public RawMaterials()
         {
             InitializeComponent();
             control = new RawMaterialController();
-            DataTable rawMaterialList = control.getData();
-            dataGridView_rawMaterialsList.DataSource = rawMaterialList;
-
-            dataGridView_rawMaterialsList.Columns["idRawMaterial"].HeaderText = "ID";
-            dataGridView_rawMaterialsList.Columns["name"].HeaderText = "Nombre";
-            dataGridView_rawMaterialsList.Columns["unit"].HeaderText = "Unidad";
-            dataGridView_rawMaterialsList.Columns["status"].HeaderText = "Estado";
-            dataGridView_rawMaterialsList.Columns["description"].HeaderText = "Descripción";
-            dataGridView_rawMaterialsList.Columns["averagePrice"].HeaderText = "Precio Promedio";
-            dataGridView_rawMaterialsList.Columns["averagePrice"].Visible = false;
+            rawMaterialList = control.getData();
+            desarrolloBusqueda();
         }
         private void verifying_ids()
         {
@@ -47,14 +37,39 @@ namespace InkaArt.Interface.Purchases
             }
             textBox_id.Text = actualdata;
         }
-        private void button_search(object sender, EventArgs e)
+        public string buscarNombre(string id_unit)
+        {
+            DataRow[] rows;
+            if (controlUnit == null) controlUnit = new UnitOfMeasurementController();
+            DataTable auxiliarLista = controlUnit.getData();
+            rows = auxiliarLista.Select("id_unit = " + id_unit);
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_unit");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            if (auxiliarLista.Rows.Count != 0) return auxiliarLista.Rows[0]["name"].ToString();
+            else return "";
+        }
+        public void desarrolloBusqueda()
         {
             textBox_name.Text = textBox_name.Text.Trim();
-            if (true)
+            filter();
+            dataGridView_rawMaterialsList.Rows.Clear();
+            for (int i = 0; i < rawMaterialList.Rows.Count; i++)
             {
-                //codigo para hacer las busquedas
+                string id_raw_material = rawMaterialList.Rows[i]["id_raw_material"].ToString();
+                string name = rawMaterialList.Rows[i]["name"].ToString();
+                string description = rawMaterialList.Rows[i]["description"].ToString();
+                string id_unit = rawMaterialList.Rows[i]["unit"].ToString();
+                string unit = buscarNombre(id_unit);
+                string status =rawMaterialList.Rows[i]["status"].ToString();
+                double average_price = double.Parse(rawMaterialList.Rows[i]["average_price"].ToString());
+                dataGridView_rawMaterialsList.Rows.Add(false,id_raw_material,name,description,unit,status,average_price,id_unit);
             }
-            
+        }
+        public void button_search(object sender, EventArgs e)
+        {
+            desarrolloBusqueda();
         }
 
         private void button_delete(object sender, EventArgs e)
@@ -66,26 +81,34 @@ namespace InkaArt.Interface.Purchases
                 {
                     string id = dataGridView_rawMaterialsList.Rows[i].Cells[1].Value.ToString();
                     string name = dataGridView_rawMaterialsList.Rows[i].Cells[2].Value.ToString();
-                    string unit = dataGridView_rawMaterialsList.Rows[i].Cells[4].Value.ToString();
-                    dataGridView_rawMaterialsList.Rows[i].Cells[5].Value = "Inactivo";
-                    string status = dataGridView_rawMaterialsList.Rows[i].Cells[5].Value.ToString();
                     string description = dataGridView_rawMaterialsList.Rows[i].Cells[3].Value.ToString();
+                    string unit = dataGridView_rawMaterialsList.Rows[i].Cells[7].Value.ToString();
                     string averagePrice = dataGridView_rawMaterialsList.Rows[i].Cells[6].Value.ToString();
-                    control.updateData(id, name, description, unit, status, double.Parse(averagePrice));
+                    try
+                    {
+                        control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice));
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("No se pudo actualizar el registro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        continue;
+                    }
+                    
                 }
             }
+            desarrolloBusqueda();
         }
 
         private void button_create(object sender, EventArgs e)
         {
-            Form new_raw_material = new RawMaterialDetail(control);
+            Form new_raw_material = new RawMaterialDetail(control,this);
             new_raw_material.Show();
         }
 
         private void editRawMaterialDetail(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentRawMaterial = dataGridView_rawMaterialsList.CurrentRow;
-            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control);
+            Form new_raw_material = new RawMaterialDetail(currentRawMaterial,control,this);
             new_raw_material.Show();
         }
 
@@ -107,6 +130,41 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_id.Text = actualdata;
+        }
+        public void filter()
+        {
+            DataRow[] rows;
+            rawMaterialList = control.getData();
+            string cadena = "";
+            if (textBox_id.Text.Length > 0)
+            {
+                cadena = " AND id_raw_material = "+textBox_id.Text;
+            }
+            if (String.Compare(comboBox_status.Text, "Activo") == 0)
+            {
+                rows = rawMaterialList.Select("name LIKE '%" + textBox_name.Text + "%' AND status LIKE '" + comboBox_status.Text + "'"+cadena);
+            }
+            else
+            {
+                rows = rawMaterialList.Select("name LIKE '%" + textBox_name.Text + "%' AND status LIKE '%" + comboBox_status.Text + "%'"+cadena);
+            }
+            if (rows.Any()) rawMaterialList = rows.CopyToDataTable();
+            else rawMaterialList.Rows.Clear();
+            string sortQuery = string.Format("id_raw_material");
+            rawMaterialList.DefaultView.Sort = sortQuery;
+        }
+
+        private void button_cargamasivaclic(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Raw Materials File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+                control.massiveUpload(dialog.FileName);
+            textBox_id.Text = "";
+            textBox_name.Text = "";
+            comboBox_status.Text = "";
+            desarrolloBusqueda();
         }
     }
 }

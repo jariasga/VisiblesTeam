@@ -13,7 +13,7 @@ namespace InkaArt.Interface.Production
 {
     public partial class ProductionProcess : Form
     {
-        public ProductionProcess(string id, string name, string count, string localPrice, string exportPrice)
+        public ProductionProcess(string id, string name, string count, string localPrice, string exportPrice,string basePrice)
         {
             InitializeComponent();
             textBox_id.Text = id;
@@ -21,6 +21,7 @@ namespace InkaArt.Interface.Production
             textBox_stock.Text = count;
             textBox_localPrice.Text = localPrice;
             textBox_exportPrice.Text = exportPrice;
+            textBox_basePrice.Text = basePrice;
 
             ProcessProductController control = new ProcessProductController();
             ProcessController controlProcess = new ProcessController();
@@ -33,10 +34,10 @@ namespace InkaArt.Interface.Production
             {
                 if (String.Compare(productProcessesList.Rows[i]["idProduct"].ToString(),id)==0)
                 {
-                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"]);
+                    //dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["id_process"]);
                     for(int j=0;j<processList.Rows.Count;j++)
                     {
-                        if(String.Compare(processList.Rows[j]["idProcess"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
+                        if(String.Compare(processList.Rows[j]["id_process"].ToString(),productProcessesList.Rows[i]["idProcess"].ToString())==0)
                         {
                             dataGridView_productProceses.Rows.Add(productProcessesList.Rows[i]["idProcess"], processList.Rows[j]["description"]);
                             break;
@@ -75,11 +76,17 @@ namespace InkaArt.Interface.Production
             local = exp = 0;
             if (double.TryParse(textBox_localPrice.Text, out local) && double.TryParse(textBox_exportPrice.Text, out exp))
             {
-                control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
-                MessageBox.Show("Se guardaron los cambios.");
+                int retorno;
+                retorno =control.updateData(textBox_id.Text, textBox_localPrice.Text, textBox_exportPrice.Text);
+                if(retorno == 0)//los precios son menores
+                {
+                    MessageBox.Show("Los precios no pueden ser menores al precio base, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Tipo de dato no permitido");
+                MessageBox.Show("Tipo de dato no permitido, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ProductionProcess_Load(object sender, EventArgs e)

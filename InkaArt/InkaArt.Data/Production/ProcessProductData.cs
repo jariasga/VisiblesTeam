@@ -14,7 +14,7 @@ namespace InkaArt.Data.Production
         public NpgsqlDataAdapter processProductsAdapter()
         {
             NpgsqlDataAdapter processProductsAdapter = new NpgsqlDataAdapter();
-            processProductsAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Process-Product\" WHERE idProces = :process;", Connection);
+            processProductsAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Process-Product\" WHERE idProcess = :process;", Connection);
             processProductsAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("process", DbType.Int32));
             processProductsAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
             processProductsAdapter.SelectCommand.Parameters[0].SourceColumn = "idProcess";
@@ -25,7 +25,7 @@ namespace InkaArt.Data.Production
         public NpgsqlDataAdapter productProcesesAdapter()
         {
             NpgsqlDataAdapter productProcesesAdapter = new NpgsqlDataAdapter();
-            productProcesesAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Process-Product\" WHERE idproduct = 1;", Connection);
+            productProcesesAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"Process-Product\" WHERE idProduct = 1;", Connection);
             productProcesesAdapter.SelectCommand.Parameters.Add(new NpgsqlParameter("product", DbType.Int32));
             productProcesesAdapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
             productProcesesAdapter.SelectCommand.Parameters[0].SourceColumn = "idProduct";

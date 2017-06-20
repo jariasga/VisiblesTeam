@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.textBox_abbreviature = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,8 +42,7 @@
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button_cargamasiva = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_unitOfMeasurement)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +65,30 @@
             this.groupBox1.TabIndex = 44;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "",
+            "Activo",
+            "Inactivo"});
+            this.comboBox1.Location = new System.Drawing.Point(24, 110);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(192, 26);
+            this.comboBox1.TabIndex = 29;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 89);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 18);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Estado";
             // 
             // textBox_id
             // 
@@ -160,7 +185,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(360, 379);
+            this.buttonDelete.Location = new System.Drawing.Point(281, 379);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(133, 39);
             this.buttonDelete.TabIndex = 47;
@@ -173,7 +198,7 @@
             this.buttonCreate.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonCreate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCreate.ForeColor = System.Drawing.Color.White;
-            this.buttonCreate.Location = new System.Drawing.Point(231, 379);
+            this.buttonCreate.Location = new System.Drawing.Point(152, 379);
             this.buttonCreate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(124, 39);
@@ -182,28 +207,19 @@
             this.buttonCreate.UseVisualStyleBackColor = false;
             this.buttonCreate.Click += new System.EventHandler(this.button_create);
             // 
-            // label2
+            // button_cargamasiva
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 89);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 18);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Estado";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.AllowDrop = true;
-            this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.comboBox1.Location = new System.Drawing.Point(24, 110);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 26);
-            this.comboBox1.TabIndex = 29;
+            this.button_cargamasiva.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_cargamasiva.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_cargamasiva.ForeColor = System.Drawing.Color.White;
+            this.button_cargamasiva.Location = new System.Drawing.Point(419, 379);
+            this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
+            this.button_cargamasiva.Name = "button_cargamasiva";
+            this.button_cargamasiva.Size = new System.Drawing.Size(124, 39);
+            this.button_cargamasiva.TabIndex = 49;
+            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.UseVisualStyleBackColor = false;
+            this.button_cargamasiva.Click += new System.EventHandler(this.button_cargamasivaclick);
             // 
             // UnitOfMeasurementList
             // 
@@ -211,6 +227,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(708, 428);
+            this.Controls.Add(this.button_cargamasiva);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridView_unitOfMeasurement);
@@ -242,5 +259,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button_cargamasiva;
     }
 }

@@ -24,12 +24,10 @@ namespace InkaArt.Business.Production
         }
         public DataTable getData()
         {
-
-            unit.connect();
             adapt = unit.unitAdapter();
 
             data.Clear();
-            data = unit.getData(adapt, "Worker");
+            data = unit.getData(adapt, "UnitOfMeasurement");
 
             DataTable unitList = new DataTable();
             unitList = data.Tables[0];

@@ -72,13 +72,25 @@ namespace InkaArt.Interface.Production
                 if (DateTime.TryParse(textBox_horaIni.Text.ToString(), out aux) &&
                     DateTime.TryParse(textBox_horaFin.Text.ToString(), out aux))
                 {
-                    ini = textBox_horaIni.Text.ToString();
-                    fin = textBox_horaFin.Text.ToString();
-                    desc = textBox_desc.Text.ToString();
+                    var tini = TimeSpan.Parse(textBox_horaIni.Text.ToString());
+                    var tfin = TimeSpan.Parse(textBox_horaFin.Text.ToString());
+                    if (tfin > tini)
+                    {
 
-                    control.insertData(ini, fin, desc);
-                    fillCombo();
-                }else
+
+                        ini = textBox_horaIni.Text.ToString();
+                        fin = textBox_horaFin.Text.ToString();
+                        desc = textBox_desc.Text.ToString();
+
+                        control.insertData(ini, fin, desc);
+                        fillCombo();
+                        MessageBox.Show("Nuevo turno creado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }else
+                        MessageBox.Show("La hora fin no puede ser menor a la de inicio, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
                     MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else //update
@@ -94,13 +106,28 @@ namespace InkaArt.Interface.Production
                     if (DateTime.TryParse(textBox_horaIni.Text.ToString(), out aux)&&
                         DateTime.TryParse(textBox_horaFin.Text.ToString(), out aux))
                     {
-                        id = comboBox_turn.SelectedItem.ToString();
-                        ini = textBox_horaIni.Text.ToString();
-                        fin = textBox_horaFin.Text.ToString();
-                        desc = textBox_desc.Text.ToString();
+                        var tini = TimeSpan.Parse(textBox_horaIni.Text.ToString());
+                        var tfin = TimeSpan.Parse(textBox_horaFin.Text.ToString());
+                        if (tfin > tini)
+                        {
 
-                        control.updateData(id, ini, fin, desc);
-                    }else
+
+                            id = comboBox_turn.SelectedItem.ToString();
+                            ini = textBox_horaIni.Text.ToString();
+                            fin = textBox_horaFin.Text.ToString();
+                            desc = textBox_desc.Text.ToString();
+
+                            control.updateData(id, ini, fin, desc);
+                            MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            fillGrid();
+                        }
+                        else
+                        {
+                            MessageBox.Show("La hora fin no puede ser menor a la de inicio, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            fillGrid();
+                        }
+                    }
+                    else
                         MessageBox.Show("Formato de hora no válido, por favor verifique los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
