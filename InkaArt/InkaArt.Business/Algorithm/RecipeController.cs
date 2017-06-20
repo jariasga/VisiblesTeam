@@ -22,13 +22,10 @@ namespace InkaArt.Business.Algorithm
 
         public void Load()
         {
-            NpgsqlConnection connection = new NpgsqlConnection();
-            connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Recipe\" WHERE status = :status",
-                connection);
-
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Recipe\" WHERE status = :status", connection);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Integer, 1);
 
             NpgsqlDataReader reader = command.ExecuteReader();
@@ -77,9 +74,9 @@ namespace InkaArt.Business.Algorithm
             get { return recipes[index]; }
         }
 
-        public int Count()
+        public int NumberOfRecipes
         {
-            return recipes.Count;
+            get { return recipes.Count; }
         }
 
         public List<Recipe> List()

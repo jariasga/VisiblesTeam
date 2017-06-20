@@ -32,8 +32,8 @@ namespace InkaArt.Business.Algorithm
             {
                 int id = reader.GetInt32(0);
                 string description = reader.GetString(1);
-                int position_count = reader.GetInt32(2);
-                processes.Add(new Process(id, description, position_count));
+                int number_of_jobs = reader.GetInt32(2);
+                processes.Add(new Process(id, description, number_of_jobs));
             }
 
             connection.Close();

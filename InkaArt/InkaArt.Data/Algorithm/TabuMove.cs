@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InkaArt.Data;
 
 namespace InkaArt.Data.Algorithm
 {
@@ -21,23 +22,12 @@ namespace InkaArt.Data.Algorithm
             this.worker1 = null;
             this.worker2 = null;
         }
-
-        public TabuMove(int type, Assignment solution, int worker1, int worker2)
+        
+        public TabuMove(int type, int worker1, int item1, int worker2, int item2)
         {
             this.type = type;
-            // process
-            if (type == 0)
-            {
-                this.worker1 = new Tuple<int, int>(worker1, solution.getProcessId(worker1));
-                this.worker2 = new Tuple<int, int>(worker2, solution.getProcessId(worker2));
-            }
-            // product 
-            else
-            {
-                this.worker1 = new Tuple<int, int>(worker1, solution[worker1,type].Recipe.Product);
-                this.worker2 = new Tuple<int, int>(worker2, solution[worker2,type].Recipe.Product);
-            }
-
+            this.worker1 = new Tuple<int, int>(worker1, item1);
+            this.worker2 = new Tuple<int, int>(worker2, item2);
         }
 
         public void print()
