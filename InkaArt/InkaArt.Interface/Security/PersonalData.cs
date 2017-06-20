@@ -239,7 +239,7 @@ namespace InkaArt.Interface.Security
         {
             OpenFileDialog photo = new OpenFileDialog();
             photo.Title = "Open photo";
-            photo.Filter = "JPG files (*.jpg)|*.jpg";
+            photo.Filter = "JPG files (*.jpg)|*.jpg|GIF files (*.gif)|*.gif";
             if (photo.ShowDialog(this) == DialogResult.OK)
             {
                 rawImage = File.ReadAllBytes(photo.FileName);
