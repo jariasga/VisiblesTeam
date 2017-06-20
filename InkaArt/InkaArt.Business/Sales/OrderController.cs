@@ -70,6 +70,11 @@ namespace InkaArt.Business.Sales
             return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
+        public int getClientID(int orderId)
+        {
+            return orderData.getClientID(orderId);
+        }
+
         public DataTable GetSalesDocument(int orderId=-1)
         {
             return orderData.GetSalesDocument(orderId);

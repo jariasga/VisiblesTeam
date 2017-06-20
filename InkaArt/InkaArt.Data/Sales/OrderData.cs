@@ -93,6 +93,25 @@ namespace InkaArt.Data.Sales
             return productId;
         }
 
+        public int getClientID(int orderId)
+        {
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = orderAdapter();
+            myAdap.SelectCommand.CommandText += "WHERE \"idOrder\" = :idOrder;";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = orderId;
+
+            myData.Clear();
+            myData = getData(myAdap, "idOrder");
+
+            DataTable list = new DataTable();
+            list = myData.Tables[0];
+            int clientId = int.Parse(list.Rows[0]["idClient"].ToString());
+            return clientId;
+        }
+
         public int InsertSaleDocument(int idDocType, float amount, float igv, float total, int orderId)
         {
             adap = salesDocumentAdapter();
@@ -595,17 +614,16 @@ namespace InkaArt.Data.Sales
         }
         public DataTable getLineXDocument(int idSaleDocument)
         {
-            adap = lineXDocumentAdapter();
-            adap.SelectCommand.CommandText += " WHERE \"idSaleDocument\" = :idSaleDocument;";
-            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("idSaleDocument", DbType.Int32));
-            adap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
-            adap.SelectCommand.Parameters[0].SourceColumn = "idSaleDocument";
-            adap.SelectCommand.Parameters[0].NpgsqlValue = idSaleDocument;
-            data.Clear();
-            data = getData(adap, "Line-Document");
+            NpgsqlDataAdapter curAdap = lineXDocumentAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE \"idSaleDocument\" = :idSaleDocument;";
+            curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idSaleDocument", DbType.Int32));
+            curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdap.SelectCommand.Parameters[0].SourceColumn = "idSaleDocument";
+            curAdap.SelectCommand.Parameters[0].NpgsqlValue = idSaleDocument;
+            DataSet curData = getData(curAdap, "Line-Document");
 
             DataTable lineList = new DataTable();
-            lineList = data.Tables[0];
+            lineList = curData.Tables[0];
             return lineList;
         }
         public int InsertOrder(int idClient, DateTime deliveryDate, string saleAmount, string igv, string totalAmount, string orderStatus, int bdStatus, string type, string reason, string totalDev)

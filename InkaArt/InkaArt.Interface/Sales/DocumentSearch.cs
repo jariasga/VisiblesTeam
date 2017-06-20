@@ -67,5 +67,14 @@ namespace InkaArt.Interface.Sales
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        private void button_see_Click(object sender, EventArgs e)
+        {
+            int index = grid_documents.CurrentCell.RowIndex;
+            int orderId = int.Parse(grid_documents.Rows[index].Cells[5].Value.ToString());
+            int clientId = orderController.getClientID(orderId);
+            SaleDocumentDetail form = new SaleDocumentDetail(grid_documents.Rows[index], orderId, clientId);
+            form.Show();
+        }
     }
 }
