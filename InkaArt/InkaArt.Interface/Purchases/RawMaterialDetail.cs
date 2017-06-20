@@ -34,7 +34,7 @@ namespace InkaArt.Interface.Purchases
             textBox_averagePrice.Enabled = false;
             buttonSave.Text="🖫 Guardar";
             comboBox_status.SelectedIndex = 0;
-
+            comboBox_status.Enabled = false;
             control_units = new UnitOfMeasurementController();
             unitsList = control_units.getData();
             for (int i = 0; i < unitsList.Rows.Count; i++)
@@ -52,6 +52,7 @@ namespace InkaArt.Interface.Purchases
             buttonSave.Text = "🖫 Guardar";
             textBox_averagePrice.Enabled = false;
             comboBox_status.SelectedIndex = 0;
+            comboBox_status.Enabled = false;
             ventanaRM = viewRMList;
             control_units = new UnitOfMeasurementController();
             unitsList = control_units.getData();
