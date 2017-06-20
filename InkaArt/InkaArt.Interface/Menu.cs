@@ -41,6 +41,8 @@ namespace InkaArt.Interface
             checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
             checkConnectorThread.IsBackground = true;
             checkConnectorThread.Start();
+
+            toolStripProgressBarPing.Maximum = 1000;
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -281,6 +283,12 @@ namespace InkaArt.Interface
                 {
                     long ms = ping.Send(BD_Connector.serverAddress).RoundtripTime;
                     SetPingStatusText("Reply from server: " + ms + "ms");
+                    int pValue = 1000 - (int)ms;
+                    if (pValue < 0) pValue = 0;
+                    if (toolStripProgressBarPing.GetCurrentParent().InvokeRequired)
+                    {
+                        toolStripProgressBarPing.GetCurrentParent().Invoke(new MethodInvoker(delegate { toolStripProgressBarPing.Value = pValue; }));
+                    }
                 }
                 catch (Exception)
                 {
