@@ -393,7 +393,7 @@
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(626, 272);
             this.dataGridView_pedidos.TabIndex = 17;
-            this.dataGridView_pedidos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingresandoFactura);
+//            this.dataGridView_pedidos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingresandoFactura);
             // 
             // buttonDelete
             // 

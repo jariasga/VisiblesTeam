@@ -17,6 +17,7 @@ namespace InkaArt.Interface.Purchases
         SupplierController control_supplier;
         RawMaterial_SupplierController control_rm_sup;
         RawMaterialController control_rm;
+        string estadoInicial = "";
         UnitOfMeasurementController control_unit;
         PurchaseOrder ventanaListaOrdenes;
         DataTable supList,rawMat_supList,rmList,unitList,lineaPedidosList;
@@ -100,6 +101,7 @@ namespace InkaArt.Interface.Purchases
             control_rm_sup = new RawMaterial_SupplierController();
             control_unit = new UnitOfMeasurementController();
             obtenerMateriasDelSupplier();
+            estadoInicial=comboBox_status.Text;
             llenarMateriasPedidas();
             if (string.Compare(comboBox_status.Text, "Inactivo") == 0) buttonSave.Visible = false;
         }
@@ -406,6 +408,11 @@ namespace InkaArt.Interface.Purchases
                 //hacer update
                 try {
                     control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
+                        if(string.Compare(comboBox_status.Text, "Inactivo") == 0) pasarTodasLasLineasAEstado("Inactivo");
+                        else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
+                        estadoInicial = comboBox_status.Text;
+                    }
                     ventanaListaOrdenes.desarrolloBusqueda();
                 }
                 catch (Exception)
@@ -463,7 +470,29 @@ namespace InkaArt.Interface.Purchases
             unitAbrev.Text=hallarNombreUnit(int.Parse(idUnit.Text));
             textBox_price.Text = hallarPrecio(textBox_idrm.Text);            
         }
-
+        private void pasarTodasLasLineasAEstado(string nuevoEstado)
+        {
+            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            {
+                int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
+                int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
+                double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
+                int id_facturaAux = 0;
+                if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length > 0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
+                try
+                {
+                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, nuevoEstado);
+                        dataGridView_pedidos.Rows[i].Cells[0].Value = false;
+                }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            
+            llenarMateriasPedidas();
+            ventanaListaOrdenes.desarrolloBusqueda();
+        }
         private bool validarNumFactura(int id_Row)
         {
             int valorInt = 0, modInt;
@@ -483,24 +512,6 @@ namespace InkaArt.Interface.Purchases
                 return false;
             }        
             return true;
-        }
-        private void ingresandoFactura(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!enProcesoDeLlenado)
-            {
-                //validando que sea correcto
-                int currentId = dataGridView_pedidos.CurrentCell.RowIndex;
-                
-                if (dataGridView_pedidos.CurrentCell.ColumnIndex == 6 && validarNumFactura(currentId))
-                {
-                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[1].Value.ToString());
-                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[4].Value.ToString());
-                    Double subtotalAux = double.Parse(dataGridView_pedidos.Rows[currentId].Cells[5].Value.ToString());
-                    int id_facturaAux = int.Parse(dataGridView_pedidos.Rows[currentId].Cells[6].Value.ToString());
-                    control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Activo");
-                    llenarMateriasPedidas();
-                }
-            }
         }
 
         private string hallarNombreUnit(int idUnit)
