@@ -49,7 +49,7 @@
             this.PrecioLocal,
             this.PrecioExportacion,
             this.Detalles});
-            this.dataGridView_process.Location = new System.Drawing.Point(23, 23);
+            this.dataGridView_process.Location = new System.Drawing.Point(26, 23);
             this.dataGridView_process.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_process.Name = "dataGridView_process";
             this.dataGridView_process.Size = new System.Drawing.Size(444, 246);
@@ -87,7 +87,7 @@
             this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
             this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_refresh.ForeColor = System.Drawing.Color.White;
-            this.button_refresh.Location = new System.Drawing.Point(195, 276);
+            this.button_refresh.Location = new System.Drawing.Point(198, 276);
             this.button_refresh.Name = "button_refresh";
             this.button_refresh.Size = new System.Drawing.Size(103, 42);
             this.button_refresh.TabIndex = 21;
