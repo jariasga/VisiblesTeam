@@ -75,6 +75,19 @@ namespace InkaArt.Data.Algorithm
             this.average_time = average_time;
         }
 
+        public Index(Index old_index)
+        {
+            this.id_index = old_index.id_index;
+            this.worker = old_index.worker;
+            this.job = old_index.job;
+            this.recipe = old_index.recipe;
+            this.average_breakage = old_index.average_breakage;
+            this.average_time = old_index.average_time;
+            this.breakage_index = old_index.breakage_index;
+            this.time_index = old_index.time_index;
+            this.loss_index = old_index.time_index;
+        }
+
         public static string Insert(Ratio ratio)
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
