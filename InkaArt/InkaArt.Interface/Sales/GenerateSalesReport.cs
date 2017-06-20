@@ -27,7 +27,7 @@ namespace InkaArt.Interface.Sales
             int response = validateData();
             if (response == 1)
             {
-                SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy HH:MM"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy HH:MM"), comboBox_products.Text);
+                SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy"), comboBox_products.Text);
                 sales_form.Show();
             }
 
