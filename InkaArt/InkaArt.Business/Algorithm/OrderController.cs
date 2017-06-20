@@ -75,9 +75,9 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
-        public int Count()
+        public int NumberOfOrders
         {
-            return orders.Count();
+            get { return orders.Count; }
         }
 
         public void Add(Order order)
@@ -85,9 +85,9 @@ namespace InkaArt.Business.Algorithm
             this.orders.Add(order);
         }
 
-        public void RemoveFirst()
+        public void RemoveAt(int index)
         {
-            this.orders.RemoveAt(0);
+            this.orders.RemoveAt(index);
         }
 
         public bool Contains(Order order)

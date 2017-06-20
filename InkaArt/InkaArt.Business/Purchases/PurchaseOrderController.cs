@@ -1,12 +1,7 @@
 ﻿using InkaArt.Data.Purchases;
 using Npgsql;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NpgsqlTypes;
 
 namespace InkaArt.Business.Purchases
 {
@@ -56,19 +51,16 @@ namespace InkaArt.Business.Purchases
                         "SET id_supplier = {0}, status = '{1}', creation_date = to_date('{2}','DD/MM/YYYY'), delivery_date = to_date('{3}','DD/MM/YYYY'), total = {4} " +
                         "WHERE id_order = {5}", proveedor, estado, creacion.ToString(), entrega.ToString(), total, id));
 
-           /* for (int i = 0; i < table.Rows.Count; i++)
-            {
-                if (String.Compare(table.Rows[i]["idOrder"].ToString(), id) == 0)
-                {
-                    table.Rows[i]["idSupplier"] = proveedor;
-                    table.Rows[i]["status"] = estado;
-                    table.Rows[i]["creation_date"] = creacion;
-                    table.Rows[i]["delivery_date"] = entrega;
-                    table.Rows[i]["total"] = total;
-                    break;
-                }
-            }*/
+           
             purchaseOrder.updateData(data, adap, "PurcharseOrder");
+        }
+
+        public void updateOrdenEntregada(int id_order)
+        {
+            table = data.Tables["PurcharseOrder"];
+            purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
+                "SET status = 'Entregado' " +
+                "WHERE id_order = {0}", id_order));
         }
     }
 }

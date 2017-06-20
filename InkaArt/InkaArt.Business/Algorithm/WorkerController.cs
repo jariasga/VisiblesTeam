@@ -1,13 +1,14 @@
-﻿using Npgsql;
+﻿using InkaArt.Business.Production;
+using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
+using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using InkaArt.Classes;
-using InkaArt.Data.Algorithm;
-using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -24,6 +25,9 @@ namespace InkaArt.Business.Algorithm
 
         public void Load()
         {
+            TurnController turns = new TurnController();
+            DataTable table = turns.getData();
+
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
@@ -33,10 +37,18 @@ namespace InkaArt.Business.Algorithm
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int id = reader.GetInt32(0);
-                string name = reader.GetString(1);
-                string last_name = reader.GetString(2);
-                workers.Add(new Worker(id, name, last_name));
+                int id = Convert.ToInt32(reader["id_worker"]);
+                string name = reader["first_name"].ToString();
+                string last_name = reader["last_name"].ToString();
+
+                DataRow turn_info = table.Select("idTurn = " + Convert.ToInt32(reader["turn"]))[0];
+                int id_turn = int.Parse(turn_info["idTurn"].ToString());
+                TimeSpan start_time = TimeSpan.Parse(turn_info["start"].ToString());
+                TimeSpan end_time = TimeSpan.Parse(turn_info["end"].ToString());
+                string description = turn_info["description"].ToString();
+                Turn turn = new Turn(id_turn, start_time, end_time, description);
+
+                workers.Add(new Worker(id, name, last_name, turn));
             }
 
             connection.Close();
@@ -56,9 +68,9 @@ namespace InkaArt.Business.Algorithm
             return null;
         }
 
-        public int Count()
+        public int NumberOfWorkers
         {
-            return workers.Count();
+            get { return workers.Count; }
         }
 
         public Worker this[int index]
@@ -74,11 +86,6 @@ namespace InkaArt.Business.Algorithm
         public void Add(Worker worker)
         {
             this.workers.Add(worker);
-        }
-
-        public bool Contains(Worker worker)
-        {
-            return this.workers.Contains(worker);
         }
 
         public int GetIndex(int id_worker)

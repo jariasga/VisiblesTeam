@@ -30,15 +30,8 @@ namespace InkaArt.Business.Algorithm
 
         internal List<AssignmentLine[][]> BestSolution
         {
-            get
-            {
-                return best_solution;
-            }
-
-            set
-            {
-                best_solution = value;
-            }
+            get { return best_solution; }
+            set { best_solution = value; }
         }
 
         /* Se inicializan los parametros a calibrar */
@@ -89,7 +82,7 @@ namespace InkaArt.Business.Algorithm
             {
                 foreach(AssignmentLine assignment in solution[i])
                 {
-                    Index index = simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
+                    Index index = null; //simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
                     // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
                     if (index != null)
                     {
@@ -156,7 +149,7 @@ namespace InkaArt.Business.Algorithm
         }
 
         /* Flujo del algoritmo */
-        public void run()
+        public void run(int[] elapsed_time)
         {
             for(int day = 0; day < initial_solution.Count; day++)
             {
@@ -182,7 +175,7 @@ namespace InkaArt.Business.Algorithm
 
                 // inicio
                 // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-                while (Environment.TickCount - simulation.StartTime < simulation.LimitTime && iter_count < max_iterations)
+                while (elapsed_time[0] < Simulation.LimitTime && iter_count < max_iterations)
                 {
                     int neighbor_count = 0;         // cuenta de vecinos evaluados
                     iter_count++;                   // condicion de meseta: contara iteraciones 

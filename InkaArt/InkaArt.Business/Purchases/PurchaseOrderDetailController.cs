@@ -1,10 +1,5 @@
 ﻿using Npgsql;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InkaArt.Data.Purchases;
 
 namespace InkaArt.Business.Purchases
@@ -57,6 +52,14 @@ namespace InkaArt.Business.Purchases
                         "WHERE id_detail = {4}", quantity, amount, factura,estado, id_detail));
 
            purchaseOrderDetail.updateData(data, adap, "PurchaseOrderDetail");
+        }
+
+        public void updateLineaEntregada(int id_detail)
+        {
+            table = data.Tables["PurchaseOrderDetail"];
+            purchaseOrderDetail.execute(string.Format("UPDATE \"inkaart\".\"PurchaseOrderDetail\" " +
+                "SET status = 'Entregado' " +
+                "WHERE id_detail = {0}", id_detail));
         }
     }
 }

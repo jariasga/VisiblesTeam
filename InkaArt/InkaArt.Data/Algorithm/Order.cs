@@ -61,9 +61,11 @@ namespace InkaArt.Data.Algorithm
 
         public bool Completed()
         {
-            foreach (OrderLineItem line_item in line_items)
+            throw new NotImplementedException();
+
+            /*foreach (OrderLineItem line_item in line_items)
                 if (line_item.Produced < line_item.Quantity) return false;
-            return true;
+            return true;*/
         }
 
         public OrderLineItem this[int index]

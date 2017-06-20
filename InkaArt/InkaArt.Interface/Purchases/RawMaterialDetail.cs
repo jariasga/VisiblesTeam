@@ -17,9 +17,11 @@ namespace InkaArt.Interface.Purchases
         bool isInEditMode=false;
         RawMaterialController control_material;
         RawMaterial_SupplierController control_material_supplier;
+        SupplierController control_supplier;
         RawMaterials ventanaRM;
         UnitOfMeasurementController control_units;
         DataTable unitsList;
+        DataTable priceList;
 
         public RawMaterialDetail()
         {
@@ -78,13 +80,9 @@ namespace InkaArt.Interface.Purchases
             buttonCreate.Enabled = false;
 
             control_material_supplier = new RawMaterial_SupplierController();
-            DataTable priceList= filterRawMaterial();
-            dataGridView_suppliersPrice.DataSource = priceList;
-            dataGridView_suppliersPrice.Columns["id_supplier"].HeaderText = "ID";
-            dataGridView_suppliersPrice.Columns["price"].HeaderText = "Precio";
-            dataGridView_suppliersPrice.Columns["id_raw_material"].Visible = false;
-            dataGridView_suppliersPrice.Columns["id_rawmaterial_supplier"].Visible = false;
-            dataGridView_suppliersPrice.Columns["status"].Visible = false;
+            priceList= filterRawMaterial();
+            llenarTablaSuppliers();
+
             double valorPrecio = 0;
             int registros = dataGridView_suppliersPrice.Rows.Count;
             for (int j = 0; j < registros; j++)
@@ -116,6 +114,39 @@ namespace InkaArt.Interface.Purchases
 
                 }
             }
+        }
+        public void llenarTablaSuppliers()
+        {
+            DataRow[] rows = priceList.Select("status LIKE 'Activo'");
+            if (rows.Any()) priceList = rows.CopyToDataTable();
+            else priceList.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            priceList.DefaultView.Sort = sortQuery;
+
+            dataGridView_suppliersPrice.Rows.Clear();
+            for (int i = 0; i < priceList.Rows.Count; i++)
+            {
+                string id_supplier = priceList.Rows[i]["id_supplier"].ToString();
+                string id_raw_material = priceList.Rows[i]["id_raw_material"].ToString();
+                string nombre = buscarNombre(id_supplier);
+                double price = double.Parse(priceList.Rows[i]["price"].ToString());
+                string id_rawmaterial_supplier = priceList.Rows[i]["id_rawmaterial_supplier"].ToString();
+                string status = priceList.Rows[i]["status"].ToString();
+                dataGridView_suppliersPrice.Rows.Add(id_supplier, nombre, price, nombre, id_raw_material, status, id_rawmaterial_supplier);
+            }
+        }
+        public string buscarNombre(string id_supplier)
+        {
+            DataRow[] rows;
+            if (control_supplier == null) control_supplier = new SupplierController();
+            DataTable auxiliarLista = control_supplier.getData();
+            rows = auxiliarLista.Select("id_supplier = " + id_supplier);
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            if (auxiliarLista.Rows.Count != 0) return auxiliarLista.Rows[0]["name"].ToString();
+            else return "";
         }
         public DataTable filterRawMaterial()
         {

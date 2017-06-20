@@ -92,11 +92,11 @@ namespace InkaArt.Interface.Production
                 button_save.Enabled = true;
                 button_delete.Enabled = true;
                 button_report.Enabled = true;
-                if (simulation.AssignmentsToList().Count > 0)
+                /*if (simulation.AssignmentsToList().Count > 0)
                 {
                     simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
                     { Column1 = o.Date, Column2 = o.Worker.FullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description }).ToList();
-                }
+                }*/
             }
         }
         
