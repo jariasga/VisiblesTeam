@@ -93,6 +93,25 @@ namespace InkaArt.Data.Sales
             return productId;
         }
 
+        public int getClientID(int orderId)
+        {
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = orderAdapter();
+            myAdap.SelectCommand.CommandText += "WHERE \"idOrder\" = :idOrder;";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = orderId;
+
+            myData.Clear();
+            myData = getData(myAdap, "idOrder");
+
+            DataTable list = new DataTable();
+            list = myData.Tables[0];
+            int clientId = int.Parse(list.Rows[0]["idClient"].ToString());
+            return clientId;
+        }
+
         public int InsertSaleDocument(int idDocType, float amount, float igv, float total, int orderId)
         {
             adap = salesDocumentAdapter();
