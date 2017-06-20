@@ -149,7 +149,6 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 3) return retable_weight;
             return 1;                
         }
-
         /******************* GUARDADO EN BASE DE DATOS *******************/
 
         public void Save()

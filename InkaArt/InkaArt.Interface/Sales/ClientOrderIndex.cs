@@ -114,5 +114,10 @@ namespace InkaArt.Interface.Sales
         {
                 date_deliveryDate_ini.Enabled = date_deliveryDate_end.Enabled = checkbox_enabledate.Checked;
         }
+
+        private void textbox_name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

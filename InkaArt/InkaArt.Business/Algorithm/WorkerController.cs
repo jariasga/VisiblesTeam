@@ -83,6 +83,11 @@ namespace InkaArt.Business.Algorithm
             return new List<Worker>(workers);
         }
 
+        public int Count()
+        {
+            return workers.Count();
+        }
+
         public void Add(Worker worker)
         {
             this.workers.Add(worker);
