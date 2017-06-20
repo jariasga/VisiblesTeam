@@ -20,13 +20,14 @@ namespace InkaArt.Interface.Security
 
         private void button_change_Click(object sender, EventArgs e)
         {
+            bool active;
             LoginController verify = new LoginController();
-            bool pass = verify.checkCredentials(LoginController.userName, textbox_password_old.Text);
+            bool pass = verify.checkCredentials(LoginController.userName, textbox_password_old.Text, out active);
             if (pass)
             {
                 if (string.Equals(textbox_password_new_1.Text, textbox_password_new_2.Text) & verifyPasswordRequeriments())
                 {
-                    user.updatePassword(LoginController.userID, textbox_password_new_2.Text);
+                    user.updatePassword(LoginController.userID, textbox_password_new_2.Text, false);
                     DialogResult goodPassword = MessageBox.Show("Se cambió la contraseña", "Inka Art",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
@@ -46,6 +47,8 @@ namespace InkaArt.Interface.Security
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+            
+    
 
         private bool verifyPasswordRequeriments()
         {

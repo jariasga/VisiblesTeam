@@ -36,10 +36,10 @@
             this.textbox_password_new_2 = new System.Windows.Forms.TextBox();
             this.button_change = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label8Char = new System.Windows.Forms.Label();
-            this.labelUpperChar = new System.Windows.Forms.Label();
-            this.labelLowerChar = new System.Windows.Forms.Label();
             this.labelNumberChar = new System.Windows.Forms.Label();
+            this.labelLowerChar = new System.Windows.Forms.Label();
+            this.labelUpperChar = new System.Windows.Forms.Label();
+            this.label8Char = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,23 +135,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Requisitos";
             // 
-            // label8Char
+            // labelNumberChar
             // 
-            this.label8Char.AutoSize = true;
-            this.label8Char.Location = new System.Drawing.Point(6, 22);
-            this.label8Char.Name = "label8Char";
-            this.label8Char.Size = new System.Drawing.Size(151, 20);
-            this.label8Char.TabIndex = 0;
-            this.label8Char.Text = "- Al menos 8 caracteres";
-            // 
-            // labelUpperChar
-            // 
-            this.labelUpperChar.AutoSize = true;
-            this.labelUpperChar.Location = new System.Drawing.Point(6, 42);
-            this.labelUpperChar.Name = "labelUpperChar";
-            this.labelUpperChar.Size = new System.Drawing.Size(166, 20);
-            this.labelUpperChar.TabIndex = 1;
-            this.labelUpperChar.Text = "- Al menos una mayúscula";
+            this.labelNumberChar.AutoSize = true;
+            this.labelNumberChar.Location = new System.Drawing.Point(6, 82);
+            this.labelNumberChar.Name = "labelNumberChar";
+            this.labelNumberChar.Size = new System.Drawing.Size(141, 20);
+            this.labelNumberChar.TabIndex = 3;
+            this.labelNumberChar.Text = "- Al menos un número";
             // 
             // labelLowerChar
             // 
@@ -162,14 +153,23 @@
             this.labelLowerChar.TabIndex = 2;
             this.labelLowerChar.Text = "- Al menos una minúscula";
             // 
-            // labelNumberChar
+            // labelUpperChar
             // 
-            this.labelNumberChar.AutoSize = true;
-            this.labelNumberChar.Location = new System.Drawing.Point(6, 82);
-            this.labelNumberChar.Name = "labelNumberChar";
-            this.labelNumberChar.Size = new System.Drawing.Size(141, 20);
-            this.labelNumberChar.TabIndex = 3;
-            this.labelNumberChar.Text = "- Al menos un número";
+            this.labelUpperChar.AutoSize = true;
+            this.labelUpperChar.Location = new System.Drawing.Point(6, 42);
+            this.labelUpperChar.Name = "labelUpperChar";
+            this.labelUpperChar.Size = new System.Drawing.Size(166, 20);
+            this.labelUpperChar.TabIndex = 1;
+            this.labelUpperChar.Text = "- Al menos una mayúscula";
+            // 
+            // label8Char
+            // 
+            this.label8Char.AutoSize = true;
+            this.label8Char.Location = new System.Drawing.Point(6, 22);
+            this.label8Char.Name = "label8Char";
+            this.label8Char.Size = new System.Drawing.Size(151, 20);
+            this.label8Char.TabIndex = 0;
+            this.label8Char.Text = "- Al menos 8 caracteres";
             // 
             // ChangePassword
             // 
@@ -190,6 +190,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ChangePassword";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cambiar contraseña";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

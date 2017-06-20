@@ -25,6 +25,12 @@ namespace InkaArt.Interface
         {
             InitializeComponent();
             this.login = login;
+            if (LoginController.needPassChange)
+            {
+                Form change_password = new ChangePassword();
+                change_password.ControlBox = false;
+                change_password.ShowDialog(this);
+            }
             getPermissions();
             pingThread = new Thread(new ThreadStart(pingStatus));
             pingThread.IsBackground = true;
