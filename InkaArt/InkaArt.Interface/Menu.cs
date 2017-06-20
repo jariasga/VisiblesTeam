@@ -317,30 +317,45 @@ namespace InkaArt.Interface
         {
             while (true)
             {
-                if (string.Equals(pingText, "Server unreacheable"))                
-                    showConnectWarning(true);                
-                else                
-                    showConnectWarning(false);
-                
-                Thread.Sleep(1000);
+                try
+                {
+                    if (string.Equals(pingText, "Server unreacheable"))
+                        showConnectWarning(true);
+                    else
+                        showConnectWarning(false);
+                }
+                catch (Exception e)
+                {
+                    LogHandler.WriteLine(e.ToString());
+                }
+                Thread.Sleep(50);
             }
         }
 
         private void showConnectWarning(bool value)
         {
-            try
+            bool active = false;
+            if (this.InvokeRequired)
             {
-                Form conn = new ConnectWarning();
-                if (value)
+                showConnectWarningCallBack d = new showConnectWarningCallBack(showConnectWarning);
+                this.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                Form conn = new ConnectWarning(5000);
+                if (value /*&& !active*/)
                 {
-                    conn = new ConnectWarning();
+                    if (conn.IsDisposed == true) conn = new ConnectWarning(5000);
                     conn.ShowDialog(this);
+                    active = true;
                 }
                 else conn.Close();
-            }
-            catch (Exception)
-            {
 
+                //if (!value && active)
+                //{
+                //    conn.Close();
+                //    active = false;
+                //}
             }
         }
     }
