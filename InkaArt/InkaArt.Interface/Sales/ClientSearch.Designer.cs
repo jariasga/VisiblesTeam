@@ -31,6 +31,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_clients = new System.Windows.Forms.DataGridView();
+            this.button_select = new System.Windows.Forms.Button();
+            this.button_cancel = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,8 +40,6 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_select = new System.Windows.Forms.Button();
-            this.button_cancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_clients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,47 +71,11 @@
             this.grid_clients.Location = new System.Drawing.Point(36, 71);
             this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_clients.Name = "grid_clients";
+            this.grid_clients.ReadOnly = true;
             this.grid_clients.Size = new System.Drawing.Size(889, 463);
             this.grid_clients.TabIndex = 28;
             this.grid_clients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentDoubleClick);
             this.grid_clients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellDoubleClick);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "ID";
-            this.Producto.Name = "Producto";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Documento";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // cost
-            // 
-            this.cost.HeaderText = "Nombre";
-            this.cost.Name = "cost";
-            // 
-            // delete
-            // 
-            this.delete.HeaderText = "Estado";
-            this.delete.Name = "delete";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Prioridad";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Tipo Cliente";
-            this.Column2.Name = "Column2";
-            this.Column2.Visible = false;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Tipo Nacionalidad";
-            this.Column3.Name = "Column3";
-            this.Column3.Visible = false;
             // 
             // button_select
             // 
@@ -140,6 +104,55 @@
             this.button_cancel.Text = "＋ Cancelar";
             this.button_cancel.UseVisualStyleBackColor = false;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
+            // 
+            // Producto
+            // 
+            this.Producto.FillWeight = 30F;
+            this.Producto.HeaderText = "ID";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.FillWeight = 60F;
+            this.Cantidad.HeaderText = "Documento";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // cost
+            // 
+            this.cost.FillWeight = 93.27411F;
+            this.cost.HeaderText = "Nombre";
+            this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
+            // 
+            // delete
+            // 
+            this.delete.FillWeight = 93.27411F;
+            this.delete.HeaderText = "Nacionalidad";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 93.27411F;
+            this.Column1.HeaderText = "Prioridad";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Tipo Cliente";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Visible = false;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Tipo Nacionalidad";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Visible = false;
             // 
             // ClientSearch
             // 

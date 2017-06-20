@@ -147,7 +147,7 @@ namespace InkaArt.Data.Sales
             int numParams = adap.SelectCommand.Parameters.Count();
             if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
             else adap.SelectCommand.CommandText += " AND ";
-            adap.SelectCommand.CommandText += "name LIKE :name";
+            adap.SelectCommand.CommandText += "UPPER(name) LIKE UPPER(:name)";
             adap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
             adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
             adap.SelectCommand.Parameters[numParams].SourceColumn = "name";

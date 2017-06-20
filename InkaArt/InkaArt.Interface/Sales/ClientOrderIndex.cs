@@ -101,7 +101,8 @@ namespace InkaArt.Interface.Sales
                 string status = row["bdStatus"].ToString().Equals("1") ? "Activo" : "Inactivo";
                 if (status.Equals("Activo"))
                 {
-                    string idClient = row["idClient"].ToString();
+                    string idClient = "-1";
+                    if (row["idClient"] != DBNull.Value) idClient = row["idClient"].ToString();
                     string clientName = orderController.getClientName(idClient), clientDoc = orderController.getClientDoc(idClient);
                     float totalAmount = orderController.getRightTotalAmount(row);
                     grid_orders.Rows.Add(row["idOrder"], row["type"].ToString().ToUpper(), clientName, clientDoc, row["orderStatus"].ToString().ToUpper(), totalAmount);

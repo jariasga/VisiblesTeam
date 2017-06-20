@@ -158,6 +158,7 @@
             this.grid_orderline.Location = new System.Drawing.Point(33, 48);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
+            this.grid_orderline.ReadOnly = true;
             this.grid_orderline.RowHeadersVisible = false;
             this.grid_orderline.Size = new System.Drawing.Size(560, 203);
             this.grid_orderline.TabIndex = 22;
@@ -166,21 +167,25 @@
             // 
             this.Producto.HeaderText = "Producto";
             this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Calidad";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "PU";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Cantidad
             // 
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
             // 
             // groupBox1
             // 
