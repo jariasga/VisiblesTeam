@@ -9,7 +9,6 @@ namespace InkaArt.Data.Algorithm
 {
     public class AssignmentLine
     {
-        private DateTime date;
         private Worker worker;
         private Recipe recipe;
         private Job job;         //Proceso por producto
@@ -33,11 +32,12 @@ namespace InkaArt.Data.Algorithm
             get { return recipe; }
             set { recipe = value; }
         }
-        public DateTime Date
+        public int MiniturnStart
         {
-            get { return date; }
-            set { date = value; }
+            get { return miniturn_start; }
+            set { miniturn_start = value; }
         }
+
         public int TotalMiniturnsUsed
         {
             get { return total_miniturns_used; }
@@ -56,9 +56,8 @@ namespace InkaArt.Data.Algorithm
             this.Job = job;
         }
 
-        public AssignmentLine(DateTime date, Worker worker, Recipe recipe, Job job, int miniturn_start, int total_miniturns_used)
+        public AssignmentLine(Worker worker, Recipe recipe, Job job, int miniturn_start, int total_miniturns_used)
         {
-            this.date = date;
             this.worker = worker;
             this.recipe = recipe;
             this.job = job;
