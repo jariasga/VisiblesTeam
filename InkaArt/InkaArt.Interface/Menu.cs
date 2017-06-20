@@ -19,8 +19,10 @@ namespace InkaArt.Interface
     {
         private Form login;
         private RoleController controller;
-        Thread pingThread;
+        Thread pingThread, checkConnectorThread;
         delegate void SetPingStatusTextCallback(string text);
+        delegate void showConnectWarningCallBack(bool value);
+        private string pingText;
         public Menu(Form login)
         {
             InitializeComponent();
@@ -35,6 +37,10 @@ namespace InkaArt.Interface
             pingThread = new Thread(new ThreadStart(pingStatus));
             pingThread.IsBackground = true;
             pingThread.Start();
+
+            checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
+            checkConnectorThread.IsBackground = true;
+            checkConnectorThread.Start();
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -274,11 +280,11 @@ namespace InkaArt.Interface
                 try
                 {
                     long ms = ping.Send(BD_Connector.serverAddress).RoundtripTime;
-                    this.SetPingStatusText("Reply from server: " + ms + "ms");
+                    SetPingStatusText("Reply from server: " + ms + "ms");
                 }
                 catch (Exception)
                 {
-                    this.SetPingStatusText("Server unreacheable");
+                    SetPingStatusText("Server unreacheable");
                 }
                 Thread.Sleep(1000);
             }
@@ -295,11 +301,46 @@ namespace InkaArt.Interface
             {*/
             try
             {
-                this.toolStripStatusLabelPingStatus.Text = text;
+                toolStripStatusLabelPingStatus.Text = text;
             }
             catch (Exception e)
             {
                 LogHandler.WriteLine(e.ToString());
+            }
+            finally
+            {
+                pingText = text;
+            }
+        }
+
+        private void preventUserInteract()
+        {
+            while (true)
+            {
+                if (string.Equals(pingText, "Server unreacheable"))                
+                    showConnectWarning(true);                
+                else                
+                    showConnectWarning(false);
+                
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void showConnectWarning(bool value)
+        {
+            try
+            {
+                Form conn = new ConnectWarning();
+                if (value)
+                {
+                    conn = new ConnectWarning();
+                    conn.ShowDialog(this);
+                }
+                else conn.Close();
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

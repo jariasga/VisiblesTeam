@@ -113,10 +113,13 @@ namespace InkaArt.Business.Security
             adap = user.userAdapter();
             adap.SelectCommand.Parameters[0].NpgsqlValue = username;
 
-            data.Clear();
+            if (data != null) data.Clear();
             data = user.getData(adap, "User");
-
-            if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
+            if (data != null)
+            {
+                if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
+                else return null;
+            }
             else return null;
         }
         

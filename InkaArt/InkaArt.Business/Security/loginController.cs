@@ -16,7 +16,8 @@ namespace InkaArt.Business.Security
         private DataRow row;
         public static int userID, roleID;
         public static string userName, firstName, lastName;
-        public static bool needPassChange;
+        public static bool needPassChange, validConnection;
+
         public LoginController()
         {
             user = new UserController();
@@ -32,7 +33,13 @@ namespace InkaArt.Business.Security
             row = user.getUserRow(loginUsername);
             active = true;
             //  Read data from DB
-            
+            if (row == null)
+            {
+                validConnection = false;
+                return false;
+            }
+
+            validConnection = true;
             string userDB, keyDB;
 
             if (row != null)   //Encontro un usuario
