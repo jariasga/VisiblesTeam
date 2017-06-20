@@ -119,6 +119,7 @@ namespace InkaArt.Business.Algorithm
         public Assignment getNeighbor(Assignment solution, TabuMove move)
         {
             Assignment neighbor = new Assignment(solution);
+            int num_workers = simulation.SelectedWorkers.Count();
 
             // move attributes
             int swap_type = Randomizer.NextNumber(0, 1);
@@ -129,11 +130,11 @@ namespace InkaArt.Business.Algorithm
             if (true) //(swap_type == 0)
             {
                 // buscamos trabajadores
-                worker1_index = Randomizer.NextNumber(0, solution.NumberOfWorkers - 1);
-                worker2_index = Randomizer.NextNumber(0, solution.Miniturns - 1);
+                worker1_index = Randomizer.NextNumber(0, num_workers - 1);
+                worker2_index = Randomizer.NextNumber(0, num_workers - 1);
                 // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-                while (solution.NumberOfWorkers > 1 && worker1_index == worker2_index)
-                    worker2_index = Randomizer.NextNumber(0, solution.NumberOfWorkers - 1);
+                while (num_workers > 1 && worker1_index == worker2_index)
+                    worker2_index = Randomizer.NextNumber(0, num_workers - 1);
                 // intercambiamos valores
                 SwapWorkers(neighbor, worker1_index, worker2_index);
             }
