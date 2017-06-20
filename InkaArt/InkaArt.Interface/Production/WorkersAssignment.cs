@@ -57,7 +57,8 @@ namespace InkaArt.Interface.Production
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            SimulationReport simulation_report = new SimulationReport(combo_simulations.Text);
+            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
+            SimulationReport simulation_report = new SimulationReport(simulation);
             simulation_report.Show();
         }
 

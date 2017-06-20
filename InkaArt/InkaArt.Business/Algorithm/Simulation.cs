@@ -28,6 +28,7 @@ namespace InkaArt.Business.Algorithm
         private double huaco_weight;
         private double huamanga_stone_weight;
         private double retable_weight;
+        private double time;
 
         //Trabajadores y pedidos filtrados 
         private WorkerController selected_workers;
@@ -101,6 +102,19 @@ namespace InkaArt.Business.Algorithm
         {
             get { return assignments; }
             //set { assignments = value; }
+        }
+
+        public double Time
+        {
+            get
+            {
+                return time;
+            }
+
+            set
+            {
+                time = value;
+            }
         }
 
         /********** Constructor para nueva simulación de asignación de trabajadores **********/

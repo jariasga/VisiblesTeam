@@ -12,6 +12,7 @@ namespace InkaArt.Business.Algorithm
         private DateTime date;
         private double objective_function_value;
         private AssignmentLine[,] assignment_lines;
+        private int tabu_iterations;
 
         private int huacos_produced;
         private int huamanga_produced;
@@ -19,7 +20,7 @@ namespace InkaArt.Business.Algorithm
 		
         private int total_miniturns; //Total de miniturnos de un día
         private WorkerController selected_workers;
-
+        
         public DateTime Date
         {
             get { return date; }
@@ -33,7 +34,59 @@ namespace InkaArt.Business.Algorithm
         {
             get { return total_miniturns; }
         }
-		
+
+        public int Tabu_iterations
+        {
+            get
+            {
+                return tabu_iterations;
+            }
+
+            set
+            {
+                tabu_iterations = value;
+            }
+        }
+
+        public int Huacos_produced
+        {
+            get
+            {
+                return huacos_produced;
+            }
+
+            set
+            {
+                huacos_produced = value;
+            }
+        }
+
+        public int Huamanga_produced
+        {
+            get
+            {
+                return huamanga_produced;
+            }
+
+            set
+            {
+                huamanga_produced = value;
+            }
+        }
+
+        public int Altarpiece_produced
+        {
+            get
+            {
+                return altarpiece_produced;
+            }
+
+            set
+            {
+                altarpiece_produced = value;
+            }
+        }
+
         public AssignmentLine this[int worker_index, int miniturn_index]
         {
             get { return this.assignment_lines[worker_index, miniturn_index]; }

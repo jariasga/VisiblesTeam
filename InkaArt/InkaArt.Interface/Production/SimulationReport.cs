@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Reports;
+using InkaArt.Business.Algorithm;
 
 namespace InkaArt.Interface.Production
 {
@@ -15,20 +16,30 @@ namespace InkaArt.Interface.Production
     {
         private ReportsController reportControl = new ReportsController();
 
-        public SimulationReport(string name)
+        public SimulationReport(Simulation simulation)
         {
             InitializeComponent();
-            showData(name);
+            showData(simulation);
         }
 
-        public void showData(string name)
+        public void showData(Simulation simulation)
         {
-            label_todaydate.Text = DateTime.Now.ToString("M/d/yyyy");
-            label_simulationName.Text = name;
-            //label_simulationTime.Text = time;
+            label_todaydate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            label_simulationName.Text = simulation.Name;
+            label_simulationTime.Text = simulation.Time.ToString();
 
-            DataTable simulationReportList = reportControl.getDataSimulation(name);
-            populateDataGrid(simulationReportList);
+            foreach (Assignment day in simulation.Assignments)
+            {
+                DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
+                row.Cells["Column1"].Value = day.Date;
+                row.Cells["Column2"].Value = day.Tabu_iterations;
+                row.Cells["Column3"].Value = day.Huacos_produced;
+                row.Cells["Column4"].Value = day.Huamanga_produced;
+                row.Cells["Column5"].Value = simulation.SelectedWorkers.Count();
+            }
+            
+            //DataTable simulationReportList = reportControl.getDataSimulation(simulation);
+            //populateDataGrid(simulationReportList);
         }
 
         private void populateDataGrid(DataTable simulationReportList)
