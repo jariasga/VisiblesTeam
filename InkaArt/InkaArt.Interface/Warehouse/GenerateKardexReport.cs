@@ -20,8 +20,32 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
             warehouses = new List<string>();
-            items = new List<string>();
-            loadData();            
+            items = new List<string>();              
+            loadData();
+        }
+
+        private void checkBox_allProd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox_allProd.Checked)
+                list_products.Enabled = true;
+            else
+                list_products.Enabled = false;
+        }
+
+        private void checkBox_allRM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox_allRM.Checked)
+                list_rawMaterials.Enabled = true;
+            else
+                list_rawMaterials.Enabled = false;
+        }
+
+        private void checkBox_allW_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox_allW.Checked)
+                list_warehouses.Enabled = true;
+            else
+                list_warehouses.Enabled = false;
         }
 
         private void loadData()
@@ -29,11 +53,13 @@ namespace InkaArt.Interface.Warehouse
             FinalProductController controlProd = new FinalProductController();
             prodList = controlProd.getData();
             for (int i = 0; i < prodList.Rows.Count; i++)
-                list_products.Items.Add(prodList.Rows[i]["name"]);
+                if (prodList.Rows[i]["status"].ToString().Equals("1"))
+                    list_products.Items.Add(prodList.Rows[i]["name"]);
             RawMaterialController_old controlRawMat = new RawMaterialController_old();
             rawMatList = controlRawMat.getData();
             for (int i = 0; i < rawMatList.Rows.Count; i++)
-                list_rawMaterials.Items.Add(rawMatList.Rows[i]["name"]);
+                if (rawMatList.Rows[i]["status"].ToString().Equals("Activo"))
+                    list_rawMaterials.Items.Add(rawMatList.Rows[i]["name"]);
             WarehouseCrud controlWarehouse = new WarehouseCrud();
             warehouseList = controlWarehouse.GetWarehouses();
             for (int i = 0; i < warehouseList.Rows.Count; i++)
@@ -70,7 +96,7 @@ namespace InkaArt.Interface.Warehouse
                         warehouses.Add(str);
                     }
                 }
-                KardexReport kardex_form = new KardexReport(dateTimePicker_fechaIni.Text, dateTimePicker_fechaFin.Text, items, warehouses);
+                KardexReport kardex_form = new KardexReport(dateTimePicker_fechaIni.Value.ToString("MM/dd/yyyy"), dateTimePicker_fechaFin.Value.ToString("MM/dd/yyyy"), items, warehouses);
                 kardex_form.Show();
                 items.Clear();
                 warehouses.Clear();
