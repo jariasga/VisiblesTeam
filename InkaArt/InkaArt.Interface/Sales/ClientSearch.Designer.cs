@@ -31,8 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_clients = new System.Windows.Forms.DataGridView();
-            this.button_select = new System.Windows.Forms.Button();
-            this.button_cancel = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +38,8 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_select = new System.Windows.Forms.Button();
+            this.button_cancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid_clients)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,36 +74,9 @@
             this.grid_clients.ReadOnly = true;
             this.grid_clients.Size = new System.Drawing.Size(889, 463);
             this.grid_clients.TabIndex = 28;
+            this.grid_clients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentClick);
             this.grid_clients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentDoubleClick);
             this.grid_clients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellDoubleClick);
-            // 
-            // button_select
-            // 
-            this.button_select.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_select.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_select.ForeColor = System.Drawing.Color.White;
-            this.button_select.Location = new System.Drawing.Point(264, 549);
-            this.button_select.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_select.Name = "button_select";
-            this.button_select.Size = new System.Drawing.Size(200, 48);
-            this.button_select.TabIndex = 29;
-            this.button_select.Text = "＋ Seleccionar";
-            this.button_select.UseVisualStyleBackColor = false;
-            this.button_select.Click += new System.EventHandler(this.button_select_Click);
-            // 
-            // button_cancel
-            // 
-            this.button_cancel.BackColor = System.Drawing.Color.Gray;
-            this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(485, 549);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_cancel.Name = "button_cancel";
-            this.button_cancel.Size = new System.Drawing.Size(200, 48);
-            this.button_cancel.TabIndex = 30;
-            this.button_cancel.Text = "＋ Cancelar";
-            this.button_cancel.UseVisualStyleBackColor = false;
-            this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // Producto
             // 
@@ -153,6 +126,34 @@
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             this.Column3.Visible = false;
+            // 
+            // button_select
+            // 
+            this.button_select.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_select.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_select.ForeColor = System.Drawing.Color.White;
+            this.button_select.Location = new System.Drawing.Point(264, 549);
+            this.button_select.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_select.Name = "button_select";
+            this.button_select.Size = new System.Drawing.Size(200, 48);
+            this.button_select.TabIndex = 29;
+            this.button_select.Text = "＋ Seleccionar";
+            this.button_select.UseVisualStyleBackColor = false;
+            this.button_select.Click += new System.EventHandler(this.button_select_Click);
+            // 
+            // button_cancel
+            // 
+            this.button_cancel.BackColor = System.Drawing.Color.Gray;
+            this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_cancel.ForeColor = System.Drawing.Color.White;
+            this.button_cancel.Location = new System.Drawing.Point(485, 549);
+            this.button_cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_cancel.Name = "button_cancel";
+            this.button_cancel.Size = new System.Drawing.Size(200, 48);
+            this.button_cancel.TabIndex = 30;
+            this.button_cancel.Text = "＋ Cancelar";
+            this.button_cancel.UseVisualStyleBackColor = false;
+            this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // ClientSearch
             // 

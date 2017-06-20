@@ -76,7 +76,7 @@ namespace InkaArt.Interface.Sales
             string messageResponse = orderController.makeValidations(textbox_doc.Text,textbox_name.Text, orderLine, "pedido", "", date_delivery.Value);
             if (messageResponse.Equals("OK"))
             {
-                int response = orderController.AddOrder(currentClientId, combo_doctype.SelectedIndex, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, orderState, 1, orderLine, "pedido", isClientSelected, currentClientType);
+                int response = orderController.AddOrder(currentClientId, combo_doctype.SelectedIndex, date_delivery.Value, textbox_amount.Text, textbox_igv.Text, textbox_total.Text, orderState, 1, orderLine, "pedido", isClientSelected, currentClientNat);
                 if (response >= 0)
                 {
                     MessageBox.Show(this, "El pedido ha sido registrado con éxito.", "Registrar Pedido", MessageBoxButtons.OK);
@@ -140,7 +140,7 @@ namespace InkaArt.Interface.Sales
                 textbox_name.Text = form.SelectedClientName;
                 currentClientType = form.SelectedClientType;
                 currentClientNat = form.SelectedClientTypeNat;
-                if (currentClientType == 0)
+                if (currentClientType == 1)
                 {
                     clientIdentifierLabel.Text = "DNI";
                     combo_doctype.SelectedIndex = 0;
@@ -195,15 +195,15 @@ namespace InkaArt.Interface.Sales
                         if (canAdd)
                         {
                             float price = orderController.getRightPrice(currentClientNat, row["localPrice"].ToString(), row["exportPrice"].ToString());
-                            amount += price * float.Parse(numeric_quantity.Value.ToString());
+                            amount = orderController.updateAmount(amount,price, numeric_quantity.Value);
                             grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
                         }
                         else MessageBox.Show(this, "La cantidad supera al stock disponible", "Stock", MessageBoxButtons.OK);
                     }
                 }
-                textbox_amount.Text = Math.Round(amount, 2).ToString();
-                textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
-                textbox_total.Text = Math.Round((1.18 * amount), 2).ToString();
+                textbox_amount.Text = orderController.getPolishedAmount(amount);
+                textbox_igv.Text = orderController.getPolishedIGV(amount);
+                textbox_total.Text = orderController.getPolishedTotal(amount);
             }
         }
 

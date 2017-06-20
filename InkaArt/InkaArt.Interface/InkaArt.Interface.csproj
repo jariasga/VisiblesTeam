@@ -193,6 +193,12 @@
     <Compile Include="Sales\DocumentSearch.Designer.cs">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\SaleDocumentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentDetail.Designer.cs">
+      <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\SaleDocumentShow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -544,6 +550,9 @@
     </Compile>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\SaleDocumentDetail.resx">
+      <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SaleDocumentShow.resx">
       <DependentUpon>SaleDocumentShow.cs</DependentUpon>

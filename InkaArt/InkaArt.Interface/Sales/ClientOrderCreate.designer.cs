@@ -473,6 +473,11 @@
             // 
             this.numeric_quantity.Location = new System.Drawing.Point(487, 66);
             this.numeric_quantity.Margin = new System.Windows.Forms.Padding(4);
+            this.numeric_quantity.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numeric_quantity.Name = "numeric_quantity";
             this.numeric_quantity.Size = new System.Drawing.Size(107, 30);
             this.numeric_quantity.TabIndex = 19;

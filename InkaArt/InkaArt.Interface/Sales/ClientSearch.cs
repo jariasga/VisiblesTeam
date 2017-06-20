@@ -71,5 +71,10 @@ namespace InkaArt.Interface.Sales
         {
             Close();
         }
+
+        private void grid_clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }
