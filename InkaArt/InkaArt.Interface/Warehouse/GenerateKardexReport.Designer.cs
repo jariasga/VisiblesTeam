@@ -34,8 +34,8 @@
             this.dateTimePicker_fechaIni = new System.Windows.Forms.DateTimePicker();
             this.comboBox_products = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +72,7 @@
             // 
             this.dateTimePicker_fechaFin.CalendarFont = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(21, 171);
             this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
             this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(334, 28);
@@ -80,6 +81,7 @@
             // dateTimePicker_fechaIni
             // 
             this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 78);
             this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
             this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(334, 28);
@@ -103,16 +105,6 @@
             this.label4.TabIndex = 28;
             this.label4.Text = "Fecha final del periodo";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(17, 50);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 22);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "Fecha inicial del periodo";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -122,6 +114,16 @@
             this.label2.Size = new System.Drawing.Size(189, 22);
             this.label2.TabIndex = 26;
             this.label2.Text = "Nombre del producto";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(17, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(215, 22);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Fecha inicial del periodo";
             // 
             // GenerateKardexReport
             // 
