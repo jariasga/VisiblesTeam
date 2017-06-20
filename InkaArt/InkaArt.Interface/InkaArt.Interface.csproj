@@ -200,6 +200,11 @@
       <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Sales\SaleDocumentShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentShow.Designer.cs">
+      <DependentUpon>SaleDocumentShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\ConnectWarning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -557,6 +562,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\SaleDocumentShow.resx">
       <DependentUpon>SaleDocumentShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Security\ConnectWarning.resx">
       <DependentUpon>ConnectWarning.cs</DependentUpon>
     </EmbeddedResource>
