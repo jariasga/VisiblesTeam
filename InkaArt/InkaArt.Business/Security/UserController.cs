@@ -121,10 +121,13 @@ namespace InkaArt.Business.Security
                     var values = line.Split(';');
 
                     // creamos usuario
-                    insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]), null);
+                    int userCreated = insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]), null);
                     // creamos trabajador
-                    worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
-                    worker.sendPassword(values[10], values[0], password);
+                    if (userCreated == 1)
+                    {
+                        worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
+                        worker.sendPassword(values[10], values[0], password);
+                    }
                 }
             }            
         }
