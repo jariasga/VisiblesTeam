@@ -152,12 +152,10 @@ namespace InkaArt.Business.Algorithm
             this.indexes.Remove(index);
         }
 
-        public Index FindByWorkerAndJob(Worker worker, Job job)
+        public Index Find(Worker worker, Job job, Recipe recipe)
         {
-            if (worker == null || job == null) return null;
-            foreach (Index index in indexes)
-                if (index.Worker.ID == worker.ID && index.Job.ID == job.ID) return index;
-            return null;
+            if (worker == null || job == null || recipe == null) return null;
+            return indexes.Find(index => index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID);
         }
     }
 }

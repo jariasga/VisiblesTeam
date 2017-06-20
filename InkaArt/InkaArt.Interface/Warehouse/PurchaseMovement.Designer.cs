@@ -48,6 +48,7 @@
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantidadPorMover = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantMovement = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NroFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.idDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
@@ -147,12 +148,13 @@
             this.Cantidad,
             this.CantidadPorMover,
             this.cantMovement,
+            this.NroFactura,
             this.Seleccionar,
             this.idDetail});
-            this.dataGridView_orders.Location = new System.Drawing.Point(17, 44);
+            this.dataGridView_orders.Location = new System.Drawing.Point(6, 44);
             this.dataGridView_orders.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView_orders.Name = "dataGridView_orders";
-            this.dataGridView_orders.Size = new System.Drawing.Size(754, 171);
+            this.dataGridView_orders.Size = new System.Drawing.Size(794, 171);
             this.dataGridView_orders.TabIndex = 45;
             // 
             // button2
@@ -233,7 +235,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(803, 247);
+            this.groupBox3.Size = new System.Drawing.Size(806, 247);
             this.groupBox3.TabIndex = 32;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
@@ -249,7 +251,7 @@
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 200;
+            this.Nombre.Width = 150;
             // 
             // Cantidad
             // 
@@ -267,6 +269,11 @@
             // 
             this.cantMovement.HeaderText = "Cantidad a Mover";
             this.cantMovement.Name = "cantMovement";
+            // 
+            // NroFactura
+            // 
+            this.NroFactura.HeaderText = "NroFactura";
+            this.NroFactura.Name = "NroFactura";
             // 
             // Seleccionar
             // 
@@ -321,13 +328,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.ComboBox comboBox_OC;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantidadPorMover;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantMovement;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NroFactura;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDetail;
-        private System.Windows.Forms.GroupBox groupBox3;
     }
 }

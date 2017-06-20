@@ -133,9 +133,8 @@
             this.comboBox_status.Items.AddRange(new object[] {
             "Borrador",
             "Enviado",
-            "Entregado",
             "Inactivo"});
-            this.comboBox_status.Location = new System.Drawing.Point(12, 381);
+            this.comboBox_status.Location = new System.Drawing.Point(13, 381);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(183, 25);
             this.comboBox_status.TabIndex = 9;
@@ -393,7 +392,6 @@
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(626, 272);
             this.dataGridView_pedidos.TabIndex = 17;
-            this.dataGridView_pedidos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ingresandoFactura);
             // 
             // Eliminar
             // 
@@ -411,12 +409,14 @@
             this.id_detail.Name = "id_detail";
             this.id_detail.ReadOnly = true;
             this.id_detail.Visible = false;
+            this.id_detail.Width = 70;
             // 
             // idRawMat
             // 
             this.idRawMat.HeaderText = "ID Mat.";
             this.idRawMat.Name = "idRawMat";
             this.idRawMat.ReadOnly = true;
+            this.idRawMat.Width = 70;
             // 
             // Nombre
             // 
@@ -429,12 +429,14 @@
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 80;
             // 
             // Subtotal
             // 
             this.Subtotal.HeaderText = "Subtotal";
             this.Subtotal.Name = "Subtotal";
             this.Subtotal.ReadOnly = true;
+            this.Subtotal.Width = 80;
             // 
             // Factura
             // 
@@ -446,7 +448,7 @@
             // 
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
-            this.Estado.Visible = false;
+            this.Estado.Width = 80;
             // 
             // buttonDelete
             // 
