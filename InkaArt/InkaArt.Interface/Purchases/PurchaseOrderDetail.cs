@@ -59,11 +59,11 @@ namespace InkaArt.Interface.Purchases
             control = controlForm;
             InitializeComponent();
             textBox_id.Text = currentPurchaseOrder.Cells[1].Value.ToString();
-            textBox_idsupplier.Text = currentPurchaseOrder.Cells[2].Value.ToString();
-            comboBox_status.Text = currentPurchaseOrder.Cells[3].Value.ToString();
-            dateTimePicker_creation.Value = (DateTime) currentPurchaseOrder.Cells[4].Value;
-            dateTimePicker_delivery.Value = (DateTime)currentPurchaseOrder.Cells[5].Value;
-            textBox_total.Text = currentPurchaseOrder.Cells[6].Value.ToString();
+            textBox_idsupplier.Text = currentPurchaseOrder.Cells[7].Value.ToString();
+            comboBox_status.Text = currentPurchaseOrder.Cells[6].Value.ToString();
+            dateTimePicker_creation.Value = DateTime.Parse(currentPurchaseOrder.Cells[3].Value.ToString());
+            dateTimePicker_delivery.Value = DateTime.Parse(currentPurchaseOrder.Cells[4].Value.ToString());
+            textBox_total.Text = currentPurchaseOrder.Cells[5].Value.ToString();
             textBox_idsupplier.Enabled = false;
             dateTimePicker_creation.Enabled = false;
             dateTimePicker_delivery.Enabled = false;
