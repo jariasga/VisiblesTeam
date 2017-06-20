@@ -28,8 +28,8 @@ namespace InkaArt.Data.Algorithm
             // process
             if (type == 0)
             {
-                this.worker1 = new Tuple<int, int>(worker1, solution[worker1,0].Job.Process);
-                this.worker2 = new Tuple<int, int>(worker2, solution[worker2,0].Job.Process);
+                this.worker1 = new Tuple<int, int>(worker1, solution.getProcessId(worker1));
+                this.worker2 = new Tuple<int, int>(worker2, solution.getProcessId(worker2));
             }
             // product 
             else

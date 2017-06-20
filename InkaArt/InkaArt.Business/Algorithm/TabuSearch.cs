@@ -122,7 +122,7 @@ namespace InkaArt.Business.Algorithm
             int num_workers = simulation.SelectedWorkers.Count();
 
             // move attributes
-            int swap_type = Randomizer.NextNumber(0, 1);
+            int swap_type = 0; // Randomizer.NextNumber(0, 1);
             int worker1_index;
             int worker2_index;
             

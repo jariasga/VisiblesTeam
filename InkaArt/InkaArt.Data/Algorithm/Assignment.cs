@@ -95,5 +95,11 @@ namespace InkaArt.Data.Algorithm
         {
             return (assigned_miniturns[worker_index] >= miniturns);
         }
+
+        public int getProcessId(int worker_index)
+        {
+            int id = -1;
+            return id;
+        }
     }
 }
