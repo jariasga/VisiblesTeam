@@ -174,13 +174,17 @@ namespace InkaArt.Business.Algorithm
         {
             int produced = selected_orders[0][order_line_index].Quantity - selected_orders[0][order_line_index].Produced;
             current_product.OrderBy(line => line.Job.Order);
-            for (int i = 0; current_product.Count > 1 && i < current_product.Count; i++)
+
+            for (int i = 0; i < current_product.Count; i++)
             {
                 if (current_product[i].Produced < produced) produced = current_product[i].Produced;
+                //RECALCULAR TIEMPOS: FALTA
             }
-            for (int i = 0; current_product.Count > 1 && i < current_product.Count; i++)
+            for (int i = 0; i < current_product.Count; i++)
             {
                 current_product[i].Produced = produced;
+                for (int j = 0; j < current_product[i].TotalMiniturnsUsed; j++)
+                    assignment[selected_workers.GetIndex(current_product[i].Worker.ID), current_product[i].MiniturnStart + j] = current_product[i];
             }
             return produced;
         }
