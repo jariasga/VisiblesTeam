@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using InkaArt.Data.Production;
 using NpgsqlTypes;
 using Npgsql;
+using System.IO;
 
 namespace InkaArt.Business.Production
 {
@@ -17,6 +18,7 @@ namespace InkaArt.Business.Production
         private DataSet data;
         private DataTable recipeList;
         private DataRow row;
+        private DataTable table;
 
         public RecipeController()
         {
@@ -36,6 +38,33 @@ namespace InkaArt.Business.Production
             recipeList = data.Tables["Recipe"];
 
             return recipeList;
+        }
+
+        public int massiveUpload(string filename)
+        {
+            table = getData();     // obtenemos la tabla de materia prima
+            int res = 0;
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    try{
+                        //description(0), version(1), status (2), idProduct(3)
+                        insertData(values[0], values[1], values[2], values[3]);
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("No se pudo cargar el archivo.");
+                        res = 1;
+                    }
+                    
+                }
+            }
+            return res;
         }
 
         public void insertData(string description, string version, string status, string idProduct)

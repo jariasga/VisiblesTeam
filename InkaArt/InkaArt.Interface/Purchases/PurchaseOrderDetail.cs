@@ -18,6 +18,7 @@ namespace InkaArt.Interface.Purchases
         RawMaterial_SupplierController control_rm_sup;
         RawMaterialController control_rm;
         UnitOfMeasurementController control_unit;
+        PurchaseOrder ventanaListaOrdenes;
         DataTable supList,rawMat_supList,rmList,unitList,lineaPedidosList;
         int mode;
         string listaMaterialesIds;
@@ -34,17 +35,26 @@ namespace InkaArt.Interface.Purchases
             buttonSave.Enabled = true;
             dateTimePicker_creation.Value = DateTime.Now;
             dateTimePicker_delivery.Value = DateTime.Today.AddDays(8);
+            dataGridView_pedidos.Enabled = false;
+            comboBoxRawMaterialName.Enabled = false;
+            textBox_cantidad.Enabled = false;
+            textBox_factura.Enabled = false;
             textBox_total.Text = "0";
             buttonSave.Text = "🖫 Guardar";
         }
-        public PurchaseOrderDetail(PurchaseOrderController controlForm)
+        public PurchaseOrderDetail(PurchaseOrderController controlForm,PurchaseOrder ventana)
         {
             mode = 1;
+            ventanaListaOrdenes = ventana;
             control = controlForm;
             InitializeComponent();
             button_add.Enabled = false;
             buttonDelete.Enabled = true;
             buttonSave.Enabled = true;
+            dataGridView_pedidos.Enabled = false;
+            comboBoxRawMaterialName.Enabled = false;
+            textBox_factura.Enabled = false;
+            textBox_cantidad.Enabled = false;
             dateTimePicker_creation.Value = DateTime.Now;
             dateTimePicker_delivery.Value = DateTime.Today.AddDays(8);
             textBox_total.Text = "0";
@@ -53,9 +63,11 @@ namespace InkaArt.Interface.Purchases
             control_supplier = new SupplierController();
             llenarComboBoxSuppliers();
         }
-        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder, PurchaseOrderController controlForm)
+        public PurchaseOrderDetail(DataGridViewRow currentPurchaseOrder, PurchaseOrderController controlForm,PurchaseOrder ventana)
         {
             mode = 2;
+            isInEditMode = false;
+            ventanaListaOrdenes = ventana;
             control = controlForm;
             InitializeComponent();
             textBox_id.Text = currentPurchaseOrder.Cells[1].Value.ToString();
@@ -72,6 +84,9 @@ namespace InkaArt.Interface.Purchases
             button_add.Enabled = false;
             buttonDelete.Enabled = false;
             textBox_cantidad.Enabled = false;
+            dataGridView_pedidos.Enabled = false;
+            comboBoxRawMaterialName.Enabled = false;
+            textBox_factura.Enabled = false;
             control_supplier = new SupplierController();
             buscarNombreSupplier(textBox_idsupplier.Text);
             control_detail = new PurchaseOrderDetailController();
@@ -80,6 +95,7 @@ namespace InkaArt.Interface.Purchases
             control_unit = new UnitOfMeasurementController();
             obtenerMateriasDelSupplier();
             llenarMateriasPedidas();
+            if (string.Compare(comboBox_status.Text, "Inactivo") == 0) buttonSave.Visible = false;
         }
         private void filterSupplier()
         {
@@ -311,10 +327,10 @@ namespace InkaArt.Interface.Purchases
                 button_add.Enabled = false;
                 buttonDelete.Enabled = false;
                 //hacer insert
-                control.inserData(int.Parse(textBox_idsupplier.Text),comboBox_status.Text,DateTime.Parse(dateTimePicker_creation.Text),DateTime.Parse(dateTimePicker_delivery.Text),double.Parse(textBox_total.Text));
+                control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
                 Close();
             }
-            else if(mode==2 && isInEditMode)
+            else if (mode == 2 && isInEditMode)
             {
                 if (!validating_alldata())
                 {
@@ -329,18 +345,31 @@ namespace InkaArt.Interface.Purchases
                 button_add.Enabled = false;
                 buttonDelete.Enabled = false;
                 //hacer update
-                control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                try {
+                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    ventanaListaOrdenes.desarrolloBusqueda();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                this.Close();
             }
             else
             {
                 isInEditMode = true;
                 buttonSave.Text = "🖫 Guardar";
-                dateTimePicker_creation.Enabled = true;
-                dateTimePicker_delivery.Enabled = true;
-                textBox_cantidad.Enabled = true;
-                button_add.Enabled = true;
-                buttonDelete.Enabled = true;
-                comboBox_status.Enabled = true;
+                if (string.Compare(comboBox_status.Text, "Borrador") == 0) {
+                    dateTimePicker_creation.Enabled = true;
+                    dateTimePicker_delivery.Enabled = true;
+                    comboBox_status.Enabled = true;
+                    textBox_factura.Enabled = true;
+                    textBox_cantidad.Enabled = true;
+                    button_add.Enabled = true;
+                    buttonDelete.Enabled = true;
+                    comboBoxRawMaterialName.Enabled = true;
+                }
+                dataGridView_pedidos.Enabled = true;
 
             }
         }
