@@ -85,7 +85,6 @@
             this.textBox6.Location = new System.Drawing.Point(38, 151);
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(208, 26);
             this.textBox6.TabIndex = 30;
             // 
@@ -128,6 +127,7 @@
             this.Controls.Add(this.combo_type);
             this.Name = "MovementFindIn";
             this.Text = "MovementeFindIn";
+            this.Load += new System.EventHandler(this.MovementFindIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
