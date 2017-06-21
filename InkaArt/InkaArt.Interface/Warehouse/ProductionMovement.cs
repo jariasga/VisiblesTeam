@@ -40,7 +40,7 @@ namespace InkaArt.Interface.Warehouse
         private void button_create_Click(object sender, EventArgs e)
         {
             //Form new_warehouse_window = new Form1(ref textBox1,ref textBox2,ref textBox4);
-            Form new_warehouse_window = new Form1(textBox1, textBox2, textBox4);
+            Form new_warehouse_window = new ExchangeItem(textBox1, textBox2, textBox4,"","",null);
             new_warehouse_window.Show();
         }
 
@@ -97,7 +97,7 @@ namespace InkaArt.Interface.Warehouse
             }
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[5].Value);
+                bool s = Convert.ToBoolean(row.Cells[6].Value);
 
                 if (s == true)
                 {
@@ -105,7 +105,7 @@ namespace InkaArt.Interface.Warehouse
                     nameProd = Convert.ToString(row.Cells[1].Value);
                     try
                     {
-                        cantMov = Convert.ToInt32(row.Cells[4].Value);
+                        cantMov = Convert.ToInt32(row.Cells[5].Value);
                     }
                     catch
                     {
@@ -117,7 +117,7 @@ namespace InkaArt.Interface.Warehouse
                         MessageBox.Show("Línea :" + numRows + " Favor de ingresar un valor válido para la cantidad a mover");
                         continue;
                     }
-                    maxMov = Convert.ToInt32(row.Cells[3].Value);
+                    maxMov = Convert.ToInt32(row.Cells[4].Value);
 
                     if (cantMov <= maxMov)
                     {
@@ -172,8 +172,8 @@ namespace InkaArt.Interface.Warehouse
             string id = "";
             try
             {
-                Convert.ToInt32(textBox3.Text);
-                id = textBox3.Text;
+                Convert.ToInt32(textBox5.Text);
+                id = textBox5.Text;
             }
             catch
             {
@@ -181,7 +181,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
             
-            datos = productionItemMovementController.getProductLote(id, textBox5.Text);
+            datos = productionItemMovementController.getProductLote(id, textBox3.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
@@ -195,6 +195,7 @@ namespace InkaArt.Interface.Warehouse
                 row.Cells[1].Value = datos[1];
                 row.Cells[2].Value = datos[2];
                 row.Cells[3].Value = datos[3];
+                row.Cells[4].Value = datos[4];
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }

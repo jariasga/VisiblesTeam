@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGrid_stocks = new System.Windows.Forms.DataGridView();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,19 +48,18 @@
             // 
             // dataGrid_stocks
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGrid_stocks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGrid_stocks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGrid_stocks.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGrid_stocks.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGrid_stocks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGrid_stocks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGrid_stocks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGrid_stocks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid_stocks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Tipo,
@@ -67,9 +69,28 @@
             this.Cantidad,
             this.delete,
             this.Column1});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGrid_stocks.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGrid_stocks.Location = new System.Drawing.Point(28, 84);
             this.dataGrid_stocks.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.dataGrid_stocks.Name = "dataGrid_stocks";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGrid_stocks.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGrid_stocks.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGrid_stocks.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGrid_stocks.Size = new System.Drawing.Size(1010, 404);
             this.dataGrid_stocks.TabIndex = 25;
             // 
@@ -77,42 +98,49 @@
             // 
             this.Tipo.HeaderText = "Tipo";
             this.Tipo.Name = "Tipo";
+            this.Tipo.Width = 138;
             // 
             // Producto
             // 
             this.Producto.HeaderText = "Código";
             this.Producto.Name = "Producto";
+            this.Producto.Width = 138;
             // 
             // cost
             // 
             this.cost.HeaderText = "Descripción";
             this.cost.Name = "cost";
+            this.cost.Width = 138;
             // 
             // warehouse
             // 
             this.warehouse.HeaderText = "Almacén";
             this.warehouse.Name = "warehouse";
+            this.warehouse.Width = 139;
             // 
             // Cantidad
             // 
             this.Cantidad.HeaderText = "Cantidad física";
             this.Cantidad.Name = "Cantidad";
+            this.Cantidad.Width = 138;
             // 
             // delete
             // 
             this.delete.HeaderText = "Cantidad lógica";
             this.delete.Name = "delete";
+            this.delete.Width = 138;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "U.M.";
             this.Column1.Name = "Column1";
+            this.Column1.Width = 138;
             // 
             // label_todayDate
             // 
             this.label_todayDate.AutoSize = true;
             this.label_todayDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_todayDate.Location = new System.Drawing.Point(684, 22);
+            this.label_todayDate.Location = new System.Drawing.Point(920, 9);
             this.label_todayDate.Name = "label_todayDate";
             this.label_todayDate.Size = new System.Drawing.Size(0, 23);
             this.label_todayDate.TabIndex = 28;

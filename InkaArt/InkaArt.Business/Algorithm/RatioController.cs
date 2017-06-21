@@ -122,7 +122,7 @@ namespace InkaArt.Business.Algorithm
             }
 
             int broken, produced;
-            if (!int.TryParse(broken_text, out broken) || broken <= 0)
+            if (!int.TryParse(broken_text, out broken) || broken < 0)
             {
                 message = "El número de productos rotos no es válido.";
                 return null;

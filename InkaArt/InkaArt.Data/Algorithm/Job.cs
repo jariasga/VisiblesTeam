@@ -37,6 +37,10 @@ namespace InkaArt.Data.Algorithm
         {
             get { return id_product; }
         }
+        public int Order
+        {
+            get { return order; }
+        }
 
         public Job(int id_job, string name, int id_process, int id_product, int order)
         {

@@ -25,5 +25,22 @@ namespace InkaArt.Classes
                 return false;
             }
         }
+
+        public static bool WriteLine(string text, params object[] parameters)
+        {
+            try
+            {
+                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write);
+                StreamWriter stream = new StreamWriter(file);
+                stream.WriteLine(text, parameters);
+                stream.Close();
+                file.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

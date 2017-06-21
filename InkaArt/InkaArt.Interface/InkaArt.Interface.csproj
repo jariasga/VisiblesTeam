@@ -58,14 +58,9 @@
       <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\packages\Microsoft.Office.Interop.Outlook.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Outlook.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Npgsql">
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
@@ -193,6 +188,18 @@
     <Compile Include="Sales\DocumentSearch.Designer.cs">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sales\SaleDocumentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentDetail.Designer.cs">
+      <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\SaleDocumentShow.Designer.cs">
+      <DependentUpon>SaleDocumentShow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\ConnectWarning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +218,12 @@
     <Compile Include="Warehouse\ExchangeMovement.Designer.cs">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\MovementFindIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\MovementFindIn.Designer.cs">
+      <DependentUpon>MovementFindIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\MovementIndex.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +241,12 @@
     </Compile>
     <Compile Include="Warehouse\ProductionMovement.Designer.cs">
       <DependentUpon>ProductionMovement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\ProductionMovementOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ProductionMovementOut.Designer.cs">
+      <DependentUpon>ProductionMovementOut.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\PurchaseMovement.cs">
       <SubType>Form</SubType>
@@ -379,11 +398,11 @@
     <Compile Include="Warehouse\AlertLackSupplies.designer.cs">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\Form1.cs">
+    <Compile Include="Warehouse\ExchangeItem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Warehouse\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Warehouse\ExchangeItem.Designer.cs">
+      <DependentUpon>ExchangeItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\GenerateKardexReport.cs">
       <SubType>Form</SubType>
@@ -545,6 +564,12 @@
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sales\SaleDocumentDetail.resx">
+      <DependentUpon>SaleDocumentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\SaleDocumentShow.resx">
+      <DependentUpon>SaleDocumentShow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Security\ConnectWarning.resx">
       <DependentUpon>ConnectWarning.cs</DependentUpon>
     </EmbeddedResource>
@@ -554,6 +579,9 @@
     <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\MovementFindIn.resx">
+      <DependentUpon>MovementFindIn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\MovementIndex.resx">
       <DependentUpon>MovementIndex.cs</DependentUpon>
     </EmbeddedResource>
@@ -562,6 +590,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ProductionMovement.resx">
       <DependentUpon>ProductionMovement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ProductionMovementOut.resx">
+      <DependentUpon>ProductionMovementOut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseMovement.resx">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
@@ -638,8 +669,8 @@
     <EmbeddedResource Include="Warehouse\AlertLackSupplies.resx">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\ExchangeItem.resx">
+      <DependentUpon>ExchangeItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\GenerateKardexReport.resx">
       <DependentUpon>GenerateKardexReport.cs</DependentUpon>
@@ -690,7 +721,6 @@
       <DependentUpon>WarehouseShow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -726,17 +756,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

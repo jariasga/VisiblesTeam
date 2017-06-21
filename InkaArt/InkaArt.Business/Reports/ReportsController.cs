@@ -27,18 +27,18 @@ namespace InkaArt.Business.Reports
             return reportData.getDataStocks(flag);
         }
 
-        public DataTable getDataPerformance(string worker, int chosenIndex, string fechaIni, string fechaFin)
+        public DataTable getDataPerformance(List<string> workersList, string fechaIni, string fechaFin)
         {
-            return reportData.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
+            return reportData.getDataPerformance(workersList, fechaIni, fechaFin);
         }
 
         public DataTable getDataSimulation(string name)
         {
             return reportData.getDataSimulation(name);
         }
-        public DataTable getDataMovements()
+        public DataTable getDataMovements(string fechaIni, string fechaFin, List<string> items, List<string> warehouses)
         {
-            return reportData.getDataMovements();
+            return reportData.getDataMovements(fechaIni, fechaFin, items, warehouses);
         }
     }
 }

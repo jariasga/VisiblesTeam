@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Warehouse
 {
-    partial class Form1
+    partial class ExchangeItem
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,13 +37,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoDeProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.idItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDeProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +64,21 @@
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            this.groupBox1.Visible = false;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.comboBox1.Location = new System.Drawing.Point(25, 115);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(182, 31);
+            this.comboBox1.Sorted = true;
+            this.comboBox1.TabIndex = 28;
+            this.comboBox1.Visible = false;
             // 
             // textBox_id
             // 
@@ -98,9 +114,9 @@
             // 
             this.textBox_supplier.BackColor = System.Drawing.Color.White;
             this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_supplier.Location = new System.Drawing.Point(25, 50);
+            this.textBox_supplier.Location = new System.Drawing.Point(241, 50);
             this.textBox_supplier.Name = "textBox_supplier";
-            this.textBox_supplier.Size = new System.Drawing.Size(661, 29);
+            this.textBox_supplier.Size = new System.Drawing.Size(462, 29);
             this.textBox_supplier.TabIndex = 17;
             // 
             // label1
@@ -124,6 +140,7 @@
             this.buttonSearch.TabIndex = 15;
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Visible = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // dataGridView1
@@ -132,37 +149,15 @@
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
+            this.idItem,
             this.Nombre,
             this.TipoDeProducto,
+            this.cantMov,
             this.Seleccionar});
-            this.dataGridView1.Location = new System.Drawing.Point(21, 195);
+            this.dataGridView1.Location = new System.Drawing.Point(21, 21);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(709, 210);
+            this.dataGridView1.Size = new System.Drawing.Size(709, 384);
             this.dataGridView1.TabIndex = 44;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id Item";
-            this.Id.Name = "Id";
-            this.Id.Width = 190;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 250;
-            // 
-            // TipoDeProducto
-            // 
-            this.TipoDeProducto.HeaderText = "Tipo de Producto";
-            this.TipoDeProducto.Name = "TipoDeProducto";
-            this.TipoDeProducto.Width = 120;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
             // 
             // buttonAdd
             // 
@@ -191,19 +186,32 @@
             this.buttonDelete.UseVisualStyleBackColor = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
-            // comboBox1
+            // idItem
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.comboBox1.Location = new System.Drawing.Point(25, 115);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(182, 31);
-            this.comboBox1.Sorted = true;
-            this.comboBox1.TabIndex = 28;
-            this.comboBox1.Visible = false;
+            this.idItem.HeaderText = "idItem";
+            this.idItem.Name = "idItem";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 250;
+            // 
+            // TipoDeProducto
+            // 
+            this.TipoDeProducto.HeaderText = "Tipo de Producto";
+            this.TipoDeProducto.Name = "TipoDeProducto";
+            this.TipoDeProducto.Width = 120;
+            // 
+            // cantMov
+            // 
+            this.cantMov.HeaderText = "Cantidad a mover";
+            this.cantMov.Name = "cantMov";
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
             // 
             // Form1
             // 
@@ -217,6 +225,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Seleccionar Item";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -234,12 +243,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoDeProducto;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoDeProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantMov;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
     }
 }

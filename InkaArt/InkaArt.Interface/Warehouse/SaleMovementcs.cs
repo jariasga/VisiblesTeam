@@ -106,7 +106,7 @@ namespace InkaArt.Interface.Warehouse
             }
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[5].Value);
+                bool s = Convert.ToBoolean(row.Cells[6].Value);
 
                 if (s == true)
                 {
@@ -114,7 +114,7 @@ namespace InkaArt.Interface.Warehouse
                     nameProd = Convert.ToString(row.Cells[1].Value);
                     try
                     {
-                        cantMov = Convert.ToInt32(row.Cells[4].Value);
+                        cantMov = Convert.ToInt32(row.Cells[5].Value);
                     }
                     catch
                     {
@@ -127,7 +127,7 @@ namespace InkaArt.Interface.Warehouse
                         continue;
                     }
 
-                    maxMov = Convert.ToInt32(row.Cells[3].Value);
+                    maxMov = Convert.ToInt32(row.Cells[4].Value);
 
                     if (cantMov <= maxMov)
                     {
@@ -269,6 +269,7 @@ namespace InkaArt.Interface.Warehouse
                 row.Cells[1].Value = datos[1];
                 row.Cells[2].Value = datos[2];
                 row.Cells[3].Value = datos[3];
+                row.Cells[4].Value = datos[4];
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }

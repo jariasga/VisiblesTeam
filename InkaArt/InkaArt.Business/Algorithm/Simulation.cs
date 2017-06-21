@@ -13,7 +13,7 @@ namespace InkaArt.Business.Algorithm
 {
     public class Simulation
     {
-        public const int LimitTime = 300;      //60 segundos * 5 minutos como máximo
+        public const int LimitTime = 60;//300;      //60 segundos * 5 minutos como máximo
         public const int MiniturnLength = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
 
         private int id_simulation;
@@ -28,6 +28,7 @@ namespace InkaArt.Business.Algorithm
         private double huaco_weight;
         private double huamanga_stone_weight;
         private double retable_weight;
+        private double time;
 
         //Trabajadores y pedidos filtrados 
         private WorkerController selected_workers;
@@ -100,7 +101,20 @@ namespace InkaArt.Business.Algorithm
         public List<Assignment> Assignments
         {
             get { return assignments; }
-            //set { assignments = value; }
+            set { assignments = value; }
+        }
+
+        public double Time
+        {
+            get
+            {
+                return time;
+            }
+
+            set
+            {
+                time = value;
+            }
         }
 
         /********** Constructor para nueva simulación de asignación de trabajadores **********/
@@ -149,7 +163,6 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 3) return retable_weight;
             return 1;                
         }
-
         /******************* GUARDADO EN BASE DE DATOS *******************/
 
         public void Save()
@@ -218,18 +231,18 @@ namespace InkaArt.Business.Algorithm
 
         //public List<AssignmentLine> AssignmentsToList()
         //{
-        //    //List<AssignmentLine> list = new List<AssignmentLine>();
+        //    List<AssignmentLine> list = new List<AssignmentLine>();
 
-        //    //if (assignments == null) return list;
-        //    //foreach(AssignmentLine[][] day in assignments)
-        //    //{
-        //    //    foreach(AssignmentLine[] worker in day)
-        //    //    {
-        //    //        list.Concat(worker.ToList<AssignmentLine>());
-        //    //    }
-        //    //}
-            
-        //    //return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
+        //    if (assignments == null) return list;
+        //    foreach (AssignmentLine[][] day in assignments)
+        //    {
+        //        foreach (AssignmentLine[] worker in day)
+        //        {
+        //            list.Concat(worker.ToList<AssignmentLine>());
+        //        }
+        //    }
+
+        //    return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
         //}
     }
 }

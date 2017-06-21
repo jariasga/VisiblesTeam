@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
     public class TabuSearch
     {
         private Simulation simulation;
+        private IndexController indexes;
+        private int limitDayTime;
 
         // reactive tabu list
         private int tabu_list_length;
@@ -25,33 +28,36 @@ namespace InkaArt.Business.Algorithm
         // solutions
         private int max_iterations;
         private double best_fitness;
-        private List<AssignmentLine[][]> initial_solution;
-        private List<AssignmentLine[][]> best_solution;
+        private List<Assignment> initial_solution;
+        private List<Assignment> best_solution;
 
-        internal List<AssignmentLine[][]> BestSolution
+        public List<Assignment> BestSolution
         {
             get { return best_solution; }
             set { best_solution = value; }
         }
 
         /* Se inicializan los parametros a calibrar */
-        public TabuSearch(Simulation simulation, List<AssignmentLine[][]> initial_solution)
+        public TabuSearch(Simulation simulation, IndexController indexes, List<Assignment> solution, int elapsed_time)
         {
-            LoadParameters();
+            loadParameters();            
             this.simulation = simulation;
-            this.initial_solution = initial_solution;
-            this.best_solution = new List<AssignmentLine[][]>();
+            this.indexes = indexes;
+            this.limitDayTime = (Simulation.LimitTime - elapsed_time) / simulation.Days;
+            this.initial_solution = solution;
+            this.best_solution = new List<Assignment>();
+            MessageBox.Show("Inicializacion de Tabu");
         }
 
-        public void LoadParameters()
+        public bool loadParameters()
         {
+            bool read = false;
             NpgsqlConnection connection = new NpgsqlConnection();
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
-
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TabuParameters\"", connection);
-
             NpgsqlDataReader reader = command.ExecuteReader();
+
             while (reader.Read())
             {
                 // reactive tabu list
@@ -64,51 +70,50 @@ namespace InkaArt.Business.Algorithm
 
                 // neighbor
                 this.neighbor_checks = reader.GetInt32(4);     // cantidad maxima de vecinos a evaluar                
+                read = true; 
             }
-
             connection.Close();
-        }
 
+            return read;
+        }
+        
         /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
            Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
         */
-        public double getFitness(Simulation simulation, AssignmentLine[][] solution)
+        public double getFitness(Assignment solution)
         {
             double fitness = 0;
             int assigned_workers = 0;
-            double product_weight;
+            AssignmentLine current_assignment = null;
 
-            for (int i = 0; i < solution.Length; i++)
+            for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
             {
-                foreach(AssignmentLine assignment in solution[i])
+                for (int miniturn_index = 0; miniturn_index < solution.TotalMiniturns; miniturn_index++)
                 {
-                    Index index = null; //simulation.Indexes.FindByWorkerAndJob(assignment.Worker, assignment.Job);
-                    // si el trabajador no esta asignado (solution[i]=0) no se encontrara ratio (ratio == null)
-                    if (index != null)
-                    {
-                        assigned_workers++;
-                        // buscamos el peso del producto (producto = primer digito del procesoxproducto id)
-                        
-                        product_weight = simulation.ProductWeight(assignment.Job.Product);
-                        // sumamos el indice de perdida
-                        fitness += (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight)
-                            / product_weight;
-                    }
+                    AssignmentLine assignment = solution[worker_index, miniturn_index];
+                    if (assignment == null || assignment.Equals(current_assignment))
+                        continue;
+                    Index index = indexes.Find(assignment.Worker, assignment.Job, assignment.Recipe);
+                    if (index == null)
+                        continue;
+                    assigned_workers++;
+                    fitness += index.LossIndex;
                 }
             }
+            if (assigned_workers == 0) assigned_workers++;
 
-            // dividimos lo acumulado solo entre los trabajadores asignados
+            //Dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
         }
 
         /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
-        public AssignmentLine[][] getNeighbor(AssignmentLine[][] solution, TabuMove move)
+        public Assignment getNeighbor(Assignment solution, TabuMove move)
         {
-            AssignmentLine[][] neighbor = new AssignmentLine[solution.Length][];
-            solution.CopyTo(neighbor, 0);
+            Assignment neighbor = new Assignment(solution);
+            int num_workers = simulation.SelectedWorkers.Count();
 
             // move attributes
-            int swap_type = Randomizer.NextNumber(0, 1);
+            int swap_type = 0; // Randomizer.NextNumber(0, 1);
             int worker1_index;
             int worker2_index;
             
@@ -116,11 +121,11 @@ namespace InkaArt.Business.Algorithm
             if (true) //(swap_type == 0)
             {
                 // buscamos trabajadores
-                worker1_index = Randomizer.NextNumber(0, solution.Length - 1);
-                worker2_index = Randomizer.NextNumber(0, solution.Length - 1);
+                worker1_index = Randomizer.NextNumber(0, num_workers - 1);
+                worker2_index = Randomizer.NextNumber(0, num_workers - 1);
                 // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-                while (solution.Length > 1 && worker1_index == worker2_index)
-                    worker2_index = Randomizer.NextNumber(0, solution.Length - 1);
+                while (num_workers > 1 && worker1_index == worker2_index)
+                    worker2_index = Randomizer.NextNumber(0, num_workers - 1);
                 // intercambiamos valores
                 SwapWorkers(neighbor, worker1_index, worker2_index);
             }
@@ -131,128 +136,156 @@ namespace InkaArt.Business.Algorithm
             }
 
             // guardamos movimiento
-            move = new TabuMove(swap_type, neighbor, worker1_index, worker2_index);
+            move = saveMove(swap_type, neighbor, worker1_index, worker2_index);
 
             return neighbor;
         }
 
-        public void SwapWorkers(AssignmentLine[][] solution, int worker1_index, int worker2_index)
+        public TabuMove saveMove(int type, Assignment solution, int worker1, int worker2)
         {
-            Worker worker1 = solution[worker1_index].First().Worker;
-            Worker worker2 = solution[worker2_index].First().Worker;
+            TabuMove move;
+            int item1, item2;
 
-            for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
+            // process
+            if (type == 0)
             {
-                solution[worker1_index][miniturn].Worker = worker2;
-                solution[worker2_index][miniturn].Worker = worker1;
+                item1 = solution.getProcessId(worker1);
+                item2 = solution.getProcessId(worker2);
+            }
+            // product 
+            else
+            {
+                item1 = solution.getProductId(worker1, type);
+                item2 = solution.getProductId(worker2, type);
+            }
+            move = new TabuMove(type, worker1, item1, worker2, item2);
+
+            return move;
+        }
+
+        public void SwapWorkers(Assignment solution, int worker1_index, int worker2_index)
+        {
+            Worker worker1 = simulation.SelectedWorkers[worker1_index];
+            Worker worker2 = simulation.SelectedWorkers[worker2_index];
+
+            for (int miniturn = 0; miniturn < solution.TotalMiniturns; miniturn++)
+            {
+                AssignmentLine assignment1, assignment2;
+
+                assignment1 = solution[worker1_index, miniturn];
+                assignment2 = solution[worker2_index, miniturn];
+
+                if (assignment1 != null) assignment1.Worker = worker2;
+                solution[worker2_index, miniturn] = assignment1;
+                if (assignment2 != null) assignment2.Worker = worker1;
+                solution[worker1_index, miniturn] = assignment2;                
             }
         }
 
         /* Flujo del algoritmo */
-        public void run(int[] elapsed_time)
+        public void run(ref int elapsed_time, int day)
         {
-            for(int day = 0; day < initial_solution.Count; day++)
+            // soluciones
+            Assignment current_solution = new Assignment(initial_solution[day]);
+            Assignment best_day_solution = new Assignment(initial_solution[day]);
+            Assignment neighbor = null;
+
+            // condicion de meseta: contador de iteraciones sin mejora en best_solution
+            int iter_count = 0;
+
+            // lista tabu
+            TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
+            int no_growth_count = 0;
+
+            // fitness
+            double initial_fitness = getFitness(current_solution);
+            MessageBox.Show("Fitness");
+            double current_fitness = initial_fitness;
+            double neighbor_fitness = 0;
+            best_fitness = current_fitness;
+
+            // inicio
+            // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
+            while (elapsed_time < limitDayTime && iter_count < max_iterations)
             {
-                // soluciones
-                AssignmentLine[][] current_solution = new AssignmentLine[initial_solution[day].Length][];
-                AssignmentLine[][] best_day_solution = current_solution;
-                AssignmentLine[][] neighbor = null;
-                initial_solution[day].CopyTo(current_solution, 0);
-                current_solution.CopyTo(best_day_solution, 0);
+                int neighbor_count = 0;         // cuenta de vecinos evaluados
+                iter_count++;                   // condicion de meseta: contara iteraciones 
+                bool success = false;
 
-                // condicion de meseta: contador de iteraciones sin mejora en best_solution
-                int iter_count = 0;
+                // variables para movimientos
+                TabuMove move = new TabuMove();
+                TabuMove last_move = new TabuMove();
 
-                // lista tabu
-                TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
-                int no_growth_count = 0;
-
-                // fitness
-                double initial_fitness = getFitness(simulation, current_solution);
-                double current_fitness = initial_fitness;
-                double neighbor_fitness = 0;
-                best_fitness = current_fitness;
-
-                // inicio
-                // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-                while (elapsed_time[0] < Simulation.LimitTime && iter_count < max_iterations)
+                // Busqueda local: buscaremos un numero maximo de vecinos por eficiencia
+                while (neighbor_count < neighbor_checks)
                 {
-                    int neighbor_count = 0;         // cuenta de vecinos evaluados
-                    iter_count++;                   // condicion de meseta: contara iteraciones 
-                    bool success = false;
-
-                    // variables para movimientos
-                    TabuMove move = new TabuMove();
-                    TabuMove last_move = new TabuMove();
-
-                    // Busqueda local: buscaremos un numero maximo de vecinos por eficiencia
-                    while (neighbor_count < neighbor_checks)
+                    neighbor_count++;
+                    neighbor = getNeighbor(current_solution, move);     // se crea un vecino con un intercambio aleatorio y se guarda el movimiento
+                                                                        // el movimiento no puede estar en la lista tabu y el vecino debe ser distinto de la solucion
+                    if (!tabu_list.Contains(move) && move != last_move)
                     {
-                        neighbor_count++;
-                        neighbor = getNeighbor(current_solution, move);     // se crea un vecino con un intercambio aleatorio y se guarda el movimiento
-                                                                            // el movimiento no puede estar en la lista tabu y el vecino debe ser distinto de la solucion
-                        if (!tabu_list.Contains(move) && move != last_move)
-                        {
-                            success = true;
-                            // evalua el vecindario con la funcion objetivo
-                            neighbor_fitness = getFitness(simulation, neighbor);
-                            // best improved: a penas encuentre un vecino que supere a la solucion actual, salimos
-                            if (current_fitness > neighbor_fitness)
-                                break;
-                        }
+                        success = true;
+                        // evalua el vecindario con la funcion objetivo
+                        neighbor_fitness = getFitness(neighbor);
+                        // best improved: a penas encuentre un vecino que supere a la solucion actual, salimos
+                        if (current_fitness > neighbor_fitness)
+                            break;
+                    }
+                }
+
+                // Evaluamos lo encontrado:
+
+                // si no encontro un vecino
+                if (!success)
+                {
+                    // cambia el espacio de busqueda si no encuentra buenas soluciones
+                    neighbor = initial_solution[day];
+                    neighbor_fitness = initial_fitness;
+                }
+
+                // si se encontro un vecino
+                else
+                {
+
+                    // si encontro un vecino superior al best_fitness actual
+                    if (best_fitness > neighbor_fitness)
+                    {
+                        // actualizamos
+                        best_day_solution = neighbor;
+                        best_fitness = neighbor_fitness;
+                        // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
+                        iter_count = 0;
+                        // reactive tabu: como es una buena solucion, no se agranda la lista
+                        no_growth_count++;
                     }
 
-                    // Evaluamos lo encontrado:
-
-                    // si no encontro un vecino
-                    if (!success)
-                    {
-                        // cambia el espacio de busqueda si no encuentra buenas soluciones
-                        neighbor = initial_solution[day];
-                        neighbor_fitness = initial_fitness;
-                    }
-
-                    // si se encontro un vecino
+                    // si encontro un vecino menor al best_fitness y la lista tabu no ha crecido                
+                    // reactive tabu: si no se supera la mejor solucion, se incrementa el tama;o de la lista
                     else
                     {
-
-                        // si encontro un vecino superior al best_fitness actual
-                        if (best_fitness > neighbor_fitness)
-                        {
-                            // actualizamos
-                            best_day_solution = neighbor;
-                            best_fitness = neighbor_fitness;
-                            // condicion de meseta: como se mejoro la mejor solucion, se reinicia la cuenta
-                            iter_count = 0;
-                            // reactive tabu: como es una buena solucion, no se agranda la lista
-                            no_growth_count++;
-                        }
-
-                        // si encontro un vecino menor al best_fitness y la lista tabu no ha crecido                
-                        // reactive tabu: si no se supera la mejor solucion, se incrementa el tama;o de la lista
-                        else
-                        {
-                            tabu_list.Increase();
-                            no_growth_count = 0;
-                        }
-                    }
-
-                    // reactive tabu: si se supero max_no_growth sin que el tama;o se increimente, se reduce
-                    if (no_growth_count >= max_no_growth)
-                    {
-                        tabu_list.Decrease();
+                        tabu_list.Increase();
                         no_growth_count = 0;
                     }
-
-                    // guardamos el movimiento
-                    tabu_list.Enqueue(move);
-
-                    // siguiente iteracion
-                    current_solution = neighbor;
-                    current_fitness = neighbor_fitness;
                 }
-                best_solution.Add(best_day_solution);
-            }            
+
+                // reactive tabu: si se supero max_no_growth sin que el tama;o se increimente, se reduce
+                if (no_growth_count >= max_no_growth)
+                {
+                    tabu_list.Decrease();
+                    no_growth_count = 0;
+                }
+
+                // guardamos el movimiento
+                tabu_list.Enqueue(move);
+
+                // siguiente iteracion
+                current_solution = neighbor;
+                current_fitness = neighbor_fitness;
+            }
+
+            best_day_solution.TabuIterations = iter_count;
+            best_solution.Add(best_day_solution);            
+            MessageBox.Show("Paso un dia");
         }
         
     }

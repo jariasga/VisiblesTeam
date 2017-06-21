@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Reports;
-using Excel = Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;   
 using System.IO;
 
 namespace InkaArt.Interface.Production
@@ -17,26 +17,27 @@ namespace InkaArt.Interface.Production
     {
         private ReportsController reportControl = new ReportsController();        
 
-        public PerformanceReport(string worker, int chosenIndex, string fechaIni, string fechaFin)
+        public PerformanceReport(List<string> workersList, string fechaIni, string fechaFin)
         {
             InitializeComponent();
-            showData(worker, chosenIndex, fechaIni, fechaFin);
+            showData(workersList, fechaIni, fechaFin);
         }
 
-        public void showData(string worker, int chosenIndex, string fechaIni, string fechaFin)
+        public void showData(List<string> workersList, string fechaIni, string fechaFin)
         {
-            label_nameWorker.Text = worker;
-            label_today.Text = DateTime.Now.ToString("M/d/yyyy");
-            System.Data.DataTable performanceReportList = reportControl.getDataPerformance(worker, chosenIndex, fechaIni, fechaFin);
+            label_today.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            System.Data.DataTable performanceReportList = reportControl.getDataPerformance(workersList, fechaIni, fechaFin);
             populateDataGrid(performanceReportList);           
         }
 
         private void populateDataGrid(System.Data.DataTable performanceReportList)
         {
+            dataGridView_performance.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
             dataGridView_performance.Rows.Clear();
+            dataGridView_performance.Columns[6].DefaultCellStyle.Format = "0.##";
             foreach (DataRow row in performanceReportList.Rows)
             {
-                dataGridView_performance.Rows.Add(row["Fecha"], row["Puesto"], row["Receta"], row["CantidadRota"], row["CantidadProducida"], row["Tiempo"]);
+                dataGridView_performance.Rows.Add(row["Fecha"], row["Trabajador"], row["Puesto"], row["Receta"], row["CantidadRota"], row["CantidadProducida"], row["Tiempo"]);
             }               
         }
 

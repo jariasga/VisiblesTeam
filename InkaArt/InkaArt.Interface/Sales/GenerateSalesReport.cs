@@ -27,7 +27,7 @@ namespace InkaArt.Interface.Sales
             int response = validateData();
             if (response == 1)
             {
-                SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy HH:MM"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy HH:MM"), comboBox_products.Text);
+                SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy"), comboBox_products.Text);
                 sales_form.Show();
             }
 
@@ -35,7 +35,7 @@ namespace InkaArt.Interface.Sales
 
         private int validateData()
         {
-            if (dateTimePicker_fechaIni.Value >= dateTimePicker_fechaFin.Value)
+            if (dateTimePicker_fechaIni.Value > dateTimePicker_fechaFin.Value)
             {
                 MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
