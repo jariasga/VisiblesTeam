@@ -16,13 +16,15 @@ namespace InkaArt.Interface.Production
 {
     public partial class SimulationExecution : Form
     {
+        private SimulationController simulations;
         private Simulation simulation;
         private int elapsed_seconds;
         private WorkerController workers;
 
-        public SimulationExecution(Simulation simulation, WorkerController workers)
+        public SimulationExecution(SimulationController simulations, Simulation simulation, WorkerController workers)
         {
             InitializeComponent();
+            this.simulations = simulations;
             this.simulation = simulation;
             this.elapsed_seconds = 0;
             this.workers = workers;
@@ -85,7 +87,6 @@ namespace InkaArt.Interface.Production
             }
 
             simulation.Assignments = tabu.BestSolution;
-
         }
 
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -99,6 +100,7 @@ namespace InkaArt.Interface.Production
             this.timer.Stop();
 
             MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            simulations.Add(simulation);
             this.Close();
         }
 

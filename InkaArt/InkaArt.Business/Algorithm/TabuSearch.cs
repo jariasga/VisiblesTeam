@@ -91,13 +91,16 @@ namespace InkaArt.Business.Algorithm
                 for (int miniturn_index = 0; miniturn_index < solution.TotalMiniturns; miniturn_index++)
                 {
                     AssignmentLine assignment = solution[worker_index, miniturn_index];
-                    if (assignment == null || assignment.Equals(current_assignment)) continue;
+                    if (assignment == null || assignment.Equals(current_assignment))
+                        continue;
                     Index index = indexes.Find(assignment.Worker, assignment.Job, assignment.Recipe);
-                    if (index == null) continue;
+                    if (index == null)
+                        continue;
                     assigned_workers++;
                     fitness += index.LossIndex;
                 }
             }
+            if (assigned_workers == 0) assigned_workers++;
 
             //Dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
@@ -165,15 +168,15 @@ namespace InkaArt.Business.Algorithm
             Worker worker1 = simulation.SelectedWorkers[worker1_index];
             Worker worker2 = simulation.SelectedWorkers[worker2_index];
 
-            for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
+            for (int miniturn = 0; miniturn < solution.TotalMiniturns; miniturn++)
             {
                 AssignmentLine assignment1, assignment2;
 
                 assignment1 = solution[worker1_index, miniturn];
+                assignment2 = solution[worker2_index, miniturn];
+
                 if (assignment1 != null) assignment1.Worker = worker2;
                 solution[worker2_index, miniturn] = assignment1;
-
-                assignment2 = solution[worker2_index, miniturn];
                 if (assignment2 != null) assignment2.Worker = worker1;
                 solution[worker1_index, miniturn] = assignment2;                
             }
@@ -279,7 +282,9 @@ namespace InkaArt.Business.Algorithm
                 current_solution = neighbor;
                 current_fitness = neighbor_fitness;
             }
-            best_solution.Add(best_day_solution);
+
+            best_day_solution.TabuIterations = iter_count;
+            best_solution.Add(best_day_solution);            
             MessageBox.Show("Paso un dia");
         }
         

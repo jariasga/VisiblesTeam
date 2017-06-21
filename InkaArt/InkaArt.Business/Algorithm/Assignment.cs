@@ -12,6 +12,7 @@ namespace InkaArt.Business.Algorithm
         private DateTime date;
         private double objective_function_value;
         private AssignmentLine[,] assignment_lines;
+        private int tabu_iterations;
 
         private int huacos_produced;
         private int huamanga_produced;
@@ -33,7 +34,20 @@ namespace InkaArt.Business.Algorithm
         {
             get { return total_miniturns; }
         }
-		
+
+        public int TabuIterations
+        {
+            get
+            {
+                return tabu_iterations;
+            }
+
+            set
+            {
+                tabu_iterations = value;
+            }
+        }
+
         public AssignmentLine this[int worker_index, int miniturn_index]
         {
             get { return this.assignment_lines[worker_index, miniturn_index]; }
@@ -56,6 +70,8 @@ namespace InkaArt.Business.Algorithm
         {
             this.date = assignment.date;
             this.objective_function_value = assignment.objective_function_value;
+            this.total_miniturns = assignment.total_miniturns;
+            this.selected_workers = assignment.selected_workers;
             this.assignment_lines = (AssignmentLine[,]) assignment.assignment_lines.Clone();
 
             this.huacos_produced = assignment.huacos_produced;
@@ -109,6 +125,19 @@ namespace InkaArt.Business.Algorithm
             int products = Convert.ToInt32(Math.Truncate(total_miniturns_used * Simulation.MiniturnLength / chosen_candidate.AverageTime));
             
             return new AssignmentLine(chosen_candidate.Worker, chosen_candidate.Recipe, chosen_candidate.Job, next_miniturn, total_miniturns_used, products);
+        }
+
+        public List<AssignmentLine> toList()
+        {
+            List<AssignmentLine> list = new List<AssignmentLine>();
+
+            for(int worker = 0; worker < this.selected_workers.NumberOfWorkers; worker++)
+            {
+                for (int miniturn = 0; miniturn < this.total_miniturns; miniturn++)
+                    if (assignment_lines[worker, miniturn] != null) list.Add(assignment_lines[worker, miniturn]);
+            }
+
+            return list;
         }
     }
 }

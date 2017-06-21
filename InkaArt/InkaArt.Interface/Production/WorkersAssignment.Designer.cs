@@ -41,7 +41,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.simulation_tab_control.SuspendLayout();
             this.simulation_tab_assignment.SuspendLayout();
@@ -91,6 +91,7 @@
             this.combo_simulations.Size = new System.Drawing.Size(212, 26);
             this.combo_simulations.TabIndex = 44;
             this.combo_simulations.SelectedIndexChanged += new System.EventHandler(this.ComboSimulationsSelectedIndexChanged);
+            this.combo_simulations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.combo_simulations_MouseClick);
             // 
             // button_report
             // 
@@ -117,7 +118,7 @@
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Cantidad});
+            this.Column5});
             this.simulation_grid.Location = new System.Drawing.Point(24, 23);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.simulation_grid.Name = "simulation_grid";
@@ -180,10 +181,10 @@
             this.Column4.HeaderText = "Receta";
             this.Column4.Name = "Column4";
             // 
-            // Cantidad
+            // Column5
             // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
+            this.Column5.HeaderText = "Cantidad";
+            this.Column5.Name = "Column5";
             // 
             // WorkersAssignment
             // 
@@ -225,6 +226,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
     }
 }
