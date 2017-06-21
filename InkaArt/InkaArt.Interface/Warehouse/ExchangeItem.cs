@@ -12,7 +12,7 @@ using InkaArt.Business.Warehouse;
 
 namespace InkaArt.Interface.Warehouse
 {
-    public partial class Form1 : Form
+    public partial class ExchangeItem : Form
     {
         public int id = 0 ;
         public string name = "";
@@ -28,13 +28,13 @@ namespace InkaArt.Interface.Warehouse
         private MaterialMovementController materialMovementController = new MaterialMovementController();
         private ProductMovementController productMovementController = new ProductMovementController();
 
-        public Form1()
+        public ExchangeItem()
         {
             InitializeComponent();
         }
 
         //public Form1(ref TextBox text1, ref TextBox text2,ref  TextBox text3)
-        public Form1( TextBox text1,  TextBox text2,  TextBox text3, string warehouseOrigin, string warehouseDestiny, TextBox text8)
+        public ExchangeItem( TextBox text1,  TextBox text2,  TextBox text3, string warehouseOrigin, string warehouseDestiny, TextBox text8)
         {
             text1New = text1;
             text2New = text2;
@@ -107,7 +107,7 @@ namespace InkaArt.Interface.Warehouse
                     }
                     catch
                     {
-
+                        MessageBox.Show("Por favor ingrese un valor numérico para la cantidad a mover.");
                     }
                     
                     break;

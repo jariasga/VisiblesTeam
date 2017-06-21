@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Warehouse
 {
-    partial class Form1
+    partial class ExchangeItem
     {
         /// <summary>
         /// Required designer variable.

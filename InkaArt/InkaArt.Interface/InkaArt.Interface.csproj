@@ -242,6 +242,12 @@
     <Compile Include="Warehouse\ProductionMovement.Designer.cs">
       <DependentUpon>ProductionMovement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\ProductionMovementOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ProductionMovementOut.Designer.cs">
+      <DependentUpon>ProductionMovementOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\PurchaseMovement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,11 +398,11 @@
     <Compile Include="Warehouse\AlertLackSupplies.designer.cs">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\Form1.cs">
+    <Compile Include="Warehouse\ExchangeItem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Warehouse\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Warehouse\ExchangeItem.Designer.cs">
+      <DependentUpon>ExchangeItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\GenerateKardexReport.cs">
       <SubType>Form</SubType>
@@ -585,6 +591,9 @@
     <EmbeddedResource Include="Warehouse\ProductionMovement.resx">
       <DependentUpon>ProductionMovement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ProductionMovementOut.resx">
+      <DependentUpon>ProductionMovementOut.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseMovement.resx">
       <DependentUpon>PurchaseMovement.cs</DependentUpon>
     </EmbeddedResource>
@@ -660,8 +669,8 @@
     <EmbeddedResource Include="Warehouse\AlertLackSupplies.resx">
       <DependentUpon>AlertLackSupplies.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\ExchangeItem.resx">
+      <DependentUpon>ExchangeItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\GenerateKardexReport.resx">
       <DependentUpon>GenerateKardexReport.cs</DependentUpon>

@@ -152,6 +152,18 @@ namespace InkaArt.Business.Warehouse
             return productionItemMovementData.GetLoteData(query);
         }
 
+        public NpgsqlDataReader getQuery(string idWarehouse)
+        {
+            int intAux, intIdWarehouse = -1;
+            string query = "", queryDocument = "";
+
+            if (!idWarehouse.Equals("")) if (int.TryParse(idWarehouse, out intAux)) intIdWarehouse = int.Parse(idWarehouse);
+            queryDocument = "select A.\"idRawMaterial\",B.\"name\",A.\"currentStock\" from inkaart.\"RawMaterial-Warehouse\" A, inkaart.\"RawMaterial\" B where A.\"idWarehouse\" = " + intIdWarehouse + " and A.\"idWarehouse\" = B.\"id_raw_mtaerial\";";
+            
+            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
+            return productionItemMovementData.GetLoteData(queryDocument);
+        }
+
         public NpgsqlDataReader getProductLote(string id = "",string idLote = "")
         {
             int intId = -1, intAux, intIdLote = -1, intIdWarehouse = -1;
