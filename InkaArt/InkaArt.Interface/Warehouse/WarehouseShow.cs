@@ -233,8 +233,8 @@ namespace InkaArt.Interface.Warehouse
             if (int.TryParse(numericUpDown3.Value.ToString(), out min) && int.TryParse(numericUpDown4.Value.ToString(), out max))
             {
 
-                min = int.Parse(numericUpDown1.Value.ToString());
-                max = int.Parse(numericUpDown2.Value.ToString());
+                min = int.Parse(numericUpDown4.Value.ToString());
+                max = int.Parse(numericUpDown3.Value.ToString());
 
                 if (min != 0 && max != 0)
                 {
@@ -274,7 +274,7 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
             //updateDataGrid();
-            MessageBox.Show("Materias Primas eliminados", "Eliminar Materia Prima.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            MessageBox.Show("Materias Primas eliminados", "Eliminar Materia Prima.","Information", MessageBoxIcon.Information);
             fillGridRawMaterial();
         }
 
