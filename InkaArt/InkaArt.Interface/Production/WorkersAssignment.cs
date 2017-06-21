@@ -92,14 +92,27 @@ namespace InkaArt.Interface.Production
                 button_save.Enabled = true;
                 button_delete.Enabled = true;
                 button_report.Enabled = true;
-                /*if (simulation.AssignmentsToList().Count > 0)
-                {
-                    simulation_grid.DataSource = simulation.AssignmentsToList().Select(o => new
-                    { Column1 = o.Date, Column2 = o.Worker.FullName, Column3 = o.Job.Name, Column4 = o.Recipe.Description }).ToList();
-                }*/
+                updateGrid(simulation);
             }
         }
-        
+
+        public void updateGrid(Simulation simulation)
+        {
+            foreach(Assignment day in simulation.Assignments)
+            {
+                foreach(AssignmentLine miniturn in day.toList())
+                {
+                    DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
+                    row.Cells[0].Value = day.Date.ToShortDateString();
+                    row.Cells[1].Value = miniturn.Worker.FullName;
+                    row.Cells[2].Value = miniturn.Job.Name;
+                    row.Cells[3].Value = miniturn.Recipe.Description;
+                    row.Cells[4].Value = miniturn.Produced;
+                    simulation_grid.Rows.Add(row);
+                }
+            }
+        }
+
         private void simulation_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -108,6 +121,11 @@ namespace InkaArt.Interface.Production
         private void groupbox_summary_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void combo_simulations_MouseClick(object sender, MouseEventArgs e)
+        {
+            combo_simulations.DataSource = simulations.BindingList();
         }
     }
 }
