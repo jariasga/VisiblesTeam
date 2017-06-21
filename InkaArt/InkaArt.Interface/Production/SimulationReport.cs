@@ -31,11 +31,13 @@ namespace InkaArt.Interface.Production
             foreach (Assignment day in simulation.Assignments)
             {
                 DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
-                row.Cells["Column1"].Value = day.Date;
-                row.Cells["Column2"].Value = day.Tabu_iterations;
-                row.Cells["Column3"].Value = day.Huacos_produced;
-                row.Cells["Column4"].Value = day.Huamanga_produced;
-                row.Cells["Column5"].Value = simulation.SelectedWorkers.Count();
+                row.Cells[0].Value = day.Date;
+                row.Cells[1].Value = day.TabuIterations;
+                row.Cells[2].Value = day.Huacos_produced;
+                row.Cells[3].Value = day.Huamanga_produced;
+                row.Cells[4].Value = day.Altarpiece_produced;
+                row.Cells[5].Value = simulation.SelectedWorkers.Count();
+                simulation_grid.Rows.Add(row);
             }
             
             //DataTable simulationReportList = reportControl.getDataSimulation(simulation);

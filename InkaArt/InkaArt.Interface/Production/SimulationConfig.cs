@@ -104,7 +104,7 @@ namespace InkaArt.Interface.Production
                         numeric_altarpiece.Value, workers, selected_workers, orders, selected_orders);
 
                     //Llegó la hora de la verdad: ejecutar la simulación de asignación de trabajadores
-                    Form loading_screen = new SimulationExecution(simulation, workers);
+                    Form loading_screen = new SimulationExecution(simulations, simulation, workers);
                     DialogResult result = loading_screen.ShowDialog();
                     if (result == DialogResult.Cancel) return;
 

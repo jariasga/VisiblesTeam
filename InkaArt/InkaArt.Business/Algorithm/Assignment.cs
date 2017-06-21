@@ -35,7 +35,7 @@ namespace InkaArt.Business.Algorithm
             get { return total_miniturns; }
         }
 
-        public int Tabu_iterations
+        public int TabuIterations
         {
             get
             {
@@ -47,7 +47,7 @@ namespace InkaArt.Business.Algorithm
                 tabu_iterations = value;
             }
         }
-
+        
         public int Huacos_produced
         {
             get
@@ -109,6 +109,8 @@ namespace InkaArt.Business.Algorithm
         {
             this.date = assignment.date;
             this.objective_function_value = assignment.objective_function_value;
+            this.total_miniturns = assignment.total_miniturns;
+            this.selected_workers = assignment.selected_workers;
             this.assignment_lines = (AssignmentLine[,]) assignment.assignment_lines.Clone();
 
             this.huacos_produced = assignment.huacos_produced;
@@ -119,12 +121,24 @@ namespace InkaArt.Business.Algorithm
         public int getProcessId(int worker_index)
         {
             int id = -1;
+
+            for(int i = 0; i < total_miniturns; i++)
+            {
+                if (assignment_lines[worker_index, i] != null)
+                    return assignment_lines[worker_index, i].Job.Process;
+            }
+
             return id;
         }
-		
-        internal int getProductId(int worker1, int type)
+
+        public int getProductId(int worker, int miniturn)
         {
-            throw new NotImplementedException();
+            int id = -1;
+
+            if (assignment_lines[worker, miniturn] != null)
+                return assignment_lines[worker, miniturn].Job.Product;
+
+            return id;
         }
 
         public bool IsWorkerFull(Worker worker, List<AssignmentLine> temp_assignment_lines)
@@ -150,6 +164,19 @@ namespace InkaArt.Business.Algorithm
             int products = Convert.ToInt32(Math.Truncate(total_miniturns_used * Simulation.MiniturnLength / chosen_candidate.AverageTime));
             
             return new AssignmentLine(chosen_candidate.Worker, chosen_candidate.Recipe, chosen_candidate.Job, next_miniturn, total_miniturns_used, products);
+        }
+
+        public List<AssignmentLine> toList()
+        {
+            List<AssignmentLine> list = new List<AssignmentLine>();
+
+            for(int worker = 0; worker < this.selected_workers.NumberOfWorkers; worker++)
+            {
+                for (int miniturn = 0; miniturn < this.total_miniturns; miniturn++)
+                    if (assignment_lines[worker, miniturn] != null) list.Add(assignment_lines[worker, miniturn]);
+            }
+
+            return list;
         }
     }
 }

@@ -85,7 +85,17 @@ namespace InkaArt.Business.Warehouse
 
         public void updateStock(string idWh, string idRm, int logico, int fisico)
         {
+            adapt = pWarehouse.pWarehouseAdapter();
 
+            string updateQuery;
+            string logStr = logico.ToString();
+            string fidStr = fisico.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"Product-Warehouse\" SET ";
+            updateQuery = updateQuery + "\"currentStock\"= " + logStr + ", ";
+            updateQuery = updateQuery + "\"virtualStock\" = " + fidStr;
+            updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idProduct\"= " + idRm + " AND state = 'Activo'" + " ;";
+            pWarehouse.execute(updateQuery);
         }
 
 
