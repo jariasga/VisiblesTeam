@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InkaArt.Data.Sales;
 using System.Data;
+using System.IO;
 
 namespace InkaArt.Business.Sales
 {
@@ -94,6 +95,30 @@ namespace InkaArt.Business.Sales
             if (state.Equals("-1"))
                 return "Seleccione un estado";
             return "OK";
+        }
+
+        public string massiveUpload(string fileName, bool validate = false)
+        {
+            int index = 1;
+            using (var fs = File.OpenRead(fileName))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    string response = makeValidations(values[0].ToString(), values[2].ToString(), values[1].ToString(), values[1].ToString(), values[4].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[7].ToString(), values[8].ToString(), values[9].ToString());
+                    if (response.Equals("OK"))
+                    {
+                        if (!validate) clientData.InsertClient(int.Parse(values[0].ToString()), values[2].ToString(), long.Parse(values[1].ToString()), long.Parse(values[1].ToString()), int.Parse(values[4].ToString()), int.Parse(values[3].ToString()), int.Parse(values[5].ToString()), values[6].ToString(), long.Parse(values[7].ToString()), values[8].ToString(), values[9].ToString());                        
+                    }else
+                    {
+                        return "Error línea " + index.ToString() + ": " + response;
+                    }
+                    index++;
+                }
+                return "OK";
+            }
         }
 
         public void deleteClients(List<string> selectedClients)

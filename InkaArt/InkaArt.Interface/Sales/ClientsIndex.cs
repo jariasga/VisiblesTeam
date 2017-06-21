@@ -93,5 +93,23 @@ namespace InkaArt.Interface.Sales
                 updateDataGrid(false);
             }
         }
+
+        private void button_cargamasiva_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Clients File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string response = clientController.massiveUpload(dialog.FileName, true);
+                if (response.Equals("OK"))
+                {
+                    clientController.massiveUpload(dialog.FileName);
+                    MessageBox.Show(this, "Se ha cargado la data correctamente.", "Carga Masiva", MessageBoxButtons.OK);
+                }else MessageBox.Show(this, response + " revise los datos en el archivo.", "Carga Masiva", MessageBoxButtons.OK);
+            }
+            else MessageBox.Show(this, "No se ha podido cargar el archivo, intente nuevamente.", "Carga Masiva", MessageBoxButtons.OK);
+            updateDataGrid(false);
+        }
     }
 }
