@@ -20,6 +20,7 @@ namespace InkaArt.Interface.Sales
         DataTable saleDocumentList;
         DataTable productList;
         DataTable orderLine;
+        DataTable invoicedLine;
         OrderController orderController = new OrderController();
         public DevolutionCreate()
         {
@@ -56,11 +57,19 @@ namespace InkaArt.Interface.Sales
                 if (clientDoc.Length == 11) docType = "Factura";
                 combo_doc.Text = docType;
                 orderLine = orderController.getOrderLines(row["idOrder"].ToString());
+                invoicedLine = orderController.getLineXDocument(salesDocumentId.ToString());
+                grid_orderline.Rows.Clear();
                 foreach (DataRow orderline in orderLine.Rows)
                 {
-                    string productId = orderline["idProduct"].ToString();
-                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId, row["idClient"].ToString());
-                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"]);
+                    foreach (DataRow invoicedline in invoicedLine.Rows)
+                    {
+                        if (orderline["idLineItem"].ToString().Equals(invoicedline["idLineItem"].ToString()))
+                        {
+                            string productId = orderline["idProduct"].ToString();
+                            string name = orderController.getProductName(productId);
+                            grid_orderline.Rows.Add(name, orderline["quality"], invoicedline["pu"], invoicedline["finished"]);
+                        }
+                    }
                 }
             }
         }
@@ -69,6 +78,8 @@ namespace InkaArt.Interface.Sales
         {
             productList = orderController.GetProducts();
             populateCombobox(combo_product, productList, "name", "idProduct");
+            DataTable recipes = orderController.getProductRecipe(combo_product.SelectedValue);
+            populateCombobox(combo_quality, recipes, "version", "idRecipe");
         }
 
         private void populateCombobox(ComboBox combo, DataTable dataSource, string displayParam, string valueParam)
@@ -223,6 +234,23 @@ namespace InkaArt.Interface.Sales
         private void numeric_quantity_ValueChanged(object sender, EventArgs e)
         {
             button_add.Enabled = numeric_quantity.Value > 0;
+        }
+
+        private void combo_product_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (DataRow row in productList.Rows)
+            {
+                if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
+                {
+                    DataTable recipes = orderController.getProductRecipe(row["idProduct"]);
+                    populateCombobox(combo_quality, recipes, "version", "idRecipe");
+                }
+            }
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

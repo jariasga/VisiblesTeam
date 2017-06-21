@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +63,20 @@
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.comboBox1.Location = new System.Drawing.Point(25, 115);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(182, 31);
+            this.comboBox1.Sorted = true;
+            this.comboBox1.TabIndex = 28;
+            this.comboBox1.Visible = false;
             // 
             // textBox_id
             // 
@@ -98,9 +112,9 @@
             // 
             this.textBox_supplier.BackColor = System.Drawing.Color.White;
             this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_supplier.Location = new System.Drawing.Point(25, 50);
+            this.textBox_supplier.Location = new System.Drawing.Point(241, 50);
             this.textBox_supplier.Name = "textBox_supplier";
-            this.textBox_supplier.Size = new System.Drawing.Size(661, 29);
+            this.textBox_supplier.Size = new System.Drawing.Size(462, 29);
             this.textBox_supplier.TabIndex = 17;
             // 
             // label1
@@ -190,20 +204,6 @@
             this.buttonDelete.Text = "Cancelar";
             this.buttonDelete.UseVisualStyleBackColor = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.comboBox1.Location = new System.Drawing.Point(25, 115);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(182, 31);
-            this.comboBox1.Sorted = true;
-            this.comboBox1.TabIndex = 28;
-            this.comboBox1.Visible = false;
             // 
             // Form1
             // 
