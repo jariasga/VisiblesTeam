@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using InkaArt.Business.Purchases;
 using InkaArt.Business.Warehouse;
 
+
 namespace InkaArt.Interface.Warehouse
 {
     public partial class PurchaseMovement : Form
@@ -271,7 +272,8 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (int.Parse(dataGridView_orders.Rows[i].Cells[4].Value.ToString()) > 0)
                         {
-                            if (int.TryParse(dataGridView_orders.Rows[i].Cells[5].Value.ToString(), out idFactura))
+                            if (int.TryParse(dataGridView_orders.Rows[i].Cells[5].Value.ToString(), out idFactura) &&
+                                dataGridView_orders.Rows[i].Cells[5].Value.ToString()!="")
                             {
                                 idFactura = int.Parse(dataGridView_orders.Rows[i].Cells[5].Value.ToString());
 
