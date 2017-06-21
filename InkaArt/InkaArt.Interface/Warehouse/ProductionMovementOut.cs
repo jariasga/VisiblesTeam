@@ -18,6 +18,7 @@ namespace InkaArt.Interface.Warehouse
         string nameWarehouseOrigin = "";
         string typeMovement = "";
         private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
+        private ProductionItemWarehouseMovementController productionItemWarehouseMovementController = new ProductionItemWarehouseMovementController();
 
         public ProductionMovementOut()
         {
@@ -74,7 +75,46 @@ namespace InkaArt.Interface.Warehouse
 
         private void button2_Click(object sender, EventArgs e)
         {
+            int idProd = 0,cantMov=0,numRows=0,maxMov=0;
+            string nameProd = "";
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                bool s = Convert.ToBoolean(row.Cells[6].Value);
 
+                if (s == true)
+                {
+                    idProd = Convert.ToInt32(row.Cells[0].Value);
+                    nameProd = Convert.ToString(row.Cells[1].Value);
+                    try
+                    {
+                        cantMov = Convert.ToInt32(row.Cells[3].Value);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Favor de ingresar un valor entero para el número de productos a mover. Linea: " + (numRows + 1));
+                        return;
+                    }
+                    if (cantMov < 0)
+                    {
+                        MessageBox.Show("Línea :" + numRows + " Favor de ingresar un valor válido para la cantidad a mover");
+                        continue;
+                    }
+                    maxMov = Convert.ToInt32(row.Cells[2].Value);
+
+                    if (cantMov <= maxMov)
+                    {
+                        //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
+                        productionItemWarehouseMovementController.updateDataRawMaterialOut(idProd, Convert.ToInt32(idWarehouesOrigin), cantMov, "Salida", "OK");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + ". Solo se puede quitar " + maxMov + " items.");
+                    }
+                }
+                numRows++;
+            }
+            //productionItemMovementController.sacarMateria();
+            MessageBox.Show("Actualizando...");
         }
     }
 }
