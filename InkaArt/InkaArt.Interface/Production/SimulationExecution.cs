@@ -107,7 +107,7 @@ namespace InkaArt.Interface.Production
         private void timer_Tick(object sender, EventArgs e)
         {
             this.elapsed_seconds++;
-            this.label_time.Text = string.Format("Tiempo: {0:00}:{1:00} s", elapsed_seconds / 60, elapsed_seconds % 60);
+            this.label_time.Text = string.Format("Tiempo: {0:00} m {1:00} s", elapsed_seconds / 60, elapsed_seconds % 60);
         }
 
         private void button_cancel_Click(object sender, EventArgs e)

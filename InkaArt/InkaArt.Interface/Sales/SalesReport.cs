@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Reports;
+using System.Globalization;
 
 namespace InkaArt.Interface.Sales
 {
@@ -23,9 +24,15 @@ namespace InkaArt.Interface.Sales
 
         public void showData(string fechaIni, string fechaFin, string producto)
         {
-            label_todaydate.Text = DateTime.Now.ToString("M/d/yyyy");
-            label_iniDate.Text = fechaIni;
-            label_finDate.Text = fechaFin;
+            label_todaydate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            CultureInfo provider = CultureInfo.InvariantCulture;            
+            DateTime dti = DateTime.ParseExact(fechaIni, "M/d/yyyy", provider);
+            label_iniDate.Text = dti.ToString("dd/MM/yyyy");
+
+            DateTime dtf = DateTime.ParseExact(fechaFin, "M/d/yyyy", provider);
+            label_finDate.Text = dtf.ToString("dd/MM/yyyy");
+
             label_product.Text = producto;
 
             DataTable salesReportList = reportControl.getDataSales(fechaIni, fechaFin, producto);
@@ -34,6 +41,7 @@ namespace InkaArt.Interface.Sales
 
         private void populateDataGrid(DataTable salesReportList)
         {
+            grid_salesReport.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
             grid_salesReport.Rows.Clear();
             foreach (DataRow row in salesReportList.Rows)
             {

@@ -23,7 +23,7 @@ namespace InkaArt.Interface.Warehouse
 
         public void showData(int flag)
         {
-            label_todayDate.Text = DateTime.Now.ToString("M/d/yyyy");
+            label_todayDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
             DataTable stocksReportList = reportControl.getDataStocks(flag);
             populateDataGrid(stocksReportList);
         }
