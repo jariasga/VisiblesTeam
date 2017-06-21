@@ -42,7 +42,7 @@ namespace InkaArt.Interface.Purchases
             }
             if (textBox_name.Text.Length > 0)
             {
-                cadena += " AND id_supplier = " + textBox_name.Text;
+                //cadena += " AND id_supplier = " + textBox_name.Text;
             }
             /*if (dateTimePicker_creation.Text.Length > 0)
             {

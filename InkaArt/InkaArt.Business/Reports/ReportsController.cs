@@ -36,9 +36,9 @@ namespace InkaArt.Business.Reports
         {
             return reportData.getDataSimulation(name);
         }
-        public DataTable getDataMovements()
+        public DataTable getDataMovements(string fechaIni, string fechaFin, List<string> items, List<string> warehouses)
         {
-            return reportData.getDataMovements();
+            return reportData.getDataMovements(fechaIni, fechaFin, items, warehouses);
         }
     }
 }
