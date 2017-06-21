@@ -85,8 +85,8 @@ namespace InkaArt.Business.Security
         public int getUserID(string username)
         {
             UserController user = new UserController();
-            
-            return Convert.ToInt32(user.getUserRow(username)["id_user"].ToString().Trim());
+            bool i;
+            return Convert.ToInt32(user.getUserRow(username, out i)["id_user"].ToString().Trim());
         }
 
         public void sendPassword(string recipient, string username, string password)
