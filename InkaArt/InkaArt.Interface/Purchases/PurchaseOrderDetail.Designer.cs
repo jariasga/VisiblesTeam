@@ -67,6 +67,7 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonFacturar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -231,6 +232,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonFacturar);
             this.groupBox2.Controls.Add(this.textBox_idrm);
             this.groupBox2.Controls.Add(this.textBox_subtotal);
             this.groupBox2.Controls.Add(this.label11);
@@ -455,7 +457,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(279, 437);
+            this.buttonDelete.Location = new System.Drawing.Point(214, 438);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(104, 41);
             this.buttonDelete.TabIndex = 15;
@@ -488,6 +490,19 @@
             this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
+            // 
+            // buttonFacturar
+            // 
+            this.buttonFacturar.BackColor = System.Drawing.Color.Gray;
+            this.buttonFacturar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFacturar.ForeColor = System.Drawing.Color.White;
+            this.buttonFacturar.Location = new System.Drawing.Point(342, 437);
+            this.buttonFacturar.Name = "buttonFacturar";
+            this.buttonFacturar.Size = new System.Drawing.Size(104, 42);
+            this.buttonFacturar.TabIndex = 24;
+            this.buttonFacturar.Text = "🗀 Facturar";
+            this.buttonFacturar.UseVisualStyleBackColor = false;
+            this.buttonFacturar.Click += new System.EventHandler(this.button_facturarClick);
             // 
             // PurchaseOrderDetail
             // 
@@ -552,5 +567,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Factura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.Button buttonFacturar;
     }
 }
