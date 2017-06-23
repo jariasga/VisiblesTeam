@@ -274,7 +274,7 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
             //updateDataGrid();
-            MessageBox.Show("Materias Primas eliminados", "Eliminar Materia Prima.","Information", MessageBoxIcon.Information);
+            MessageBox.Show("Materias primas eliminadas.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             fillGridRawMaterial();
         }
 
@@ -282,6 +282,7 @@ namespace InkaArt.Interface.Warehouse
         {
 
         }
+
 
         private void buttonDelete_Product_Click(object sender, EventArgs e)
         {
@@ -300,7 +301,7 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
             //updateDataGrid();
-            MessageBox.Show("Productos eliminados", "Eliminar Producto.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            MessageBox.Show("Productos eliminados", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             fillGridProduct();
         }
     }
