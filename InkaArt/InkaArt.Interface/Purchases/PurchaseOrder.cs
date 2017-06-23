@@ -19,17 +19,7 @@ namespace InkaArt.Interface.Purchases
             controlSup = new SupplierController();
             purchaseOrderList = control.getData();
             desarrolloBusqueda();
-            /*
-            dataGridView_purchaseOrder.DataSource = purchaseOrderList;
-
-            dataGridView_purchaseOrder.Columns["id_order"].HeaderText = "ID";
-            dataGridView_purchaseOrder.Columns["id_supplier"].HeaderText = "Proveedor";
-            dataGridView_purchaseOrder.Columns["status"].HeaderText = "Estado";
-            dataGridView_purchaseOrder.Columns["creation_date"].HeaderText = "Fecha de emisión";
-            dataGridView_purchaseOrder.Columns["delivery_date"].HeaderText = "Fecha de entrega";
-            dataGridView_purchaseOrder.Columns["total"].HeaderText = "Total";
-
-            dataGridView_purchaseOrder.Columns["delivery_date"].Visible=false;*/
+            dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void filter() {
@@ -44,12 +34,12 @@ namespace InkaArt.Interface.Purchases
             {
                 //cadena += " AND id_supplier = " + textBox_name.Text;
             }
-            /*if (dateTimePicker_creation.Text.Length > 0)
+            if (dateTimePicker_creation.Text.Length > 0 && checkBox_dateInclude.Checked)
             {
-                int inicio = int.Parse(dateTimePicker_creation.Value.ToString("yyyyMMdd"));
-                int fin = int.Parse(dateTimePicker_creationEnd.Value.ToString("yyyyMMdd"));
-                cadena += " AND format(cast(creationDate as date), 'yyyyMMdd') <= "+fin+" AND "+inicio+ " <= format(cast(creationDate as date), 'yyyyMMdd')";
-            }*/
+                string creation_date = DateTime.Parse(dateTimePicker_creation.Text).ToString("dd/MM/yyyy");
+                string end_date = DateTime.Parse(dateTimePicker_creationEnd.Text).ToString("dd/MM/yyyy");
+                cadena += " AND creation_date >= '"+creation_date+ "' AND creation_date<= '" + end_date + "'";
+            }
             if (String.Compare(comboBox_status.Text, "Activo") == 0)
             {
                 rows = purchaseOrderList.Select("status LIKE '" + comboBox_status.Text + "'" + cadena);
@@ -96,6 +86,11 @@ namespace InkaArt.Interface.Purchases
         }
         private void button_search(object sender, EventArgs e)
         {
+            if(checkBox_dateInclude.Checked && dateTimePicker_creationEnd.Value < dateTimePicker_creation.Value)
+            {
+                MessageBox.Show("La fecha fin debe ser mayor o igual a la de inicio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             desarrolloBusqueda();
         }
 
@@ -165,6 +160,11 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_id.Text = actualdata;
+        }
+
+        private void activarCheckbox(object sender, EventArgs e)
+        {
+            checkBox_dateInclude.Checked = true;
         }
     }
 }
