@@ -108,7 +108,7 @@ namespace InkaArt.Interface.Purchases
             estadoInicial=comboBox_status.Text;
             llenarMateriasPedidas();
             buttonFacturar.Visible = false;
-            if (string.Compare(comboBox_status.Text, "Inactivo") == 0)
+            if (string.Compare(comboBox_status.Text, "Eliminado") == 0)
             {
                 buttonSave.Visible = false;
             }
@@ -176,7 +176,7 @@ namespace InkaArt.Interface.Purchases
             //obtengo todas las lineas de pedido de esta orden
             DataRow[] rows;
             lineaPedidosList = control_detail.getData();
-            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status NOT IN ('Inactivo')");
+            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status NOT IN ('Eliminado')");
             if (rows.Any()) lineaPedidosList = rows.CopyToDataTable();
             else lineaPedidosList.Rows.Clear();
             string sortQuery = string.Format("id_detail");
@@ -285,7 +285,7 @@ namespace InkaArt.Interface.Purchases
                     if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length>0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
                     try
                     {
-                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Inactivo");
+                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Eliminado");
                         dataGridView_pedidos.Rows[i].Cells[0].Value = false;
                         double totalOr = double.Parse(textBox_total.Text);
                         totalOr -= subtotalAux;
@@ -416,7 +416,7 @@ namespace InkaArt.Interface.Purchases
                 try {
                     control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
-                        if(string.Compare(comboBox_status.Text, "Inactivo") == 0) pasarTodasLasLineasAEstado("Inactivo");
+                        if(string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
                         else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
                         estadoInicial = comboBox_status.Text;
                     }

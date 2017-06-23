@@ -43,6 +43,7 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonFacturar = new System.Windows.Forms.Button();
             this.textBox_idrm = new System.Windows.Forms.TextBox();
             this.textBox_subtotal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -67,7 +68,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonFacturar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -134,7 +134,7 @@
             this.comboBox_status.Items.AddRange(new object[] {
             "Borrador",
             "Enviado",
-            "Inactivo"});
+            "Eliminado"});
             this.comboBox_status.Location = new System.Drawing.Point(13, 381);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(183, 25);
@@ -254,6 +254,19 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas pedidas";
+            // 
+            // buttonFacturar
+            // 
+            this.buttonFacturar.BackColor = System.Drawing.Color.Gray;
+            this.buttonFacturar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFacturar.ForeColor = System.Drawing.Color.White;
+            this.buttonFacturar.Location = new System.Drawing.Point(342, 437);
+            this.buttonFacturar.Name = "buttonFacturar";
+            this.buttonFacturar.Size = new System.Drawing.Size(104, 42);
+            this.buttonFacturar.TabIndex = 24;
+            this.buttonFacturar.Text = "🗀 Facturar";
+            this.buttonFacturar.UseVisualStyleBackColor = false;
+            this.buttonFacturar.Click += new System.EventHandler(this.button_facturarClick);
             // 
             // textBox_idrm
             // 
@@ -490,19 +503,6 @@
             this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
-            // 
-            // buttonFacturar
-            // 
-            this.buttonFacturar.BackColor = System.Drawing.Color.Gray;
-            this.buttonFacturar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFacturar.ForeColor = System.Drawing.Color.White;
-            this.buttonFacturar.Location = new System.Drawing.Point(342, 437);
-            this.buttonFacturar.Name = "buttonFacturar";
-            this.buttonFacturar.Size = new System.Drawing.Size(104, 42);
-            this.buttonFacturar.TabIndex = 24;
-            this.buttonFacturar.Text = "🗀 Facturar";
-            this.buttonFacturar.UseVisualStyleBackColor = false;
-            this.buttonFacturar.Click += new System.EventHandler(this.button_facturarClick);
             // 
             // PurchaseOrderDetail
             // 

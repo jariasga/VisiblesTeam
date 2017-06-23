@@ -40,14 +40,8 @@ namespace InkaArt.Interface.Purchases
                 string end_date = DateTime.Parse(dateTimePicker_creationEnd.Text).ToString("dd/MM/yyyy");
                 cadena += " AND creation_date >= '"+creation_date+ "' AND creation_date<= '" + end_date + "'";
             }
-            if (String.Compare(comboBox_status.Text, "Activo") == 0)
-            {
-                rows = purchaseOrderList.Select("status LIKE '" + comboBox_status.Text + "'" + cadena);
-            }
-            else
-            {
-                rows = purchaseOrderList.Select("status LIKE '%" + comboBox_status.Text + "%'" + cadena);
-            }
+            rows = purchaseOrderList.Select("status LIKE '%" + comboBox_status.Text + "%'" + cadena);
+            
             if (rows.Any()) purchaseOrderList = rows.CopyToDataTable();
             else purchaseOrderList.Rows.Clear();
             string sortQuery = string.Format("id_order");
@@ -122,7 +116,7 @@ namespace InkaArt.Interface.Purchases
                     double total = (double) dataGridView_purchaseOrder.Rows[i].Cells[5].Value;
                     try
                     {
-                        control.updateData(id_order,prov,"Inactivo", creation_date,delivery_date,total);
+                        control.updateData(id_order,prov,"Eliminado", creation_date,delivery_date,total);
                     }
                     catch (Exception)
                     {
