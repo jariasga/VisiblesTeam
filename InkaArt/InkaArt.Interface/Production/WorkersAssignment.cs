@@ -104,22 +104,17 @@ namespace InkaArt.Interface.Production
                 foreach(AssignmentLine miniturn in day.toList())
                 {
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
-                    row.Cells["worker"].Value = miniturn.Worker.FullName;
-                    row.Cells["job"].Value = miniturn.Job.Name;
-                    row.Cells["recipe"].Value = miniturn.Recipe.Description;
-                    row.Cells["quantity"].Value = miniturn.Produced;
-                    row.Cells["index"].Value = miniturn.Index.LossIndex;
+                    row.Cells[worker.Index].Value = miniturn.Worker.FullName;
+                    row.Cells[job.Index].Value = miniturn.Job.Name;
+                    row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
+                    row.Cells[quantity.Index].Value = miniturn.Produced;
+                    row.Cells[index.Index].Value = simulation.getLossIndex(miniturn);
                     simulation_grid.Rows.Add(row);
                 }
             }
         }
 
         private void simulation_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void groupbox_summary_Enter(object sender, EventArgs e)
         {
 
         }

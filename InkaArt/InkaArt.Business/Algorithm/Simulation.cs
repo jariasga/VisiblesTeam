@@ -33,6 +33,7 @@ namespace InkaArt.Business.Algorithm
         //Trabajadores y pedidos filtrados 
         private WorkerController selected_workers;
         private OrderController selected_orders;
+        private IndexController indexes;
 
         private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
 
@@ -215,6 +216,12 @@ namespace InkaArt.Business.Algorithm
                 LogHandler.WriteLine("Excepción al intentar actualizar la simulación: " + e.ToString());
                 return "Ocurrió una excepción al intentar actualizar la simulación: " + e.Message;
             }
+        }
+
+        public double getLossIndex(AssignmentLine line)
+        {
+            Index index = indexes.FindByAssignment(line);
+            return index == null ? -1 : index.LossIndex;
         }
         
         //public List<AssignmentLine> AssignmentsToList()
