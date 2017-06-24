@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Purchases;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+
 namespace InkaArt.Interface.Purchases
 {
     public partial class PurchaseOrderDetail : Form
@@ -25,6 +29,7 @@ namespace InkaArt.Interface.Purchases
         string listaMaterialesIds;
         bool isInEditMode = true;
         bool enProcesoDeLlenado = true;
+
         public PurchaseOrderDetail()
         {
             mode = 1;
@@ -107,14 +112,14 @@ namespace InkaArt.Interface.Purchases
             obtenerMateriasDelSupplier();
             estadoInicial=comboBox_status.Text;
             llenarMateriasPedidas();
-            buttonFacturar.Visible = false;
-            if (string.Compare(comboBox_status.Text, "Inactivo") == 0)
+            buttonExport.Visible = false;
+            if (string.Compare(comboBox_status.Text, "Eliminado") == 0)
             {
                 buttonSave.Visible = false;
             }
             else if (string.Compare(comboBox_status.Text, "Enviado") == 0)
             {
-                buttonFacturar.Visible = true;
+                buttonExport.Visible = true;
             }
         }
         private void filterSupplier()
@@ -176,7 +181,7 @@ namespace InkaArt.Interface.Purchases
             //obtengo todas las lineas de pedido de esta orden
             DataRow[] rows;
             lineaPedidosList = control_detail.getData();
-            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status NOT IN ('Inactivo')");
+            rows = lineaPedidosList.Select("id_order = " + textBox_id.Text + " AND status NOT IN ('Eliminado')");
             if (rows.Any()) lineaPedidosList = rows.CopyToDataTable();
             else lineaPedidosList.Rows.Clear();
             string sortQuery = string.Format("id_detail");
@@ -285,7 +290,7 @@ namespace InkaArt.Interface.Purchases
                     if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length>0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
                     try
                     {
-                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Inactivo");
+                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Eliminado");
                         dataGridView_pedidos.Rows[i].Cells[0].Value = false;
                         double totalOr = double.Parse(textBox_total.Text);
                         totalOr -= subtotalAux;
@@ -302,15 +307,7 @@ namespace InkaArt.Interface.Purchases
             llenarMateriasPedidas();
             ventanaListaOrdenes.desarrolloBusqueda();
         }
-
-        private void textBox_supplier_TextChanged(object sender, EventArgs e)
-        {
-            if (this.textBox_idsupplier.Text == "")
-            {
-                this.button_add.Enabled = false;
-            }
-            else this.button_add.Enabled = true;
-        }
+        
         private bool validating_alldata()
         {
             textBox_idsupplier.Text = textBox_idsupplier.Text.Trim();
@@ -341,7 +338,12 @@ namespace InkaArt.Interface.Purchases
                 MessageBox.Show("La fecha de emisión no puede ser posterior a la entrega", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-                return true;
+            if (string.Compare(comboBox_status.Text, "Enviado") == 0 && double.Parse(textBox_total.Text)<0.01)
+            {
+                MessageBox.Show("No se puede enviar una orden con monto 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
 
         }
         private string buscarValorId(string id_supplier)
@@ -391,6 +393,7 @@ namespace InkaArt.Interface.Purchases
                     textBox_id.Text = buscarValorId(textBox_idsupplier.Text);
                     obtenerMateriasDelSupplier();
                     llenarMateriasPedidas();
+
                 }
                 catch (Exception)
                 {
@@ -416,7 +419,7 @@ namespace InkaArt.Interface.Purchases
                 try {
                     control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
-                        if(string.Compare(comboBox_status.Text, "Inactivo") == 0) pasarTodasLasLineasAEstado("Inactivo");
+                        if(string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
                         else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
                         estadoInicial = comboBox_status.Text;
                     }
@@ -440,6 +443,7 @@ namespace InkaArt.Interface.Purchases
                     button_add.Enabled = true;
                     buttonDelete.Enabled = true;
                     comboBoxRawMaterialName.Enabled = true;
+                    activarBotonAgregar();
                 }
                 dataGridView_pedidos.Enabled = true;
 
@@ -521,30 +525,114 @@ namespace InkaArt.Interface.Purchases
             return true;
         }
 
-        private void button_facturarClick(object sender, EventArgs e)
+        private void activarBotonAgregar()
         {
-            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            if(isInEditMode && textBox_id.Text.Length>0 && textBox_idsupplier.Text.Length >= 0)
             {
-                if (string.Compare(dataGridView_pedidos.Rows[i].Cells[7].Value.ToString(), "Entregado") == 0)
+                button_add.Enabled = true;
+            }
+        }
+        private void generarExcel()
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                app.Visible = true;
+                worksheet = workbook.Sheets["Orden de compra"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "Orden de compra";
+                worksheet.Cells[1, 1] = "Orden:";
+                worksheet.Cells[1, 2] = textBox_id.Text;
+                worksheet.Cells[2, 1] = "Proveedor:";
+                worksheet.Cells[1, 2] = comboBox_supplier.Text;
+                worksheet.Cells[3, 1] = "Fecha de emisión:";
+                worksheet.Cells[3, 2] = dateTimePicker_creation.Text;
+
+                try
                 {
-                    //Si está en estado Entregado, lo facturo. Sino, no.
-                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
-                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
-                    double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
-                    int id_facturaAux = 0;
-                    if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length > 0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
-                    try
+                    for (int i = 2; i < dataGridView_pedidos.Columns.Count; i++)
                     {
-                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Facturado");
+                        worksheet.Cells[5, i - 1] = dataGridView_pedidos.Columns[i].HeaderText;
                     }
-                    catch (Exception)
+                    for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
                     {
-                        MessageBox.Show("No se pudo facturar la línea de pedido " + id_detailAux + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        for (int j = 2; j < dataGridView_pedidos.Columns.Count; j++)
+                        {
+                            if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
+                            {
+                                worksheet.Cells[i + 6, j - 1] = dataGridView_pedidos.Rows[i].Cells[j].Value.ToString();
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 6, j - 1] = "";
+                            }
+                        }
                     }
 
+                    //Getting the location and file name of the excel to save from user.
+                    SaveFileDialog saveDialog = new SaveFileDialog();
+                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                    saveDialog.FilterIndex = 2;
+
+                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        workbook.SaveAs(saveDialog.FileName);
+                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                finally
+                {
+                    app.Quit();
+                    workbook = null;
+                    worksheet = null;
                 }
             }
-            llenarMateriasPedidas();
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+
+        }
+        private void generarOrdenDoc(object sender, EventArgs e)
+        {
+            if(mode==2 && string.Compare(comboBox_status.Text, "Enviado") == 0)
+            {
+                //generarExcel();
+                FileStream fs = new FileStream("OrdenPrueba.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+                Document document = new Document(PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                document.Open();
+                document.Add(new Paragraph("Orden de compra: " + textBox_id.Text));
+                document.Add(new Paragraph("Proveedor: " + comboBox_supplier.Text));
+                document.Add(new Paragraph("Fecha de emisión: " + dateTimePicker_creation.Text));
+                document.Add(new Paragraph(""));
+                PdfPTable table = new PdfPTable(6);
+                for (int i = 2; i < dataGridView_pedidos.Columns.Count; i++)
+                {
+                    table.AddCell(dataGridView_pedidos.Columns[i].HeaderText);
+                }
+                for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+                {
+                    for (int j = 2; j < dataGridView_pedidos.Columns.Count; j++)
+                    {
+                        if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
+                        {
+                            table.AddCell(dataGridView_pedidos.Rows[i].Cells[j].Value.ToString());
+                        }
+                        else
+                        {
+                            table.AddCell("");
+                        }
+                    }
+                }
+                document.Add(table);
+                document.Close();
+                MessageBox.Show("Se generó el archivo de la orden exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private string hallarNombreUnit(int idUnit)
