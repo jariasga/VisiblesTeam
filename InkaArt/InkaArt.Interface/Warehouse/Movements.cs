@@ -102,8 +102,12 @@ namespace InkaArt.Interface.Warehouse
                                 Form formView = new InkaArt.Interface.Warehouse.MovementFindIn(idWarehouesOrigin);
                                 formView.Show();
                             }
-                            else
-                                MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            else if (reason == "Devolución")
+                            {
+                                Form formView = new InkaArt.Interface.Warehouse.ReturnMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                                formView.Show();
+                            }
+                            else MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -156,6 +160,11 @@ namespace InkaArt.Interface.Warehouse
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

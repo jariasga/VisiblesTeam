@@ -472,6 +472,12 @@
     <Compile Include="Warehouse\PurchaseOrderIndex.designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\ReturnMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ReturnMovement.Designer.cs">
+      <DependentUpon>ReturnMovement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\SaleMovementcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -715,6 +721,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseOrderIndex.resx">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ReturnMovement.resx">
+      <DependentUpon>ReturnMovement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\SaleMovementcs.resx">
       <DependentUpon>SaleMovementcs.cs</DependentUpon>
