@@ -17,6 +17,7 @@ namespace InkaArt.Interface.Production
         private SimulationController simulations;
         private Simulation current_simulation = null;
         private WorkerController workers;
+        private RecipeController recipes;
         private OrderController orders;
 
         public WorkersAssignment()
@@ -24,6 +25,7 @@ namespace InkaArt.Interface.Production
             InitializeComponent();
 
             this.workers = new WorkerController();
+            this.recipes = new RecipeController();
             this.orders = new OrderController();
             this.simulations = new SimulationController();
         }
@@ -31,7 +33,7 @@ namespace InkaArt.Interface.Production
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
             this.workers.Load();
-            this.orders.Load();
+            this.orders.Load(recipes);
             this.simulations.Load();
 
             combo_simulations.DataSource = simulations.BindingList();

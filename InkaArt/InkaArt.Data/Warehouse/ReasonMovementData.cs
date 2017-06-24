@@ -33,7 +33,7 @@ namespace InkaArt.Data.Warehouse
             adap = reasonMovementAdapter();
             adap.SelectCommand.CommandText += " order by 1;";
             data.Clear();
-            data = getData(adap, "NameType");
+            data = getData(adap, "NameType");   
 
             DataTable clientList = new DataTable();
             clientList = data.Tables[0];

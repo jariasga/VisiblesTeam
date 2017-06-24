@@ -49,7 +49,7 @@ namespace InkaArt.Interface.Production
 
         private void SimulationConfig_Load(object sender, EventArgs e)
         {
-            if (simulation != null) //Creación de una simulación
+            if (simulation != null) //Visualización de una simulación
             {
                 this.textbox_name.Text = simulation.Name;
                 this.date_picker_start.Value = simulation.StartDate;
@@ -75,7 +75,7 @@ namespace InkaArt.Interface.Production
                 this.Text = "Ver simulación de asignación de trabajadores";
                 this.button_start.Text = "🖫 Guardar cambios";
             }
-            else
+            else //Creación de una simulación
             {
                 this.date_picker_start.Enabled = true;
                 this.date_picker_end.Enabled = true;
@@ -85,6 +85,11 @@ namespace InkaArt.Interface.Production
 
                 this.Text = "Nueva simulación de asignación de trabajadores";
                 this.button_start.Text = "▶ Iniciar simulación";
+
+                for (int i = 0; i < list_workers.Items.Count; i++)
+                    list_workers.SetItemChecked(i, true);
+                for (int i = 0; i < list_orders.Items.Count; i++)
+                    list_orders.SetItemChecked(i, true);
             }
 
         }

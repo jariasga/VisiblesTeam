@@ -53,7 +53,6 @@
     <Compile Include="Algorithm\Job.cs" />
     <Compile Include="Algorithm\Order.cs" />
     <Compile Include="Algorithm\OrderLineItem.cs" />
-    <Compile Include="Algorithm\Process.cs" />
     <Compile Include="Algorithm\Ratio.cs" />
     <Compile Include="Algorithm\Recipe.cs" />
     <Compile Include="Algorithm\TabuMove.cs" />

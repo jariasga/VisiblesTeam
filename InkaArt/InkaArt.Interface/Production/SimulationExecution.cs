@@ -45,8 +45,8 @@ namespace InkaArt.Interface.Production
 
             //Carga de controladores
 
-            ProcessController processes = new ProcessController();
-            processes.Load();
+            Business.Production.ProcessController process_controller = new Business.Production.ProcessController();
+            DataTable processes = process_controller.getData();
             JobController jobs = new JobController();
             jobs.Load();
             RecipeController recipes = new RecipeController();
@@ -55,8 +55,16 @@ namespace InkaArt.Interface.Production
             indexes.Load();
             indexes.CalculateIndexes(simulation);
 
+            for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
+            {
+                LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
+                for (int j = 0; j < simulation.SelectedOrders[i].NumberOfLineItems; j++)
+                    LogHandler.WriteLine("- Linea de orden #{0}: {1}", j, simulation.SelectedOrders[i][j].ToString());
+            }
+            Environment.Exit(0);
+
             //Temporal: Determinar el tiempo total del turno y los miniturnos
-            Turn turn = null;
+            Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
             for (int i = 0; i < workers.NumberOfWorkers; i++)
                 if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
             int total_miniturns = turn.TotalMinutes / Simulation.MiniturnLength;
@@ -71,31 +79,56 @@ namespace InkaArt.Interface.Production
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
                 initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, total_miniturns, ref elapsed_seconds));
-                background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
+                background_worker.ReportProgress(0, null);
             }
-
-            indexes.indexesToCSV();
+            
+            PrintGraspResults(initial_assignments);
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
             //Algoritmo de Búsqueda Tabú
 
             TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
-
-            //for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
-            //{
-            //    tabu.run(ref elapsed_seconds, day);
-            //    background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
-            //}
+            
+            for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+            {
+                tabu.run(ref elapsed_seconds, day);
+                background_worker.ReportProgress(0, null);
+            }
 
             //simulation.Assignments = tabu.BestSolution;
             simulation.Assignments = initial_assignments;
         }
-                
+
+        private void PrintGraspResults(List<Assignment> assignments)
+        {
+            for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+            {
+                LogHandler.WriteLine("============ DÍA {0} ============", day + 1);
+                LogHandler.WriteLine("Valor de la función objetivo = " + assignments[day].ObjectiveFunction);
+                for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
+                {
+                    LogHandler.WriteLine("");
+                    LogHandler.WriteLine("TRABAJADOR 1:");
+                    for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
+                    {
+                        AssignmentLine line = assignments[day][worker_index, miniturn];
+                        if (line == null)
+                            LogHandler.WriteLine("- Miniturno {0}: Nada.", miniturn);
+                        else
+                            LogHandler.WriteLine("- Miniturno {0}: Worker = {1}, Job = {2}, Recipe = {3}, Produced = {4}, Rango = [{5}, {6}]",
+                                miniturn, line.Worker.FullName, line.Job.Name, line.Recipe.Description + " " + line.Recipe.Version,
+                                line.Produced, line.MiniturnStart, line.MiniturnStart + line.TotalMiniturnsUsed);
+                    }
+                }
+                LogHandler.WriteLine("");
+            }
+        }
+        
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (e.UserState == null) this.progress_bar.Value += e.ProgressPercentage;
             if (e.UserState != null) this.label_state.Text = e.UserState.ToString();
+            else this.progress_bar.Value += Convert.ToInt32(Math.Floor(500.0 / simulation.Days));
         }
 
         private void background_simulation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

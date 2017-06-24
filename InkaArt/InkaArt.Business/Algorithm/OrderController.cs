@@ -27,7 +27,7 @@ namespace InkaArt.Business.Algorithm
             this.orders = this.orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
         }
 
-        public void Load()
+        public void Load(RecipeController recipes)
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
@@ -68,7 +68,7 @@ namespace InkaArt.Business.Algorithm
                     int id_line_item = int.Parse(reader["idLineItem"].ToString());
                     int id_recipe = int.Parse(reader["idRecipe"].ToString());
                     int quantity = int.Parse(reader["quantity"].ToString());
-                    order.AddLineItem(new OrderLineItem(id_line_item, id_recipe, quantity));
+                    order.AddLineItem(new OrderLineItem(id_line_item, recipes.GetByID(id_recipe), quantity));
                 }
                 reader.Close();
             }

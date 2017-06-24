@@ -46,25 +46,6 @@ namespace InkaArt.Business.Algorithm
             this.limitDayTime = (Simulation.LimitTime - elapsed_time) / simulation.Days;
             this.initial_solution = solution;
             this.best_solution = new List<Assignment>();
-            addIndexes();
-        }
-
-        public void addIndexes()
-        {
-            foreach (Assignment assignment in initial_solution)
-            {
-                for(int i = 0; i <simulation.SelectedWorkers.NumberOfWorkers; i ++)
-                {
-                    for (int j = 0; j < assignment.TotalMiniturns; j++)
-                    {
-                        if (assignment[i,j] != null)
-                        {
-                            Index index = indexes.Find(assignment[i, j].Worker, assignment[i, j].Job, assignment[i, j].Recipe);
-                            assignment[i, j].Index = index;
-                        }
-                    }
-                }
-            }
         }
 
         public bool loadParameters()

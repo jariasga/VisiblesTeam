@@ -35,17 +35,20 @@ namespace InkaArt.Interface.Production
             DataTable whList = control.getData();
             for(int i = 0; i<whList.Rows.Count; i++)
             {
-                if (whList.Rows[i]["idProduct"].ToString() == "1")
+                if (whList.Rows[i]["idProduct"].ToString() == "1" &&
+                    whList.Rows[i]["state"].ToString()=="Activo")
                 {
                     huaco += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     huacoL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
                 }
-                if (whList.Rows[i]["idProduct"].ToString() == "2")
+                if (whList.Rows[i]["idProduct"].ToString() == "2" &&
+                    whList.Rows[i]["state"].ToString() == "Activo")
                 {
                     piedra += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     piedraL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
                 }
-                if (whList.Rows[i]["idProduct"].ToString() == "3")
+                if (whList.Rows[i]["idProduct"].ToString() == "3" &&
+                    whList.Rows[i]["state"].ToString() == "Activo")
                 {
                     retablo += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     retabloL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
@@ -122,6 +125,24 @@ namespace InkaArt.Interface.Production
         private void button_refresh_Click(object sender, EventArgs e)
         {
             fillGrid();
+        }
+
+        private void button_batch_Click(object sender, EventArgs e)
+        {
+            FinalProductController control = new FinalProductController();
+            DataTable productList = control.getData();
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Suppliers File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (control.massiveUpload(dialog.FileName) == 0)
+                    MessageBox.Show("Productos cargados de manera exitosa.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("No se pudo cargar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
     }
 }

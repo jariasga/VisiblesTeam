@@ -190,6 +190,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\ClientOrderDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDelivery.Designer.cs">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.Designer.cs">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.Designer.cs">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\DocumentSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -472,6 +490,12 @@
     <Compile Include="Warehouse\PurchaseOrderIndex.designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\ReturnMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ReturnMovement.Designer.cs">
+      <DependentUpon>ReturnMovement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\SaleMovementcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -575,6 +599,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sales\ClientOrderDelivery.resx">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDevolution.resx">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDocuments.resx">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -715,6 +748,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\PurchaseOrderIndex.resx">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ReturnMovement.resx">
+      <DependentUpon>ReturnMovement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\SaleMovementcs.resx">
       <DependentUpon>SaleMovementcs.cs</DependentUpon>
