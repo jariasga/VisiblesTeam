@@ -341,7 +341,12 @@ namespace InkaArt.Interface.Purchases
                 MessageBox.Show("La fecha de emisión no puede ser posterior a la entrega", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-                return true;
+            if (string.Compare(comboBox_status.Text, "Enviado") == 0 && double.Parse(textBox_total.Text)<0.01)
+            {
+                MessageBox.Show("No se puede enviar una orden con monto 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
 
         }
         private string buscarValorId(string id_supplier)
