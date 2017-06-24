@@ -46,7 +46,6 @@ namespace InkaArt.Business.Algorithm
             this.limitDayTime = (Simulation.LimitTime - elapsed_time) / simulation.Days;
             this.initial_solution = solution;
             this.best_solution = new List<Assignment>();
-            MessageBox.Show("Inicializacion de Tabu");
         }
 
         public bool loadParameters()
@@ -199,7 +198,6 @@ namespace InkaArt.Business.Algorithm
 
             // fitness
             double initial_fitness = getFitness(current_solution);
-            MessageBox.Show("Fitness");
             double current_fitness = initial_fitness;
             double neighbor_fitness = 0;
             best_fitness = current_fitness;
@@ -285,7 +283,6 @@ namespace InkaArt.Business.Algorithm
 
             best_day_solution.TabuIterations = iter_count;
             best_solution.Add(best_day_solution);            
-            MessageBox.Show("Paso un dia");
         }
         
     }
