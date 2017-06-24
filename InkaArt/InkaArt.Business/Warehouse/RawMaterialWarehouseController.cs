@@ -39,6 +39,21 @@ namespace InkaArt.Business.Warehouse
             return rmWarehouseList;
         }
 
+        public void updateMinMax(string idRmW, int min, int max)
+        {
+            adapt = rmWarehouse.rmWarehouseAdapter();
+
+            string updateQuery;
+            string minS = min.ToString();
+            string maxS = max.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"RawMaterial-Warehouse\" SET ";
+            updateQuery = updateQuery + "\"minimunStock\"= " + minS + ", ";
+            updateQuery = updateQuery + "\"maximunStock\" = " + maxS;
+            updateQuery = updateQuery + " WHERE \"idRawMaterialWarehouse\"= " + idRmW + " ;";
+            rmWarehouse.execute(updateQuery);
+        }
+
         public int insertData(string idW, string idRM, string name, string min, string max)
         {
             adapt = rmWarehouse.rmWarehouseAdapter();
