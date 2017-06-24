@@ -38,9 +38,9 @@ namespace InkaArt.Interface
             pingThread.IsBackground = true;
             pingThread.Start();
 
-            checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
+            /*checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
             checkConnectorThread.IsBackground = true;
-            checkConnectorThread.Start();
+            checkConnectorThread.Start();*/
 
             toolStripProgressBarPing.Maximum = 1000;
         }
