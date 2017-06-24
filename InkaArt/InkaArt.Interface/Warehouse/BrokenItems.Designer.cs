@@ -127,6 +127,7 @@
             this.Controls.Add(this.combo_type);
             this.Name = "BrokenItems";
             this.Text = "Items Rotos";
+            this.Load += new System.EventHandler(this.BrokenItems_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
