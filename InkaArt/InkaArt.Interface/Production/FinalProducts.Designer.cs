@@ -38,6 +38,7 @@
             this.Detalles = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Receta = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button_refresh = new System.Windows.Forms.Button();
+            this.button_batch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_finalProductList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +117,7 @@
             this.button_refresh.BackColor = System.Drawing.Color.SteelBlue;
             this.button_refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_refresh.ForeColor = System.Drawing.Color.White;
-            this.button_refresh.Location = new System.Drawing.Point(387, 300);
+            this.button_refresh.Location = new System.Drawing.Point(269, 300);
             this.button_refresh.Name = "button_refresh";
             this.button_refresh.Size = new System.Drawing.Size(131, 42);
             this.button_refresh.TabIndex = 21;
@@ -124,12 +125,26 @@
             this.button_refresh.UseVisualStyleBackColor = false;
             this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
+            // button_batch
+            // 
+            this.button_batch.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_batch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_batch.ForeColor = System.Drawing.Color.White;
+            this.button_batch.Location = new System.Drawing.Point(522, 300);
+            this.button_batch.Name = "button_batch";
+            this.button_batch.Size = new System.Drawing.Size(147, 42);
+            this.button_batch.TabIndex = 22;
+            this.button_batch.Text = "Carga Productos";
+            this.button_batch.UseVisualStyleBackColor = false;
+            this.button_batch.Click += new System.EventHandler(this.button_batch_Click);
+            // 
             // FinalProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(905, 375);
+            this.Controls.Add(this.button_batch);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.dataGridView_finalProductList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -154,5 +169,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewButtonColumn Detalles;
         private System.Windows.Forms.DataGridViewButtonColumn Receta;
+        private System.Windows.Forms.Button button_batch;
     }
 }

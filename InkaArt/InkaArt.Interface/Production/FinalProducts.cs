@@ -126,5 +126,23 @@ namespace InkaArt.Interface.Production
         {
             fillGrid();
         }
+
+        private void button_batch_Click(object sender, EventArgs e)
+        {
+            FinalProductController control = new FinalProductController();
+            DataTable productList = control.getData();
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Suppliers File";
+            dialog.Filter = "CSV files|*.csv";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (control.massiveUpload(dialog.FileName) == 0)
+                    MessageBox.Show("Productos cargados de manera exitosa.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("No se pudo cargar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
     }
 }
