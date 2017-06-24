@@ -43,6 +43,7 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonExport = new System.Windows.Forms.Button();
             this.textBox_idrm = new System.Windows.Forms.TextBox();
             this.textBox_subtotal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -67,7 +68,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonFacturar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -134,7 +134,7 @@
             this.comboBox_status.Items.AddRange(new object[] {
             "Borrador",
             "Enviado",
-            "Inactivo"});
+            "Eliminado"});
             this.comboBox_status.Location = new System.Drawing.Point(13, 381);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(183, 25);
@@ -185,9 +185,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 231);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 18);
+            this.label3.Size = new System.Drawing.Size(200, 18);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Fecha de entrega";
+            this.label3.Text = "Fecha de entrega estimada";
             // 
             // textBox_idsupplier
             // 
@@ -199,7 +199,6 @@
             this.textBox_idsupplier.Name = "textBox_idsupplier";
             this.textBox_idsupplier.Size = new System.Drawing.Size(55, 26);
             this.textBox_idsupplier.TabIndex = 3;
-            this.textBox_idsupplier.TextChanged += new System.EventHandler(this.textBox_supplier_TextChanged);
             // 
             // label2
             // 
@@ -232,7 +231,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.buttonFacturar);
             this.groupBox2.Controls.Add(this.textBox_idrm);
             this.groupBox2.Controls.Add(this.textBox_subtotal);
             this.groupBox2.Controls.Add(this.label11);
@@ -254,6 +252,19 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas pedidas";
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.BackColor = System.Drawing.Color.Gray;
+            this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExport.ForeColor = System.Drawing.Color.White;
+            this.buttonExport.Location = new System.Drawing.Point(129, 460);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(104, 42);
+            this.buttonExport.TabIndex = 24;
+            this.buttonExport.Text = "🗀 Exportar";
+            this.buttonExport.UseVisualStyleBackColor = false;
+            this.buttonExport.Click += new System.EventHandler(this.generarOrdenDoc);
             // 
             // textBox_idrm
             // 
@@ -483,7 +494,7 @@
             this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Location = new System.Drawing.Point(71, 453);
+            this.buttonSave.Location = new System.Drawing.Point(19, 460);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(104, 42);
             this.buttonSave.TabIndex = 23;
@@ -491,25 +502,13 @@
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 
-            // buttonFacturar
-            // 
-            this.buttonFacturar.BackColor = System.Drawing.Color.Gray;
-            this.buttonFacturar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFacturar.ForeColor = System.Drawing.Color.White;
-            this.buttonFacturar.Location = new System.Drawing.Point(342, 437);
-            this.buttonFacturar.Name = "buttonFacturar";
-            this.buttonFacturar.Size = new System.Drawing.Size(104, 42);
-            this.buttonFacturar.TabIndex = 24;
-            this.buttonFacturar.Text = "🗀 Facturar";
-            this.buttonFacturar.UseVisualStyleBackColor = false;
-            this.buttonFacturar.Click += new System.EventHandler(this.button_facturarClick);
-            // 
             // PurchaseOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(924, 522);
+            this.ClientSize = new System.Drawing.Size(924, 518);
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -567,6 +566,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Factura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.Button buttonFacturar;
+        private System.Windows.Forms.Button buttonExport;
     }
 }

@@ -65,9 +65,9 @@
             this.label_item.Location = new System.Drawing.Point(35, 80);
             this.label_item.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_item.Name = "label_item";
-            this.label_item.Size = new System.Drawing.Size(107, 18);
+            this.label_item.Size = new System.Drawing.Size(64, 18);
             this.label_item.TabIndex = 29;
-            this.label_item.Text = "Materia Prima";
+            this.label_item.Text = "Nombre";
             // 
             // combo_item
             // 
@@ -126,7 +126,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.combo_type);
             this.Name = "MovementFindIn";
-            this.Text = "MovementeFindIn";
+            this.Text = "Hallazgo";
             this.Load += new System.EventHandler(this.MovementFindIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

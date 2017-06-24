@@ -89,5 +89,34 @@ namespace InkaArt.Business.Production
             return retorno;
             
         }   
+
+        public int updateStock(int h, int hl,int p, int pl, int r, int rl)
+        {
+
+
+            adapt = finalProduct.finalProductAdapter();
+            data = finalProduct.getData(adapt, "Product");
+
+            table = data.Tables["Product"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (table.Rows[i]["name"].ToString()=="Huaco")
+                {
+                    table.Rows[i]["actualStock"] = h;
+                    table.Rows[i]["logicalStock"] = hl;
+                }
+                if (table.Rows[i]["name"].ToString() == "Piedra Huamanga")
+                {
+                    table.Rows[i]["actualStock"] = p;
+                    table.Rows[i]["logicalStock"] = pl;
+                }
+                if (table.Rows[i]["name"].ToString() == "Retablo")
+                {
+                    table.Rows[i]["actualStock"] = r;
+                    table.Rows[i]["logicalStock"] = rl;
+                }
+            }
+            return finalProduct.updateData(data, adapt, "Product");
+        }
     }
 }

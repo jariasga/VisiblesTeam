@@ -40,6 +40,8 @@
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_dateInclude = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker_creationEnd = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_creation = new System.Windows.Forms.DateTimePicker();
@@ -50,8 +52,6 @@
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.checkBox_dateInclude = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -182,6 +182,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // checkBox_dateInclude
+            // 
+            this.checkBox_dateInclude.AutoSize = true;
+            this.checkBox_dateInclude.Location = new System.Drawing.Point(240, 87);
+            this.checkBox_dateInclude.Name = "checkBox_dateInclude";
+            this.checkBox_dateInclude.Size = new System.Drawing.Size(152, 22);
+            this.checkBox_dateInclude.TabIndex = 32;
+            this.checkBox_dateInclude.Text = "Fecha de emisión";
+            this.checkBox_dateInclude.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(256, 112);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 18);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Inicio";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -223,7 +242,7 @@
             "Borrador",
             "Enviado",
             "Entregado",
-            "Inactivo"});
+            "Eliminado"});
             this.comboBox_status.Location = new System.Drawing.Point(25, 110);
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(192, 25);
@@ -290,25 +309,6 @@
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(256, 112);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 18);
-            this.label6.TabIndex = 31;
-            this.label6.Text = "Inicio";
-            // 
-            // checkBox_dateInclude
-            // 
-            this.checkBox_dateInclude.AutoSize = true;
-            this.checkBox_dateInclude.Location = new System.Drawing.Point(240, 87);
-            this.checkBox_dateInclude.Name = "checkBox_dateInclude";
-            this.checkBox_dateInclude.Size = new System.Drawing.Size(152, 22);
-            this.checkBox_dateInclude.TabIndex = 32;
-            this.checkBox_dateInclude.Text = "Fecha de emisión";
-            this.checkBox_dateInclude.UseVisualStyleBackColor = true;
             // 
             // PurchaseOrder
             // 
