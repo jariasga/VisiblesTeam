@@ -44,6 +44,7 @@ namespace InkaArt.Interface.Sales
                 string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType = "Boleta";
                 textbox_doc.Text = clientDoc;
                 textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
+                textbox_reason.Text = row["reason"].ToString();
                 if (clientDoc.Length == 11) docType = "Factura";
                 combo_doc.Text = docType;
 
@@ -68,8 +69,8 @@ namespace InkaArt.Interface.Sales
 
         private void button_fac_Click(object sender, EventArgs e)
         {
-            DataTable orderLines = parseDataGrid(grid_orderline);
-            int response = orderController.AddSaleDocument(ID_NCREDIT, textbox_devamount.Text, textbox_igv.Text, textbox_devtotal.Text, orderId, orderLines, clientId);
+            DataTable orderLines = orderController.getOrderLines(orderId.ToString());
+            int response = orderController.AddSaleDocument(ID_NCREDIT, textbox_devamount.Text, textbox_igv.Text, textbox_devtotal.Text, orderId, orderLines, clientId,1);
             if (response >= 0)
             {
                 MessageBox.Show(this, "Se ha generado la nota de crédito exitosamente", "Nota de crédito", MessageBoxButtons.OK);
@@ -82,26 +83,6 @@ namespace InkaArt.Interface.Sales
         {
             SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
             form.Show();
-        }
-
-        private DataTable parseDataGrid(DataGridView grid)
-        {
-            DataTable dt = new DataTable();
-            foreach (DataGridViewColumn col in grid.Columns)
-            {
-                dt.Columns.Add(col.HeaderText);
-            }
-
-            foreach (DataGridViewRow row in grid.Rows)
-            {
-                DataRow dRow = dt.NewRow();
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    dRow[cell.ColumnIndex] = cell.Value;
-                }
-                dt.Rows.Add(dRow);
-            }
-            return dt;
         }
     }
 }

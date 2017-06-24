@@ -36,13 +36,13 @@ namespace InkaArt.Interface.Sales
 
         private void populateLabels(DataGridViewRow selectedInvoice)
         {
-            if (selectedInvoice.Cells[1].Value.ToString().Equals("Boleta")) label_type.Text = "Boleta - Nro";
-            else if (selectedInvoice.Cells[1].Value.ToString().Equals("Factura")) label_type.Text = "Factura - Nro";
-            else label_type.Text = "Nota de crédito - Nro";
+            if (selectedInvoice.Cells[1].Value.ToString().Equals("Boleta")) label_invoiceid.Text = "Boleta - Nro ";
+            else if (selectedInvoice.Cells[1].Value.ToString().Equals("Factura")) label_invoiceid.Text = "Factura - Nro ";
+            else label_invoiceid.Text = "Nota de crédito - Nro ";
             label_orderid.Text = idOrder.ToString();
             label_doc.Text = orderController.getClientDoc(idClient.ToString());
             label_name.Text = orderController.getClientName(idClient.ToString());
-            label_invoiceid.Text = selectedInvoice.Cells[0].Value.ToString();
+            label_invoiceid.Text += selectedInvoice.Cells[0].Value.ToString();
             label_subtotal.Text = selectedInvoice.Cells[2].Value.ToString();
             label_igv.Text = selectedInvoice.Cells[3].Value.ToString();
             label_total.Text = selectedInvoice.Cells[4].Value.ToString();

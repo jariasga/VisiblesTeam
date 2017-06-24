@@ -61,7 +61,7 @@ namespace InkaArt.Data.Sales
         {
             NpgsqlDataAdapter myAdap = orderAdapter();
             DataSet myData = getData(myAdap, "Order");
-            table = data.Tables["Order"];
+            table = myData.Tables["Order"];
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 if (string.Compare(table.Rows[i]["idOrder"].ToString(), orderId) == 0)
@@ -70,7 +70,7 @@ namespace InkaArt.Data.Sales
                     break;
                 }
             }
-            updateData(myData, myAdap, "Client");
+            updateData(myData, myAdap, "Order");
         
         }
 
