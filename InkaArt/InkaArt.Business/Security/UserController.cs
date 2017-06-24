@@ -82,15 +82,16 @@ namespace InkaArt.Business.Security
             return rowsAffected;
         }
 
-        public DataRow getUserRow(string username)
+        public DataRow getUserRow(string username, out bool dataExist)
         {
             adap = user.userAdapter();
             adap.SelectCommand.Parameters[0].NpgsqlValue = username;
-
             if (data != null) data.Clear();
             data = user.getData(adap, "User");
+            dataExist = false;
             if (data != null)
             {
+                dataExist = true;
                 if (data.Tables["User"].Rows.Count > 0) return data.Tables["User"].Rows[0];
                 else return null;
             }
@@ -134,8 +135,9 @@ namespace InkaArt.Business.Security
 
         public void sendResetPass(string username)
         {
+            bool i;
             WorkerController worker = new WorkerController();
-            row = getUserRow(username);
+            row = getUserRow(username, out i);
             DataTable workerTable = worker.showData();
             int idUser = Convert.ToInt32(row["id_user"]);
 

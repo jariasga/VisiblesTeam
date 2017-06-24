@@ -30,17 +30,17 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
-            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iteraciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_huacos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_stones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_altarpieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_workers = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_export = new System.Windows.Forms.Button();
             this.label_todaydate = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_simulationName = new System.Windows.Forms.Label();
             this.label_simulationTime = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,18 +56,17 @@
             // 
             // simulation_grid
             // 
-            this.simulation_grid.AllowUserToAddRows = false;
             this.simulation_grid.AllowUserToDeleteRows = false;
             this.simulation_grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.report_date,
-            this.iteraciones,
-            this.report_huacos,
-            this.report_stones,
-            this.report_altarpieces,
-            this.report_workers});
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
             this.simulation_grid.Location = new System.Drawing.Point(68, 149);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(5);
             this.simulation_grid.Name = "simulation_grid";
@@ -75,42 +74,6 @@
             this.simulation_grid.RowHeadersVisible = false;
             this.simulation_grid.Size = new System.Drawing.Size(996, 335);
             this.simulation_grid.TabIndex = 2;
-            // 
-            // report_date
-            // 
-            this.report_date.HeaderText = "Fecha";
-            this.report_date.Name = "report_date";
-            this.report_date.ReadOnly = true;
-            // 
-            // iteraciones
-            // 
-            this.iteraciones.HeaderText = "N° iteraciones tabu";
-            this.iteraciones.Name = "iteraciones";
-            this.iteraciones.ReadOnly = true;
-            // 
-            // report_huacos
-            // 
-            this.report_huacos.HeaderText = "Huacos producidos";
-            this.report_huacos.Name = "report_huacos";
-            this.report_huacos.ReadOnly = true;
-            // 
-            // report_stones
-            // 
-            this.report_stones.HeaderText = "Piedras de Huamanga producidas";
-            this.report_stones.Name = "report_stones";
-            this.report_stones.ReadOnly = true;
-            // 
-            // report_altarpieces
-            // 
-            this.report_altarpieces.HeaderText = "Retablos producidos";
-            this.report_altarpieces.Name = "report_altarpieces";
-            this.report_altarpieces.ReadOnly = true;
-            // 
-            // report_workers
-            // 
-            this.report_workers.HeaderText = "# trabajadores asignados";
-            this.report_workers.Name = "report_workers";
-            this.report_workers.ReadOnly = true;
             // 
             // button_export
             // 
@@ -162,6 +125,42 @@
             this.label_simulationTime.Size = new System.Drawing.Size(0, 22);
             this.label_simulationTime.TabIndex = 37;
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fecha";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "N° iteraciones tabu";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Huacos producidos";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Piedras de Huamanga producidas";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Retablos producidos";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "# trabajadores asignados";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
             // SimulationReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -193,11 +192,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_simulationName;
         private System.Windows.Forms.Label label_simulationTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn report_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iteraciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn report_huacos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn report_stones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn report_altarpieces;
-        private System.Windows.Forms.DataGridViewTextBoxColumn report_workers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }

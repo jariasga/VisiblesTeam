@@ -26,14 +26,14 @@ namespace InkaArt.Business.Security
         }
         public bool checkCredentials(string loginUsername, string loginPass, out bool active)
         {
-            bool verified = false;
+            bool verified = false, dataExist;
             SHA_2 sha = new SHA_2();
             string key = sha.encrypt(loginPass);            
             
-            row = user.getUserRow(loginUsername);
+            row = user.getUserRow(loginUsername, out dataExist);
             active = true;
             //  Read data from DB
-            if (row == null)
+            if (row == null && !dataExist)
             {
                 validConnection = false;
                 return false;
