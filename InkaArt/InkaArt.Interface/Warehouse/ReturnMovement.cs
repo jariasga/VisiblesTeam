@@ -14,7 +14,6 @@ namespace InkaArt.Interface.Warehouse
     {
         string typeMovement = "";
 
-
         public ReturnMovement()
         {
             InitializeComponent();
@@ -27,8 +26,6 @@ namespace InkaArt.Interface.Warehouse
             textBox6.Text = nameWarehouse;
             textBox5.Text = idWarehouse;
         }
-
-
 
     }
 }
