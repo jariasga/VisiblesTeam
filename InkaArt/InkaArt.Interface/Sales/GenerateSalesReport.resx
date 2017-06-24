@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>
+El presente reporte mostrará por cada día que se encuentre en el intervalo de fechas elegidas, las ventas del producto elegido, junto con el cliente al que se le vendió, si el cliente es nacional o internacional, la cantidad y monto final de la venta.
+
+</value>
+  </data>
 </root>

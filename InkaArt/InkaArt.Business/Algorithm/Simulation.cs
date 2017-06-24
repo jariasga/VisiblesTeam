@@ -33,6 +33,7 @@ namespace InkaArt.Business.Algorithm
         //Trabajadores y pedidos filtrados 
         private WorkerController selected_workers;
         private OrderController selected_orders;
+        private IndexController indexes;
 
         private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
 
@@ -163,45 +164,33 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 3) return retable_weight;
             return 1;                
         }
+
         /******************* GUARDADO EN BASE DE DATOS *******************/
 
-        public void Save()
+        public void save()
         {
-            //if (assignments == null) return;
-            //NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            //connection.Open();
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
 
-            //int miniturn;
-            //int days = 1;            
+            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" (name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time);", connection);
+            command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+            command.Parameters.Add(new NpgsqlParameter("name", name));
+            command.Parameters.Add(new NpgsqlParameter("start_date", date_start));
+            command.Parameters.Add(new NpgsqlParameter("end_date", date_end));
+            command.Parameters.Add(new NpgsqlParameter("days", days));
+            command.Parameters.Add(new NpgsqlParameter("breakage_weight", breakage_weight));
+            command.Parameters.Add(new NpgsqlParameter("time_weight", time_weight));
+            command.Parameters.Add(new NpgsqlParameter("huaco_weight", huaco_weight));
+            command.Parameters.Add(new NpgsqlParameter("huamanga_stone_weight", huamanga_stone_weight));
+            command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
+            command.Parameters.Add(new NpgsqlParameter("time", LimitTime));
 
-            //foreach (AssignmentLine[][] day in assignments)
-            //{
-            //    foreach(AssignmentLine[] worker in day)
-            //    {
-            //        miniturn = 0;
-            //        foreach (AssignmentLine assignment in worker)
-            //        {
-            //            //assignment.Miniturn = miniturn;
-            //            assignment.Date = DateTime.Now.AddDays(days);
+            command.ExecuteNonQuery();
 
-            //            NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
-            //            command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
-            //            command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
-            //            command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
-            //            //command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
-            //            command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
-
-            //            command.ExecuteNonQuery();
-            //            miniturn++;
-            //        }
-            //    }
-            //    days++;                
-            //}           
-            
-            //connection.Close();
+            connection.Close();
         }
 
-        public string UpdateName()
+        public string updateName()
         {
             try
             {
@@ -229,6 +218,12 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
+        public double getLossIndex(AssignmentLine line)
+        {
+            Index index = indexes.FindByAssignment(line);
+            return index == null ? -1 : index.LossIndex;
+        }
+        
         //public List<AssignmentLine> AssignmentsToList()
         //{
         //    List<AssignmentLine> list = new List<AssignmentLine>();

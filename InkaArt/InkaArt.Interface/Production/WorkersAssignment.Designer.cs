@@ -37,11 +37,12 @@
             this.simulation_tab_control = new System.Windows.Forms.TabControl();
             this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
             this.button_save = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.worker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.job = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.index = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.simulation_tab_control.SuspendLayout();
             this.simulation_tab_assignment.SuspendLayout();
@@ -114,11 +115,12 @@
             this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
+            this.date,
+            this.worker,
+            this.job,
+            this.recipe,
+            this.quantity,
+            this.index});
             this.simulation_grid.Location = new System.Drawing.Point(24, 23);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.simulation_grid.Name = "simulation_grid";
@@ -161,30 +163,35 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
-            // Column1
+            // date
             // 
-            this.Column1.HeaderText = "Fecha";
-            this.Column1.Name = "Column1";
+            this.date.HeaderText = "Fecha";
+            this.date.Name = "date";
             // 
-            // Column2
+            // worker
             // 
-            this.Column2.HeaderText = "Trabajador";
-            this.Column2.Name = "Column2";
+            this.worker.HeaderText = "Trabajador";
+            this.worker.Name = "worker";
             // 
-            // Column3
+            // job
             // 
-            this.Column3.HeaderText = "Proceso y Producto";
-            this.Column3.Name = "Column3";
+            this.job.HeaderText = "Proceso y Producto";
+            this.job.Name = "job";
             // 
-            // Column4
+            // recipe
             // 
-            this.Column4.HeaderText = "Receta";
-            this.Column4.Name = "Column4";
+            this.recipe.HeaderText = "Receta";
+            this.recipe.Name = "recipe";
             // 
-            // Column5
+            // quantity
             // 
-            this.Column5.HeaderText = "Cantidad";
-            this.Column5.Name = "Column5";
+            this.quantity.HeaderText = "Cantidad";
+            this.quantity.Name = "quantity";
+            // 
+            // index
+            // 
+            this.index.HeaderText = "Índice de Pérdida";
+            this.index.Name = "index";
             // 
             // WorkersAssignment
             // 
@@ -222,10 +229,11 @@
         private System.Windows.Forms.TabControl simulation_tab_control;
         private System.Windows.Forms.TabPage simulation_tab_assignment;
         private System.Windows.Forms.Button button_save;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn worker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn job;
+        private System.Windows.Forms.DataGridViewTextBoxColumn recipe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn index;
     }
 }

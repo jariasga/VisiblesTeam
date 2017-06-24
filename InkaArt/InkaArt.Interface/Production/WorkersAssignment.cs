@@ -15,7 +15,7 @@ namespace InkaArt.Interface.Production
     public partial class WorkersAssignment : Form
     {
         private SimulationController simulations;
-        private Simulation current_simulation;
+        private Simulation current_simulation = null;
         private WorkerController workers;
         private RecipeController recipes;
         private OrderController orders;
@@ -44,24 +44,19 @@ namespace InkaArt.Interface.Production
 
         private void ButtonConfigClick(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-
-            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers, orders);
+            Form simulation_config = new SimulationConfig(simulations, current_simulation, combo_simulations, workers, orders);
             simulation_config.MdiParent = this.MdiParent;
             simulation_config.Show();
         }
 
         private void ButtonSaveClick(object sender, EventArgs e)
         {
-            //Guardar simulación en BD
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            simulation.Save();
+            current_simulation.save();
         }
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            SimulationReport simulation_report = new SimulationReport(simulation);
+            SimulationReport simulation_report = new SimulationReport(current_simulation);
             simulation_report.Show();
         }
 
@@ -79,9 +74,9 @@ namespace InkaArt.Interface.Production
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            current_simulation = (Simulation) combo_simulations.SelectedItem;
 
-            if (combo_simulations.SelectedIndex < 0 || simulation == null)
+            if (combo_simulations.SelectedIndex < 0 || current_simulation == null)
             {
                 button_config.Text = "+ Nueva simulación";
                 button_config.BackColor = Color.SteelBlue;
@@ -96,33 +91,29 @@ namespace InkaArt.Interface.Production
                 button_save.Enabled = true;
                 button_delete.Enabled = true;
                 button_report.Enabled = true;
-                updateGrid(simulation);
+                updateGrid();
             }
         }
 
-        public void updateGrid(Simulation simulation)
+        public void updateGrid()
         {
-            foreach(Assignment day in simulation.Assignments)
+            if (current_simulation == null) return;
+            foreach(Assignment day in current_simulation.Assignments)
             {
                 foreach(AssignmentLine miniturn in day.toList())
                 {
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
-                    row.Cells[0].Value = day.Date.ToShortDateString();
-                    row.Cells[1].Value = miniturn.Worker.FullName;
-                    row.Cells[2].Value = miniturn.Job.Name;
-                    row.Cells[3].Value = miniturn.Recipe.Description;
-                    row.Cells[4].Value = miniturn.Produced;
+                    row.Cells[worker.Index].Value = miniturn.Worker.FullName;
+                    row.Cells[job.Index].Value = miniturn.Job.Name;
+                    row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
+                    row.Cells[quantity.Index].Value = miniturn.Produced;
+                    row.Cells[index.Index].Value = current_simulation.getLossIndex(miniturn);
                     simulation_grid.Rows.Add(row);
                 }
             }
         }
 
         private void simulation_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void groupbox_summary_Enter(object sender, EventArgs e)
         {
 
         }

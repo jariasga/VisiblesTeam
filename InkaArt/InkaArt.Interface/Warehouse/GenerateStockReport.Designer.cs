@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenerateStockReport));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_rawMaterial = new System.Windows.Forms.CheckBox();
             this.checkBox_product = new System.Windows.Forms.CheckBox();
             this.button_generate = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,7 +42,7 @@
             this.groupBox1.Controls.Add(this.checkBox_rawMaterial);
             this.groupBox1.Controls.Add(this.checkBox_product);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(36, 34);
+            this.groupBox1.Location = new System.Drawing.Point(42, 231);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(338, 161);
             this.groupBox1.TabIndex = 0;
@@ -73,7 +75,7 @@
             this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(143, 211);
+            this.button_generate.Location = new System.Drawing.Point(133, 419);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(138, 51);
             this.button_generate.TabIndex = 22;
@@ -81,12 +83,26 @@
             this.button_generate.UseVisualStyleBackColor = false;
             this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(42, 33);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(338, 161);
+            this.textBox1.TabIndex = 39;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // GenerateStockReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(414, 286);
+            this.ClientSize = new System.Drawing.Size(426, 482);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button_generate);
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerateStockReport";
@@ -94,6 +110,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,5 +120,6 @@
         private System.Windows.Forms.CheckBox checkBox_rawMaterial;
         private System.Windows.Forms.CheckBox checkBox_product;
         private System.Windows.Forms.Button button_generate;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

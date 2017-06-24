@@ -73,6 +73,19 @@ namespace InkaArt.Business.Algorithm
             get { return workers.Count; }
         }
 
+        public List<Worker> Workers
+        {
+            get
+            {
+                return workers;
+            }
+
+            set
+            {
+                workers = value;
+            }
+        }
+
         public Worker this[int index]
         {
             get { return workers[index]; }
