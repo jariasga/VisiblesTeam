@@ -185,9 +185,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 231);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 18);
+            this.label3.Size = new System.Drawing.Size(200, 18);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Fecha de entrega";
+            this.label3.Text = "Fecha de entrega estimada";
             // 
             // textBox_idsupplier
             // 
@@ -199,7 +199,6 @@
             this.textBox_idsupplier.Name = "textBox_idsupplier";
             this.textBox_idsupplier.Size = new System.Drawing.Size(55, 26);
             this.textBox_idsupplier.TabIndex = 3;
-            this.textBox_idsupplier.TextChanged += new System.EventHandler(this.textBox_supplier_TextChanged);
             // 
             // label2
             // 

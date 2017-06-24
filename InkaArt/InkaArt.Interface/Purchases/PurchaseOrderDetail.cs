@@ -303,15 +303,7 @@ namespace InkaArt.Interface.Purchases
             llenarMateriasPedidas();
             ventanaListaOrdenes.desarrolloBusqueda();
         }
-
-        private void textBox_supplier_TextChanged(object sender, EventArgs e)
-        {
-            if (this.textBox_idsupplier.Text == "")
-            {
-                this.button_add.Enabled = false;
-            }
-            else this.button_add.Enabled = true;
-        }
+        
         private bool validating_alldata()
         {
             textBox_idsupplier.Text = textBox_idsupplier.Text.Trim();
@@ -397,6 +389,7 @@ namespace InkaArt.Interface.Purchases
                     textBox_id.Text = buscarValorId(textBox_idsupplier.Text);
                     obtenerMateriasDelSupplier();
                     llenarMateriasPedidas();
+
                 }
                 catch (Exception)
                 {
@@ -446,6 +439,7 @@ namespace InkaArt.Interface.Purchases
                     button_add.Enabled = true;
                     buttonDelete.Enabled = true;
                     comboBoxRawMaterialName.Enabled = true;
+                    activarBotonAgregar();
                 }
                 dataGridView_pedidos.Enabled = true;
 
@@ -551,6 +545,14 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             llenarMateriasPedidas();
+        }
+
+        private void activarBotonAgregar()
+        {
+            if(isInEditMode && textBox_id.Text.Length>0 && textBox_idsupplier.Text.Length >= 0)
+            {
+                button_add.Enabled = true;
+            }
         }
 
         private string hallarNombreUnit(int idUnit)
