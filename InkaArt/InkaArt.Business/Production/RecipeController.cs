@@ -49,18 +49,19 @@ namespace InkaArt.Business.Production
                 for(int j = 0; j < r_rmList.Rows.Count; j++)
                 {
                     if (r_rmList.Rows[j]["idRecipe"].ToString() == idRecipe 
-                        /*&& r_rmList.Rows[j]["status"].ToString()=="1"*/)
+                        && r_rmList.Rows[j]["status"].ToString()=="1")
                     {
                         string idRm = r_rmList.Rows[j]["idRawMaterial"].ToString();
                         for(int k = 0; k < rmList.Rows.Count; k++)
                         {
                             if (rmList.Rows[k]["id_raw_material"].ToString() == idRm)
                             {
-                                if (rmList.Rows[k]["status"].ToString() == "Inactivo")//hay una materia prima inactiva en la receta
+                                if (rmList.Rows[k]["status"].ToString() == "Inactivo" && activar == 0)//hay una materia prima inactiva en la receta
                                 {
                                     recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
                                         "SET status = {0} WHERE \"idRecipe\" = '{1}'", 0,idRecipe));
                                     activar = 1;
+                                    break;
                                 }
                             }
                         }
