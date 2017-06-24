@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textbox_reason = new System.Windows.Forms.TextBox();
@@ -58,6 +58,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button_delete = new System.Windows.Forms.Button();
+            this.button_seedoc = new System.Windows.Forms.Button();
+            this.button_fac = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orderline)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -167,14 +169,14 @@
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -389,7 +391,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(774, 540);
+            this.button_delete.Location = new System.Drawing.Point(943, 540);
             this.button_delete.Margin = new System.Windows.Forms.Padding(4);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(143, 48);
@@ -398,12 +400,44 @@
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
+            // button_seedoc
+            // 
+            this.button_seedoc.BackColor = System.Drawing.Color.Gray;
+            this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_seedoc.ForeColor = System.Drawing.Color.White;
+            this.button_seedoc.Location = new System.Drawing.Point(538, 540);
+            this.button_seedoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_seedoc.Name = "button_seedoc";
+            this.button_seedoc.Size = new System.Drawing.Size(244, 48);
+            this.button_seedoc.TabIndex = 42;
+            this.button_seedoc.Text = "🔍 Ver Documentos";
+            this.button_seedoc.UseVisualStyleBackColor = false;
+            this.button_seedoc.Visible = false;
+            this.button_seedoc.Click += new System.EventHandler(this.button_seedoc_Click);
+            // 
+            // button_fac
+            // 
+            this.button_fac.BackColor = System.Drawing.Color.Gray;
+            this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_fac.ForeColor = System.Drawing.Color.White;
+            this.button_fac.Location = new System.Drawing.Point(789, 540);
+            this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_fac.Name = "button_fac";
+            this.button_fac.Size = new System.Drawing.Size(143, 48);
+            this.button_fac.TabIndex = 41;
+            this.button_fac.Text = "🗀 Facturar";
+            this.button_fac.UseVisualStyleBackColor = false;
+            this.button_fac.Visible = false;
+            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
+            // 
             // DevolutionShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1161, 614);
+            this.Controls.Add(this.button_seedoc);
+            this.Controls.Add(this.button_fac);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -454,5 +488,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.Button button_seedoc;
+        private System.Windows.Forms.Button button_fac;
     }
 }

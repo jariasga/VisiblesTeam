@@ -13,7 +13,9 @@ namespace InkaArt.Interface.Sales
 {
     public partial class DevolutionShow : Form
     {
+        private static int ID_NCREDIT = 6;
         private int orderId;
+        private int clientId;
         OrderController orderController;
         public DevolutionShow(string id)
         {
@@ -26,6 +28,7 @@ namespace InkaArt.Interface.Sales
         {
             DataTable orderObject = orderController.GetOrders(orderId);
             populateFields(orderObject);
+            clientId = orderController.getClientID(orderId);
         }
 
         private void populateFields(DataTable orderObject)
@@ -61,6 +64,44 @@ namespace InkaArt.Interface.Sales
             orderController.deleteOrders(order);
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void button_fac_Click(object sender, EventArgs e)
+        {
+            DataTable orderLines = parseDataGrid(grid_orderline);
+            int response = orderController.AddSaleDocument(ID_NCREDIT, textbox_devamount.Text, textbox_igv.Text, textbox_devtotal.Text, orderId, orderLines, clientId);
+            if (response >= 0)
+            {
+                MessageBox.Show(this, "Se ha generado la nota de crédito exitosamente", "Nota de crédito", MessageBoxButtons.OK);
+                DataTable orderObject = orderController.GetOrders(orderId, clientId);
+                populateFields(orderObject);
+            }
+        }
+
+        private void button_seedoc_Click(object sender, EventArgs e)
+        {
+            SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
+            form.Show();
+        }
+
+        private DataTable parseDataGrid(DataGridView grid)
+        {
+            DataTable dt = new DataTable();
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                dt.Columns.Add(col.HeaderText);
+            }
+
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                DataRow dRow = dt.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    dRow[cell.ColumnIndex] = cell.Value;
+                }
+                dt.Rows.Add(dRow);
+            }
+            return dt;
         }
     }
 }
