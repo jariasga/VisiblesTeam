@@ -84,7 +84,7 @@ namespace InkaArt.Business.Sales
         {
             if (documentTypeId != -1) documentTypeId++;
             saleAmount = Math.Round(double.Parse(saleAmount), 2).ToString();
-            igv = Math.Round(double.Parse(igv), 2).ToString();
+            igv = Math.Round(double.Parse(igv), 2).ToString(); 
             totalAmount = Math.Round(double.Parse(totalAmount), 2).ToString();
             int orderAdded, orderLineAdded;
             orderAdded = orderData.InsertOrder(idClient, deliveryDate, saleAmount, igv, totalAmount, orderStatus, bdStatus, type,reason, totalDev);

@@ -52,7 +52,7 @@ namespace InkaArt.Interface.Production
         {
             //Guardar simulación en BD
             Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            simulation.Save();
+            simulation.save();
         }
 
         private void ButtonReportClick(object sender, EventArgs e)

@@ -163,14 +163,33 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 3) return retable_weight;
             return 1;                
         }
+
         /******************* GUARDADO EN BASE DE DATOS *******************/
 
-        public void Save()
+        public void save()
         {
-        
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" (name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time);", connection);
+            command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+            command.Parameters.Add(new NpgsqlParameter("name", name));
+            command.Parameters.Add(new NpgsqlParameter("start_date", date_start));
+            command.Parameters.Add(new NpgsqlParameter("end_date", date_end));
+            command.Parameters.Add(new NpgsqlParameter("days", days));
+            command.Parameters.Add(new NpgsqlParameter("breakage_weight", breakage_weight));
+            command.Parameters.Add(new NpgsqlParameter("time_weight", time_weight));
+            command.Parameters.Add(new NpgsqlParameter("huaco_weight", huaco_weight));
+            command.Parameters.Add(new NpgsqlParameter("huamanga_stone_weight", huamanga_stone_weight));
+            command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
+            command.Parameters.Add(new NpgsqlParameter("time", LimitTime));
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
         }
 
-        public string UpdateName()
+        public string updateName()
         {
             try
             {
@@ -197,7 +216,7 @@ namespace InkaArt.Business.Algorithm
                 return "Ocurrió una excepción al intentar actualizar la simulación: " + e.Message;
             }
         }
-
+        
         //public List<AssignmentLine> AssignmentsToList()
         //{
         //    List<AssignmentLine> list = new List<AssignmentLine>();

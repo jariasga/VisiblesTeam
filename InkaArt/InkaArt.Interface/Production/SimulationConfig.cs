@@ -127,7 +127,7 @@ namespace InkaArt.Interface.Production
                 simulation.Name = this.textbox_name.Text;
                 if (simulation.ID > 0)
                 {
-                    string message = simulation.UpdateName();
+                    string message = simulation.updateName();
                     if (message != null) MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 MessageBox.Show("Los datos de la simulación fueron actualizados correctamente.", "Inka Art",
