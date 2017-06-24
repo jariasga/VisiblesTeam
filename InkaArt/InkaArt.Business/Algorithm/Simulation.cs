@@ -153,38 +153,7 @@ namespace InkaArt.Business.Algorithm
 
         public void Save()
         {
-            //if (assignments == null) return;
-            //NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            //connection.Open();
-
-            //int miniturn;
-            //int days = 1;            
-
-            //foreach (AssignmentLine[][] day in assignments)
-            //{
-            //    foreach(AssignmentLine[] worker in day)
-            //    {
-            //        miniturn = 0;
-            //        foreach (AssignmentLine assignment in worker)
-            //        {
-            //            //assignment.Miniturn = miniturn;
-            //            assignment.Date = DateTime.Now.AddDays(days);
-
-            //            NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_worker, id_process_product, id_recipe, miniturn, assignment_date) values (:id_worker, :id_process_product, :id_recipe, :miniturn, :assignment_date)", connection);
-            //            command.Parameters.Add(new NpgsqlParameter("id_worker", assignment.Worker.ID));
-            //            command.Parameters.Add(new NpgsqlParameter("id_process_product", assignment.Job.ID));
-            //            command.Parameters.Add(new NpgsqlParameter("id_recipe", assignment.Recipe.ID));
-            //            //command.Parameters.Add(new NpgsqlParameter("miniturn", assignment.Miniturn));
-            //            command.Parameters.Add(new NpgsqlParameter("assignment_date", assignment.Date));
-
-            //            command.ExecuteNonQuery();
-            //            miniturn++;
-            //        }
-            //    }
-            //    days++;                
-            //}           
-            
-            //connection.Close();
+        
         }
 
         public string UpdateName()

@@ -1,4 +1,6 @@
-﻿using InkaArt.Data.Algorithm;
+﻿using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -138,6 +140,34 @@ namespace InkaArt.Business.Algorithm
             }
 
             return list;
+        }
+
+        public void save(int id_simulation)
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
+            NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date, assigned_workers) values (:id_simulation, :tabu_iterations, :objective_function_value, :huamanga_produced, :huacos_produced, :altarpiece_produced, :date, :assigned_workers)", connection);
+            command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+            command.Parameters.Add(new NpgsqlParameter("tabu_iterations", this.tabu_iterations));
+            command.Parameters.Add(new NpgsqlParameter("objective_function_value", this.objective_function_value));
+            command.Parameters.Add(new NpgsqlParameter("huamanga_produced", this.huamanga_produced));
+            command.Parameters.Add(new NpgsqlParameter("huacos_produced", this.huacos_produced));
+            command.Parameters.Add(new NpgsqlParameter("altarpiece_produced", this.altarpiece_produced));
+            command.Parameters.Add(new NpgsqlParameter("date", this.date));
+            command.Parameters.Add(new NpgsqlParameter("assigned_workers", this.selected_workers.NumberOfWorkers));
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            for (int worker = 0; worker < this.selected_workers.NumberOfWorkers; worker++)
+            {
+                for (int minit = 0; minit < this.total_miniturns; minit++)
+                    if (assignment_lines[worker, minit] != null)
+                    {
+                        AssignmentLine assignment = assignment_lines[worker, minit];
+                        // aqui agrupariamos
+                        //assignment.
+                    }
+            }            
         }
     }
 }
