@@ -90,7 +90,7 @@ namespace InkaArt.Business.Production
             
         }   
 
-        public int updateStock(int h, int hl,int p, int pl, int r, int rl)
+        public int updateStock(int h, int p,int r, int hl, int pl, int rl)
         {
 
 

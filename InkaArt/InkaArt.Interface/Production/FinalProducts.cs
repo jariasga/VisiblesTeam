@@ -35,17 +35,20 @@ namespace InkaArt.Interface.Production
             DataTable whList = control.getData();
             for(int i = 0; i<whList.Rows.Count; i++)
             {
-                if (whList.Rows[i]["idProduct"].ToString() == "1")
+                if (whList.Rows[i]["idProduct"].ToString() == "1" &&
+                    whList.Rows[i]["state"].ToString()=="Activo")
                 {
                     huaco += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     huacoL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
                 }
-                if (whList.Rows[i]["idProduct"].ToString() == "2")
+                if (whList.Rows[i]["idProduct"].ToString() == "2" &&
+                    whList.Rows[i]["state"].ToString() == "Activo")
                 {
                     piedra += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     piedraL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
                 }
-                if (whList.Rows[i]["idProduct"].ToString() == "3")
+                if (whList.Rows[i]["idProduct"].ToString() == "3" &&
+                    whList.Rows[i]["state"].ToString() == "Activo")
                 {
                     retablo += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     retabloL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
