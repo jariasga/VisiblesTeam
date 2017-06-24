@@ -40,12 +40,20 @@ namespace InkaArt.Business.Algorithm
             {
                 Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), selected_workers, total_miniturns);
                 selected_orders.RemoveAll(order => order.DeliveryDate.Date < assignment.Date.Date);
-                if (selected_orders.NumberOfOrders <= 0) return best_assignment;
-
+                if (selected_orders.NumberOfOrders <= 0)
+                {
+                    LogHandler.WriteLine("¡Acabamos las ordenes antes de terminarse el algoritmo! :D");
+                    return best_assignment;
+                }
                 //Inicializar la lista de candidatos para ser asignados
                 List<Index> candidates = new List<Index>();
                 for (int i = 0; i < indexes.Count(); i++)
                     if (selected_workers.GetByID(indexes[i].Worker.ID) != null) candidates.Add(indexes[i]);
+
+                LogHandler.WriteLine("Lista de candidatos: ");
+                for (int i = 0; i < candidates.Count; i++)
+                    LogHandler.WriteLine("- Candidato {0}: {1}", i + 1, candidates[i].ToString());
+                if (candidates.Count <= 0) LogHandler.WriteLine("- No se encontraron candidatos.");
 
                 LogHandler.WriteLine("Seleccionados {0} trabajadores y {1} ordenes. Se tienen {2} indices y {3} candidatos.",
                     selected_workers.Count(), selected_orders.NumberOfOrders, indexes.Count(), candidates.Count);

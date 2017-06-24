@@ -51,7 +51,7 @@ namespace InkaArt.Data.Algorithm
 
         public override string ToString()
         {
-            string recipe = (this.recipe == null) ? "null" : this.recipe.Description;
+            string recipe = (this.recipe == null) ? "null" : this.recipe.Description + " " + this.recipe.Version;
             return string.Format("ID={0}, Receta={1}, Cant.solicitada={2}, Cant.producida={3}", this.id_line_item, recipe, this.quantity, this.produced);
         }
     }
