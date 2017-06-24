@@ -37,6 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_rawMaterial = new System.Windows.Forms.TabPage();
+            this.button_updateP = new System.Windows.Forms.Button();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.buttonAdd_RawMaterial = new System.Windows.Forms.Button();
@@ -55,6 +56,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage_Products = new System.Windows.Forms.TabPage();
+            this.button_updateRm = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -178,6 +180,7 @@
             // 
             // tabPage_rawMaterial
             // 
+            this.tabPage_rawMaterial.Controls.Add(this.button_updateP);
             this.tabPage_rawMaterial.Controls.Add(this.numericUpDown2);
             this.tabPage_rawMaterial.Controls.Add(this.numericUpDown1);
             this.tabPage_rawMaterial.Controls.Add(this.buttonAdd_RawMaterial);
@@ -195,6 +198,20 @@
             this.tabPage_rawMaterial.TabIndex = 0;
             this.tabPage_rawMaterial.Text = "Materias Primas";
             this.tabPage_rawMaterial.UseVisualStyleBackColor = true;
+            // 
+            // button_updateP
+            // 
+            this.button_updateP.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_updateP.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_updateP.ForeColor = System.Drawing.Color.White;
+            this.button_updateP.Location = new System.Drawing.Point(159, 290);
+            this.button_updateP.Margin = new System.Windows.Forms.Padding(2);
+            this.button_updateP.Name = "button_updateP";
+            this.button_updateP.Size = new System.Drawing.Size(106, 32);
+            this.button_updateP.TabIndex = 66;
+            this.button_updateP.Text = "＋ Guardar";
+            this.button_updateP.UseVisualStyleBackColor = false;
+            this.button_updateP.Click += new System.EventHandler(this.button_updateRm_Click);
             // 
             // numericUpDown2
             // 
@@ -281,7 +298,7 @@
             // 
             // borrar
             // 
-            this.borrar.HeaderText = "Borrar";
+            this.borrar.HeaderText = "Seleccionar";
             this.borrar.Name = "borrar";
             this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -297,7 +314,7 @@
             this.buttonDelete_RawMaterial.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_RawMaterial.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_RawMaterial.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(264, 305);
+            this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(382, 290);
             this.buttonDelete_RawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_RawMaterial.Name = "buttonDelete_RawMaterial";
             this.buttonDelete_RawMaterial.Size = new System.Drawing.Size(106, 32);
@@ -352,6 +369,7 @@
             // 
             // tabPage_Products
             // 
+            this.tabPage_Products.Controls.Add(this.button_updateRm);
             this.tabPage_Products.Controls.Add(this.numericUpDown3);
             this.tabPage_Products.Controls.Add(this.numericUpDown4);
             this.tabPage_Products.Controls.Add(this.label1);
@@ -369,6 +387,20 @@
             this.tabPage_Products.TabIndex = 1;
             this.tabPage_Products.Text = "Productos";
             this.tabPage_Products.UseVisualStyleBackColor = true;
+            // 
+            // button_updateRm
+            // 
+            this.button_updateRm.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_updateRm.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_updateRm.ForeColor = System.Drawing.Color.White;
+            this.button_updateRm.Location = new System.Drawing.Point(158, 290);
+            this.button_updateRm.Margin = new System.Windows.Forms.Padding(2);
+            this.button_updateRm.Name = "button_updateRm";
+            this.button_updateRm.Size = new System.Drawing.Size(106, 32);
+            this.button_updateRm.TabIndex = 81;
+            this.button_updateRm.Text = "＋ Guardar";
+            this.button_updateRm.UseVisualStyleBackColor = false;
+            this.button_updateRm.Click += new System.EventHandler(this.button_updateProduct_Click);
             // 
             // numericUpDown3
             // 
@@ -495,17 +527,15 @@
             // 
             this.dataGridViewTextBoxColumn6.HeaderText = "Stock Mínimo";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.HeaderText = "Stock Máximo";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // dataGridViewCheckBoxColumn1
             // 
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Borrar";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Seleccionar";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -522,7 +552,7 @@
             this.buttonDelete_Product.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_Product.Location = new System.Drawing.Point(280, 305);
+            this.buttonDelete_Product.Location = new System.Drawing.Point(376, 290);
             this.buttonDelete_Product.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_Product.Name = "buttonDelete_Product";
             this.buttonDelete_Product.Size = new System.Drawing.Size(106, 32);
@@ -594,6 +624,8 @@
         private System.Windows.Forms.ComboBox comboBox_Producto;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button_updateP;
+        private System.Windows.Forms.Button button_updateRm;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn stockActual;

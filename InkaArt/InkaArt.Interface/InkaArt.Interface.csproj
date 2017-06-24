@@ -212,6 +212,12 @@
     <Compile Include="Warehouse\breakProduct.Designer.cs">
       <DependentUpon>breakProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\BrokenItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\BrokenItems.Designer.cs">
+      <DependentUpon>BrokenItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\ExchangeMovement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -569,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\breakProduct.resx">
       <DependentUpon>breakProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\BrokenItems.resx">
+      <DependentUpon>BrokenItems.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>
