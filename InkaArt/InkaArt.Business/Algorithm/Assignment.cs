@@ -163,7 +163,7 @@ namespace InkaArt.Business.Algorithm
             int total_miniturns_used = total_miniturns - next_miniturn;
             int products = Convert.ToInt32(Math.Truncate(total_miniturns_used * Simulation.MiniturnLength / chosen_candidate.AverageTime));
             
-            return new AssignmentLine(chosen_candidate.Worker, chosen_candidate.Recipe, chosen_candidate.Job, next_miniturn, total_miniturns_used, products);
+            return new AssignmentLine(chosen_candidate, next_miniturn, total_miniturns_used, products);
         }
 
         public List<AssignmentLine> toList()

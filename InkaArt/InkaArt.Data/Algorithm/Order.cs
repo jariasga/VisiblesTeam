@@ -50,7 +50,7 @@ namespace InkaArt.Data.Algorithm
 
         public bool UpdateLineItem(Recipe recipe, int produced)
         {
-            OrderLineItem line_item = line_items.Find(item => item.Recipe == recipe.ID);
+            OrderLineItem line_item = line_items.Find(item => item.Recipe.ID == recipe.ID);
             if (line_item == null) return false;
             line_item.Produced += produced;
             return true;
