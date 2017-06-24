@@ -111,13 +111,20 @@ namespace InkaArt.Business.Warehouse
 
         public int updateDataRawMaterialOut(int idProd, int idWarehouse, int numMov, string typeMovement, string stateItem = "")
         {
-            string query = "";
+            string query = "", updateQuery="";
+            int nuevoStock = 0,actStock=0;
+            NpgsqlDataReader dr;
             query = "select \"currentStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
             //Se obtiene el stock de la materia prima
-
+            dr = productionItemWarehouseMovementData.returnQuery(query);
             //Se descuenta a ese stock lo que se va a mover
-
+            dr.Read();
+            actStock=Convert.ToInt32(dr[1]);
             //Se actualiza el stock de la materia prima en el almacén
+            nuevoStock = actStock - numMov;
+            updateQuery = "update inkaart.\"RawMaterial-Warehouse\" set \"currentStock\" = " + nuevoStock + " where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
+
+            productionItemWarehouseMovementData.updateDataExecute(updateQuery);
 
             return 1;
         }

@@ -52,6 +52,19 @@ namespace InkaArt.Data.Warehouse
             return rowIndex;
         }
 
+        public NpgsqlDataReader returnQuery(string query)
+        {
+            connect();
+            NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
+
+            //query = "Select * from inkaart.\"Warehouse\"";
+            NpgsqlCommand command = new NpgsqlCommand(query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+            
+            closeConnection();
+            return dr;
+        }
+
         public int updateDataExecute(string queryUpdate)
         {
             int a = 5;
