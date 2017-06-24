@@ -25,6 +25,7 @@ namespace InkaArt.Interface.Purchases
         string listaMaterialesIds;
         bool isInEditMode = true;
         bool enProcesoDeLlenado = true;
+
         public PurchaseOrderDetail()
         {
             mode = 1;

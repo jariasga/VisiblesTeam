@@ -21,7 +21,25 @@ namespace InkaArt.Interface.Purchases
             desarrolloBusqueda();
             dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
         }
-
+        private string buscarIdsProveedores(string nombre)
+        {
+            string lista = "";
+            DataRow[] rows;
+            if (controlSup == null) controlSup = new SupplierController();
+            DataTable auxiliarLista = controlSup.getData();
+            rows = auxiliarLista.Select("name LIKE '%" + nombre+ "%'");
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            for (int i = 0; i < auxiliarLista.Rows.Count; i++)
+                {
+                    if (lista.Length > 0) lista += ", ";
+                    lista += auxiliarLista.Rows[i]["id_supplier"].ToString();
+                }
+            
+            return lista;
+        }
         private void filter() {
             DataRow[] rows;
             purchaseOrderList = control.getData();
@@ -32,7 +50,8 @@ namespace InkaArt.Interface.Purchases
             }
             if (textBox_name.Text.Length > 0)
             {
-                //cadena += " AND id_supplier = " + textBox_name.Text;
+                string lista = buscarIdsProveedores(textBox_name.Text);
+                cadena += " AND id_supplier IN (" + lista+")";
             }
             if (dateTimePicker_creation.Text.Length > 0 && checkBox_dateInclude.Checked)
             {
