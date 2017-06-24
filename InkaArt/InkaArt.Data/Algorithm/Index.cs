@@ -173,5 +173,15 @@ namespace InkaArt.Data.Algorithm
         {
             return (this.loss_index - objective_function_value) / (iteration + 1);
         }
+
+        public override string ToString()
+        {
+            string worker = (this.worker == null) ? "null" : this.Worker.FullName;
+            string job = (this.job == null) ? "null" : this.job.Name;
+            string recipe = (this.recipe == null) ? "null" : this.recipe.Description + " " + this.recipe.Version;
+
+            return string.Format("ID={0}, Worker={1}, Job={2}, Recipe={3}, AvgBreakage={4}, AvgTime={5}, BreakageIndex={6}, TimeIndex={7}, LossIndex={8}",
+                this.id_index, worker, job, recipe, average_breakage, average_time, breakage_index, time_index, loss_index);
+        }
     }
 }

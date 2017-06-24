@@ -49,11 +49,11 @@ namespace InkaArt.Data.Algorithm
             set { produced = value; }
         }
 
-        public AssignmentLine(Worker worker, Recipe recipe, Job job, int miniturn_start, int total_miniturns_used, int produced)
+        public AssignmentLine(Index index, int miniturn_start, int total_miniturns_used, int produced)
         {
-            this.worker = worker;
-            this.recipe = recipe;
-            this.job = job;
+            this.worker = index.Worker;
+            this.recipe = index.Recipe;
+            this.job = index.Job;
             this.miniturn_start = miniturn_start;
             this.produced = produced;
             this.total_miniturns_used = total_miniturns_used;
