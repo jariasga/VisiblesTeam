@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Purchases;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace InkaArt.Interface.Purchases
 {
@@ -529,72 +532,82 @@ namespace InkaArt.Interface.Purchases
                 button_add.Enabled = true;
             }
         }
+        private void generarExcel()
+        {
+            try
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                app.Visible = true;
+                worksheet = workbook.Sheets["Orden de compra"];
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "Orden de compra";
+                worksheet.Cells[1, 1] = "Orden:";
+                worksheet.Cells[1, 2] = textBox_id.Text;
+                worksheet.Cells[2, 1] = "Proveedor:";
+                worksheet.Cells[1, 2] = comboBox_supplier.Text;
+                worksheet.Cells[3, 1] = "Fecha de emisión:";
+                worksheet.Cells[3, 2] = dateTimePicker_creation.Text;
 
+                try
+                {
+                    for (int i = 2; i < dataGridView_pedidos.Columns.Count; i++)
+                    {
+                        worksheet.Cells[5, i - 1] = dataGridView_pedidos.Columns[i].HeaderText;
+                    }
+                    for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+                    {
+                        for (int j = 2; j < dataGridView_pedidos.Columns.Count; j++)
+                        {
+                            if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
+                            {
+                                worksheet.Cells[i + 6, j - 1] = dataGridView_pedidos.Rows[i].Cells[j].Value.ToString();
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 6, j - 1] = "";
+                            }
+                        }
+                    }
+
+                    //Getting the location and file name of the excel to save from user.
+                    SaveFileDialog saveDialog = new SaveFileDialog();
+                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                    saveDialog.FilterIndex = 2;
+
+                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        workbook.SaveAs(saveDialog.FileName);
+                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                finally
+                {
+                    app.Quit();
+                    workbook = null;
+                    worksheet = null;
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+
+        }
         private void generarOrdenDoc(object sender, EventArgs e)
         {
             if(mode==2 && string.Compare(comboBox_status.Text, "Enviado") == 0)
             {
-                try
-                {
-                    Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-                    Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
-                    Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-                    app.Visible = true;
-                    worksheet = workbook.Sheets["Orden de compra"];
-                    worksheet = workbook.ActiveSheet;
-                    worksheet.Name = "Orden de compra";
-                    worksheet.Cells[1, 1] = "Orden:";
-                    worksheet.Cells[1, 2] = textBox_id.Text;
-                    worksheet.Cells[2, 1] = "Proveedor:";
-                    worksheet.Cells[1, 2] = comboBox_supplier.Text;
-                    worksheet.Cells[3, 1] = "Fecha de emisión:";
-                    worksheet.Cells[3, 2] = dateTimePicker_creation.Text;
+                //generarExcel();
+                FileStream fs = new FileStream("OrdenPrueba.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+                Document document = new Document(PageSize.A4);
+                PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                document.Open();
 
-                    try
-                    {
-                        for (int i = 2; i < dataGridView_pedidos.Columns.Count; i++)
-                        {
-                            worksheet.Cells[5, i - 1] = dataGridView_pedidos.Columns[i].HeaderText;
-                        }
-                        for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
-                        {
-                            for (int j = 2; j < dataGridView_pedidos.Columns.Count; j++)
-                            {
-                                if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
-                                {
-                                    worksheet.Cells[i + 6, j - 1] = dataGridView_pedidos.Rows[i].Cells[j].Value.ToString();
-                                }
-                                else
-                                {
-                                    worksheet.Cells[i + 6, j - 1] = "";
-                                }
-                            }
-                        }
-
-                        //Getting the location and file name of the excel to save from user.
-                        SaveFileDialog saveDialog = new SaveFileDialog();
-                        saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-                        saveDialog.FilterIndex = 2;
-
-                        if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        {
-                            workbook.SaveAs(saveDialog.FileName);
-                            MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-
-                    finally
-                    {
-                        app.Quit();
-                        workbook = null;
-                        worksheet = null;
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+                document.Close();
             }
         }
 
