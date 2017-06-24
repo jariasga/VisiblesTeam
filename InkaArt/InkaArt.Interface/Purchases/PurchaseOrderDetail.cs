@@ -606,8 +606,32 @@ namespace InkaArt.Interface.Purchases
                 Document document = new Document(PageSize.A4);
                 PdfWriter writer = PdfWriter.GetInstance(document, fs);
                 document.Open();
-
+                document.Add(new Paragraph("Orden de compra: " + textBox_id.Text));
+                document.Add(new Paragraph("Proveedor: " + comboBox_supplier.Text));
+                document.Add(new Paragraph("Fecha de emisión: " + dateTimePicker_creation.Text));
+                document.Add(new Paragraph(""));
+                PdfPTable table = new PdfPTable(6);
+                for (int i = 2; i < dataGridView_pedidos.Columns.Count; i++)
+                {
+                    table.AddCell(dataGridView_pedidos.Columns[i].HeaderText);
+                }
+                for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+                {
+                    for (int j = 2; j < dataGridView_pedidos.Columns.Count; j++)
+                    {
+                        if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
+                        {
+                            table.AddCell(dataGridView_pedidos.Rows[i].Cells[j].Value.ToString());
+                        }
+                        else
+                        {
+                            table.AddCell("");
+                        }
+                    }
+                }
+                document.Add(table);
                 document.Close();
+                MessageBox.Show("Se generó el archivo de la orden exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
