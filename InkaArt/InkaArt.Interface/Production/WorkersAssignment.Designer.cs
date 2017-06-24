@@ -190,7 +190,7 @@
             // 
             // index
             // 
-            this.index.HeaderText = "Índice";
+            this.index.HeaderText = "Índice de Pérdida";
             this.index.Name = "index";
             // 
             // WorkersAssignment
