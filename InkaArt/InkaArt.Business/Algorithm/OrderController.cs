@@ -12,6 +12,7 @@ namespace InkaArt.Business.Algorithm
 {
     public class OrderController
     {
+
         private List<Order> orders;
 
         public OrderController()
@@ -78,6 +79,19 @@ namespace InkaArt.Business.Algorithm
         public int NumberOfOrders
         {
             get { return orders.Count; }
+        }
+
+        public List<Order> Orders
+        {
+            get
+            {
+                return orders;
+            }
+
+            set
+            {
+                orders = value;
+            }
         }
 
         public void Add(Order order)

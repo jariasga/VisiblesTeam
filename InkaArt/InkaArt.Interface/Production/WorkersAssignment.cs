@@ -104,11 +104,11 @@ namespace InkaArt.Interface.Production
                 foreach(AssignmentLine miniturn in day.toList())
                 {
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
-                    row.Cells[0].Value = day.Date.ToShortDateString();
-                    row.Cells[1].Value = miniturn.Worker.FullName;
-                    row.Cells[2].Value = miniturn.Job.Name;
-                    row.Cells[3].Value = miniturn.Recipe.Description;
-                    row.Cells[4].Value = miniturn.Produced;
+                    row.Cells["worker"].Value = miniturn.Worker.FullName;
+                    row.Cells["job"].Value = miniturn.Job.Name;
+                    row.Cells["recipe"].Value = miniturn.Recipe.Description;
+                    row.Cells["quantity"].Value = miniturn.Produced;
+                    row.Cells["index"].Value = miniturn.Index.LossIndex;
                     simulation_grid.Rows.Add(row);
                 }
             }

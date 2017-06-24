@@ -74,21 +74,24 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
             }
 
+            indexes.indexesToCSV();
+
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
             //Algoritmo de Búsqueda Tabú
 
             TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
 
-            for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
-            {
-                tabu.run(ref elapsed_seconds, day);
-                background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
-            }
+            //for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+            //{
+            //    tabu.run(ref elapsed_seconds, day);
+            //    background_worker.ReportProgress(Convert.ToInt32(50.0 / simulation.Days), null);
+            //}
 
-            simulation.Assignments = tabu.BestSolution;
+            //simulation.Assignments = tabu.BestSolution;
+            simulation.Assignments = initial_assignments;
         }
-
+                
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (e.UserState == null) this.progress_bar.Value += e.ProgressPercentage;

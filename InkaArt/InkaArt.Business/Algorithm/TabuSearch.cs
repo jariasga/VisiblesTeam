@@ -46,7 +46,25 @@ namespace InkaArt.Business.Algorithm
             this.limitDayTime = (Simulation.LimitTime - elapsed_time) / simulation.Days;
             this.initial_solution = solution;
             this.best_solution = new List<Assignment>();
-            MessageBox.Show("Inicializacion de Tabu");
+            addIndexes();
+        }
+
+        public void addIndexes()
+        {
+            foreach (Assignment assignment in initial_solution)
+            {
+                for(int i = 0; i <simulation.SelectedWorkers.NumberOfWorkers; i ++)
+                {
+                    for (int j = 0; j < assignment.TotalMiniturns; j++)
+                    {
+                        if (assignment[i,j] != null)
+                        {
+                            Index index = indexes.Find(assignment[i, j].Worker, assignment[i, j].Job, assignment[i, j].Recipe);
+                            assignment[i, j].Index = index;
+                        }
+                    }
+                }
+            }
         }
 
         public bool loadParameters()
@@ -199,7 +217,6 @@ namespace InkaArt.Business.Algorithm
 
             // fitness
             double initial_fitness = getFitness(current_solution);
-            MessageBox.Show("Fitness");
             double current_fitness = initial_fitness;
             double neighbor_fitness = 0;
             best_fitness = current_fitness;
@@ -285,7 +302,6 @@ namespace InkaArt.Business.Algorithm
 
             best_day_solution.TabuIterations = iter_count;
             best_solution.Add(best_day_solution);            
-            MessageBox.Show("Paso un dia");
         }
         
     }

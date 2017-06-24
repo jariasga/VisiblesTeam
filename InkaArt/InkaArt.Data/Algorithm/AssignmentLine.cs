@@ -16,6 +16,8 @@ namespace InkaArt.Data.Algorithm
         private int miniturn_start;
         private int total_miniturns_used;
         private int produced;    //Cantidad producida
+
+        private Index index;
                 
         public Worker Worker
         {
@@ -47,6 +49,19 @@ namespace InkaArt.Data.Algorithm
         {
             get { return produced; }
             set { produced = value; }
+        }
+
+        public Index Index
+        {
+            get
+            {
+                return index;
+            }
+
+            set
+            {
+                index = value;
+            }
         }
 
         public AssignmentLine(Worker worker, Recipe recipe, Job job, int miniturn_start, int total_miniturns_used, int produced)

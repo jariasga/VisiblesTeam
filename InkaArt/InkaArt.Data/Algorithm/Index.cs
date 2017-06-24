@@ -173,5 +173,6 @@ namespace InkaArt.Data.Algorithm
         {
             return (this.loss_index - objective_function_value) / (iteration + 1);
         }
+                
     }
 }

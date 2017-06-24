@@ -31,12 +31,16 @@ namespace InkaArt.Interface.Production
             InitializeComponent();
 
             this.workers = workers;
+            this.checkbox_workers.Checked = true;
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "FullName";
+            this.list_workers.Enabled = false;
 
             this.orders = orders;
+            this.checkbox_orders.Checked = true;
             this.list_orders.DataSource = orders.List();
             this.list_orders.DisplayMember = "Description";
+            this.list_orders.Enabled = false;
 
             this.simulations = simulations;
             this.simulation = simulation;
@@ -69,7 +73,7 @@ namespace InkaArt.Interface.Production
                 }
 
                 this.Text = "Ver simulación de asignación de trabajadores";
-                this.button_save.Text = "🖫 Guardar cambios";
+                this.button_start.Text = "🖫 Guardar cambios";
             }
             else
             {
@@ -80,20 +84,28 @@ namespace InkaArt.Interface.Production
                 this.groupbox_orders.Enabled = true;
 
                 this.Text = "Nueva simulación de asignación de trabajadores";
-                this.button_save.Text = "▶ Iniciar simulación";
+                this.button_start.Text = "▶ Iniciar simulación";
             }
 
         }
 
-        private void ButtonSaveClick(object sender, EventArgs e)
+        private void ButtonStartClick(object sender, EventArgs e)
         {
             WorkerController selected_workers = new WorkerController();
-            foreach (object worker in list_workers.CheckedItems)
-                selected_workers.Add((Worker)worker);
+            if (checkbox_workers.Checked) selected_workers.Workers = list_workers.Items.Cast<Worker>().ToList();
+            else
+            {
+                foreach (object worker in list_workers.CheckedItems)
+                    selected_workers.Add((Worker)worker);
+            }            
 
             OrderController selected_orders = new OrderController();
-            foreach (object order in list_orders.CheckedItems)
-                selected_orders.Add((Order)order);
+            if (checkbox_workers.Checked) selected_orders.Orders = list_orders.Items.Cast<Order>().ToList();
+            else
+            {
+                foreach (object order in list_orders.CheckedItems)
+                    selected_orders.Add((Order)order);
+            }
 
             if (simulation == null) //Crear una nueva simulación y ejecutar la asignación de trabajadores
             {
@@ -135,20 +147,15 @@ namespace InkaArt.Interface.Production
                 this.Close();
             }            
         }
-
-        private void textbox_huacos_TextChanged(object sender, EventArgs e)
+        
+        private void checkboxWorkersCheckedChanged(object sender, EventArgs e)
         {
-
+            list_workers.Enabled = !checkbox_workers.Checked;
         }
 
-        private void textbox_time_TextChanged(object sender, EventArgs e)
+        private void checkboxOrdersCheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void textbox_roture_TextChanged(object sender, EventArgs e)
-        {
-
+            list_orders.Enabled = !checkbox_orders.Checked;
         }
     }
 }
