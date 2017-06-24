@@ -41,63 +41,30 @@ namespace InkaArt.Interface.Production
             }               
         }
 
+        private void copyAlltoClipboard()
+        {
+            //to remove the first blank column from datagridview
+            dataGridView_performance.RowHeadersVisible = false;
+            dataGridView_performance.SelectAll();
+            DataObject dataObj = dataGridView_performance.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
+        }
+
         private void button_export_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
-                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-                app.Visible = true;
-                worksheet = workbook.Sheets["Reporte de Desempeño"];
-                worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Reporte de Desempeño";
-
-                try
-                {
-                    for (int i = 0; i < dataGridView_performance.Columns.Count; i++)
-                    {
-                        worksheet.Cells[1, i + 1] = dataGridView_performance.Columns[i].HeaderText;
-                    }
-                    for (int i = 0; i < dataGridView_performance.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < dataGridView_performance.Columns.Count; j++)
-                        {
-                            if (dataGridView_performance.Rows[i].Cells[j].Value != null)
-                            {
-                                worksheet.Cells[i + 2, j + 1] = dataGridView_performance.Rows[i].Cells[j].Value.ToString();
-                            }
-                            else
-                            {
-                                worksheet.Cells[i + 2, j + 1] = "";
-                            }
-                        }
-                    }
-
-                    //Getting the location and file name of the excel to save from user.
-                    SaveFileDialog saveDialog = new SaveFileDialog();
-                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-                    saveDialog.FilterIndex = 2;
-
-                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        workbook.SaveAs(saveDialog.FileName);
-                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-                finally
-                {
-                    app.Quit();
-                    workbook = null;
-                    worksheet = null;
-                }
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            copyAlltoClipboard();
+            Microsoft.Office.Interop.Excel.Application xlexcel;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+            xlexcel = new Excel.Application();
+            xlexcel.Visible = true;
+            xlWorkBook = xlexcel.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
+            CR.Select();
+            xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
         }
     }
 }
