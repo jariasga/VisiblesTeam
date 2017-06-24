@@ -35,7 +35,9 @@ namespace InkaArt.Business.Algorithm
             // buscamos ordenes activas que aun no hayan sido entregadas
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\" " +
                 "INNER JOIN inkaart.\"Client\" ON(inkaart.\"Order\".\"idClient\" = inkaart.\"Client\".\"idClient\") " +
-                "WHERE inkaart.\"Order\".\"bdStatus\" = 1 AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'", connection);
+                "WHERE inkaart.\"Order\".\"bdStatus\" = 1 " +
+                "AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'" , connection);
+            // validar orderStatus == entregado o facturado ?
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -55,11 +57,13 @@ namespace InkaArt.Business.Algorithm
             }
             reader.Close();
 
+            //Leer cada detalle del pedido
+            // consideramos que la cantidad faltante es: solicitada - facturada
             foreach (Order order in orders)
-            {
-                //Leer cada detalle del pedido
-                command = new NpgsqlCommand("SELECT \"idLineItem\", \"idRecipe\", quantity FROM inkaart.\"LineItem\" " +
-                    "WHERE \"idOrder\" = :idOrder", connection);
+            {                
+                command = new NpgsqlCommand("SELECT \"idLineItem\", \"idRecipe\", quantity, \"quantityInvoiced\" FROM inkaart.\"LineItem\" " +
+                    "WHERE \"idOrder\" = :idOrder " +
+                    "AND \"quantity\" < \"quantityInvoiced\"", connection);
                 command.Parameters.AddWithValue("idOrder", NpgsqlDbType.Integer, order.ID);
 
                 reader = command.ExecuteReader();
@@ -67,7 +71,7 @@ namespace InkaArt.Business.Algorithm
                 {
                     int id_line_item = int.Parse(reader["idLineItem"].ToString());
                     int id_recipe = int.Parse(reader["idRecipe"].ToString());
-                    int quantity = int.Parse(reader["quantity"].ToString());
+                    int quantity = int.Parse(reader["quantity"].ToString()) - int.Parse(reader["quantityInvoiced"].ToString());
                     order.AddLineItem(new OrderLineItem(id_line_item, recipes.GetByID(id_recipe), quantity));
                 }
                 reader.Close();
