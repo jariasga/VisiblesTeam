@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using InkaArt.Business.Production;
+using InkaArt.Business.Warehouse;
 
 namespace InkaArt.Interface.Production
 {
@@ -18,6 +19,7 @@ namespace InkaArt.Interface.Production
         public FinalProducts()
         {
             FinalProductController control = new FinalProductController();
+            hallaStock();
             DataTable finalProductList = control.getData();
             maxrow = finalProductList.Rows.Count;
             InitializeComponent();
@@ -25,11 +27,43 @@ namespace InkaArt.Interface.Production
             
         }
 
+        private void hallaStock()
+        {
+            int huaco, piedra, retablo, huacoL, piedraL, retabloL;
+            huaco = piedra = retablo = huacoL = piedraL = retabloL = 0;
+            ProductWarehouseController control = new ProductWarehouseController();
+            DataTable whList = control.getData();
+            for(int i = 0; i<whList.Rows.Count; i++)
+            {
+                if (whList.Rows[i]["idProduct"].ToString() == "1")
+                {
+                    huaco += int.Parse(whList.Rows[i]["currentStock"].ToString());
+                    huacoL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
+                }
+                if (whList.Rows[i]["idProduct"].ToString() == "2")
+                {
+                    piedra += int.Parse(whList.Rows[i]["currentStock"].ToString());
+                    piedraL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
+                }
+                if (whList.Rows[i]["idProduct"].ToString() == "3")
+                {
+                    retablo += int.Parse(whList.Rows[i]["currentStock"].ToString());
+                    retabloL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
+
+                }
+            }
+            FinalProductController controlFp = new FinalProductController();
+            DataTable finalProductList = controlFp.getData();
+            controlFp.updateStock(huaco, piedra, retablo, huacoL, piedraL, retabloL);
+        }
+
         public void fillGrid()
         {
             FinalProductController control = new FinalProductController();
             DataTable finalProductList = control.getData();
             dataGridView_finalProductList.Rows.Clear();
+
+            //hallaStock();
 
             for (int i = 0; i < finalProductList.Rows.Count; i++)
             {
@@ -39,6 +73,8 @@ namespace InkaArt.Interface.Production
                     finalProductList.Rows[i]["exportPrice"],
                     finalProductList.Rows[i]["BasePrice"],
                     finalProductList.Rows[i]["actualStock"]);
+
+
             }
         }
 

@@ -94,7 +94,8 @@ namespace InkaArt.Interface.Warehouse
                         {
                             if (reason == "Rotura")
                             {
-                                Form formView = new InkaArt.Interface.Warehouse.breakProduct(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                                //Form formView = new InkaArt.Interface.Warehouse.breakProduct(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                                Form formView = new InkaArt.Interface.Warehouse.BrokenItems(idWarehouesOrigin);
                                 formView.Show();                            }
                             else  if (reason == "Hallazgo")
                             {
