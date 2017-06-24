@@ -107,7 +107,15 @@ namespace InkaArt.Interface.Purchases
             obtenerMateriasDelSupplier();
             estadoInicial=comboBox_status.Text;
             llenarMateriasPedidas();
-            if (string.Compare(comboBox_status.Text, "Inactivo") == 0) buttonSave.Visible = false;
+            buttonFacturar.Visible = false;
+            if (string.Compare(comboBox_status.Text, "Inactivo") == 0)
+            {
+                buttonSave.Visible = false;
+            }
+            else if (string.Compare(comboBox_status.Text, "Enviado") == 0)
+            {
+                buttonFacturar.Visible = true;
+            }
         }
         private void filterSupplier()
         {
@@ -214,12 +222,7 @@ namespace InkaArt.Interface.Purchases
             }
             if (listaMaterialesIds.Length > 0) filterRawMaterials();
         }
-        /* search */
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         /* save */
         private void button5_Click(object sender, EventArgs e)
         {
@@ -516,6 +519,32 @@ namespace InkaArt.Interface.Purchases
                 return false;
             }        
             return true;
+        }
+
+        private void button_facturarClick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            {
+                if (string.Compare(dataGridView_pedidos.Rows[i].Cells[7].Value.ToString(), "Entregado") == 0)
+                {
+                    //Si está en estado Entregado, lo facturo. Sino, no.
+                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
+                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
+                    double subtotalAux = double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString());
+                    int id_facturaAux = 0;
+                    if (dataGridView_pedidos.Rows[i].Cells[6].Value.ToString().Length > 0) id_facturaAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString());
+                    try
+                    {
+                        control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, id_facturaAux, "Facturado");
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("No se pudo facturar la línea de pedido " + id_detailAux + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+            }
+            llenarMateriasPedidas();
         }
 
         private string hallarNombreUnit(int idUnit)

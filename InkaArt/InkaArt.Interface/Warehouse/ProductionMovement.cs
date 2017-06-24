@@ -40,7 +40,7 @@ namespace InkaArt.Interface.Warehouse
         private void button_create_Click(object sender, EventArgs e)
         {
             //Form new_warehouse_window = new Form1(ref textBox1,ref textBox2,ref textBox4);
-            Form new_warehouse_window = new Form1(textBox1, textBox2, textBox4);
+            Form new_warehouse_window = new ExchangeItem(textBox1, textBox2, textBox4,"","",null);
             new_warehouse_window.Show();
         }
 

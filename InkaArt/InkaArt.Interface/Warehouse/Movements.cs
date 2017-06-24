@@ -54,8 +54,20 @@ namespace InkaArt.Interface.Warehouse
                     MessageBox.Show("Por favor ingrese un tpo de movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
-                formView.Show();
+                if (comboBox1.Text == "Entrada")
+                {
+                    Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                    formView.Show();
+                }
+                else
+                {
+                    if (comboBox1.Text == "Salida")
+                    {
+                        Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                        formView.Show();
+                    }
+                }
+                
             }
             else
             {

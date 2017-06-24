@@ -109,6 +109,19 @@ namespace InkaArt.Business.Warehouse
             productionItemWarehouseMovementData.closeConnection();
         }
 
+        public int updateDataRawMaterialOut(int idProd, int idWarehouse, int numMov, string typeMovement, string stateItem = "")
+        {
+            string query = "";
+            query = "select \"currentStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
+            //Se obtiene el stock de la materia prima
+
+            //Se descuenta a ese stock lo que se va a mover
+
+            //Se actualiza el stock de la materia prima en el almacén
+
+            return 1;
+        }
+
         public int updateData(int idProd, int idWarehouse, int numMov, string typeMovement,string stateItem = "")
         {
             //productionItemWarehouseMovementData.connect();

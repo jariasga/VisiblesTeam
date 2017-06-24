@@ -38,7 +38,7 @@ namespace InkaArt.Interface.Warehouse
         private void button_create_Click(object sender, EventArgs e)
         {
             //Form new_warehouse_window = new Form1(ref textBox1,ref textBox2,ref textBox4);
-            Form new_warehouse_window = new Form1(textBox7, textBox3, textBox4);
+            Form new_warehouse_window = new ExchangeItem(textBox7, textBox3, textBox4, textBox1.Text, textBox5.Text,textBox8);
             new_warehouse_window.Show();
         }
 
@@ -49,7 +49,7 @@ namespace InkaArt.Interface.Warehouse
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int cantMov = Convert.ToInt32(numericUpDown2.Value);
+            int cantMov = Convert.ToInt32(textBox8.Text);
             int idWarehouseOrigin = Convert.ToInt32(textBox5.Text);
             int idWarehouseDestiny = Convert.ToInt32(textBox1.Text);
             int idItem = Convert.ToInt32(textBox7.Text);
@@ -60,7 +60,7 @@ namespace InkaArt.Interface.Warehouse
             exito3 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseOrigin, cantMov, "Salida","OK");
             if(exito3 == 1)
             {
-                exito2 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseDestiny, cantMov, "Entrada");
+                exito2 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseDestiny, cantMov, "Entrada","OK");
             }
             if(exito2 != 1) //Si el almacén destino no admite el producto se revierte el movimiento
             {
