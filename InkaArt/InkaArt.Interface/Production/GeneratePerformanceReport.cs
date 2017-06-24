@@ -66,11 +66,11 @@ namespace InkaArt.Interface.Production
                 MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
             }
-            /*else if (comboBox_workers.Text == "")
+            else if (dateTimePicker_fin.Value > DateTime.Now)
             {
-                MessageBox.Show(this, "Por favor, seleccionar a un trabajador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
-            }*/
+            }
             else return 1;
         }
 

@@ -117,4 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>
+El presente reporte mostrará por cada día que se encuentre en el intervalo de fechas elegidas, los movimientos de cada producto y/o materia prima elegida en los almacenes elegidos. Se detallará el tipo de movimiento, la razón, qué es lo que se está moviendo y cuánto.
+
+
+</value>
+  </data>
 </root>
