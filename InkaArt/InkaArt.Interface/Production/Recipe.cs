@@ -202,7 +202,7 @@ namespace InkaArt.Interface.Production
             string idRaw = "";
             string count = numericUpDown_count.Value.ToString();
 
-            if (comboBox_version.SelectedItem != null)
+            if (comboBox_version.SelectedItem != null && string.Equals(textBox_state.Text, "Activo"))
             {
                 if (numericUpDown_count.Value > 0)
                 {

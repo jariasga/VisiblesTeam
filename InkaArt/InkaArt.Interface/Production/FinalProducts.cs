@@ -76,8 +76,6 @@ namespace InkaArt.Interface.Production
                     finalProductList.Rows[i]["exportPrice"],
                     finalProductList.Rows[i]["BasePrice"],
                     finalProductList.Rows[i]["actualStock"]);
-
-
             }
         }
 
@@ -100,8 +98,8 @@ namespace InkaArt.Interface.Production
                     exportPrice = row.Cells[3].Value.ToString();
 
                     Form production_process = new ProductionProcess(id, name, stock, localPrice, exportPrice,basePrice);
-                    production_process.MdiParent = this.MdiParent;
-                    production_process.Show();
+                    production_process.StartPosition = FormStartPosition.CenterScreen;
+                    production_process.ShowDialog(this);                    
                 }
                 else
                     if (e.ColumnIndex == 7)//receta
@@ -110,9 +108,10 @@ namespace InkaArt.Interface.Production
                     name = row.Cells[1].Value.ToString();
 
                     Form recipe = new Recipe(id, name);
-                    recipe.MdiParent = this.MdiParent;
-                    recipe.Show();
+                    recipe.StartPosition = FormStartPosition.CenterScreen;
+                    recipe.ShowDialog(this);
                 }
+                fillGrid();
             }
         }
 
