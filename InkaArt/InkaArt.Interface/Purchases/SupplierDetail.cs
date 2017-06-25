@@ -137,7 +137,7 @@ namespace InkaArt.Interface.Purchases
                 string nombre = hallarNombreMat(id);
                 string price = rm_supList.Rows[i]["price"].ToString();
                 string idRM_Sup= rm_supList.Rows[i]["id_rawmaterial_supplier"].ToString();
-                dataGridView_rm_sup.Rows.Add(false, id, nombre, price, idRM_Sup);
+                dataGridView_rm_sup.Rows.Add(id, nombre, price, idRM_Sup, false);
             }
         }
         private string hallarNombreMat(string idMat)
@@ -194,11 +194,11 @@ namespace InkaArt.Interface.Purchases
         {
             for (int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
             {
-                if (Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[0].Value) == true)
+                if (Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[4].Value) == true)
                 {
-                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[4].Value.ToString();
-                    string idMat = dataGridView_rm_sup.Rows[i].Cells[1].Value.ToString();
-                    string price= dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                    string price= dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
                     control_rs.UpdateRM_Sup(idRMSup,idMat,textBox_idSupplier.Text, price, "Inactivo");
                 }
             }
@@ -380,9 +380,9 @@ namespace InkaArt.Interface.Purchases
 
         private void actualizar_precio(int fila)
         {
-            string id_rm = dataGridView_rm_sup.Rows[fila].Cells[1].Value.ToString();
-            string id_sup = dataGridView_rm_sup.Rows[fila].Cells[2].Value.ToString();
-            string price = dataGridView_rm_sup.Rows[fila].Cells[3].Value.ToString();
+            string id_rm = dataGridView_rm_sup.Rows[fila].Cells[0].Value.ToString();
+            string id_sup = dataGridView_rm_sup.Rows[fila].Cells[1].Value.ToString();
+            string price = dataGridView_rm_sup.Rows[fila].Cells[2].Value.ToString();
             //control_rs.UpdateRM_Sup(id_rm, id_sup, price);
         }
 
