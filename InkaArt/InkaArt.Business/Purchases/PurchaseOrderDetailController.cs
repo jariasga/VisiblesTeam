@@ -26,7 +26,7 @@ namespace InkaArt.Business.Purchases
             table = data.Tables[0];
             return table;
         }
-        public void insertData(int id_order, int id_raw_material, int id_suppliers,int quantity,double amount,int factura,string status)
+        public void insertData(int id_order, int id_raw_material, int id_suppliers,int quantity,double amount,double igv,int factura,string status)
         {
 
             table = data.Tables["PurchaseOrderDetail"];
@@ -37,19 +37,20 @@ namespace InkaArt.Business.Purchases
             row["id_suppliers"] = id_suppliers;
             row["quantity"] = quantity;
             row["amount"] = amount;
-            if(factura!=0) row["id_factura"] = factura;
+            row["igv"] = igv;
+            if (factura!=0) row["id_factura"] = factura;
             row["status"]=status;
             table.Rows.Add(row);
 
             int rowsAffected = purchaseOrderDetail.insertData(data, adap, "PurchaseOrderDetail");
 
         }
-        public void updateData(int id_detail,int quantity,double amount,int factura,string estado)
+        public void updateData(int id_detail,int quantity,double amount,double igv,string estado)
         {
             table = data.Tables["PurchaseOrderDetail"];
             purchaseOrderDetail.execute(string.Format("UPDATE \"inkaart\".\"PurchaseOrderDetail\" " +
-                        "SET quantity = {0}, amount = {1}, id_factura = {2}, status='{3}'" +
-                        "WHERE id_detail = {4}", quantity, amount, factura,estado, id_detail));
+                        "SET quantity = {0}, amount = {1}, igv = {2}, status='{3}'" +
+                        "WHERE id_detail = {4}", quantity, amount, igv,estado, id_detail));
 
            purchaseOrderDetail.updateData(data, adap, "PurchaseOrderDetail");
         }
