@@ -199,7 +199,7 @@ namespace InkaArt.Interface.Purchases
                 string igv = lineaPedidosList.Rows[i]["igv"].ToString();
                 string id_factura = lineaPedidosList.Rows[i]["id_factura"].ToString();
                 string status = lineaPedidosList.Rows[i]["status"].ToString();
-                dataGridView_pedidos.Rows.Add(false, id_detail,id_raw_material,nombre,quantity,amount,igv,id_factura,status);
+                dataGridView_pedidos.Rows.Add(id_detail,id_raw_material,nombre,quantity,amount,igv,id_factura,status,false);
             }
             enProcesoDeLlenado = false;
         }
@@ -275,6 +275,7 @@ namespace InkaArt.Interface.Purchases
             double total =Math.Round(double.Parse(textBox_total.Text),2);
             total += subTotalNuevo;
             total += igv;
+            total = Math.Round(total, 2);
             textBox_total.Text = total.ToString();
             control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
             llenarMateriasPedidas();
@@ -285,16 +286,16 @@ namespace InkaArt.Interface.Purchases
         {
             for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
             {
-                if (Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[0].Value))
+                if (Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[8].Value))
                 {
-                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
-                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
-                    double subtotalAux = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()),2);
-                    double igvLinea = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString()),2);
+                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[0].Value.ToString());
+                    int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[3].Value.ToString());
+                    double subtotalAux = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()),2);
+                    double igvLinea = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()),2);
                     try
                     {
                         control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, igvLinea, "Eliminado");
-                        dataGridView_pedidos.Rows[i].Cells[0].Value = false;
+                        dataGridView_pedidos.Rows[i].Cells[8].Value = false;
                         double totalOr = Math.Round(double.Parse(textBox_total.Text),2);
                         totalOr -= subtotalAux;
                         totalOr -= igvLinea;
@@ -472,7 +473,14 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_cantidad.Text = actualdata;
-            int cantidad=int.Parse(textBox_cantidad.Text);
+            int modelo,cantidad=0;
+            if(int.TryParse(textBox_cantidad.Text,out modelo)) cantidad=int.Parse(textBox_cantidad.Text);
+            else
+            {
+                textBox_subtotal.Text = "0";
+                textBox_igv.Text = "0";
+                return;
+            }
             double precio = Math.Round(double.Parse(textBox_price.Text),2);
             double subtotal = Math.Round(precio * cantidad,2);
             textBox_subtotal.Text = subtotal.ToString();
@@ -485,20 +493,23 @@ namespace InkaArt.Interface.Purchases
             textBox_idrm.Text= rmList.Rows[iCombo]["id_raw_material"].ToString();
             idUnit.Text = rmList.Rows[iCombo]["unit"].ToString();
             unitAbrev.Text=hallarNombreUnit(int.Parse(idUnit.Text));
-            textBox_price.Text = hallarPrecio(textBox_idrm.Text);            
+            textBox_price.Text = hallarPrecio(textBox_idrm.Text);
+            textBox_cantidad.Text = "0";
+            textBox_igv.Text = "0";
+            textBox_subtotal.Text = "0";       
         }
         private void pasarTodasLasLineasAEstado(string nuevoEstado)
         {
             for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
             {
-                int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
-                int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString());
-                double subtotalAux = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()), 2);
-                double igvLinea = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[6].Value.ToString()), 2);
+                int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[0].Value.ToString());
+                int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[3].Value.ToString());
+                double subtotalAux = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()), 2);
+                double igvLinea = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()), 2);
                 try
                 {
                         control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, igvLinea, nuevoEstado);
-                        dataGridView_pedidos.Rows[i].Cells[0].Value = false;
+                        dataGridView_pedidos.Rows[i].Cells[8].Value = false;
                 }
                     catch (Exception)
                     {
@@ -546,14 +557,14 @@ namespace InkaArt.Interface.Purchases
                 phrase3.Add(new Chunk(dateTimePicker_creation.Text));
                 document.Add(new Paragraph(phrase3));
                 document.Add(new Paragraph(" "));
-                PdfPTable table = new PdfPTable(4);
-                for (int i = 2; i < dataGridView_pedidos.Columns.Count-2; i++)
+                PdfPTable table = new PdfPTable(5);
+                for (int i = 1; i < dataGridView_pedidos.Columns.Count-3; i++)
                 {
                     table.AddCell(dataGridView_pedidos.Columns[i].HeaderText);
                 }
                 for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
                 {
-                    for (int j = 2; j < dataGridView_pedidos.Columns.Count-2; j++)
+                    for (int j = 1; j < dataGridView_pedidos.Columns.Count-3; j++)
                     {
                         if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
                         {

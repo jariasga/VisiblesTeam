@@ -62,7 +62,6 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBox_igv = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id_detail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idRawMat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +70,7 @@
             this.Igv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -385,7 +385,6 @@
             this.dataGridView_pedidos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_pedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_pedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Eliminar,
             this.id_detail,
             this.idRawMat,
             this.Nombre,
@@ -393,7 +392,8 @@
             this.Subtotal,
             this.Igv,
             this.Factura,
-            this.Estado});
+            this.Estado,
+            this.Eliminar});
             this.dataGridView_pedidos.Location = new System.Drawing.Point(13, 159);
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(647, 272);
@@ -471,16 +471,6 @@
             this.label12.TabIndex = 29;
             this.label12.Text = "IGV";
             // 
-            // Eliminar
-            // 
-            this.Eliminar.FalseValue = "False";
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.TrueValue = "True";
-            this.Eliminar.Width = 50;
-            // 
             // id_detail
             // 
             this.id_detail.HeaderText = "ID Detail";
@@ -535,6 +525,16 @@
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
             this.Estado.Width = 80;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.FalseValue = "False";
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.TrueValue = "True";
+            this.Eliminar.Width = 50;
             // 
             // PurchaseOrderDetail
             // 
@@ -595,7 +595,6 @@
         private System.Windows.Forms.Button buttonExport;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox_igv;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_detail;
         private System.Windows.Forms.DataGridViewTextBoxColumn idRawMat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
@@ -604,5 +603,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Igv;
         private System.Windows.Forms.DataGridViewTextBoxColumn Factura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }
