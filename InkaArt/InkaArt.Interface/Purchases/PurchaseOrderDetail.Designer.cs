@@ -43,7 +43,6 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonExport = new System.Windows.Forms.Button();
             this.textBox_idrm = new System.Windows.Forms.TextBox();
             this.textBox_subtotal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -57,17 +56,21 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView_pedidos = new System.Windows.Forms.DataGridView();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.button_add = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.textBox_igv = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.id_detail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idRawMat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Igv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.button_add = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -231,6 +234,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.textBox_igv);
             this.groupBox2.Controls.Add(this.textBox_idrm);
             this.groupBox2.Controls.Add(this.textBox_subtotal);
             this.groupBox2.Controls.Add(this.label11);
@@ -248,23 +253,10 @@
             this.groupBox2.Controls.Add(this.button_add);
             this.groupBox2.Location = new System.Drawing.Point(249, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(663, 487);
+            this.groupBox2.Size = new System.Drawing.Size(674, 487);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas pedidas";
-            // 
-            // buttonExport
-            // 
-            this.buttonExport.BackColor = System.Drawing.Color.Gray;
-            this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonExport.ForeColor = System.Drawing.Color.White;
-            this.buttonExport.Location = new System.Drawing.Point(129, 460);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(104, 42);
-            this.buttonExport.TabIndex = 24;
-            this.buttonExport.Text = "🗀 Exportar";
-            this.buttonExport.UseVisualStyleBackColor = false;
-            this.buttonExport.Click += new System.EventHandler(this.generarOrdenDoc);
             // 
             // textBox_idrm
             // 
@@ -280,7 +272,7 @@
             this.textBox_subtotal.BackColor = System.Drawing.Color.White;
             this.textBox_subtotal.Enabled = false;
             this.textBox_subtotal.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_subtotal.Location = new System.Drawing.Point(409, 111);
+            this.textBox_subtotal.Location = new System.Drawing.Point(427, 111);
             this.textBox_subtotal.Name = "textBox_subtotal";
             this.textBox_subtotal.Size = new System.Drawing.Size(118, 24);
             this.textBox_subtotal.TabIndex = 26;
@@ -290,7 +282,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(406, 90);
+            this.label11.Location = new System.Drawing.Point(424, 90);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 18);
             this.label11.TabIndex = 25;
@@ -300,7 +292,7 @@
             // 
             this.idUnit.Enabled = false;
             this.idUnit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idUnit.Location = new System.Drawing.Point(409, 55);
+            this.idUnit.Location = new System.Drawing.Point(427, 54);
             this.idUnit.Name = "idUnit";
             this.idUnit.Size = new System.Drawing.Size(72, 24);
             this.idUnit.TabIndex = 24;
@@ -309,7 +301,7 @@
             // 
             this.unitAbrev.Enabled = false;
             this.unitAbrev.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.unitAbrev.Location = new System.Drawing.Point(487, 54);
+            this.unitAbrev.Location = new System.Drawing.Point(505, 54);
             this.unitAbrev.Name = "unitAbrev";
             this.unitAbrev.Size = new System.Drawing.Size(155, 24);
             this.unitAbrev.TabIndex = 23;
@@ -317,7 +309,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(406, 33);
+            this.label10.Location = new System.Drawing.Point(424, 33);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(58, 18);
             this.label10.TabIndex = 22;
@@ -328,9 +320,9 @@
             this.textBox_price.BackColor = System.Drawing.Color.White;
             this.textBox_price.Enabled = false;
             this.textBox_price.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_price.Location = new System.Drawing.Point(211, 111);
+            this.textBox_price.Location = new System.Drawing.Point(152, 111);
             this.textBox_price.Name = "textBox_price";
-            this.textBox_price.Size = new System.Drawing.Size(172, 24);
+            this.textBox_price.Size = new System.Drawing.Size(106, 24);
             this.textBox_price.TabIndex = 21;
             this.textBox_price.Text = "0";
             this.textBox_price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -338,7 +330,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(211, 90);
+            this.label9.Location = new System.Drawing.Point(149, 90);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 18);
             this.label9.TabIndex = 20;
@@ -349,7 +341,7 @@
             this.textBox_cantidad.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_cantidad.Location = new System.Drawing.Point(16, 111);
             this.textBox_cantidad.Name = "textBox_cantidad";
-            this.textBox_cantidad.Size = new System.Drawing.Size(168, 24);
+            this.textBox_cantidad.Size = new System.Drawing.Size(106, 24);
             this.textBox_cantidad.TabIndex = 19;
             this.textBox_cantidad.Text = "0";
             this.textBox_cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -362,7 +354,7 @@
             this.comboBoxRawMaterialName.FormattingEnabled = true;
             this.comboBoxRawMaterialName.Location = new System.Drawing.Point(94, 54);
             this.comboBoxRawMaterialName.Name = "comboBoxRawMaterialName";
-            this.comboBoxRawMaterialName.Size = new System.Drawing.Size(289, 25);
+            this.comboBoxRawMaterialName.Size = new System.Drawing.Size(310, 25);
             this.comboBoxRawMaterialName.TabIndex = 18;
             this.comboBoxRawMaterialName.SelectedIndexChanged += new System.EventHandler(this.mostrarOtrosCampos);
             // 
@@ -393,75 +385,19 @@
             this.dataGridView_pedidos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_pedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_pedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Eliminar,
             this.id_detail,
             this.idRawMat,
             this.Nombre,
             this.Cantidad,
             this.Subtotal,
+            this.Igv,
             this.Factura,
-            this.Estado});
-            this.dataGridView_pedidos.Location = new System.Drawing.Point(16, 159);
+            this.Estado,
+            this.Eliminar});
+            this.dataGridView_pedidos.Location = new System.Drawing.Point(13, 159);
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
-            this.dataGridView_pedidos.Size = new System.Drawing.Size(626, 272);
+            this.dataGridView_pedidos.Size = new System.Drawing.Size(647, 272);
             this.dataGridView_pedidos.TabIndex = 17;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.FalseValue = "False";
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.TrueValue = "True";
-            this.Eliminar.Width = 68;
-            // 
-            // id_detail
-            // 
-            this.id_detail.HeaderText = "ID Detail";
-            this.id_detail.Name = "id_detail";
-            this.id_detail.ReadOnly = true;
-            this.id_detail.Visible = false;
-            this.id_detail.Width = 70;
-            // 
-            // idRawMat
-            // 
-            this.idRawMat.HeaderText = "ID Mat.";
-            this.idRawMat.Name = "idRawMat";
-            this.idRawMat.ReadOnly = true;
-            this.idRawMat.Width = 70;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 80;
-            // 
-            // Subtotal
-            // 
-            this.Subtotal.HeaderText = "Subtotal";
-            this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
-            this.Subtotal.Width = 80;
-            // 
-            // Factura
-            // 
-            this.Factura.HeaderText = "Factura";
-            this.Factura.MaxInputLength = 9;
-            this.Factura.Name = "Factura";
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 80;
             // 
             // buttonDelete
             // 
@@ -481,13 +417,26 @@
             this.button_add.BackColor = System.Drawing.Color.SteelBlue;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
-            this.button_add.Location = new System.Drawing.Point(538, 98);
+            this.button_add.Location = new System.Drawing.Point(556, 100);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(104, 41);
             this.button_add.TabIndex = 14;
             this.button_add.Text = "+ Agregar";
             this.button_add.UseVisualStyleBackColor = false;
             this.button_add.Click += new System.EventHandler(this.button_add_Click);
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.BackColor = System.Drawing.Color.Gray;
+            this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExport.ForeColor = System.Drawing.Color.White;
+            this.buttonExport.Location = new System.Drawing.Point(129, 460);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(104, 42);
+            this.buttonExport.TabIndex = 24;
+            this.buttonExport.Text = "🗀 Exportar";
+            this.buttonExport.UseVisualStyleBackColor = false;
+            this.buttonExport.Click += new System.EventHandler(this.generarOrdenDoc);
             // 
             // buttonSave
             // 
@@ -502,12 +451,97 @@
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 
+            // textBox_igv
+            // 
+            this.textBox_igv.Enabled = false;
+            this.textBox_igv.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_igv.Location = new System.Drawing.Point(295, 111);
+            this.textBox_igv.Name = "textBox_igv";
+            this.textBox_igv.Size = new System.Drawing.Size(100, 24);
+            this.textBox_igv.TabIndex = 28;
+            this.textBox_igv.Text = "0";
+            this.textBox_igv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(296, 90);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 18);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "IGV";
+            // 
+            // id_detail
+            // 
+            this.id_detail.HeaderText = "ID Detail";
+            this.id_detail.Name = "id_detail";
+            this.id_detail.ReadOnly = true;
+            this.id_detail.Visible = false;
+            this.id_detail.Width = 70;
+            // 
+            // idRawMat
+            // 
+            this.idRawMat.HeaderText = "ID Mat.";
+            this.idRawMat.Name = "idRawMat";
+            this.idRawMat.ReadOnly = true;
+            this.idRawMat.Width = 65;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            this.Cantidad.Width = 80;
+            // 
+            // Subtotal
+            // 
+            this.Subtotal.HeaderText = "Subtotal";
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
+            this.Subtotal.Width = 75;
+            // 
+            // Igv
+            // 
+            this.Igv.HeaderText = "Igv";
+            this.Igv.Name = "Igv";
+            this.Igv.ReadOnly = true;
+            this.Igv.Width = 75;
+            // 
+            // Factura
+            // 
+            this.Factura.HeaderText = "Factura";
+            this.Factura.MaxInputLength = 9;
+            this.Factura.Name = "Factura";
+            this.Factura.Width = 75;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.Width = 80;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.FalseValue = "False";
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.TrueValue = "True";
+            this.Eliminar.Width = 50;
+            // 
             // PurchaseOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(924, 518);
+            this.ClientSize = new System.Drawing.Size(935, 518);
             this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBox2);
@@ -558,14 +592,17 @@
         private System.Windows.Forms.TextBox textBox_idrm;
         private System.Windows.Forms.TextBox textBox_subtotal;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox_igv;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_detail;
         private System.Windows.Forms.DataGridViewTextBoxColumn idRawMat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Igv;
         private System.Windows.Forms.DataGridViewTextBoxColumn Factura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }
