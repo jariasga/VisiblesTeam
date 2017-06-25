@@ -64,7 +64,7 @@ namespace InkaArt.Interface.Purchases
                 string unit = buscarNombre(id_unit);
                 string status =rawMaterialList.Rows[i]["status"].ToString();
                 double average_price = double.Parse(rawMaterialList.Rows[i]["average_price"].ToString());
-                dataGridView_rawMaterialsList.Rows.Add(false,id_raw_material,name,description,unit,status,average_price,id_unit);
+                dataGridView_rawMaterialsList.Rows.Add(id_raw_material,name,description,unit,status,average_price,id_unit,false);
             }
         }
         public void button_search(object sender, EventArgs e)
@@ -77,13 +77,13 @@ namespace InkaArt.Interface.Purchases
             int registros = dataGridView_rawMaterialsList.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                if (Convert.ToBoolean(dataGridView_rawMaterialsList.Rows[i].Cells[0].Value) == true)
+                if (Convert.ToBoolean(dataGridView_rawMaterialsList.Rows[i].Cells[7].Value) == true)
                 {
-                    string id = dataGridView_rawMaterialsList.Rows[i].Cells[1].Value.ToString();
-                    string name = dataGridView_rawMaterialsList.Rows[i].Cells[2].Value.ToString();
-                    string description = dataGridView_rawMaterialsList.Rows[i].Cells[3].Value.ToString();
-                    string unit = dataGridView_rawMaterialsList.Rows[i].Cells[7].Value.ToString();
-                    string averagePrice = dataGridView_rawMaterialsList.Rows[i].Cells[6].Value.ToString();
+                    string id = dataGridView_rawMaterialsList.Rows[i].Cells[0].Value.ToString();
+                    string name = dataGridView_rawMaterialsList.Rows[i].Cells[1].Value.ToString();
+                    string description = dataGridView_rawMaterialsList.Rows[i].Cells[2].Value.ToString();
+                    string unit = dataGridView_rawMaterialsList.Rows[i].Cells[6].Value.ToString();
+                    string averagePrice = dataGridView_rawMaterialsList.Rows[i].Cells[5].Value.ToString();
                     try
                     {
                         control.updateData(id, name, description, unit, "Inactivo", double.Parse(averagePrice));
