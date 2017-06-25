@@ -40,14 +40,16 @@ namespace InkaArt.Business.Production
 
             RawMaterialController controlrm = new RawMaterialController();
             DataTable rmList = controlrm.getData();
-            
 
+            int parar;
             for (int i = 0; i < recipeList.Rows.Count; i++)
             {
-                string idRecipe = recipeList.Rows[i]["idRecipe"].ToString();
+                int idRecipe = Convert.ToInt32(recipeList.Rows[i]["idRecipe"]);
                 //  Activar
+                if (idRecipe == 8)
+                    parar = 1;//eliminar
                 recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
-                                        "SET status = {0} WHERE \"idRecipe\" = '{1}'", 1, idRecipe));
+                                        "SET status = {0} WHERE \"idRecipe\" = {1}", 1, idRecipe));
 
 
                 //  Desactivar
@@ -56,7 +58,7 @@ namespace InkaArt.Business.Production
                 if (r_rmRows.Any())
                 {
                     r_rmTable = r_rmRows.CopyToDataTable();
-                    foreach (DataRow rRow in r_rmList.Rows)
+                    foreach (DataRow rRow in r_rmTable.Rows)
                     {
                         DataTable rmtable = new DataTable();
                         DataRow[] rmRows = rmList.Select("id_raw_material = " + rRow["idRawMaterial"] + " AND status = 'Inactivo'");
