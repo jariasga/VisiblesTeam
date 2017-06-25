@@ -69,6 +69,7 @@ namespace InkaArt.Interface.Production
 
         }
 
+
         private void fillGrid()
         {
             //llenar el datagrid
