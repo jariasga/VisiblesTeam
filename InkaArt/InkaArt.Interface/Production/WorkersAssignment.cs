@@ -33,6 +33,7 @@ namespace InkaArt.Interface.Production
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
             this.workers.Load();
+            this.recipes.Load();
             this.orders.Load(recipes);
             this.simulations.Load();
 

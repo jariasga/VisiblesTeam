@@ -61,9 +61,8 @@ namespace InkaArt.Interface.Production
             {
                 LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
                 for (int j = 0; j < simulation.SelectedOrders[i].NumberOfLineItems; j++)
-                    LogHandler.WriteLine("- Linea de orden #{0}: {1}", j, simulation.SelectedOrders[i][j].ToString());
+                    LogHandler.WriteLine("- Linea de orden #{0}-{1}: {2}", i + 1, j + 1, simulation.SelectedOrders[i][j].ToString());
             }
-            Environment.Exit(0);
 
             //Temporal: Determinar el tiempo total del turno y los miniturnos
             Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
