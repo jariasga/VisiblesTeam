@@ -55,6 +55,8 @@ namespace InkaArt.Interface.Production
             indexes.Load();
             indexes.CalculateIndexes(simulation);
 
+            simulation.save();
+
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
                 LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);

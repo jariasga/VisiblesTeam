@@ -136,6 +136,7 @@ namespace InkaArt.Business.Algorithm
             this.retable_weight = retable_weight;
             this.selected_workers = selected_workers;
             this.selected_orders = selected_orders;
+            this.assignments = new List<Assignment>();
         }
 
         /********** Constructor para lectura de base de datos **********/
@@ -172,7 +173,11 @@ namespace InkaArt.Business.Algorithm
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" (name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time);", connection);
+            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" " +
+                "(name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) " +
+                "values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time) " +
+                "returning inkaart.\"Simulation\".id_simulation", connection);
+
             command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
             command.Parameters.Add(new NpgsqlParameter("name", name));
             command.Parameters.Add(new NpgsqlParameter("start_date", date_start));
@@ -185,7 +190,10 @@ namespace InkaArt.Business.Algorithm
             command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
             command.Parameters.Add(new NpgsqlParameter("time", LimitTime));
 
-            command.ExecuteNonQuery();
+            this.id_simulation = int.Parse(command.ExecuteScalar().ToString());
+
+            foreach (Assignment day in assignments)
+                day.save(this.ID, connection);
 
             connection.Close();
         }

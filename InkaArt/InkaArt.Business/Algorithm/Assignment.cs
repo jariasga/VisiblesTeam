@@ -27,11 +27,13 @@ namespace InkaArt.Business.Algorithm
         {
             get { return date; }
         }
+
         public double ObjectiveFunction
         {
             get { return objective_function_value; }
             set { objective_function_value = value; }
         }
+
         public int TotalMiniturns
         {
             get { return total_miniturns; }
@@ -175,17 +177,25 @@ namespace InkaArt.Business.Algorithm
             for(int worker = 0; worker < this.selected_workers.NumberOfWorkers; worker++)
             {
                 for (int miniturn = 0; miniturn < this.total_miniturns; miniturn++)
-                    if (assignment_lines[worker, miniturn] != null) list.Add(assignment_lines[worker, miniturn]);
+                {
+                    if (assignment_lines[worker, miniturn] == null) continue;
+
+                    AssignmentLine assignment = assignment_lines[worker, miniturn];
+                    // agrupamos
+                    list.Add(assignment);
+                }                    
             }
 
             return list;
         }
 
-        public void save(int id_simulation)
+        public void save(int id_simulation, NpgsqlConnection connection)
         {
-            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            connection.Open();
-            NpgsqlCommand command = new NpgsqlCommand("insert into Assignment (id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date, assigned_workers) values (:id_simulation, :tabu_iterations, :objective_function_value, :huamanga_produced, :huacos_produced, :altarpiece_produced, :date, :assigned_workers)", connection);
+            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Assignment\" " + 
+                "(id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date, assigned_workers) " +
+                "values (:id_simulation, :tabu_iterations, :objective_function_value, :huamanga_produced, :huacos_produced, :altarpiece_produced, :date, :assigned_workers) " +
+                "returning inkaart.\"Assignment\".id_assignment", connection);
+
             command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
             command.Parameters.Add(new NpgsqlParameter("tabu_iterations", this.tabu_iterations));
             command.Parameters.Add(new NpgsqlParameter("objective_function_value", this.objective_function_value));
@@ -194,19 +204,11 @@ namespace InkaArt.Business.Algorithm
             command.Parameters.Add(new NpgsqlParameter("altarpiece_produced", this.altarpiece_produced));
             command.Parameters.Add(new NpgsqlParameter("date", this.date));
             command.Parameters.Add(new NpgsqlParameter("assigned_workers", this.selected_workers.NumberOfWorkers));
-            command.ExecuteNonQuery();
-            connection.Close();
 
-            for (int worker = 0; worker < this.selected_workers.NumberOfWorkers; worker++)
-            {
-                for (int minit = 0; minit < this.total_miniturns; minit++)
-                    if (assignment_lines[worker, minit] != null)
-                    {
-                        AssignmentLine assignment = assignment_lines[worker, minit];
-                        // aqui agrupariamos
-                        //assignment.
-                    }
-            }            
+            int id_assginment = int.Parse(command.ExecuteScalar().ToString());
+
+            foreach(AssignmentLine line in this.toList())
+                line.save(id_assginment,connection);
         }
     }
 }
