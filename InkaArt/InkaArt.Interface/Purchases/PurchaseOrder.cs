@@ -19,7 +19,7 @@ namespace InkaArt.Interface.Purchases
             controlSup = new SupplierController();
             purchaseOrderList = control.getData();
             desarrolloBusqueda();
-            dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
+            
         }
         private string buscarIdsProveedores(string nombre)
         {
@@ -51,7 +51,8 @@ namespace InkaArt.Interface.Purchases
             if (textBox_name.Text.Length > 0)
             {
                 string lista = buscarIdsProveedores(textBox_name.Text);
-                cadena += " AND id_supplier IN (" + lista+")";
+                if (lista.Length == 0) lista = "0";
+                cadena += " AND id_supplier IN (" + lista + ")";
             }
             if (dateTimePicker_creation.Text.Length > 0 && checkBox_dateInclude.Checked)
             {
@@ -95,7 +96,8 @@ namespace InkaArt.Interface.Purchases
                 string suppName = buscarNombre(id_supplier);
                 dataGridView_purchaseOrder.Rows.Add(id_order, suppName, creation_date, delivery_date, total, status, id_supplier, false);
             }
-            
+            dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
+
         }
         private void button_search(object sender, EventArgs e)
         {

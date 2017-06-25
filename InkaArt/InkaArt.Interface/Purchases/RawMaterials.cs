@@ -57,7 +57,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_rawMaterialsList.Rows.Clear();
             for (int i = 0; i < rawMaterialList.Rows.Count; i++)
             {
-                string id_raw_material = rawMaterialList.Rows[i]["id_raw_material"].ToString();
+                int id_raw_material = int.Parse(rawMaterialList.Rows[i]["id_raw_material"].ToString());
                 string name = rawMaterialList.Rows[i]["name"].ToString();
                 string description = rawMaterialList.Rows[i]["description"].ToString();
                 string id_unit = rawMaterialList.Rows[i]["unit"].ToString();
@@ -66,6 +66,8 @@ namespace InkaArt.Interface.Purchases
                 double average_price = double.Parse(rawMaterialList.Rows[i]["average_price"].ToString());
                 dataGridView_rawMaterialsList.Rows.Add(id_raw_material,name,description,unit,status,average_price,id_unit,false);
             }
+            dataGridView_rawMaterialsList.Sort(dataGridView_rawMaterialsList.Columns["id_raw_material"], System.ComponentModel.ListSortDirection.Ascending);
+
         }
         public void button_search(object sender, EventArgs e)
         {

@@ -117,9 +117,10 @@ namespace InkaArt.Interface.Purchases
             {
                 buttonSave.Visible = false;
             }
-            else if (string.Compare(comboBox_status.Text, "Enviado") == 0)
+            else if (string.Compare(comboBox_status.Text, "Borrador") != 0)
             {
                 buttonExport.Visible = true;
+                buttonSave.Visible = false;
             }
         }
         private void filterSupplier()
