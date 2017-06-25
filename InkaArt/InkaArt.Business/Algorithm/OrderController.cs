@@ -37,6 +37,7 @@ namespace InkaArt.Business.Algorithm
                 "INNER JOIN inkaart.\"Client\" ON(inkaart.\"Order\".\"idClient\" = inkaart.\"Client\".\"idClient\") " +
                 "WHERE inkaart.\"Order\".\"bdStatus\" = 1 " +
                 "AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'" , connection);
+                //"AND inkaart.\"Order\".\"deliveryDate\" < to_date("+ DateTime.Now.ToShortDateString() + ",'DD/MM/YYYY')";
             // validar orderStatus == entregado o facturado ?
 
             NpgsqlDataReader reader = command.ExecuteReader();
@@ -57,8 +58,8 @@ namespace InkaArt.Business.Algorithm
             }
             reader.Close();
 
-            //Leer cada detalle del pedido
-            // consideramos que la cantidad faltante es: solicitada - facturada
+            // Leer cada detalle del pedido
+            // cantidad faltante = solicitada - facturada
             foreach (Order order in orders)
             {                
                 command = new NpgsqlCommand("SELECT \"idLineItem\", \"idRecipe\", quantity, \"quantityInvoiced\" FROM inkaart.\"LineItem\" " +
