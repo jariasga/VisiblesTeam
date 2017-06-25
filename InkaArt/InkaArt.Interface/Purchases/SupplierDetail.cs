@@ -137,7 +137,7 @@ namespace InkaArt.Interface.Purchases
                 string nombre = hallarNombreMat(id);
                 string price = rm_supList.Rows[i]["price"].ToString();
                 string idRM_Sup= rm_supList.Rows[i]["id_rawmaterial_supplier"].ToString();
-                dataGridView_rm_sup.Rows.Add(id, nombre, price, idRM_Sup, false);
+                dataGridView_rm_sup.Rows.Add(id, nombre, price, idRM_Sup, false,false,false);
             }
         }
         private string hallarNombreMat(string idMat)
@@ -165,6 +165,7 @@ namespace InkaArt.Interface.Purchases
         }
         private void button_add(object sender, EventArgs e)
         {
+            double modelOut;
             if (mode == 1)
             {
                 MessageBox.Show("Primero debe crear el proveedor para agregar las materias primas", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -179,6 +180,11 @@ namespace InkaArt.Interface.Purchases
             {
                 textBox_price.Text += "0";
             }
+            else if(!double.TryParse(textBox_price.Text,out modelOut))
+            {
+                MessageBox.Show("No es un número valido", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             else if (double.Parse(textBox_price.Text) < 0.01)
             {
                 MessageBox.Show("El precio no puede ser 0", "Importante", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -186,23 +192,62 @@ namespace InkaArt.Interface.Purchases
             }
             int idMaterial=hallarIdMat();
             if (idMaterial == -1) return;
-            control_rs.insertRM_Sup(idMaterial.ToString(), textBox_idSupplier.Text, textBox_price.Text, "Activo");
-            llenarMateriasProvistas(textBox_idSupplier.Text);
-        }
+            //            control_rs.insertRM_Sup(idMaterial.ToString(), textBox_idSupplier.Text, textBox_price.Text, "Activo");
+            //            llenarMateriasProvistas(textBox_idSupplier.Text);
 
+            //MODIFICADO
+            int indiceExistente;
+            if ((indiceExistente=estaEnDataGrid(idMaterial)) != -1)
+            {
+                //actualizo valor del datagrid
+                string precioValorRedondeado = Math.Round(double.Parse(textBox_price.Text), 2).ToString();
+                dataGridView_rm_sup.Rows[indiceExistente].Cells[2].Value = precioValorRedondeado;
+                if (dataGridView_rm_sup.Rows[indiceExistente].Cells[3].Value!=null)
+                {//si existe en la base de datos marco que se ha modificado
+                    dataGridView_rm_sup.Rows[indiceExistente].Cells[5].Value = true;//marco que se ha modificado
+                }
+            }
+            else
+            {
+                string precioValorRedondeado = Math.Round(double.Parse(textBox_price.Text),2).ToString();
+                dataGridView_rm_sup.Rows.Add(idMaterial, comboBox_rawMaterial.Text, precioValorRedondeado, null, false, false,false);
+            }
+        }
+        //MODIFICADO
+        private int estaEnDataGrid(int idMaterial)
+        {
+            //solo devuelve los ids de filas que no estan eliminadas
+            for(int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            {
+                if(int.Parse(dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString()) == idMaterial && !Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[6].Value))
+                    return i;
+            }
+            return -1;
+        }
         private void button_delete(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            for (int i = dataGridView_rm_sup.Rows.Count-1; i >= 0; i--)
             {
                 if (Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[4].Value) == true)
                 {
-                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
-                    string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
-                    string price= dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
-                    control_rs.UpdateRM_Sup(idRMSup,idMat,textBox_idSupplier.Text, price, "Inactivo");
+                    if (dataGridView_rm_sup.Rows[i].Cells[3].Value == null)
+                    {
+                        //si no está en la BD
+                        dataGridView_rm_sup.Rows.RemoveAt(i);
+                    }
+                    else
+                    {
+                        //si está en la BD, marco que se ha eliminado
+                        dataGridView_rm_sup.Rows[i].Cells[6].Value = true;
+                        dataGridView_rm_sup.Rows[i].Visible = false;
+                    }
+                    //string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    //string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                    //string price= dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
+                    //control_rs.UpdateRM_Sup(idRMSup,idMat,textBox_idSupplier.Text, price, "Inactivo");
                 }
             }
-            llenarMateriasProvistas(textBox_idSupplier.Text);
+            //llenarMateriasProvistas(textBox_idSupplier.Text);
         }
         
 
@@ -304,6 +349,34 @@ namespace InkaArt.Interface.Purchases
             }
             return true;
         }
+        private void guardarCambiosEnMateriasOfrecidas()
+        {
+            for(int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            {
+                if(dataGridView_rm_sup.Rows[i].Cells[3].Value == null)
+                {
+                    //si no está en la bd lo inserto
+                    string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                    string price = dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
+                    control_rs.insertRM_Sup(idMat, textBox_idSupplier.Text, price, "Activo");
+                }
+                else if(Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[6].Value)){
+                    //si existe en la BD y está marcado como eliminado, lo paso a Inactivo
+                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                    string price= dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
+                    control_rs.UpdateRM_Sup(idRMSup,idMat,textBox_idSupplier.Text, price, "Inactivo");
+
+                }
+                else if(Convert.ToBoolean(dataGridView_rm_sup.Rows[i].Cells[5].Value)){
+                    //si existe en la BD y está marcado como modificado, lo actualizo
+                    string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                    string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                    string price = dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
+                    control_rs.UpdateRM_Sup(idRMSup, idMat, textBox_idSupplier.Text, price, "Activo");
+                }
+            }
+        }
         private void button_event_click(object sender, EventArgs e)
         {
             if (mode==2 && isInEditMode)
@@ -316,6 +389,8 @@ namespace InkaArt.Interface.Purchases
                 {
                     control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                     suppliersWindow.desarrolloBusqueda();
+                    guardarCambiosEnMateriasOfrecidas();
+                    llenarMateriasProvistas(textBox_idSupplier.Text);
                 }
                 catch (Exception)
                 {

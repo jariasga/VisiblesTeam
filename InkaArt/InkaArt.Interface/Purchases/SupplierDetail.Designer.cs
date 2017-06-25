@@ -62,6 +62,8 @@
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idrmsup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Eliminado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -351,7 +353,9 @@
             this.nombre,
             this.Precio,
             this.idrmsup,
-            this.Acción});
+            this.Acción,
+            this.Actualizar,
+            this.Eliminado});
             this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 109);
             this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
             this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 347);
@@ -413,6 +417,7 @@
             // 
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
             // 
             // idrmsup
             // 
@@ -427,6 +432,20 @@
             this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Acción.Width = 50;
+            // 
+            // Actualizar
+            // 
+            this.Actualizar.HeaderText = "Actualizar";
+            this.Actualizar.Name = "Actualizar";
+            this.Actualizar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Actualizar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Actualizar.Visible = false;
+            // 
+            // Eliminado
+            // 
+            this.Eliminado.HeaderText = "Eliminado";
+            this.Eliminado.Name = "Eliminado";
+            this.Eliminado.Visible = false;
             // 
             // SupplierDetail
             // 
@@ -501,5 +520,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn idrmsup;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Acción;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Actualizar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminado;
     }
 }
