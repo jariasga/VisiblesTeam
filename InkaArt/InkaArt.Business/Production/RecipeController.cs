@@ -41,42 +41,36 @@ namespace InkaArt.Business.Production
             RawMaterialController controlrm = new RawMaterialController();
             DataTable rmList = controlrm.getData();
 
-            int activar = 0;
-
-            for(int i = 0; i < recipeList.Rows.Count; i++)
+            int parar;
+            for (int i = 0; i < recipeList.Rows.Count; i++)
             {
-                string idRecipe = recipeList.Rows[i]["idRecipe"].ToString();
-                for(int j = 0; j < r_rmList.Rows.Count; j++)
+                int idRecipe = Convert.ToInt32(recipeList.Rows[i]["idRecipe"]);
+                //  Activar
+                if (idRecipe == 8)
+                    parar = 1;//eliminar
+                recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
+                                        "SET status = {0} WHERE \"idRecipe\" = {1}", 1, idRecipe));
+
+
+                //  Desactivar
+                DataTable r_rmTable = new DataTable();
+                DataRow[] r_rmRows = r_rmList.Select("idRecipe = " + idRecipe);
+                if (r_rmRows.Any())
                 {
-                    if (r_rmList.Rows[j]["idRecipe"].ToString() == idRecipe 
-                        && r_rmList.Rows[j]["status"].ToString()=="1")
+                    r_rmTable = r_rmRows.CopyToDataTable();
+                    foreach (DataRow rRow in r_rmTable.Rows)
                     {
-                        string idRm = r_rmList.Rows[j]["idRawMaterial"].ToString();
-                        for(int k = 0; k < rmList.Rows.Count; k++)
+                        DataTable rmtable = new DataTable();
+                        DataRow[] rmRows = rmList.Select("id_raw_material = " + rRow["idRawMaterial"] + " AND status = 'Inactivo'");
+                        if (rmRows.Any())
                         {
-                            if (rmList.Rows[k]["id_raw_material"].ToString() == idRm)
-                            {
-                                if (rmList.Rows[k]["status"].ToString() == "Inactivo" && activar == 0)//hay una materia prima inactiva en la receta
-                                {
-                                    recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
-                                        "SET status = {0} WHERE \"idRecipe\" = '{1}'", 0,idRecipe));
-                                    activar = 1;
-                                    break;
-                                }
-                            }
+                            recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
+                                            "SET status = {0} WHERE \"idRecipe\" = '{1}'", 0, idRecipe));
+                            break;
                         }
+
                     }
-
                 }
-
-                //Reactivar la materia prima
-                if (activar == 0)
-                {
-                    if (recipeList.Rows[i]["status"].ToString() == "0")
-                        recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
-                                "SET status = {0} WHERE \"idRecipe\" = '{1}'", 1, idRecipe));
-                }
-
             }
         }
 
