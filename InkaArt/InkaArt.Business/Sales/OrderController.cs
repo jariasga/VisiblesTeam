@@ -17,7 +17,7 @@ namespace InkaArt.Business.Sales
             orderData = new OrderData();
         }
 
-        public int AddSaleDocument(int selectedDoc, string strAmount, string strIgv, string strTotal, int orderId, DataTable orderLines, int clientId)
+        public int AddSaleDocument(int selectedDoc, string strAmount, string strIgv, string strTotal, int orderId, DataTable orderLines, int clientId, int orderType = 0)
         {
             float amount = float.Parse(strAmount), igv = float.Parse(strIgv), total = float.Parse(strTotal);
             int responseSD, responseLI = 0, invoicedNumber = 0;
@@ -32,10 +32,13 @@ namespace InkaArt.Business.Sales
                 int invoiced = int.Parse(orderline["quantityInvoiced"].ToString());
                 bool lineComplete = quantity == invoiced;
                 if (lineComplete) invoicedNumber++;
-                responseLI += orderData.AddLineXDocument(idLineItem, finished, pu, idSaleDocument);
+                int toAdd;
+                if (orderType == 1) toAdd = quantity;
+                else toAdd = finished;
+                responseLI += orderData.AddLineXDocument(idLineItem, toAdd, pu, idSaleDocument);
                 responseLI += orderData.UpdateLineItem(idLineItem, lineComplete);
             }
-            if (invoicedNumber == orderLines.Rows.Count) orderData.updateOrderStatus(orderId.ToString(),"facturado");
+            if (invoicedNumber == orderLines.Rows.Count || orderType == 1) orderData.updateOrderStatus(orderId.ToString(),"facturado");
             return responseSD + responseLI;
         }
         public bool verifyStock(int natType, string strStock, string strQuantity)
@@ -152,9 +155,9 @@ namespace InkaArt.Business.Sales
             return orderData.getProductName(parsedID);
         }
 
-        public DataTable getOrderLines(string id)
+        public DataTable getOrderLines(string orderId)
         {
-            return orderData.getOrderLines(int.Parse(id));
+            return orderData.getOrderLines(int.Parse(orderId));
         }
 
         public DataTable getProductRecipe(object id)
