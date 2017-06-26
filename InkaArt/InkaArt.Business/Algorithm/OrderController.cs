@@ -128,5 +128,10 @@ namespace InkaArt.Business.Algorithm
         {
             return this.orders;
         }
+
+        public Order GetByID(int order_id)
+        {
+            return orders.Where(o => o.ID.Equals(order_id)).ToList().First();
+        }
     }
 }

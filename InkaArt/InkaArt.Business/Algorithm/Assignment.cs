@@ -1,6 +1,7 @@
 ﻿using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,11 @@ namespace InkaArt.Business.Algorithm
 {
     public class Assignment
     {
+        private int id_assignment;
         private DateTime date;
         private double objective_function_value;
         private AssignmentLine[,] assignment_lines;
+        private List<AssignmentLine> assignment_lines_list; // para cuando se carga de la bd
         private int tabu_iterations;
 
         private int huacos_produced;
@@ -22,7 +25,9 @@ namespace InkaArt.Business.Algorithm
 		
         private int total_miniturns; //Total de miniturnos de un día
         private WorkerController selected_workers;
-        
+        private int id_simulation;
+        private int assigned_workers;
+
         public DateTime Date
         {
             get { return date; }
@@ -91,6 +96,18 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
+        public int ID
+        {
+            get { return id_assignment; }
+            set { id_assignment = value; }
+        }
+
+        public List<AssignmentLine> AssignmentLinesList
+        {
+            get { return assignment_lines_list; }
+            set { assignment_lines_list = value; }
+        }
+
         public AssignmentLine this[int worker_index, int miniturn_index]
         {
             get { return this.assignment_lines[worker_index, miniturn_index]; }
@@ -108,7 +125,8 @@ namespace InkaArt.Business.Algorithm
             this.altarpiece_produced = 0;
             this.selected_workers = selected_workers;
         }
-        
+
+        /* Tabu: para crear vecinos */        
         public Assignment(Assignment assignment)
         {
             this.date = assignment.date;
@@ -120,6 +138,22 @@ namespace InkaArt.Business.Algorithm
             this.huacos_produced = assignment.huacos_produced;
             this.huamanga_produced = assignment.huamanga_produced;
             this.altarpiece_produced = assignment.altarpiece_produced;
+        }
+
+        /* Para cargar de la BD */
+        public Assignment(int id_assignment, int id_simulation, int tabu_iterations, double objective_function_value, int huamanga_produced, int huacos_produced, int altarpiece_produced, DateTime date, int assigned_workers)
+        {
+            this.id_assignment = id_assignment;
+            this.id_simulation = id_simulation;
+            this.tabu_iterations = tabu_iterations;
+            this.objective_function_value = objective_function_value;
+            this.huamanga_produced = huamanga_produced;
+            this.huacos_produced = huacos_produced;
+            this.altarpiece_produced = altarpiece_produced;
+            this.date = date;
+            this.assigned_workers = assigned_workers;
+
+            this.assignment_lines_list = new List<AssignmentLine>();
         }
 
         public int getProcessId(int worker_index)
@@ -188,7 +222,7 @@ namespace InkaArt.Business.Algorithm
 
             return list;
         }
-
+               
         public void save(int id_simulation, NpgsqlConnection connection)
         {
             NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Assignment\" " + 

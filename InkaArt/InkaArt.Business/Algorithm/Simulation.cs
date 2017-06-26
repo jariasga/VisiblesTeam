@@ -46,59 +46,72 @@ namespace InkaArt.Business.Algorithm
             get { return id_simulation; }
             //set { id_simulation = value; }
         }
+
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
+
         public DateTime StartDate
         {
             get { return date_start; }
         }
+
         public DateTime EndDate
         {
             get { return date_end; }
         }
+
         public int Days
         {
             get { return days; }
             //set { days = value; }
         }
+
         public WorkerController SelectedWorkers
         {
             get { return selected_workers; }
             //set { selected_workers = value; }
         }
+
         public OrderController SelectedOrders
         {
             get { return selected_orders; }
             //set { selected_orders = value; }
         }
+
         public double BreakageWeight
         {
             get { return breakage_weight; }
         }
+
         public double TimeWeight
         {
             get { return time_weight; }
         }
+
         public double HuacoWeight
         {
             get { return huaco_weight; }
         }
+
         public double HuamangaStoneWeight
         {
             get { return huamanga_stone_weight; }
         }
+
         public double RetableWeight
         {
             get { return retable_weight; }
         }
+        
         public int Miniturns
         {
             get { return miniturns; }
             //set { miniturns = value; }
         }
+
         public List<Assignment> Assignments
         {
             get { return assignments; }
@@ -107,19 +120,11 @@ namespace InkaArt.Business.Algorithm
 
         public double Time
         {
-            get
-            {
-                return time;
-            }
-
-            set
-            {
-                time = value;
-            }
+            get { return time; }
+            set { time = value; }
         }
 
         /********** Constructor para nueva simulación de asignación de trabajadores **********/
-
         public Simulation(string name, DateTime date_start, DateTime date_end, int days, double breakage_weight,
             double time_weight, double huaco_weight, double huamanga_weight, double retable_weight, WorkerController selected_workers,
             OrderController selected_orders)
@@ -140,8 +145,7 @@ namespace InkaArt.Business.Algorithm
         }
 
         /********** Constructor para lectura de base de datos **********/
-
-        public Simulation(int id_simulation, string name, DateTime date_start, DateTime date_end, int number_of_days,
+        public Simulation(int id_simulation, string name, DateTime date_start, DateTime date_end, int number_of_days, int limit_time,
             double breakage_weight, double time_weight, double huaco_weight, double huamanga_weight, double retable_weight)
         {
             this.id_simulation = id_simulation;
@@ -149,15 +153,21 @@ namespace InkaArt.Business.Algorithm
             this.date_start = date_start;
             this.date_end = date_end;
             this.days = number_of_days;
+            this.Time = limit_time;
+
             this.breakage_weight = breakage_weight;
             this.time_weight = time_weight;
             this.huaco_weight = huaco_weight;
             this.huamanga_stone_weight = huamanga_weight;
             this.retable_weight = retable_weight;
-            this.selected_workers = null;
-            this.selected_orders = null;
-        }
 
+            this.assignments = new List<Assignment>();
+            this.indexes = new IndexController();
+            indexes.Load();
+            this.selected_workers = new WorkerController();
+            this.selected_orders = new OrderController();
+        }        
+        
         public double ProductWeight(int product_id)
         {
             if (product_id == 1) return huaco_weight;
@@ -228,24 +238,10 @@ namespace InkaArt.Business.Algorithm
 
         public double getLossIndex(AssignmentLine line)
         {
+            if (indexes == null) return -1;
             Index index = indexes.FindByAssignment(line);
             return index == null ? -1 : index.LossIndex;
         }
         
-        //public List<AssignmentLine> AssignmentsToList()
-        //{
-        //    List<AssignmentLine> list = new List<AssignmentLine>();
-
-        //    if (assignments == null) return list;
-        //    foreach (AssignmentLine[][] day in assignments)
-        //    {
-        //        foreach (AssignmentLine[] worker in day)
-        //        {
-        //            list.Concat(worker.ToList<AssignmentLine>());
-        //        }
-        //    }
-
-        //    return list.OrderByDescending(o => o.TotalMiniturns).OrderByDescending(o => o.Worker).OrderByDescending(o => o.Date).ToList();
-        //}
     }
 }
