@@ -61,21 +61,27 @@ namespace InkaArt.Interface.Warehouse
             while (datos.Read())
             {
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];
-                row.Cells[1].Value = datos[1];
-                row.Cells[2].Value = datos[2];
-                row.Cells[3].Value = datos[3];
-                row.Cells[4].Value = datos[4];
+                row.Cells[0].Value = datos[0];//idRawMaterial
+                row.Cells[1].Value = datos[1];//Nombre
+                row.Cells[2].Value = datos[2];//CurrentStock
+                row.Cells[3].Value = datos[3];//MinimunStock
+                row.Cells[4].Value = datos[4];//MaximunStock
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
+            if(rowIndex == 0)
+            {
+                MessageBox.Show("No hay materia prima que mostrar para el almacén ingresado.");
+                return;
+            }
+
             productionItemMovementController.closeConnection();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int idProd = 0,cantMov=0,numRows=0,maxMov=0;
+            int idProd = 0,cantMov=0,numRows=0,maxMov=0,exito=0, numRows2=0, availableToMove=0;
             string nameProd = "";
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -87,7 +93,7 @@ namespace InkaArt.Interface.Warehouse
                     nameProd = Convert.ToString(row.Cells[1].Value);
                     try
                     {
-                        cantMov = Convert.ToInt32(row.Cells[3].Value);
+                        cantMov = Convert.ToInt32(row.Cells[5].Value);
                     }
                     catch
                     {
@@ -103,8 +109,30 @@ namespace InkaArt.Interface.Warehouse
 
                     if (cantMov <= maxMov)
                     {
+                        //Se valida que exista la materia prima, el almacén, también que exista la relación materiaPrima-almacén
+                        int intIdWarehouse = 0;
+                        intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
+
+                        availableToMove = productionItemMovementController.availableProductionOut(idProd, intIdWarehouse);
+                        if (availableToMove != 1)
+                        {
+                            return;
+                        }
+                        
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-                        productionItemWarehouseMovementController.updateDataRawMaterialOut(idProd, Convert.ToInt32(idWarehouesOrigin), cantMov, "Salida", "OK");
+                        exito =productionItemWarehouseMovementController.updateDataRawMaterialOut(idProd, intIdWarehouse, cantMov, "Salida", "OK");
+
+                        if (exito == 1)
+                        {
+                            //Grabar movimiento
+                            int movemenType = 13; //Indica que es una salida
+                            int movementReason = 3;//Indica que es un movimiento por producción
+                            int documentTypes = -1;//Indica que no tiene un documento relacionado para validarlo
+                            int productType = 0;//0:materia prima | 1:producto
+                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                            productionItemWarehouseMovementController.insertMovement(-1, movemenType, Convert.ToInt32(idWarehouesOrigin), movementReason, documentTypes, isExchange, idProd, cantMov, productType);
+                            numRows2++;
+                        }
                     }
                     else
                     {
@@ -114,7 +142,18 @@ namespace InkaArt.Interface.Warehouse
                 numRows++;
             }
             //productionItemMovementController.sacarMateria();
-            MessageBox.Show("Actualizando...");
+            MessageBox.Show("Se actualizaron: " + numRows2 + " Registros.");
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

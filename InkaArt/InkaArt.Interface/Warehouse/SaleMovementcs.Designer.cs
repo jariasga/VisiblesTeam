@@ -43,7 +43,6 @@
             this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MovementCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MovementQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,7 +132,6 @@
             this.idProduct,
             this.ProductName,
             this.Cant,
-            this.StockWarehouse,
             this.CurrentCant,
             this.MovementCant,
             this.MovementQuantity,
@@ -209,12 +207,6 @@
             this.Cant.Name = "Cant";
             this.Cant.ReadOnly = true;
             // 
-            // StockWarehouse
-            // 
-            this.StockWarehouse.HeaderText = "Stock en Almacén";
-            this.StockWarehouse.Name = "StockWarehouse";
-            this.StockWarehouse.ReadOnly = true;
-            // 
             // CurrentCant
             // 
             this.CurrentCant.HeaderText = "Stock en Almacén";
@@ -274,7 +266,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StockWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
         private System.Windows.Forms.DataGridViewTextBoxColumn MovementCant;
         private System.Windows.Forms.DataGridViewTextBoxColumn MovementQuantity;

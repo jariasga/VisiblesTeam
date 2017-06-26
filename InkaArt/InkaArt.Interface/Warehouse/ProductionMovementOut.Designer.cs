@@ -34,15 +34,17 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.maxStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
@@ -100,9 +102,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 180);
@@ -110,39 +109,7 @@
             this.groupBox2.Size = new System.Drawing.Size(791, 326);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Lote de Producción";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Gray;
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(699, 24);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(60, 38);
-            this.button1.TabIndex = 57;
-            this.button1.Text = "🔎 Buscar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(397, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 23);
-            this.label3.TabIndex = 34;
-            this.label3.Text = "Id Pedido";
-            this.label3.Visible = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(503, 29);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(188, 30);
-            this.textBox3.TabIndex = 34;
-            this.textBox3.Visible = false;
+            this.groupBox2.Text = "Lista de Materiales";
             // 
             // dataGridView1
             // 
@@ -153,12 +120,47 @@
             this.idProduct,
             this.ProductName,
             this.stockWarehouse,
+            this.minStock,
+            this.maxStock,
             this.CurrentCant,
             this.Modificar});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 29);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(753, 230);
+            this.dataGridView1.Size = new System.Drawing.Size(753, 279);
             this.dataGridView1.TabIndex = 57;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Gray;
+            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(753, 547);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 38);
+            this.button1.TabIndex = 57;
+            this.button1.Text = "🔎 Buscar";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(451, 555);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 17);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Id Pedido";
+            this.label3.Visible = false;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(557, 552);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(188, 22);
+            this.textBox3.TabIndex = 34;
+            this.textBox3.Visible = false;
             // 
             // buttonDelete
             // 
@@ -171,6 +173,7 @@
             this.buttonDelete.TabIndex = 58;
             this.buttonDelete.Text = "Cancelar";
             this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // button2
             // 
@@ -204,11 +207,22 @@
             this.stockWarehouse.Name = "stockWarehouse";
             this.stockWarehouse.ReadOnly = true;
             // 
+            // minStock
+            // 
+            this.minStock.HeaderText = "Stock Mínimo";
+            this.minStock.Name = "minStock";
+            this.minStock.ReadOnly = true;
+            // 
+            // maxStock
+            // 
+            this.maxStock.HeaderText = "Stock Máximo";
+            this.maxStock.Name = "maxStock";
+            this.maxStock.ReadOnly = true;
+            // 
             // CurrentCant
             // 
             this.CurrentCant.HeaderText = "Cantidad por mover";
             this.CurrentCant.Name = "CurrentCant";
-            this.CurrentCant.ReadOnly = true;
             // 
             // Modificar
             // 
@@ -221,7 +235,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(817, 587);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonDelete);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -231,9 +248,9 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -254,6 +271,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn stockWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn minStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn maxStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
     }

@@ -199,6 +199,10 @@ namespace InkaArt.Interface.Warehouse
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
+            if(rowIndex == 0)
+            {
+                MessageBox.Show("El lote ingresado no tiene registros.");
+            }
             productionItemMovementController.closeConnection();
 
         }

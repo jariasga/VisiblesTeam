@@ -163,12 +163,12 @@ namespace InkaArt.Interface.Warehouse
             if (exito > 0)
             {
                 MessageBox.Show("" + exito + " Operaciones realizadas con éxito.");
+                this.Close();
             }
             else
             {
                 MessageBox.Show("No se pudo realizar ningún movimiento...");
             }
-            this.Close();
         }
 
         private void populateDataGridLote(DataTable listList)
@@ -274,7 +274,11 @@ namespace InkaArt.Interface.Warehouse
                 rowIndex++;
             }
             productionItemMovementController.closeConnection();
-
+            if (rowIndex == 0)
+            {
+                MessageBox.Show("No hay productos que este almacén pueda devolver para la orden de pedido ingresada.");
+                return;
+            }
         }
 
 
