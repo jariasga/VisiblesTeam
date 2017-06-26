@@ -178,34 +178,93 @@ namespace InkaArt.Business.Algorithm
 
         /******************* GUARDADO EN BASE DE DATOS *******************/
 
-        public void save()
+        public bool save()
         {
-            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            connection.Open();
+            try
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+                connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" " +
-                "(name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) " +
-                "values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time) " +
-                "returning inkaart.\"Simulation\".id_simulation", connection);
+                NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" " +
+                    "(name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) " +
+                    "values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time) " +
+                    "returning inkaart.\"Simulation\".id_simulation", connection);
 
-            command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
-            command.Parameters.Add(new NpgsqlParameter("name", name));
-            command.Parameters.Add(new NpgsqlParameter("start_date", date_start));
-            command.Parameters.Add(new NpgsqlParameter("end_date", date_end));
-            command.Parameters.Add(new NpgsqlParameter("days", days));
-            command.Parameters.Add(new NpgsqlParameter("breakage_weight", breakage_weight));
-            command.Parameters.Add(new NpgsqlParameter("time_weight", time_weight));
-            command.Parameters.Add(new NpgsqlParameter("huaco_weight", huaco_weight));
-            command.Parameters.Add(new NpgsqlParameter("huamanga_stone_weight", huamanga_stone_weight));
-            command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
-            command.Parameters.Add(new NpgsqlParameter("time", LimitTime));
+                command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+                command.Parameters.Add(new NpgsqlParameter("name", name));
+                command.Parameters.Add(new NpgsqlParameter("start_date", date_start));
+                command.Parameters.Add(new NpgsqlParameter("end_date", date_end));
+                command.Parameters.Add(new NpgsqlParameter("days", days));
+                command.Parameters.Add(new NpgsqlParameter("breakage_weight", breakage_weight));
+                command.Parameters.Add(new NpgsqlParameter("time_weight", time_weight));
+                command.Parameters.Add(new NpgsqlParameter("huaco_weight", huaco_weight));
+                command.Parameters.Add(new NpgsqlParameter("huamanga_stone_weight", huamanga_stone_weight));
+                command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
+                command.Parameters.Add(new NpgsqlParameter("time", LimitTime));
+                this.id_simulation = int.Parse(command.ExecuteScalar().ToString());
 
-            this.id_simulation = int.Parse(command.ExecuteScalar().ToString());
+                bool save_workers = saveSelectedWorkers(connection);
+                bool save_orders = saveSelectedOrders(connection);
+                bool save_assignments = true;
+                foreach (Assignment day in assignments)
+                    save_assignments &= day.save(this.ID, connection);
 
-            foreach (Assignment day in assignments)
-                day.save(this.ID, connection);
+                connection.Close();
+                return save_workers && save_orders && save_assignments;
+            }
+            catch (Exception e)
+            {
+                LogHandler.WriteLine("Excepción al intentar guardar la simulación: " + e.ToString());
+                return false;
+            }
+        }
 
-            connection.Close();
+        private bool saveSelectedOrders(NpgsqlConnection connection)
+        {
+            foreach (Order order in selected_orders.Orders)
+            {
+                try
+                {                
+                    NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation-Order\" " +
+                    "(id_simulation, id_order) values (:id_simulation, :id_order) ", connection);
+
+                    command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+                    command.Parameters.Add(new NpgsqlParameter("id_order", order.ID));
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    LogHandler.WriteLine("Excepción al intentar guardar órdenes de simulación: " + e.ToString());
+                    return false;
+                }
+
+            }
+
+            return true;                        
+        }
+
+        private bool saveSelectedWorkers(NpgsqlConnection connection)
+        {
+            foreach (Worker worker in selected_workers.Workers)
+            {
+                try
+                {
+                    NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation-Worker\" " +
+                    "(id_simulation, id_worker) values (:id_simulation, :id_worker) ", connection);
+
+                    command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+                    command.Parameters.Add(new NpgsqlParameter("id_worker", worker.ID));
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    LogHandler.WriteLine("Excepción al intentar guardar trabajadores de simulación: " + e.ToString());
+                    return false;
+                }
+
+            }
+
+            return true;
         }
 
         public string updateName()
