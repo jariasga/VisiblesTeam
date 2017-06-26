@@ -219,7 +219,7 @@
             // checkbox_workers
             // 
             this.checkbox_workers.AutoSize = true;
-            this.checkbox_workers.Location = new System.Drawing.Point(15, 26);
+            this.checkbox_workers.Location = new System.Drawing.Point(18, 30);
             this.checkbox_workers.Name = "checkbox_workers";
             this.checkbox_workers.Size = new System.Drawing.Size(153, 22);
             this.checkbox_workers.TabIndex = 46;
@@ -332,7 +332,7 @@
             // checkbox_orders
             // 
             this.checkbox_orders.AutoSize = true;
-            this.checkbox_orders.Location = new System.Drawing.Point(16, 24);
+            this.checkbox_orders.Location = new System.Drawing.Point(18, 30);
             this.checkbox_orders.Name = "checkbox_orders";
             this.checkbox_orders.Size = new System.Drawing.Size(153, 22);
             this.checkbox_orders.TabIndex = 47;

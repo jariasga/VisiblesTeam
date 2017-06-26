@@ -76,7 +76,7 @@ namespace InkaArt.Business.Algorithm
         {
             //Inicializar las variables principales
             List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
-            LogHandler.WriteLine("Orden de compra {0}: {1}", selected_orders[0].ID, selected_orders[0].Description);
+            LogHandler.WriteLine("Orden de compra {0}: {1}", selected_orders[0].ID, selected_orders[0].Description) ;
             for (int i = 0; i < order_recipes.Count; i++)
                 LogHandler.WriteLine("- Receta {0}: {1}", i+1, order_recipes[i].Description + " " + order_recipes[i].Version);
             List<AssignmentLine> current_product = new List<AssignmentLine>();

@@ -1,4 +1,5 @@
 ﻿using InkaArt.Data.Algorithm;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,19 @@ namespace InkaArt.Data.Algorithm
             get { return worker; }
             set { worker = value; }
         }
+
         public Job Job
         {
             get { return job; }
             set { job = value; }
         }
+
         public Recipe Recipe
         {
             get { return recipe; }
             set { recipe = value; }
         }
+
         public int MiniturnStart
         {
             get { return miniturn_start; }
@@ -43,6 +47,7 @@ namespace InkaArt.Data.Algorithm
             get { return total_miniturns_used; }
             set { total_miniturns_used = value; }
         }
+
         public int Produced
         {
             get { return produced; }
@@ -63,6 +68,22 @@ namespace InkaArt.Data.Algorithm
         {
             if (this == null || other == null) return false;
             return (this.worker.ID == other.worker.ID && this.job.ID == other.job.ID && this.recipe.ID == other.recipe.ID);
+        }
+
+        public void save(int id_assignment, NpgsqlConnection connection)
+        {
+            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"AssignmentLine\" " +
+                "(id_assignment, id_worker, id_job, id_recipe, produced, total_miniturns) " +
+                "values (:id_assignment, :id_worker, :id_job, :id_recipe, :produced, :total_miniturns)", connection);
+
+            command.Parameters.Add(new NpgsqlParameter("id_assignment", id_assignment));
+            command.Parameters.Add(new NpgsqlParameter("id_worker", this.Worker.ID));
+            command.Parameters.Add(new NpgsqlParameter("id_job", this.Job.ID));
+            command.Parameters.Add(new NpgsqlParameter("id_recipe", this.Recipe.ID));
+            command.Parameters.Add(new NpgsqlParameter("produced", this.Produced));
+            command.Parameters.Add(new NpgsqlParameter("total_miniturns", this.TotalMiniturnsUsed));
+
+            command.ExecuteNonQuery();
         }
     }
 }
