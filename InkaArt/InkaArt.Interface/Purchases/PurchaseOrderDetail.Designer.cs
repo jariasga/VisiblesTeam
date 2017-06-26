@@ -43,6 +43,8 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox_igv = new System.Windows.Forms.TextBox();
             this.textBox_idrm = new System.Windows.Forms.TextBox();
             this.textBox_subtotal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -60,8 +62,6 @@
             this.button_add = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.textBox_igv = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.id_detail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idRawMat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +71,8 @@
             this.Factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Eliminado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -258,6 +260,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de materias primas pedidas";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(296, 90);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 18);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "IGV";
+            // 
+            // textBox_igv
+            // 
+            this.textBox_igv.Enabled = false;
+            this.textBox_igv.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox_igv.Location = new System.Drawing.Point(295, 111);
+            this.textBox_igv.Name = "textBox_igv";
+            this.textBox_igv.Size = new System.Drawing.Size(100, 24);
+            this.textBox_igv.TabIndex = 28;
+            this.textBox_igv.Text = "0";
+            this.textBox_igv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // textBox_idrm
             // 
             this.textBox_idrm.Enabled = false;
@@ -393,7 +415,9 @@
             this.Igv,
             this.Factura,
             this.Estado,
-            this.Eliminar});
+            this.Eliminar,
+            this.Actualizar,
+            this.Eliminado});
             this.dataGridView_pedidos.Location = new System.Drawing.Point(13, 159);
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(647, 272);
@@ -450,26 +474,6 @@
             this.buttonSave.Text = "Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
-            // 
-            // textBox_igv
-            // 
-            this.textBox_igv.Enabled = false;
-            this.textBox_igv.Font = new System.Drawing.Font("Arial", 11F);
-            this.textBox_igv.Location = new System.Drawing.Point(295, 111);
-            this.textBox_igv.Name = "textBox_igv";
-            this.textBox_igv.Size = new System.Drawing.Size(100, 24);
-            this.textBox_igv.TabIndex = 28;
-            this.textBox_igv.Text = "0";
-            this.textBox_igv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(296, 90);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(34, 18);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "IGV";
             // 
             // id_detail
             // 
@@ -535,6 +539,18 @@
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Eliminar.TrueValue = "True";
             this.Eliminar.Width = 50;
+            // 
+            // Actualizar
+            // 
+            this.Actualizar.HeaderText = "Actualizar";
+            this.Actualizar.Name = "Actualizar";
+            this.Actualizar.Visible = false;
+            // 
+            // Eliminado
+            // 
+            this.Eliminado.HeaderText = "Eliminado";
+            this.Eliminado.Name = "Eliminado";
+            this.Eliminado.Visible = false;
             // 
             // PurchaseOrderDetail
             // 
@@ -604,5 +620,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Factura;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Actualizar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminado;
     }
 }
