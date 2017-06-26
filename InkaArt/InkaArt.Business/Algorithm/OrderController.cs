@@ -12,6 +12,7 @@ namespace InkaArt.Business.Algorithm
 {
     public class OrderController
     {
+
         private List<Order> orders;
 
         public OrderController()
@@ -34,7 +35,10 @@ namespace InkaArt.Business.Algorithm
             // buscamos ordenes activas que aun no hayan sido entregadas
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\" " +
                 "INNER JOIN inkaart.\"Client\" ON(inkaart.\"Order\".\"idClient\" = inkaart.\"Client\".\"idClient\") " +
-                "WHERE inkaart.\"Order\".\"bdStatus\" = 1 AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'", connection);
+                "WHERE inkaart.\"Order\".\"bdStatus\" = 1 " +
+                "AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'" , connection);
+                //"AND inkaart.\"Order\".\"deliveryDate\" < to_date("+ DateTime.Now.ToShortDateString() + ",'DD/MM/YYYY')";
+            // validar orderStatus == entregado o facturado ?
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -54,11 +58,13 @@ namespace InkaArt.Business.Algorithm
             }
             reader.Close();
 
+            // Leer cada detalle del pedido
+            // cantidad faltante = solicitada - facturada
             foreach (Order order in orders)
-            {
-                //Leer cada detalle del pedido
-                command = new NpgsqlCommand("SELECT \"idLineItem\", \"idRecipe\", quantity FROM inkaart.\"LineItem\" " +
-                    "WHERE \"idOrder\" = :idOrder", connection);
+            {                
+                command = new NpgsqlCommand("SELECT \"idLineItem\", \"idRecipe\", quantity, \"quantityInvoiced\" FROM inkaart.\"LineItem\" " +
+                    "WHERE \"idOrder\" = :idOrder " +
+                    "AND \"quantity\" < \"quantityInvoiced\"", connection);
                 command.Parameters.AddWithValue("idOrder", NpgsqlDbType.Integer, order.ID);
 
                 reader = command.ExecuteReader();
@@ -66,7 +72,7 @@ namespace InkaArt.Business.Algorithm
                 {
                     int id_line_item = int.Parse(reader["idLineItem"].ToString());
                     int id_recipe = int.Parse(reader["idRecipe"].ToString());
-                    int quantity = int.Parse(reader["quantity"].ToString());
+                    int quantity = int.Parse(reader["quantity"].ToString()) - int.Parse(reader["quantityInvoiced"].ToString());
                     order.AddLineItem(new OrderLineItem(id_line_item, recipes.GetByID(id_recipe), quantity));
                 }
                 reader.Close();
@@ -78,6 +84,19 @@ namespace InkaArt.Business.Algorithm
         public int NumberOfOrders
         {
             get { return orders.Count; }
+        }
+
+        public List<Order> Orders
+        {
+            get
+            {
+                return orders;
+            }
+
+            set
+            {
+                orders = value;
+            }
         }
 
         public void Add(Order order)
@@ -108,6 +127,11 @@ namespace InkaArt.Business.Algorithm
         public List<Order> List()
         {
             return this.orders;
+        }
+
+        public Order GetByID(int order_id)
+        {
+            return orders.Where(o => o.ID.Equals(order_id)).ToList().First();
         }
     }
 }

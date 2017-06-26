@@ -55,13 +55,14 @@ namespace InkaArt.Interface.Production
             indexes.Load();
             indexes.CalculateIndexes(simulation);
 
+            simulation.save();
+
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
                 LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
                 for (int j = 0; j < simulation.SelectedOrders[i].NumberOfLineItems; j++)
-                    LogHandler.WriteLine("- Linea de orden #{0}: {1}", j, simulation.SelectedOrders[i][j].ToString());
+                    LogHandler.WriteLine("- Linea de orden #{0}-{1}: {2}", i + 1, j + 1, simulation.SelectedOrders[i][j].ToString());
             }
-            Environment.Exit(0);
 
             //Temporal: Determinar el tiempo total del turno y los miniturnos
             Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
@@ -81,7 +82,7 @@ namespace InkaArt.Interface.Production
                 initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, total_miniturns, ref elapsed_seconds));
                 background_worker.ReportProgress(0, null);
             }
-
+            
             PrintGraspResults(initial_assignments);
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
@@ -89,7 +90,7 @@ namespace InkaArt.Interface.Production
             //Algoritmo de Búsqueda Tabú
 
             TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
-
+            
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
                 tabu.run(ref elapsed_seconds, day);
@@ -123,7 +124,7 @@ namespace InkaArt.Interface.Production
                 LogHandler.WriteLine("");
             }
         }
-
+        
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (e.UserState != null) this.label_state.Text = e.UserState.ToString();

@@ -65,13 +65,13 @@ namespace InkaArt.Interface.Purchases
             mode = 2; //editarRawMaterial
             control_material = controlForm;
             InitializeComponent();
-            textBox_id.Text = currentRawMaterial.Cells[1].Value.ToString();
-            textBox_name.Text = currentRawMaterial.Cells[2].Value.ToString();
+            textBox_id.Text = currentRawMaterial.Cells[0].Value.ToString();
+            textBox_name.Text = currentRawMaterial.Cells[1].Value.ToString();
 
             ventanaRM = viewRMList;
-            comboBox_status.Text = currentRawMaterial.Cells[5].Value.ToString();
-            textBox_description.Text = currentRawMaterial.Cells[3].Value.ToString();
-            textBox_averagePrice.Text = currentRawMaterial.Cells[6].Value.ToString();
+            comboBox_status.Text = currentRawMaterial.Cells[4].Value.ToString();
+            textBox_description.Text = currentRawMaterial.Cells[2].Value.ToString();
+            textBox_averagePrice.Text = currentRawMaterial.Cells[5].Value.ToString();
             
             textBox_name.Enabled = false;
             comboBox_unit.Enabled = false;
@@ -90,14 +90,14 @@ namespace InkaArt.Interface.Purchases
             {
                 valorPrecio+=double.Parse(dataGridView_suppliersPrice.Rows[j].Cells[2].Value.ToString());
             }
-            if(registros>0) valorPrecio = valorPrecio / registros;
+            if(registros>0) valorPrecio = Math.Round(valorPrecio / registros,2);
             
             control_units = new UnitOfMeasurementController();
             unitsList = control_units.getData();
             for (int i = 0; i < unitsList.Rows.Count; i++)
             {
                 comboBox_unit.Items.Add(unitsList.Rows[i]["name"].ToString());
-                if (String.Compare(unitsList.Rows[i]["id_unit"].ToString(), currentRawMaterial.Cells[7].Value.ToString())==0)
+                if (String.Compare(unitsList.Rows[i]["id_unit"].ToString(), currentRawMaterial.Cells[6].Value.ToString())==0)
                 {
                     comboBox_unit.Text = unitsList.Rows[i]["name"].ToString();
                 }
@@ -106,7 +106,7 @@ namespace InkaArt.Interface.Purchases
             {
                 try
                 {
-                    control_material.updateData(textBox_id.Text, textBox_name.Text, textBox_description.Text, currentRawMaterial.Cells[4].Value.ToString(), comboBox_status.Text, valorPrecio);
+                    control_material.updateData(textBox_id.Text, textBox_name.Text, textBox_description.Text, currentRawMaterial.Cells[6].Value.ToString(), comboBox_status.Text, valorPrecio);
                     textBox_averagePrice.Text = valorPrecio.ToString();
                     ventanaRM.desarrolloBusqueda();
                 }

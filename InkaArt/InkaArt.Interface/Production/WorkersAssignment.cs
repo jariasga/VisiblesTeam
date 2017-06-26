@@ -15,7 +15,7 @@ namespace InkaArt.Interface.Production
     public partial class WorkersAssignment : Form
     {
         private SimulationController simulations;
-        private Simulation current_simulation;
+        private Simulation current_simulation = null;
         private WorkerController workers;
         private RecipeController recipes;
         private OrderController orders;
@@ -33,34 +33,34 @@ namespace InkaArt.Interface.Production
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
             this.workers.Load();
+            this.recipes.Load();
             this.orders.Load(recipes);
-            this.simulations.Load();
+            this.simulations.Load(workers, orders, recipes);
 
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
-            combo_simulations.SelectedIndex = -1;
+            combo_simulations.SelectedItem = null;
         }
 
         private void ButtonConfigClick(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-
-            Form simulation_config = new SimulationConfig(simulations, simulation, combo_simulations, workers, orders);
+            Form simulation_config = new SimulationConfig(simulations, current_simulation, combo_simulations, workers, orders);
             simulation_config.MdiParent = this.MdiParent;
             simulation_config.Show();
         }
 
         private void ButtonSaveClick(object sender, EventArgs e)
         {
-            //Guardar simulación en BD
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            simulation.Save();
+            if (current_simulation.ID > 0) return;
+            if (simulations.Save(current_simulation))
+                MessageBox.Show("Simulación guardada", "Guardar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            else
+                MessageBox.Show("No se logró guardar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            SimulationReport simulation_report = new SimulationReport(simulation);
+            SimulationReport simulation_report = new SimulationReport(current_simulation);
             simulation_report.Show();
         }
 
@@ -68,19 +68,23 @@ namespace InkaArt.Interface.Production
         {
             //general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
-            //summary_grid.Rows.Clear();
-            combo_simulations.SelectedIndex = -1;
+            //summary_grid.Rows.Clear();            
+            
+            if (simulations.Delete(current_simulation))
+                MessageBox.Show("Simulación eliminada", "Eliminar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            else
+                MessageBox.Show("No se logró eliminar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            simulations.Delete(simulation);
             combo_simulations.DataSource = simulations.BindingList();
+            combo_simulations.SelectedItem = null;
+            current_simulation = null;
         }
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
         {
-            Simulation simulation = (Simulation) combo_simulations.SelectedItem;
+            current_simulation = (Simulation) combo_simulations.SelectedItem;
 
-            if (combo_simulations.SelectedIndex < 0 || simulation == null)
+            if (current_simulation == null)
             {
                 button_config.Text = "+ Nueva simulación";
                 button_config.BackColor = Color.SteelBlue;
@@ -92,36 +96,42 @@ namespace InkaArt.Interface.Production
             {
                 button_config.Text = "Ver detalles de asignación";
                 button_config.BackColor = Color.Gray;
-                button_save.Enabled = true;
+                button_save.Enabled = (current_simulation.ID == 0); // solo se puede guardar si es nueva
                 button_delete.Enabled = true;
-                button_report.Enabled = true;
-                updateGrid(simulation);
+                button_report.Enabled = true;              
             }
+            updateGrid();
         }
 
-        public void updateGrid(Simulation simulation)
+        public void updateGrid()
         {
-            foreach(Assignment day in simulation.Assignments)
+            simulation_grid.Rows.Clear();
+            if (current_simulation == null) return;
+
+            foreach(Assignment day in current_simulation.Assignments)
             {
-                foreach(AssignmentLine miniturn in day.toList())
+                string day_date = day.Date.ToShortDateString();
+                foreach (AssignmentLine miniturn in day.AssignmentLinesList)
                 {
+                    // por ahora solo mostraremos los miniturnos con elementos activos
+                    if (miniturn.Worker == null || miniturn.Job == null || miniturn.Recipe == null) continue;
+
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
-                    row.Cells[0].Value = day.Date.ToShortDateString();
-                    row.Cells[1].Value = miniturn.Worker.FullName;
-                    row.Cells[2].Value = miniturn.Job.Name;
-                    row.Cells[3].Value = miniturn.Recipe.Description;
-                    row.Cells[4].Value = miniturn.Produced;
+                    row.Cells[date.Index].Value = day_date;
+                    row.Cells[worker.Index].Value = miniturn.Worker.FullName;
+                    row.Cells[job.Index].Value = miniturn.Job.Name;
+                    row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
+                    row.Cells[quantity.Index].Value = miniturn.Produced;
+
+                    double loss_index = current_simulation.getLossIndex(miniturn);
+                    if (loss_index >= 0) row.Cells[index.Index].Value = loss_index;
+
                     simulation_grid.Rows.Add(row);
                 }
             }
         }
 
         private void simulation_grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void groupbox_summary_Enter(object sender, EventArgs e)
         {
 
         }

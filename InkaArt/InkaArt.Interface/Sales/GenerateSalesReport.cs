@@ -30,7 +30,6 @@ namespace InkaArt.Interface.Sales
                 SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy"), comboBox_products.Text);
                 sales_form.Show();
             }
-
         }
 
         private int validateData()
@@ -43,6 +42,11 @@ namespace InkaArt.Interface.Sales
             else if (comboBox_products.Text == "")
             {
                 MessageBox.Show(this, "Por favor, seleccionar un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+            else if (dateTimePicker_fechaFin.Value > DateTime.Now)
+            {
+                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
             }
             else return 1;
