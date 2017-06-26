@@ -51,6 +51,7 @@ namespace InkaArt.Interface.Production
 
         private void ButtonSaveClick(object sender, EventArgs e)
         {
+            if (current_simulation.ID > 0) return;
             current_simulation.save();
         }
 
@@ -66,9 +67,9 @@ namespace InkaArt.Interface.Production
             simulation_grid.Rows.Clear();
             //summary_grid.Rows.Clear();            
 
-            simulations.Delete(current_simulation);            
+            simulations.Delete(current_simulation);
             combo_simulations.DataSource = simulations.BindingList();
-            combo_simulations.SelectedIndex = -1;
+            combo_simulations.SelectedItem = null;
             current_simulation = null;
         }
 
@@ -88,9 +89,9 @@ namespace InkaArt.Interface.Production
             {
                 button_config.Text = "Ver detalles de asignación";
                 button_config.BackColor = Color.Gray;
-                button_save.Enabled = true;
+                button_save.Enabled = (current_simulation.ID == 0); // solo se puede guardar si es nueva
                 button_delete.Enabled = true;
-                button_report.Enabled = true;                
+                button_report.Enabled = true;              
             }
             updateGrid();
         }

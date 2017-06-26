@@ -41,6 +41,15 @@ namespace InkaArt.Business.Algorithm
         
         public void Delete(Simulation simulation)
         {
+            if(simulation.ID > 0)
+            {
+                NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+                NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Simulation\" SET status = false WHERE id_simulation = :id_simulation;", connection);
+                connection.Open();
+                command.Parameters.AddWithValue("id_simulation", NpgsqlDbType.Integer, simulation.ID);
+                command.ExecuteNonQuery();
+                connection.Close();               
+            }
             simulations.Remove(simulation);
         }
 
