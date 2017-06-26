@@ -52,7 +52,10 @@ namespace InkaArt.Interface.Production
         private void ButtonSaveClick(object sender, EventArgs e)
         {
             if (current_simulation.ID > 0) return;
-            current_simulation.save();
+            if (simulations.Save(current_simulation))
+                MessageBox.Show("Simulación guardada", "Guardar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            else
+                MessageBox.Show("No se logró guardar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ButtonReportClick(object sender, EventArgs e)
@@ -66,8 +69,12 @@ namespace InkaArt.Interface.Production
             //general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
             //summary_grid.Rows.Clear();            
+            
+            if (simulations.Delete(current_simulation))
+                MessageBox.Show("Simulación eliminada", "Eliminar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            else
+                MessageBox.Show("No se logró eliminar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            simulations.Delete(current_simulation);
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.SelectedItem = null;
             current_simulation = null;

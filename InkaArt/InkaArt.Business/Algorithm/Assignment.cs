@@ -13,6 +13,7 @@ namespace InkaArt.Business.Algorithm
     public class Assignment
     {
         private int id_assignment;
+        private int id_simulation;
         private DateTime date;
         private double objective_function_value;
         private AssignmentLine[,] assignment_lines;
@@ -24,9 +25,8 @@ namespace InkaArt.Business.Algorithm
         private int altarpiece_produced;
 		
         private int total_miniturns; //Total de miniturnos de un día
-        private WorkerController selected_workers;
-        private int id_simulation;
-        private int assigned_workers;
+        private WorkerController selected_workers;        
+        
 
         public DateTime Date
         {
@@ -141,7 +141,7 @@ namespace InkaArt.Business.Algorithm
         }
 
         /* Para cargar de la BD */
-        public Assignment(int id_assignment, int id_simulation, int tabu_iterations, double objective_function_value, int huamanga_produced, int huacos_produced, int altarpiece_produced, DateTime date, int assigned_workers)
+        public Assignment(int id_assignment, int id_simulation, int tabu_iterations, double objective_function_value, int huamanga_produced, int huacos_produced, int altarpiece_produced, DateTime date)
         {
             this.id_assignment = id_assignment;
             this.id_simulation = id_simulation;
@@ -151,7 +151,6 @@ namespace InkaArt.Business.Algorithm
             this.huacos_produced = huacos_produced;
             this.altarpiece_produced = altarpiece_produced;
             this.date = date;
-            this.assigned_workers = assigned_workers;
 
             this.assignment_lines_list = new List<AssignmentLine>();
         }
@@ -223,7 +222,7 @@ namespace InkaArt.Business.Algorithm
             return list;
         }
                
-        public void save(int id_simulation, NpgsqlConnection connection)
+        public bool save(int id_simulation, NpgsqlConnection connection)
         {
             NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Assignment\" " + 
                 "(id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date, assigned_workers) " +
@@ -243,6 +242,8 @@ namespace InkaArt.Business.Algorithm
 
             foreach(AssignmentLine line in this.toList())
                 line.save(id_assginment,connection);
+
+            return true;
         }
     }
 }

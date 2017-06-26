@@ -39,18 +39,27 @@ namespace InkaArt.Business.Algorithm
             simulations.Add(simulation);
         }
         
-        public void Delete(Simulation simulation)
+        public bool Delete(Simulation simulation)
         {
             if(simulation.ID > 0)
             {
-                NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-                NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Simulation\" SET status = false WHERE id_simulation = :id_simulation;", connection);
-                connection.Open();
-                command.Parameters.AddWithValue("id_simulation", NpgsqlDbType.Integer, simulation.ID);
-                command.ExecuteNonQuery();
-                connection.Close();               
+                try
+                {
+                    NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+                    NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"Simulation\" SET status = false WHERE id_simulation = :id_simulation;", connection);
+                    connection.Open();
+                    command.Parameters.AddWithValue("id_simulation", NpgsqlDbType.Integer, simulation.ID);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    LogHandler.WriteLine("Excepción al intentar eliminar la simulación: " + e.ToString());
+                    return false;
+                }                
             }
             simulations.Remove(simulation);
+            return true;
         }
 
         public void Load(WorkerController workers, OrderController orders, RecipeController recipes)
@@ -64,6 +73,11 @@ namespace InkaArt.Business.Algorithm
             loadSelectedWorkers(connection, workers);
             loadSelectedOrders(connection, orders);
             connection.Close();
+        }
+
+        public bool Save(Simulation simulation)
+        {
+            return simulation.save();
         }
 
         private void loadSelectedWorkers(NpgsqlConnection connection, WorkerController workers)
@@ -142,9 +156,8 @@ namespace InkaArt.Business.Algorithm
                 int huacos_produced = int.Parse(reader["huacos_produced"].ToString());
                 int altarpiece_produced = int.Parse(reader["altarpiece_produced"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
-                int assigned_workers = int.Parse(reader["assigned_workers"].ToString());
 
-                Assignment assignment = new Assignment(id_assignment, id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date, assigned_workers);
+                Assignment assignment = new Assignment(id_assignment, id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date);
                 Simulation simulation = simulations.Where(s => s.ID.Equals(id_simulation)).ToList().First();
                 simulation.Assignments.Add(assignment);
                 list.Add(assignment);
