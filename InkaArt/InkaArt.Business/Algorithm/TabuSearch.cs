@@ -37,7 +37,6 @@ namespace InkaArt.Business.Algorithm
             set { best_solution = value; }
         }
 
-        /* Se inicializan los parametros a calibrar */
         public TabuSearch(Simulation simulation, IndexController indexes, List<Assignment> solution, int elapsed_time)
         {
             loadParameters();            
@@ -48,7 +47,16 @@ namespace InkaArt.Business.Algorithm
             this.best_solution = new List<Assignment>();
         }
 
-        public bool loadParameters()
+        private void createInitialSolution()
+        {
+            WorkerController workers = new WorkerController();
+            workers.Workers.Add(simulation.SelectedWorkers.Workers[0]);
+            workers.Workers.Add(simulation.SelectedWorkers.Workers[1]);
+            List<Assignment> initial_solution = new List<Assignment>();
+            Assignment day = new Assignment(DateTime.Now, workers, 3);
+        }
+
+        private bool loadParameters()
         {
             bool read = false;
             NpgsqlConnection connection = new NpgsqlConnection();
@@ -60,8 +68,8 @@ namespace InkaArt.Business.Algorithm
             while (reader.Read())
             {
                 // reactive tabu list
-                this.tabu_list_length = reader.GetInt32(0);     // largo inicial
-                this.tabu_list_growth = reader.GetDouble(1);    // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
+                this.tabu_list_length = reader.GetInt32(0);    // largo inicial
+                this.tabu_list_growth = reader.GetDouble(1);   // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
                 this.max_no_growth = reader.GetInt32(2);       // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
 
                 // solutions
@@ -75,12 +83,13 @@ namespace InkaArt.Business.Algorithm
 
             return read;
         }
-        
-        /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
-           Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
-        */
+                
         public double getFitness(Assignment solution)
         {
+            /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
+             * Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
+             */
+
             double fitness = 0;
             int assigned_workers = 0;
             AssignmentLine current_assignment = null;
@@ -104,34 +113,35 @@ namespace InkaArt.Business.Algorithm
             //Dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
         }
-
-        /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
-        public Assignment getNeighbor(Assignment solution, TabuMove move)
+        
+        private Assignment getNeighbor(Assignment solution, TabuMove move)
         {
+            /* Creara una nueva solucion por medio de un swap aleatorio, intercambiando dias o miniturnos */
+
             Assignment neighbor = new Assignment(solution);
             int num_workers = simulation.SelectedWorkers.Count();
 
             // move attributes
-            int swap_type = 0; // Randomizer.NextNumber(0, 1);
+            int swap_type = Randomizer.NextNumber(0, 1);
             int worker1_index;
             int worker2_index;
-            
-            // tipo 0: intercambiar listas
-            if (true) //(swap_type == 0)
-            {
-                // buscamos trabajadores
-                worker1_index = Randomizer.NextNumber(0, num_workers - 1);
+
+            // workers
+            worker1_index = Randomizer.NextNumber(0, num_workers - 1);
+            worker2_index = Randomizer.NextNumber(0, num_workers - 1);
+            while (num_workers > 1 && worker1_index == worker2_index)
                 worker2_index = Randomizer.NextNumber(0, num_workers - 1);
-                // nos aseguramos de que sean distintos, a menos que solo se tenga un trabajador en la empresa
-                while (num_workers > 1 && worker1_index == worker2_index)
-                    worker2_index = Randomizer.NextNumber(0, num_workers - 1);
-                // intercambiamos valores
-                SwapWorkers(neighbor, worker1_index, worker2_index);
+
+            // tipo 0: intercambiar el dia entero
+            if (swap_type == 0)
+            {
+                swapDays(neighbor, worker1_index, worker2_index);
             }
-            // tipo 1: intercambiar productos
+            // tipo 1: intercambiar miniturnos
             else
             {
-                // FALTA EL SEGUNDO MODO
+                int miniturn_index = Randomizer.NextNumber(0, simulation.Miniturns - 1);
+                swapMiniturns(solution, worker1_index, worker2_index, miniturn_index);
             }
 
             // guardamos movimiento
@@ -140,7 +150,80 @@ namespace InkaArt.Business.Algorithm
             return neighbor;
         }
 
-        public TabuMove saveMove(int type, Assignment solution, int worker1, int worker2)
+        private void swapDays(Assignment solution, int worker1_index, int worker2_index)
+        {
+            Worker worker1 = simulation.SelectedWorkers[worker1_index];
+            Worker worker2 = simulation.SelectedWorkers[worker2_index];
+            AssignmentLine assignment1, assignment2;
+
+            for (int miniturn = 0; miniturn < solution.TotalMiniturns; miniturn++)
+            {
+                assignment1 = solution[worker1_index, miniturn];                
+                assignment2 = solution[worker2_index, miniturn];                                
+                solution[worker2_index, miniturn] = updateMiniturn(assignment1, worker2);
+                solution[worker1_index, miniturn] = updateMiniturn(assignment2, worker1);
+            }
+        }
+
+        private void swapMiniturns(Assignment solution, int worker1_index, int worker2_index, int miniturn_index)
+        {
+            Worker worker1 = simulation.SelectedWorkers[worker1_index];
+            Worker worker2 = simulation.SelectedWorkers[worker2_index];
+            AssignmentLine assignment1 = solution[worker1_index, miniturn_index];
+            AssignmentLine assignment2 = solution[worker2_index, miniturn_index];
+            AssignmentLine assignment;
+
+            // actualizamos todo lo anterior
+            for (int i = 0; i < solution.TotalMiniturns; i++)
+            {
+                assignment = solution[worker1_index, i];
+                decreaseMiniturn(assignment1, assignment, miniturn_index, i);
+                assignment = solution[worker2_index, i];
+                decreaseMiniturn(assignment2, assignment, miniturn_index, i);
+            }
+
+            // intercambiamos
+            assignment1 = solution[worker1_index, miniturn_index];
+            assignment2 = solution[worker2_index, miniturn_index];
+            solution[worker2_index, miniturn_index] = updateMiniturn(assignment1, worker2);
+            solution[worker1_index, miniturn_index] = updateMiniturn(assignment2, worker1);
+        }
+
+        private void decreaseMiniturn(AssignmentLine assignment_pivot, AssignmentLine assignment, int miniturn_pivot, int miniturn)
+        {            
+            // dividimos bloques de miniturnos y actualizamos sus valores
+            if (assignment_pivot != null && assignment.Equals(assignment_pivot))
+            {                
+                if (miniturn_pivot == miniturn) return;
+
+                Index index = indexes.FindByAssignment(assignment_pivot);
+                // minuturnos anteriores
+                if (miniturn_pivot > miniturn)
+                    assignment.TotalMiniturnsUsed = miniturn - assignment.MiniturnStart;
+                // miniturnos posteriores
+                else
+                {
+                    assignment.TotalMiniturnsUsed -= miniturn_pivot - assignment.MiniturnStart;
+                    assignment.MiniturnStart = miniturn_pivot + 1;                    
+                }
+                assignment.calculateProduced(Simulation.MiniturnLength, index.AverageTime, index.AverageBreakage);
+            }
+        }
+
+        private AssignmentLine updateMiniturn(AssignmentLine assignment, Worker worker)
+        {
+            if (assignment != null)
+            {
+                assignment.Worker = worker;
+                Index index = indexes.FindByAssignment(assignment);
+                if (index != null)
+                    assignment.calculateProduced(Simulation.MiniturnLength, index.AverageTime, index.AverageBreakage);
+            }
+
+            return assignment;
+        }
+
+        private TabuMove saveMove(int type, Assignment solution, int worker1, int worker2)
         {
             TabuMove move;
             int item1, item2;
@@ -161,27 +244,7 @@ namespace InkaArt.Business.Algorithm
 
             return move;
         }
-
-        public void SwapWorkers(Assignment solution, int worker1_index, int worker2_index)
-        {
-            Worker worker1 = simulation.SelectedWorkers[worker1_index];
-            Worker worker2 = simulation.SelectedWorkers[worker2_index];
-
-            for (int miniturn = 0; miniturn < solution.TotalMiniturns; miniturn++)
-            {
-                AssignmentLine assignment1, assignment2;
-
-                assignment1 = solution[worker1_index, miniturn];
-                assignment2 = solution[worker2_index, miniturn];
-
-                if (assignment1 != null) assignment1.Worker = worker2;
-                solution[worker2_index, miniturn] = assignment1;
-                if (assignment2 != null) assignment2.Worker = worker1;
-                solution[worker1_index, miniturn] = assignment2;                
-            }
-        }
-
-        /* Flujo del algoritmo */
+        
         public void run(ref int elapsed_time, int day)
         {
             // soluciones
@@ -244,7 +307,6 @@ namespace InkaArt.Business.Algorithm
                 // si se encontro un vecino
                 else
                 {
-
                     // si encontro un vecino superior al best_fitness actual
                     if (best_fitness > neighbor_fitness)
                     {
