@@ -325,9 +325,9 @@ namespace InkaArt.Interface
                     else
                         showConnectWarning(false);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    LogHandler.WriteLine(e.ToString());
+                    //LogHandler.WriteLine(e.ToString());
                 }
                 Thread.Sleep(50);
             }

@@ -78,7 +78,7 @@ namespace InkaArt.Business.Algorithm
             List<Recipe> order_recipes = GetOrderRecipes(selected_orders[0]);
             LogHandler.WriteLine("Orden de compra {0}: {1}", selected_orders[0].ID, selected_orders[0].Description);
             for (int i = 0; i < order_recipes.Count; i++)
-                LogHandler.WriteLine("Receta {0}: {1}", i+1, order_recipes[i].Description + " " + order_recipes[i].Version);
+                LogHandler.WriteLine("- Receta {0}: {1}", i+1, order_recipes[i].Description + " " + order_recipes[i].Version);
             List<AssignmentLine> current_product = new List<AssignmentLine>();
             List<Job> current_product_jobs = new List<Job>();
             List<Index> current_deleted_indexes = new List<Index>();
@@ -153,11 +153,11 @@ namespace InkaArt.Business.Algorithm
             for (int i = 0; i < candidates.Count; i++)
             {
                 //Si current_product_jobs no tiene datos (y por tanto current_product tampoco), añadir los candidatos cuya receta esté dentro de la lista de recetas de la orden actual.
-                if (current_product_jobs.Count <= 0 && order_recipes.Contains(candidates[i].Recipe))
+                if (current_product_jobs.Count <= 0 && order_recipes.Find(recipe => recipe.ID == candidates[i].Recipe.ID) != null)
                     rcl.Add(candidates[i]);
                 //Si current_product está con datos (y por tanto, current_product_jobs también), añadir los candidatos cuyo puesto de trabajo esté dentro de la lista de puestos para el producto
                 //y cuya receta sea la misma que el producto que estamos elaborando.
-                if (current_product.Count > 0 && current_product_jobs.Contains(candidates[i].Job) && candidates[i].Recipe.ID == current_product[0].Recipe.ID)
+                if (current_product.Count > 0 && current_product_jobs.Find(job => job.ID == candidates[i].Job.ID) != null && candidates[i].Recipe.ID == current_product[0].Recipe.ID)
                     rcl.Add(candidates[i]);
             }
 
