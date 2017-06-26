@@ -32,7 +32,7 @@ namespace InkaArt.Business.Algorithm
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Worker\" ORDER BY last_name ASC", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Worker\" WHERE has_user = false ORDER BY last_name ASC", connection);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
