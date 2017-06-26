@@ -35,7 +35,7 @@ namespace InkaArt.Interface.Production
             this.workers.Load();
             this.recipes.Load();
             this.orders.Load(recipes);
-            this.simulations.Load();
+            this.simulations.Load(workers, orders, recipes);
 
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
@@ -64,12 +64,12 @@ namespace InkaArt.Interface.Production
         {
             //general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
-            //summary_grid.Rows.Clear();
-            combo_simulations.SelectedIndex = -1;
+            //summary_grid.Rows.Clear();            
 
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            simulations.Delete(simulation);
+            simulations.Delete(current_simulation);            
             combo_simulations.DataSource = simulations.BindingList();
+            combo_simulations.SelectedIndex = -1;
+            current_simulation = null;
         }
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
@@ -97,17 +97,27 @@ namespace InkaArt.Interface.Production
 
         public void updateGrid()
         {
+            simulation_grid.Rows.Clear();
             if (current_simulation == null) return;
+
             foreach(Assignment day in current_simulation.Assignments)
             {
-                foreach(AssignmentLine miniturn in day.toList())
+                string day_date = day.Date.ToShortDateString();
+                foreach (AssignmentLine miniturn in day.AssignmentLinesList)
                 {
+                    // por ahora solo mostraremos los miniturnos con elementos activos
+                    if (miniturn.Worker == null || miniturn.Job == null || miniturn.Recipe == null) continue;
+
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
+                    row.Cells[date.Index].Value = day_date;
                     row.Cells[worker.Index].Value = miniturn.Worker.FullName;
                     row.Cells[job.Index].Value = miniturn.Job.Name;
                     row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
                     row.Cells[quantity.Index].Value = miniturn.Produced;
-                    row.Cells[index.Index].Value = current_simulation.getLossIndex(miniturn);
+
+                    double loss_index = current_simulation.getLossIndex(miniturn);
+                    if (loss_index >= 0) row.Cells[index.Index].Value = loss_index;
+
                     simulation_grid.Rows.Add(row);
                 }
             }

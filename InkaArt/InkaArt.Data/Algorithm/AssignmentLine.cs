@@ -17,7 +17,9 @@ namespace InkaArt.Data.Algorithm
         private int miniturn_start;
         private int total_miniturns_used;
         private int produced;    //Cantidad producida
-                
+        private Job job1;
+        private int total_miniturns;
+
         public Worker Worker
         {
             get { return worker; }
@@ -62,6 +64,15 @@ namespace InkaArt.Data.Algorithm
             this.miniturn_start = miniturn_start;
             this.produced = produced;
             this.total_miniturns_used = total_miniturns_used;
+        }
+
+        public AssignmentLine(Worker worker, Job job, Recipe recipe, int produced, int total_miniturns)
+        {
+            this.worker = worker;
+            this.job = job;
+            this.recipe = recipe;
+            this.produced = produced;
+            this.total_miniturns = total_miniturns;
         }
 
         public bool Equals(AssignmentLine other)
