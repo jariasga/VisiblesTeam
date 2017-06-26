@@ -35,11 +35,11 @@ namespace InkaArt.Interface.Production
             this.workers.Load();
             this.recipes.Load();
             this.orders.Load(recipes);
-            this.simulations.Load();
+            this.simulations.Load(workers, orders, recipes);
 
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
-            combo_simulations.SelectedIndex = -1;
+            combo_simulations.SelectedItem = null;
         }
 
         private void ButtonConfigClick(object sender, EventArgs e)
@@ -51,7 +51,11 @@ namespace InkaArt.Interface.Production
 
         private void ButtonSaveClick(object sender, EventArgs e)
         {
-            current_simulation.save();
+            if (current_simulation.ID > 0) return;
+            if (simulations.Save(current_simulation))
+                MessageBox.Show("Simulación guardada", "Guardar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            else
+                MessageBox.Show("No se logró guardar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ButtonReportClick(object sender, EventArgs e)
@@ -64,19 +68,23 @@ namespace InkaArt.Interface.Production
         {
             //general_grid.Rows.Clear();
             simulation_grid.Rows.Clear();
-            //summary_grid.Rows.Clear();
-            combo_simulations.SelectedIndex = -1;
+            //summary_grid.Rows.Clear();            
+            
+            if (simulations.Delete(current_simulation))
+                MessageBox.Show("Simulación eliminada", "Eliminar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            else
+                MessageBox.Show("No se logró eliminar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            Simulation simulation = (Simulation)combo_simulations.SelectedItem;
-            simulations.Delete(simulation);
             combo_simulations.DataSource = simulations.BindingList();
+            combo_simulations.SelectedItem = null;
+            current_simulation = null;
         }
 
         private void ComboSimulationsSelectedIndexChanged(object sender, EventArgs e)
         {
             current_simulation = (Simulation) combo_simulations.SelectedItem;
 
-            if (combo_simulations.SelectedIndex < 0 || current_simulation == null)
+            if (current_simulation == null)
             {
                 button_config.Text = "+ Nueva simulación";
                 button_config.BackColor = Color.SteelBlue;
@@ -88,21 +96,28 @@ namespace InkaArt.Interface.Production
             {
                 button_config.Text = "Ver detalles de asignación";
                 button_config.BackColor = Color.Gray;
-                button_save.Enabled = true;
+                button_save.Enabled = (current_simulation.ID == 0); // solo se puede guardar si es nueva
                 button_delete.Enabled = true;
-                button_report.Enabled = true;
-                updateGrid();
+                button_report.Enabled = true;              
             }
+            updateGrid();
         }
 
         public void updateGrid()
         {
+            simulation_grid.Rows.Clear();
             if (current_simulation == null) return;
+
             foreach(Assignment day in current_simulation.Assignments)
             {
-                foreach(AssignmentLine miniturn in day.toList(current_simulation))
+                string day_date = day.Date.ToShortDateString();
+                foreach (AssignmentLine miniturn in day.AssignmentLinesList)
                 {
+                    // por ahora solo mostraremos los miniturnos con elementos activos
+                    if (miniturn.Worker == null || miniturn.Job == null || miniturn.Recipe == null) continue;
+
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
+                    row.Cells[date.Index].Value = day_date;
                     row.Cells[worker.Index].Value = miniturn.Worker.FullName;
                     row.Cells[job.Index].Value = miniturn.Job.Name;
                     row.Cells[recipe.Index].Value = miniturn.Recipe.Description;

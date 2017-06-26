@@ -172,7 +172,9 @@ namespace InkaArt.Business.Algorithm
         public Index FindByAssignment(AssignmentLine line)
         {
             if (line == null) return null;
-            return indexes.Find(index => index.Worker.ID == line.Worker.ID && index.Job.ID == line.Job.ID && index.Recipe.ID == line.Recipe.ID);
+            return indexes.Find(index => index.Worker != null && index.Worker.ID == line.Worker.ID 
+                && index.Job != null && index.Job.ID == line.Job.ID 
+                && index.Recipe != null && index.Recipe.ID == line.Recipe.ID);
         }
 
 

@@ -20,7 +20,7 @@ namespace InkaArt.Data.Algorithm
 
         private double average_time;
         private double loss_value;
-                
+
         public Worker Worker
         {
             get { return worker; }
@@ -73,6 +73,15 @@ namespace InkaArt.Data.Algorithm
             this.total_miniturns_used = total_miniturns_used;
         }
 
+        public AssignmentLine(Worker worker, Job job, Recipe recipe, int produced, int total_miniturns)
+        {
+            this.worker = worker;
+            this.job = job;
+            this.recipe = recipe;
+            this.produced = produced;
+            this.total_miniturns_used = total_miniturns;
+        }
+
         public bool Equals(AssignmentLine other)
         {
             if (this == null || other == null || this.worker == null || other.worker == null || this.job == null || other.job == null
@@ -97,6 +106,12 @@ namespace InkaArt.Data.Algorithm
             command.Parameters.Add(new NpgsqlParameter("total_miniturns", this.TotalMiniturnsUsed));
 
             command.ExecuteNonQuery();
+        }
+
+        public void calculateProduced(int miniturn_length, double average_time, double average_breakage)
+        {
+            double attempts = TotalMiniturnsUsed * miniturn_length / average_time;
+            produced = Convert.ToInt32(Math.Truncate(attempts * (1 - average_breakage)));
         }
     }
 }

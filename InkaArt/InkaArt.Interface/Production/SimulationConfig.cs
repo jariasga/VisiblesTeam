@@ -59,6 +59,8 @@ namespace InkaArt.Interface.Production
                 this.numeric_huacos.Value = Convert.ToDecimal(simulation.HuacoWeight * 100);
                 this.numeric_stones.Value = Convert.ToDecimal(simulation.HuamangaStoneWeight * 100);
                 this.numeric_altarpiece.Value = Convert.ToDecimal(simulation.RetableWeight * 100);
+                this.checkbox_workers.Checked = false;
+                this.checkbox_orders.Checked = false;
 
                 for (int i = 0; (simulation.SelectedWorkers != null) && (i < list_workers.Items.Count); i++)
                 {

@@ -29,9 +29,8 @@ namespace InkaArt.Business.Algorithm
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Order\" " +  
                 "INNER JOIN inkaart.\"Client\" ON(inkaart.\"Order\".\"idClient\" = inkaart.\"Client\".\"idClient\") " +
                 "WHERE inkaart.\"Order\".\"bdStatus\" = 1 " +
-                "AND inkaart.\"Order\".\"orderStatus\" <> 'entregado'" , connection);
+                "AND inkaart.\"Order\".\"orderStatus\" <> 'facturado'" , connection);
                 //"AND inkaart.\"Order\".\"deliveryDate\" < to_date("+ DateTime.Now.ToShortDateString() + ",'DD/MM/YYYY')";
-            // validar orderStatus == entregado o facturado ?
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -112,6 +111,11 @@ namespace InkaArt.Business.Algorithm
         public List<Order> List()
         {
             return this.orders;
+        }
+
+        public Order GetByID(int order_id)
+        {
+            return orders.Where(o => o.ID.Equals(order_id)).ToList().First();
         }
     }
 }

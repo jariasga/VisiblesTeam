@@ -200,7 +200,7 @@ namespace InkaArt.Interface.Purchases
                 string igv = lineaPedidosList.Rows[i]["igv"].ToString();
                 string id_factura = lineaPedidosList.Rows[i]["id_factura"].ToString();
                 string status = lineaPedidosList.Rows[i]["status"].ToString();
-                dataGridView_pedidos.Rows.Add(id_detail,id_raw_material,nombre,quantity,amount,igv,id_factura,status,false);
+                dataGridView_pedidos.Rows.Add(id_detail,id_raw_material,nombre,quantity,amount,igv,id_factura,status,false,false,false);
             }
             enProcesoDeLlenado = false;
         }
@@ -260,7 +260,7 @@ namespace InkaArt.Interface.Purchases
             int id_sup = int.Parse(textBox_idsupplier.Text);
             double subTotalNuevo = Math.Round(double.Parse(textBox_subtotal.Text),2);
             double igv = Math.Round(double.Parse(textBox_igv.Text),2);
-            try
+            /*try
             {
                 control_detail.insertData(id_order, id_rm, id_sup, int.Parse(textBox_cantidad.Text), subTotalNuevo,igv, 0, "Borrador");
                 textBox_subtotal.Text = "0";
@@ -272,46 +272,90 @@ namespace InkaArt.Interface.Purchases
             {
                 MessageBox.Show("No se pudo agregar la línea de pedido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }*/
+            double total = Math.Round(double.Parse(textBox_total.Text), 2);
+            int indiceExistente;
+            if ((indiceExistente = estaEnDataGrid(id_rm)) != -1)
+            {
+                //si esta en el datagrid, actualizo valor del datagrid
+                dataGridView_pedidos.Rows[indiceExistente].Cells[3].Value = int.Parse(textBox_cantidad.Text);
+                //Le resto el valor del subtotal e igv anterior
+                total -= Math.Round(double.Parse(dataGridView_pedidos.Rows[indiceExistente].Cells[4].Value.ToString()),2);
+                dataGridView_pedidos.Rows[indiceExistente].Cells[4].Value = subTotalNuevo;
+                total -= Math.Round(double.Parse(dataGridView_pedidos.Rows[indiceExistente].Cells[5].Value.ToString()), 2);
+                dataGridView_pedidos.Rows[indiceExistente].Cells[5].Value = igv;
+                if (dataGridView_pedidos.Rows[indiceExistente].Cells[0].Value != null)
+                {//si existe en la base de datos marco que se ha modificado
+                    dataGridView_pedidos.Rows[indiceExistente].Cells[9].Value = true;//marco que se ha modificado
+                }
+
             }
-            double total =Math.Round(double.Parse(textBox_total.Text),2);
+            else
+            {
+                //si no está en el dataGrid
+                dataGridView_pedidos.Rows.Add(null, id_rm, comboBoxRawMaterialName.Text, textBox_cantidad.Text, subTotalNuevo, igv, null, "Borrador", false, false, false);
+
+            }
+            
             total += subTotalNuevo;
             total += igv;
             total = Math.Round(total, 2);
             textBox_total.Text = total.ToString();
-            control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
-            llenarMateriasPedidas();
+            //control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+            //llenarMateriasPedidas();
         }
         
+        private int estaEnDataGrid(int id_rm)
+        {
+            //solo devuelve los ids de filas que no estan eliminadas
+            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            {
+                if (int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString()) == id_rm && !Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[10].Value))
+                    return i;
+            }
+            return -1;
+        }
         /* delete */
         private void button_delete(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            for (int i = dataGridView_pedidos.Rows.Count - 1; i >= 0; i--)
             {
                 if (Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[8].Value))
                 {
-                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[0].Value.ToString());
+                    double totalOr = Math.Round(double.Parse(textBox_total.Text), 2);
+                    double subtotalAux = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()), 2);
+                    double igvLinea = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()), 2);
+                    totalOr -= subtotalAux;
+                    totalOr -= igvLinea;
+                    textBox_total.Text = Math.Round(totalOr,2).ToString();
+                    if (dataGridView_pedidos.Rows[i].Cells[0].Value == null)
+                    {
+                        //si no está en la BD
+                        dataGridView_pedidos.Rows.RemoveAt(i);
+                    }
+                    else
+                    {
+                        //Si está en la BD
+                        dataGridView_pedidos.Rows[i].Cells[10].Value = true;
+                        dataGridView_pedidos.Rows[i].Visible = false;
+                    }
+                       /* int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[0].Value.ToString());
                     int cantidadAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[3].Value.ToString());
-                    double subtotalAux = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()),2);
-                    double igvLinea = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()),2);
                     try
                     {
                         control_detail.updateData(id_detailAux, cantidadAux, subtotalAux, igvLinea, "Eliminado");
                         dataGridView_pedidos.Rows[i].Cells[8].Value = false;
-                        double totalOr = Math.Round(double.Parse(textBox_total.Text),2);
-                        totalOr -= subtotalAux;
-                        totalOr -= igvLinea;
-                        textBox_total.Text = totalOr.ToString();
                         control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), totalOr);
                         
                     }
                     catch (Exception)
                     {
                         continue;
-                    }
+                    }*/
                 }
             }
-            llenarMateriasPedidas();
-            ventanaListaOrdenes.desarrolloBusqueda();
+            /*llenarMateriasPedidas();
+            ventanaListaOrdenes.desarrolloBusqueda();*/
         }
         
         private bool validating_alldata()
@@ -423,12 +467,14 @@ namespace InkaArt.Interface.Purchases
                 buttonDelete.Enabled = false;
                 //hacer update
                 try {
+                    guardarLineasDePedido();
                     control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
                         if(string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
                         else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
                         estadoInicial = comboBox_status.Text;
                     }
+                    llenarMateriasPedidas();
                     ventanaListaOrdenes.desarrolloBusqueda();
                 }
                 catch (Exception)
@@ -455,7 +501,44 @@ namespace InkaArt.Interface.Purchases
 
             }
         }
-        
+        private void guardarLineasDePedido()
+        {
+            for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
+            {
+                if (dataGridView_pedidos.Rows[i].Cells[0].Value == null)
+                {
+                    //si no está en la bd lo inserto
+                    int id_orderR = int.Parse(textBox_id.Text);
+                    int idMat = int.Parse(dataGridView_pedidos.Rows[i].Cells[1].Value.ToString());
+                    string price = dataGridView_pedidos.Rows[i].Cells[2].Value.ToString();
+                    int id_supplierR = int.Parse(textBox_idsupplier.Text);
+                    int cantidad = int.Parse(dataGridView_pedidos.Rows[i].Cells[3].Value.ToString());
+                    double subtotal = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()),2);
+                    double igv = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()), 2);
+                    control_detail.insertData(id_orderR, idMat, id_supplierR,cantidad,subtotal,igv,0,"Borrador");
+                }
+                else if (Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[10].Value))
+                {
+                    //si existe en la BD y está marcado como eliminado, lo paso a Inactivo
+                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[0].Value.ToString());
+                    int cantidad = int.Parse(dataGridView_pedidos.Rows[i].Cells[3].Value.ToString());
+                    double subtotal = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()), 2);
+                    double igv = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()), 2);
+                    control_detail.updateData(id_detailAux, cantidad, subtotal, igv, "Eliminado");
+
+                }
+                else if (Convert.ToBoolean(dataGridView_pedidos.Rows[i].Cells[9].Value))
+                {
+                    //si existe en la BD y está marcado como modificado, lo actualizo
+                    int id_detailAux = int.Parse(dataGridView_pedidos.Rows[i].Cells[0].Value.ToString());
+                    int cantidad = int.Parse(dataGridView_pedidos.Rows[i].Cells[3].Value.ToString());
+                    double subtotal = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[4].Value.ToString()), 2);
+                    double igv = Math.Round(double.Parse(dataGridView_pedidos.Rows[i].Cells[5].Value.ToString()), 2);
+
+                    control_detail.updateData(id_detailAux, cantidad, subtotal, igv, "Borrador");
+                }
+            }
+        }
         private void verifying_quantity(object sender, EventArgs e)
         {
             string actualdata = string.Empty;
@@ -559,13 +642,13 @@ namespace InkaArt.Interface.Purchases
                 document.Add(new Paragraph(phrase3));
                 document.Add(new Paragraph(" "));
                 PdfPTable table = new PdfPTable(5);
-                for (int i = 1; i < dataGridView_pedidos.Columns.Count-3; i++)
+                for (int i = 1; i < dataGridView_pedidos.Columns.Count-5; i++)
                 {
                     table.AddCell(dataGridView_pedidos.Columns[i].HeaderText);
                 }
                 for (int i = 0; i < dataGridView_pedidos.Rows.Count; i++)
                 {
-                    for (int j = 1; j < dataGridView_pedidos.Columns.Count-3; j++)
+                    for (int j = 1; j < dataGridView_pedidos.Columns.Count-5; j++)
                     {
                         if (dataGridView_pedidos.Rows[i].Cells[j].Value != null)
                         {

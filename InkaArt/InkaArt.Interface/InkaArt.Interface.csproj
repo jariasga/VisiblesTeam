@@ -256,6 +256,12 @@
     <Compile Include="Warehouse\MovementFindIn.Designer.cs">
       <DependentUpon>MovementFindIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\MovementForDifference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\MovementForDifference.Designer.cs">
+      <DependentUpon>MovementForDifference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\MovementIndex.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -631,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\MovementFindIn.resx">
       <DependentUpon>MovementFindIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\MovementForDifference.resx">
+      <DependentUpon>MovementForDifference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\MovementIndex.resx">
       <DependentUpon>MovementIndex.cs</DependentUpon>
