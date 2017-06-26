@@ -389,7 +389,7 @@ namespace InkaArt.Data.Sales
                 int currentProductId = getProductId(r["Producto"].ToString()), produced = 0;
                 row["quantity"] = cant;
                 row["quality"] = cali;
-                row["idRecipe"] = getRecipeId(getProductId(r["Producto"].ToString()));
+                row["idRecipe"] = getVersionId(cali);
                 row["idProduct"] = currentProductId;
                 row["idOrder"] = orderId;
                 if (isClientSelected)
@@ -428,6 +428,26 @@ namespace InkaArt.Data.Sales
                 }
             }
             return updateData(myData, myAdap, "Product");
+        }
+
+        private int getVersionId(string versionName)
+        {
+            DataSet myData = new DataSet();
+            NpgsqlDataAdapter myAdap = recipeAdapter();
+            myAdap.SelectCommand.CommandText += " WHERE version = :version";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("version", DbType.AnsiStringFixedLength));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "version";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = versionName;
+
+            myData.Clear();
+            myData = getData(myAdap, "Recipe");
+
+            DataTable documentList = new DataTable();
+            documentList = myData.Tables[0];
+            DataRow row = documentList.Rows[0];
+            int id = int.Parse(row["idRecipe"].ToString());
+            return id;
         }
 
         private int getRecipeId(int productId)
