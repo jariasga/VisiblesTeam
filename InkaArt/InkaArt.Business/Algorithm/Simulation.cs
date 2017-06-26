@@ -164,8 +164,8 @@ namespace InkaArt.Business.Algorithm
             this.assignments = new List<Assignment>();
             this.indexes = new IndexController();
             indexes.Load();
-            this.selected_workers = null;
-            this.selected_orders = null;
+            this.selected_workers = new WorkerController();
+            this.selected_orders = new OrderController();
         }        
         
         public double ProductWeight(int product_id)

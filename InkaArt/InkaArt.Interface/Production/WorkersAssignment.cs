@@ -39,7 +39,7 @@ namespace InkaArt.Interface.Production
 
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.DisplayMember = "Name";
-            combo_simulations.SelectedIndex = -1;
+            combo_simulations.SelectedItem = null;
         }
 
         private void ButtonConfigClick(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace InkaArt.Interface.Production
         {
             current_simulation = (Simulation) combo_simulations.SelectedItem;
 
-            if (combo_simulations.SelectedIndex < 0 || current_simulation == null)
+            if (current_simulation == null)
             {
                 button_config.Text = "+ Nueva simulación";
                 button_config.BackColor = Color.SteelBlue;
@@ -90,9 +90,9 @@ namespace InkaArt.Interface.Production
                 button_config.BackColor = Color.Gray;
                 button_save.Enabled = true;
                 button_delete.Enabled = true;
-                button_report.Enabled = true;
-                updateGrid();
+                button_report.Enabled = true;                
             }
+            updateGrid();
         }
 
         public void updateGrid()
