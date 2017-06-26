@@ -87,7 +87,7 @@ namespace InkaArt.Business.Algorithm
 
             for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
             {
-                for (int miniturn_index = 0; miniturn_index < solution.TotalMiniturns; miniturn_index++)
+                for (int miniturn_index = 0; miniturn_index < simulation.TotalMiniturns; miniturn_index++)
                 {
                     AssignmentLine assignment = solution[worker_index, miniturn_index];
                     if (assignment == null || assignment.Equals(current_assignment))
@@ -148,8 +148,8 @@ namespace InkaArt.Business.Algorithm
             // process
             if (type == 0)
             {
-                item1 = solution.getProcessId(worker1);
-                item2 = solution.getProcessId(worker2);
+                item1 = solution.getProcessId(worker1, simulation);
+                item2 = solution.getProcessId(worker2, simulation);
             }
             // product 
             else
@@ -167,7 +167,7 @@ namespace InkaArt.Business.Algorithm
             Worker worker1 = simulation.SelectedWorkers[worker1_index];
             Worker worker2 = simulation.SelectedWorkers[worker2_index];
 
-            for (int miniturn = 0; miniturn < solution.TotalMiniturns; miniturn++)
+            for (int miniturn = 0; miniturn < simulation.TotalMiniturns; miniturn++)
             {
                 AssignmentLine assignment1, assignment2;
 

@@ -100,14 +100,14 @@ namespace InkaArt.Interface.Production
             if (current_simulation == null) return;
             foreach(Assignment day in current_simulation.Assignments)
             {
-                foreach(AssignmentLine miniturn in day.toList())
+                foreach(AssignmentLine miniturn in day.toList(current_simulation))
                 {
                     DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
                     row.Cells[worker.Index].Value = miniturn.Worker.FullName;
                     row.Cells[job.Index].Value = miniturn.Job.Name;
                     row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
                     row.Cells[quantity.Index].Value = miniturn.Produced;
-                    row.Cells[index.Index].Value = current_simulation.getLossIndex(miniturn);
+                    row.Cells[index.Index].Value = miniturn.LossValue;
                     simulation_grid.Rows.Add(row);
                 }
             }

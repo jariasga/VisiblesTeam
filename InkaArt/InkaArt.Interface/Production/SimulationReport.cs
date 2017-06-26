@@ -34,9 +34,9 @@ namespace InkaArt.Interface.Production
                 DataGridViewRow row = (DataGridViewRow)simulation_grid.Rows[0].Clone();
                 row.Cells[0].Value = day.Date;
                 row.Cells[1].Value = day.TabuIterations;
-                row.Cells[2].Value = day.Huacos_produced;
-                row.Cells[3].Value = day.Huamanga_produced;
-                row.Cells[4].Value = day.Altarpiece_produced;
+                row.Cells[2].Value = day.HuacosProduced;
+                row.Cells[3].Value = day.HuamangaProduced;
+                row.Cells[4].Value = day.AltarpieceProduced;
                 row.Cells[5].Value = simulation.SelectedWorkers.Count();
                 simulation_grid.Rows.Add(row);
             }
