@@ -54,7 +54,7 @@ namespace InkaArt.Business.Production
 
                 //  Desactivar
                 DataTable r_rmTable = new DataTable();
-                DataRow[] r_rmRows = r_rmList.Select("idRecipe = " + idRecipe);
+                DataRow[] r_rmRows = r_rmList.Select("idRecipe = " + idRecipe + " AND status = 1");
                 if (r_rmRows.Any())
                 {
                     r_rmTable = r_rmRows.CopyToDataTable();
