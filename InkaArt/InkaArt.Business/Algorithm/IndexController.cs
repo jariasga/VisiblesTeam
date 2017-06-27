@@ -103,25 +103,32 @@ namespace InkaArt.Business.Algorithm
             for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
             {
                 List<Job> product_jobs = jobs.GetJobsByProduct(recipes[recipe].Product);
+                LogHandler.WriteLine("Receta {0}: {1}", recipe + 1, "ID: " + recipes[recipe].ID + ", Version: " + recipes[recipe].Version);
                 for (int job = 0; job < product_jobs.Count; job++)
                 {
                     int job_index = jobs.GetIndex(product_jobs[job].ID);
                     int recipe_index = recipes.GetIndex(recipes[recipe].ID);
+                    if (job_index < 0 || recipe_index < 0) continue;
+                    LogHandler.WriteLine("- Puesto de trabajo {0}: index={1}, ID={2}, Nombre={3}", job + 1, job_index, product_jobs[job].ID, product_jobs[job].Name);
 
                     for (int index = 0; index < indexes.Count; index++)
                     {
-                        if (indexes[index].Job.ID == jobs[job_index].ID && indexes[index].Recipe.ID == recipes[recipe_index].ID)
+                        LogHandler.WriteLine("  - index.Job={0}={1}=product_jobs[{2}], index.Recipe={3}={4}=recipes[{5}]", indexes[index].Job.ID,
+                            product_jobs[job].ID, job, indexes[index].Recipe.ID, recipes[recipe].ID, recipe);
+                        if (indexes[index].Job.ID == product_jobs[job].ID && indexes[index].Recipe.ID == recipes[recipe].ID)
                         {
                             average_mean_count[recipe_index, job_index]++;
                             average_breakage_mean[recipe_index, job_index] += indexes[index].AverageBreakage;
                             average_time_mean[recipe_index, job_index] += indexes[index].AverageTime;
+                            LogHandler.WriteLine("    Nuevo average_mean[{0},{1}]: Count={2}, Breakage={3}, Time={4}", recipe_index, job_index,
+                                average_mean_count[recipe_index, job_index], average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index]);
                         }
                     }
 
                     average_breakage_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
-                        ? 1 : average_breakage_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
+                        ? -1 : average_breakage_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
                     average_time_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
-                        ? 1 : average_time_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
+                        ? -1 : average_time_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
                 }
             }
 
@@ -138,16 +145,19 @@ namespace InkaArt.Business.Algorithm
                         Worker worker_object = simulation.SelectedWorkers[worker];
 
                         Index index = FindByWorkerJobAndRecipe(worker_object, jobs[job_index], recipes[recipe_index]);
+                        bool is_new_index = false;
                         if (index == null)
                         {
+                            if (average_mean_count[recipe_index, job_index] <= 0) continue;
                             index = new Index(0, worker_object, jobs[job_index], recipes[recipe_index],
                                 average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index]);
-                            indexes.Add(index);
+                            is_new_index = true;
                         }
 
                         double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
                         index.CalculateIndexes(average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index],
                             simulation.BreakageWeight, simulation.TimeWeight, product_weight);
+                        if (is_new_index) indexes.Add(index);
                     }
                 }
             }
