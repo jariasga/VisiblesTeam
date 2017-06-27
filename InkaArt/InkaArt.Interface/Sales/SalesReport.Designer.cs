@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_export = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,6 +48,9 @@
             this.label_product = new System.Windows.Forms.Label();
             this.label_iniDate = new System.Windows.Forms.Label();
             this.label_finDate = new System.Windows.Forms.Label();
+            this.button_pdf = new System.Windows.Forms.Button();
+            this.label_total = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_salesReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,11 +59,11 @@
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
             this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(365, 466);
+            this.button_export.Location = new System.Drawing.Point(337, 555);
             this.button_export.Name = "button_export";
-            this.button_export.Size = new System.Drawing.Size(154, 51);
+            this.button_export.Size = new System.Drawing.Size(222, 51);
             this.button_export.TabIndex = 19;
-            this.button_export.Text = "Exportar";
+            this.button_export.Text = "Exportar a Excel";
             this.button_export.UseVisualStyleBackColor = false;
             this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
@@ -98,7 +101,7 @@
             // 
             this.label_todaydate.AutoSize = true;
             this.label_todaydate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_todaydate.Location = new System.Drawing.Point(748, 9);
+            this.label_todaydate.Location = new System.Drawing.Point(1016, 9);
             this.label_todaydate.Name = "label_todaydate";
             this.label_todaydate.Size = new System.Drawing.Size(0, 23);
             this.label_todaydate.TabIndex = 23;
@@ -106,18 +109,19 @@
             // grid_salesReport
             // 
             this.grid_salesReport.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_salesReport.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_salesReport.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.grid_salesReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_salesReport.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_salesReport.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_salesReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_salesReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.grid_salesReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_salesReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.date,
@@ -125,60 +129,55 @@
             this.TipoCliente,
             this.amount,
             this.monto});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_salesReport.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_salesReport.DefaultCellStyle = dataGridViewCellStyle8;
             this.grid_salesReport.Location = new System.Drawing.Point(39, 163);
             this.grid_salesReport.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_salesReport.Name = "grid_salesReport";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_salesReport.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_salesReport.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_salesReport.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_salesReport.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.grid_salesReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_salesReport.Size = new System.Drawing.Size(820, 255);
+            this.grid_salesReport.Size = new System.Drawing.Size(1071, 304);
             this.grid_salesReport.TabIndex = 28;
             // 
             // date
             // 
             this.date.HeaderText = "Fecha";
             this.date.Name = "date";
-            this.date.Width = 155;
             // 
             // client
             // 
             this.client.HeaderText = "Cliente";
             this.client.Name = "client";
-            this.client.Width = 156;
             // 
             // TipoCliente
             // 
             this.TipoCliente.HeaderText = "Tipo de Cliente";
             this.TipoCliente.Name = "TipoCliente";
-            this.TipoCliente.Width = 155;
             // 
             // amount
             // 
             this.amount.HeaderText = "Cantidad";
             this.amount.Name = "amount";
-            this.amount.Width = 156;
             // 
             // monto
             // 
             this.monto.HeaderText = "Monto (S/.)";
             this.monto.Name = "monto";
-            this.monto.Width = 155;
             // 
             // label4
             // 
@@ -216,12 +215,48 @@
             this.label_finDate.Size = new System.Drawing.Size(0, 23);
             this.label_finDate.TabIndex = 32;
             // 
+            // button_pdf
+            // 
+            this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.ForeColor = System.Drawing.Color.White;
+            this.button_pdf.Location = new System.Drawing.Point(614, 556);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_pdf.Name = "button_pdf";
+            this.button_pdf.Size = new System.Drawing.Size(198, 50);
+            this.button_pdf.TabIndex = 39;
+            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.UseVisualStyleBackColor = false;
+            this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
+            // 
+            // label_total
+            // 
+            this.label_total.AutoSize = true;
+            this.label_total.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_total.Location = new System.Drawing.Point(903, 500);
+            this.label_total.Name = "label_total";
+            this.label_total.Size = new System.Drawing.Size(0, 22);
+            this.label_total.TabIndex = 41;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(745, 500);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(152, 22);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "Monto Total (S/.):";
+            // 
             // SalesReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(899, 553);
+            this.ClientSize = new System.Drawing.Size(1157, 626);
+            this.Controls.Add(this.label_total);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.label_finDate);
             this.Controls.Add(this.label_iniDate);
             this.Controls.Add(this.label_product);
@@ -256,5 +291,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn monto;
+        private System.Windows.Forms.Button button_pdf;
+        private System.Windows.Forms.Label label_total;
+        private System.Windows.Forms.Label label5;
     }
 }
