@@ -44,12 +44,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textbox_igv = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,8 +57,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button_delete = new System.Windows.Forms.Button();
-            this.button_fac = new System.Windows.Forms.Button();
             this.button_seedoc = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -259,9 +258,9 @@
             this.Producto,
             this.Column1,
             this.Column2,
-            this.Column4,
+            this.Cantidad,
             this.Column3,
-            this.Cantidad});
+            this.Column4});
             this.grid_orderline.Location = new System.Drawing.Point(27, 32);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
@@ -269,47 +268,6 @@
             this.grid_orderline.RowHeadersVisible = false;
             this.grid_orderline.Size = new System.Drawing.Size(697, 203);
             this.grid_orderline.TabIndex = 22;
-            // 
-            // Producto
-            // 
-            this.Producto.FillWeight = 150F;
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 40F;
-            this.Column2.HeaderText = "PU";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.FillWeight = 75F;
-            this.Column4.HeaderText = "Facturado";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.FillWeight = 75F;
-            this.Column3.HeaderText = "Stock";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.FillWeight = 70F;
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -471,27 +429,12 @@
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
-            // button_fac
-            // 
-            this.button_fac.BackColor = System.Drawing.Color.Gray;
-            this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_fac.ForeColor = System.Drawing.Color.White;
-            this.button_fac.Location = new System.Drawing.Point(808, 555);
-            this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_fac.Name = "button_fac";
-            this.button_fac.Size = new System.Drawing.Size(143, 48);
-            this.button_fac.TabIndex = 39;
-            this.button_fac.Text = "🗀 Facturar";
-            this.button_fac.UseVisualStyleBackColor = false;
-            this.button_fac.Visible = false;
-            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
-            // 
             // button_seedoc
             // 
             this.button_seedoc.BackColor = System.Drawing.Color.Gray;
             this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_seedoc.ForeColor = System.Drawing.Color.White;
-            this.button_seedoc.Location = new System.Drawing.Point(557, 555);
+            this.button_seedoc.Location = new System.Drawing.Point(706, 555);
             this.button_seedoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_seedoc.Name = "button_seedoc";
             this.button_seedoc.Size = new System.Drawing.Size(244, 48);
@@ -500,6 +443,47 @@
             this.button_seedoc.UseVisualStyleBackColor = false;
             this.button_seedoc.Click += new System.EventHandler(this.button_seedoc_Click);
             // 
+            // Producto
+            // 
+            this.Producto.FillWeight = 150F;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 40F;
+            this.Column2.HeaderText = "PU";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.FillWeight = 70F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.FillWeight = 75F;
+            this.Column3.HeaderText = "Stock";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.FillWeight = 75F;
+            this.Column4.HeaderText = "Facturado";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
             // ClientOrderShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -507,7 +491,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1248, 634);
             this.Controls.Add(this.button_seedoc);
-            this.Controls.Add(this.button_fac);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -553,7 +536,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textbox_amount;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button_fac;
         private System.Windows.Forms.Button button_seedoc;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label1;
@@ -566,8 +548,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
