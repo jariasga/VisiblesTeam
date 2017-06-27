@@ -58,13 +58,16 @@ namespace InkaArt.Business.Purchases
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
             {
+                
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(';');
-
-                    // creamos unidades
-                    insertData(values[0], values[1], values[2]);
+                    string nombre=values[0].Trim();
+                    string abreviatura=values[1].Trim();
+                    string estado=values[2].Trim();
+                    if (values[0].Length <= 280 && values[1].Length <= 10)
+                        insertData(values[0], values[1], "Activo");
                 }
             }
         }
