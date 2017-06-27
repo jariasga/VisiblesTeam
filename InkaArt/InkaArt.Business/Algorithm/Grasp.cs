@@ -104,7 +104,7 @@ namespace InkaArt.Business.Algorithm
             {
                 //Actualizar la función de costo para los candidatos restantes
                 for (int i = 0; i < candidates.Count; i++)
-                    candidates[i].NextCostValue(assignment.ObjectiveFunction, iteration - 1);
+                    candidates[i].NextCostValue(assignment.ObjectiveFunction, iteration);
 
                 LogHandler.WriteLine("ITERACIÓN DE CONSTRUCCIÓN #" + construction);
                 LogHandler.WriteLine();
@@ -176,8 +176,13 @@ namespace InkaArt.Business.Algorithm
             ///////////////////////////////////////////////////////////////////////////////
 
             //Calcular el máximo y el mínimo costo de los candidatos que podrían pertenecer al RCL
-            double min = rcl.Min(candidate => candidate.CostValue);
-            double max = rcl.Max(candidate => candidate.CostValue);
+            double min = double.MaxValue;
+            double max = double.MinValue;
+            for (int i = 0; i < rcl.Count; i++)
+            {
+                if (candidates[i].CostValue < min) min = candidates[i].CostValue;
+                if (candidates[i].CostValue > max) max = candidates[i].CostValue;
+            }
             double max_rcl = min + Alpha * (max - min);
             LogHandler.WriteLine("Minimo = {0}, Maximo = {1}, Rango = [{0}, {2}]", min, max, max_rcl);
 
