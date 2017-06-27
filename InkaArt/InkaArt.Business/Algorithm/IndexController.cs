@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
+using System.IO;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -98,24 +99,22 @@ namespace InkaArt.Business.Algorithm
             double[,] average_time_mean = new double[jobs.NumberOfJobs, recipes.NumberOfRecipes];
             int[,] average_mean_count = new int[jobs.NumberOfJobs, recipes.NumberOfRecipes];
 
-            for (int i = 0; i < jobs.NumberOfJobs; i++)
+            for (int job = 0; job < jobs.NumberOfJobs; job++)
             {
-                for (int j = 0; j < recipes.NumberOfRecipes; j++)
+                for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
                 {
                     foreach (Index index in indexes)
                     {
-                        if (index.Job.ID == jobs[i].ID && index.Recipe.ID == recipes[j].ID)
+                        if (index.Job.ID == jobs[job].ID && index.Recipe.ID == recipes[recipe].ID)
                         {
-                            average_mean_count[i, j]++;
-                            average_breakage_mean[i, j] += index.AverageBreakage;
-                            average_time_mean[i, j] += index.AverageTime;
+                            average_mean_count[job, recipe]++;
+                            average_breakage_mean[job, recipe] += index.AverageBreakage;
+                            average_time_mean[job, recipe] += index.AverageTime;
                         }
                     }
 
-                    average_breakage_mean[i, j] = (average_mean_count[i, j] <= 0) ? 1 :
-                        average_breakage_mean[i, j] / average_mean_count[i, j];
-                    average_time_mean[i, j] = (average_mean_count[i, j] <= 0) ? 1 :
-                        average_time_mean[i, j] / average_mean_count[i, j];
+                    average_breakage_mean[job, recipe] = (average_mean_count[job, recipe] <= 0) ? 1 : average_breakage_mean[job, recipe] / average_mean_count[job, recipe];
+                    average_time_mean[job, recipe] = (average_mean_count[job, recipe] <= 0) ? 1 : average_time_mean[job, recipe] / average_mean_count[job, recipe];
                 }
             }
 
@@ -170,12 +169,43 @@ namespace InkaArt.Business.Algorithm
             return indexes.Find(index => index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID);
         }
 
+        public Index FindByAssignment(AssignmentLine line)
+        {
+            if (line == null) return null;
+            return indexes.Find(index => index.Worker != null && index.Worker.ID == line.Worker.ID 
+                && index.Job != null && index.Job.ID == line.Job.ID 
+                && index.Recipe != null && index.Recipe.ID == line.Recipe.ID);
+        }
+
+
         public Index FindByWorkerJobAndRecipe(Worker worker, Job job, Recipe recipe)
         {
             if (worker == null || job == null || recipe == null) return null;
             foreach (Index index in indexes)
                 if (index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID) return index;
             return null;
+        }
+
+        public void indexesToCSV()
+        {
+            //before your loop
+            var csv = new StringBuilder();
+
+            foreach (Index index in indexes)
+            {
+                var worker = index.Worker.FullName;
+                var worker_id = index.Worker.ID.ToString();
+                var job = index.Job.ID.ToString();
+                var recipe = index.Recipe.ID.ToString();
+                var br = index.BreakageIndex.ToString();
+                var ti = index.TimeIndex.ToString();
+                var lo = index.LossIndex.ToString();
+                var newLine = string.Format("{0}; {1}; {2}; {3}; {4}; {5}; {6}", worker_id, worker, job, recipe, br, ti, lo);
+                csv.AppendLine(newLine);
+            }
+                        
+            //after your loop
+            File.WriteAllText("indexes.csv", csv.ToString());
         }
     }
 }

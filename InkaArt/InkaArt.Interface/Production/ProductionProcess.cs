@@ -83,7 +83,10 @@ namespace InkaArt.Interface.Production
                     MessageBox.Show("Los precios no pueden ser menores al precio base, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
+                {
                     MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }                    
             }
             else
                 MessageBox.Show("Tipo de dato no permitido, por favor ingrese un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

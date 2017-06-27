@@ -21,9 +21,9 @@ namespace InkaArt.Interface.Warehouse
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonAceptClick(object sender, EventArgs e)
         {
-            string reason = comboBox2.Text;
+            string reason = combobox_reason.Text;
 
             if(reason == "")
             {
@@ -31,7 +31,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
 
-            if (textBox5.Text == "")
+            if (text_warehouse_id.Text == "")
             {
                 MessageBox.Show("Por favor seleccione un almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -39,8 +39,8 @@ namespace InkaArt.Interface.Warehouse
 
             string nameWarehouseOrigin;
             string idWarehouesOrigin;
-            nameWarehouseOrigin = textBox6.Text;
-            idWarehouesOrigin = textBox5.Text;
+            nameWarehouseOrigin = text_warehouse.Text;
+            idWarehouesOrigin = text_warehouse_id.Text;
 
             if (reason == "Produccion")
             {
@@ -49,21 +49,23 @@ namespace InkaArt.Interface.Warehouse
                     MessageBox.Show("Por favor seleccione un almacén antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if(comboBox1.Text == "")
+                if(combobox_type.Text == "")
                 {
                     MessageBox.Show("Por favor ingrese un tpo de movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (comboBox1.Text == "Entrada")
+                if (combobox_type.Text == "Entrada")
                 {
-                    Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                    Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
                     formView.Show();
                 }
                 else
                 {
-                    if (comboBox1.Text == "Salida")
+                    if (combobox_type.Text == "Salida")
                     {
-                        Form formView = new InkaArt.Interface.Warehouse.ProductionMovementOut(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+
+                        Form formView = new InkaArt.Interface.Warehouse.ProductionMovementOut(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
+
                         formView.Show();
                     }
                 }
@@ -71,23 +73,23 @@ namespace InkaArt.Interface.Warehouse
             }
             else
             {
-                if(reason == "Compra" && string.Compare(comboBox1.Text,"Entrada")==0)
+                if(reason == "Compra" && string.Compare(combobox_type.Text,"Entrada")==0)
                 {
-                    Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(textBox5.Text);
+                    Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(text_warehouse_id.Text);
                     formView.Show();
                 }
                 else
                 {
                     if (reason == "Venta")
                     {
-                        Form formView = new InkaArt.Interface.Warehouse.SaleMovementcs(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                        Form formView = new InkaArt.Interface.Warehouse.SaleMovementcs(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
                         formView.Show();
                     }
                     else
                     {
                         if (reason == "Traslado")
                         {
-                            Form formView = new InkaArt.Interface.Warehouse.ExchangeMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                            Form formView = new InkaArt.Interface.Warehouse.ExchangeMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
                             formView.Show();
                         }
                         else
@@ -102,9 +104,14 @@ namespace InkaArt.Interface.Warehouse
                                 Form formView = new InkaArt.Interface.Warehouse.MovementFindIn(idWarehouesOrigin);
                                 formView.Show();
                             }
+                            else if(reason == "Diferencia de stock")
+                            {
+                                Form formView = new InkaArt.Interface.Warehouse.MovementForDifference(idWarehouesOrigin);
+                                formView.Show();
+                            }
                             else if (reason == "Devolución")
                             {
-                                Form formView = new InkaArt.Interface.Warehouse.ReturnMovement(idWarehouesOrigin, nameWarehouseOrigin, comboBox1.Text);
+                                Form formView = new InkaArt.Interface.Warehouse.ReturnMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
                                 formView.Show();
                             }
                             else MessageBox.Show("Por favor seleccione una razón válida de movimiento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -130,13 +137,13 @@ namespace InkaArt.Interface.Warehouse
             //int a;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonSearchClick(object sender, EventArgs e)
         {
-            Form new_warehouse_window = new WarehouseSearchMovement(textBox5, textBox6);
+            Form new_warehouse_window = new WarehouseSearchMovement(text_warehouse_id, text_warehouse);
             new_warehouse_window.Show();
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void buttonDeleteClick(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -149,13 +156,13 @@ namespace InkaArt.Interface.Warehouse
             movementReasonList = reasonMovementController.GetReasonMovementList();
             foreach (DataRow row in movementReasonList.Rows)
             {
-                comboBox2.Items.Add(row["description"]);
+                combobox_reason.Items.Add(row["description"]);
             }
 
             movementTypeList = typeMovementController.GetTypeMovementList();
             foreach (DataRow row in movementTypeList.Rows)
             {
-                comboBox1.Items.Add(row["description"]);
+                combobox_type.Items.Add(row["description"]);
             }
         }
 

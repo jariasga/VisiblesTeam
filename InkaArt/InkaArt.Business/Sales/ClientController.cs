@@ -58,10 +58,9 @@ namespace InkaArt.Business.Sales
                 return "Por favor, complete todos los campos antes de continuar";
             if (personType.Equals("0"))
             {
-                switch (notValid(ruc))
+                if (!(long.TryParse(dni, out laux) && ruc.Length == 11))
                 {
-                    case 0:
-                        return "Ingrese un RUC válido";
+                    return "Ingrese un RUC válido";
                 }
             }
             else if (personType.Equals("1"))
@@ -132,49 +131,6 @@ namespace InkaArt.Business.Sales
             if (int.TryParse(value, out aux))
                 return true;
             else return false;
-        }
-        private int notValid(string ruc)
-        {
-            long aux;
-            char[] digits;
-            int[] factors = { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
-            if (Int64.TryParse(ruc, out aux))
-            {
-                if (ruc.Length != 11) return 0;
-                digits = ruc.ToCharArray();
-                int sum = 0, result;
-                for (int i = 0; i < digits.Length - 1; i++)
-                {
-                    sum += factors[i] * (digits[i] - '0');
-                }
-                result = 11 - (sum % 11);
-                switch (result)
-                {
-                    case 10:
-                        result = 0;
-                        break;
-                    case 11:
-                        result = 1;
-                        break;
-                }
-                if (result > 11)
-                {
-                    string auxRes = result.ToString();
-                    result = int.Parse(auxRes.Substring(auxRes.Length - 1, 1));
-                }
-                if (result == (digits[10] - '0'))
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            else
-            {
-                return 0;
-            }
         }
     }
 }

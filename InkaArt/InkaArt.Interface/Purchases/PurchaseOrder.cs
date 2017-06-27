@@ -19,7 +19,7 @@ namespace InkaArt.Interface.Purchases
             controlSup = new SupplierController();
             purchaseOrderList = control.getData();
             desarrolloBusqueda();
-            dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
+            
         }
         private string buscarIdsProveedores(string nombre)
         {
@@ -51,7 +51,8 @@ namespace InkaArt.Interface.Purchases
             if (textBox_name.Text.Length > 0)
             {
                 string lista = buscarIdsProveedores(textBox_name.Text);
-                cadena += " AND id_supplier IN (" + lista+")";
+                if (lista.Length == 0) lista = "0";
+                cadena += " AND id_supplier IN (" + lista + ")";
             }
             if (dateTimePicker_creation.Text.Length > 0 && checkBox_dateInclude.Checked)
             {
@@ -93,9 +94,10 @@ namespace InkaArt.Interface.Purchases
                 string delivery_date = DateTime.Parse(purchaseOrderList.Rows[i]["delivery_date"].ToString()).ToShortDateString();
                 double total = double.Parse(purchaseOrderList.Rows[i]["total"].ToString());
                 string suppName = buscarNombre(id_supplier);
-                dataGridView_purchaseOrder.Rows.Add(false, id_order, suppName, creation_date, delivery_date, total, status, id_supplier);
+                dataGridView_purchaseOrder.Rows.Add(id_order, suppName, creation_date, delivery_date, total, status, id_supplier, false);
             }
-            
+            dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
+
         }
         private void button_search(object sender, EventArgs e)
         {
@@ -118,21 +120,21 @@ namespace InkaArt.Interface.Purchases
             int registros = dataGridView_purchaseOrder.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                if (Convert.ToBoolean(dataGridView_purchaseOrder.Rows[i].Cells[0].Value) == true)
+                if (Convert.ToBoolean(dataGridView_purchaseOrder.Rows[i].Cells[7].Value) == true)
                 {
-                    string id_order = dataGridView_purchaseOrder.Rows[i].Cells[1].Value.ToString();
-                    int prov = int.Parse(dataGridView_purchaseOrder.Rows[i].Cells[7].Value.ToString());
-                    string status = dataGridView_purchaseOrder.Rows[i].Cells[6].Value.ToString();
+                    string id_order = dataGridView_purchaseOrder.Rows[i].Cells[0].Value.ToString();
+                    int prov = int.Parse(dataGridView_purchaseOrder.Rows[i].Cells[6].Value.ToString());
+                    string status = dataGridView_purchaseOrder.Rows[i].Cells[5].Value.ToString();
                     if (string.Compare(status, "Borrador") != 0)
                     {
                         //solo se eliminará las ordenes en estado Borrador
-                        dataGridView_purchaseOrder.Rows[i].Cells[0].Value = false;
+                        dataGridView_purchaseOrder.Rows[i].Cells[7].Value = false;
                         MessageBox.Show("No se pudo eliminar la orden " + id_order + " porque no se encuentra en estado Borrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         continue;
                     }
-                    DateTime creation_date = DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[3].Value.ToString());
-                    DateTime delivery_date= DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[4].Value.ToString());
-                    double total = (double) dataGridView_purchaseOrder.Rows[i].Cells[5].Value;
+                    DateTime creation_date = DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[2].Value.ToString());
+                    DateTime delivery_date= DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[3].Value.ToString());
+                    double total = (double) dataGridView_purchaseOrder.Rows[i].Cells[4].Value;
                     try
                     {
                         control.updateData(id_order,prov,"Eliminado", creation_date,delivery_date,total);

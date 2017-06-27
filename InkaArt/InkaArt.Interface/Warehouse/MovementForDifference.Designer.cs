@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Warehouse
 {
-    partial class BrokenItems
+    partial class MovementForDifference
     {
         /// <summary>
         /// Required designer variable.
@@ -45,7 +45,7 @@
             this.button_save.Location = new System.Drawing.Point(82, 196);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(127, 42);
-            this.button_save.TabIndex = 39;
+            this.button_save.TabIndex = 46;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
@@ -58,7 +58,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 18);
-            this.label1.TabIndex = 38;
+            this.label1.TabIndex = 45;
             this.label1.Text = "Cantidad";
             // 
             // textBox6
@@ -69,7 +69,7 @@
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(208, 26);
-            this.textBox6.TabIndex = 37;
+            this.textBox6.TabIndex = 44;
             // 
             // label_item
             // 
@@ -79,7 +79,7 @@
             this.label_item.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_item.Name = "label_item";
             this.label_item.Size = new System.Drawing.Size(64, 18);
-            this.label_item.TabIndex = 36;
+            this.label_item.TabIndex = 43;
             this.label_item.Text = "Nombre";
             // 
             // combo_item
@@ -89,7 +89,7 @@
             this.combo_item.Location = new System.Drawing.Point(40, 94);
             this.combo_item.Name = "combo_item";
             this.combo_item.Size = new System.Drawing.Size(208, 26);
-            this.combo_item.TabIndex = 35;
+            this.combo_item.TabIndex = 42;
             // 
             // label3
             // 
@@ -99,7 +99,7 @@
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 18);
-            this.label3.TabIndex = 34;
+            this.label3.TabIndex = 41;
             this.label3.Text = "Tipo";
             // 
             // combo_type
@@ -109,10 +109,10 @@
             this.combo_type.Location = new System.Drawing.Point(40, 44);
             this.combo_type.Name = "combo_type";
             this.combo_type.Size = new System.Drawing.Size(208, 26);
-            this.combo_type.TabIndex = 33;
+            this.combo_type.TabIndex = 40;
             this.combo_type.SelectedValueChanged += new System.EventHandler(this.combo_type_SelectedValueChanged);
             // 
-            // BrokenItems
+            // MovementForDifference
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,9 +125,8 @@
             this.Controls.Add(this.combo_item);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.combo_type);
-            this.Name = "BrokenItems";
-            this.Text = "Items Rotos";
-            this.Load += new System.EventHandler(this.BrokenItems_Load);
+            this.Name = "MovementForDifference";
+            this.Text = "Diferencia de Stock";
             this.ResumeLayout(false);
             this.PerformLayout();
 

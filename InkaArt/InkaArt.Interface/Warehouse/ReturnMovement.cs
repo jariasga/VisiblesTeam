@@ -15,9 +15,11 @@ namespace InkaArt.Interface.Warehouse
     public partial class ReturnMovement : Form
     {
         string typeMovement = "";
+
         string idWarehouesOrigin = "";
         string nameWarehouseOrigin = "";
         private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
+
 
         public ReturnMovement()
         {
@@ -33,6 +35,7 @@ namespace InkaArt.Interface.Warehouse
             textBox6.Text = nameWarehouse;
             textBox5.Text = idWarehouse;
         }
+
 
         private int validarEntero(string entero)
         {
@@ -99,5 +102,6 @@ namespace InkaArt.Interface.Warehouse
         {
             this.Close();
         }
+
     }
 }

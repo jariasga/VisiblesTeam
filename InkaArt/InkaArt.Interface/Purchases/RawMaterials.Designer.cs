@@ -40,7 +40,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonCargaMasiva = new System.Windows.Forms.Button();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id_raw_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +47,7 @@
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.average_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterialsList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,14 +61,14 @@
             this.dataGridView_rawMaterialsList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_rawMaterialsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_rawMaterialsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Eliminar,
             this.id_raw_material,
             this.name,
             this.description,
             this.unitName,
             this.status,
             this.average_price,
-            this.unit});
+            this.unit,
+            this.Eliminar});
             this.dataGridView_rawMaterialsList.Location = new System.Drawing.Point(15, 185);
             this.dataGridView_rawMaterialsList.MultiSelect = false;
             this.dataGridView_rawMaterialsList.Name = "dataGridView_rawMaterialsList";
@@ -212,12 +212,6 @@
             this.buttonCargaMasiva.UseVisualStyleBackColor = false;
             this.buttonCargaMasiva.Click += new System.EventHandler(this.button_cargamasivaclic);
             // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Width = 50;
-            // 
             // id_raw_material
             // 
             this.id_raw_material.HeaderText = "ID";
@@ -255,6 +249,12 @@
             this.unit.Name = "unit";
             this.unit.Visible = false;
             // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Width = 50;
+            // 
             // RawMaterials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -290,7 +290,6 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonCargaMasiva;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_raw_material;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
@@ -298,5 +297,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn average_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }
