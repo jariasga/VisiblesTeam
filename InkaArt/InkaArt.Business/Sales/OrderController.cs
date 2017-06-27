@@ -126,6 +126,16 @@ namespace InkaArt.Business.Sales
             return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
+        public void updateReturn(string idDoc)
+        {
+            DataTable table = GetOrders();
+
+            string updateQuery;
+            updateQuery = "UPDATE inkaart.\"Order\" SET ";
+            updateQuery = updateQuery + "orderStatus = 'facturado' ";
+            updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
+            orderData.execute(updateQuery);
+        }
         public int getClientID(int orderId)
         {
             return orderData.getClientID(orderId);
