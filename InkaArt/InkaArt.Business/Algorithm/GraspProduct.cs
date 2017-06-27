@@ -17,7 +17,7 @@ namespace InkaArt.Business.Algorithm
         {
             get { return current_recipe; }
         }
-        public int NumberOfJobs
+        public int NumberOfTuples
         {
             get { return temporal_assignments.Count; }
         }
