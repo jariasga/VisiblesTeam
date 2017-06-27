@@ -42,8 +42,8 @@
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
             this.checkBox_allProd = new System.Windows.Forms.CheckBox();
             this.list_products = new System.Windows.Forms.CheckedListBox();
-            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_fechaIni = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -72,9 +72,9 @@
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupbox_workers);
-            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Controls.Add(this.button_generate);
             this.groupBox1.Controls.Add(this.dateTimePicker_fechaIni);
+            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,6 +207,16 @@
             this.list_products.Name = "list_products";
             this.list_products.Size = new System.Drawing.Size(241, 204);
             this.list_products.TabIndex = 45;
+            //             
+            // dateTimePicker_fechaIni
+            // 
+            this.dateTimePicker_fechaIni.CustomFormat = "";
+            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 81);
+            this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
+            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(211, 28);
+            this.dateTimePicker_fechaIni.TabIndex = 31;
             // 
             // dateTimePicker_fechaFin
             // 
@@ -218,16 +228,6 @@
             this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
             this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(211, 28);
             this.dateTimePicker_fechaFin.TabIndex = 32;
-            // 
-            // dateTimePicker_fechaIni
-            // 
-            this.dateTimePicker_fechaIni.CustomFormat = "";
-            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 81);
-            this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
-            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(211, 28);
-            this.dateTimePicker_fechaIni.TabIndex = 31;
             // 
             // label4
             // 

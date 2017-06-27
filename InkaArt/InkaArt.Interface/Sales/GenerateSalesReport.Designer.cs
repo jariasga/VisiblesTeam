@@ -34,9 +34,9 @@
             this.comboBox_products = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker_fechaIni = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -47,9 +47,9 @@
             this.groupBox1.Controls.Add(this.comboBox_products);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dateTimePicker_fechaIni);
+            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(39, 143);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -102,17 +102,7 @@
             this.label2.Size = new System.Drawing.Size(105, 23);
             this.label2.TabIndex = 5;
             this.label2.Text = "Fecha final";
-            // 
-            // dateTimePicker_fechaFin
-            // 
-            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(28, 159);
-            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
-            this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(157, 28);
-            this.dateTimePicker_fechaFin.TabIndex = 6;
-            // 
+            //             
             // label1
             // 
             this.label1.AutoSize = true;
@@ -132,6 +122,16 @@
             this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
             this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(157, 28);
             this.dateTimePicker_fechaIni.TabIndex = 4;
+            // 
+            // dateTimePicker_fechaFin
+            // 
+            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(28, 159);
+            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
+            this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(157, 28);
+            this.dateTimePicker_fechaFin.TabIndex = 6;
             // 
             // textBox1
             // 
