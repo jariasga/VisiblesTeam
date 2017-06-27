@@ -45,6 +45,7 @@
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantToReturn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaxStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
@@ -155,6 +156,7 @@
             this.Cant,
             this.CurrentCant,
             this.cantToReturn,
+            this.MaxStock,
             this.CantMov,
             this.Modificar});
             this.dataGridView1.Location = new System.Drawing.Point(6, 78);
@@ -187,6 +189,7 @@
             this.button2.TabIndex = 57;
             this.button2.Text = "Aceptar";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // idProduct
             // 
@@ -214,10 +217,15 @@
             // 
             // cantToReturn
             // 
-            this.cantToReturn.HeaderText = "Cantidad que falta por devolver";
+            this.cantToReturn.HeaderText = "Stock Mínimo";
             this.cantToReturn.Name = "cantToReturn";
             this.cantToReturn.ReadOnly = true;
-            this.cantToReturn.Visible = false;
+            // 
+            // MaxStock
+            // 
+            this.MaxStock.HeaderText = "Stock Máximo";
+            this.MaxStock.Name = "MaxStock";
+            this.MaxStock.ReadOnly = true;
             // 
             // CantMov
             // 
@@ -269,6 +277,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantToReturn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaxStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantMov;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
     }
