@@ -49,7 +49,8 @@ namespace InkaArt.Interface.Sales
             if (e.RowIndex != -1)
             {
                 string id = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string type = grid_orders.Rows[e.RowIndex].Cells[1].Value.ToString().ToLower();                
+                string type = grid_orders.Rows[e.RowIndex].Cells[1].Value.ToString().ToLower();             
+                string idSalesDocument = grid_orders.Rows[e.RowIndex].Cells[0].Value.ToString();
                 if (type.Equals("pedido"))
                 {
                     ClientOrderShow show_form = new ClientOrderShow(id);

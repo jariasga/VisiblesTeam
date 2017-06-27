@@ -35,7 +35,6 @@
             this.label_doc = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label_type = new System.Windows.Forms.Label();
             this.label_invoiceid = new System.Windows.Forms.Label();
             this.grid_detail = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,9 +84,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(27, 54);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(480, 119);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -133,28 +132,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Nombre:";
             // 
-            // label_type
-            // 
-            this.label_type.AutoSize = true;
-            this.label_type.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_type.Location = new System.Drawing.Point(318, 25);
-            this.label_type.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_type.Name = "label_type";
-            this.label_type.Size = new System.Drawing.Size(154, 27);
-            this.label_type.TabIndex = 3;
-            this.label_type.Text = "Factura - Nro";
-            // 
             // label_invoiceid
             // 
             this.label_invoiceid.AutoSize = true;
             this.label_invoiceid.BackColor = System.Drawing.Color.Transparent;
             this.label_invoiceid.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_invoiceid.Location = new System.Drawing.Point(469, 25);
+            this.label_invoiceid.Location = new System.Drawing.Point(213, 25);
             this.label_invoiceid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_invoiceid.Name = "label_invoiceid";
-            this.label_invoiceid.Size = new System.Drawing.Size(38, 27);
+            this.label_invoiceid.Size = new System.Drawing.Size(294, 27);
             this.label_invoiceid.TabIndex = 4;
-            this.label_invoiceid.Text = "99";
+            this.label_invoiceid.Text = "Nota de crédito - Nro 9999";
             // 
             // grid_detail
             // 
@@ -169,7 +157,7 @@
             this.Column3,
             this.Column4});
             this.grid_detail.Location = new System.Drawing.Point(19, 32);
-            this.grid_detail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grid_detail.Margin = new System.Windows.Forms.Padding(2);
             this.grid_detail.Name = "grid_detail";
             this.grid_detail.ReadOnly = true;
             this.grid_detail.RowTemplate.Height = 24;
@@ -278,7 +266,7 @@
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
             this.button_cancel.Location = new System.Drawing.Point(198, 504);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(130, 39);
             this.button_cancel.TabIndex = 33;
@@ -314,11 +302,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.label_invoiceid);
-            this.Controls.Add(this.label_type);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_orderid);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SaleDocumentDetail";
             this.Text = "Documento de Venta";
             this.Load += new System.EventHandler(this.SaleDocumentDetail_Load);
@@ -341,7 +328,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_name;
         private System.Windows.Forms.Label label_doc;
-        private System.Windows.Forms.Label label_type;
         private System.Windows.Forms.Label label_invoiceid;
         private System.Windows.Forms.DataGridView grid_detail;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
