@@ -198,12 +198,14 @@ namespace InkaArt.Business.Algorithm
         private string simulationIdsToString()
         {
             List<int> ids = simulations.Select(simulation => simulation.ID).ToList();
+            ids.Add(-1);
             return string.Join(",", ids);
         }
 
         private string assignmentIdsToString(List<Assignment> all_assignments)
         {
             List<int> ids = all_assignments.Select(assignment => assignment.ID).ToList();
+            ids.Add(-1);
             return string.Join(",", ids);
         }
 

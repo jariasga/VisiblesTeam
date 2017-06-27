@@ -305,10 +305,11 @@ namespace InkaArt.Business.Algorithm
         private void RemoveProcesses(ProcessTuple[] remaining_processes, List<Index> candidates, List<Index> current_deleted_indexes, ref GraspProduct current_product)
         {
             //Eliminar los procesos que ya se agotaron
-            for (int i = 0; i < remaining_processes.Count(); i++)
+            for (int process = 0; process < remaining_processes.Count(); process++)
             {
-                if (remaining_processes[i].NumberOfJobs > 0) continue;
-                candidates.RemoveAll(index => index.Job.Process == remaining_processes[i].ID);
+                if (remaining_processes[process].NumberOfJobs > 0) continue;
+                for (int index = candidates.Count - 1; index >= 0; index--)
+                    if (candidates[index].Job.Process == remaining_processes[process].ID) candidates.RemoveAt(index);
             }
             //Eliminar para un trabajador el resto de procesos para que siempre se quede en un proceso
             for (int i = 0; i < current_product.NumberOfTuples; i++)
