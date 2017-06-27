@@ -267,9 +267,9 @@ namespace InkaArt.Business.Warehouse
                     var line = reader.ReadLine();
                     var values = line.Split(';');
 
-                    // creamos usuario
+                    // creamos almacen
                     int idNote, idBill, idMovementType, idWarehouse, idMovementReason,idProd;
-                    string dateIn="";
+                    string dateIn = "";
                     idNote = int.Parse(values[2]);
                     idBill = int.Parse(values[7]);
                     idProd = int.Parse(values[4]);
