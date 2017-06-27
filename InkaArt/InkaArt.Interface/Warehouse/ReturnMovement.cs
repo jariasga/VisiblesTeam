@@ -257,6 +257,7 @@ namespace InkaArt.Interface.Warehouse
 
 
                         if (exito == 1)
+
                         {
                             //Aumentar stock físico y lógico del producto
                             productionItemMovementController.updateData(idProd, cantMov, typeMovement);

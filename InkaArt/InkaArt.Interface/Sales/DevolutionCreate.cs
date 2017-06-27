@@ -242,21 +242,21 @@ namespace InkaArt.Interface.Sales
             {
                 string cellProduct = row["idProduct"].ToString();
                 string cellVersion = row["idRecipe"].ToString();
-                if (selectedProduct.Contains(cellProduct))
+                foreach (DataRow irow in invoicedLine.Rows)
                 {
-                    foreach (DataRow irow in invoicedLine.Rows)
+                    if (irow["idLineItem"].Equals(row["idLineItem"]))
                     {
-                        if (irow["idLineItem"].Equals(row["idLineItem"]))
+                        if (selectedProduct.Contains(cellProduct))
                         {
                             int cellQuantity = int.Parse(irow["finished"].ToString());
                             if (cellQuantity < quantity) return "No puede agregar más de lo que pidió.";
                             if (!selectedVersion.Contains(cellVersion)) return "No puede seleccionar una versión diferente de la que pidió";
                         }
+                        else attemps++;
                     }
                 }
-                else attemps++;
             }
-            if (attemps == orderLine.Rows.Count) return "No puede agregar un producto que no ha pedido.";
+            if (attemps > 0) return "No puede agregar un producto que no ha pedido.";
             return "OK";
         }
 

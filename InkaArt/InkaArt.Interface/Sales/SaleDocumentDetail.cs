@@ -68,7 +68,7 @@ namespace InkaArt.Interface.Sales
 
         private void button_pdf_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("Factura.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            FileStream fs = new FileStream("Factura-Pedido"+label_orderid.Text+".pdf", FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document(PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
