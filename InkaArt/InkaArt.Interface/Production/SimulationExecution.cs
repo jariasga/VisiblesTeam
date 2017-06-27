@@ -44,9 +44,7 @@ namespace InkaArt.Interface.Production
             background_worker.ReportProgress(0, "Estado de la simulación: Cargando datos...");
 
             //Carga de controladores
-
-            Business.Production.ProcessController process_controller = new Business.Production.ProcessController();
-            DataTable processes = process_controller.getData();
+            
             JobController jobs = new JobController();
             jobs.Load();
             RecipeController recipes = new RecipeController();
