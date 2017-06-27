@@ -81,13 +81,21 @@ namespace InkaArt.Interface.Sales
         private void personRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (radio_natural.Checked)
+            {
                 documentLabel.Text = "DNI";
+                textbox_ruc.Text = "";
+                textbox_ruc.MaxLength = 8;
+            }
         }
 
         private void juridicRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (radio_juridic.Checked)
+            {
                 documentLabel.Text = "RUC";
+                textbox_ruc.Text = "";
+                textbox_ruc.MaxLength = 11;
+            }
         }
 
         private void trackbar_priority_Scroll(object sender, EventArgs e)
