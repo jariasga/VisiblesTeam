@@ -57,9 +57,15 @@ namespace InkaArt.Interface.Production
                     ini = textBox_horaIni.Text.ToString();
                     fin = textBox_horaFin.Text.ToString();
                     desc = textBox_desc.Text.ToString();
-
-                    control.updateData(id, ini, fin, desc);
-                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        control.updateData(id, ini, fin, desc);
+                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception m)
+                    {
+                        Console.WriteLine("{0} error", m);
+                    }
                     fillForm();
                 }
                 else

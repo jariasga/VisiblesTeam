@@ -127,6 +127,7 @@
             this.Controls.Add(this.combo_type);
             this.Name = "MovementForDifference";
             this.Text = "Diferencia de Stock";
+            this.Load += new System.EventHandler(this.MovementForDifference_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

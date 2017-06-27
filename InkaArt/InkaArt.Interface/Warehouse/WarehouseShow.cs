@@ -203,8 +203,15 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (max > min)
                         {
-                            control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
-                            MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            try
+                            {
+                                control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
+                                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
                             fillGridRawMaterial();
                         }
                         else
@@ -265,8 +272,15 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (max > min)
                         {
-                            control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
-                            MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            try
+                            {
+                                control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
+                                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
                             fillGridProduct();
                         }
                         else
@@ -301,7 +315,14 @@ namespace InkaArt.Interface.Warehouse
                 {
                     string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
                     //Debug.WriteLine(id);
-                    rwWarehouseController.deleteData(id);
+                    try
+                    {
+                        rwWarehouseController.deleteData(id);
+                    }
+                    catch (Exception m)
+                    {
+                        Console.WriteLine("{0} error", m);
+                    }
                 }
             }
             //updateDataGrid();
@@ -327,7 +348,14 @@ namespace InkaArt.Interface.Warehouse
                 {
                     string id = dataGridView_Product.Rows[i].Cells[7].Value.ToString();
                     //Debug.WriteLine(id);
-                    pWarehouseController.deleteData(id);
+                    try
+                    {
+                        pWarehouseController.deleteData(id);
+                    }
+                    catch (Exception m)
+                    {
+                        Console.WriteLine("{0} error", m);
+                    }
                 }
             }
             //updateDataGrid();
@@ -362,8 +390,15 @@ namespace InkaArt.Interface.Warehouse
 
                                 string id = dataGridView_Product.Rows[i].Cells[7].Value.ToString();
                                 //update de valores maximos y minimos
-                                pWarehouseController.updateMinMax(id, min, max);
-                                MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                try
+                                {
+                                    pWarehouseController.updateMinMax(id, min, max);
+                                    MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine("{0} error", m);
+                                }
                                 fillGridProduct();
                             }
                             else
@@ -408,8 +443,15 @@ namespace InkaArt.Interface.Warehouse
 
                                 string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
                                 //update de valores maximos y minimos
-                                rmWarehouseController.updateMinMax(id, min, max);
-                                MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                try
+                                {
+                                    rmWarehouseController.updateMinMax(id, min, max);
+                                    MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine("{0} error", m);
+                                }
                                 fillGridRawMaterial();
                             }
                             else
