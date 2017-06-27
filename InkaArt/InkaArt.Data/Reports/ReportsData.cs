@@ -145,9 +145,13 @@ namespace InkaArt.Data.Reports
                                     "from   inkaart.\"Ratio\" ra, " +
                                             "inkaart.\"Process-Product\" j, " +
                                             "inkaart.\"Recipe\" re, " +
-                                            "inkaart.\"Worker\" w "+
+                                            "inkaart.\"Worker\" w, "+
+                                            "inkaart.\"User\" u "+
                                     "where  ra.\"id_job\" = j.\"idJob\" and " +
-                                            "ra.\"id_recipe\" = re.\"idRecipe\") ";
+                                            "ra.\"id_recipe\" = re.\"idRecipe\" and "+
+                                            "w.\"id_user\" = u.\"id_user\" and " +
+                                            "u.\"status\" = 1 and " +
+                                            "u.\"id_role\" = 27) ";
             command_query +=        "select * 	from tablaPerformance " +
                                     "where		\"date\" >= '" + fechaIni + "' " +
                                     "and         \"date\" <= '" + fechaFin + "' ";

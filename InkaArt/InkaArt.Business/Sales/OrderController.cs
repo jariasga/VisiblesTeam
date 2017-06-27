@@ -194,7 +194,7 @@ namespace InkaArt.Business.Sales
 
         public string makeValidations(string clientDoc, string clientName, DataTable orderLines, string type, string reason, DateTime selectedDate, string docId = "null")
         {
-            if(type.Equals("pedido")) if (!isMoreThanToday(selectedDate)) return "La fecha de emisión que ha ingresado no es válida";
+            if(type.Equals("pedido")) if (!isMoreThanToday(selectedDate)) return "La fecha de entrega que ha ingresado no es válida";
             if (type.Equals("devolucion")) if (docId.Equals("")) return "Debe seleccionar un pedido antes de continuar.";
             if (orderLines.Rows.Count == 0) return "Debe añadir productos para realizar un pedido.";
             if (type.Equals("devolucion") && reason.Equals("")) return "Debe ingresar un motivo para continuar.";

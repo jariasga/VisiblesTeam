@@ -55,8 +55,6 @@ namespace InkaArt.Interface.Production
             for (int i = 0; i < indexes.Count(); i++)
                 LogHandler.WriteLine("INDICE {0}: {1}", i + 1, indexes[i].ToString());
 
-            simulation.save();
-
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
                 LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
@@ -68,7 +66,7 @@ namespace InkaArt.Interface.Production
             Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
             for (int i = 0; i < workers.NumberOfWorkers; i++)
                 if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
-            int total_miniturns = turn.TotalMinutes / Simulation.MiniturnLength;
+            simulation.TotalMiniturns = turn.TotalMinutes / Simulation.MiniturnLength;
 
             background_worker.ReportProgress(0, "Estado de la simulación: Asignando trabajadores...");
 
@@ -79,11 +77,11 @@ namespace InkaArt.Interface.Production
 
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
-                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, total_miniturns, ref elapsed_seconds));
+                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
                 background_worker.ReportProgress(0, null);
             }
             
-            PrintGraspResults(initial_assignments, total_miniturns);
+            PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
@@ -97,6 +95,7 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(0, null);
             }
 
+            tabu.bestSolutionToList();
             simulation.Assignments = tabu.BestSolution;
         }
 
@@ -138,7 +137,6 @@ namespace InkaArt.Interface.Production
             if (e.Cancelled == false)
             {
                 MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                simulations.Add(simulation);
                 this.DialogResult = DialogResult.OK;
             }
             else

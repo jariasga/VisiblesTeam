@@ -64,7 +64,7 @@ namespace InkaArt.Business.Algorithm
         public Recipe GetByVersion(string version)
         {
             foreach (Recipe recipe in recipes)
-                if (recipe.Version == version) return recipe;
+                if (recipe.Version.CompareTo(version) == 0) return recipe;
             return null;
         }
 

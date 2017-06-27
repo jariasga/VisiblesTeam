@@ -178,9 +178,10 @@ namespace InkaArt.Data.Algorithm
             this.cost_value = this.loss_index;
         }
 
-        public double NextCostValue(double objective_function_value, int iteration)
+        public double NextCostValue(double objective_function_value, int construction_iteration)
         {
-            this.cost_value = (this.loss_index - objective_function_value) / (iteration + 1);
+            this.cost_value = (this.loss_index - objective_function_value) / construction_iteration;
+            LogHandler.WriteLine("LossIndex={0}, ObjectiveFunction={1}, Iteration={2}, CostValue={3}", loss_index, objective_function_value, construction_iteration, cost_value);
             return this.cost_value;
         }
 
