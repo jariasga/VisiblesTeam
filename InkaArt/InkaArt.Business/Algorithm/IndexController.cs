@@ -113,8 +113,7 @@ namespace InkaArt.Business.Algorithm
 
                     for (int index = 0; index < indexes.Count; index++)
                     {
-                        LogHandler.WriteLine("  - index.Job={0}={1}=product_jobs[{2}], index.Recipe={3}={4}=recipes[{5}]", indexes[index].Job.ID,
-                            product_jobs[job].ID, job, indexes[index].Recipe.ID, recipes[recipe].ID, recipe);
+                        //LogHandler.WriteLine("  - index.Job={0}={1}=product_jobs[{2}], index.Recipe={3}={4}=recipes[{5}]", indexes[index].Job.ID, product_jobs[job].ID, job, indexes[index].Recipe.ID, recipes[recipe].ID, recipe);
                         if (indexes[index].Job.ID == product_jobs[job].ID && indexes[index].Recipe.ID == recipes[recipe].ID)
                         {
                             average_mean_count[recipe_index, job_index]++;
