@@ -48,11 +48,19 @@ namespace InkaArt.Business.Security
         public int updateData(string username, string description, int status, int role, System.Byte[] photo, int userID)
         {
             table = data.Tables["User"];
+            try
+            {
+                if (photo[5] != null)
+                    user.insertPhoto(photo, userID);
+            }
+            catch (Exception)
+            {                
+            }
 
-            user.insertPhoto(photo, userID);
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
-                "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
-                "WHERE id_user = {4}", username, status, description, role, userID));
+                    "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
+                    "WHERE id_user = {4}", username, status, description, role, userID));
+
         }
 
         public int insertData(string username, string description, int status, ref string password, int role, System.Byte [] photo)
