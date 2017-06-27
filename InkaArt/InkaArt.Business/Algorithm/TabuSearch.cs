@@ -116,7 +116,7 @@ namespace InkaArt.Business.Algorithm
         
         private Assignment getNeighbor(Assignment solution, TabuMove move)
         {
-            /* Encontrara dos trabajadores aleatoriamente e intercambiara sus trabajos */
+            /* Creara una nueva solucion por medio de un swap aleatorio, intercambiando dias o miniturnos */
 
             Assignment neighbor = new Assignment(solution);
             int num_workers = simulation.SelectedWorkers.Count();
