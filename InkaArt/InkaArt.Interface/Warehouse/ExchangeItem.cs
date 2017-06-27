@@ -113,6 +113,11 @@ namespace InkaArt.Interface.Warehouse
                     break;
                 }
             }
+            if (aux <= 0)
+            {
+                MessageBox.Show("Por favor ingrese un valor entero mayor a cero");
+                return;
+            }
             text1New.Text = Convert.ToString(id);
             text2New.Text = name;
             text3New.Text = productType;

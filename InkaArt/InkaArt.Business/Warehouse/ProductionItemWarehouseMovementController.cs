@@ -38,7 +38,7 @@ namespace InkaArt.Business.Warehouse
 
             if (remainOrder == 0)
             {
-                query = "Update inkaart.\"Order\" set \"orderStatus\" = 'despachado' where \"idOrder\" = " + idOrder + ";";
+                query = "Update inkaart.\"Order\" set \"orderStatus\" = 'despachado' where \"idOrder\" = " + idOrder + " where \"orderStatus\" = 'registrado';";
                 productionItemWarehouseMovementData.execute(query);
             }
             
@@ -116,7 +116,7 @@ namespace InkaArt.Business.Warehouse
             string query = "", updateQuery="";
             int nuevoStock = 0,actStock=0,minStock=0,maxStock=0;
             NpgsqlDataReader dr;
-            query = "select \"currentStock\",\"minimunStock\", \"maximunStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
+            query = "select \"currentStock\",\"minimunStock\", \"maximunStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
             //Se obtiene el stock de la materia prima
             adapt = productionItemWarehouseMovementData.ProductionItemWarehouseAdapter();
             dr = productionItemMovementData.GetLoteData(query);
@@ -170,72 +170,59 @@ namespace InkaArt.Business.Warehouse
             int stockAct = -1,maxStock = -1, minStock=9999;//Stock físico
             int logicStock = -1;//Stock lógico
             int filModified = 0,filModified2=0;
-            
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                if ((Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == idProd) && (Convert.ToInt32(table.Rows[i]["idWarehouse"].ToString()) == idWarehouse))
+
+            NpgsqlDataReader dr;
+            string query = "";
+            query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+            //Se obtiene el stock del producto en el almacén            
+            dr = productionItemMovementData.GetLoteData(query);
+
+            dr.Read();
+            stockAct = Convert.ToInt32(dr[0]);
+            minStock = Convert.ToInt32(dr[1]);
+            maxStock = Convert.ToInt32(dr[2]);
+            logicStock = Convert.ToInt32(dr[3]);
+
+            if (typeMovement == "Entrada")
                 {
-                    
-                        if (typeMovement == "Entrada")
-                        {
-                            stockAct = Convert.ToInt32(table.Rows[i]["currentStock"]);
-                            maxStock = Convert.ToInt32(table.Rows[i]["maximunStock"]);
-                            stockAct = stockAct + numMov;
-
-                            if (stockAct > maxStock)
-                            {
-                                MessageBox.Show("Error: El límite máximo de stock es: " + maxStock + ".");
-                                return -2;
-                            }
-
-                            logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
-                            logicStock = logicStock + numMov;
-
-                            table.Rows[i]["currentStock"] = stockAct;
-                            table.Rows[i]["virtualStock"] = logicStock;
-
-                            filModified++;
-
-                            break;
-                        }
-                        else
-                        {
-                            if (typeMovement == "Salida")
-                            {
-                                stockAct = Convert.ToInt32(table.Rows[i]["currentStock"]);
-                                minStock = Convert.ToInt32(table.Rows[i]["minimunStock"]);
-
-                                logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
-
-                                if (stockAct - numMov < 0)
-                                {
-                                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items en este almacén, no puede mover: " + numMov + " items.");
-                                    return -2;
-                                }
-                                else
-                                {
-                                    stockAct = stockAct - numMov;
-                                    if (stockAct < minStock)
-                                    {
-                                        MessageBox.Show("No se puede tener menos del mínimo stock: " + minStock);
-                                        return -2;
-                                    }
-                                    table.Rows[i]["currentStock"] = stockAct;
-                                }
-                                filModified++;
-                                break;
-                            }
-                            else
-                            {
-                                /*DEFINIR LA ENTRADA Y SALIDA DE PRODUCTOS*/
-                                stockAct = 1;
-                                logicStock = 1;
-                            }
-                            filModified++;
-                        }
-                    
+                stockAct = stockAct + numMov;
+                if (stockAct > maxStock)
+                {
+                    MessageBox.Show("Error: El límite máximo de stock es: " + maxStock + ".");
+                    return -2;
                 }
+                logicStock = logicStock + numMov;
+                filModified++;
             }
+            else
+            {
+                if (typeMovement == "Salida")
+                {
+                    if (stockAct - numMov < 0)
+                    {
+                        MessageBox.Show("Usted solo cuenta con: " + stockAct + " items en este almacén, no puede mover: " + numMov + " items.");
+                        return -2;
+                    }
+                    else
+                    {
+                        stockAct = stockAct - numMov;
+                        if (stockAct < minStock)
+                        {
+                            MessageBox.Show("No se puede tener menos del mínimo stock: " + minStock);
+                            return -2;
+                        }
+                    }
+                    filModified++;
+                }
+                else
+                {
+                    /*DEFINIR LA ENTRADA Y SALIDA DE PRODUCTOS*/
+                    stockAct = 1;
+                    logicStock = 1;
+                }
+                filModified++;
+            }
+
             if (filModified == 0 && filModified2 == 0)
             {
                 return -1;

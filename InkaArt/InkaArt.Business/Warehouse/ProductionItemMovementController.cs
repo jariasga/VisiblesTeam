@@ -68,7 +68,7 @@ namespace InkaArt.Business.Warehouse
             int makeUpdate = 1;
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                if (Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == id)
+                if (Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == id && Convert.ToInt32(table.Rows[i]["status"].ToString()) == 1)
                 {
                     if (typeMovement == "Entrada")
                     {
@@ -159,7 +159,7 @@ namespace InkaArt.Business.Warehouse
             string queryDocument = "";
 
             if (!idWarehouse.Equals("")) if (int.TryParse(idWarehouse, out intAux)) intIdWarehouse = int.Parse(idWarehouse);
-            queryDocument = "select A.\"idRawMaterial\",B.\"name\",A.\"currentStock\",A.\"minimunStock\",A.\"maximunStock\" from inkaart.\"RawMaterial-Warehouse\" A, inkaart.\"RawMaterial\" B where A.\"idWarehouse\" = " + intIdWarehouse + " and A.\"idWarehouse\" = B.\"id_raw_material\" and A.\"state\" = 'Activo' and B.\"status\" = 'Activo';";
+            queryDocument = "select A.\"idRawMaterial\",B.\"name\",A.\"currentStock\",A.\"minimunStock\",A.\"maximunStock\" from inkaart.\"RawMaterial-Warehouse\" A, inkaart.\"RawMaterial\" B where A.\"idWarehouse\" = " + intIdWarehouse + " and A.\"idRawMaterial\" = B.\"id_raw_material\" and A.\"state\" = 'Activo' and B.\"status\" = 'Activo';";
             
             //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
             return productionItemMovementData.GetLoteData(queryDocument);

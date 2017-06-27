@@ -51,9 +51,9 @@ namespace InkaArt.Interface.Production
             recipes.Load();
             IndexController indexes = new IndexController(workers, jobs, recipes);
             indexes.Load();
-            for (int i = 0; i < indexes.Count(); i++)
-                LogHandler.WriteLine("INDICE {0}: {1}", i+1, indexes[i].ToString());
             indexes.CalculateIndexes(simulation);
+            for (int i = 0; i < indexes.Count(); i++)
+                LogHandler.WriteLine("INDICE {0}: {1}", i + 1, indexes[i].ToString());
 
             simulation.save();
 
