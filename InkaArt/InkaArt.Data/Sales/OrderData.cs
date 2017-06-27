@@ -536,7 +536,7 @@ namespace InkaArt.Data.Sales
             curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
             curAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
             curAdap.SelectCommand.Parameters[0].NpgsqlValue = id;
-            curData.Clear();
+            //curData.Clear();
             curData = getData(curAdap, "Product");
             DataTable orderLine = new DataTable();
             orderLine = curData.Tables[0];

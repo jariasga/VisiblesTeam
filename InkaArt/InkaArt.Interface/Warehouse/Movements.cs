@@ -63,7 +63,9 @@ namespace InkaArt.Interface.Warehouse
                 {
                     if (combobox_type.Text == "Salida")
                     {
-                        Form formView = new InkaArt.Interface.Warehouse.ProductionMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
+
+                        Form formView = new InkaArt.Interface.Warehouse.ProductionMovementOut(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
+
                         formView.Show();
                     }
                 }
