@@ -152,9 +152,15 @@ namespace InkaArt.Interface.Warehouse
                                 {
                                     encontrado = 1;
                                     //update d la tabla
-                                    controlRm.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical - aIngresar);
-                                    controlM.insertBrokenFindMovement(13, warehouse_id, 9, DateTime.Now.ToShortDateString(), item_id, 0, aIngresar);
-
+                                    try
+                                    {
+                                        controlRm.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical - aIngresar);
+                                        controlM.insertBrokenFindMovement(13, warehouse_id, 9, DateTime.Now.ToShortDateString(), item_id, 0, aIngresar);
+                                    }
+                                    catch (Exception m)
+                                    {
+                                        Console.WriteLine("{0} error", m);
+                                    }
                                     MessageBox.Show(this, "Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
                                 }
@@ -204,8 +210,15 @@ namespace InkaArt.Interface.Warehouse
                                 {
                                     encontrado = 1;
                                     //update d la tabla
-                                    control.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical - aIngresar);
-                                    controlM.insertBrokenFindMovement(13, warehouse_id, 9, DateTime.Now.ToShortDateString(), item_id, 1, aIngresar);
+                                    try
+                                    {
+                                        control.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical - aIngresar);
+                                        controlM.insertBrokenFindMovement(13, warehouse_id, 9, DateTime.Now.ToShortDateString(), item_id, 1, aIngresar);
+                                    }
+                                    catch (Exception m)
+                                    {
+                                        Console.WriteLine("{0} error", m);
+                                    }
                                     MessageBox.Show(this, "Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
                                 }
@@ -233,5 +246,9 @@ namespace InkaArt.Interface.Warehouse
             setItemsCombo(combo_type.SelectedIndex);
         }
 
+        private void MovementForDifference_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -44,6 +44,7 @@
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantToReturn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
@@ -125,6 +126,7 @@
             this.button1.TabIndex = 57;
             this.button1.Text = "🔎 Buscar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -152,6 +154,7 @@
             this.ProductName,
             this.Cant,
             this.CurrentCant,
+            this.cantToReturn,
             this.CantMov,
             this.Modificar});
             this.dataGridView1.Location = new System.Drawing.Point(6, 78);
@@ -170,6 +173,7 @@
             this.buttonDelete.TabIndex = 58;
             this.buttonDelete.Text = "Cancelar";
             this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // button2
             // 
@@ -204,9 +208,15 @@
             // 
             // CurrentCant
             // 
-            this.CurrentCant.HeaderText = "Cantidad posible a devolver";
+            this.CurrentCant.HeaderText = "Stock en almacén";
             this.CurrentCant.Name = "CurrentCant";
             this.CurrentCant.ReadOnly = true;
+            // 
+            // cantToReturn
+            // 
+            this.cantToReturn.HeaderText = "Cantidad que falta por devolver";
+            this.cantToReturn.Name = "cantToReturn";
+            this.cantToReturn.ReadOnly = true;
             // 
             // CantMov
             // 
@@ -257,6 +267,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantToReturn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantMov;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
     }

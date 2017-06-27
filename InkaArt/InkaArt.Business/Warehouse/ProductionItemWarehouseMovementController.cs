@@ -14,6 +14,7 @@ namespace InkaArt.Business.Warehouse
     public class ProductionItemWarehouseMovementController
     {
         private ProductionItemWarehouseMovementData productionItemWarehouseMovementData;
+        private ProductionItemMovementData productionItemMovementData;
         private NpgsqlDataAdapter adapt;
         private DataSet data;
         private DataTable table;
@@ -22,6 +23,7 @@ namespace InkaArt.Business.Warehouse
         public ProductionItemWarehouseMovementController()
         {
             productionItemWarehouseMovementData = new ProductionItemWarehouseMovementData();
+            productionItemMovementData = new ProductionItemMovementData();
             data = new DataSet();
         }
 
@@ -81,11 +83,11 @@ namespace InkaArt.Business.Warehouse
             string query = "";
             if (idWareDestiny == -1)
             {
-                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idItem\",\"itemType\",\"quantity\" ) values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1,"+ idItem+","+cantMov+","+itemType+");";
+                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idItem\",\"itemType\",\"quantity\" ) values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1,"+ idItem+","+ itemType + ","+ cantMov + ");";
             }
             else
             {
-                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idWarehouseDestiny\",\"idItem\",\"itemType\",\"quantity\") values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1," + idWareDestiny + "," + idItem + "," + cantMov + "," + itemType + ");";
+                query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"idDocumentType\",\"dateIn\",\"status\",\"idWarehouseDestiny\",\"idItem\",\"itemType\",\"quantity\") values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + "," + document_type + ",current_date,1," + idWareDestiny + "," + idItem + "," + itemType + "," + cantMov + ");";
             }
             productionItemWarehouseMovementData.updateDataExecute(query);
         }
@@ -112,19 +114,45 @@ namespace InkaArt.Business.Warehouse
         public int updateDataRawMaterialOut(int idProd, int idWarehouse, int numMov, string typeMovement, string stateItem = "")
         {
             string query = "", updateQuery="";
-            int nuevoStock = 0,actStock=0;
+            int nuevoStock = 0,actStock=0,minStock=0,maxStock=0;
             NpgsqlDataReader dr;
-            query = "select \"currentStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
+            query = "select \"currentStock\",\"minimunStock\", \"maximunStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
             //Se obtiene el stock de la materia prima
-            dr = productionItemWarehouseMovementData.returnQuery(query);
+            adapt = productionItemWarehouseMovementData.ProductionItemWarehouseAdapter();
+            dr = productionItemMovementData.GetLoteData(query);
             //Se descuenta a ese stock lo que se va a mover
+
             dr.Read();
-            actStock=Convert.ToInt32(dr[1]);
+            actStock = Convert.ToInt32(dr[0]);
+            minStock = Convert.ToInt32(dr[1]);
+            maxStock = Convert.ToInt32(dr[2]);
+            
+            
             //Se actualiza el stock de la materia prima en el almacén
             nuevoStock = actStock - numMov;
-            updateQuery = "update inkaart.\"RawMaterial-Warehouse\" set \"currentStock\" = " + nuevoStock + " where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + ";";
+            if (nuevoStock > maxStock)
+            {
+                MessageBox.Show("No se puede tener menos que el Stock Máximo, Stock Máximo: " + maxStock);
+                return -2;
+            }
+            if (nuevoStock < minStock)
+            {
+                MessageBox.Show("No se puede tener menos que el Stock Mínimo, Stock Mínimo: " + minStock);
+                return -2;
+            }
+            if (nuevoStock < 0)
+            {
+                MessageBox.Show("No se tiene suficiente materia en este almacén, Stock Actual: " + actStock);
+                return -2;
+            }
 
-            productionItemWarehouseMovementData.updateDataExecute(updateQuery);
+            updateQuery = "update inkaart.\"RawMaterial-Warehouse\" set \"currentStock\" = " + nuevoStock + " where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
+
+            //productionItemWarehouseMovementData.updateDataExecute(updateQuery);
+
+            ProductionItemWarehouseMovementData aux = new ProductionItemWarehouseMovementData();
+            
+            aux.updateDataExecute(updateQuery);
 
             return 1;
         }
@@ -147,8 +175,7 @@ namespace InkaArt.Business.Warehouse
             {
                 if ((Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == idProd) && (Convert.ToInt32(table.Rows[i]["idWarehouse"].ToString()) == idWarehouse))
                 {
-                    if (stateItem == "OK")
-                    {
+                    
                         if (typeMovement == "Entrada")
                         {
                             stockAct = Convert.ToInt32(table.Rows[i]["currentStock"]);
@@ -206,65 +233,7 @@ namespace InkaArt.Business.Warehouse
                             }
                             filModified++;
                         }
-                    }
-                    else
-                    {
-                        if (typeMovement == "Entrada")
-                        {
-                            stockAct = Convert.ToInt32(table.Rows[i]["breaks"]);
-                            maxStock = Convert.ToInt32(table.Rows[i]["maximunStock"]);
-                            stockAct = stockAct + numMov;
-
-                            if (stockAct > maxStock)
-                            {
-                                MessageBox.Show("Error: El límite máximo de stock es: " + maxStock + ".");
-                                return -2;
-                            }
-
-                            logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
-
-                            table.Rows[i]["currentStock"] = stockAct;
-
-                            filModified2++;
-
-                            break;
-                        }
-                        else
-                        {
-                            if (typeMovement == "Salida")
-                            {
-                                stockAct = Convert.ToInt32(table.Rows[i]["breaks"]);
-                                minStock = Convert.ToInt32(table.Rows[i]["minimunStock"]);
-
-                                logicStock = Convert.ToInt32(table.Rows[i]["virtualStock"]);
-
-                                if (stockAct - numMov < 0)
-                                {
-                                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
-                                    return -2;
-                                }
-                                else
-                                {
-                                    stockAct = stockAct - numMov;
-                                    if (stockAct < minStock)
-                                    {
-                                        MessageBox.Show("No se puede tener menos del mínimo stock: " + minStock);
-                                        return -2;
-                                    }
-                                    table.Rows[i]["currentStock"] = stockAct;
-                                }
-                                filModified2++;
-                                break;
-                            }
-                            else
-                            {
-                                /*DEFINIR LA ENTRADA Y SALIDA DE PRODUCTOS*/
-                                stockAct = 1;
-                                logicStock = 1;
-                            }
-                            filModified2++;
-                        }
-                    }
+                    
                 }
             }
             if (filModified == 0 && filModified2 == 0)

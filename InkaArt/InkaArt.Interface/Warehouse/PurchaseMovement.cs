@@ -123,7 +123,14 @@ namespace InkaArt.Interface.Warehouse
                 for (int i = 0; i < ocDetailList.Rows.Count; i++)
                     if (ocDetailList.Rows[i]["id_detail"].ToString() == idLinea)
                         //updete del controller
-                        control.updateLineaEntregada(id_linea,id_factura);
+                        try
+                        {
+                            control.updateLineaEntregada(id_linea, id_factura);
+                        }
+                        catch (Exception m)
+                        {
+                            Console.WriteLine("{0} error", m);
+                        }
             }
         }
 
@@ -140,7 +147,14 @@ namespace InkaArt.Interface.Warehouse
                     estado_terminado = 1;
             if (estado_terminado == 0)
                 //update del controlador orden de compra
-                control.updateOrdenEntregada(id_orden);
+                try
+                {
+                    control.updateOrdenEntregada(id_orden);
+                }
+                catch (Exception m)
+                {
+                    Console.WriteLine("{0} error", m);
+                }
 
         }
 
@@ -212,12 +226,27 @@ namespace InkaArt.Interface.Warehouse
             if (string.Compare(aux, "falso") == 0)//no existe el registro, entonces agregar la fila
             {
                 //insert
-                control.insertData(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
-            }else//si existe el registro
+                try
+                {
+                    control.insertData(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+                }
+                catch (Exception m)
+                {
+                    Console.WriteLine("{0} error", m);
+                }
+            }
+            else//si existe el registro
             {
                 int nuevo = int.Parse(aux) - cantidad;
                 //update
-                control.updateStock(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+                try
+                {
+                    control.updateStock(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+                }
+                catch (Exception m)
+                {
+                    Console.WriteLine("{0} error", m);
+                }
             }
         }
 
@@ -291,16 +320,21 @@ namespace InkaArt.Interface.Warehouse
                                             //AUMENTAR
                                             RawMaterialWarehouseController controlRmW = new RawMaterialWarehouseController();
                                             ProductionMovementMovementController controlMovement = new ProductionMovementMovementController();
+                                            try{
+                                                //agregar en RM-WH
+                                                controlRmW.updateStock(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), stockLogico + cantidad_ingresar, stockFisico + cantidad_ingresar);
+                                                //agregar en StockDocument
+                                                updateInStockDocument(comboBox_OC.SelectedItem.ToString(), dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
+                                                //agregar en Movement
+                                                controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, dateTimePicker1.Value.ToShortDateString(), int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()), cantidad_ingresar);
 
-                                            //agregar en RM-WH
-                                            controlRmW.updateStock(idWh, dataGridView_orders.Rows[i].Cells[0].Value.ToString(), stockLogico + cantidad_ingresar, stockFisico + cantidad_ingresar);
-                                            //agregar en StockDocument
-                                            updateInStockDocument(comboBox_OC.SelectedItem.ToString(), dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
-                                            //agregar en Movement
-                                            controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, dateTimePicker1.Value.ToShortDateString(), int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()), cantidad_ingresar);
-
-                                            MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                            fillGrid(idFactura);
+                                                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                fillGrid(idFactura);
+                                            }
+                                            catch (Exception m)
+                                            {
+                                                Console.WriteLine("{0} error", m);
+                                            }
                                             reload();
 
                                         }
