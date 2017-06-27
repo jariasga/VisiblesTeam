@@ -151,6 +151,8 @@ namespace InkaArt.Interface.Warehouse
                             int productType = 1;//0:materia prima | 1:producto
                             int isExchange = -1;//-1:No es intercambio | otro:es intercambio
                             productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd,cantMov, productType);
+                            movementReason = 10;
+                            productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd, cantMov, productType);
                             //productionItemWarehouseMovementController.updateOrder(idPedido);
 
                             arrIdProd[countArr] = idProd;
@@ -171,7 +173,7 @@ namespace InkaArt.Interface.Warehouse
             //cantMov = Convert.ToInt32(numericUpDown2.Value);
             if (exito > 0)
             {
-                classFacture.AddSaleDocumentW(idPedido, arrIdProd, arrCantProd, 1);
+                classFacture.AddSaleDocumentW(idPedido, arrIdProd, arrCantProd);
                 MessageBox.Show("" + exito + " Operaciones realizadas con éxito.");
                 this.Close();
             }
