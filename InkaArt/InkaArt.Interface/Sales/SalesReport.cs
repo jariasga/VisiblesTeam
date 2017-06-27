@@ -162,7 +162,7 @@ namespace InkaArt.Interface.Sales
             document.Add(new Paragraph(phrase2));
             
             document.Close();
-            MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Se generó el archivo del reporte de ventas exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

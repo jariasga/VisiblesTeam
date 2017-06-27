@@ -49,6 +49,7 @@
             this.label_total = new System.Windows.Forms.Label();
             this.button_cancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_pdf = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_detail)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -265,10 +266,10 @@
             this.button_cancel.BackColor = System.Drawing.Color.Gray;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(198, 504);
+            this.button_cancel.Location = new System.Drawing.Point(279, 504);
             this.button_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.button_cancel.Name = "button_cancel";
-            this.button_cancel.Size = new System.Drawing.Size(130, 39);
+            this.button_cancel.Size = new System.Drawing.Size(163, 39);
             this.button_cancel.TabIndex = 33;
             this.button_cancel.Text = "🗙 Cerrar";
             this.button_cancel.UseVisualStyleBackColor = false;
@@ -293,12 +294,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle";
             // 
+            // button_pdf
+            // 
+            this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.ForeColor = System.Drawing.Color.White;
+            this.button_pdf.Location = new System.Drawing.Point(101, 503);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
+            this.button_pdf.Name = "button_pdf";
+            this.button_pdf.Size = new System.Drawing.Size(163, 39);
+            this.button_pdf.TabIndex = 39;
+            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.UseVisualStyleBackColor = false;
+            this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
+            // 
             // SaleDocumentDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(539, 563);
+            this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.label_invoiceid);
@@ -342,5 +358,6 @@
         private System.Windows.Forms.Label label_total;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button_pdf;
     }
 }
