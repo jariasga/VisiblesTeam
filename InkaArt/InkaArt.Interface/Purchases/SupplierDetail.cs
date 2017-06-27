@@ -331,6 +331,22 @@ namespace InkaArt.Interface.Purchases
             }
             return true;
         }
+        private bool existeEnLaBD() {
+            DataRow[] rows;
+            DataTable tablaAuxiliar = control.getData();
+            rows = tablaAuxiliar.Select("ruc = '" +textBox_ruc.Text+"'");
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            if (numero > 0)
+            {
+                MessageBox.Show("Ya existe un proveedor con este RUC", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
+        }
         private bool verifying_length_ruc()
         {
             if (textBox_ruc.Text.Length != 11)
@@ -419,7 +435,7 @@ namespace InkaArt.Interface.Purchases
             }
             else
             {
-                if (!validating_filled() || !verifying_length_ruc() ||!verifying_length_telephone()|| !verifying_email())
+                if (!validating_filled() || !verifying_length_ruc() ||!verifying_length_telephone()|| !verifying_email()|| existeEnLaBD())
                 {
                     return;
                 }
