@@ -282,6 +282,8 @@ namespace InkaArt.Interface.Warehouse
 
             if (idProducts.Count > 0)
             {
+                idProducts.Add(0);
+                quantities.Add(0);
                 OrderController controlOrder = new OrderController();
                 int[] arr_ids = idProducts.ToArray();
                 int[] quants = quantities.ToArray();
