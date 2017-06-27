@@ -1,79 +1,81 @@
 Fecha;Trabajador;Puesto de trabajo;Versión de receta;Hora inicial;Hora final;Cantidad rota;Cantidad producida
-15/06/2017;Camila Chavez;Tallado de retablos;Ver2.3;9:18;14:42;22;22
-15/06/2017;Javier Arias;Pintado de retablos;RetabloExp2;8:27;13:27;8;30
-15/06/2017;Flor de Maria Noriega;Horneado de huacos;prueba;9:15;13:24;38;41
-15/06/2017;Daniel Galan;Pintado de huacos;huacoLoc1;10:31;14:32;6;10
-15/06/2017;Anthony Gutierrez;Pintado de huacos;huacoLoc1;9:13;13:56;4;11
-15/06/2017;Natalia Palomares;Horneado de huacos;huacoPrueba;9:26;14:59;6;22
-15/06/2017;Diana Lepage;Pintado de huacos;huacoLoc1;9:59;13:07;17;23
-15/06/2017;Ricardo Vente;Horneado de huacos;HuacoRetrato;8:24;14:41;7;22
-16/06/2017;Camila Chavez;Tallado de retablos;Ver2.3;8:09;13:21;30;32
-16/06/2017;Javier Arias;Pintado de retablos;Ver2.3;9:02;13:16;13;26
-16/06/2017;Flor de Maria Noriega;Horneado de huacos;huacoPrueba;9:45;13:44;7;25
-16/06/2017;Daniel Galan;Tallado de retablos;Ver2.3;8:10;14:41;19;24
-16/06/2017;Anthony Gutierrez;Tallado de retablos;retabloExp1;8:07;13:40;3;20
-16/06/2017;Natalia Palomares;Moldeado de huacos;prueba;8:07;13:47;15;31
-16/06/2017;Diana Lepage;Horneado de huacos;huacoLoc1;9:04;14:55;2;26
-16/06/2017;Ricardo Vente;Pintado de retablos;Ver2.3;9:42;13:15;6;16
-17/06/2017;Camila Chavez;Pintado de huacos;HuacoRetrato;8:09;13:10;17;18
-17/06/2017;Javier Arias;Pintado de retablos;RetabloExp2;8:23;13:01;6;11
-17/06/2017;Flor de Maria Noriega;Pintado de huacos;nuevo;9:54;14:39;13;39
-17/06/2017;Daniel Galan;Tallado de piedras;PiedraLoc1;9:58;13:07;5;40
-17/06/2017;Natalia Palomares;Moldeado de huacos;huacoPrueba;9:50;14:54;11;27
-17/06/2017;Diana Lepage;Pintado de retablos;RetabloExp2;9:38;14:33;7;16
-17/06/2017;Ricardo Vente;Tallado de piedras;test2;9:39;13:16;11;17
-18/06/2017;Camila Chavez;Tallado de piedras;piedraYa1;9:21;13:04;6;19
-18/06/2017;Javier Arias;Pintado de huacos;huacoPrueba;9:20;13:13;12;16
-18/06/2017;Flor de Maria Noriega;Tallado de retablos;retabloExp1;9:27;13:36;10;12
-18/06/2017;Daniel Galan;Horneado de huacos;huacoLoc1;8:11;13:46;9;11
-18/06/2017;Anthony Gutierrez;Tallado de piedras;test2;8:20;13:13;26;33
-18/06/2017;Natalia Palomares;Horneado de huacos;HuacoRetrato;9:08;13:38;22;30
-18/06/2017;Diana Lepage;Moldeado de huacos;prueba;9:03;13:08;9;33
-18/06/2017;Ricardo Vente;Horneado de huacos;HuacoRetrato;8:11;13:29;2;21
-19/06/2017;Camila Chavez;Pintado de huacos;HuacoRetrato;9:49;13:15;9;40
-19/06/2017;Javier Arias;Horneado de huacos;huacoLoc1;9:47;14:58;25;27
-19/06/2017;Flor de Maria Noriega;Tallado de retablos;RetabloExp2;9:03;13:36;24;33
-19/06/2017;Daniel Galan;Tallado de piedras;PiedraLoc1;9:47;14:39;12;35
-19/06/2017;Anthony Gutierrez;Pintado de retablos;Ver2.3;8:11;14:57;25;35
-19/06/2017;Natalia Palomares;Horneado de huacos;huacoLoc1;9:46;13:07;4;13
-19/06/2017;Diana Lepage;Tallado de retablos;RetabloExp2;8:17;14:52;7;22
-19/06/2017;Ricardo Vente;Pintado de retablos;retabloExp1;9:41;13:51;23;37
-20/06/2017;Camila Chavez;Horneado de huacos;nuevo;9:53;14:55;9;26
-20/06/2017;Javier Arias;Pintado de retablos;retabloExp1;9:32;12:30;29;33
-20/06/2017;Flor de Maria Noriega;Horneado de huacos;huacoPrueba3;9:37;14:44;15;33
-20/06/2017;Daniel Galan;Moldeado de huacos;huacoPrueba;9:05;13:58;5;35
-20/06/2017;Anthony Gutierrez;Tallado de retablos;RetabloExp2;9:09;13:52;9;22
-20/06/2017;Natalia Palomares;Tallado de piedras;piedraPrueba;9:53;13:49;12;12
-20/06/2017;Diana Lepage;Pintado de huacos;HuacoRetrato;8:21;14:56;16;36
-20/06/2017;Ricardo Vente;Tallado de piedras;piedras2;8:09;13:49;16;31
-21/06/2017;Camila Chavez;Pintado de huacos;huacoPrueba3;9:21;14:45;2;15
-21/06/2017;Javier Arias;Moldeado de huacos;huacoLoc1;9:34;13:47;36;40
-21/06/2017;Flor de Maria Noriega;Tallado de piedras;piedraPrueba;8:03;14:45;28;34
-21/06/2017;Daniel Galan;Horneado de huacos;prueba;9:51;13:49;6;16
-21/06/2017;Anthony Gutierrez;Tallado de piedras;test2;9:39;13:22;7;12
-21/06/2017;Natalia Palomares;Pintado de huacos;HuacoRetrato;9:25;14:00;15;36
-21/06/2017;Diana Lepage;Pintado de retablos;retabloExp1;9:03;13:32;15;21
-21/06/2017;Ricardo Vente;Pintado de huacos;huacoLoc1;8:26;13:06;9;27
-22/06/2017;Camila Chavez;Horneado de huacos;prueba;8:28;13:04;19;22
-22/06/2017;Javier Arias;Horneado de huacos;huacoPrueba3;9:00;13:07;26;39
-22/06/2017;Flor de Maria Noriega;Tallado de piedras;piedras2;9:08;13:12;11;38
-22/06/2017;Daniel Galan;Tallado de retablos;Ver2.3;8:01;13:57;32;41
-22/06/2017;Anthony Gutierrez;Tallado de piedras;piedras2;8:24;13:16;31;35
-22/06/2017;Natalia Palomares;Pintado de huacos;HuacoRetrato;10:30;13:24;17;26
-22/06/2017;Diana Lepage;Pintado de huacos;huacoLoc1;9:38;13:20;22;27
-22/06/2017;Ricardo Vente;Moldeado de huacos;huacoPrueba;9:55;13:17;10;28
-23/06/2017;Camila Chavez;Pintado de retablos;Ver2.3;9:07;13:45;3;12
-23/06/2017;Javier Arias;Pintado de retablos;RetabloExp2;8:19;13:25;37;38
-23/06/2017;Flor de Maria Noriega;Tallado de retablos;Ver2.3;9:46;14:37;8;24
-23/06/2017;Daniel Galan;Moldeado de huacos;huacoPrueba3;9:53;13:29;15;35
-23/06/2017;Anthony Gutierrez;Pintado de retablos;retabloExp1;9:10;13:36;18;18
-23/06/2017;Natalia Palomares;Pintado de retablos;retabloExp1;8:17;13:52;10;39
-23/06/2017;Diana Lepage;Horneado de huacos;huacoPrueba3;9:01;14:40;11;34
-23/06/2017;Ricardo Vente;Pintado de retablos;retabloExp1;9:32;13:20;4;21
-24/06/2017;Camila Chavez;Tallado de piedras;piedras2;8:13;13:36;26;30
-24/06/2017;Javier Arias;Tallado de retablos;Ver2.3;8:17;13:15;32;40
-24/06/2017;Flor de Maria Noriega;Horneado de huacos;nuevo;9:31;13:41;19;23
-24/06/2017;Daniel Galan;Horneado de huacos;huacoPrueba3;9:40;14:36;5;26
-24/06/2017;Anthony Gutierrez;Horneado de huacos;huacoPrueba;9:18;13:59;6;35
-24/06/2017;Natalia Palomares;Horneado de huacos;huacoPrueba;8:12;13:00;22;34
-24/06/2017;Ricardo Vente;Tallado de retablos;Ver2.3;9:32;14:58;16;26
+18/06/2017;Camila Chavez;Tallado de piedras;Piedra Nacional Básica;8:16;14:52;10;15
+18/06/2017;Javier Arias;Tallado de retablos;Retablo Nacional Básico;9:51;13:25;7;17
+18/06/2017;Flor de Maria Noriega;Tallado de piedras;Piedra Nacional Intermedia;9:16;14:46;12;15
+18/06/2017;Daniel Galan;Tallado de retablos;Retablo Exportación;9:07;13:10;20;23
+18/06/2017;Anthony Gutierrez;Horneado de huacos;Huaco Exportación;9:26;14:59;5;28
+18/06/2017;Natalia Palomares;Pintado de huacos;Huaco Nacional Avanzado;9:09;14:56;18;37
+18/06/2017;Diana Lepage;Tallado de retablos;Retablo Exportación;9:03;14:51;0;20
+18/06/2017;Ricardo Vente;Pintado de retablos;Retablo Exportación;8:30;13:47;32;39
+19/06/2017;Camila Chavez;Tallado de retablos;Retablo Nacional Básico;8:08;13:45;12;16
+19/06/2017;Javier Arias;Pintado de huacos;Huaco Nacional Promedio;8:17;13:21;15;23
+19/06/2017;Flor de Maria Noriega;Pintado de retablos;Retablo Nacional Avanzado;9:22;14:55;5;31
+19/06/2017;Daniel Galan;Tallado de piedras;Piedra Nacional Intermedia;9:03;14:00;20;39
+19/06/2017;Anthony Gutierrez;Pintado de huacos;Huaco Nacional Básico;9:32;14:33;7;34
+19/06/2017;Natalia Palomares;Pintado de huacos;Huaco Exportación;9:41;14:42;12;37
+19/06/2017;Diana Lepage;Tallado de retablos;Retablo Nacional Intermedio;8:24;13:18;13;20
+19/06/2017;Ricardo Vente;Tallado de piedras;Piedra Nacional Básica;9:29;13:02;3;10
+20/06/2017;Camila Chavez;Tallado de piedras;Piedra Nacional Básica;8:29;13:55;5;17
+20/06/2017;Javier Arias;Tallado de piedras;Piedra Exportación;9:20;13:27;21;28
+20/06/2017;Flor de Maria Noriega;Tallado de retablos;Retablo Nacional Básico;8:21;13:03;25;29
+20/06/2017;Daniel Galan;Pintado de retablos;Retablo Nacional Intermedio;9:40;13:54;6;19
+20/06/2017;Anthony Gutierrez;Tallado de piedras;Piedra Nacional Básica;9:47;13:06;1;19
+20/06/2017;Natalia Palomares;Tallado de retablos;Retablo Nacional Avanzado;9:20;14:47;22;27
+20/06/2017;Diana Lepage;Horneado de huacos;Huaco Nacional Promedio;8:15;14:59;20;27
+20/06/2017;Ricardo Vente;Tallado de retablos;Retablo Nacional Intermedio;8:24;14:45;15;19
+21/06/2017;Camila Chavez;Moldeado de huacos;Huaco Nacional Promedio;9:22;13:07;7;35
+21/06/2017;Javier Arias;Pintado de huacos;Huaco Exportación;9:20;13:40;5;20
+21/06/2017;Flor de Maria Noriega;Pintado de retablos;Retablo Nacional Intermedio;9:09;14:41;2;35
+21/06/2017;Daniel Galan;Horneado de huacos;Huaco Nacional Promedio;8:23;13:06;19;27
+21/06/2017;Anthony Gutierrez;Tallado de piedras;Piedra Nacional Básica;8:29;14:52;5;19
+21/06/2017;Natalia Palomares;Horneado de huacos;Huaco Exportación;8:24;13:55;33;36
+21/06/2017;Diana Lepage;Tallado de piedras;Piedra Nacional Básica;9:03;14:36;19;36
+21/06/2017;Ricardo Vente;Tallado de piedras;Piedra Nacional Avanzada;8:12;13:17;36;38
+22/06/2017;Camila Chavez;Horneado de huacos;Huaco Exportación;9:44;13:40;14;38
+22/06/2017;Javier Arias;Pintado de huacos;Huaco Nacional Avanzado;9:28;14:42;17;18
+22/06/2017;Flor de Maria Noriega;Moldeado de huacos;Huaco Nacional Básico;9:45;14:00;0;40
+22/06/2017;Daniel Galan;Pintado de retablos;Retablo Exportación;9:11;14:41;19;27
+22/06/2017;Anthony Gutierrez;Moldeado de huacos;Huaco Nacional Básico;8:18;14:37;11;16
+22/06/2017;Natalia Palomares;Pintado de retablos;Retablo Nacional Básico;9:40;13:17;1;15
+22/06/2017;Diana Lepage;Pintado de retablos;Retablo Nacional Básico;9:46;13:22;16;26
+22/06/2017;Ricardo Vente;Pintado de retablos;Retablo Exportación;9:34;14:41;4;13
+23/06/2017;Camila Chavez;Moldeado de huacos;Huaco Nacional Básico;9:00;14:34;28;29
+23/06/2017;Javier Arias;Tallado de retablos;Retablo Exportación;9:56;14:45;1;15
+23/06/2017;Flor de Maria Noriega;Pintado de huacos;Huaco Nacional Avanzado;9:35;14:51;21;30
+23/06/2017;Daniel Galan;Moldeado de huacos;Huaco Exportación;9:04;13:15;25;27
+23/06/2017;Anthony Gutierrez;Tallado de piedras;Piedra Exportación;9:06;14:39;5;40
+23/06/2017;Natalia Palomares;Pintado de huacos;Huaco Nacional Básico;9:08;13:01;36;37
+23/06/2017;Diana Lepage;Tallado de piedras;Piedra Exportación;9:32;14:00;29;30
+23/06/2017;Ricardo Vente;Tallado de piedras;Piedra Nacional Intermedia;9:53;13:25;6;15
+24/06/2017;Camila Chavez;Tallado de piedras;Piedra Nacional Avanzada;8:17;13:33;19;23
+24/06/2017;Javier Arias;Tallado de retablos;Retablo Nacional Avanzado;9:51;13:57;21;25
+24/06/2017;Flor de Maria Noriega;Horneado de huacos;Huaco Nacional Básico;9:58;13:27;7;18
+24/06/2017;Daniel Galan;Tallado de piedras;Piedra Nacional Básica;9:49;13:41;15;23
+24/06/2017;Anthony Gutierrez;Pintado de huacos;Huaco Nacional Básico;9:08;14:48;1;16
+24/06/2017;Natalia Palomares;Tallado de retablos;Retablo Nacional Básico;9:51;14:31;27;35
+24/06/2017;Diana Lepage;Moldeado de huacos;Huaco Nacional Avanzado;9:35;13:36;5;38
+24/06/2017;Ricardo Vente;Pintado de huacos;Huaco Nacional Avanzado;9:15;13:47;29;38
+25/06/2017;Camila Chavez;Tallado de piedras;Piedra Nacional Avanzada;9:28;14:56;25;25
+25/06/2017;Javier Arias;Tallado de piedras;Piedra Exportación;9:24;13:02;8;31
+25/06/2017;Flor de Maria Noriega;Tallado de retablos;Retablo Nacional Avanzado;8:04;13:47;12;12
+25/06/2017;Daniel Galan;Tallado de piedras;Piedra Nacional Intermedia;9:09;13:04;9;11
+25/06/2017;Anthony Gutierrez;Tallado de piedras;Piedra Nacional Avanzada;9:45;13:01;8;14
+25/06/2017;Natalia Palomares;Tallado de piedras;Piedra Nacional Avanzada;9:16;13:29;12;26
+25/06/2017;Diana Lepage;Moldeado de huacos;Huaco Nacional Promedio;9:08;13:33;15;32
+25/06/2017;Ricardo Vente;Pintado de retablos;Retablo Nacional Intermedio;8:20;13:24;35;36
+26/06/2017;Camila Chavez;Tallado de piedras;Piedra Nacional Intermedia;8:00;13:52;5;34
+26/06/2017;Javier Arias;Moldeado de huacos;Huaco Nacional Avanzado;8:18;13:07;8;11
+26/06/2017;Flor de Maria Noriega;Tallado de piedras;Piedra Nacional Intermedia;9:28;14:46;8;19
+26/06/2017;Daniel Galan;Tallado de piedras;Piedra Nacional Intermedia;9:47;13:01;33;33
+26/06/2017;Anthony Gutierrez;Pintado de retablos;Retablo Nacional Básico;8:16;13:38;10;22
+26/06/2017;Natalia Palomares;Horneado de huacos;Huaco Nacional Avanzado;8:13;13:01;7;23
+26/06/2017;Diana Lepage;Tallado de piedras;Piedra Nacional Avanzada;9:19;14:30;9;27
+26/06/2017;Ricardo Vente;Moldeado de huacos;Huaco Nacional Básico;9:40;13:46;0;26
+27/06/2017;Camila Chavez;Pintado de huacos;Huaco Exportación;8:06;13:18;9;12
+27/06/2017;Javier Arias;Tallado de piedras;Piedra Nacional Avanzada;10:30;13:28;18;35
+27/06/2017;Flor de Maria Noriega;Pintado de huacos;Huaco Nacional Avanzado;9:31;13:28;19;22
+27/06/2017;Daniel Galan;Moldeado de huacos;Huaco Exportación;8:23;14:49;8;11
+27/06/2017;Anthony Gutierrez;Tallado de piedras;Piedra Nacional Avanzada;8:22;14:50;7;13
+27/06/2017;Natalia Palomares;Pintado de huacos;Huaco Nacional Básico;9:53;14:45;11;23
+27/06/2017;Diana Lepage;Tallado de piedras;Piedra Nacional Básica;9:51;13:40;35;35
+27/06/2017;Ricardo Vente;Tallado de piedras;Piedra Exportación;9:49;14:35;9;21

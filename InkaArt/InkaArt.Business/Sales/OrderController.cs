@@ -75,7 +75,7 @@ namespace InkaArt.Business.Sales
             {
                 string idLineItem = orderline["idLineItem"].ToString();
                 float pu = float.Parse(getProductPU(orderline["idProduct"].ToString(), clientId.ToString()));
-                int quantity = int.Parse(orderline["quantityProduced"].ToString());
+                int quantity = int.Parse(orderline["quantity"].ToString());
                 int finished = int.Parse(orderline["quantityProduced"].ToString());
                 int invoiced = int.Parse(orderline["quantityInvoiced"].ToString());
                 bool lineComplete = quantity == invoiced;
