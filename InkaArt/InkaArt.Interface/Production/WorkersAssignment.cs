@@ -122,10 +122,7 @@ namespace InkaArt.Interface.Production
                     row.Cells[job.Index].Value = miniturn.Job.Name;
                     row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
                     row.Cells[quantity.Index].Value = miniturn.Produced;
-
-                    double loss_index = current_simulation.getLossIndex(miniturn);
-                    if (loss_index >= 0) row.Cells[index.Index].Value = loss_index;
-
+                    row.Cells[index.Index].Value = miniturn.LossValue;
                     simulation_grid.Rows.Add(row);
                 }
             }

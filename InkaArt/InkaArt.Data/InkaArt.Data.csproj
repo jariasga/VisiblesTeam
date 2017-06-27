@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\AssignmentLine.cs" />
+    <Compile Include="Algorithm\AssignmentTuple.cs" />
     <Compile Include="Algorithm\Client.cs" />
     <Compile Include="Algorithm\Index.cs" />
     <Compile Include="Algorithm\Job.cs" />

@@ -83,7 +83,7 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(0, null);
             }
             
-            PrintGraspResults(initial_assignments);
+            PrintGraspResults(initial_assignments, total_miniturns);
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
@@ -100,7 +100,7 @@ namespace InkaArt.Interface.Production
             simulation.Assignments = tabu.BestSolution;
         }
 
-        private void PrintGraspResults(List<Assignment> assignments)
+        private void PrintGraspResults(List<Assignment> assignments, int total_miniturns)
         {
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
@@ -110,14 +110,14 @@ namespace InkaArt.Interface.Production
                 {
                     LogHandler.WriteLine("");
                     LogHandler.WriteLine("TRABAJADOR 1:");
-                    for (int miniturn = 0; miniturn < simulation.Miniturns; miniturn++)
+                    for (int miniturn = 0; miniturn < total_miniturns; miniturn++)
                     {
                         AssignmentLine line = assignments[day][worker_index, miniturn];
                         if (line == null)
                             LogHandler.WriteLine("- Miniturno {0}: Nada.", miniturn);
                         else
-                            LogHandler.WriteLine("- Miniturno {0}: Worker = {1}, Job = {2}, Recipe = {3}, Produced = {4}, Rango = [{5}, {6}]",
-                                miniturn, line.Worker.FullName, line.Job.Name, line.Recipe.Description + " " + line.Recipe.Version,
+                            LogHandler.WriteLine("- Miniturno {0}: ({1:00},{2:00},{3},{4},[{5},{6}])",
+                                miniturn, line.Worker.ID, line.Job.ID, line.Recipe.Description + " " + line.Recipe.Version,
                                 line.Produced, line.MiniturnStart, line.MiniturnStart + line.TotalMiniturnsUsed);
                     }
                 }
@@ -135,8 +135,15 @@ namespace InkaArt.Interface.Production
         {
             this.timer.Stop();
 
-            MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            simulations.Add(simulation);
+            if (e.Cancelled == false)
+            {
+                MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                simulations.Add(simulation);
+                this.DialogResult = DialogResult.OK;
+            }
+            else
+                this.DialogResult = DialogResult.Cancel;
+
             this.Close();
         }
 

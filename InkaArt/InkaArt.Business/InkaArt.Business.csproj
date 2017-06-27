@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Algorithm\Assignment.cs" />
     <Compile Include="Algorithm\Grasp.cs" />
+    <Compile Include="Algorithm\GraspProduct.cs" />
     <Compile Include="Algorithm\IndexController.cs" />
     <Compile Include="Algorithm\JobController.cs" />
     <Compile Include="Algorithm\OrderController.cs" />

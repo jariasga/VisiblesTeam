@@ -96,7 +96,7 @@ namespace InkaArt.Business.Algorithm
 
             for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
             {
-                for (int miniturn_index = 0; miniturn_index < solution.TotalMiniturns; miniturn_index++)
+                for (int miniturn_index = 0; miniturn_index < simulation.TotalMiniturns; miniturn_index++)
                 {
                     AssignmentLine assignment = solution[worker_index, miniturn_index];
                     if (assignment == null || assignment.Equals(current_assignment))
@@ -140,7 +140,7 @@ namespace InkaArt.Business.Algorithm
             // tipo 1: intercambiar miniturnos
             else
             {
-                int miniturn_index = Randomizer.NextNumber(0, simulation.Miniturns - 1);
+                int miniturn_index = Randomizer.NextNumber(0, simulation.TotalMiniturns - 1);
                 swapMiniturns(solution, worker1_index, worker2_index, miniturn_index);
             }
 
@@ -156,7 +156,7 @@ namespace InkaArt.Business.Algorithm
             Worker worker2 = simulation.SelectedWorkers[worker2_index];
             AssignmentLine assignment1, assignment2;
 
-            for (int miniturn = 0; miniturn < solution.TotalMiniturns; miniturn++)
+            for (int miniturn = 0; miniturn < simulation.TotalMiniturns; miniturn++)
             {
                 assignment1 = solution[worker1_index, miniturn];                
                 assignment2 = solution[worker2_index, miniturn];                                
@@ -174,7 +174,7 @@ namespace InkaArt.Business.Algorithm
             AssignmentLine assignment;
 
             // actualizamos todo lo anterior
-            for (int i = 0; i < solution.TotalMiniturns; i++)
+            for (int i = 0; i < simulation.TotalMiniturns; i++)
             {
                 assignment = solution[worker1_index, i];
                 decreaseMiniturn(assignment1, assignment, miniturn_index, i);
@@ -231,8 +231,8 @@ namespace InkaArt.Business.Algorithm
             // process
             if (type == 0)
             {
-                item1 = solution.getProcessId(worker1);
-                item2 = solution.getProcessId(worker2);
+                item1 = solution.getProcessId(worker1, simulation);
+                item2 = solution.getProcessId(worker2, simulation);
             }
             // product 
             else
@@ -244,7 +244,27 @@ namespace InkaArt.Business.Algorithm
 
             return move;
         }
-        
+
+        public void SwapWorkers(Assignment solution, int worker1_index, int worker2_index)
+        {
+            Worker worker1 = simulation.SelectedWorkers[worker1_index];
+            Worker worker2 = simulation.SelectedWorkers[worker2_index];
+
+            for (int miniturn = 0; miniturn < simulation.TotalMiniturns; miniturn++)
+            {
+                AssignmentLine assignment1, assignment2;
+
+                assignment1 = solution[worker1_index, miniturn];
+                assignment2 = solution[worker2_index, miniturn];
+
+                if (assignment1 != null) assignment1.Worker = worker2;
+                solution[worker2_index, miniturn] = assignment1;
+                if (assignment2 != null) assignment2.Worker = worker1;
+                solution[worker1_index, miniturn] = assignment2;                
+            }
+        }
+
+        /* Flujo del algoritmo */
         public void run(ref int elapsed_time, int day)
         {
             // soluciones

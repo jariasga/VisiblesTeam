@@ -29,13 +29,11 @@ namespace InkaArt.Business.Algorithm
         private double huamanga_stone_weight;
         private double retable_weight;
         private double time;
+        private int total_miniturns;
 
         //Trabajadores y pedidos filtrados 
         private WorkerController selected_workers;
         private OrderController selected_orders;
-        private IndexController indexes;
-
-        private int miniturns = 30;             //30 * 10 = 300 minutos = 5 h como turno ( esto debería calcularse :' )
 
         private List<Assignment> assignments;
 
@@ -105,13 +103,6 @@ namespace InkaArt.Business.Algorithm
         {
             get { return retable_weight; }
         }
-        
-        public int Miniturns
-        {
-            get { return miniturns; }
-            //set { miniturns = value; }
-        }
-
         public List<Assignment> Assignments
         {
             get { return assignments; }
@@ -122,6 +113,11 @@ namespace InkaArt.Business.Algorithm
         {
             get { return time; }
             set { time = value; }
+        }
+        public int TotalMiniturns
+        {
+            get { return total_miniturns; }
+            set { total_miniturns = value; }
         }
 
         /********** Constructor para nueva simulación de asignación de trabajadores **********/
@@ -162,8 +158,6 @@ namespace InkaArt.Business.Algorithm
             this.retable_weight = retable_weight;
 
             this.assignments = new List<Assignment>();
-            this.indexes = new IndexController();
-            indexes.Load();
             this.selected_workers = new WorkerController();
             this.selected_orders = new OrderController();
         }        
@@ -207,7 +201,7 @@ namespace InkaArt.Business.Algorithm
                 bool save_orders = saveSelectedOrders(connection);
                 bool save_assignments = true;
                 foreach (Assignment day in assignments)
-                    save_assignments &= day.save(this.ID, connection);
+                    save_assignments &= day.save(this, connection);
 
                 connection.Close();
                 return save_workers && save_orders && save_assignments;
@@ -261,7 +255,6 @@ namespace InkaArt.Business.Algorithm
                     LogHandler.WriteLine("Excepción al intentar guardar trabajadores de simulación: " + e.ToString());
                     return false;
                 }
-
             }
 
             return true;
@@ -293,13 +286,6 @@ namespace InkaArt.Business.Algorithm
                 LogHandler.WriteLine("Excepción al intentar actualizar la simulación: " + e.ToString());
                 return "Ocurrió una excepción al intentar actualizar la simulación: " + e.Message;
             }
-        }
-
-        public double getLossIndex(AssignmentLine line)
-        {
-            if (indexes == null) return -1;
-            Index index = indexes.FindByAssignment(line);
-            return index == null ? -1 : index.LossIndex;
         }
         
     }
