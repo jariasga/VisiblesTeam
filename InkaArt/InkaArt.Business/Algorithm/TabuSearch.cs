@@ -197,11 +197,11 @@ namespace InkaArt.Business.Algorithm
                 Index index = indexes.FindByAssignment(assignment_pivot);
                 // minuturnos anteriores
                 if (miniturn_pivot > miniturn)
-                    assignment.TotalMiniturnsUsed = miniturn - assignment.MiniturnStart;
+                    assignment.MiniturnsUsed = miniturn - assignment.MiniturnStart;
                 // miniturnos posteriores
                 else
                 {
-                    assignment.TotalMiniturnsUsed -= miniturn_pivot - assignment.MiniturnStart;
+                    assignment.MiniturnsUsed -= miniturn_pivot - assignment.MiniturnStart;
                     assignment.MiniturnStart = miniturn_pivot + 1;                    
                 }
                 assignment.calculateProduced(Simulation.MiniturnLength, index.AverageTime, index.AverageBreakage);
