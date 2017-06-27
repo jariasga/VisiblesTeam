@@ -133,9 +133,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(338, 32);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(158, 23);
+            this.label3.Size = new System.Drawing.Size(147, 23);
             this.label3.TabIndex = 34;
-            this.label3.Text = "Nro NotaCredito:";
+            this.label3.Text = "Nro Devolución:";
             // 
             // textBox3
             // 
@@ -217,6 +217,7 @@
             this.cantToReturn.HeaderText = "Cantidad que falta por devolver";
             this.cantToReturn.Name = "cantToReturn";
             this.cantToReturn.ReadOnly = true;
+            this.cantToReturn.Visible = false;
             // 
             // CantMov
             // 
