@@ -68,7 +68,7 @@ namespace InkaArt.Interface.Production
             Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
             for (int i = 0; i < workers.NumberOfWorkers; i++)
                 if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
-            int total_miniturns = turn.TotalMinutes / Simulation.MiniturnLength;
+            simulation.TotalMiniturns = turn.TotalMinutes / Simulation.MiniturnLength;
 
             background_worker.ReportProgress(0, "Estado de la simulación: Asignando trabajadores...");
 
@@ -79,11 +79,11 @@ namespace InkaArt.Interface.Production
 
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
-                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, total_miniturns, ref elapsed_seconds));
+                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
                 background_worker.ReportProgress(0, null);
             }
             
-            PrintGraspResults(initial_assignments, total_miniturns);
+            PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
