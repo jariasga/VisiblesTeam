@@ -94,7 +94,7 @@ namespace InkaArt.Business.Algorithm
             //Lista de procesos
             int[] remaining_processes = new int[processes.Rows.Count];
             for (int i = 0; i < processes.Rows.Count; i++)
-                remaining_processes[i] = Convert.ToInt32(processes.Rows[i]["numberOfJobs"].ToString());
+                remaining_processes[i] = Convert.ToInt32(processes.Rows[i]["number_of_jobs"].ToString());
 
             for (int construction = 1; elapsed_time < Simulation.LimitTime && order_index < orders.Count && candidates.Count > 0; construction++)
             {
