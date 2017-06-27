@@ -20,6 +20,7 @@ namespace InkaArt.Interface.Purchases
         RawMaterialController rawMaterialControl;
         DataTable rawMaterialList;
         bool isInEditMode = false;
+        string estadoInicial = "";
         bool editPriceMode = false;
         Suppliers suppliersWindow;
         public SupplierDetail()
@@ -61,6 +62,7 @@ namespace InkaArt.Interface.Purchases
             textBox_price.Enabled = false;
             suppliersWindow = suppliersView;
             isInEditMode = true;
+            estadoInicial = comboBox_status.Text;
             rawMaterialControl = new RawMaterialController();
             llenarComboBox();
         }
@@ -94,6 +96,7 @@ namespace InkaArt.Interface.Purchases
             textBox_email.Enabled = false;
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
+            estadoInicial = comboBox_status.Text;
             rawMaterialControl = new RawMaterialController();
 
             llenarComboBox();
@@ -331,6 +334,22 @@ namespace InkaArt.Interface.Purchases
             }
             return true;
         }
+        private bool existeEnLaBD() {
+            DataRow[] rows;
+            DataTable tablaAuxiliar = control.getData();
+            rows = tablaAuxiliar.Select("ruc = '" +textBox_ruc.Text+"'");
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            if (numero > 0)
+            {
+                MessageBox.Show("Ya existe un proveedor con este RUC", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
+        }
         private bool verifying_length_ruc()
         {
             if (textBox_ruc.Text.Length != 11)
@@ -377,6 +396,23 @@ namespace InkaArt.Interface.Purchases
                 }
             }
         }
+        private void pasarTodasLasLineasAEstado(string estado)
+        {
+            for (int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            {
+                string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                string price = dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
+                try
+                {
+                    control_rs.UpdateRM_Sup(idRMSup, idMat, textBox_idSupplier.Text, price, estado);
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }
         private void button_event_click(object sender, EventArgs e)
         {
             if (mode==2 && isInEditMode)
@@ -388,9 +424,13 @@ namespace InkaArt.Interface.Purchases
                 try
                 {
                     control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
-                    suppliersWindow.desarrolloBusqueda();
                     guardarCambiosEnMateriasOfrecidas();
                     llenarMateriasProvistas(textBox_idSupplier.Text);
+                    if (string.Compare(comboBox_status.Text, estadoInicial) != 0) { //si el estado cambio
+                        pasarTodasLasLineasAEstado(comboBox_status.Text);
+                        estadoInicial = comboBox_status.Text;
+                    }
+                    suppliersWindow.desarrolloBusqueda();
                 }
                 catch (Exception)
                 {
@@ -419,7 +459,7 @@ namespace InkaArt.Interface.Purchases
             }
             else
             {
-                if (!validating_filled() || !verifying_length_ruc() ||!verifying_length_telephone()|| !verifying_email())
+                if (!validating_filled() || !verifying_length_ruc() ||!verifying_length_telephone()|| !verifying_email()|| existeEnLaBD())
                 {
                     return;
                 }
