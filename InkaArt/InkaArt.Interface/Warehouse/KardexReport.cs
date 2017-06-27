@@ -73,7 +73,8 @@ namespace InkaArt.Interface.Warehouse
 
         private void button_pdf_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("ReporteKardex.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            DateTime date = DateTime.ParseExact(label_todaydate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            FileStream fs = new FileStream("ReporteKardex-" + date.ToString("dd-MM-yyyy") + ".pdf", FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document(PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
