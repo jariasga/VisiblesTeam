@@ -123,7 +123,7 @@ namespace InkaArt.Interface.Warehouse
             document.Add(new Paragraph(" "));
 
             document.Close();
-            MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Se generó el archivo del reporte kardex exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
