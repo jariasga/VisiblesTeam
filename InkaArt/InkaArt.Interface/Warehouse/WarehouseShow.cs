@@ -171,8 +171,6 @@ namespace InkaArt.Interface.Warehouse
             RawMaterialWarehouseController control = new RawMaterialWarehouseController();
             DataTable rmWarehouseList = control.getData();
 
-            
-
             string name = comboBox_RM.SelectedItem.ToString();
             string idRM = "";
             //validar que no esté en la lista
