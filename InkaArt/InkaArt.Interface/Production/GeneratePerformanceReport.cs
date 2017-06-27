@@ -11,6 +11,7 @@ using InkaArt.Business.Algorithm;
 //using InkaArt.Business.Security;
 using InkaArt.Data;
 using InkaArt.Data.Algorithm;
+using InkaArt.Business.Production;
 
 namespace InkaArt.Interface.Production
 {
@@ -31,10 +32,10 @@ namespace InkaArt.Interface.Production
                 comboBox_workers.Items.Add(worker.Name + " " + worker.LastName);
                 indexList.Add(worker.ID);
             }*/
+            
             workers.Load();
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "FullName";
-
         }
 
         private void button_generate_Click(object sender, EventArgs e)
