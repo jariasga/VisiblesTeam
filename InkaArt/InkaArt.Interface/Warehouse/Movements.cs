@@ -102,6 +102,11 @@ namespace InkaArt.Interface.Warehouse
                                 Form formView = new InkaArt.Interface.Warehouse.MovementFindIn(idWarehouesOrigin);
                                 formView.Show();
                             }
+                            else if(reason == "Diferencia de stock")
+                            {
+                                Form formView = new InkaArt.Interface.Warehouse.MovementForDifference(idWarehouesOrigin);
+                                formView.Show();
+                            }
                             else if (reason == "Devolución")
                             {
                                 Form formView = new InkaArt.Interface.Warehouse.ReturnMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
