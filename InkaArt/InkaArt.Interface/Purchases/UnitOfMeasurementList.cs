@@ -132,12 +132,15 @@ namespace InkaArt.Interface.Purchases
             dialog.Title = "Open Units File";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
-                control.massiveUpload(dialog.FileName);
+            {
+                if(control.massiveUpload(dialog.FileName)==1) MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             textBox_abbreviature.Text = "";
             textBox_id.Text = "";
             textBox_abbreviature.Text = "";
             comboBox1.Text = "";
-            desarrolloBusqueda();
+            
+        
         }
     }
 }

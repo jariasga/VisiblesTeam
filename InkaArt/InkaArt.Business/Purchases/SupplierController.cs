@@ -64,7 +64,7 @@ namespace InkaArt.Business.Purchases
             supplier.updateData(data, adap, "Supplier");
             return 1;
         }
-        public void massiveUpload(string filename)
+        public int massiveUpload(string filename)
         {
             table = getData();     // obtenemos la tabla de materia prima
 
@@ -77,20 +77,33 @@ namespace InkaArt.Business.Purchases
                     var values = line.Split(';');
                     int phone = 0,prioridad=0, intMod;
 
-                    if (int.TryParse(values[3], out intMod))
+                    if (values[3].Length>6 && values[3].Length<10 && int.TryParse(values[3], out intMod))
                     {
                         phone = int.Parse(values[3]);
                     }
+                    else continue;
                     if (int.TryParse(values[6], out intMod))
                     {
                         prioridad = int.Parse(values[6]);
+                        if (prioridad < 0 || prioridad > 10) continue;
                     }
-
-                    // creamos materia prima
-                    //nombre (0), ruc (1), contacto (2),telefono (3),correo (4),dirección (5),prioridad(6),estado (7)
-                    insertData(values[0], values[1], values[2], phone, values[4],values[5],prioridad,values[7]);
+                    else continue;
+                    if (values[1].Length != 11) continue;
+                    if (values[2].Length < 6) continue;
+                    if (values[5].Length < 7) continue;
+                    try
+                    {
+                        // creamos materia prima
+                        //nombre (0), ruc (1), contacto (2),telefono (3),correo (4),dirección (5),prioridad(6),estado (7)
+                        insertData(values[0], values[1], values[2], phone, values[4], values[5], prioridad, "Activo");
+                    }
+                    catch (Exception)
+                    {
+                        return 1;
+                    }
                 }
             }
+            return 0;
         }
     }
 }

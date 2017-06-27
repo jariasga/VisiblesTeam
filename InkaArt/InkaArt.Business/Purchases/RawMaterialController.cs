@@ -1,6 +1,7 @@
 ﻿using InkaArt.Data.Purchases;
 using Npgsql;
 using System.Data;
+using System;
 using System.IO;
 
 namespace InkaArt.Business.Purchases
@@ -55,7 +56,7 @@ namespace InkaArt.Business.Purchases
            
             return rawMaterial.updateData(data, adap, "RawMaterial");
         }
-        public void massiveUpload(string filename)
+        public int massiveUpload(string filename)
         {
             table = getData();     // obtenemos la tabla de materia prima
 
@@ -67,14 +68,26 @@ namespace InkaArt.Business.Purchases
                     var line = reader.ReadLine();
                     var values = line.Split(';');
                     double precioProm = 0, doubleMod;
-
-                    if (double.TryParse(values[4], out doubleMod)) {
-                        precioProm = double.Parse(values[4]);
+                    int intMod;
+                    //si no cumple con los tipos de datos, no lo insertará y pasará al siguiente.
+                    if (double.TryParse(values[3], out doubleMod))
+                    {
+                        precioProm = double.Parse(values[3]);
                     }
+                    else continue;
+                    if (!int.TryParse(values[2], out intMod)) continue;
                     // creamos materia prima
-                    insertData(values[0], values[1], values[2],values[3],precioProm);
+                    try
+                    {
+                        insertData(values[0], values[1], values[2], "Activo", precioProm);
+                    }
+                    catch (Exception)
+                    {
+                        return 1;
+                    }
                 }
             }
+            return 0;
         }
     }
 }
