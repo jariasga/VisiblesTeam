@@ -2,6 +2,7 @@
 using Npgsql;
 using System.Data;
 using System.IO;
+using System;
 
 namespace InkaArt.Business.Purchases
 {
@@ -51,7 +52,7 @@ namespace InkaArt.Business.Purchases
             
             unitOfMeasurement.updateData(data,adap, "UnitOfMeasurement");
         }
-        public void massiveUpload(string filename)
+        public int massiveUpload(string filename)
         {
             table = getData();     // obtenemos la tabla de unidades
 
@@ -67,9 +68,19 @@ namespace InkaArt.Business.Purchases
                     string abreviatura=values[1].Trim();
                     string estado=values[2].Trim();
                     if (values[0].Length <= 280 && values[1].Length <= 10)
-                        insertData(values[0], values[1], "Activo");
+                    {
+                        try
+                        {
+                            insertData(values[0], values[1], "Activo");
+                        }
+                        catch (Exception)
+                        {
+                            return 1;
+                        }
+                    }
                 }
             }
+            return 0;
         }
     }
 }
