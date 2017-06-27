@@ -58,6 +58,7 @@ namespace InkaArt.Business.Algorithm
                 Recipe recipe = recipes.GetByID(reader.GetInt32(3));
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
+                if (worker == null || job == null || recipe == null) continue;
                 Index index = new Index(id_index, worker, job, recipe, average_breakage, average_time);
                 indexes.Add(index);
             }
@@ -196,26 +197,19 @@ namespace InkaArt.Business.Algorithm
             this.indexes.Remove(index);
         }
 
-        public Index Find(Worker worker, Job job, Recipe recipe)
-        {
-            if (worker == null || job == null || recipe == null) return null;
-            return indexes.Find(index => index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID);
-        }
-
         public Index FindByAssignment(AssignmentLine line)
         {
-            if (line == null) return null;
-            return indexes.Find(index => index.Worker != null && index.Worker.ID == line.Worker.ID 
-                && index.Job != null && index.Job.ID == line.Job.ID 
-                && index.Recipe != null && index.Recipe.ID == line.Recipe.ID);
+            return (line == null) ? null : FindByWorkerJobAndRecipe(line.Worker, line.Job, line.Recipe);
         }
-
 
         public Index FindByWorkerJobAndRecipe(Worker worker, Job job, Recipe recipe)
         {
             if (worker == null || job == null || recipe == null) return null;
-            foreach (Index index in indexes)
-                if (index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID) return index;
+            for (int i = 0; i < indexes.Count; i++)
+            {
+                if (indexes[i] == null || indexes[i].Worker == null || indexes[i].Job == null || indexes[i].Recipe == null) continue;
+                if (indexes[i].Worker.ID == worker.ID && indexes[i].Job.ID == job.ID && indexes[i].Recipe.ID == recipe.ID) return indexes[i];
+            }
             return null;
         }
 
@@ -233,7 +227,7 @@ namespace InkaArt.Business.Algorithm
                 var br = index.BreakageIndex.ToString();
                 var ti = index.TimeIndex.ToString();
                 var lo = index.LossIndex.ToString();
-                var newLine = string.Format("{0}; {1}; {2}; {3}; {4}; {5}; {6}", worker_id, worker, job, recipe, br, ti, lo);
+                var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6}", worker_id, worker, job, recipe, br, ti, lo);
                 csv.AppendLine(newLine);
             }
                         
