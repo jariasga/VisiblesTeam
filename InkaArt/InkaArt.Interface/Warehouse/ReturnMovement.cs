@@ -117,7 +117,7 @@ namespace InkaArt.Interface.Warehouse
             //for del datagrid
             int actualizar = 0;
             for(int i = 0; i < dataGridView1.Rows.Count; i++)
-                if (int.Parse(dataGridView1.Rows[i].Cells[7].Value.ToString()) != 0)
+                if (dataGridView1.Rows[i].Cells[7].Value != null && int.Parse(dataGridView1.Rows[i].Cells[7].Value.ToString()) != 0)
                 {
                     actualizar = 1;
                     break;
@@ -222,7 +222,7 @@ namespace InkaArt.Interface.Warehouse
                             MessageBox.Show("Favor de ingresar un valor válido para el número de pedido");
                             return;
                         }
-                        if (cantMov <= maxMov && cantMov <= int.Parse(row.Cells[7].ToString()))
+                        if (cantMov <= maxMov && cantMov <= int.Parse(row.Cells[7].Value.ToString()))
                         {
                             //Se valida que exista la materia prima, el almacén, también que exista la relación materiaPrima-almacén
                             int intIdWarehouse = 0;
