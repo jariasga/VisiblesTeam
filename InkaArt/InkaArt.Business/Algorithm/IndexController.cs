@@ -112,9 +112,9 @@ namespace InkaArt.Business.Algorithm
                     {
                         if (indexes[index].Job.ID == jobs[job_index].ID && indexes[index].Recipe.ID == recipes[recipe_index].ID)
                         {
-                            average_mean_count[job_index, recipe_index]++;
-                            average_breakage_mean[job_index, recipe_index] += indexes[index].AverageBreakage;
-                            average_time_mean[job_index, recipe_index] += indexes[index].AverageTime;
+                            average_mean_count[recipe_index, job_index]++;
+                            average_breakage_mean[recipe_index, job_index] += indexes[index].AverageBreakage;
+                            average_time_mean[recipe_index, job_index] += indexes[index].AverageTime;
                         }
                     }
 
@@ -146,7 +146,7 @@ namespace InkaArt.Business.Algorithm
                         }
 
                         double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
-                        index.CalculateIndexes(average_breakage_mean[job_index, recipe_index], average_time_mean[job_index, recipe_index],
+                        index.CalculateIndexes(average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index],
                             simulation.BreakageWeight, simulation.TimeWeight, product_weight);
                     }
                 }
