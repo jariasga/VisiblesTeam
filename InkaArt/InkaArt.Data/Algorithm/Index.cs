@@ -180,7 +180,7 @@ namespace InkaArt.Data.Algorithm
 
         public double NextCostValue(double objective_function_value, int iteration)
         {
-            this.cost_value = (this.loss_index - objective_function_value) / (iteration + 1);
+            this.cost_value = (this.loss_index - objective_function_value) / iteration;
             return this.cost_value;
         }
 
