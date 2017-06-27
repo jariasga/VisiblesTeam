@@ -44,11 +44,6 @@ namespace InkaArt.Interface.Sales
                 MessageBox.Show(this, "Por favor, seleccionar un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
             }
-            else if (dateTimePicker_fechaFin.Value > DateTime.Now)
-            {
-                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
-            }
             else return 1;
         }
     }
