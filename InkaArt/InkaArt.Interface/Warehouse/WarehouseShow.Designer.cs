@@ -42,14 +42,6 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.buttonAdd_RawMaterial = new System.Windows.Forms.Button();
             this.dataGridView_RawMaterial = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockMaximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonDelete_RawMaterial = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_RM = new System.Windows.Forms.ComboBox();
@@ -74,6 +66,16 @@
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.idPW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonDelete_Product = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockMaximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage_rawMaterial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -90,7 +92,7 @@
             this.button_edit.BackColor = System.Drawing.Color.SteelBlue;
             this.button_edit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_edit.ForeColor = System.Drawing.Color.White;
-            this.button_edit.Location = new System.Drawing.Point(78, 319);
+            this.button_edit.Location = new System.Drawing.Point(74, 365);
             this.button_edit.Margin = new System.Windows.Forms.Padding(2);
             this.button_edit.Name = "button_edit";
             this.button_edit.Size = new System.Drawing.Size(95, 34);
@@ -108,7 +110,7 @@
             this.textBox_address.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_address.Multiline = true;
             this.textBox_address.Name = "textBox_address";
-            this.textBox_address.Size = new System.Drawing.Size(197, 127);
+            this.textBox_address.Size = new System.Drawing.Size(197, 148);
             this.textBox_address.TabIndex = 55;
             // 
             // label4
@@ -175,11 +177,12 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(630, 365);
+            this.tabControl1.Size = new System.Drawing.Size(630, 399);
             this.tabControl1.TabIndex = 57;
             // 
             // tabPage_rawMaterial
             // 
+            this.tabPage_rawMaterial.Controls.Add(this.label11);
             this.tabPage_rawMaterial.Controls.Add(this.button_updateP);
             this.tabPage_rawMaterial.Controls.Add(this.numericUpDown2);
             this.tabPage_rawMaterial.Controls.Add(this.numericUpDown1);
@@ -194,7 +197,7 @@
             this.tabPage_rawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_rawMaterial.Name = "tabPage_rawMaterial";
             this.tabPage_rawMaterial.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage_rawMaterial.Size = new System.Drawing.Size(622, 339);
+            this.tabPage_rawMaterial.Size = new System.Drawing.Size(622, 373);
             this.tabPage_rawMaterial.TabIndex = 0;
             this.tabPage_rawMaterial.Text = "Materias Primas";
             this.tabPage_rawMaterial.UseVisualStyleBackColor = true;
@@ -204,7 +207,7 @@
             this.button_updateP.BackColor = System.Drawing.Color.SteelBlue;
             this.button_updateP.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_updateP.ForeColor = System.Drawing.Color.White;
-            this.button_updateP.Location = new System.Drawing.Point(159, 290);
+            this.button_updateP.Location = new System.Drawing.Point(168, 323);
             this.button_updateP.Margin = new System.Windows.Forms.Padding(2);
             this.button_updateP.Name = "button_updateP";
             this.button_updateP.Size = new System.Drawing.Size(106, 32);
@@ -218,6 +221,11 @@
             this.numericUpDown2.Enabled = false;
             this.numericUpDown2.Location = new System.Drawing.Point(320, 37);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown2.TabIndex = 65;
@@ -227,6 +235,11 @@
             this.numericUpDown1.Enabled = false;
             this.numericUpDown1.Location = new System.Drawing.Point(175, 40);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown1.TabIndex = 58;
@@ -266,55 +279,12 @@
             this.dataGridView_RawMaterial.TabIndex = 55;
             this.dataGridView_RawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_RawMaterial_CellContentClick);
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            // 
-            // stockActual
-            // 
-            this.stockActual.HeaderText = "Stock Actual";
-            this.stockActual.Name = "stockActual";
-            // 
-            // stockVirtual
-            // 
-            this.stockVirtual.HeaderText = "Stock Virtual";
-            this.stockVirtual.Name = "stockVirtual";
-            // 
-            // stockMinimo
-            // 
-            this.stockMinimo.HeaderText = "Stock Mínimo";
-            this.stockMinimo.Name = "stockMinimo";
-            // 
-            // stockMaximo
-            // 
-            this.stockMaximo.HeaderText = "Stock Máximo";
-            this.stockMaximo.Name = "stockMaximo";
-            // 
-            // borrar
-            // 
-            this.borrar.HeaderText = "Seleccionar";
-            this.borrar.Name = "borrar";
-            this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // IdRMW
-            // 
-            this.IdRMW.HeaderText = "IdRMW";
-            this.IdRMW.Name = "IdRMW";
-            this.IdRMW.Visible = false;
-            // 
             // buttonDelete_RawMaterial
             // 
             this.buttonDelete_RawMaterial.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_RawMaterial.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_RawMaterial.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(382, 290);
+            this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(372, 323);
             this.buttonDelete_RawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_RawMaterial.Name = "buttonDelete_RawMaterial";
             this.buttonDelete_RawMaterial.Size = new System.Drawing.Size(106, 32);
@@ -369,6 +339,7 @@
             // 
             // tabPage_Products
             // 
+            this.tabPage_Products.Controls.Add(this.label10);
             this.tabPage_Products.Controls.Add(this.button_updateRm);
             this.tabPage_Products.Controls.Add(this.numericUpDown3);
             this.tabPage_Products.Controls.Add(this.numericUpDown4);
@@ -383,7 +354,7 @@
             this.tabPage_Products.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage_Products.Name = "tabPage_Products";
             this.tabPage_Products.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage_Products.Size = new System.Drawing.Size(622, 339);
+            this.tabPage_Products.Size = new System.Drawing.Size(622, 373);
             this.tabPage_Products.TabIndex = 1;
             this.tabPage_Products.Text = "Productos";
             this.tabPage_Products.UseVisualStyleBackColor = true;
@@ -393,7 +364,7 @@
             this.button_updateRm.BackColor = System.Drawing.Color.SteelBlue;
             this.button_updateRm.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_updateRm.ForeColor = System.Drawing.Color.White;
-            this.button_updateRm.Location = new System.Drawing.Point(158, 290);
+            this.button_updateRm.Location = new System.Drawing.Point(167, 323);
             this.button_updateRm.Margin = new System.Windows.Forms.Padding(2);
             this.button_updateRm.Name = "button_updateRm";
             this.button_updateRm.Size = new System.Drawing.Size(106, 32);
@@ -407,6 +378,11 @@
             this.numericUpDown3.Enabled = false;
             this.numericUpDown3.Location = new System.Drawing.Point(328, 42);
             this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDown3.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown3.TabIndex = 80;
@@ -416,6 +392,11 @@
             this.numericUpDown4.Enabled = false;
             this.numericUpDown4.Location = new System.Drawing.Point(183, 45);
             this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown4.TabIndex = 77;
@@ -552,7 +533,7 @@
             this.buttonDelete_Product.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_Product.Location = new System.Drawing.Point(376, 290);
+            this.buttonDelete_Product.Location = new System.Drawing.Point(373, 323);
             this.buttonDelete_Product.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_Product.Name = "buttonDelete_Product";
             this.buttonDelete_Product.Size = new System.Drawing.Size(106, 32);
@@ -561,12 +542,82 @@
             this.buttonDelete_Product.UseVisualStyleBackColor = false;
             this.buttonDelete_Product.Click += new System.EventHandler(this.buttonDelete_Product_Click);
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // stockActual
+            // 
+            this.stockActual.HeaderText = "Stock Actual";
+            this.stockActual.Name = "stockActual";
+            this.stockActual.ReadOnly = true;
+            // 
+            // stockVirtual
+            // 
+            this.stockVirtual.HeaderText = "Stock Virtual";
+            this.stockVirtual.Name = "stockVirtual";
+            this.stockVirtual.ReadOnly = true;
+            // 
+            // stockMinimo
+            // 
+            this.stockMinimo.HeaderText = "Stock Mínimo";
+            this.stockMinimo.Name = "stockMinimo";
+            // 
+            // stockMaximo
+            // 
+            this.stockMaximo.HeaderText = "Stock Máximo";
+            this.stockMaximo.Name = "stockMaximo";
+            // 
+            // borrar
+            // 
+            this.borrar.HeaderText = "Seleccionar";
+            this.borrar.Name = "borrar";
+            this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IdRMW
+            // 
+            this.IdRMW.HeaderText = "IdRMW";
+            this.IdRMW.Name = "IdRMW";
+            this.IdRMW.ReadOnly = true;
+            this.IdRMW.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(28, 293);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(553, 18);
+            this.label10.TabIndex = 82;
+            this.label10.Text = "* El stock actual y virtual solo son editables mediante movimientos de almacén.";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(28, 293);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(553, 18);
+            this.label11.TabIndex = 83;
+            this.label11.Text = "* El stock actual y virtual solo son editables mediante movimientos de almacén.";
+            // 
             // WarehouseShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(914, 401);
+            this.ClientSize = new System.Drawing.Size(914, 441);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button_edit);
             this.Controls.Add(this.textBox_address);
@@ -626,14 +677,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button_updateP;
         private System.Windows.Forms.Button button_updateRm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockActual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockVirtual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockMinimo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stockMaximo;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn borrar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdRMW;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
@@ -642,5 +685,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockVirtual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockMinimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stockMaximo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn borrar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdRMW;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

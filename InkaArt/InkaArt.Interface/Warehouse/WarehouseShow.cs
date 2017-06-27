@@ -171,8 +171,6 @@ namespace InkaArt.Interface.Warehouse
             RawMaterialWarehouseController control = new RawMaterialWarehouseController();
             DataTable rmWarehouseList = control.getData();
 
-            
-
             string name = comboBox_RM.SelectedItem.ToString();
             string idRM = "";
             //validar que no esté en la lista
@@ -199,7 +197,7 @@ namespace InkaArt.Interface.Warehouse
                     min = int.Parse(numericUpDown1.Value.ToString());
                     max = int.Parse(numericUpDown2.Value.ToString());
 
-                    if (min != 0 && max != 0)
+                    if (min >= 0 && max != 0)
                     {
                         if (max > min)
                         {
@@ -268,7 +266,7 @@ namespace InkaArt.Interface.Warehouse
                     min = int.Parse(numericUpDown4.Value.ToString());
                     max = int.Parse(numericUpDown3.Value.ToString());
 
-                    if (min != 0 && max != 0)
+                    if (min >= 0 && max != 0)
                     {
                         if (max > min)
                         {
@@ -399,7 +397,7 @@ namespace InkaArt.Interface.Warehouse
                                 {
                                     Console.WriteLine("{0} error", m);
                                 }
-                                fillGridProduct();
+                                //fillGridProduct();
                             }
                             else
                                 MessageBox.Show("El valor máximo no puede ser menor al minimo, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -414,6 +412,7 @@ namespace InkaArt.Interface.Warehouse
 
                 }
             }
+            fillGridProduct();
         }
 
         private void button_updateRm_Click(object sender, EventArgs e)

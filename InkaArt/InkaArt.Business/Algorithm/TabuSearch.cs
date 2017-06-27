@@ -262,6 +262,14 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
+        public void bestSolutionToList()
+        {
+            foreach(Assignment day in BestSolution)
+            {
+                day.AssignmentLinesList = day.toList(simulation);
+            }
+        }
+
         /* Flujo del algoritmo */
         public void run(ref int elapsed_time, int day)
         {

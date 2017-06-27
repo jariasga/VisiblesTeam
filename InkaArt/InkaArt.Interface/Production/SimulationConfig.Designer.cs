@@ -241,7 +241,7 @@
             this.button_start.BackColor = System.Drawing.Color.SteelBlue;
             this.button_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_start.ForeColor = System.Drawing.Color.White;
-            this.button_start.Location = new System.Drawing.Point(509, 425);
+            this.button_start.Location = new System.Drawing.Point(576, 424);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(221, 42);
             this.button_start.TabIndex = 55;
@@ -261,7 +261,7 @@
             this.groupBox1.Size = new System.Drawing.Size(296, 177);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pesos o relevancias";
+            this.groupBox1.Text = "General";
             // 
             // label_end
             // 
@@ -324,7 +324,7 @@
             this.groupbox_orders.Enabled = false;
             this.groupbox_orders.Location = new System.Drawing.Point(626, 19);
             this.groupbox_orders.Name = "groupbox_orders";
-            this.groupbox_orders.Size = new System.Drawing.Size(271, 392);
+            this.groupbox_orders.Size = new System.Drawing.Size(359, 392);
             this.groupbox_orders.TabIndex = 0;
             this.groupbox_orders.TabStop = false;
             this.groupbox_orders.Text = "Pedidos a considerar";
@@ -347,7 +347,7 @@
             this.list_orders.HorizontalScrollbar = true;
             this.list_orders.Location = new System.Drawing.Point(16, 52);
             this.list_orders.Name = "list_orders";
-            this.list_orders.Size = new System.Drawing.Size(240, 319);
+            this.list_orders.Size = new System.Drawing.Size(320, 319);
             this.list_orders.TabIndex = 50;
             // 
             // SimulationConfig
@@ -355,7 +355,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(909, 491);
+            this.ClientSize = new System.Drawing.Size(1010, 491);
             this.Controls.Add(this.groupbox_orders);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_start);

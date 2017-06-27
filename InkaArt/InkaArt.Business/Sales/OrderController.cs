@@ -68,7 +68,6 @@ namespace InkaArt.Business.Sales
         {
             float amount = float.Parse(strAmount), igv = float.Parse(strIgv), total = float.Parse(strTotal);
             int responseSD, responseLI = 0, invoicedNumber = 0;
-            if (selectedDoc != 6) selectedDoc++;
             responseSD = orderData.InsertSaleDocument(selectedDoc,amount,igv,total,orderId);
             string idSaleDocument = orderData.getSaleDocumentId().ToString();
             foreach (DataRow orderline in orderLines.Rows)
@@ -84,7 +83,7 @@ namespace InkaArt.Business.Sales
                 if (orderType == 1) toAdd = quantity;
                 else toAdd = finished;
                 responseLI += orderData.AddLineXDocument(idLineItem, toAdd, pu, idSaleDocument);
-                responseLI += orderData.UpdateLineItem(idLineItem, lineComplete);
+                responseLI += orderData.UpdateLineItem(idLineItem, lineComplete,finished);
             }
             if (invoicedNumber == orderLines.Rows.Count || orderType == 1) orderData.updateOrderStatus(orderId.ToString(),"facturado");
             return responseSD + responseLI;
@@ -195,7 +194,7 @@ namespace InkaArt.Business.Sales
 
         public string makeValidations(string clientDoc, string clientName, DataTable orderLines, string type, string reason, DateTime selectedDate, string docId = "null")
         {
-            if(type.Equals("pedido")) if (!isMoreThanToday(selectedDate)) return "La fecha de emisión que ha ingresado no es válida";
+            if(type.Equals("pedido")) if (!isMoreThanToday(selectedDate)) return "La fecha de entrega que ha ingresado no es válida";
             if (type.Equals("devolucion")) if (docId.Equals("")) return "Debe seleccionar un pedido antes de continuar.";
             if (orderLines.Rows.Count == 0) return "Debe añadir productos para realizar un pedido.";
             if (type.Equals("devolucion") && reason.Equals("")) return "Debe ingresar un motivo para continuar.";

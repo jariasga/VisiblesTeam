@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.textbox_reason = new System.Windows.Forms.TextBox();
@@ -57,7 +57,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_seedoc = new System.Windows.Forms.Button();
-            this.button_fac = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orderline)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -77,9 +76,9 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox2.Location = new System.Drawing.Point(505, 28);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(620, 492);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
@@ -101,7 +100,7 @@
             this.textbox_reason.Enabled = false;
             this.textbox_reason.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_reason.Location = new System.Drawing.Point(269, 300);
-            this.textbox_reason.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_reason.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_reason.Multiline = true;
             this.textbox_reason.Name = "textbox_reason";
             this.textbox_reason.Size = new System.Drawing.Size(324, 153);
@@ -112,7 +111,7 @@
             this.textbox_devtotal.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_devtotal.Enabled = false;
             this.textbox_devtotal.Location = new System.Drawing.Point(33, 423);
-            this.textbox_devtotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_devtotal.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_devtotal.Name = "textbox_devtotal";
             this.textbox_devtotal.Size = new System.Drawing.Size(219, 30);
             this.textbox_devtotal.TabIndex = 28;
@@ -133,7 +132,7 @@
             this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Location = new System.Drawing.Point(35, 362);
-            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_igv.Name = "textbox_igv";
             this.textbox_igv.Size = new System.Drawing.Size(219, 30);
             this.textbox_igv.TabIndex = 26;
@@ -154,7 +153,7 @@
             this.textbox_devamount.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_devamount.Enabled = false;
             this.textbox_devamount.Location = new System.Drawing.Point(35, 300);
-            this.textbox_devamount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_devamount.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_devamount.Name = "textbox_devamount";
             this.textbox_devamount.Size = new System.Drawing.Size(219, 30);
             this.textbox_devamount.TabIndex = 21;
@@ -167,14 +166,14 @@
             this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -230,9 +229,9 @@
             this.groupBox1.Controls.Add(this.clientIdentifierLabel);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(29, 364);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(445, 224);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
@@ -243,7 +242,7 @@
             this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_name.Enabled = false;
             this.textbox_name.Location = new System.Drawing.Point(33, 148);
-            this.textbox_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_name.Name = "textbox_name";
             this.textbox_name.Size = new System.Drawing.Size(368, 30);
             this.textbox_name.TabIndex = 19;
@@ -263,7 +262,7 @@
             this.textbox_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_doc.Enabled = false;
             this.textbox_doc.Location = new System.Drawing.Point(33, 74);
-            this.textbox_doc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_doc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_doc.Name = "textbox_doc";
             this.textbox_doc.Size = new System.Drawing.Size(368, 30);
             this.textbox_doc.TabIndex = 17;
@@ -288,9 +287,9 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox3.Location = new System.Drawing.Point(29, 28);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(445, 322);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
@@ -301,7 +300,7 @@
             this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total.Enabled = false;
             this.textbox_total.Location = new System.Drawing.Point(31, 255);
-            this.textbox_total.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_total.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_total.Name = "textbox_total";
             this.textbox_total.Size = new System.Drawing.Size(369, 30);
             this.textbox_total.TabIndex = 30;
@@ -317,7 +316,7 @@
             "Boleta",
             "Factura"});
             this.combo_doc.Location = new System.Drawing.Point(33, 68);
-            this.combo_doc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combo_doc.Margin = new System.Windows.Forms.Padding(4);
             this.combo_doc.Name = "combo_doc";
             this.combo_doc.Size = new System.Drawing.Size(369, 31);
             this.combo_doc.TabIndex = 36;
@@ -338,7 +337,7 @@
             this.date_deliverydate.Font = new System.Drawing.Font("Arial", 11F);
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(32, 167);
-            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4);
             this.date_deliverydate.Name = "date_deliverydate";
             this.date_deliverydate.Size = new System.Drawing.Size(368, 29);
             this.date_deliverydate.TabIndex = 12;
@@ -370,7 +369,7 @@
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
             this.button_delete.Location = new System.Drawing.Point(943, 540);
-            this.button_delete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_delete.Margin = new System.Windows.Forms.Padding(4);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(143, 48);
             this.button_delete.TabIndex = 39;
@@ -383,7 +382,7 @@
             this.button_seedoc.BackColor = System.Drawing.Color.Gray;
             this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_seedoc.ForeColor = System.Drawing.Color.White;
-            this.button_seedoc.Location = new System.Drawing.Point(539, 540);
+            this.button_seedoc.Location = new System.Drawing.Point(692, 540);
             this.button_seedoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_seedoc.Name = "button_seedoc";
             this.button_seedoc.Size = new System.Drawing.Size(244, 48);
@@ -392,20 +391,6 @@
             this.button_seedoc.UseVisualStyleBackColor = false;
             this.button_seedoc.Click += new System.EventHandler(this.button_seedoc_Click);
             // 
-            // button_fac
-            // 
-            this.button_fac.BackColor = System.Drawing.Color.Gray;
-            this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_fac.ForeColor = System.Drawing.Color.White;
-            this.button_fac.Location = new System.Drawing.Point(789, 540);
-            this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_fac.Name = "button_fac";
-            this.button_fac.Size = new System.Drawing.Size(143, 48);
-            this.button_fac.TabIndex = 41;
-            this.button_fac.Text = "🗀 Facturar";
-            this.button_fac.UseVisualStyleBackColor = false;
-            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
-            // 
             // DevolutionShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -413,12 +398,11 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1161, 614);
             this.Controls.Add(this.button_seedoc);
-            this.Controls.Add(this.button_fac);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DevolutionShow";
             this.Text = "Devolución";
             this.Load += new System.EventHandler(this.DevolutionShow_Load);
@@ -459,7 +443,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button_delete;
         private System.Windows.Forms.Button button_seedoc;
-        private System.Windows.Forms.Button button_fac;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn PU;

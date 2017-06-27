@@ -80,8 +80,8 @@ namespace InkaArt.Business.Warehouse
                 return true;
             else
                 return false;
-        }
-
+        }*/
+        /*
         public void insertProduct(int idProd,int idWarehouse)
         {
             string query="";
@@ -252,7 +252,11 @@ namespace InkaArt.Business.Warehouse
             return datos;
         }*/
 
-        /*
+        void insertProductQuery(int idProd,int idWarehouse)
+        {
+
+        }
+
         public void massiveUpload(string filename)
         {
             using (var fs = File.OpenRead(filename))
@@ -263,9 +267,9 @@ namespace InkaArt.Business.Warehouse
                     var line = reader.ReadLine();
                     var values = line.Split(';');
 
-                    // creamos usuario
+                    // creamos almacen
                     int idNote, idBill, idMovementType, idWarehouse, idMovementReason,idProd;
-                    string dateIn="";
+                    string dateIn = "";
                     idNote = int.Parse(values[2]);
                     idBill = int.Parse(values[7]);
                     idProd = int.Parse(values[4]);
@@ -274,11 +278,11 @@ namespace InkaArt.Business.Warehouse
                     idMovementReason = int.Parse(values[3]);
                     dateIn = values[6];
                     createMovement(idNote, idBill, idMovementType, idWarehouse, idMovementReason, dateIn);
-                    insertProduct(idProd, idWarehouse);
+                    insertProductQuery(idProd, idWarehouse);
                     // agregamos el producto a la tabla producto por almacen                    
                 }
                 MessageBox.Show("Carga de movimientos con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             }
-        }*/
+        }
     }
 }
