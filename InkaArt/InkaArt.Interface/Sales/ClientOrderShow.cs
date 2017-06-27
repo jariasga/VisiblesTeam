@@ -70,7 +70,7 @@ namespace InkaArt.Interface.Sales
                     if (int.Parse(orderline["quantityProduced"].ToString()) > 0) orderLineToFac.Rows.Add(orderline.ItemArray);
                     float price = float.Parse(pu.ToString());
                     toFacAmount = orderController.updateAmount(toFacAmount, price, decimal.Parse(orderline["quantityProduced"].ToString()));
-                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantityInvoiced"] , curStock, orderline["quantity"]);
+                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"], curStock, orderline["quantityInvoiced"]);
                 }
                 if (totalInvoiced > 0) button_seedoc.Visible = true;
                 else button_seedoc.Visible = true;
