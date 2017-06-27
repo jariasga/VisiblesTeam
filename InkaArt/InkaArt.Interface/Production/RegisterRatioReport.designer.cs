@@ -53,9 +53,9 @@
             this.open_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
             this.grid_column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_worker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_job = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.grid_column_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -347,25 +347,23 @@
             // 
             this.grid_column_worker.HeaderText = "Trabajador";
             this.grid_column_worker.Name = "grid_column_worker";
-            this.grid_column_worker.ReadOnly = true;
             this.grid_column_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.grid_column_worker.Width = 180;
             // 
             // grid_column_job
             // 
             this.grid_column_job.HeaderText = "Puesto de trabajo";
             this.grid_column_job.Name = "grid_column_job";
-            this.grid_column_job.ReadOnly = true;
             this.grid_column_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_job.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.grid_column_job.Width = 180;
             // 
             // grid_column_recipe
             // 
             this.grid_column_recipe.HeaderText = "Receta";
             this.grid_column_recipe.Name = "grid_column_recipe";
-            this.grid_column_recipe.ReadOnly = true;
             this.grid_column_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.grid_column_recipe.Width = 150;
             // 
             // grid_column_start
@@ -443,14 +441,14 @@
         private System.Windows.Forms.TextBox textbox_start;
         private System.Windows.Forms.Button button_load;
         private System.Windows.Forms.OpenFileDialog open_file_dialog;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_worker;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_job;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_recipe;
+        private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_worker;
+        private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_job;
+        private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_recipe;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_start;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_end;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_broken;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_produced;
-        private System.Windows.Forms.Label label1;
     }
 }
