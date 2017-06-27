@@ -68,7 +68,7 @@ namespace InkaArt.Business.Warehouse
             int makeUpdate = 1;
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                if (Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == id)
+                if (Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == id && Convert.ToInt32(table.Rows[i]["status"].ToString()) == 1)
                 {
                     if (typeMovement == "Entrada")
                     {
