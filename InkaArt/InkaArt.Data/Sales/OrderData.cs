@@ -20,7 +20,7 @@ namespace InkaArt.Data.Sales
             data = new DataSet();
         }
 
-        public int UpdateLineItem(string id, bool lineComplete)
+        public int UpdateLineItem(string id, bool lineComplete, int finished)
         {
             NpgsqlDataAdapter myAdap = orderLineAdapter();
             DataSet myData = getData(myAdap, "LineItem");
@@ -29,9 +29,8 @@ namespace InkaArt.Data.Sales
             {
                 if (string.Compare(table.Rows[i]["idLineItem"].ToString(), id) == 0)
                 {
-                    int invoiced, finished;
+                    int invoiced;
                     invoiced = int.Parse(table.Rows[i]["quantityInvoiced"].ToString());
-                    finished = int.Parse(table.Rows[i]["quantityProduced"].ToString());
                     table.Rows[i]["quantityInvoiced"] = invoiced + finished;
                     table.Rows[i]["quantityProduced"] = 0;
                     if (lineComplete) table.Rows[i]["lineStatus"] = "facturado";
