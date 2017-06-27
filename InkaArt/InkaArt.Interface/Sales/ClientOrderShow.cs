@@ -72,8 +72,6 @@ namespace InkaArt.Interface.Sales
                     toFacAmount = orderController.updateAmount(toFacAmount, price, decimal.Parse(orderline["quantityProduced"].ToString()));
                     grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantityInvoiced"] , curStock, orderline["quantity"]);
                 }
-                if (totalFinished > 0) button_fac.Visible = true;
-                else button_fac.Visible = false;
                 if (totalInvoiced > 0) button_seedoc.Visible = true;
                 else button_seedoc.Visible = true;
                 textbox_amount_todoc.Text = orderController.getPolishedAmount(toFacAmount);
