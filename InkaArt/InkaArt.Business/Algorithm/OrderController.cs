@@ -62,7 +62,7 @@ namespace InkaArt.Business.Algorithm
                 {
                     int id_line_item = int.Parse(reader["idLineItem"].ToString());
                     int id_recipe = int.Parse(reader["idRecipe"].ToString());
-                    int quantity = int.Parse(reader["quantity"].ToString());
+                    int quantity = int.Parse(reader["quantity"].ToString()) - int.Parse(reader["quantityInvoiced"].ToString());
                     int produced = int.Parse(reader["quantityProduced"].ToString());
                     order.OrderLineItems.Add(new OrderLineItem(id_line_item, order.DeliveryDate, recipes.GetByID(id_recipe), quantity, produced));
                 }
