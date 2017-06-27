@@ -269,6 +269,7 @@
             this.button_bulk_upload.TabIndex = 47;
             this.button_bulk_upload.Text = "CargaMasiva";
             this.button_bulk_upload.UseVisualStyleBackColor = false;
+            this.button_bulk_upload.Click += new System.EventHandler(this.button_bulk_upload_Click);
             // 
             // WarehouseIndex
             // 

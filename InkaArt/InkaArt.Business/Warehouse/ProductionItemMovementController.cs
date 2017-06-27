@@ -56,58 +56,49 @@ namespace InkaArt.Business.Warehouse
             productionItemMovementData.closeConnection();*/
         }
         
-        public void updateData(int id, int numMov, string typeMovement)
+        public void updateData(int idProduct, int numMov, string typeMovement)
         {
+            string query = "";
+            int stockAct = 0,logicStock=0, makeUpdate=-1;
             //productionItemMovementData.connect();
-            adapt = productionItemMovementData.ProductionItemMovementAdapter();
+            NpgsqlDataReader dr;
+            query = "select \"actualStock\",\"logicalStock\" from inkaart.\"Product\" where \"idProduct\" = " + idProduct + " and \"status\" = 1;";
+            dr = productionItemMovementData.GetLoteData(query);
+            dr.Read();
+            stockAct = Convert.ToInt32(dr[0]);
+            logicStock = Convert.ToInt32(dr[1]);
 
-            data.Clear();
-            data = productionItemMovementData.getData(adapt, "Product");
-
-            table = data.Tables["Product"];
-            int makeUpdate = 1;
-            for (int i = 0; i < table.Rows.Count; i++)
+            if (typeMovement == "Entrada")
             {
-                if (Convert.ToInt32(table.Rows[i]["idProduct"].ToString()) == id && Convert.ToInt32(table.Rows[i]["status"].ToString()) == 1)
+                stockAct = stockAct + numMov;
+                logicStock = logicStock + numMov;
+                makeUpdate = 1;
+            }
+            if (typeMovement == "Salida")
+            {
+                if (stockAct - numMov < 0)
                 {
-                    if (typeMovement == "Entrada")
-                    {
-                        int stockAct;//Stock físico
-                        int logicStock;//Stock lógico
-
-                        stockAct = Convert.ToInt32(table.Rows[i]["actualStock"]);
-                        stockAct = stockAct + numMov;
-
-                        logicStock = Convert.ToInt32(table.Rows[i]["logicalStock"]);
-                        logicStock = logicStock + numMov;
-
-                        table.Rows[i]["actualStock"] = stockAct;
-                        table.Rows[i]["logicalStock"] = logicStock;
-                        break;
-                    }
-                    if (typeMovement == "Salida")
-                    {
-                        int stockAct;//Stock físico
-
-                        stockAct = Convert.ToInt32(table.Rows[i]["actualStock"]);
-                        if(stockAct - numMov < 0)
-                        {
-                            MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
-                            makeUpdate = -1;
-                            break;
-                        }
-                        else
-                        {
-                            stockAct = stockAct - numMov;
-                            table.Rows[i]["actualStock"] = stockAct;
-                        }
-                        break;
-                    }
+                    MessageBox.Show("Usted solo cuenta con: " + stockAct + " items, no puede mover: " + numMov + " items.");
+                    makeUpdate = -1;
+                }
+                else
+                {
+                    stockAct = stockAct - numMov;
+                    makeUpdate = 1;
                 }
             }
+
+            string updateQuery = "";
             if (makeUpdate != -1)
             {
-                int rowUpdated = productionItemMovementData.updateData(data, adapt, "Product");
+                updateQuery = "update inkaart.\"Product\" set \"actualStock\" = " + stockAct + ", \"logicalStock\" = " + logicStock + " where \"idProduct\" = " + idProduct + " and \"status\" = 1";
+
+                //productionItemWarehouseMovementData.updateDataExecute(updateQuery);
+
+                ProductionItemWarehouseMovementData aux = new ProductionItemWarehouseMovementData();
+
+                aux.updateDataExecute(updateQuery);
+                
             }            
         }
 
@@ -165,13 +156,25 @@ namespace InkaArt.Business.Warehouse
             return productionItemMovementData.GetLoteData(queryDocument);
         }
 
+        public NpgsqlDataReader getQueryProd(string idWarehouse)
+        {
+            int intAux, intIdWarehouse = -1;
+            string queryDocument = "";
+
+            if (!idWarehouse.Equals("")) if (int.TryParse(idWarehouse, out intAux)) intIdWarehouse = int.Parse(idWarehouse);
+            queryDocument = "select A.\"idProduct\",B.\"name\",A.\"currentStock\",A.\"minimunStock\",A.\"maximunStock\" from inkaart.\"Product-Warehouse\" A, inkaart.\"Product\" B where A.\"idWarehouse\" = " + intIdWarehouse + " and A.\"idProduct\" = B.\"idProduct\" and A.\"state\" = 'Activo' and B.\"status\" = 1;";
+
+            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
+            return productionItemMovementData.GetLoteData(queryDocument);
+        }
+
         public NpgsqlDataReader getQueryCreditNote(string idWarehouse, int idCreditNote)
         {
             int intAux, intIdWarehouse = -1;
             string queryDocument = "";
 
             if (!idWarehouse.Equals("")) if (int.TryParse(idWarehouse, out intAux)) intIdWarehouse = int.Parse(idWarehouse);
-            queryDocument = "select B.\"idProduct\",D.\"name\",B.\"quantity\",C.\"currentStock\" from inkaart.\"Order\" A,inkaart.\"LineItem\" B, inkaart.\"Product-Warehouse\" C, inkaart.\"Product\" D where A.\"idOrder\" = " + idCreditNote + " and A.\"orderStatus\" = 'registrado' and A.\"type\" = 'devolucion' and A.\"idOrder\" = B.\"idOrder\" and B.\"idProduct\" = C.\"idProduct\" and C.\"state\" = 'Activo' and B.\"idProduct\" = D.\"idProduct\" and C.\"idWarehouse\" = " + intIdWarehouse + ";";
+            queryDocument = "select B.\"idProduct\",D.\"name\",B.\"quantity\",C.\"currentStock\",C.\"minimunStock\",C.\"maximunStock\"  from inkaart.\"Order\" A,inkaart.\"LineItem\" B, inkaart.\"Product-Warehouse\" C, inkaart.\"Product\" D where A.\"idOrder\" = " + idCreditNote + " and A.\"orderStatus\" = 'registrado' and A.\"type\" = 'devolucion' and A.\"idOrder\" = B.\"idOrder\" and B.\"idProduct\" = C.\"idProduct\" and C.\"state\" = 'Activo' and B.\"idProduct\" = D.\"idProduct\" and C.\"idWarehouse\" = " + intIdWarehouse + " and D.\"status\" = 1;";
 
             //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
             return productionItemMovementData.GetLoteData(queryDocument);
@@ -209,16 +212,40 @@ namespace InkaArt.Business.Warehouse
             string queryProd, queryRawMaterial_Warehouse = "";
             int cant1 = 0, cant2 = 0;
 
-            queryProd = "select count(*) from inkaart.\"RawMaterial\" where \"id_raw_material\" = " + idProd + " and \"state\" = 'Activo';";
+            queryProd = "select count(*) from inkaart.\"RawMaterial\" where \"id_raw_material\" = " + idProd + " and \"status\" = 'Activo';";
             datos1 = productionItemMovementData.GetLoteData(queryProd);
             datos1.Read();
             cant1 = Convert.ToInt32(datos1[0]);
 
             queryRawMaterial_Warehouse = "select count(*)  from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + intIdWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
             datos2 = productionItemMovementData.GetLoteData(queryRawMaterial_Warehouse);
-            datos1.Read();
+            datos2.Read();
             cant2 = Convert.ToInt32(datos2[0]);
             
+            if ((cant1 >= 1) && (cant2 >= 1))
+            {
+                return 1;
+            }
+
+            return -1;
+        }
+
+        public int availableReturn(int idProd, int intIdWarehouse)
+        {
+            NpgsqlDataReader datos1, datos2;
+            string queryProd, queryRawMaterial_Warehouse = "";
+            int cant1 = 0, cant2 = 0;
+
+            queryProd = "select count(*) from inkaart.\"Product\" where \"idProduct\" = " + idProd + " and \"status\" = 1;";
+            datos1 = productionItemMovementData.GetLoteData(queryProd);
+            datos1.Read();
+            cant1 = Convert.ToInt32(datos1[0]);
+
+            queryRawMaterial_Warehouse = "select count(*)  from inkaart.\"Product-Warehouse\" where \"idWarehouse\" = " + intIdWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+            datos2 = productionItemMovementData.GetLoteData(queryRawMaterial_Warehouse);
+            datos2.Read();
+            cant2 = Convert.ToInt32(datos2[0]);
+
             if ((cant1 >= 1) && (cant2 >= 1))
             {
                 return 1;
