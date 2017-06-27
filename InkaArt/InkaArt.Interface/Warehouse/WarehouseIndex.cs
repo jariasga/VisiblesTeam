@@ -98,15 +98,15 @@ namespace InkaArt.Interface.Warehouse
             if (dialog.ShowDialog() == DialogResult.OK) { 
                 if (movimientos.massiveUpload(dialog.FileName) != 0) return;
             }
-            /*
-            WarehouseCrud movimientos = new WarehouseCrud();
+            
+            RawMaterialWarehouseController rmw_control = new RawMaterialWarehouseController();
             OpenFileDialog dialog2 = new OpenFileDialog();
             dialog2.Title = "Open Stock File";
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
-                if (movimientos.massiveUpload(dialog.FileName) != 0) return;
-            }*/
+                if (rmw_control.massiveUpload(dialog.FileName) != 0) return;
+            }
         }
 
         /*private void button_bulk_upload_Click(object sender, EventArgs e)
