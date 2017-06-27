@@ -11,7 +11,6 @@ using InkaArt.Business.Algorithm;
 //using InkaArt.Business.Security;
 using InkaArt.Data;
 using InkaArt.Data.Algorithm;
-using InkaArt.Business.Production;
 
 namespace InkaArt.Interface.Production
 {
@@ -25,13 +24,6 @@ namespace InkaArt.Interface.Production
         {
             InitializeComponent();
             workersList = new List<string>();
-            /*WorkerController workerControl = new WorkerController();
-            workerControl.Load();
-            foreach (var worker in workerControl.List())
-            {
-                comboBox_workers.Items.Add(worker.Name + " " + worker.LastName);
-                indexList.Add(worker.ID);
-            }*/
             
             workers.Load();
             this.list_workers.DataSource = workers.List();
@@ -61,8 +53,9 @@ namespace InkaArt.Interface.Production
         }
 
         private int validateData()
-        {            
-            if (dateTimePicker_ini.Value > dateTimePicker_fin.Value)
+        {
+            int result = DateTime.Compare(dateTimePicker_ini.Value, dateTimePicker_fin.Value);
+            if (result > 0)
             {
                 MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
