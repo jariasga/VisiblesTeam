@@ -215,7 +215,11 @@ namespace InkaArt.Business.Algorithm
         {
             if (worker == null || job == null || recipe == null) return null;
             foreach (Index index in indexes)
+            {
+                if (index.Worker == null || index.Job == null || index.Recipe == null) continue;
                 if (index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID) return index;
+            }
+                
             return null;
         }
 
