@@ -40,6 +40,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\InkaArt.Libraries\Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\packages\GDI+\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="sendEmail">
       <HintPath>..\InkaArt.Libraries\sendEmail.dll</HintPath>
     </Reference>
