@@ -132,7 +132,7 @@ namespace InkaArt.Business.Sales
 
             string updateQuery;
             updateQuery = "UPDATE inkaart.\"Order\" SET ";
-            updateQuery = updateQuery + "orderStatus = 'facturado' ";
+            updateQuery = updateQuery + "\"orderStatus\" = 'facturado' ";
             updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
             orderData.execute(updateQuery);
         }
