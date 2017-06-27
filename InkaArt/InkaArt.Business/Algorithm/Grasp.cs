@@ -299,7 +299,7 @@ namespace InkaArt.Business.Algorithm
                 if (line == null || line.Worker == null || line.Job == null) continue;
                 candidates.RemoveAll(index => index.Worker.ID == line.Worker.ID && index.Job.ID != line.Job.ID);
             }
-            //Reiniciar todo
+            //Reiniciar el proceso en producción, para la siguiente asignación.
             current_deleted_indexes.Clear();
             current_product = null;
         }

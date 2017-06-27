@@ -45,10 +45,10 @@ namespace InkaArt.Business.Algorithm
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
-
+            
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status ORDER BY id_index ASC", connection);
             command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
-
+            
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -95,37 +95,61 @@ namespace InkaArt.Business.Algorithm
 
         public void CalculateIndexes(Simulation simulation)
         {
-            double[,] average_breakage_mean = new double[jobs.NumberOfJobs, recipes.NumberOfRecipes];
-            double[,] average_time_mean = new double[jobs.NumberOfJobs, recipes.NumberOfRecipes];
-            int[,] average_mean_count = new int[jobs.NumberOfJobs, recipes.NumberOfRecipes];
+            double[,] average_breakage_mean = new double[recipes.NumberOfRecipes, jobs.NumberOfJobs];
+            double[,] average_time_mean = new double[recipes.NumberOfRecipes, jobs.NumberOfJobs];
+            int[,] average_mean_count = new int[recipes.NumberOfRecipes, jobs.NumberOfJobs];
 
-            for (int job = 0; job < jobs.NumberOfJobs; job++)
+            //Calcular los promedios de average_breakage y average_time. Esta función es O(n^3) :(
+            for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
             {
-                for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
+                List<Job> product_jobs = jobs.GetJobsByProduct(recipes[recipe].Product);
+                for (int job = 0; job < product_jobs.Count; job++)
                 {
-                    foreach (Index index in indexes)
+                    int job_index = jobs.GetIndex(product_jobs[job].ID);
+                    int recipe_index = recipes.GetIndex(recipes[recipe].ID);
+
+                    for (int index = 0; index < indexes.Count; index++)
                     {
-                        if (index.Job.ID == jobs[job].ID && index.Recipe.ID == recipes[recipe].ID)
+                        if (indexes[index].Job.ID == jobs[job_index].ID && indexes[index].Recipe.ID == recipes[recipe_index].ID)
                         {
-                            average_mean_count[job, recipe]++;
-                            average_breakage_mean[job, recipe] += index.AverageBreakage;
-                            average_time_mean[job, recipe] += index.AverageTime;
+                            average_mean_count[recipe_index, job_index]++;
+                            average_breakage_mean[recipe_index, job_index] += indexes[index].AverageBreakage;
+                            average_time_mean[recipe_index, job_index] += indexes[index].AverageTime;
                         }
                     }
 
-                    average_breakage_mean[job, recipe] = (average_mean_count[job, recipe] <= 0) ? 1 : average_breakage_mean[job, recipe] / average_mean_count[job, recipe];
-                    average_time_mean[job, recipe] = (average_mean_count[job, recipe] <= 0) ? 1 : average_time_mean[job, recipe] / average_mean_count[job, recipe];
+                    average_breakage_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
+                        ? 1 : average_breakage_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
+                    average_time_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
+                        ? 1 : average_time_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
                 }
             }
 
-            foreach (Index index in indexes)
+            //Calcular los promedios de average_breakage y average_time. Esta función es O(n^4). Ineficiencia 100% :(
+            for (int worker = 0; worker < simulation.SelectedWorkers.Count(); worker++)
             {
-                int job_index = jobs.GetIndex(index.Job.ID);
-                int recipe_index = recipes.GetIndex(index.Recipe.ID);
-                double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
+                for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
+                {
+                    List<Job> product_jobs = jobs.GetJobsByProduct(recipes[recipe].Product);
+                    for (int job = 0; job < product_jobs.Count; job++)
+                    {
+                        int job_index = jobs.GetIndex(product_jobs[job].ID);
+                        int recipe_index = recipes.GetIndex(recipes[recipe].ID);
+                        Worker worker_object = simulation.SelectedWorkers[worker];
 
-                index.CalculateIndexes(average_breakage_mean[job_index, recipe_index], average_time_mean[job_index, recipe_index],
-                    simulation.BreakageWeight, simulation.TimeWeight, product_weight);
+                        Index index = FindByWorkerJobAndRecipe(worker_object, jobs[job_index], recipes[recipe_index]);
+                        if (index == null)
+                        {
+                            index = new Index(0, worker_object, jobs[job_index], recipes[recipe_index],
+                                average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index]);
+                            indexes.Add(index);
+                        }
+
+                        double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
+                        index.CalculateIndexes(average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index],
+                            simulation.BreakageWeight, simulation.TimeWeight, product_weight);
+                    }
+                }
             }
         }
 
