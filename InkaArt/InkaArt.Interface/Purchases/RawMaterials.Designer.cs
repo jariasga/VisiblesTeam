@@ -216,26 +216,31 @@
             // 
             this.id_raw_material.HeaderText = "ID";
             this.id_raw_material.Name = "id_raw_material";
+            this.id_raw_material.ReadOnly = true;
             // 
             // name
             // 
             this.name.HeaderText = "Nombre";
             this.name.Name = "name";
+            this.name.ReadOnly = true;
             // 
             // description
             // 
             this.description.HeaderText = "Descripción";
             this.description.Name = "description";
+            this.description.ReadOnly = true;
             // 
             // unitName
             // 
             this.unitName.HeaderText = "Unidad";
             this.unitName.Name = "unitName";
+            this.unitName.ReadOnly = true;
             // 
             // status
             // 
             this.status.HeaderText = "Estado";
             this.status.Name = "status";
+            this.status.ReadOnly = true;
             // 
             // average_price
             // 

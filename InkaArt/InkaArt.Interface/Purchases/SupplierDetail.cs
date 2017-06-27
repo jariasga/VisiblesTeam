@@ -20,6 +20,7 @@ namespace InkaArt.Interface.Purchases
         RawMaterialController rawMaterialControl;
         DataTable rawMaterialList;
         bool isInEditMode = false;
+        string estadoInicial = "";
         bool editPriceMode = false;
         Suppliers suppliersWindow;
         public SupplierDetail()
@@ -61,6 +62,7 @@ namespace InkaArt.Interface.Purchases
             textBox_price.Enabled = false;
             suppliersWindow = suppliersView;
             isInEditMode = true;
+            estadoInicial = comboBox_status.Text;
             rawMaterialControl = new RawMaterialController();
             llenarComboBox();
         }
@@ -94,6 +96,7 @@ namespace InkaArt.Interface.Purchases
             textBox_email.Enabled = false;
             buttonAdd.Enabled = false;
             buttonDelete.Enabled = false;
+            estadoInicial = comboBox_status.Text;
             rawMaterialControl = new RawMaterialController();
 
             llenarComboBox();
@@ -393,6 +396,23 @@ namespace InkaArt.Interface.Purchases
                 }
             }
         }
+        private void pasarTodasLasLineasAEstado(string estado)
+        {
+            for (int i = 0; i < dataGridView_rm_sup.Rows.Count; i++)
+            {
+                string idRMSup = dataGridView_rm_sup.Rows[i].Cells[3].Value.ToString();
+                string idMat = dataGridView_rm_sup.Rows[i].Cells[0].Value.ToString();
+                string price = dataGridView_rm_sup.Rows[i].Cells[2].Value.ToString();
+                try
+                {
+                    control_rs.UpdateRM_Sup(idRMSup, idMat, textBox_idSupplier.Text, price, estado);
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
+        }
         private void button_event_click(object sender, EventArgs e)
         {
             if (mode==2 && isInEditMode)
@@ -404,9 +424,13 @@ namespace InkaArt.Interface.Purchases
                 try
                 {
                     control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
-                    suppliersWindow.desarrolloBusqueda();
                     guardarCambiosEnMateriasOfrecidas();
                     llenarMateriasProvistas(textBox_idSupplier.Text);
+                    if (string.Compare(comboBox_status.Text, estadoInicial) != 0) { //si el estado cambio
+                        pasarTodasLasLineasAEstado(comboBox_status.Text);
+                        estadoInicial = comboBox_status.Text;
+                    }
+                    suppliersWindow.desarrolloBusqueda();
                 }
                 catch (Exception)
                 {
