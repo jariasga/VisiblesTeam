@@ -57,6 +57,51 @@ namespace InkaArt.Data.Sales
             return rowsAffected;
         }
 
+        public DataTable GetInvoice(int salesDocumentId)
+        {
+            NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curAdap = salesDocumentAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE \"idSalesDocument\" = :idSalesDocument;";
+            curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idSalesDocument", DbType.Int32));
+            curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdap.SelectCommand.Parameters[0].SourceColumn = "idSalesDocument";
+            curAdap.SelectCommand.Parameters[0].NpgsqlValue = salesDocumentId;
+            curData = getData(curAdap, "SalesDocument");
+            DataTable saleDocument = new DataTable();
+            saleDocument = curData.Tables[0];
+            return saleDocument;
+        }
+
+        public DataTable getLinesByIds(int[] idProd, int orderId)
+        {
+            NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curData.Clear();
+            curAdap = orderLineAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE \"idOrder\" = :idOrder AND ";
+            curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdap.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+            curAdap.SelectCommand.Parameters[0].NpgsqlValue = orderId;
+            curAdap.SelectCommand.CommandText += " WHERE \"idProduct\" in (";
+            for (int i = 0; i < idProd.Length; i++)
+            {
+                if (i == idProd.Length - 1) curAdap.SelectCommand.CommandText += ":idProduct";
+                else curAdap.SelectCommand.CommandText += ":idProduct,";
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+                curAdap.SelectCommand.Parameters[i + 1].Direction = ParameterDirection.Input;
+                curAdap.SelectCommand.Parameters[i + 1].SourceColumn = "idProduct";
+                curAdap.SelectCommand.Parameters[i + 1].NpgsqlValue = idProd[i];
+
+            }
+            curAdap.SelectCommand.CommandText += ");";
+            curData = getData(curAdap, "LineItem");
+            DataTable orderLine = new DataTable();
+            orderLine = curData.Tables[0];
+            return orderLine;
+        }
+
         public void updateOrderStatus(string orderId, string orderStatus)
         {
             NpgsqlDataAdapter myAdap = orderAdapter();
@@ -235,7 +280,7 @@ namespace InkaArt.Data.Sales
                 curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[0].SourceColumn = "ruc";
                 curAdap.SelectCommand.Parameters[0].NpgsqlValue = doc;
-                curAdap.SelectCommand.CommandText += "name LIKE :name;";
+                curAdap.SelectCommand.CommandText += "UPPER(name) LIKE UPPER(:name);";
                 curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
                 curAdap.SelectCommand.Parameters[1].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[1].SourceColumn = "name";
@@ -252,7 +297,7 @@ namespace InkaArt.Data.Sales
             else if (doc == -1 && !clientName.Equals(""))
             {
                 clientName = "%" + clientName + "%";
-                curAdap.SelectCommand.CommandText += "name LIKE :name;";
+                curAdap.SelectCommand.CommandText += "UPPER(name) LIKE UPPER(:name);";
                 curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("name", DbType.AnsiStringFixedLength));
                 curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[0].SourceColumn = "name";
@@ -270,7 +315,7 @@ namespace InkaArt.Data.Sales
         {
             DataSet myData = new DataSet();
             NpgsqlDataAdapter myAdap = recipeAdapter();
-            myAdap.SelectCommand.CommandText += "WHERE \"idProduct\" = :idProduct;";
+            myAdap.SelectCommand.CommandText += "WHERE \"idProduct\" = :idProduct AND status = 1;";
             myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
             myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
             myAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
@@ -499,6 +544,22 @@ namespace InkaArt.Data.Sales
             else return orderLine.Rows[0]["exportPrice"].ToString();
         }
 
+        public string getProductLogicalStock(int productId)
+        {
+            NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
+            DataSet curData = new DataSet();
+            curAdap = productAdapter();
+            curAdap.SelectCommand.CommandText += " WHERE \"idProduct\" = :idProduct;";
+            curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+            curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            curAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
+            curAdap.SelectCommand.Parameters[0].NpgsqlValue = productId;
+            curData.Clear();
+            curData = getData(curAdap, "Product");
+            DataTable orderLine = new DataTable();
+            orderLine = curData.Tables[0];
+            return orderLine.Rows[0]["logicalStock"].ToString();
+        }
         private bool isNationalClient(int idClient)
         {
             NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();

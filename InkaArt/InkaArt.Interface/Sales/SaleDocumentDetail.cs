@@ -30,7 +30,7 @@ namespace InkaArt.Interface.Sales
         private void SaleDocumentDetail_Load(object sender, EventArgs e)
         {
             populateLabels(selectedInvoice);
-            lines = orderController.getLineXDocument(selectedInvoice.Cells[0].Value.ToString());
+            lines = orderController.getLineXDocument(int.Parse(selectedInvoice.Cells[0].Value.ToString()));
             populateDataGrid(lines);
         }
 
@@ -59,7 +59,7 @@ namespace InkaArt.Interface.Sales
             foreach (DataRow row in lines.Rows)
             {
                 string productName = orderController.getProductName(orderController.getProductId(row["idLineItem"].ToString()));
-                grid_detail.Rows.Add(productName, row["pu"],row["finished"], Math.Round(float.Parse(row["pu"].ToString())*float.Parse(row["finished"].ToString()),2));               
+                if (int.Parse(row["finished"].ToString()) > 0) grid_detail.Rows.Add(productName, row["pu"],row["finished"], Math.Round(float.Parse(row["pu"].ToString())*float.Parse(row["finished"].ToString()),2));               
             }
         }
     }

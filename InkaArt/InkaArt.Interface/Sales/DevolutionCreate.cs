@@ -17,7 +17,7 @@ namespace InkaArt.Interface.Sales
         private int salesDocumentId;
         private int clientId;
         private double amount;
-        DataTable saleDocumentList;
+        DataTable selectedInvoice;
         DataTable productList;
         DataTable orderLine;
         DataTable invoicedLine;
@@ -36,29 +36,36 @@ namespace InkaArt.Interface.Sales
                 orderId = form.SelectedOrderId;
                 salesDocumentId = form.SelectedDocumentId;
                 DataTable orderObject = orderController.GetOrders(orderId);
+                selectedInvoice = orderController.GetInvoice(salesDocumentId);
                 populateFields(orderObject);
+                DataTable recipes = orderController.getProductRecipe(combo_product.SelectedValue);
+                populateCombobox(combo_quality, recipes, "version", "idRecipe");
             }
         }
 
         private void populateFields(DataTable orderObject)
         {
+            textbox_docid.Text = salesDocumentId.ToString();
+            foreach (DataRow row in selectedInvoice.Rows)
+            {
+                textbox_total.Text = textbox_devtotal.Text = row["totalAmount"].ToString();
+                textbox_devamount.Text = row["amount"].ToString();
+                textbox_igv.Text = row["igv"].ToString();
+            }
+
+
             foreach (DataRow row in orderObject.Rows)
             {
-                amount = float.Parse(row["saleAmount"].ToString());
                 clientId = int.Parse(row["idClient"].ToString());
                 date_deliverydate.Value = Convert.ToDateTime(row["deliveryDate"]);
-                textbox_devamount.Text = row["saleAmount"].ToString();
-                textbox_docid.Text = salesDocumentId.ToString();
-                textbox_igv.Text = row["igv"].ToString();
-                textbox_total.Text = textbox_devtotal.Text = row["totalAmount"].ToString();
                 string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType = "Boleta";
                 textbox_doc.Text = clientDoc;
                 textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
                 if (clientDoc.Length == 11) docType = "Factura";
                 combo_doc.Text = docType;
                 orderLine = orderController.getOrderLines(row["idOrder"].ToString());
-                invoicedLine = orderController.getLineXDocument(salesDocumentId.ToString());
                 grid_orderline.Rows.Clear();
+                invoicedLine = orderController.getLineXDocument(salesDocumentId);
                 foreach (DataRow orderline in orderLine.Rows)
                 {
                     foreach (DataRow invoicedline in invoicedLine.Rows)
@@ -67,7 +74,7 @@ namespace InkaArt.Interface.Sales
                         {
                             string productId = orderline["idProduct"].ToString();
                             string name = orderController.getProductName(productId);
-                            grid_orderline.Rows.Add(name, orderline["quality"], invoicedline["pu"], invoicedline["finished"]);
+                            if (int.Parse(invoicedline["finished"].ToString()) > 0) grid_orderline.Rows.Add(name, orderline["quality"], invoicedline["pu"], invoicedline["finished"]);
                         }
                     }
                 }
@@ -157,12 +164,16 @@ namespace InkaArt.Interface.Sales
                     grid_orderline.Rows.RemoveAt(row.Index);
                 }
             }
-            amount -= remAmount;
+            amount = 0;
+            foreach (DataGridViewRow row in grid_orderline.Rows)
+            {
+                amount += Math.Round((double.Parse(row.Cells[2].Value.ToString()) * double.Parse(row.Cells[3].Value.ToString())), 2);
+            }
             if (amount > 0)
             {
-                textbox_devamount.Text = Math.Round(amount, 2).ToString();
-                textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
-                textbox_devtotal.Text = Math.Round((1.18 * amount), 2).ToString();
+                textbox_devamount.Text = orderController.getPolishedAmount(amount);
+                textbox_igv.Text = orderController.getPolishedIGV(amount);
+                textbox_devtotal.Text = orderController.getPolishedTotal(amount);
             }
             else
             {
@@ -177,7 +188,8 @@ namespace InkaArt.Interface.Sales
             if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
             else
             {
-                if (isQuantityBelow()) MessageBox.Show(this, "No puede devolver más de lo que pidio.", "Producto", MessageBoxButtons.OK);
+                string resp = isQuantityBelow();
+                if (!resp.Equals("OK")) MessageBox.Show(this, resp, "Producto", MessageBoxButtons.OK);
                 else
                 {
                     if (productList.Rows.Count == 0) productList = orderController.GetProducts();
@@ -187,32 +199,65 @@ namespace InkaArt.Interface.Sales
                         string strAux = aux.ToString();
                         if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                         {
-                            float price = float.Parse(row["localPrice"].ToString()) + float.Parse(row["basePrice"].ToString());
+                            float price = getPrice(row["idProduct"].ToString());
                             amount += price * float.Parse(numeric_quantity.Value.ToString());
                             grid_orderline.Rows.Add(row["name"], combo_quality.Text, price.ToString(), numeric_quantity.Value.ToString());
                         }
                     }
-                    textbox_devamount.Text = Math.Round(amount, 2).ToString();
-                    textbox_igv.Text = Math.Round((0.18 * amount), 2).ToString();
-                    textbox_devtotal.Text = Math.Round((1.18 * amount), 2).ToString();
+                    textbox_devamount.Text = orderController.getPolishedAmount(amount);
+                    textbox_igv.Text = orderController.getPolishedIGV(amount);
+                    textbox_devtotal.Text = orderController.getPolishedTotal(amount);
                 }
             }
         }
 
-        private bool isQuantityBelow()
+        private float getPrice(string productId)
+        {
+            foreach(DataRow row in orderLine.Rows)
+            {
+                if (row["idProduct"].ToString().Equals(productId))
+                {
+                    string idLineItem = row["idLineItem"].ToString();
+                    foreach(DataRow irow in invoicedLine.Rows)
+                    {
+                        if (irow["idLineItem"].ToString().Equals(idLineItem))
+                        {
+                            return float.Parse(irow["pu"].ToString());
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+
+        private string isQuantityBelow()
         {
             int quantity = int.Parse(numeric_quantity.Value.ToString());
-            string selectedProduct = combo_product.SelectedItem.ToString();
+            string selectedProduct;
+            if (combo_product.SelectedItem != null) selectedProduct = combo_product.SelectedItem.ToString();
+            else return "OK";
+            int attemps = 0;
+            string selectedVersion = combo_quality.SelectedItem.ToString();
             foreach (DataRow row in orderLine.Rows)
             {
                 string cellProduct = row["idProduct"].ToString();
+                string cellVersion = row["idRecipe"].ToString();
                 if (selectedProduct.Contains(cellProduct))
                 {
-                    int cellQuantity = int.Parse(row["quantity"].ToString());
-                    if (cellQuantity < quantity) return true;
+                    foreach (DataRow irow in invoicedLine.Rows)
+                    {
+                        if (irow["idLineItem"].Equals(row["idLineItem"]))
+                        {
+                            int cellQuantity = int.Parse(irow["finished"].ToString());
+                            if (cellQuantity < quantity) return "No puede agregar más de lo que pidió.";
+                            if (!selectedVersion.Contains(cellVersion)) return "No puede seleccionar una versión diferente de la que pidió";
+                        }
+                    }
                 }
+                else attemps++;
             }
-            return false;
+            if (attemps == orderLine.Rows.Count) return "No puede agregar un producto que no ha pedido.";
+            return "OK";
         }
 
         private bool isProductAdded()
@@ -238,6 +283,7 @@ namespace InkaArt.Interface.Sales
 
         private void combo_product_SelectedIndexChanged(object sender, EventArgs e)
         {
+            productList = orderController.GetProducts();
             foreach (DataRow row in productList.Rows)
             {
                 if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
@@ -251,6 +297,10 @@ namespace InkaArt.Interface.Sales
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void grid_orderline_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }

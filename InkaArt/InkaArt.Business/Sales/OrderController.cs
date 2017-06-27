@@ -17,11 +17,57 @@ namespace InkaArt.Business.Sales
             orderData = new OrderData();
         }
 
+        public int AddSaleDocumentW(int orderId, int[] idProd, int[] quantity, int orderType = 0)
+        {
+            int clientId = getClientID(orderId);
+            string clientDoc = getClientDoc(clientId.ToString());
+            int selectedDoc = -1;
+            if (orderType == 1) selectedDoc = 6;
+            if (clientDoc.Length == 11) selectedDoc = 2;
+            else selectedDoc = 1;
+            //////////////////////////
+            float amount = 0;
+            if (idProd.Length != 0 && quantity.Length != 0)
+            {
+                for (int i = 0; i < idProd.Length; i++)
+                {
+                    float pu = float.Parse(getProductPU(idProd[i].ToString(), clientId.ToString()));
+                    amount += pu * quantity[i];
+                }
+                DataTable orderLines = getLinesByIds(idProd,orderId);                
+                for (int i = 0; i < quantity.Length; i++)
+                {
+                    foreach (DataRow row in orderLines.Rows)
+                    {
+                        if (row["idProduct"].ToString().Equals(idProd[i].ToString()))
+                        {
+                            row["quantityProduced"] = quantity[i];
+                        }
+                    }
+                }
+                string pamount = getPolishedAmount(amount);
+                string igv = getPolishedIGV(amount);
+                string total = getPolishedTotal(amount);
+                return AddSaleDocument(selectedDoc, pamount, igv, total, orderId,orderLines, clientId, orderType);
+            } else return -1;
+        }
+
+        public DataTable GetInvoice(int salesDocumentId)
+        {
+            return orderData.GetInvoice(salesDocumentId);
+        }
+
+        private DataTable getLinesByIds(int[] idProd, int orderId)
+        {
+            return orderData.getLinesByIds(idProd, orderId);
+        }
+
         public int AddSaleDocument(int selectedDoc, string strAmount, string strIgv, string strTotal, int orderId, DataTable orderLines, int clientId, int orderType = 0)
         {
             float amount = float.Parse(strAmount), igv = float.Parse(strIgv), total = float.Parse(strTotal);
             int responseSD, responseLI = 0, invoicedNumber = 0;
-            responseSD = orderData.InsertSaleDocument(++selectedDoc,amount,igv,total,orderId);
+            if (selectedDoc != 6) selectedDoc++;
+            responseSD = orderData.InsertSaleDocument(selectedDoc,amount,igv,total,orderId);
             string idSaleDocument = orderData.getSaleDocumentId().ToString();
             foreach (DataRow orderline in orderLines.Rows)
             {
@@ -41,6 +87,12 @@ namespace InkaArt.Business.Sales
             if (invoicedNumber == orderLines.Rows.Count || orderType == 1) orderData.updateOrderStatus(orderId.ToString(),"facturado");
             return responseSD + responseLI;
         }
+
+        public string getCurrentStock(string productId)
+        {
+            return orderData.getProductLogicalStock(int.Parse(productId));
+        }
+
         public bool verifyStock(int natType, string strStock, string strQuantity)
         {
             if (natType == 1) return true;
@@ -192,9 +244,9 @@ namespace InkaArt.Business.Sales
             return Math.Round((1.18 * amount), 2).ToString();
         }
 
-        public DataTable getLineXDocument(string idSaleDocument)
+        public DataTable getLineXDocument(int idSaleDocument)
         {
-            return orderData.getLineXDocument(int.Parse(idSaleDocument));
+            return orderData.getLineXDocument(idSaleDocument);
         }
     }
 }

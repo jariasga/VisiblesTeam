@@ -64,12 +64,13 @@ namespace InkaArt.Interface.Sales
                 {
                     string productId = orderline["idProduct"].ToString();
                     string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId,row["idClient"].ToString());
-                    totalFinished += int.Parse(orderline["quantityProduced"].ToString());
+                    string curStock = orderController.getCurrentStock(productId);
+                    totalFinished += int.Parse(curStock);
                     totalInvoiced += int.Parse(orderline["quantityInvoiced"].ToString());
                     if (int.Parse(orderline["quantityProduced"].ToString()) > 0) orderLineToFac.Rows.Add(orderline.ItemArray);
                     float price = float.Parse(pu.ToString());
                     toFacAmount = orderController.updateAmount(toFacAmount, price, decimal.Parse(orderline["quantityProduced"].ToString()));
-                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantityInvoiced"] , orderline["quantityProduced"], orderline["quantity"]);
+                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantityInvoiced"] , curStock, orderline["quantity"]);
                 }
                 if (totalFinished > 0) button_fac.Visible = true;
                 else button_fac.Visible = false;
