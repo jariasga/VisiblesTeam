@@ -99,11 +99,9 @@ namespace InkaArt.Business.Algorithm
                 for (int miniturn_index = 0; miniturn_index < simulation.TotalMiniturns; miniturn_index++)
                 {
                     AssignmentLine assignment = solution[worker_index, miniturn_index];
-                    if (assignment == null || assignment.Equals(current_assignment))
-                        continue;
-                    Index index = indexes.Find(assignment.Worker, assignment.Job, assignment.Recipe);
-                    if (index == null)
-                        continue;
+                    if (assignment == null || assignment.Equals(current_assignment)) continue;
+                    Index index = indexes.FindByWorkerJobAndRecipe(assignment.Worker, assignment.Job, assignment.Recipe);
+                    if (index == null) continue;
                     assigned_workers++;
                     fitness += index.LossIndex;
                 }
