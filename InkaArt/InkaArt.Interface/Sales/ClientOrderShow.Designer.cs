@@ -44,6 +44,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textbox_igv = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,12 +65,6 @@
             this.button_delete = new System.Windows.Forms.Button();
             this.button_fac = new System.Windows.Forms.Button();
             this.button_seedoc = new System.Windows.Forms.Button();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -80,9 +80,9 @@
             this.groupBox2.Controls.Add(this.grid_orderline);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox2.Location = new System.Drawing.Point(460, 30);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(755, 519);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
@@ -120,7 +120,7 @@
             this.textbox_amount_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_amount_todoc.Enabled = false;
             this.textbox_amount_todoc.Location = new System.Drawing.Point(27, 63);
-            this.textbox_amount_todoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_amount_todoc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_amount_todoc.Name = "textbox_amount_todoc";
             this.textbox_amount_todoc.Size = new System.Drawing.Size(284, 30);
             this.textbox_amount_todoc.TabIndex = 36;
@@ -131,7 +131,7 @@
             this.textbox_igv_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv_todoc.Enabled = false;
             this.textbox_igv_todoc.Location = new System.Drawing.Point(27, 124);
-            this.textbox_igv_todoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_igv_todoc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_igv_todoc.Name = "textbox_igv_todoc";
             this.textbox_igv_todoc.Size = new System.Drawing.Size(284, 30);
             this.textbox_igv_todoc.TabIndex = 38;
@@ -142,7 +142,7 @@
             this.textbox_total_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total_todoc.Enabled = false;
             this.textbox_total_todoc.Location = new System.Drawing.Point(24, 185);
-            this.textbox_total_todoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_total_todoc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_total_todoc.Name = "textbox_total_todoc";
             this.textbox_total_todoc.Size = new System.Drawing.Size(284, 30);
             this.textbox_total_todoc.TabIndex = 40;
@@ -200,7 +200,7 @@
             this.textbox_amount.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_amount.Enabled = false;
             this.textbox_amount.Location = new System.Drawing.Point(27, 63);
-            this.textbox_amount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_amount.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_amount.Name = "textbox_amount";
             this.textbox_amount.Size = new System.Drawing.Size(284, 30);
             this.textbox_amount.TabIndex = 30;
@@ -211,7 +211,7 @@
             this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total.Enabled = false;
             this.textbox_total.Location = new System.Drawing.Point(25, 185);
-            this.textbox_total.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_total.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_total.Name = "textbox_total";
             this.textbox_total.Size = new System.Drawing.Size(284, 30);
             this.textbox_total.TabIndex = 34;
@@ -242,7 +242,7 @@
             this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Location = new System.Drawing.Point(27, 124);
-            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_igv.Name = "textbox_igv";
             this.textbox_igv.Size = new System.Drawing.Size(284, 30);
             this.textbox_igv.TabIndex = 32;
@@ -269,196 +269,6 @@
             this.grid_orderline.RowHeadersVisible = false;
             this.grid_orderline.Size = new System.Drawing.Size(697, 203);
             this.grid_orderline.TabIndex = 22;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textbox_name);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textbox_ruc);
-            this.groupBox1.Controls.Add(this.label_doc);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(37, 385);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(415, 218);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cliente";
-            // 
-            // textbox_name
-            // 
-            this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textbox_name.Enabled = false;
-            this.textbox_name.Location = new System.Drawing.Point(24, 140);
-            this.textbox_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(367, 30);
-            this.textbox_name.TabIndex = 19;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 111);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Nombre";
-            // 
-            // textbox_ruc
-            // 
-            this.textbox_ruc.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textbox_ruc.Enabled = false;
-            this.textbox_ruc.Location = new System.Drawing.Point(24, 76);
-            this.textbox_ruc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textbox_ruc.Name = "textbox_ruc";
-            this.textbox_ruc.Size = new System.Drawing.Size(367, 30);
-            this.textbox_ruc.TabIndex = 17;
-            // 
-            // label_doc
-            // 
-            this.label_doc.AutoSize = true;
-            this.label_doc.Location = new System.Drawing.Point(19, 49);
-            this.label_doc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_doc.Name = "label_doc";
-            this.label_doc.Size = new System.Drawing.Size(109, 23);
-            this.label_doc.TabIndex = 16;
-            this.label_doc.Text = "Documento";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.combo_doc);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.combo_orderstatus);
-            this.groupBox3.Controls.Add(this.date_deliverydate);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox3.Location = new System.Drawing.Point(37, 30);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox3.Size = new System.Drawing.Size(415, 346);
-            this.groupBox3.TabIndex = 23;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Pedido";
-            // 
-            // combo_doc
-            // 
-            this.combo_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.combo_doc.Enabled = false;
-            this.combo_doc.FormattingEnabled = true;
-            this.combo_doc.Items.AddRange(new object[] {
-            "Boleta",
-            "Factura"});
-            this.combo_doc.Location = new System.Drawing.Point(23, 167);
-            this.combo_doc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.combo_doc.Name = "combo_doc";
-            this.combo_doc.Size = new System.Drawing.Size(368, 31);
-            this.combo_doc.TabIndex = 36;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 229);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 23);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Estado";
-            // 
-            // combo_orderstatus
-            // 
-            this.combo_orderstatus.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.combo_orderstatus.Enabled = false;
-            this.combo_orderstatus.FormattingEnabled = true;
-            this.combo_orderstatus.Items.AddRange(new object[] {
-            "Registrado",
-            "Entrega Parcial",
-            "Entregado"});
-            this.combo_orderstatus.Location = new System.Drawing.Point(24, 258);
-            this.combo_orderstatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.combo_orderstatus.Name = "combo_orderstatus";
-            this.combo_orderstatus.Size = new System.Drawing.Size(368, 31);
-            this.combo_orderstatus.TabIndex = 14;
-            // 
-            // date_deliverydate
-            // 
-            this.date_deliverydate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.date_deliverydate.Enabled = false;
-            this.date_deliverydate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliverydate.Location = new System.Drawing.Point(23, 78);
-            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.date_deliverydate.Name = "date_deliverydate";
-            this.date_deliverydate.Size = new System.Drawing.Size(368, 30);
-            this.date_deliverydate.TabIndex = 12;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 12F);
-            this.label6.Location = new System.Drawing.Point(19, 49);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(165, 23);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Fecha de entrega";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 142);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 23);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Documento de pago";
-            // 
-            // button_delete
-            // 
-            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
-            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(957, 555);
-            this.button_delete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(143, 48);
-            this.button_delete.TabIndex = 38;
-            this.button_delete.Text = "🗑 Eliminar";
-            this.button_delete.UseVisualStyleBackColor = false;
-            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
-            // 
-            // button_fac
-            // 
-            this.button_fac.BackColor = System.Drawing.Color.Gray;
-            this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_fac.ForeColor = System.Drawing.Color.White;
-            this.button_fac.Location = new System.Drawing.Point(808, 555);
-            this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_fac.Name = "button_fac";
-            this.button_fac.Size = new System.Drawing.Size(143, 48);
-            this.button_fac.TabIndex = 39;
-            this.button_fac.Text = "🗀 Facturar";
-            this.button_fac.UseVisualStyleBackColor = false;
-            this.button_fac.Visible = false;
-            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
-            // 
-            // button_seedoc
-            // 
-            this.button_seedoc.BackColor = System.Drawing.Color.Gray;
-            this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_seedoc.ForeColor = System.Drawing.Color.White;
-            this.button_seedoc.Location = new System.Drawing.Point(557, 555);
-            this.button_seedoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_seedoc.Name = "button_seedoc";
-            this.button_seedoc.Size = new System.Drawing.Size(244, 48);
-            this.button_seedoc.TabIndex = 40;
-            this.button_seedoc.Text = "🔍 Ver Documentos";
-            this.button_seedoc.UseVisualStyleBackColor = false;
-            this.button_seedoc.Visible = false;
-            this.button_seedoc.Click += new System.EventHandler(this.button_seedoc_Click);
             // 
             // Producto
             // 
@@ -501,6 +311,195 @@
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textbox_name);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.textbox_ruc);
+            this.groupBox1.Controls.Add(this.label_doc);
+            this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
+            this.groupBox1.Location = new System.Drawing.Point(37, 385);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(415, 218);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Cliente";
+            // 
+            // textbox_name
+            // 
+            this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_name.Enabled = false;
+            this.textbox_name.Location = new System.Drawing.Point(24, 140);
+            this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_name.Name = "textbox_name";
+            this.textbox_name.Size = new System.Drawing.Size(367, 30);
+            this.textbox_name.TabIndex = 19;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 111);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 23);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Nombre";
+            // 
+            // textbox_ruc
+            // 
+            this.textbox_ruc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_ruc.Enabled = false;
+            this.textbox_ruc.Location = new System.Drawing.Point(24, 76);
+            this.textbox_ruc.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_ruc.Name = "textbox_ruc";
+            this.textbox_ruc.Size = new System.Drawing.Size(367, 30);
+            this.textbox_ruc.TabIndex = 17;
+            // 
+            // label_doc
+            // 
+            this.label_doc.AutoSize = true;
+            this.label_doc.Location = new System.Drawing.Point(19, 49);
+            this.label_doc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_doc.Name = "label_doc";
+            this.label_doc.Size = new System.Drawing.Size(109, 23);
+            this.label_doc.TabIndex = 16;
+            this.label_doc.Text = "Documento";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.combo_doc);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.combo_orderstatus);
+            this.groupBox3.Controls.Add(this.date_deliverydate);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
+            this.groupBox3.Location = new System.Drawing.Point(37, 30);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(415, 346);
+            this.groupBox3.TabIndex = 23;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Pedido";
+            // 
+            // combo_doc
+            // 
+            this.combo_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.combo_doc.Enabled = false;
+            this.combo_doc.FormattingEnabled = true;
+            this.combo_doc.Items.AddRange(new object[] {
+            "Boleta",
+            "Factura"});
+            this.combo_doc.Location = new System.Drawing.Point(23, 167);
+            this.combo_doc.Margin = new System.Windows.Forms.Padding(4);
+            this.combo_doc.Name = "combo_doc";
+            this.combo_doc.Size = new System.Drawing.Size(368, 31);
+            this.combo_doc.TabIndex = 36;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(19, 229);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 23);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Estado";
+            // 
+            // combo_orderstatus
+            // 
+            this.combo_orderstatus.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.combo_orderstatus.Enabled = false;
+            this.combo_orderstatus.FormattingEnabled = true;
+            this.combo_orderstatus.Items.AddRange(new object[] {
+            "Registrado",
+            "Entrega Parcial",
+            "Entregado"});
+            this.combo_orderstatus.Location = new System.Drawing.Point(24, 258);
+            this.combo_orderstatus.Margin = new System.Windows.Forms.Padding(4);
+            this.combo_orderstatus.Name = "combo_orderstatus";
+            this.combo_orderstatus.Size = new System.Drawing.Size(368, 31);
+            this.combo_orderstatus.TabIndex = 14;
+            // 
+            // date_deliverydate
+            // 
+            this.date_deliverydate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.date_deliverydate.Enabled = false;
+            this.date_deliverydate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliverydate.Location = new System.Drawing.Point(23, 78);
+            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4);
+            this.date_deliverydate.Name = "date_deliverydate";
+            this.date_deliverydate.Size = new System.Drawing.Size(368, 30);
+            this.date_deliverydate.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 12F);
+            this.label6.Location = new System.Drawing.Point(19, 49);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(165, 23);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Fecha de entrega";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 142);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(187, 23);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Documento de pago";
+            // 
+            // button_delete
+            // 
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(957, 555);
+            this.button_delete.Margin = new System.Windows.Forms.Padding(4);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(143, 48);
+            this.button_delete.TabIndex = 38;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
+            // 
+            // button_fac
+            // 
+            this.button_fac.BackColor = System.Drawing.Color.Gray;
+            this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_fac.ForeColor = System.Drawing.Color.White;
+            this.button_fac.Location = new System.Drawing.Point(808, 555);
+            this.button_fac.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_fac.Name = "button_fac";
+            this.button_fac.Size = new System.Drawing.Size(143, 48);
+            this.button_fac.TabIndex = 39;
+            this.button_fac.Text = "🗀 Facturar";
+            this.button_fac.UseVisualStyleBackColor = false;
+            this.button_fac.Visible = false;
+            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
+            // 
+            // button_seedoc
+            // 
+            this.button_seedoc.BackColor = System.Drawing.Color.Gray;
+            this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_seedoc.ForeColor = System.Drawing.Color.White;
+            this.button_seedoc.Location = new System.Drawing.Point(557, 555);
+            this.button_seedoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_seedoc.Name = "button_seedoc";
+            this.button_seedoc.Size = new System.Drawing.Size(244, 48);
+            this.button_seedoc.TabIndex = 40;
+            this.button_seedoc.Text = "🔍 Ver Documentos";
+            this.button_seedoc.UseVisualStyleBackColor = false;
+            this.button_seedoc.Click += new System.EventHandler(this.button_seedoc_Click);
+            // 
             // ClientOrderShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -513,7 +512,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ClientOrderShow";
             this.Text = "Vista de venta";
             this.Load += new System.EventHandler(this.ClientOrderShow_Load);
