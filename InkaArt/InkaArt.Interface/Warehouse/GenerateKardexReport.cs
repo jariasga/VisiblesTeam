@@ -22,6 +22,11 @@ namespace InkaArt.Interface.Warehouse
             warehouses = new List<string>();
             items = new List<string>();              
             loadData();
+
+            this.dateTimePicker_fechaIni.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fechaIni.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker_fechaFin.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fechaFin.CustomFormat = "dd/MM/yyyy";
         }
 
         private void checkBox_allProd_CheckedChanged(object sender, EventArgs e)
