@@ -35,7 +35,7 @@ namespace InkaArt.Business.Algorithm
             NpgsqlCommand command = new NpgsqlCommand("SELECT DISTINCT w.* FROM inkaart.\"Worker\" w, inkaart.\"User\" u " +
                 "WHERE w.id_user = u.id_user AND u.status = :status AND u.id_role = :id_role ORDER BY last_name ASC", connection);
             command.Parameters.Add(new NpgsqlParameter("status", 1)); // activos
-            command.Parameters.Add(new NpgsqlParameter("id_role", 27)); // id del rol de obrero (sin permisos)
+            command.Parameters.Add(new NpgsqlParameter("id_role", 2)); // id del rol de obrero (sin permisos)
             
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
