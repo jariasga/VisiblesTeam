@@ -174,8 +174,25 @@ namespace InkaArt.Interface.Purchases
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Suppliers File";
             dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK)
-                control.massiveUpload(dialog.FileName);
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                if (control.massiveUpload(dialog.FileName) == 1)
+                {
+                    MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            OpenFileDialog dialog2 = new OpenFileDialog();
+            dialog2.Title = "Open Raw materials offered by suppliers File";
+            dialog2.Filter = "CSV files|*.csv";
+            if (dialog2.ShowDialog() == DialogResult.OK)
+            {
+                RawMaterial_SupplierController control_rm=new RawMaterial_SupplierController();
+                if (control_rm.massiveUpload(dialog2.FileName) == 1)
+                {
+                    MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
             textBox_id.Text = "";
             textBox_ruc.Text = "";
             textBox_supplier.Text = "";

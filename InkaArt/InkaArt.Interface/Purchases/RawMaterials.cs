@@ -161,8 +161,13 @@ namespace InkaArt.Interface.Purchases
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Raw Materials File";
             dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK)
-                control.massiveUpload(dialog.FileName);
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                if (control.massiveUpload(dialog.FileName) == 1)
+                {
+                    MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
             textBox_id.Text = "";
             textBox_name.Text = "";
             comboBox_status.Text = "";

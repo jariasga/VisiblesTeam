@@ -68,6 +68,7 @@ namespace InkaArt.Data.Warehouse
         public int updateDataExecute(string queryUpdate)
         {
             int a = 5;
+            connect();
             execute(queryUpdate);
             return a;
         }

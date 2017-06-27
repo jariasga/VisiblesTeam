@@ -173,9 +173,14 @@ namespace InkaArt.Interface.Production
                 ver = textbox_newVer.Text;
                 stat = "1";
                 idProduct = textBox_id.Text;
-
-                control.insertData(desc, ver, stat, idProduct);
-
+                try
+                {
+                    control.insertData(desc, ver, stat, idProduct);
+                }
+                catch(Exception p)
+                {
+                    Console.WriteLine("{0} error", p);
+                }
 
                 //refresh comboBox_version
                 DataTable recipeList = control.getData();
@@ -216,7 +221,14 @@ namespace InkaArt.Interface.Production
                         }
                     }
                     DataTable table = controlRecipeRaw.getData();
-                    controlRecipeRaw.insertDataNoAdapter(globalIdRecipe, idRaw, count);
+                    try
+                    {
+                        controlRecipeRaw.insertDataNoAdapter(globalIdRecipe, idRaw, count);
+                    }
+                    catch(Exception m)
+                    {
+                        Console.Write("{0} error", m);
+                    }
                     fillGrid();
                 }
                 else
@@ -245,7 +257,14 @@ namespace InkaArt.Interface.Production
                         id = row.Cells[0].Value.ToString();
                         quantity = row.Cells[2].Value.ToString();
                         RecipeRawMaterialController control = new RecipeRawMaterialController();
-                        control.updateDataNoAdapter(globalIdRecipe, id,quantity);
+                        try
+                        {
+                            control.updateDataNoAdapter(globalIdRecipe, id, quantity);
+                        }
+                        catch (Exception m)
+                        {
+                            Console.Write("{0} error", m);
+                        }
                         fillGrid();
                         break;
                     }

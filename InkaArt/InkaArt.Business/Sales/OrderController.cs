@@ -31,12 +31,14 @@ namespace InkaArt.Business.Sales
             {
                 for (int i = 0; i < idProd.Length; i++)
                 {
+                    if (idProd[i] == 0 && quantity[i] == 0) break;
                     float pu = float.Parse(getProductPU(idProd[i].ToString(), clientId.ToString()));
                     amount += pu * quantity[i];
                 }
                 DataTable orderLines = getLinesByIds(idProd,orderId);                
                 for (int i = 0; i < quantity.Length; i++)
                 {
+                    if (idProd[i] == 0 && quantity[i] == 0) break;
                     foreach (DataRow row in orderLines.Rows)
                     {
                         if (row["idProduct"].ToString().Equals(idProd[i].ToString()))

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Business.Sales;
 using Npgsql;
 using InkaArt.Business.Warehouse;
 
@@ -72,7 +73,11 @@ namespace InkaArt.Interface.Warehouse
         private void button2_Click(object sender, EventArgs e)
         {
             int idProd = 0, idWare = 0, idPedido = 0, exito2 = 0;
+            OrderController classFacture = new OrderController();
             string nameProd = "";
+            int[] arrIdProd = new int[500];
+            int[] arrCantProd = new int[500];
+            int countArr = 0;
 
             int cantMov = 0, maxMov = 0, exito = 0;
             int numRows = 0;
@@ -147,6 +152,10 @@ namespace InkaArt.Interface.Warehouse
                             int isExchange = -1;//-1:No es intercambio | otro:es intercambio
                             productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd,cantMov, productType);
                             //productionItemWarehouseMovementController.updateOrder(idPedido);
+
+                            arrIdProd[countArr] = idProd;
+                            arrCantProd[countArr] = cantMov;
+                            countArr++;
                             exito++;
                         }
                     }
@@ -162,13 +171,14 @@ namespace InkaArt.Interface.Warehouse
             //cantMov = Convert.ToInt32(numericUpDown2.Value);
             if (exito > 0)
             {
+                classFacture.AddSaleDocumentW(idPedido, arrIdProd, arrCantProd, 1);
                 MessageBox.Show("" + exito + " Operaciones realizadas con éxito.");
+                this.Close();
             }
             else
             {
                 MessageBox.Show("No se pudo realizar ningún movimiento...");
             }
-            this.Close();
         }
 
         private void populateDataGridLote(DataTable listList)
@@ -274,7 +284,11 @@ namespace InkaArt.Interface.Warehouse
                 rowIndex++;
             }
             productionItemMovementController.closeConnection();
-
+            if (rowIndex == 0)
+            {
+                MessageBox.Show("No hay productos que este almacén pueda devolver para la orden de pedido ingresada.");
+                return;
+            }
         }
 
 

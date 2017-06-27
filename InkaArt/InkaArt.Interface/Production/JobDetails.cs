@@ -56,6 +56,7 @@ namespace InkaArt.Interface.Production
 
         private void button_save_Click(object sender, EventArgs e)
         {
+
             ProcessController control = new ProcessController();
             int number_of_jobs;
             if (int.TryParse(textBox_count.Text, out number_of_jobs))
@@ -64,9 +65,17 @@ namespace InkaArt.Interface.Production
                 if (number_of_jobs >= 0)
                 {
                     int id = int.Parse(textBox_id.Text);
-                    control.updateDataNoAdapter(id, number_of_jobs);
-                    MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                    try {
+                        control.updateDataNoAdapter(id, number_of_jobs);
+                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                    catch (Exception m)
+                    {
+                        Console.WriteLine("{0} error.", m);
+                    }
+               
+             }
                 else
                     MessageBox.Show("La cantidad de turnos no puede ser negativo, por favor ingrese un valor válido.",
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
