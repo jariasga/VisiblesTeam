@@ -336,10 +336,11 @@ namespace InkaArt.Interface.Production
                         values[6], values[7], workers, jobs, recipes, ref message);
                     if (id_ratio <= 0)
                     {
-                        MessageBox.Show("Error en el ratio leído en la línea " + line_index + ": " + message,
-                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        result = MessageBox.Show("Error en el ratio leído en la línea " + line_index + ": " + message,
+                            "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         success = false;
-                        continue;
+                        if (result == DialogResult.OK) continue;
+                        if (result == DialogResult.Cancel) break;
                     }
                     else LogHandler.WriteLine(message);
                 }

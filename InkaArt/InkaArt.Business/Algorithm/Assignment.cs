@@ -77,6 +77,9 @@ namespace InkaArt.Business.Algorithm
             this.date = date;
             this.objective_function_value = 0;
             this.assignment_lines = new AssignmentLine[selected_workers.NumberOfWorkers, total_miniturns];
+            for (int i = 0; i < selected_workers.NumberOfWorkers; i++)
+                for (int j = 0; j < total_miniturns; j++)
+                    assignment_lines[i, j] = null;
             this.huacos_produced = 0;
             this.huamanga_produced = 0;
             this.altarpiece_produced = 0;

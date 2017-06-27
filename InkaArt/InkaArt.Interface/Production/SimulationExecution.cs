@@ -97,6 +97,7 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(0, null);
             }
 
+            tabu.bestSolutionToList();
             simulation.Assignments = tabu.BestSolution;
         }
 
