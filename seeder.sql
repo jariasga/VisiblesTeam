@@ -25,31 +25,72 @@ ALTER SEQUENCE inkaart."Product_idProduct_seq" RESTART WITH 1;
 TRUNCATE inkaart."Process" CASCADE;
 ALTER SEQUENCE inkaart."Process_idProcess_seq" RESTART WITH 1;
 
-INSERT INTO "Product" ("idProductType", name, description, "localPrice", "basePrice", "exportPrice", "actualStock", "logicalStock", status)
+INSERT INTO inkaart."Product" ("idProductType", name, description, "localPrice", "basePrice", "exportPrice", "actualStock", "logicalStock", status)
 VALUES (1, 'Huaco', 'Huaco precolombino', 50, 14, 30, 27, 38, 1);
-INSERT INTO "Product" ("idProductType", name, description, "localPrice", "basePrice", "exportPrice", "actualStock", "logicalStock", status)
+INSERT INTO inkaart."Product" ("idProductType", name, description, "localPrice", "basePrice", "exportPrice", "actualStock", "logicalStock", status)
 VALUES (2, 'Piedra Huamanga', 'Piedra de Huamanga', 12, 10, 13, 1, 25, 1);
-INSERT INTO "Product" ("idProductType", name, description, "localPrice", "basePrice", "exportPrice", "actualStock", "logicalStock", status)
+INSERT INTO inkaart."Product" ("idProductType", name, description, "localPrice", "basePrice", "exportPrice", "actualStock", "logicalStock", status)
 VALUES (3, 'Retablo', 'Retablo de Madera', 66, 13, 45, 18, 24, 1);
 
-INSERT INTO "Process" (description, number_of_jobs)
+INSERT INTO inkaart."Process" (description, number_of_jobs)
 VALUES ('Tallado', 1);
-INSERT INTO "Process" (description, number_of_jobs)
+INSERT INTO inkaart."Process" (description, number_of_jobs)
 VALUES ('Moldeado', 6);
-INSERT INTO "Process" (description, number_of_jobs)
+INSERT INTO inkaart."Process" (description, number_of_jobs)
 VALUES ('Horneado', 5);
-INSERT INTO "Process" (description, number_of_jobs)
+INSERT INTO inkaart."Process" (description, number_of_jobs)
 VALUES ('Pintado', 4);
 
-INSERT INTO "Process-Product" ("idProduct", "idProcess", name, "order")
+INSERT INTO inkaart."Process-Product" ("idProduct", "idProcess", name, "order")
 VALUES (1, 2, 'Moldeado de huacos', 1);
-INSERT INTO "Process-Product" ("idProduct", "idProcess", name, "order")
+INSERT INTO inkaart."Process-Product" ("idProduct", "idProcess", name, "order")
 VALUES (1, 3, 'Pintado de huacos', 2);
-INSERT INTO "Process-Product" ("idProduct", "idProcess", name, "order")
+INSERT INTO inkaart."Process-Product" ("idProduct", "idProcess", name, "order")
 VALUES (1, 4, 'Horneado de huacos', 3);
-INSERT INTO "Process-Product" ("idProduct", "idProcess", name, "order")
+INSERT INTO inkaart."Process-Product" ("idProduct", "idProcess", name, "order")
 VALUES (2, 1, 'Tallado de piedras', 1);
-INSERT INTO "Process-Product" ("idProduct", "idProcess", name, "order")
+INSERT INTO inkaart."Process-Product" ("idProduct", "idProcess", name, "order")
 VALUES (3, 1, 'Tallado de retablos', 1);
-INSERT INTO "Process-Product" ("idProduct", "idProcess", name, "order")
+INSERT INTO inkaart."Process-Product" ("idProduct", "idProcess", name, "order")
 VALUES (3, 3, 'Pintado de retablos', 2);
+
+
+TRUNCATE inkaart."Recipe-RawMaterial" CASCADE;
+TRUNCATE inkaart."Recipe" CASCADE;
+ALTER SEQUENCE inkaart."receta_idReceta_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."RawMaterial-Warehouse" CASCADE;
+ALTER SEQUENCE inkaart."RawMaterial-Warehouse_idRawMaterialWarehouse_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."RawMaterial" CASCADE;
+ALTER SEQUENCE inkaart."MateriaPrima_idMateria_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."UnitOfMeasurement" CASCADE;
+ALTER SEQUENCE inkaart."UnitOfMeasurement_idUnit_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."Supplier" CASCADE;
+ALTER SEQUENCE inkaart."Proveedor_idProveedor_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."Client" CASCADE;
+ALTER SEQUENCE inkaart."cliente_idcliente_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."Ratio" CASCADE;
+ALTER SEQUENCE inkaart."Ratio_idRatio_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."Product-Warehouse" CASCADE;
+ALTER SEQUENCE inkaart."Product-Warehouse_idProductWarehouse_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."Warehouse" CASCADE;
+ALTER SEQUENCE inkaart."Warehouse_idWarehouse_seq" RESTART WITH 1;
+
+TRUNCATE inkaart."Line-Document" CASCADE;
+TRUNCATE inkaart."LineItem" CASCADE;
+TRUNCATE inkaart."SalesDocument" CASCADE;
+TRUNCATE inkaart."Order" CASCADE;
+TRUNCATE inkaart."NoteDetail" CASCADE;
+
+TRUNCATE inkaart."PurchaseDocumentLine" CASCADE;
+TRUNCATE inkaart."PurchaseOrderDetail" CASCADE;
+TRUNCATE inkaart."PurchaseDocument" CASCADE;
+TRUNCATE inkaart."PurcharseOrder" CASCADE;
+TRUNCATE inkaart."Movement" CASCADE;
