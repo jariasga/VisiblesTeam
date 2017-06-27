@@ -38,9 +38,9 @@ namespace InkaArt.Interface
             pingThread.IsBackground = true;
             pingThread.Start();
 
-            checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
+            /*checkConnectorThread = new Thread(new ThreadStart(preventUserInteract));
             checkConnectorThread.IsBackground = true;
-            checkConnectorThread.Start();
+            checkConnectorThread.Start();*/
 
             toolStripProgressBarPing.Maximum = 1000;
         }
@@ -325,9 +325,9 @@ namespace InkaArt.Interface
                     else
                         showConnectWarning(false);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    LogHandler.WriteLine(e.ToString());
+                    //LogHandler.WriteLine(e.ToString());
                 }
                 Thread.Sleep(50);
             }

@@ -54,14 +54,16 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
-            this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.id_materiaPrima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idrmsup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.comboBox_status = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Eliminado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -347,49 +349,18 @@
             this.dataGridView_rm_sup.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_rm_sup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_rm_sup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Acción,
             this.id_materiaPrima,
             this.nombre,
             this.Precio,
-            this.idrmsup});
+            this.idrmsup,
+            this.Acción,
+            this.Actualizar,
+            this.Eliminado});
             this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 109);
             this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
             this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 347);
             this.dataGridView_rm_sup.TabIndex = 10;
             this.dataGridView_rm_sup.DoubleClick += new System.EventHandler(this.obtain_idEdit);
-            // 
-            // Acción
-            // 
-            this.Acción.HeaderText = "";
-            this.Acción.Name = "Acción";
-            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Acción.Width = 50;
-            // 
-            // id_materiaPrima
-            // 
-            this.id_materiaPrima.HeaderText = "ID";
-            this.id_materiaPrima.Name = "id_materiaPrima";
-            this.id_materiaPrima.ReadOnly = true;
-            this.id_materiaPrima.Width = 80;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            this.nombre.Width = 110;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            // 
-            // idrmsup
-            // 
-            this.idrmsup.HeaderText = "Id RM Sup";
-            this.idrmsup.Name = "idrmsup";
-            this.idrmsup.Visible = false;
             // 
             // buttonSave
             // 
@@ -427,6 +398,54 @@
             this.label9.Size = new System.Drawing.Size(58, 18);
             this.label9.TabIndex = 25;
             this.label9.Text = "Estado";
+            // 
+            // id_materiaPrima
+            // 
+            this.id_materiaPrima.HeaderText = "ID";
+            this.id_materiaPrima.Name = "id_materiaPrima";
+            this.id_materiaPrima.ReadOnly = true;
+            this.id_materiaPrima.Width = 80;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            this.nombre.Width = 110;
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            // 
+            // idrmsup
+            // 
+            this.idrmsup.HeaderText = "Id RM Sup";
+            this.idrmsup.Name = "idrmsup";
+            this.idrmsup.Visible = false;
+            // 
+            // Acción
+            // 
+            this.Acción.HeaderText = "";
+            this.Acción.Name = "Acción";
+            this.Acción.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Acción.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Acción.Width = 50;
+            // 
+            // Actualizar
+            // 
+            this.Actualizar.HeaderText = "Actualizar";
+            this.Actualizar.Name = "Actualizar";
+            this.Actualizar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Actualizar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Actualizar.Visible = false;
+            // 
+            // Eliminado
+            // 
+            this.Eliminado.HeaderText = "Eliminado";
+            this.Eliminado.Name = "Eliminado";
+            this.Eliminado.Visible = false;
             // 
             // SupplierDetail
             // 
@@ -496,10 +515,12 @@
         private System.Windows.Forms.ComboBox comboBox_rawMaterial;
         private System.Windows.Forms.TextBox textBox_price;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Acción;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_materiaPrima;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn idrmsup;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Acción;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Actualizar;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminado;
     }
 }

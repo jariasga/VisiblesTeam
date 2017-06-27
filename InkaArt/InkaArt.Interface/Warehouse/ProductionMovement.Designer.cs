@@ -55,6 +55,7 @@
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CurrentCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MovCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -303,6 +304,7 @@
             this.Cant,
             this.stockWarehouse,
             this.CurrentCant,
+            this.MovCant,
             this.Modificar});
             this.dataGridView1.Location = new System.Drawing.Point(6, 78);
             this.dataGridView1.Name = "dataGridView1";
@@ -338,6 +340,11 @@
             this.CurrentCant.HeaderText = "Cantidad por mover";
             this.CurrentCant.Name = "CurrentCant";
             this.CurrentCant.ReadOnly = true;
+            // 
+            // MovCant
+            // 
+            this.MovCant.HeaderText = "Cantidad a Mover";
+            this.MovCant.Name = "MovCant";
             // 
             // Modificar
             // 
@@ -398,6 +405,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
         private System.Windows.Forms.DataGridViewTextBoxColumn stockWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn CurrentCant;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MovCant;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Modificar;
     }
 }

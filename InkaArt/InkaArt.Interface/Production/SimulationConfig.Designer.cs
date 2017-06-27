@@ -40,8 +40,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
+            this.checkbox_workers = new System.Windows.Forms.CheckBox();
             this.list_workers = new System.Windows.Forms.CheckedListBox();
-            this.button_save = new System.Windows.Forms.Button();
+            this.button_start = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label_end = new System.Windows.Forms.Label();
             this.date_picker_end = new System.Windows.Forms.DateTimePicker();
@@ -50,6 +51,7 @@
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupbox_orders = new System.Windows.Forms.GroupBox();
+            this.checkbox_orders = new System.Windows.Forms.CheckBox();
             this.list_orders = new System.Windows.Forms.CheckedListBox();
             this.groupbox_weight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_altarpiece)).BeginInit();
@@ -204,6 +206,7 @@
             // 
             // groupbox_workers
             // 
+            this.groupbox_workers.Controls.Add(this.checkbox_workers);
             this.groupbox_workers.Controls.Add(this.list_workers);
             this.groupbox_workers.Enabled = false;
             this.groupbox_workers.Location = new System.Drawing.Point(338, 19);
@@ -213,26 +216,37 @@
             this.groupbox_workers.TabStop = false;
             this.groupbox_workers.Text = "Trabajadores a considerar";
             // 
+            // checkbox_workers
+            // 
+            this.checkbox_workers.AutoSize = true;
+            this.checkbox_workers.Location = new System.Drawing.Point(18, 30);
+            this.checkbox_workers.Name = "checkbox_workers";
+            this.checkbox_workers.Size = new System.Drawing.Size(153, 22);
+            this.checkbox_workers.TabIndex = 46;
+            this.checkbox_workers.Text = "Seleccionar todos";
+            this.checkbox_workers.UseVisualStyleBackColor = true;
+            this.checkbox_workers.CheckedChanged += new System.EventHandler(this.checkboxWorkersCheckedChanged);
+            // 
             // list_workers
             // 
             this.list_workers.CheckOnClick = true;
             this.list_workers.FormattingEnabled = true;
-            this.list_workers.Location = new System.Drawing.Point(15, 31);
+            this.list_workers.Location = new System.Drawing.Point(15, 52);
             this.list_workers.Name = "list_workers";
-            this.list_workers.Size = new System.Drawing.Size(241, 340);
+            this.list_workers.Size = new System.Drawing.Size(241, 319);
             this.list_workers.TabIndex = 45;
             // 
-            // button_save
+            // button_start
             // 
-            this.button_save.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(509, 425);
-            this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(221, 42);
-            this.button_save.TabIndex = 55;
-            this.button_save.UseVisualStyleBackColor = false;
-            this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
+            this.button_start.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_start.ForeColor = System.Drawing.Color.White;
+            this.button_start.Location = new System.Drawing.Point(576, 424);
+            this.button_start.Name = "button_start";
+            this.button_start.Size = new System.Drawing.Size(221, 42);
+            this.button_start.TabIndex = 55;
+            this.button_start.UseVisualStyleBackColor = false;
+            this.button_start.Click += new System.EventHandler(this.ButtonStartClick);
             // 
             // groupBox1
             // 
@@ -247,7 +261,7 @@
             this.groupBox1.Size = new System.Drawing.Size(296, 177);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pesos o relevancias";
+            this.groupBox1.Text = "General";
             // 
             // label_end
             // 
@@ -305,23 +319,35 @@
             // 
             // groupbox_orders
             // 
+            this.groupbox_orders.Controls.Add(this.checkbox_orders);
             this.groupbox_orders.Controls.Add(this.list_orders);
             this.groupbox_orders.Enabled = false;
             this.groupbox_orders.Location = new System.Drawing.Point(626, 19);
             this.groupbox_orders.Name = "groupbox_orders";
-            this.groupbox_orders.Size = new System.Drawing.Size(271, 392);
+            this.groupbox_orders.Size = new System.Drawing.Size(359, 392);
             this.groupbox_orders.TabIndex = 0;
             this.groupbox_orders.TabStop = false;
             this.groupbox_orders.Text = "Pedidos a considerar";
+            // 
+            // checkbox_orders
+            // 
+            this.checkbox_orders.AutoSize = true;
+            this.checkbox_orders.Location = new System.Drawing.Point(18, 30);
+            this.checkbox_orders.Name = "checkbox_orders";
+            this.checkbox_orders.Size = new System.Drawing.Size(153, 22);
+            this.checkbox_orders.TabIndex = 47;
+            this.checkbox_orders.Text = "Seleccionar todos";
+            this.checkbox_orders.UseVisualStyleBackColor = true;
+            this.checkbox_orders.CheckedChanged += new System.EventHandler(this.checkboxOrdersCheckedChanged);
             // 
             // list_orders
             // 
             this.list_orders.CheckOnClick = true;
             this.list_orders.FormattingEnabled = true;
             this.list_orders.HorizontalScrollbar = true;
-            this.list_orders.Location = new System.Drawing.Point(16, 31);
+            this.list_orders.Location = new System.Drawing.Point(16, 52);
             this.list_orders.Name = "list_orders";
-            this.list_orders.Size = new System.Drawing.Size(240, 340);
+            this.list_orders.Size = new System.Drawing.Size(320, 319);
             this.list_orders.TabIndex = 50;
             // 
             // SimulationConfig
@@ -329,10 +355,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(909, 491);
+            this.ClientSize = new System.Drawing.Size(1010, 491);
             this.Controls.Add(this.groupbox_orders);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button_save);
+            this.Controls.Add(this.button_start);
             this.Controls.Add(this.groupbox_workers);
             this.Controls.Add(this.groupbox_weight);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -348,9 +374,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numeric_time)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_breakage)).EndInit();
             this.groupbox_workers.ResumeLayout(false);
+            this.groupbox_workers.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupbox_orders.ResumeLayout(false);
+            this.groupbox_orders.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -362,7 +390,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupbox_workers;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button_save;
+        private System.Windows.Forms.Button button_start;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckedListBox list_workers;
         private System.Windows.Forms.Label label4;
@@ -380,5 +408,7 @@
         private System.Windows.Forms.DateTimePicker date_picker_end;
         private System.Windows.Forms.Label label_start;
         private System.Windows.Forms.DateTimePicker date_picker_start;
+        private System.Windows.Forms.CheckBox checkbox_workers;
+        private System.Windows.Forms.CheckBox checkbox_orders;
     }
 }

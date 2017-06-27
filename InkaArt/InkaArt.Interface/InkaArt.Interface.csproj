@@ -57,6 +57,14 @@
     <Reference Include="GMap.NET.WindowsForms">
       <HintPath>..\InkaArt.Libraries\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\InkaArt.Libraries\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\InkaArt.Libraries\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -182,6 +190,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\ClientOrderDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDelivery.Designer.cs">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDevolution.Designer.cs">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sales\ClientOrderDocuments.Designer.cs">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sales\DocumentSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +238,12 @@
     <Compile Include="Warehouse\breakProduct.Designer.cs">
       <DependentUpon>breakProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\BrokenItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\BrokenItems.Designer.cs">
+      <DependentUpon>BrokenItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\ExchangeMovement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +255,12 @@
     </Compile>
     <Compile Include="Warehouse\MovementFindIn.Designer.cs">
       <DependentUpon>MovementFindIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\MovementForDifference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\MovementForDifference.Designer.cs">
+      <DependentUpon>MovementForDifference.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\MovementIndex.cs">
       <SubType>Form</SubType>
@@ -458,6 +496,12 @@
     <Compile Include="Warehouse\PurchaseOrderIndex.designer.cs">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Warehouse\ReturnMovement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Warehouse\ReturnMovement.Designer.cs">
+      <DependentUpon>ReturnMovement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warehouse\SaleMovementcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -561,6 +605,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Sales\ClientOrderDelivery.resx">
+      <DependentUpon>ClientOrderDelivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDevolution.resx">
+      <DependentUpon>ClientOrderDevolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\ClientOrderDocuments.resx">
+      <DependentUpon>ClientOrderDocuments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sales\DocumentSearch.resx">
       <DependentUpon>DocumentSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -576,11 +629,17 @@
     <EmbeddedResource Include="Warehouse\breakProduct.resx">
       <DependentUpon>breakProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\BrokenItems.resx">
+      <DependentUpon>BrokenItems.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\ExchangeMovement.resx">
       <DependentUpon>ExchangeMovement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\MovementFindIn.resx">
       <DependentUpon>MovementFindIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\MovementForDifference.resx">
+      <DependentUpon>MovementForDifference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\MovementIndex.resx">
       <DependentUpon>MovementIndex.cs</DependentUpon>
@@ -699,6 +758,9 @@
     <EmbeddedResource Include="Warehouse\PurchaseOrderIndex.resx">
       <DependentUpon>PurchaseOrderIndex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Warehouse\ReturnMovement.resx">
+      <DependentUpon>ReturnMovement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\SaleMovementcs.resx">
       <DependentUpon>SaleMovementcs.cs</DependentUpon>
     </EmbeddedResource>
@@ -721,6 +783,7 @@
       <DependentUpon>WarehouseShow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

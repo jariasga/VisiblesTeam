@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Reports;
 using System.Globalization;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace InkaArt.Interface.Sales
 {
@@ -41,71 +45,122 @@ namespace InkaArt.Interface.Sales
 
         private void populateDataGrid(DataTable salesReportList)
         {
+            decimal sum = 0;
             grid_salesReport.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
             grid_salesReport.Rows.Clear();
             foreach (DataRow row in salesReportList.Rows)
             {
                 grid_salesReport.Rows.Add(row["FechaEntrega"], row["Cliente"], row["TipoCliente"], row["Cantidad"], row["MontoTotal"]);
             }
+            foreach (DataRow row in salesReportList.Rows)
+            {
+                sum += Decimal.Parse(row["MontoTotal"].ToString());
+            }
+            label_total.Text = sum.ToString();
+        }
+
+        private void copyAlltoClipboard()
+        {
+            //to remove the first blank column from datagridview
+            grid_salesReport.RowHeadersVisible = false;
+            grid_salesReport.SelectAll();
+            DataObject dataObj = grid_salesReport.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
         }
 
         private void button_export_Click(object sender, EventArgs e)
         {
-            try
+            copyAlltoClipboard();
+            Microsoft.Office.Interop.Excel.Application xlexcel;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+            xlexcel = new Excel.Application();
+            xlexcel.Visible = true;
+            xlWorkBook = xlexcel.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
+            CR.Select();
+            xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+        }
+
+        private void button_pdf_Click(object sender, EventArgs e)
+        {
+            FileStream fs = new FileStream("ReporteVentas.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            Document document = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+            var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
+
+            Paragraph title = new Paragraph("REPORTE DE VENTAS", titleFont);
+            title.Alignment = Element.ALIGN_CENTER;
+            document.Add(title);
+            document.Add(new Paragraph(" "));
+
+            var phrase = new Phrase();
+            phrase.Add(new Chunk("Fecha de generación de reporte:    ", boldFont));
+            phrase.Add(new Chunk(label_todaydate.Text));
+            document.Add(new Paragraph(phrase));
+            document.Add(new Paragraph(" "));
+
+            var phraseI = new Phrase();
+            phraseI.Add(new Chunk("Fecha inicial de entrega:    ", boldFont));
+            phraseI.Add(new Chunk(label_iniDate.Text));
+            document.Add(new Paragraph(phraseI));
+            document.Add(new Paragraph(" "));
+
+            var phraseF = new Phrase();
+            phraseF.Add(new Chunk("Fecha final de entrega:    ", boldFont));
+            phraseF.Add(new Chunk(label_finDate.Text));
+            document.Add(new Paragraph(phraseF));
+            document.Add(new Paragraph(" "));
+
+            PdfPTable table = new PdfPTable(5)
             {
-                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
-                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-                app.Visible = true;
-                worksheet = workbook.Sheets["Reporte de Simulación"];
-                worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Reporte de Simulación";
+                WidthPercentage = 100,
+            };
 
-                try
+            for (int i = 0; i < grid_salesReport.Columns.Count; i++)
+            {
+                table.AddCell(grid_salesReport.Columns[i].HeaderText);
+            }
+            for (int i = 0; i < grid_salesReport.Rows.Count; i++)
+            {
+                for (int j = 0; j < grid_salesReport.Columns.Count; j++)
                 {
-                    for (int i = 0; i < grid_salesReport.Columns.Count; i++)
+                    if (grid_salesReport.Rows[i].Cells[j].Value != null)
                     {
-                        worksheet.Cells[1, i + 1] = grid_salesReport.Columns[i].HeaderText;
-                    }
-                    for (int i = 0; i < grid_salesReport.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < grid_salesReport.Columns.Count; j++)
+                        if (j == 0)
                         {
-                            if (grid_salesReport.Rows[i].Cells[j].Value != null)
-                            {
-                                worksheet.Cells[i + 2, j + 1] = grid_salesReport.Rows[i].Cells[j].Value.ToString();
-                            }
-                            else
-                            {
-                                worksheet.Cells[i + 2, j + 1] = "";
-                            }
+                            table.AddCell(grid_salesReport.Rows[i].Cells[j].Value.ToString().Substring(0, 10));
                         }
+                        else if (j == 4)
+                        {
+                            decimal t = Convert.ToDecimal(grid_salesReport.Rows[i].Cells[j].Value);
+                            t = Math.Truncate(t * 1000m) / 1000m;
+                            table.AddCell(t.ToString());
+                        }
+                        else
+                            table.AddCell(grid_salesReport.Rows[i].Cells[j].Value.ToString());
                     }
-
-                    //Getting the location and file name of the excel to save from user.
-                    SaveFileDialog saveDialog = new SaveFileDialog();
-                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-                    saveDialog.FilterIndex = 2;
-
-                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    else
                     {
-                        workbook.SaveAs(saveDialog.FileName);
-                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        table.AddCell("");
                     }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-                finally
-                {
-                    app.Quit();
-                    workbook = null;
-                    worksheet = null;
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            document.Add(table);
+            document.Add(new Paragraph(" "));
+
+            var phrase2 = new Phrase();
+            phrase2.Add(new Chunk("Monto Total (S/.):                         ", boldFont));
+            phrase2.Add(new Chunk(label_total.Text));
+            document.Add(new Paragraph(phrase2));
+            
+            document.Close();
+            MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

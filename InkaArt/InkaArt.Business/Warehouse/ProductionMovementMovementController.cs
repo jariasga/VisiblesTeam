@@ -42,7 +42,24 @@ namespace InkaArt.Business.Warehouse
                 "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"status\", \"idDocumentType\", \"dateIn\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, {4}, {5}, to_date('{6}', 'DD/MM/YYYY'), {7}, 0, {8});", idFactura, 2, idWh, 1, 1, 7,fecha,idItem,cant));
         }
 
-        
+        public void insertBrokenFindMovement(int idMovementType, string idWh, int idMovementReason,string dateIn,string idItem, int idItemType,int quantity)
+        {
+            NpgsqlDataAdapter adapt;
+            DataSet data;
+            data = new DataSet();
+            DataTable table;
+
+            adapt = productionMovementMovementData.ProductionMovementMovementDataAdapter();
+            data.Clear();
+            data = productionMovementMovementData.getData(adapt, "Movement");
+
+            table = data.Tables["Movement"];
+            productionMovementMovementData.execute(string.Format(
+                "INSERT INTO \"inkaart\".\"Movement\"(\"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"dateIn\", \"status\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, to_date('{3}', 'DD/MM/YYYY'), {4}, {5}, {6}, {7});",idMovementType,idWh,idMovementReason,dateIn,1,idItem,idItemType,quantity));
+
+        }
+
+
         public void insertMovement(int idLote,int movement_type,int idWare,int id_reason,string document_type)
         {
             
@@ -51,6 +68,24 @@ namespace InkaArt.Business.Warehouse
             query = "insert into inkaart.\"Movement\" (\"idBill\",\"idMovementType\",\"idWarehouse\",\"idMovementReason\",\"document_type\",\"dateIn\") values (" + idLote + "," + movement_type + "," + idWare + "," + id_reason + ",'" + document_type + "',current_date);";
 
             productionMovementMovementData.executeQuery(query);
+
+        }
+
+        public void insertMovDev(int idDoc, int movement_type, int idWare, int id_reason, int idDocType,string idItem,int idItemType,int quantity )
+        {
+            NpgsqlDataAdapter adapt;
+            DataSet data;
+            data = new DataSet();
+            DataTable table;
+            string date = DateTime.Now.ToShortDateString();
+
+            adapt = productionMovementMovementData.ProductionMovementMovementDataAdapter();
+            data.Clear();
+            data = productionMovementMovementData.getData(adapt, "Movement");
+
+            table = data.Tables["Movement"];
+            productionMovementMovementData.execute(string.Format(
+                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"dateIn\", \"status\", \"idDocumentType\" \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, to_date('{4}', 'DD/MM/YYYY'), {5}, '{6}', '{7}', {8}, {9});", idDoc, movement_type, idWare, id_reason, date,1,idDocType, idItem, idItemType, quantity));
 
         }
     }

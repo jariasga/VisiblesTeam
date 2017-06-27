@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Reports;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -39,63 +43,85 @@ namespace InkaArt.Interface.Warehouse
             }
         }
 
+        private void copyAlltoClipboard()
+        {
+            //to remove the first blank column from datagridview
+            dataGridView_movements.RowHeadersVisible = false;
+            dataGridView_movements.SelectAll();
+            DataObject dataObj = dataGridView_movements.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
+        }
+
         private void button_export_Click(object sender, EventArgs e)
         {
-            try
+            copyAlltoClipboard();
+            Microsoft.Office.Interop.Excel.Application xlexcel;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+            xlexcel = new Excel.Application();
+            xlexcel.Visible = true;
+            xlWorkBook = xlexcel.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
+            CR.Select();
+            xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+        }
+
+        private void button_pdf_Click(object sender, EventArgs e)
+        {
+            FileStream fs = new FileStream("ReporteKardex.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            Document document = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+            var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
+
+            Paragraph title = new Paragraph("REPORTE KARDEX", titleFont);
+            title.Alignment = Element.ALIGN_CENTER;
+            document.Add(title);
+            document.Add(new Paragraph(" "));
+
+            var phrase = new Phrase();
+            phrase.Add(new Chunk("Fecha de generación de reporte:    ", boldFont));
+            phrase.Add(new Chunk(label_todaydate.Text));
+            document.Add(new Paragraph(phrase));
+            document.Add(new Paragraph(" "));
+
+            PdfPTable table = new PdfPTable(7)
             {
-                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
-                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add();
-                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
-                app.Visible = true;
-                worksheet = workbook.Sheets["Reporte Kardex"];
-                worksheet = workbook.ActiveSheet;
-                worksheet.Name = "Reporte Kardex";
+                WidthPercentage = 100,
+            };
 
-                try
+            for (int i = 0; i < dataGridView_movements.Columns.Count; i++)
+            {
+                table.AddCell(dataGridView_movements.Columns[i].HeaderText);
+            }
+            for (int i = 0; i < dataGridView_movements.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView_movements.Columns.Count; j++)
                 {
-                    for (int i = 0; i < dataGridView_movements.Columns.Count; i++)
+                    if (dataGridView_movements.Rows[i].Cells[j].Value != null)
                     {
-                        worksheet.Cells[1, i + 1] = dataGridView_movements.Columns[i].HeaderText;
-                    }
-                    for (int i = 0; i < dataGridView_movements.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < dataGridView_movements.Columns.Count; j++)
+                        if (j == 0)
                         {
-                            if (dataGridView_movements.Rows[i].Cells[j].Value != null)
-                            {
-                                worksheet.Cells[i + 2, j + 1] = dataGridView_movements.Rows[i].Cells[j].Value.ToString();
-                            }
-                            else
-                            {
-                                worksheet.Cells[i + 2, j + 1] = "";
-                            }
+                            table.AddCell(dataGridView_movements.Rows[i].Cells[j].Value.ToString().Substring(0, 10));
                         }
+                        else
+                            table.AddCell(dataGridView_movements.Rows[i].Cells[j].Value.ToString());
                     }
-
-                    //Getting the location and file name of the excel to save from user.
-                    SaveFileDialog saveDialog = new SaveFileDialog();
-                    saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-                    saveDialog.FilterIndex = 2;
-
-                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    else
                     {
-                        workbook.SaveAs(saveDialog.FileName);
-                        MessageBox.Show("Exportación correcta", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        table.AddCell("");
                     }
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-                finally
-                {
-                    app.Quit();
-                    workbook = null;
-                    worksheet = null;
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
+            document.Add(table);
+            document.Add(new Paragraph(" "));
+
+            document.Close();
+            MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

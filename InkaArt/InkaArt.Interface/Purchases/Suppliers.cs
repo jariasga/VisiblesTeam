@@ -16,10 +16,16 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
             control = new SupplierController();
             suppliersList = control.getData();
+            string sortQuery = string.Format("id_supplier");
+            suppliersList.DefaultView.Sort = sortQuery;
             dataGridView_suppliersList.DataSource = suppliersList;
             dataGridView_suppliersList.Columns["id_supplier"].HeaderText = "ID";
+            dataGridView_suppliersList.Columns["id_supplier"].ReadOnly = true;
             dataGridView_suppliersList.Columns["name"].HeaderText = "Nombre";
+            dataGridView_suppliersList.Columns["name"].ReadOnly = true;
             dataGridView_suppliersList.Columns["ruc"].HeaderText = "RUC";
+
+            dataGridView_suppliersList.Columns["ruc"].ReadOnly = true;
             dataGridView_suppliersList.Columns["contact"].HeaderText = "Contacto";
             dataGridView_suppliersList.Columns["contact"].Visible = false;
             dataGridView_suppliersList.Columns["telephone"].HeaderText = "Teléfono";
@@ -27,9 +33,13 @@ namespace InkaArt.Interface.Purchases
             dataGridView_suppliersList.Columns["email"].HeaderText = "Correo";
             dataGridView_suppliersList.Columns["address"].Visible = false;
             dataGridView_suppliersList.Columns["address"].HeaderText = "Dirección";
+            dataGridView_suppliersList.Columns["address"].ReadOnly = true;
             dataGridView_suppliersList.Columns["priority"].HeaderText = "Prioridad";
+            dataGridView_suppliersList.Columns["priority"].ReadOnly = true;
             dataGridView_suppliersList.Columns["status"].HeaderText = "Estado";
-             }
+
+            dataGridView_suppliersList.Columns["status"].ReadOnly = true;
+        }
         
 
         public void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,7 +51,35 @@ namespace InkaArt.Interface.Purchases
             Form supplierDet = new SupplierDetail(control,this);
             supplierDet.Show();
         }
-
+        private void cambiarTodasLasMateriasAInactivo(string idSupplier)
+        {
+            //COMPLETARRRRR!!
+            DataRow[] rows;
+            RawMaterial_SupplierController control_rm=new RawMaterial_SupplierController();
+            DataTable tablaAuxiliar = control_rm.getData();
+            rows = tablaAuxiliar.Select("id_supplier = " + idSupplier);
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            for(int i = 0; i < numero; i++)
+            {
+                string idMat=tablaAuxiliar.Rows[i]["id_raw_material"].ToString();
+                string idRMSup = tablaAuxiliar.Rows[i]["id_rawmaterial_supplier"].ToString();
+                string price = tablaAuxiliar.Rows[i]["price"].ToString();
+                string status = tablaAuxiliar.Rows[i]["status"].ToString();
+                if (string.Compare(status, "Inactivo") == 0) continue;
+                try
+                {
+                    control_rm.UpdateRM_Sup(idRMSup, idMat, idSupplier, price, "Inactivo");
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
         public void button_delete(object sender, EventArgs e)
         {
             int registros=dataGridView_suppliersList.Rows.Count;
@@ -59,6 +97,7 @@ namespace InkaArt.Interface.Purchases
                     string telephone = dataGridView_suppliersList.Rows[i].Cells[5].Value.ToString();
                     try {
                         control.updateData(idSupplier, name, ruc, contactName, int.Parse(telephone), email, address, int.Parse(priority), "Inactivo");
+                        cambiarTodasLasMateriasAInactivo(idSupplier);
                     }
                     catch (Exception)
                     {
@@ -174,8 +213,27 @@ namespace InkaArt.Interface.Purchases
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Suppliers File";
             dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK)
-                control.massiveUpload(dialog.FileName);
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                if (control.massiveUpload(dialog.FileName) == 1)
+                {
+                    MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else MessageBox.Show("Se realizó la carga masiva de proveedores de manera exitosa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            OpenFileDialog dialog2 = new OpenFileDialog();
+            dialog2.Title = "Open Raw materials offered by suppliers File";
+            dialog2.Filter = "CSV files|*.csv";
+            if (dialog2.ShowDialog() == DialogResult.OK)
+            {
+                RawMaterial_SupplierController control_rm=new RawMaterial_SupplierController();
+                if (control_rm.massiveUpload(dialog2.FileName) == 1)
+                {
+                    MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             textBox_id.Text = "";
             textBox_ruc.Text = "";
             textBox_supplier.Text = "";

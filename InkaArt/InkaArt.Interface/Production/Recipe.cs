@@ -30,7 +30,9 @@ namespace InkaArt.Interface.Production
             textBox_product.Text = name;
 
             RecipeController control = new RecipeController();
+            control.updateRecipeStatus();
             DataTable recipeList = control.getData();
+            
 
             //agregar datos a combobox version
             for(int i =0; i<recipeList.Rows.Count;i++)
@@ -67,6 +69,7 @@ namespace InkaArt.Interface.Production
 
         }
 
+
         private void fillGrid()
         {
             //llenar el datagrid
@@ -96,6 +99,10 @@ namespace InkaArt.Interface.Production
                             //version buscada
                             idRecipe = recipeList.Rows[i]["idRecipe"].ToString();
                             globalIdRecipe = recipeList.Rows[i]["idRecipe"].ToString();
+                            if (int.Parse(recipeList.Rows[i]["status"].ToString()) == 1)
+                                textBox_state.Text = "Activo";
+                            else
+                                textBox_state.Text = "Inactivo";
                             break;
                         }
                     }
@@ -110,6 +117,7 @@ namespace InkaArt.Interface.Production
                 DataTable unitList = controlUnit.getData();
 
                 string idRaw, nameRaw, countRaw, idUnit, nameUnit;
+                string status = "Activo";
                 idRaw = nameRaw = countRaw = idUnit = nameUnit = "1";
 
                 for (int i = 0; i < recipeRawList.Rows.Count; i++)
@@ -125,6 +133,7 @@ namespace InkaArt.Interface.Production
                             {
                                 nameRaw = rawMList.Rows[j]["name"].ToString();
                                 idUnit = rawMList.Rows[j]["unit"].ToString();
+                                status = rawMList.Rows[j]["status"].ToString();
                                 break;
                             }
 
@@ -134,7 +143,8 @@ namespace InkaArt.Interface.Production
                                 nameUnit = unitList.Rows[j]["name"].ToString();
                                 break;
                             }
-                        dataGridView_rawMaterial.Rows.Add(idRaw, nameRaw, countRaw, nameUnit);
+                        //estado de la materia prima
+                        dataGridView_rawMaterial.Rows.Add(idRaw, nameRaw, countRaw, nameUnit,status);
                     }
                 }
                 maxRow = dataGridView_rawMaterial.Rows.Count;
@@ -163,9 +173,14 @@ namespace InkaArt.Interface.Production
                 ver = textbox_newVer.Text;
                 stat = "1";
                 idProduct = textBox_id.Text;
-
-                control.insertData(desc, ver, stat, idProduct);
-
+                try
+                {
+                    control.insertData(desc, ver, stat, idProduct);
+                }
+                catch(Exception p)
+                {
+                    Console.WriteLine("{0} error", p);
+                }
 
                 //refresh comboBox_version
                 DataTable recipeList = control.getData();
@@ -193,7 +208,7 @@ namespace InkaArt.Interface.Production
             string idRaw = "";
             string count = numericUpDown_count.Value.ToString();
 
-            if (comboBox_version.SelectedItem != null)
+            if (comboBox_version.SelectedItem != null && string.Equals(textBox_state.Text, "Activo"))
             {
                 if (numericUpDown_count.Value > 0)
                 {
@@ -206,7 +221,14 @@ namespace InkaArt.Interface.Production
                         }
                     }
                     DataTable table = controlRecipeRaw.getData();
-                    controlRecipeRaw.insertDataNoAdapter(globalIdRecipe, idRaw, count);
+                    try
+                    {
+                        controlRecipeRaw.insertDataNoAdapter(globalIdRecipe, idRaw, count);
+                    }
+                    catch(Exception m)
+                    {
+                        Console.Write("{0} error", m);
+                    }
                     fillGrid();
                 }
                 else
@@ -229,13 +251,20 @@ namespace InkaArt.Interface.Production
                 //fill valores limites
                 int number;
                 
-                if(row.Index>=0 && row.Index < dataGridView_rawMaterial.Rows.Count && Convert.ToBoolean(row.Cells[4].Value))
+                if(row.Index>=0 && row.Index < dataGridView_rawMaterial.Rows.Count && Convert.ToBoolean(row.Cells[5].Value))
                 {
                     if (int.TryParse(row.Cells[0].Value.ToString(),out number)){
                         id = row.Cells[0].Value.ToString();
                         quantity = row.Cells[2].Value.ToString();
                         RecipeRawMaterialController control = new RecipeRawMaterialController();
-                        control.updateDataNoAdapter(globalIdRecipe, id,quantity);
+                        try
+                        {
+                            control.updateDataNoAdapter(globalIdRecipe, id, quantity);
+                        }
+                        catch (Exception m)
+                        {
+                            Console.Write("{0} error", m);
+                        }
                         fillGrid();
                         break;
                     }

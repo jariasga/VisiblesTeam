@@ -28,7 +28,7 @@ namespace InkaArt.Business.Algorithm
             connection.ConnectionString = BD_Connector.ConnectionString.ConnectionString;
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Process-Product\"", connection);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Process-Product\" ORDER BY \"idJob\" ASC", connection);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())

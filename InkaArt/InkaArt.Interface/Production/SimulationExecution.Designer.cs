@@ -41,6 +41,7 @@
             // 
             this.progress_bar.Location = new System.Drawing.Point(13, 46);
             this.progress_bar.Margin = new System.Windows.Forms.Padding(4);
+            this.progress_bar.Maximum = 1000;
             this.progress_bar.Name = "progress_bar";
             this.progress_bar.Size = new System.Drawing.Size(756, 37);
             this.progress_bar.Step = 1;

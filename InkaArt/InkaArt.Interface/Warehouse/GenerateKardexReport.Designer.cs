@@ -28,23 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenerateKardexReport));
             this.button_generate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBox_allW = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
             this.list_warehouses = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox_allRM = new System.Windows.Forms.CheckBox();
             this.list_rawMaterials = new System.Windows.Forms.CheckedListBox();
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
+            this.checkBox_allProd = new System.Windows.Forms.CheckBox();
             this.list_products = new System.Windows.Forms.CheckedListBox();
-            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_fechaIni = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_fechaFin = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkBox_allProd = new System.Windows.Forms.CheckBox();
-            this.checkBox_allRM = new System.Windows.Forms.CheckBox();
-            this.checkBox_allW = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -70,13 +72,13 @@
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupbox_workers);
-            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Controls.Add(this.button_generate);
             this.groupBox1.Controls.Add(this.dateTimePicker_fechaIni);
+            this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(21, 28);
+            this.groupBox1.Location = new System.Drawing.Point(27, 122);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1334, 369);
             this.groupBox1.TabIndex = 25;
@@ -94,6 +96,19 @@
             this.groupBox4.TabIndex = 48;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Almacenes a considerar";
+            // 
+            // checkBox_allW
+            // 
+            this.checkBox_allW.AutoSize = true;
+            this.checkBox_allW.Checked = true;
+            this.checkBox_allW.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_allW.Location = new System.Drawing.Point(15, 243);
+            this.checkBox_allW.Name = "checkBox_allW";
+            this.checkBox_allW.Size = new System.Drawing.Size(85, 27);
+            this.checkBox_allW.TabIndex = 51;
+            this.checkBox_allW.Text = "Todos";
+            this.checkBox_allW.UseVisualStyleBackColor = true;
+            this.checkBox_allW.CheckedChanged += new System.EventHandler(this.checkBox_allW_CheckedChanged);
             // 
             // groupBox5
             // 
@@ -136,6 +151,19 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Materias primas a considerar";
             // 
+            // checkBox_allRM
+            // 
+            this.checkBox_allRM.AutoSize = true;
+            this.checkBox_allRM.Checked = true;
+            this.checkBox_allRM.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_allRM.Location = new System.Drawing.Point(18, 243);
+            this.checkBox_allRM.Name = "checkBox_allRM";
+            this.checkBox_allRM.Size = new System.Drawing.Size(85, 27);
+            this.checkBox_allRM.TabIndex = 50;
+            this.checkBox_allRM.Text = "Todos";
+            this.checkBox_allRM.UseVisualStyleBackColor = true;
+            this.checkBox_allRM.CheckedChanged += new System.EventHandler(this.checkBox_allRM_CheckedChanged);
+            // 
             // list_rawMaterials
             // 
             this.list_rawMaterials.CheckOnClick = true;
@@ -157,6 +185,19 @@
             this.groupbox_workers.TabStop = false;
             this.groupbox_workers.Text = "Productos a considerar";
             // 
+            // checkBox_allProd
+            // 
+            this.checkBox_allProd.AutoSize = true;
+            this.checkBox_allProd.Checked = true;
+            this.checkBox_allProd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_allProd.Location = new System.Drawing.Point(15, 243);
+            this.checkBox_allProd.Name = "checkBox_allProd";
+            this.checkBox_allProd.Size = new System.Drawing.Size(85, 27);
+            this.checkBox_allProd.TabIndex = 49;
+            this.checkBox_allProd.Text = "Todos";
+            this.checkBox_allProd.UseVisualStyleBackColor = true;
+            this.checkBox_allProd.CheckedChanged += new System.EventHandler(this.checkBox_allProd_CheckedChanged);
+            // 
             // list_products
             // 
             this.list_products.CheckOnClick = true;
@@ -166,6 +207,16 @@
             this.list_products.Name = "list_products";
             this.list_products.Size = new System.Drawing.Size(241, 204);
             this.list_products.TabIndex = 45;
+            //             
+            // dateTimePicker_fechaIni
+            // 
+            this.dateTimePicker_fechaIni.CustomFormat = "";
+            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 81);
+            this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
+            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(211, 28);
+            this.dateTimePicker_fechaIni.TabIndex = 31;
             // 
             // dateTimePicker_fechaFin
             // 
@@ -177,16 +228,6 @@
             this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
             this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(211, 28);
             this.dateTimePicker_fechaFin.TabIndex = 32;
-            // 
-            // dateTimePicker_fechaIni
-            // 
-            this.dateTimePicker_fechaIni.CustomFormat = "";
-            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 81);
-            this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
-            this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(211, 28);
-            this.dateTimePicker_fechaIni.TabIndex = 31;
             // 
             // label4
             // 
@@ -208,51 +249,26 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "Fecha inicial del periodo";
             // 
-            // checkBox_allProd
+            // textBox1
             // 
-            this.checkBox_allProd.AutoSize = true;
-            this.checkBox_allProd.Checked = true;
-            this.checkBox_allProd.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_allProd.Location = new System.Drawing.Point(15, 243);
-            this.checkBox_allProd.Name = "checkBox_allProd";
-            this.checkBox_allProd.Size = new System.Drawing.Size(85, 27);
-            this.checkBox_allProd.TabIndex = 49;
-            this.checkBox_allProd.Text = "Todos";
-            this.checkBox_allProd.UseVisualStyleBackColor = true;
-            this.checkBox_allProd.CheckedChanged += new System.EventHandler(this.checkBox_allProd_CheckedChanged);
-            // 
-            // checkBox_allRM
-            // 
-            this.checkBox_allRM.AutoSize = true;
-            this.checkBox_allRM.Checked = true;
-            this.checkBox_allRM.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_allRM.Location = new System.Drawing.Point(18, 243);
-            this.checkBox_allRM.Name = "checkBox_allRM";
-            this.checkBox_allRM.Size = new System.Drawing.Size(85, 27);
-            this.checkBox_allRM.TabIndex = 50;
-            this.checkBox_allRM.Text = "Todos";
-            this.checkBox_allRM.UseVisualStyleBackColor = true;
-            this.checkBox_allRM.CheckedChanged += new System.EventHandler(this.checkBox_allRM_CheckedChanged);
-            // 
-            // checkBox_allW
-            // 
-            this.checkBox_allW.AutoSize = true;
-            this.checkBox_allW.Checked = true;
-            this.checkBox_allW.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_allW.Location = new System.Drawing.Point(15, 243);
-            this.checkBox_allW.Name = "checkBox_allW";
-            this.checkBox_allW.Size = new System.Drawing.Size(85, 27);
-            this.checkBox_allW.TabIndex = 51;
-            this.checkBox_allW.Text = "Todos";
-            this.checkBox_allW.UseVisualStyleBackColor = true;
-            this.checkBox_allW.CheckedChanged += new System.EventHandler(this.checkBox_allW_CheckedChanged);
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(27, 23);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(1334, 81);
+            this.textBox1.TabIndex = 38;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // GenerateKardexReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1392, 436);
+            this.ClientSize = new System.Drawing.Size(1392, 527);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "GenerateKardexReport";
             this.Text = "Generar Reporte Kardex";
@@ -266,6 +282,7 @@
             this.groupbox_workers.ResumeLayout(false);
             this.groupbox_workers.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -287,5 +304,6 @@
         private System.Windows.Forms.CheckBox checkBox_allW;
         private System.Windows.Forms.CheckBox checkBox_allRM;
         private System.Windows.Forms.CheckBox checkBox_allProd;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InkaArt.Data.Production;
+using InkaArt.Business.Purchases;
 using NpgsqlTypes;
 using Npgsql;
 using System.IO;
@@ -22,8 +23,55 @@ namespace InkaArt.Business.Production
 
         public RecipeController()
         {
+            //adapt = new NpgsqlDataAdapter();            
             recipe = new RecipeData();
+            adapt = recipe.recipeAdapter();
             data = new DataSet();
+        }
+
+        public void updateRecipeStatus()
+        {
+            data.Reset();
+            data = recipe.getData(adapt, "Recipe");
+            recipeList = data.Tables["Recipe"];
+
+            RecipeRawMaterialController controlrrm = new RecipeRawMaterialController();
+            DataTable r_rmList = controlrrm.getData();
+
+            RawMaterialController controlrm = new RawMaterialController();
+            DataTable rmList = controlrm.getData();
+
+            int parar;
+            for (int i = 0; i < recipeList.Rows.Count; i++)
+            {
+                int idRecipe = Convert.ToInt32(recipeList.Rows[i]["idRecipe"]);
+                //  Activar
+                if (idRecipe == 8)
+                    parar = 1;//eliminar
+                recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
+                                        "SET status = {0} WHERE \"idRecipe\" = {1}", 1, idRecipe));
+
+
+                //  Desactivar
+                DataTable r_rmTable = new DataTable();
+                DataRow[] r_rmRows = r_rmList.Select("idRecipe = " + idRecipe + " AND status = 1");
+                if (r_rmRows.Any())
+                {
+                    r_rmTable = r_rmRows.CopyToDataTable();
+                    foreach (DataRow rRow in r_rmTable.Rows)
+                    {
+                        DataTable rmtable = new DataTable();
+                        DataRow[] rmRows = rmList.Select("id_raw_material = " + rRow["idRawMaterial"] + " AND status = 'Inactivo'");
+                        if (rmRows.Any())
+                        {
+                            recipe.execute(string.Format("UPDATE \"inkaart\".\"Recipe\" " +
+                                            "SET status = {0} WHERE \"idRecipe\" = '{1}'", 0, idRecipe));
+                            break;
+                        }
+
+                    }
+                }
+            }
         }
 
         public DataTable getData()

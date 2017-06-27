@@ -83,6 +83,22 @@ namespace InkaArt.Business.Warehouse
             return pWarehouse.updateData(data, adapt, "Product-Warehouse");
         }
 
+
+        public void updateMinMax(string idPW,int min,int max)
+        {
+            adapt = pWarehouse.pWarehouseAdapter();
+
+            string updateQuery;
+            string minS = min.ToString();
+            string maxS = max.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"Product-Warehouse\" SET ";
+            updateQuery = updateQuery + "\"minimunStock\"= " + minS + ", ";
+            updateQuery = updateQuery + "\"maximunStock\" = " + maxS;
+            updateQuery = updateQuery + " WHERE \"idProductWarehouse\"= " + idPW + " ;";
+            pWarehouse.execute(updateQuery);
+        }
+
         public void updateStock(string idWh, string idRm, int logico, int fisico)
         {
             adapt = pWarehouse.pWarehouseAdapter();
@@ -92,8 +108,21 @@ namespace InkaArt.Business.Warehouse
             string fidStr = fisico.ToString();
             table = getData();
             updateQuery = "UPDATE inkaart.\"Product-Warehouse\" SET ";
-            updateQuery = updateQuery + "\"currentStock\"= " + logStr + ", ";
-            updateQuery = updateQuery + "\"virtualStock\" = " + fidStr;
+            updateQuery = updateQuery + "\"currentStock\"= " + fidStr + ", ";
+            updateQuery = updateQuery + "\"virtualStock\" = " + logStr;
+            updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idProduct\"= " + idRm + " AND state = 'Activo'" + " ;";
+            pWarehouse.execute(updateQuery);
+        }
+
+        public void updateOnlyPhStock(string idWh, string idRm, int fisico)
+        {
+            adapt = pWarehouse.pWarehouseAdapter();
+
+            string updateQuery;
+            string fidStr = fisico.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"Product-Warehouse\" SET ";
+            updateQuery = updateQuery + "\"currentStock\" = " + fidStr;
             updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idProduct\"= " + idRm + " AND state = 'Activo'" + " ;";
             pWarehouse.execute(updateQuery);
         }

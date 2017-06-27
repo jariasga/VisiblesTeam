@@ -11,6 +11,7 @@ using InkaArt.Business.Algorithm;
 //using InkaArt.Business.Security;
 using InkaArt.Data;
 using InkaArt.Data.Algorithm;
+using InkaArt.Business.Production;
 
 namespace InkaArt.Interface.Production
 {
@@ -31,10 +32,14 @@ namespace InkaArt.Interface.Production
                 comboBox_workers.Items.Add(worker.Name + " " + worker.LastName);
                 indexList.Add(worker.ID);
             }*/
+            
             workers.Load();
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "FullName";
-
+            this.dateTimePicker_ini.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_ini.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker_fin.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fin.CustomFormat = "dd/MM/yyyy";
         }
 
         private void button_generate_Click(object sender, EventArgs e)
@@ -66,11 +71,11 @@ namespace InkaArt.Interface.Production
                 MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
             }
-            /*else if (comboBox_workers.Text == "")
+            else if (dateTimePicker_fin.Value > DateTime.Now)
             {
-                MessageBox.Show(this, "Por favor, seleccionar a un trabajador", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
-            }*/
+            }
             else return 1;
         }
 

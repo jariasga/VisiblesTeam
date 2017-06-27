@@ -62,10 +62,13 @@ namespace InkaArt.Interface.Sales
 
         private void grid_documents_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            SelectedOrderId = int.Parse(grid_documents.Rows[e.RowIndex].Cells[5].Value.ToString());
-            SelectedDocumentId = int.Parse(grid_documents.Rows[e.RowIndex].Cells[0].Value.ToString());
-            DialogResult = DialogResult.OK;
-            Close();
+            if (e.RowIndex != -1)
+            {
+                SelectedOrderId = int.Parse(grid_documents.Rows[e.RowIndex].Cells[5].Value.ToString());
+                SelectedDocumentId = int.Parse(grid_documents.Rows[e.RowIndex].Cells[0].Value.ToString());
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
         private void button_see_Click(object sender, EventArgs e)

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_state = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_version = new System.Windows.Forms.ComboBox();
             this.textBox_product = new System.Windows.Forms.TextBox();
@@ -43,6 +45,7 @@
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_add = new System.Windows.Forms.Button();
             this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
@@ -64,6 +67,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_state);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.comboBox_version);
             this.groupBox1.Controls.Add(this.textBox_product);
@@ -74,16 +79,39 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(227, 221);
+            this.groupBox1.Size = new System.Drawing.Size(227, 258);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Basicos";
+            // 
+            // textBox_state
+            // 
+            this.textBox_state.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox_state.Enabled = false;
+            this.textBox_state.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_state.Location = new System.Drawing.Point(20, 163);
+            this.textBox_state.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_state.Name = "textBox_state";
+            this.textBox_state.ReadOnly = true;
+            this.textBox_state.Size = new System.Drawing.Size(182, 24);
+            this.textBox_state.TabIndex = 27;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(18, 141);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 18);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Estado";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 153);
+            this.label5.Location = new System.Drawing.Point(18, 204);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 18);
@@ -93,7 +121,7 @@
             // comboBox_version
             // 
             this.comboBox_version.FormattingEnabled = true;
-            this.comboBox_version.Location = new System.Drawing.Point(22, 174);
+            this.comboBox_version.Location = new System.Drawing.Point(21, 225);
             this.comboBox_version.Name = "comboBox_version";
             this.comboBox_version.Size = new System.Drawing.Size(181, 26);
             this.comboBox_version.TabIndex = 24;
@@ -148,7 +176,7 @@
             // textbox_newVer
             // 
             this.textbox_newVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_newVer.Location = new System.Drawing.Point(19, 93);
+            this.textbox_newVer.Location = new System.Drawing.Point(21, 83);
             this.textbox_newVer.Name = "textbox_newVer";
             this.textbox_newVer.Size = new System.Drawing.Size(184, 24);
             this.textbox_newVer.TabIndex = 28;
@@ -157,7 +185,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(17, 71);
+            this.label6.Location = new System.Drawing.Point(19, 61);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(169, 18);
@@ -167,7 +195,7 @@
             // checkBox_newVer
             // 
             this.checkBox_newVer.AutoSize = true;
-            this.checkBox_newVer.Location = new System.Drawing.Point(19, 35);
+            this.checkBox_newVer.Location = new System.Drawing.Point(21, 25);
             this.checkBox_newVer.Name = "checkBox_newVer";
             this.checkBox_newVer.Size = new System.Drawing.Size(128, 22);
             this.checkBox_newVer.TabIndex = 26;
@@ -186,11 +214,12 @@
             this.Nombre,
             this.Cantidad,
             this.Unidad,
+            this.Estado,
             this.Borrar});
             this.dataGridView_rawMaterial.Location = new System.Drawing.Point(19, 84);
             this.dataGridView_rawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_rawMaterial.Name = "dataGridView_rawMaterial";
-            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(545, 233);
+            this.dataGridView_rawMaterial.Size = new System.Drawing.Size(625, 233);
             this.dataGridView_rawMaterial.TabIndex = 17;
             this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -218,6 +247,12 @@
             this.Unidad.HeaderText = "Unidad";
             this.Unidad.Name = "Unidad";
             this.Unidad.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // Borrar
             // 
@@ -281,12 +316,12 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(50, 132);
+            this.button_save.Location = new System.Drawing.Point(53, 117);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(119, 39);
             this.button_save.TabIndex = 27;
-            this.button_save.Text = "🖫 Guardar";
+            this.button_save.Text = "🖫 Crear";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
@@ -303,7 +338,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(586, 345);
+            this.groupBox2.Size = new System.Drawing.Size(652, 345);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Receta";
@@ -328,9 +363,9 @@
             this.Nuevo.Controls.Add(this.textbox_newVer);
             this.Nuevo.Controls.Add(this.checkBox_newVer);
             this.Nuevo.Controls.Add(this.button_save);
-            this.Nuevo.Location = new System.Drawing.Point(21, 252);
+            this.Nuevo.Location = new System.Drawing.Point(21, 289);
             this.Nuevo.Name = "Nuevo";
-            this.Nuevo.Size = new System.Drawing.Size(227, 199);
+            this.Nuevo.Size = new System.Drawing.Size(227, 162);
             this.Nuevo.TabIndex = 29;
             this.Nuevo.TabStop = false;
             this.Nuevo.Text = "Nuevo";
@@ -368,7 +403,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(865, 472);
+            this.ClientSize = new System.Drawing.Size(921, 472);
             this.Controls.Add(this.massive_details);
             this.Controls.Add(this.massive_recipe);
             this.Controls.Add(this.Nuevo);
@@ -413,12 +448,15 @@
         private System.Windows.Forms.TextBox textbox_newVer;
         private System.Windows.Forms.GroupBox Nuevo;
         private System.Windows.Forms.Button button_delete;
+        private System.Windows.Forms.Button massive_recipe;
+        private System.Windows.Forms.Button massive_details;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Borrar;
-        private System.Windows.Forms.Button massive_recipe;
-        private System.Windows.Forms.Button massive_details;
+        private System.Windows.Forms.TextBox textBox_state;
+        private System.Windows.Forms.Label label7;
     }
 }

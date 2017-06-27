@@ -48,12 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\AssignmentLine.cs" />
+    <Compile Include="Algorithm\AssignmentTuple.cs" />
     <Compile Include="Algorithm\Client.cs" />
     <Compile Include="Algorithm\Index.cs" />
     <Compile Include="Algorithm\Job.cs" />
     <Compile Include="Algorithm\Order.cs" />
     <Compile Include="Algorithm\OrderLineItem.cs" />
-    <Compile Include="Algorithm\Process.cs" />
+    <Compile Include="Algorithm\ProcessTuple.cs" />
     <Compile Include="Algorithm\Ratio.cs" />
     <Compile Include="Algorithm\Recipe.cs" />
     <Compile Include="Algorithm\TabuMove.cs" />

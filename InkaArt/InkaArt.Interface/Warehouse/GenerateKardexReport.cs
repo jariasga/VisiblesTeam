@@ -22,6 +22,11 @@ namespace InkaArt.Interface.Warehouse
             warehouses = new List<string>();
             items = new List<string>();              
             loadData();
+
+            this.dateTimePicker_fechaIni.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fechaIni.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker_fechaFin.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fechaFin.CustomFormat = "dd/MM/yyyy";
         }
 
         private void checkBox_allProd_CheckedChanged(object sender, EventArgs e)
@@ -109,12 +114,12 @@ namespace InkaArt.Interface.Warehouse
             {
                 MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
-            }            
-            /*else if (comboBox_products.Text == "")
+            }
+            else if (dateTimePicker_fechaFin.Value > DateTime.Now)
             {
-                MessageBox.Show(this, "Por favor, seleccionar un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
-            }*/
+            }
             else return 1;
         }
 

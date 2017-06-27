@@ -19,19 +19,27 @@ namespace InkaArt.Interface.Purchases
             controlSup = new SupplierController();
             purchaseOrderList = control.getData();
             desarrolloBusqueda();
-            /*
-            dataGridView_purchaseOrder.DataSource = purchaseOrderList;
-
-            dataGridView_purchaseOrder.Columns["id_order"].HeaderText = "ID";
-            dataGridView_purchaseOrder.Columns["id_supplier"].HeaderText = "Proveedor";
-            dataGridView_purchaseOrder.Columns["status"].HeaderText = "Estado";
-            dataGridView_purchaseOrder.Columns["creation_date"].HeaderText = "Fecha de emisión";
-            dataGridView_purchaseOrder.Columns["delivery_date"].HeaderText = "Fecha de entrega";
-            dataGridView_purchaseOrder.Columns["total"].HeaderText = "Total";
-
-            dataGridView_purchaseOrder.Columns["delivery_date"].Visible=false;*/
+            
         }
-
+        private string buscarIdsProveedores(string nombre)
+        {
+            string lista = "";
+            DataRow[] rows;
+            if (controlSup == null) controlSup = new SupplierController();
+            DataTable auxiliarLista = controlSup.getData();
+            rows = auxiliarLista.Select("name LIKE '%" + nombre+ "%'");
+            if (rows.Any()) auxiliarLista = rows.CopyToDataTable();
+            else auxiliarLista.Rows.Clear();
+            string sortQuery = string.Format("id_supplier");
+            auxiliarLista.DefaultView.Sort = sortQuery;
+            for (int i = 0; i < auxiliarLista.Rows.Count; i++)
+                {
+                    if (lista.Length > 0) lista += ", ";
+                    lista += auxiliarLista.Rows[i]["id_supplier"].ToString();
+                }
+            
+            return lista;
+        }
         private void filter() {
             DataRow[] rows;
             purchaseOrderList = control.getData();
@@ -42,22 +50,18 @@ namespace InkaArt.Interface.Purchases
             }
             if (textBox_name.Text.Length > 0)
             {
-                //cadena += " AND id_supplier = " + textBox_name.Text;
+                string lista = buscarIdsProveedores(textBox_name.Text);
+                if (lista.Length == 0) lista = "0";
+                cadena += " AND id_supplier IN (" + lista + ")";
             }
-            /*if (dateTimePicker_creation.Text.Length > 0)
+            if (dateTimePicker_creation.Text.Length > 0 && checkBox_dateInclude.Checked)
             {
-                int inicio = int.Parse(dateTimePicker_creation.Value.ToString("yyyyMMdd"));
-                int fin = int.Parse(dateTimePicker_creationEnd.Value.ToString("yyyyMMdd"));
-                cadena += " AND format(cast(creationDate as date), 'yyyyMMdd') <= "+fin+" AND "+inicio+ " <= format(cast(creationDate as date), 'yyyyMMdd')";
-            }*/
-            if (String.Compare(comboBox_status.Text, "Activo") == 0)
-            {
-                rows = purchaseOrderList.Select("status LIKE '" + comboBox_status.Text + "'" + cadena);
+                string creation_date = DateTime.Parse(dateTimePicker_creation.Text).ToString("dd/MM/yyyy");
+                string end_date = DateTime.Parse(dateTimePicker_creationEnd.Text).ToString("dd/MM/yyyy");
+                cadena += " AND creation_date >= '"+creation_date+ "' AND creation_date<= '" + end_date + "'";
             }
-            else
-            {
-                rows = purchaseOrderList.Select("status LIKE '%" + comboBox_status.Text + "%'" + cadena);
-            }
+            rows = purchaseOrderList.Select("status LIKE '%" + comboBox_status.Text + "%'" + cadena);
+            
             if (rows.Any()) purchaseOrderList = rows.CopyToDataTable();
             else purchaseOrderList.Rows.Clear();
             string sortQuery = string.Format("id_order");
@@ -90,12 +94,18 @@ namespace InkaArt.Interface.Purchases
                 string delivery_date = DateTime.Parse(purchaseOrderList.Rows[i]["delivery_date"].ToString()).ToShortDateString();
                 double total = double.Parse(purchaseOrderList.Rows[i]["total"].ToString());
                 string suppName = buscarNombre(id_supplier);
-                dataGridView_purchaseOrder.Rows.Add(false, id_order, suppName, creation_date, delivery_date, total, status, id_supplier);
+                dataGridView_purchaseOrder.Rows.Add(id_order, suppName, creation_date, delivery_date, total, status, id_supplier, false);
             }
-            
+            dataGridView_purchaseOrder.Sort(dataGridView_purchaseOrder.Columns["id_order"], System.ComponentModel.ListSortDirection.Ascending);
+
         }
         private void button_search(object sender, EventArgs e)
         {
+            if(checkBox_dateInclude.Checked && dateTimePicker_creationEnd.Value < dateTimePicker_creation.Value)
+            {
+                MessageBox.Show("La fecha fin debe ser mayor o igual a la de inicio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             desarrolloBusqueda();
         }
 
@@ -110,24 +120,25 @@ namespace InkaArt.Interface.Purchases
             int registros = dataGridView_purchaseOrder.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                if (Convert.ToBoolean(dataGridView_purchaseOrder.Rows[i].Cells[0].Value) == true)
+                if (Convert.ToBoolean(dataGridView_purchaseOrder.Rows[i].Cells[7].Value) == true)
                 {
-                    string id_order = dataGridView_purchaseOrder.Rows[i].Cells[1].Value.ToString();
-                    int prov = int.Parse(dataGridView_purchaseOrder.Rows[i].Cells[7].Value.ToString());
-                    string status = dataGridView_purchaseOrder.Rows[i].Cells[6].Value.ToString();
+                    string id_order = dataGridView_purchaseOrder.Rows[i].Cells[0].Value.ToString();
+                    int prov = int.Parse(dataGridView_purchaseOrder.Rows[i].Cells[6].Value.ToString());
+                    string status = dataGridView_purchaseOrder.Rows[i].Cells[5].Value.ToString();
                     if (string.Compare(status, "Borrador") != 0)
                     {
                         //solo se eliminará las ordenes en estado Borrador
-                        dataGridView_purchaseOrder.Rows[i].Cells[0].Value = false;
+                        dataGridView_purchaseOrder.Rows[i].Cells[7].Value = false;
                         MessageBox.Show("No se pudo eliminar la orden " + id_order + " porque no se encuentra en estado Borrador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         continue;
                     }
-                    DateTime creation_date = DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[3].Value.ToString());
-                    DateTime delivery_date= DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[4].Value.ToString());
-                    double total = (double) dataGridView_purchaseOrder.Rows[i].Cells[5].Value;
+                    DateTime creation_date = DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[2].Value.ToString());
+                    DateTime delivery_date= DateTime.Parse(dataGridView_purchaseOrder.Rows[i].Cells[3].Value.ToString());
+                    double total = (double) dataGridView_purchaseOrder.Rows[i].Cells[4].Value;
                     try
                     {
-                        control.updateData(id_order,prov,"Inactivo", creation_date,delivery_date,total);
+                        control.updateData(id_order,prov,"Eliminado", creation_date,delivery_date,total);
+                        cambiarTodasLasLineasAEliminado(id_order);
                     }
                     catch (Exception)
                     {
@@ -139,7 +150,36 @@ namespace InkaArt.Interface.Purchases
             }
             desarrolloBusqueda();
         }
+        private void cambiarTodasLasLineasAEliminado(string id_order)
+        {
+            DataRow[] rows;
+            PurchaseOrderDetailController control_detailOrder = new PurchaseOrderDetailController();
+            DataTable tablaAuxiliar = control_detailOrder.getData();
+            rows = tablaAuxiliar.Select("id_order = " + id_order);
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_order");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            for (int i = 0; i < numero; i++)
+            {
+                int id_detailAux = int.Parse(tablaAuxiliar.Rows[i]["id_detail"].ToString());
+                int cantidad = int.Parse(tablaAuxiliar.Rows[i]["quantity"].ToString());
 
+                double subtotal = Math.Round(double.Parse(tablaAuxiliar.Rows[i]["amount"].ToString()), 2);
+                double igv = Math.Round(double.Parse(tablaAuxiliar.Rows[i]["igv"].ToString()), 2);
+                string status = tablaAuxiliar.Rows[i]["status"].ToString();
+                if (string.Compare(status, "Eliminado") == 0) continue;
+                try
+                {
+                    control_detailOrder.updateData(id_detailAux, cantidad, subtotal, igv, "Eliminado");
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
         private void editPurchaseOrder(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentPurchaseOrder = dataGridView_purchaseOrder.CurrentRow;
@@ -165,6 +205,11 @@ namespace InkaArt.Interface.Purchases
                 }
             }
             textBox_id.Text = actualdata;
+        }
+
+        private void activarCheckbox(object sender, EventArgs e)
+        {
+            checkBox_dateInclude.Checked = true;
         }
     }
 }

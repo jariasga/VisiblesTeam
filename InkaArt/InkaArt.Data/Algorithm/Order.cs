@@ -43,24 +43,9 @@ namespace InkaArt.Data.Algorithm
             this.line_items = new List<OrderLineItem>();
         }
 
-        public void AddLineItem(OrderLineItem line_item)
+        public List<OrderLineItem> OrderLineItems
         {
-            this.line_items.Add(line_item);
-        }
-
-        public bool UpdateLineItem(Recipe recipe, int produced)
-        {
-            OrderLineItem line_item = line_items.Find(item => item.Recipe == recipe.ID);
-            if (line_item == null) return false;
-            line_item.Produced += produced;
-            return true;
-        }
-
-        public bool Completed()
-        {
-            foreach (OrderLineItem line_item in line_items)
-                if (line_item.Produced < line_item.Quantity) return false;
-            return true;
+            get { return line_items; }
         }
 
         public OrderLineItem this[int index]
@@ -73,5 +58,12 @@ namespace InkaArt.Data.Algorithm
             get { return this.line_items.Count; }
         }
 
+        public bool IsCompleted()
+        {
+            if (line_items == null || line_items.Count <= 0) return false;
+            for (int i = 0; i < line_items.Count; i++)
+                if (line_items[i].Produced < line_items[i].Quantity) return false;
+            return true;
+        }
     }
 }

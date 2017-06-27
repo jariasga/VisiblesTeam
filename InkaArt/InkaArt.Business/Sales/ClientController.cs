@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InkaArt.Data.Sales;
 using System.Data;
+using System.IO;
 
 namespace InkaArt.Business.Sales
 {
@@ -57,10 +58,9 @@ namespace InkaArt.Business.Sales
                 return "Por favor, complete todos los campos antes de continuar";
             if (personType.Equals("0"))
             {
-                switch (notValid(ruc))
+                if (!(long.TryParse(dni, out laux) && ruc.Length == 11))
                 {
-                    case 0:
-                        return "Ingrese un RUC válido";
+                    return "Ingrese un RUC válido";
                 }
             }
             else if (personType.Equals("1"))
@@ -96,6 +96,30 @@ namespace InkaArt.Business.Sales
             return "OK";
         }
 
+        public string massiveUpload(string fileName, bool validate = false)
+        {
+            int index = 1;
+            using (var fs = File.OpenRead(fileName))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    string response = makeValidations(values[0].ToString(), values[2].ToString(), values[1].ToString(), values[1].ToString(), values[4].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[7].ToString(), values[8].ToString(), values[9].ToString());
+                    if (response.Equals("OK"))
+                    {
+                        if (!validate) clientData.InsertClient(int.Parse(values[0].ToString()), values[2].ToString(), long.Parse(values[1].ToString()), long.Parse(values[1].ToString()), int.Parse(values[4].ToString()), int.Parse(values[3].ToString()), int.Parse(values[5].ToString()), values[6].ToString(), long.Parse(values[7].ToString()), values[8].ToString(), values[9].ToString());                        
+                    }else
+                    {
+                        return "Error línea " + index.ToString() + ": " + response;
+                    }
+                    index++;
+                }
+                return "OK";
+            }
+        }
+
         public void deleteClients(List<string> selectedClients)
         {
             clientData.deleteClients(selectedClients);
@@ -107,49 +131,6 @@ namespace InkaArt.Business.Sales
             if (int.TryParse(value, out aux))
                 return true;
             else return false;
-        }
-        private int notValid(string ruc)
-        {
-            long aux;
-            char[] digits;
-            int[] factors = { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2 };
-            if (Int64.TryParse(ruc, out aux))
-            {
-                if (ruc.Length != 11) return 0;
-                digits = ruc.ToCharArray();
-                int sum = 0, result;
-                for (int i = 0; i < digits.Length - 1; i++)
-                {
-                    sum += factors[i] * (digits[i] - '0');
-                }
-                result = 11 - (sum % 11);
-                switch (result)
-                {
-                    case 10:
-                        result = 0;
-                        break;
-                    case 11:
-                        result = 1;
-                        break;
-                }
-                if (result > 11)
-                {
-                    string auxRes = result.ToString();
-                    result = int.Parse(auxRes.Substring(auxRes.Length - 1, 1));
-                }
-                if (result == (digits[10] - '0'))
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            else
-            {
-                return 0;
-            }
         }
     }
 }

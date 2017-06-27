@@ -25,8 +25,7 @@ namespace InkaArt.Business.Algorithm
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
 
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Recipe\" WHERE status = :status", connection);
-            command.Parameters.AddWithValue("status", NpgsqlDbType.Integer, 1);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Recipe\" ORDER BY \"idRecipe\" ASC", connection);
 
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -65,7 +64,7 @@ namespace InkaArt.Business.Algorithm
         public Recipe GetByVersion(string version)
         {
             foreach (Recipe recipe in recipes)
-                if (recipe.Version == version) return recipe;
+                if (recipe.Version.CompareTo(version) == 0) return recipe;
             return null;
         }
 

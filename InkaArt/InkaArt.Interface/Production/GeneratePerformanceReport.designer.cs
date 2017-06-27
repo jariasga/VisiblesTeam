@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneratePerformanceReport));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_generate = new System.Windows.Forms.Button();
             this.groupbox_workers = new System.Windows.Forms.GroupBox();
             this.checkBox_allWorkers = new System.Windows.Forms.CheckBox();
             this.list_workers = new System.Windows.Forms.CheckedListBox();
-            this.dateTimePicker_fin = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_ini = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_fin = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupbox_workers.SuspendLayout();
             this.SuspendLayout();
@@ -45,12 +47,12 @@
             // 
             this.groupBox1.Controls.Add(this.button_generate);
             this.groupBox1.Controls.Add(this.groupbox_workers);
-            this.groupBox1.Controls.Add(this.dateTimePicker_fin);
             this.groupBox1.Controls.Add(this.dateTimePicker_ini);
+            this.groupBox1.Controls.Add(this.dateTimePicker_fin);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(30, 39);
+            this.groupBox1.Location = new System.Drawing.Point(50, 147);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(658, 375);
             this.groupBox1.TabIndex = 0;
@@ -103,16 +105,7 @@
             this.list_workers.Name = "list_workers";
             this.list_workers.Size = new System.Drawing.Size(349, 204);
             this.list_workers.TabIndex = 45;
-            // 
-            // dateTimePicker_fin
-            // 
-            this.dateTimePicker_fin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_fin.Location = new System.Drawing.Point(36, 183);
-            this.dateTimePicker_fin.Name = "dateTimePicker_fin";
-            this.dateTimePicker_fin.Size = new System.Drawing.Size(158, 28);
-            this.dateTimePicker_fin.TabIndex = 4;
-            // 
+            //  
             // dateTimePicker_ini
             // 
             this.dateTimePicker_ini.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,7 +114,16 @@
             this.dateTimePicker_ini.Name = "dateTimePicker_ini";
             this.dateTimePicker_ini.Size = new System.Drawing.Size(158, 28);
             this.dateTimePicker_ini.TabIndex = 3;
+            //           
+            // dateTimePicker_fin
             // 
+            this.dateTimePicker_fin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_fin.Location = new System.Drawing.Point(36, 183);
+            this.dateTimePicker_fin.Name = "dateTimePicker_fin";
+            this.dateTimePicker_fin.Size = new System.Drawing.Size(158, 28);
+            this.dateTimePicker_fin.TabIndex = 4;
+            //
             // label2
             // 
             this.label2.AutoSize = true;
@@ -142,12 +144,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Fecha inicial";
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(50, 27);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(658, 92);
+            this.textBox1.TabIndex = 36;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // GeneratePerformanceReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(719, 437);
+            this.ClientSize = new System.Drawing.Size(771, 573);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "GeneratePerformanceReport";
             this.Text = "Generar Reporte de Rendimiento de Trabajadores";
@@ -156,19 +172,21 @@
             this.groupbox_workers.ResumeLayout(false);
             this.groupbox_workers.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_fin;
         private System.Windows.Forms.DateTimePicker dateTimePicker_ini;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_fin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_generate;
         private System.Windows.Forms.GroupBox groupbox_workers;
         private System.Windows.Forms.CheckBox checkBox_allWorkers;
         private System.Windows.Forms.CheckedListBox list_workers;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

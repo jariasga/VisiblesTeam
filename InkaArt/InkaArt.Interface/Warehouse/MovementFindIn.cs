@@ -120,6 +120,7 @@ namespace InkaArt.Interface.Warehouse
         {
             ProductWarehouseController control = new ProductWarehouseController();
             RawMaterialWarehouseController controlRm = new RawMaterialWarehouseController();
+            ProductionMovementMovementController controlM = new ProductionMovementMovementController();
 
             DataTable pwhList = control.getData();
             DataTable rmwhList = controlRm.getData();
@@ -135,7 +136,8 @@ namespace InkaArt.Interface.Warehouse
                     {
                         encontrado = 1;
                         string item_id = combo_item.SelectedValue.ToString();
-                        if (rmwhList.Rows[i]["idRawMaterial"].ToString() == item_id)
+                        if (rmwhList.Rows[i]["idRawMaterial"].ToString() == item_id &&
+                            rmwhList.Rows[i]["state"].ToString() == "Activo")
                         {
                             encontrado = 1;
                             int currentStock = 0;
@@ -148,41 +150,50 @@ namespace InkaArt.Interface.Warehouse
                             if (int.TryParse(textBox6.Text, out aIngresar))
                             {
                                 aIngresar = int.Parse(textBox6.Text);
-                                int quantity = maxStock - currentStock-aIngresar;
+                                int quantity = maxStock- currentStock -aIngresar;
                                 if (quantity > 0)
                                 {
                                     encontrado = 1;
                                     //update d la tabla
-                                    controlRm.updateStock(warehouse_id, item_id,currentStock+ aIngresar, currentLogical+ aIngresar);
-                                    MessageBox.Show("Se guardaron los cambios.");
+                                    try
+                                    {
+                                        controlRm.updateStock(warehouse_id, item_id, currentStock + aIngresar, currentLogical + aIngresar);
+                                        controlM.insertBrokenFindMovement(2, warehouse_id, 7, DateTime.Now.ToShortDateString(), item_id, 0, aIngresar);
+                                    }
+                                    catch (Exception m)
+                                    {
+                                        Console.WriteLine("{0} error", m);
+                                    }
+                                    MessageBox.Show(this, "Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
                                 }
                                 else
                                     encontrado = 3;//no hay espacio en almacen
 
                             }else
-                                MessageBox.Show("Ingrese una cantidad valida encontrada.");
+                                MessageBox.Show(this, "Ingrese una cantidad válida encontrada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
                     }
                         
                 }
                 if(encontrado ==0)
-                    MessageBox.Show("El almacen no puede recibir esta materia prima.");
-                if(encontrado ==3)
-                    MessageBox.Show("No hay espacio suficiente para guardar.");
+                    MessageBox.Show(this, "El almacén no puede recibir esta materia prima, por favor seleccione otro almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (encontrado ==3)
+                    MessageBox.Show(this, "No hay espacio suficiente para guardar esta materia prima, por favor seleccione otro almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else //aqui
                 if(combo_type.SelectedIndex == 1)//producto
             {
                 int encontrado = 0;
-                for (int i = 0; i < rmwhList.Rows.Count; i++)
+                for (int i = 0; i < pwhList.Rows.Count; i++)
                 {
                     if (pwhList.Rows[i]["idWarehouse"].ToString() == warehouse_id)
                     {
                         encontrado = 1;
                         string item_id = combo_item.SelectedValue.ToString();
-                        if (pwhList.Rows[i]["idProduct"].ToString() == item_id)
+                        if (pwhList.Rows[i]["idProduct"].ToString() == item_id &&
+                            pwhList.Rows[i]["state"].ToString() == "Activo")
                         {
                             encontrado = 1;
                             int currentStock = 0;
@@ -195,30 +206,37 @@ namespace InkaArt.Interface.Warehouse
                             if (int.TryParse(textBox6.Text, out aIngresar))
                             {
                                 aIngresar = int.Parse(textBox6.Text);
-                                int quantity = maxStock - currentStock - aIngresar;
+                                int quantity = maxStock-currentStock - aIngresar;
                                 if (quantity > 0)
                                 {
                                     encontrado = 1;
                                     //update d la tabla
-                                    control.updateStock(warehouse_id, item_id, currentStock + aIngresar, currentLogical + aIngresar);
-                                    MessageBox.Show("Se guardaron los cambios.");
+                                    try
+                                    {
+                                        control.updateStock(warehouse_id, item_id, currentStock + aIngresar, currentLogical + aIngresar);
+                                        controlM.insertBrokenFindMovement(2, warehouse_id, 7, DateTime.Now.ToShortDateString(), item_id, 1, aIngresar);
+                                    }
+                                    catch (Exception m)
+                                    {
+                                        Console.WriteLine("{0} error", m);
+                                    }
+                                    MessageBox.Show(this, "Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     break;
                                 }
                                 else
                                     encontrado = 3;//no hay espacio en almacen
-
                             }
                             else
-                                MessageBox.Show("Ingrese una cantidad valida encontrada.");
+                                MessageBox.Show(this, "Ingrese una cantidad válida encontrada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
                     }
 
                 }
                 if (encontrado == 0)
-                    MessageBox.Show("El almacen no puede recibir este producto.");
+                    MessageBox.Show(this, "El almacén no puede recibir este producto, por favor seleccione otro almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (encontrado == 3)
-                    MessageBox.Show("No hay espacio suficiente para guardar.");
+                    MessageBox.Show(this, "No hay espacio suficiente para guardar este producto, por favor seleccione otro almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 

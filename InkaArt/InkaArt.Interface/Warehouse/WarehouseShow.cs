@@ -142,7 +142,7 @@ namespace InkaArt.Interface.Warehouse
                 int response = warehouseController.updateWarehouse(warehouseId.ToString(), textBox_name.Text, textBox_description.Text, textBox_address.Text);
                 if (response >= 0)
                 {
-                    MessageBox.Show(this, "El almacén ha sido actualizado correctamente.", "Editar almacén", MessageBoxButtons.OK);
+                    MessageBox.Show(this, "El almacén ha sido actualizado correctamente.", "Editar almacén", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
                     Close();
                 }
@@ -173,40 +173,62 @@ namespace InkaArt.Interface.Warehouse
 
             string name = comboBox_RM.SelectedItem.ToString();
             string idRM = "";
-            for (int i = 0; i < rmList.Rows.Count; i++)
-            {
-                if (string.Compare(rmList.Rows[i]["name"].ToString(), name) == 0)
-                {
-                    idRM = rmList.Rows[i]["id_raw_material"].ToString();
-                    break;
-                }
-            }
-            int min, max;
-            min = max = 0;
-            if (int.TryParse(numericUpDown1.Value.ToString(),out min) && int.TryParse(numericUpDown2.Value.ToString(),out max))
-            {
-                min = int.Parse(numericUpDown1.Value.ToString());
-                max = int.Parse(numericUpDown2.Value.ToString());
+            //validar que no esté en la lista
+            int valido = 0;
+            for (int i = 0; i < dataGridView_RawMaterial.Rows.Count; i++)
+                if (dataGridView_RawMaterial.Rows[i].Cells[1].Value.ToString() == name)
+                    valido = 1;
 
-                if (min != 0 && max != 0)
+            if (valido == 0)
+            {
+
+                for (int i = 0; i < rmList.Rows.Count; i++)
                 {
-                    if (max > min)
+                    if (string.Compare(rmList.Rows[i]["name"].ToString(), name) == 0)
                     {
-                        control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
-                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        fillGridRawMaterial();
-                    }else
-                        MessageBox.Show("El valor máximo debe ser mayor al mínimo, por favor ingrese un nuevo máximo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        idRM = rmList.Rows[i]["id_raw_material"].ToString();
+                        break;
+                    }
+                }
+                int min, max;
+                min = max = 0;
+                if (int.TryParse(numericUpDown1.Value.ToString(), out min) && int.TryParse(numericUpDown2.Value.ToString(), out max))
+                {
+                    min = int.Parse(numericUpDown1.Value.ToString());
+                    max = int.Parse(numericUpDown2.Value.ToString());
+
+                    if (min >= 0 && max != 0)
+                    {
+                        if (max > min)
+                        {
+                            try
+                            {
+                                control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
+                                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
+                            fillGridRawMaterial();
+                        }
+                        else
+                            MessageBox.Show("El valor máximo debe ser mayor al mínimo, por favor ingrese un nuevo máximo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                    else
+                        MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
                 else
-                    MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    MessageBox.Show("El valor no es un número entero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
             else
-            {
-                MessageBox.Show("El valor no es un número entero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                MessageBox.Show("La materia prima ya existe en el almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void buttonAdd_Product_Click(object sender, EventArgs e)
@@ -219,42 +241,63 @@ namespace InkaArt.Interface.Warehouse
 
             string name = comboBox_Producto.SelectedItem.ToString();
             string idP = "";
+            //validar que no esté en la lista
+            int valido = 0;
+            for (int i = 0; i < dataGridView_Product.Rows.Count; i++)
+                if (dataGridView_Product.Rows[i].Cells[1].Value.ToString() == name)
+                    valido = 1;
 
-            for (int i = 0; i < pList.Rows.Count; i++)
+
+            if (valido == 0)
             {
-                if (string.Compare(pList.Rows[i]["name"].ToString(), name) == 0)
+                for (int i = 0; i < pList.Rows.Count; i++)
                 {
-                    idP= pList.Rows[i]["idProduct"].ToString();
-                    break;
-                }
-            }
-            int min, max;
-            min = max = 0;
-            if (int.TryParse(numericUpDown3.Value.ToString(), out min) && int.TryParse(numericUpDown4.Value.ToString(), out max))
-            {
-
-                min = int.Parse(numericUpDown1.Value.ToString());
-                max = int.Parse(numericUpDown2.Value.ToString());
-
-                if (min != 0 && max != 0)
-                {
-                    if (max > min)
+                    if (string.Compare(pList.Rows[i]["name"].ToString(), name) == 0)
                     {
-                        control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
-                        MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        fillGridProduct();
-                    }else
-                        MessageBox.Show("El valor máximo debe ser mayor al mínimo, por favor ingrese un nuevo máximo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        idP = pList.Rows[i]["idProduct"].ToString();
+                        break;
+                    }
+                }
+                int min, max;
+                min = max = 0;
+                if (int.TryParse(numericUpDown3.Value.ToString(), out min) && int.TryParse(numericUpDown4.Value.ToString(), out max))
+                {
+
+                    min = int.Parse(numericUpDown4.Value.ToString());
+                    max = int.Parse(numericUpDown3.Value.ToString());
+
+                    if (min >= 0 && max != 0)
+                    {
+                        if (max > min)
+                        {
+                            try
+                            {
+                                control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
+                                MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
+                            fillGridProduct();
+                        }
+                        else
+                            MessageBox.Show("El valor máximo debe ser mayor al mínimo, por favor ingrese un nuevo máximo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                        MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
                 else
-                    MessageBox.Show("El numero debe ser mayor a cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    MessageBox.Show("El valor no es un número entero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
 
             }
             else
-            {
-                MessageBox.Show("El valor no es un número entero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El producto ya existe en el almacén.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }
         }
 
         private void buttonDelete_RawMaterial_Click(object sender, EventArgs e)
@@ -270,7 +313,14 @@ namespace InkaArt.Interface.Warehouse
                 {
                     string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
                     //Debug.WriteLine(id);
-                    rwWarehouseController.deleteData(id);
+                    try
+                    {
+                        rwWarehouseController.deleteData(id);
+                    }
+                    catch (Exception m)
+                    {
+                        Console.WriteLine("{0} error", m);
+                    }
                 }
             }
             //updateDataGrid();
@@ -296,12 +346,126 @@ namespace InkaArt.Interface.Warehouse
                 {
                     string id = dataGridView_Product.Rows[i].Cells[7].Value.ToString();
                     //Debug.WriteLine(id);
-                    pWarehouseController.deleteData(id);
+                    try
+                    {
+                        pWarehouseController.deleteData(id);
+                    }
+                    catch (Exception m)
+                    {
+                        Console.WriteLine("{0} error", m);
+                    }
                 }
             }
             //updateDataGrid();
             MessageBox.Show("Productos eliminados", "Eliminar Producto.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             fillGridProduct();
+        }
+
+        private void button_updateProduct_Click(object sender, EventArgs e)
+        {
+            ProductWarehouseController pWarehouseController = new ProductWarehouseController();
+
+            int registros = dataGridView_Product.Rows.Count;
+            for (int i = 0; i < registros; i++)
+            {
+                string ide = dataGridView_Product.Rows[i].Cells[6].Value.ToString();
+                string name = dataGridView_Product.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(dataGridView_Product.Rows[i].Cells[6].Value) == true)
+                {
+                    int min, max;
+                    min = max = 0;
+                    //validacion que los valores max y min sean numeros
+                    if (int.TryParse(dataGridView_Product.Rows[i].Cells[4].Value.ToString(), out min) &&
+                        int.TryParse(dataGridView_Product.Rows[i].Cells[5].Value.ToString(), out max))
+                    {
+                        min = int.Parse(dataGridView_Product.Rows[i].Cells[4].Value.ToString());
+                        max = int.Parse(dataGridView_Product.Rows[i].Cells[5].Value.ToString());
+
+                        if (min >=0 && max != 0)
+                        {
+                            if (max > min)
+                            {
+
+                                string id = dataGridView_Product.Rows[i].Cells[7].Value.ToString();
+                                //update de valores maximos y minimos
+                                try
+                                {
+                                    pWarehouseController.updateMinMax(id, min, max);
+                                    MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine("{0} error", m);
+                                }
+                                //fillGridProduct();
+                            }
+                            else
+                                MessageBox.Show("El valor máximo no puede ser menor al minimo, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else
+                            MessageBox.Show("Los valores maximo y minimo no pueden ser cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                    else
+                        MessageBox.Show("Los valores maximos o minimos a ingresar no son válidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            fillGridProduct();
+        }
+
+        private void button_updateRm_Click(object sender, EventArgs e)
+        {
+            RawMaterialWarehouseController rmWarehouseController = new RawMaterialWarehouseController();
+
+            int registros = dataGridView_RawMaterial.Rows.Count;
+            for (int i = 0; i < registros; i++)
+            {
+                string ide = dataGridView_RawMaterial.Rows[i].Cells[6].Value.ToString();
+                string name = dataGridView_RawMaterial.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(dataGridView_RawMaterial.Rows[i].Cells[6].Value) == true)
+                {
+                    int min, max;
+                    min = max = 0;
+                    //validacion que los valores max y min sean numeros
+                    if (int.TryParse(dataGridView_RawMaterial.Rows[i].Cells[4].Value.ToString(), out min) &&
+                        int.TryParse(dataGridView_RawMaterial.Rows[i].Cells[5].Value.ToString(), out max))
+                    {
+                        min = int.Parse(dataGridView_RawMaterial.Rows[i].Cells[4].Value.ToString());
+                        max = int.Parse(dataGridView_RawMaterial.Rows[i].Cells[5].Value.ToString());
+
+                        if (min >= 0 && max != 0)
+                        {
+                            if (max > min)
+                            {
+
+                                string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
+                                //update de valores maximos y minimos
+                                try
+                                {
+                                    rmWarehouseController.updateMinMax(id, min, max);
+                                    MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                catch (Exception m)
+                                {
+                                    Console.WriteLine("{0} error", m);
+                                }
+                                fillGridRawMaterial();
+                            }
+                            else
+                                MessageBox.Show("El valor máximo no puede ser menor al minimo, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else
+                            MessageBox.Show("Los valores maximo y minimo no pueden ser cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                    else
+                        MessageBox.Show("Los valores maximos o minimos a ingresar no son válidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
         }
     }
 }

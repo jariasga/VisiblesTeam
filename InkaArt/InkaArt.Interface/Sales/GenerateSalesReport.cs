@@ -20,6 +20,11 @@ namespace InkaArt.Interface.Sales
             DataTable prodList = controlProd.getData();
             for (int i = 0; i < prodList.Rows.Count; i++)
                 comboBox_products.Items.Add(prodList.Rows[i]["name"]);
+
+            this.dateTimePicker_fechaIni.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fechaIni.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker_fechaFin.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fechaFin.CustomFormat = "dd/MM/yyyy";
         }
 
         private void button_generateSalesResport_Click(object sender, EventArgs e)
@@ -30,7 +35,6 @@ namespace InkaArt.Interface.Sales
                 SalesReport sales_form = new SalesReport(dateTimePicker_fechaIni.Value.ToString("M/d/yyyy"), dateTimePicker_fechaFin.Value.ToString("M/d/yyyy"), comboBox_products.Text);
                 sales_form.Show();
             }
-
         }
 
         private int validateData()

@@ -134,6 +134,7 @@ namespace InkaArt.Interface.Sales
             if (result == DialogResult.OK)
             {
                 isClientSelected = true;
+                label_stock.Visible = label_stockLabel.Visible = true;
                 label3.Visible = combo_doctype.Visible = true;
                 currentClientId = form.SelectedClientId;
                 textbox_doc.Text = form.SelectedClientDoc.ToString();
@@ -151,20 +152,14 @@ namespace InkaArt.Interface.Sales
                     combo_doctype.SelectedIndex = 1;
                 }
                 combo_doctype.Enabled = false;
-                if (currentClientNat == 0)
+                foreach (DataRow row in productList.Rows)
                 {
-                    label_stock.Visible = label_stockLabel.Visible = true;
-                    foreach (DataRow row in productList.Rows)
+                    if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                     {
-                        if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
-                        {
-                            label_stock.Text = row["logicalStock"].ToString();
-                        }
+                        if (int.Parse(row["logicalStock"].ToString()) < 0) label_stock.Text = "0";
+                        else label_stock.Text = row["logicalStock"].ToString();
                     }
-                    orderState = "despachado";
                 }
-                else
-                    label_stock.Visible = label_stockLabel.Visible = false;
             }
         }
 
@@ -225,11 +220,13 @@ namespace InkaArt.Interface.Sales
 
         private void combo_product_SelectedIndexChanged(object sender, EventArgs e)
         {
+            productList = orderController.GetProducts();
             foreach (DataRow row in productList.Rows)
             {
                 if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                 {
-                    label_stock.Text = row["logicalStock"].ToString();
+                    if (int.Parse(row["logicalStock"].ToString()) < 0) label_stock.Text = "0";
+                    else label_stock.Text = row["logicalStock"].ToString();
                     DataTable recipes = orderController.getProductRecipe(row["idProduct"]);
                     populateCombobox(combo_quality, recipes, "version", "idRecipe");
                 }
@@ -237,6 +234,11 @@ namespace InkaArt.Interface.Sales
         }
 
         private void date_delivery_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grid_orderline_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
