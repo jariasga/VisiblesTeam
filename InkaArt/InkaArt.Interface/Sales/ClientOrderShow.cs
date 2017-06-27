@@ -75,7 +75,7 @@ namespace InkaArt.Interface.Sales
                 if (totalFinished > 0) button_fac.Visible = true;
                 else button_fac.Visible = false;
                 if (totalInvoiced > 0) button_seedoc.Visible = true;
-                else button_seedoc.Visible = false;
+                else button_seedoc.Visible = true;
                 textbox_amount_todoc.Text = orderController.getPolishedAmount(toFacAmount);
                 textbox_igv_todoc.Text = orderController.getPolishedIGV(toFacAmount);
                 textbox_total_todoc.Text = orderController.getPolishedTotal(toFacAmount);
