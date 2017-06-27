@@ -1,6 +1,8 @@
 ﻿using InkaArt.Data.Purchases;
 using Npgsql;
 using System.Data;
+using System.IO;
+using System;
 
 namespace InkaArt.Business.Purchases
 {
@@ -60,6 +62,31 @@ namespace InkaArt.Business.Purchases
             table.Rows.Add(row);
 
             return rawMaterial_supplier.insertData(data, adap, "RawMaterial-Supplier");
+        }
+        public int massiveUpload(string filename)
+        {
+            table = getData();     // obtenemos la tabla de productos
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    try
+                    {
+                        //string idMat,string idSup,string price,string status)
+                        insertRM_Sup(values[0], values[1], values[2], "Activo");
+                    }
+                    catch (Exception e)
+                    {
+                        return 1;
+                    }
+
+                }
+            }
+            return 0;
         }
     }
 }
