@@ -60,7 +60,15 @@ namespace InkaArt.Interface.Security
             dialog.Title = "Open Users File";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK)
-                user.massiveUpload(dialog.FileName, worker);
+            {
+                if (user.massiveUpload(dialog.FileName, worker))
+                {
+                    MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+                    return;
+                }
+                else MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+                
             showTable();
         }
 
