@@ -95,8 +95,9 @@ namespace InkaArt.Interface.Warehouse
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Users File";
             dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK)
-                movimientos.massiveUpload(dialog.FileName);
+            if (dialog.ShowDialog() == DialogResult.OK) { 
+                if (movimientos.massiveUpload(dialog.FileName) != 0) return;
+            }
         }
 
         /*private void button_bulk_upload_Click(object sender, EventArgs e)
