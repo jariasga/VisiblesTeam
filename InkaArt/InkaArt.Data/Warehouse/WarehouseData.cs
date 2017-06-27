@@ -44,11 +44,12 @@ namespace InkaArt.Data.Warehouse
             return rowsAffected;
         }
 
-        public DataTable GetWarehouses(int id = -1, string name = "", string description = "", string address = "", string state = "")
+        public DataTable GetWarehouses(int id = -1, string name = "", string description = "", string address = "", string status = "")
         {
             adap = warehouseAdapter();
             
             byId(adap, id);
+            byStatus(adap, status);
             byName(adap, name);
             byDescription(adap, description);
             byAddress(adap, address);
@@ -101,6 +102,19 @@ namespace InkaArt.Data.Warehouse
             adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
             adap.SelectCommand.Parameters[numParams].SourceColumn = "address";
             adap.SelectCommand.Parameters[numParams].NpgsqlValue = address;
+        }
+
+        private void byStatus(NpgsqlDataAdapter adap, string status)
+        {
+            if (status.Equals("")) status = "Activo";
+            int numParams = adap.SelectCommand.Parameters.Count();
+            if (numParams == 0) adap.SelectCommand.CommandText += " WHERE ";
+            else adap.SelectCommand.CommandText += " AND ";
+            adap.SelectCommand.CommandText += "state LIKE :status";
+            adap.SelectCommand.Parameters.Add(new NpgsqlParameter("status", DbType.AnsiStringFixedLength));
+            adap.SelectCommand.Parameters[numParams].Direction = ParameterDirection.Input;
+            adap.SelectCommand.Parameters[numParams].SourceColumn = "status";
+            adap.SelectCommand.Parameters[numParams].NpgsqlValue = status;
         }
 
         public void byId(NpgsqlDataAdapter adap, int id)
