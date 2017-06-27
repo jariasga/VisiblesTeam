@@ -138,6 +138,7 @@ namespace InkaArt.Interface.Purchases
                     try
                     {
                         control.updateData(id_order,prov,"Eliminado", creation_date,delivery_date,total);
+                        cambiarTodasLasLineasAEliminado(id_order);
                     }
                     catch (Exception)
                     {
@@ -149,7 +150,36 @@ namespace InkaArt.Interface.Purchases
             }
             desarrolloBusqueda();
         }
+        private void cambiarTodasLasLineasAEliminado(string id_order)
+        {
+            DataRow[] rows;
+            PurchaseOrderDetailController control_detailOrder = new PurchaseOrderDetailController();
+            DataTable tablaAuxiliar = control_detailOrder.getData();
+            rows = tablaAuxiliar.Select("id_order = " + id_order);
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("id_order");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            for (int i = 0; i < numero; i++)
+            {
+                int id_detailAux = int.Parse(tablaAuxiliar.Rows[i]["id_detail"].ToString());
+                int cantidad = int.Parse(tablaAuxiliar.Rows[i]["quantity"].ToString());
 
+                double subtotal = Math.Round(double.Parse(tablaAuxiliar.Rows[i]["amount"].ToString()), 2);
+                double igv = Math.Round(double.Parse(tablaAuxiliar.Rows[i]["igv"].ToString()), 2);
+                string status = tablaAuxiliar.Rows[i]["status"].ToString();
+                if (string.Compare(status, "Eliminado") == 0) continue;
+                try
+                {
+                    control_detailOrder.updateData(id_detailAux, cantidad, subtotal, igv, "Eliminado");
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+            }
+        }
         private void editPurchaseOrder(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow currentPurchaseOrder = dataGridView_purchaseOrder.CurrentRow;
