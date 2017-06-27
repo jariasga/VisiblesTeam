@@ -55,8 +55,6 @@ namespace InkaArt.Interface.Production
             for (int i = 0; i < indexes.Count(); i++)
                 LogHandler.WriteLine("INDICE {0}: {1}", i + 1, indexes[i].ToString());
 
-            simulation.save();
-
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
                 LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
@@ -139,7 +137,6 @@ namespace InkaArt.Interface.Production
             if (e.Cancelled == false)
             {
                 MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                simulations.Add(simulation);
                 this.DialogResult = DialogResult.OK;
             }
             else
