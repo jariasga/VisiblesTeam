@@ -615,7 +615,7 @@ namespace InkaArt.Interface.Purchases
         
         private void generarOrdenDoc(object sender, EventArgs e)
         {
-            if(mode==2 && string.Compare(comboBox_status.Text, "Enviado") == 0)
+            if(mode==2 && string.Compare(comboBox_status.Text, "Eliminado") != 0)
             {
                 FileStream fs = new FileStream("OrdenPrueba.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
                 Document document = new Document(PageSize.A4);
