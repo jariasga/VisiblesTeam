@@ -111,7 +111,7 @@
             this.buttonMassiveUpload.Name = "buttonMassiveUpload";
             this.buttonMassiveUpload.Size = new System.Drawing.Size(37, 27);
             this.buttonMassiveUpload.TabIndex = 16;
-            this.buttonMassiveUpload.Text = "+";
+            this.buttonMassiveUpload.Text = "⬆";
             this.buttonMassiveUpload.UseVisualStyleBackColor = false;
             this.buttonMassiveUpload.Click += new System.EventHandler(this.buttonMassiveUpload_Click);
             // 

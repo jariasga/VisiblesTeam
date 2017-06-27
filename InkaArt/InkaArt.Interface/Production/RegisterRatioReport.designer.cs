@@ -30,6 +30,14 @@
         {
             this.button_save = new System.Windows.Forms.Button();
             this.grid_reports = new System.Windows.Forms.DataGridView();
+            this.grid_column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
             this.label_date = new System.Windows.Forms.Label();
@@ -52,14 +60,6 @@
             this.button_load = new System.Windows.Forms.Button();
             this.open_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.grid_column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_column_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_column_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_column_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +99,60 @@
             this.grid_reports.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_reports_EditingControlShowing);
             this.grid_reports.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grid_reports_RowsAdded);
             // 
+            // grid_column_id
+            // 
+            this.grid_column_id.HeaderText = "ID";
+            this.grid_column_id.Name = "grid_column_id";
+            this.grid_column_id.ReadOnly = true;
+            this.grid_column_id.Visible = false;
+            this.grid_column_id.Width = 50;
+            // 
+            // grid_column_worker
+            // 
+            this.grid_column_worker.HeaderText = "Trabajador";
+            this.grid_column_worker.Name = "grid_column_worker";
+            this.grid_column_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.grid_column_worker.Width = 180;
+            // 
+            // grid_column_job
+            // 
+            this.grid_column_job.HeaderText = "Puesto de trabajo";
+            this.grid_column_job.Name = "grid_column_job";
+            this.grid_column_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_job.Width = 180;
+            // 
+            // grid_column_recipe
+            // 
+            this.grid_column_recipe.HeaderText = "Receta";
+            this.grid_column_recipe.Name = "grid_column_recipe";
+            this.grid_column_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.grid_column_recipe.Width = 150;
+            // 
+            // grid_column_start
+            // 
+            this.grid_column_start.HeaderText = "Hora inicio";
+            this.grid_column_start.Name = "grid_column_start";
+            this.grid_column_start.Width = 110;
+            // 
+            // grid_column_end
+            // 
+            this.grid_column_end.HeaderText = "Hora fin";
+            this.grid_column_end.Name = "grid_column_end";
+            // 
+            // grid_column_broken
+            // 
+            this.grid_column_broken.HeaderText = "Rotos";
+            this.grid_column_broken.Name = "grid_column_broken";
+            this.grid_column_broken.Width = 80;
+            // 
+            // grid_column_produced
+            // 
+            this.grid_column_produced.HeaderText = "Terminados";
+            this.grid_column_produced.Name = "grid_column_produced";
+            this.grid_column_produced.Width = 95;
+            // 
             // button_delete
             // 
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
@@ -131,9 +185,9 @@
             this.label_date.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_date.Location = new System.Drawing.Point(22, 17);
             this.label_date.Name = "label_date";
-            this.label_date.Size = new System.Drawing.Size(197, 18);
+            this.label_date.Size = new System.Drawing.Size(133, 18);
             this.label_date.TabIndex = 25;
-            this.label_date.Text = "Fecha del informe de turno:";
+            this.label_date.Text = "Fecha de vitácora";
             // 
             // label_worker
             // 
@@ -142,9 +196,9 @@
             this.label_worker.Location = new System.Drawing.Point(48, 29);
             this.label_worker.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_worker.Name = "label_worker";
-            this.label_worker.Size = new System.Drawing.Size(83, 18);
+            this.label_worker.Size = new System.Drawing.Size(57, 18);
             this.label_worker.TabIndex = 31;
-            this.label_worker.Text = "Trabajador";
+            this.label_worker.Text = "Obrero";
             // 
             // combobox_worker
             // 
@@ -162,9 +216,9 @@
             this.label_job.Location = new System.Drawing.Point(48, 90);
             this.label_job.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_job.Name = "label_job";
-            this.label_job.Size = new System.Drawing.Size(131, 18);
+            this.label_job.Size = new System.Drawing.Size(143, 18);
             this.label_job.TabIndex = 35;
-            this.label_job.Text = "Puesto de trabajo";
+            this.label_job.Text = "Proceso y producto";
             // 
             // combobox_job
             // 
@@ -300,9 +354,9 @@
             // date_picker
             // 
             this.date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_picker.Location = new System.Drawing.Point(243, 12);
+            this.date_picker.Location = new System.Drawing.Point(198, 12);
             this.date_picker.Name = "date_picker";
-            this.date_picker.Size = new System.Drawing.Size(171, 26);
+            this.date_picker.Size = new System.Drawing.Size(216, 26);
             this.date_picker.TabIndex = 5;
             this.date_picker.Value = new System.DateTime(2017, 6, 4, 18, 31, 53, 0);
             this.date_picker.ValueChanged += new System.EventHandler(this.date_picker_ValueChanged);
@@ -316,7 +370,7 @@
             this.button_load.Name = "button_load";
             this.button_load.Size = new System.Drawing.Size(185, 42);
             this.button_load.TabIndex = 66;
-            this.button_load.Text = "Cargar Masiva";
+            this.button_load.Text = "⬆ Cargar Masiva";
             this.button_load.UseVisualStyleBackColor = false;
             this.button_load.Click += new System.EventHandler(this.button_load_Click);
             // 
@@ -331,63 +385,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(22, 224);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 18);
+            this.label1.Size = new System.Drawing.Size(118, 18);
             this.label1.TabIndex = 67;
-            this.label1.Text = "Vitácora laboral:";
-            // 
-            // grid_column_id
-            // 
-            this.grid_column_id.HeaderText = "ID";
-            this.grid_column_id.Name = "grid_column_id";
-            this.grid_column_id.ReadOnly = true;
-            this.grid_column_id.Visible = false;
-            this.grid_column_id.Width = 50;
-            // 
-            // grid_column_worker
-            // 
-            this.grid_column_worker.HeaderText = "Trabajador";
-            this.grid_column_worker.Name = "grid_column_worker";
-            this.grid_column_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grid_column_worker.Width = 180;
-            // 
-            // grid_column_job
-            // 
-            this.grid_column_job.HeaderText = "Puesto de trabajo";
-            this.grid_column_job.Name = "grid_column_job";
-            this.grid_column_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_job.Width = 180;
-            // 
-            // grid_column_recipe
-            // 
-            this.grid_column_recipe.HeaderText = "Receta";
-            this.grid_column_recipe.Name = "grid_column_recipe";
-            this.grid_column_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grid_column_recipe.Width = 150;
-            // 
-            // grid_column_start
-            // 
-            this.grid_column_start.HeaderText = "Hora inicio";
-            this.grid_column_start.Name = "grid_column_start";
-            this.grid_column_start.Width = 110;
-            // 
-            // grid_column_end
-            // 
-            this.grid_column_end.HeaderText = "Hora fin";
-            this.grid_column_end.Name = "grid_column_end";
-            // 
-            // grid_column_broken
-            // 
-            this.grid_column_broken.HeaderText = "Rotos";
-            this.grid_column_broken.Name = "grid_column_broken";
-            this.grid_column_broken.Width = 80;
-            // 
-            // grid_column_produced
-            // 
-            this.grid_column_produced.HeaderText = "Terminados";
-            this.grid_column_produced.Name = "grid_column_produced";
-            this.grid_column_produced.Width = 95;
+            this.label1.Text = "Vitácora laboral";
             // 
             // RegisterRatioReport
             // 

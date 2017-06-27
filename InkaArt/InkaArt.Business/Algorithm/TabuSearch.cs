@@ -264,6 +264,8 @@ namespace InkaArt.Business.Algorithm
 
         public void bestSolutionToList()
         {
+            if (BestSolution.Count == 0)
+                BestSolution = initial_solution;
             foreach(Assignment day in BestSolution)
             {
                 day.AssignmentLinesList = day.toList(simulation);
