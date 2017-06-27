@@ -36,6 +36,10 @@ namespace InkaArt.Interface.Production
             workers.Load();
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "FullName";
+            this.dateTimePicker_ini.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_ini.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker_fin.Format = DateTimePickerFormat.Custom;
+            dateTimePicker_fin.CustomFormat = "dd/MM/yyyy";
         }
 
         private void button_generate_Click(object sender, EventArgs e)

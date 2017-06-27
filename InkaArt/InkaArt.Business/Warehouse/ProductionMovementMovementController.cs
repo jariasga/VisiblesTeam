@@ -70,5 +70,23 @@ namespace InkaArt.Business.Warehouse
             productionMovementMovementData.executeQuery(query);
 
         }
+
+        public void insertMovDev(int idDoc, int movement_type, int idWare, int id_reason, int idDocType,string idItem,int idItemType,int quantity )
+        {
+            NpgsqlDataAdapter adapt;
+            DataSet data;
+            data = new DataSet();
+            DataTable table;
+            string date = DateTime.Now.ToShortDateString();
+
+            adapt = productionMovementMovementData.ProductionMovementMovementDataAdapter();
+            data.Clear();
+            data = productionMovementMovementData.getData(adapt, "Movement");
+
+            table = data.Tables["Movement"];
+            productionMovementMovementData.execute(string.Format(
+                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"dateIn\", \"status\", \"idDocumentType\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, to_date('{4}', 'DD/MM/YYYY'), {5}, '{6}', '{7}', {8}, {9});", idDoc, movement_type, idWare, id_reason, date,1,idDocType, idItem, idItemType, quantity));
+
+        }
     }
 }

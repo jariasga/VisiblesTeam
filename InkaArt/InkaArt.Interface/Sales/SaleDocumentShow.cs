@@ -50,6 +50,11 @@ namespace InkaArt.Interface.Sales
             }
         }
 
+        private void button_cancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private void button_see_Click(object sender, EventArgs e)
         {
             int index = grid_documents.CurrentCell.RowIndex;

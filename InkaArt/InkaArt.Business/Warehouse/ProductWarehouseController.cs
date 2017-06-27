@@ -108,8 +108,21 @@ namespace InkaArt.Business.Warehouse
             string fidStr = fisico.ToString();
             table = getData();
             updateQuery = "UPDATE inkaart.\"Product-Warehouse\" SET ";
-            updateQuery = updateQuery + "\"currentStock\"= " + logStr + ", ";
-            updateQuery = updateQuery + "\"virtualStock\" = " + fidStr;
+            updateQuery = updateQuery + "\"currentStock\"= " + fidStr + ", ";
+            updateQuery = updateQuery + "\"virtualStock\" = " + logStr;
+            updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idProduct\"= " + idRm + " AND state = 'Activo'" + " ;";
+            pWarehouse.execute(updateQuery);
+        }
+
+        public void updateOnlyPhStock(string idWh, string idRm, int fisico)
+        {
+            adapt = pWarehouse.pWarehouseAdapter();
+
+            string updateQuery;
+            string fidStr = fisico.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"Product-Warehouse\" SET ";
+            updateQuery = updateQuery + "\"currentStock\" = " + fidStr;
             updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idProduct\"= " + idRm + " AND state = 'Activo'" + " ;";
             pWarehouse.execute(updateQuery);
         }

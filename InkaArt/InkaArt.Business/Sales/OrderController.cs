@@ -23,8 +23,11 @@ namespace InkaArt.Business.Sales
             string clientDoc = getClientDoc(clientId.ToString());
             int selectedDoc = -1;
             if (orderType == 1) selectedDoc = 6;
-            if (clientDoc.Length == 11) selectedDoc = 2;
-            else selectedDoc = 1;
+            else
+            {
+                if (clientDoc.Length == 11) selectedDoc = 2;
+                else selectedDoc = 1;
+            }
             //////////////////////////
             float amount = 0;
             if (idProd.Length != 0 && quantity.Length != 0)
@@ -126,6 +129,16 @@ namespace InkaArt.Business.Sales
             return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
+        public void updateReturn(string idDoc)
+        {
+            DataTable table = GetOrders();
+
+            string updateQuery;
+            updateQuery = "UPDATE inkaart.\"Order\" SET ";
+            updateQuery = updateQuery + "\"orderStatus\" = 'facturado' ";
+            updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
+            orderData.execute(updateQuery);
+        }
         public int getClientID(int orderId)
         {
             return orderData.getClientID(orderId);

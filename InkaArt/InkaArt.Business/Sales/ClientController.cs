@@ -105,7 +105,7 @@ namespace InkaArt.Business.Sales
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    var values = line.Split(';');
+                    var values = line.Split(',');
                     string response = makeValidations(values[0].ToString(), values[2].ToString(), values[1].ToString(), values[1].ToString(), values[4].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[7].ToString(), values[8].ToString(), values[9].ToString());
                     if (response.Equals("OK"))
                     {
