@@ -111,6 +111,62 @@ namespace InkaArt.Business.Warehouse
             productionItemWarehouseMovementData.closeConnection();
         }
 
+        public int updateDataProduct(int idProd, int idWarehouse, int numMov, string typeMovement, string stateItem = "")
+        {
+            string query = "", updateQuery = "";
+            int nuevoStock = 0, actStock = 0, minStock = 0, maxStock = 0,virtStock=0;
+            NpgsqlDataReader dr;
+            query = "select \"currentStock\",\"minimunStock\", \"maximunStock\",\"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+            //Se obtiene el stock de la materia prima
+            
+            dr = productionItemMovementData.GetLoteData(query);
+            //Se descuenta a ese stock lo que se va a mover
+
+            dr.Read();
+            actStock = Convert.ToInt32(dr[0]);
+            minStock = Convert.ToInt32(dr[1]);
+            maxStock = Convert.ToInt32(dr[2]);
+            virtStock = Convert.ToInt32(dr[3]);
+
+
+            //Se actualiza el stock de la materia prima en el almacén
+            if (typeMovement == "Salida")
+            {
+                nuevoStock = actStock - numMov;
+            }
+            else //Si es entrada
+            {
+                nuevoStock = actStock + numMov;
+                virtStock = virtStock + numMov;
+            }
+            
+            if (nuevoStock > maxStock)
+            {
+                MessageBox.Show("No se puede tener más que el Stock Máximo, Stock Máximo: " + maxStock);
+                return -2;
+            }
+            if (nuevoStock < minStock)
+            {
+                MessageBox.Show("No se puede tener menos que el Stock Mínimo, Stock Mínimo: " + minStock);
+                return -2;
+            }
+            if (nuevoStock < 0)
+            {
+                MessageBox.Show("No se tiene suficiente materia en este almacén, Stock Actual: " + actStock);
+                return -2;
+            }
+
+            updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + nuevoStock + ", \"virtualStock\" = " + virtStock + " where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+
+            //productionItemWarehouseMovementData.updateDataExecute(updateQuery);
+
+            ProductionItemWarehouseMovementData aux = new ProductionItemWarehouseMovementData();
+
+            aux.updateDataExecute(updateQuery);
+
+            return 1;
+        }
+
         public int updateDataRawMaterialOut(int idProd, int idWarehouse, int numMov, string typeMovement, string stateItem = "")
         {
             string query = "", updateQuery="";
