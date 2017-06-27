@@ -154,7 +154,7 @@ namespace InkaArt.Interface.Warehouse
                             //productionItemWarehouseMovementController.updateOrder(idPedido);
 
                             arrIdProd[countArr] = idProd;
-                            arrIdProd[countArr] = cantMov;
+                            arrCantProd[countArr] = cantMov;
                             countArr++;
                             exito++;
                         }
