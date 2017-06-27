@@ -62,7 +62,9 @@ namespace InkaArt.Interface.Warehouse
             xlexcel.Visible = true;
             xlWorkBook = xlexcel.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
+            for (int j = 0; j < dataGrid_stocks.Columns.Count; ++j)
+                xlWorkSheet.Cells[1, j + 1] = dataGrid_stocks.Columns[j].HeaderText;
+            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[2, 1];
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
         }
