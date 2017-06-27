@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Interface.Production;
 
 namespace InkaArt.Interface.Sales
 {
@@ -15,6 +16,7 @@ namespace InkaArt.Interface.Sales
     {
         int orderId;
         OrderController orderController;
+        FinalProducts fp;
         DataTable orderLine;
         DataTable orderLineToFac;
         private double toFacAmount;
@@ -24,6 +26,7 @@ namespace InkaArt.Interface.Sales
             InitializeComponent();
             orderId = int.Parse(id);
             orderController = new OrderController();
+            fp = new FinalProducts();
             orderLine = new DataTable();
             orderLineToFac = new DataTable();
             toFacAmount = 0;
@@ -31,6 +34,7 @@ namespace InkaArt.Interface.Sales
 
         private void ClientOrderShow_Load(object sender, EventArgs e)
         {
+            fp.hallaStock();
             DataTable orderObject = orderController.GetOrders(orderId);
             populateFields(orderObject);
         }
@@ -65,6 +69,7 @@ namespace InkaArt.Interface.Sales
                     string productId = orderline["idProduct"].ToString();
                     string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId,row["idClient"].ToString());
                     string curStock = orderController.getCurrentStock(productId);
+                    if (int.Parse(curStock) < 0) curStock = "0";
                     totalFinished += int.Parse(curStock);
                     totalInvoiced += int.Parse(orderline["quantityInvoiced"].ToString());
                     if (int.Parse(orderline["quantityProduced"].ToString()) > 0) orderLineToFac.Rows.Add(orderline.ItemArray);
