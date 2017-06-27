@@ -13,7 +13,9 @@ namespace InkaArt.Interface.Sales
 {
     public partial class DevolutionShow : Form
     {
+        private static int ID_NCREDIT = 6;
         private int orderId;
+        private int clientId;
         OrderController orderController;
         public DevolutionShow(string id)
         {
@@ -26,6 +28,7 @@ namespace InkaArt.Interface.Sales
         {
             DataTable orderObject = orderController.GetOrders(orderId);
             populateFields(orderObject);
+            clientId = orderController.getClientID(orderId);
         }
 
         private void populateFields(DataTable orderObject)
@@ -41,6 +44,7 @@ namespace InkaArt.Interface.Sales
                 string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType = "Boleta";
                 textbox_doc.Text = clientDoc;
                 textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
+                textbox_reason.Text = row["reason"].ToString();
                 if (clientDoc.Length == 11) docType = "Factura";
                 combo_doc.Text = docType;
 
@@ -61,6 +65,24 @@ namespace InkaArt.Interface.Sales
             orderController.deleteOrders(order);
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void button_fac_Click(object sender, EventArgs e)
+        {
+            DataTable orderLines = orderController.getOrderLines(orderId.ToString());
+            int response = orderController.AddSaleDocument(ID_NCREDIT, textbox_devamount.Text, textbox_igv.Text, textbox_devtotal.Text, orderId, orderLines, clientId,1);
+            if (response >= 0)
+            {
+                MessageBox.Show(this, "Se ha generado la nota de crédito exitosamente", "Nota de crédito", MessageBoxButtons.OK);
+                DataTable orderObject = orderController.GetOrders(orderId, clientId);
+                populateFields(orderObject);
+            }
+        }
+
+        private void button_seedoc_Click(object sender, EventArgs e)
+        {
+            SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
+            form.Show();
         }
     }
 }

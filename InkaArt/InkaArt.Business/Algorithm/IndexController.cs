@@ -99,24 +99,22 @@ namespace InkaArt.Business.Algorithm
             double[,] average_time_mean = new double[jobs.NumberOfJobs, recipes.NumberOfRecipes];
             int[,] average_mean_count = new int[jobs.NumberOfJobs, recipes.NumberOfRecipes];
 
-            for (int i = 0; i < jobs.NumberOfJobs; i++)
+            for (int job = 0; job < jobs.NumberOfJobs; job++)
             {
-                for (int j = 0; j < recipes.NumberOfRecipes; j++)
+                for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
                 {
                     foreach (Index index in indexes)
                     {
-                        if (index.Job.ID == jobs[i].ID && index.Recipe.ID == recipes[j].ID)
+                        if (index.Job.ID == jobs[job].ID && index.Recipe.ID == recipes[recipe].ID)
                         {
-                            average_mean_count[i, j]++;
-                            average_breakage_mean[i, j] += index.AverageBreakage;
-                            average_time_mean[i, j] += index.AverageTime;
+                            average_mean_count[job, recipe]++;
+                            average_breakage_mean[job, recipe] += index.AverageBreakage;
+                            average_time_mean[job, recipe] += index.AverageTime;
                         }
                     }
 
-                    average_breakage_mean[i, j] = (average_mean_count[i, j] <= 0) ? 1 :
-                        average_breakage_mean[i, j] / average_mean_count[i, j];
-                    average_time_mean[i, j] = (average_mean_count[i, j] <= 0) ? 1 :
-                        average_time_mean[i, j] / average_mean_count[i, j];
+                    average_breakage_mean[job, recipe] = (average_mean_count[job, recipe] <= 0) ? 1 : average_breakage_mean[job, recipe] / average_mean_count[job, recipe];
+                    average_time_mean[job, recipe] = (average_mean_count[job, recipe] <= 0) ? 1 : average_time_mean[job, recipe] / average_mean_count[job, recipe];
                 }
             }
 

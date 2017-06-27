@@ -10,6 +10,7 @@ namespace InkaArt.Data.Algorithm
     {
         private int id_line_item;
         private Recipe recipe;
+        private DateTime date;
         private int quantity;
         private int produced;
 
@@ -22,6 +23,10 @@ namespace InkaArt.Data.Algorithm
             get { return recipe; }
             //set { recipe = value; }
         }
+        public DateTime Date
+        {
+            get { return date; }
+        }
         public int Quantity
         {
             get { return quantity; }
@@ -33,17 +38,10 @@ namespace InkaArt.Data.Algorithm
             set { produced = value; }
         }
 
-        public OrderLineItem(int id_line_item, Recipe recipe, int quantity)
+        public OrderLineItem(int id_line_item, DateTime date, Recipe recipe, int quantity, int produced)
         {
             this.id_line_item = id_line_item;
-            this.recipe = recipe;
-            this.quantity = quantity;
-            this.produced = 0;
-        }
-
-        public OrderLineItem(int id_line_item, Recipe recipe, int quantity, int produced)
-        {
-            this.id_line_item = id_line_item;
+            this.date = date;
             this.recipe = recipe;
             this.quantity = quantity;
             this.produced = produced;

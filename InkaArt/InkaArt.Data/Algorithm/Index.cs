@@ -21,7 +21,9 @@ namespace InkaArt.Data.Algorithm
 
         private double breakage_index;
         private double time_index;
+
         private double loss_index;
+        private double cost_value;
 
         public int ID
         {
@@ -64,6 +66,11 @@ namespace InkaArt.Data.Algorithm
             get { return loss_index; }
             set { time_index = value; }
         }
+        public double CostValue
+        {
+            get { return cost_value; }
+            set { cost_value = value; }
+        }
 
         public Index(int id_index, Worker worker, Job job, Recipe recipe, double average_breakage, double average_time)
         {
@@ -86,6 +93,7 @@ namespace InkaArt.Data.Algorithm
             this.breakage_index = old_index.breakage_index;
             this.time_index = old_index.time_index;
             this.loss_index = old_index.time_index;
+            this.cost_value = old_index.cost_value;
         }
 
         public static string Insert(Ratio ratio)
@@ -167,11 +175,13 @@ namespace InkaArt.Data.Algorithm
             this.breakage_index = this.average_breakage / average_breakage_mean;
             this.time_index = this.average_time / average_time_mean;
             this.loss_index = (this.breakage_index * breakage_weight + this.time_index * time_weight) / product_weight;
+            this.cost_value = this.loss_index;
         }
 
-        public double CostValue(double objective_function_value, int iteration)
+        public double NextCostValue(double objective_function_value, int iteration)
         {
-            return (this.loss_index - objective_function_value) / (iteration + 1);
+            this.cost_value = (this.loss_index - objective_function_value) / (iteration + 1);
+            return this.cost_value;
         }
 
         public override string ToString()
