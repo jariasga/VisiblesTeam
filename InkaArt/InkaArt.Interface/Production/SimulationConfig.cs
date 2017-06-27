@@ -34,13 +34,11 @@ namespace InkaArt.Interface.Production
             this.checkbox_workers.Checked = true;
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "FullName";
-            this.list_workers.Enabled = false;
 
             this.orders = orders;
             this.checkbox_orders.Checked = true;
             this.list_orders.DataSource = orders.List();
             this.list_orders.DisplayMember = "Description";
-            this.list_orders.Enabled = false;
 
             this.simulations = simulations;
             this.simulation = simulation;
@@ -157,12 +155,14 @@ namespace InkaArt.Interface.Production
         
         private void checkboxWorkersCheckedChanged(object sender, EventArgs e)
         {
-            list_workers.Enabled = !checkbox_workers.Checked;
+            for (int i = 0; i < list_workers.Items.Count; i++)
+                list_workers.SetItemChecked(i, checkbox_workers.Checked);            
         }
 
         private void checkboxOrdersCheckedChanged(object sender, EventArgs e)
         {
-            list_orders.Enabled = !checkbox_orders.Checked;
+            for (int i = 0; i < list_orders.Items.Count; i++)
+                list_orders.SetItemChecked(i, checkbox_orders.Checked);
         }
     }
 }
