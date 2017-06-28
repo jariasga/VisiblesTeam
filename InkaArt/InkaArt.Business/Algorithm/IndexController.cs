@@ -159,9 +159,9 @@ namespace InkaArt.Business.Algorithm
                             is_new_index = true;
                         }
 
+                        double breakage_mean = (average_mean_count[recipe_index, job_index] <= 0) ? 1 : average_breakage_mean[recipe_index, job_index];
                         double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
-                        index.CalculateIndexes(average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index],
-                            simulation.BreakageWeight, simulation.TimeWeight, product_weight);
+                        index.CalculateIndexes(breakage_mean, average_time_mean[recipe_index, job_index], simulation.BreakageWeight, simulation.TimeWeight, product_weight);
                         if (is_new_index) indexes.Add(index);
                     }
                 }

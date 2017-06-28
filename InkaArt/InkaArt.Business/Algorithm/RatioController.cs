@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
+using InkaArt.Business.Production;
+using System.Data;
 
 namespace InkaArt.Business.Algorithm
 {
