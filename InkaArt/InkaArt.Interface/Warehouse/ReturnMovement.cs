@@ -58,6 +58,55 @@ namespace InkaArt.Interface.Warehouse
             return enteroNuevo;
         }
 
+        private int hallaPorDevolver(string idProduct, int cantDev)
+        {
+            int retornar = cantDev;
+            StockDocumentController control = new StockDocumentController();
+            DataTable stockList = control.getData();
+
+            for(int i = 0; i < stockList.Rows.Count; i++)
+            {
+                if(stockList.Rows[i]["idDocument"].ToString() == textBox3.Text 
+                    && stockList.Rows[i]["documentType"].ToString() == "DEVOLUCION"
+                    && stockList.Rows[i]["product_id"].ToString()==idProduct
+                    && stockList.Rows[i]["product_type"].ToString() == "producto")
+                {
+                    retornar = int.Parse(stockList.Rows[i]["product_stock"].ToString());
+                    break;
+                }
+            }
+
+            return retornar;
+        }
+
+        private void updateInsertDevueltos(string idProduct, int cantADev, int cantDev)
+        {
+            StockDocumentController control = new StockDocumentController();
+            DataTable stockList = control.getData();
+
+            int encontrado = 0;
+            for (int i = 0; i < stockList.Rows.Count; i++)
+            {
+                if (stockList.Rows[i]["idDocument"].ToString() == textBox3.Text
+                    && stockList.Rows[i]["documentType"].ToString() == "DEVOLUCION"
+                    && stockList.Rows[i]["product_id"].ToString() == idProduct
+                    && stockList.Rows[i]["product_type"].ToString() == "producto")
+                {
+                    //update
+                    control.updateReturn(textBox3.Text, idProduct, cantDev - cantADev);
+                    encontrado = 1;
+                    break;
+                }
+            }
+            if(encontrado == 0)//insertar por primera vez
+            {
+                //insert
+                control.insertReturn(textBox3.Text, idProduct, cantDev - cantADev);
+                
+            }
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int numNota = 0;
@@ -88,6 +137,12 @@ namespace InkaArt.Interface.Warehouse
                 row.Cells[3].Value = datos[3];//Stock en almacén
                 row.Cells[4].Value = datos[4];//MinimunStock
                 row.Cells[5].Value = datos[5];//MaximunStock
+                row.Cells[6].Value = "";
+                //REVISAR
+                row.Cells[7].Value = hallaPorDevolver(datos[0].ToString(), int.Parse(datos[2].ToString()));
+                row.Cells[8].Value = false;   
+                //TODO
+                //verificacion de cells 7 si es 0 actualizar el estado de la devolucion
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
@@ -111,7 +166,9 @@ namespace InkaArt.Interface.Warehouse
             string nameProd = "";
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[7].Value);
+                bool s = Convert.ToBoolean(row.Cells[8].Value);
+                //TODO
+                //validar la cantidad a mover
 
                 if (s == true)
                 {
@@ -159,7 +216,19 @@ namespace InkaArt.Interface.Warehouse
                         }
 
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-                        exito = productionItemWarehouseMovementController.updateDataProduct(idProd, intIdWarehouse, cantMov, "Entrada", "OK");
+                        //exito = productionItemWarehouseMovementController.updateDataProduct(idProd, intIdWarehouse, cantMov, "Entrada", "OK");
+                        
+                        //mi forma de aumentar stock logico y fisico
+                        ProductWarehouseController controlpwh = new ProductWarehouseController();
+                        DataTable pwhList = controlpwh.getData();
+                        controlpwh.updateOnlyPhStock(intIdWarehouse.ToString(), idProd.ToString(), int.Parse(row.Cells[3].Value.ToString()) + cantMov);
+                        //update o insert en la tabla stockDocument
+                        updateInsertDevueltos(idProd.ToString(), cantMov, int.Parse(row.Cells[7].Value.ToString()));
+
+                        //DONE
+                        //añadir en la tabla movimientos
+                        ProductionMovementMovementController controlM = new ProductionMovementMovementController();
+                        controlM.insertMovDev(int.Parse(textBox3.Text), 2, intIdWarehouse, 8, 8, idProd.ToString(), 1, cantMov);
 
                         if (exito == 1)
                         {

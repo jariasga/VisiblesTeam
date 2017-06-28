@@ -125,10 +125,16 @@ namespace InkaArt.Business.Algorithm
                         }
                     }
 
-                    average_breakage_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
-                        ? -1 : average_breakage_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
-                    average_time_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
-                        ? -1 : average_time_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
+                    if (average_mean_count[recipe_index, job_index] <= 0)
+                    {
+                        average_breakage_mean[recipe_index, job_index] = 0; //Asumimos que no demora nada
+                        average_time_mean[recipe_index, job_index] = Simulation.MiniturnLength; //Asumimos que se demora un miniturno en hacer un producto
+                    }
+                    else
+                    {
+                        average_breakage_mean[recipe_index, job_index] /= average_mean_count[recipe_index, job_index];
+                        average_time_mean[recipe_index, job_index] /= average_mean_count[recipe_index, job_index];
+                    }
                 }
             }
 
@@ -148,7 +154,6 @@ namespace InkaArt.Business.Algorithm
                         bool is_new_index = false;
                         if (index == null)
                         {
-                            if (average_mean_count[recipe_index, job_index] <= 0) continue;
                             index = new Index(0, worker_object, jobs[job_index], recipes[recipe_index],
                                 average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index]);
                             is_new_index = true;
