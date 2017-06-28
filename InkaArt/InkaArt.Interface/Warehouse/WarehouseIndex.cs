@@ -90,7 +90,7 @@ namespace InkaArt.Interface.Warehouse
         }
 
         private void button_bulk_upload_Click(object sender, EventArgs e)
-        {/*
+        {
             WarehouseCrud movimientos = new WarehouseCrud();
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Warehouse File";
@@ -98,7 +98,7 @@ namespace InkaArt.Interface.Warehouse
             if (dialog.ShowDialog() == DialogResult.OK) { 
                 if (movimientos.massiveUpload(dialog.FileName) != 0) return;
             }
-            */
+            
             RawMaterialWarehouseController rmw_control = new RawMaterialWarehouseController();
             OpenFileDialog dialog2 = new OpenFileDialog();
             dialog2.Title = "Open Stock File";
