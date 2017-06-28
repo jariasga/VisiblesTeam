@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using InkaArt.Business.Warehouse;
+using InkaArt.Business.Sales;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -107,6 +108,25 @@ namespace InkaArt.Interface.Warehouse
 
         }
 
+        private void actualizaDocumentos()
+        {
+            OrderController controlOrder = new OrderController();
+            //revisar
+            DataTable orderList = controlOrder.GetOrders();
+
+            //for del datagrid
+            int actualizar = 0;
+            for(int i = 0; i < dataGridView1.Rows.Count; i++)
+                if (int.Parse(dataGridView1.Rows[i].Cells[7].Value.ToString()) != 0)
+                {
+                    actualizar = 1;
+                    break;
+                }
+            if(actualizar ==0)
+                controlOrder.updateReturn(textBox3.Text);
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             int numNota = 0;
@@ -152,6 +172,7 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("No hay productos que este almacén pueda devolver para la nota de crédito ingresada.");
                 return;
             }
+            actualizaDocumentos();
 
         }
 
@@ -167,87 +188,87 @@ namespace InkaArt.Interface.Warehouse
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 bool s = Convert.ToBoolean(row.Cells[8].Value);
-                //TODO
-                //validar la cantidad a mover
 
                 if (s == true)
                 {
-                    idProd = Convert.ToInt32(row.Cells[0].Value);
-                    nameProd = Convert.ToString(row.Cells[1].Value);
-                    try
-                    {
-                        cantMov = Convert.ToInt32(row.Cells[6].Value);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Favor de ingresar un valor entero para el número de productos a mover. Linea: " + (numRows + 1));
-                        return;
-                    }
-                    if (cantMov < 0)
-                    {
-                        MessageBox.Show("Línea :" + numRows + " Favor de ingresar un valor válido para la cantidad a mover");
-                        continue;
-                    }
-                    maxMov = Convert.ToInt32(row.Cells[2].Value);
-                    try
-                    {
-                        idReturn = Convert.ToInt32(textBox3.Text);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Favor de ingresar un valor entero para el número de lote de producción");
-                        return;
-                    }
-                    if (idReturn < 0)
-                    {
-                        MessageBox.Show("Favor de ingresar un valor válido para el número de pedido");
-                        return;
-                    }
-                    if (cantMov <= maxMov)
-                    {
-                        //Se valida que exista la materia prima, el almacén, también que exista la relación materiaPrima-almacén
-                        int intIdWarehouse = 0;
-                        intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
-
-                        availableToMove = productionItemMovementController.availableReturn(idProd, intIdWarehouse);
-                        if (availableToMove != 1)
+                        idProd = Convert.ToInt32(row.Cells[0].Value);
+                        nameProd = Convert.ToString(row.Cells[1].Value);
+                        try
                         {
+                            cantMov = Convert.ToInt32(row.Cells[6].Value);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Favor de ingresar un valor entero para el número de productos a mover. Linea: " + (numRows + 1));
                             return;
                         }
-
-                        //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-                        //exito = productionItemWarehouseMovementController.updateDataProduct(idProd, intIdWarehouse, cantMov, "Entrada", "OK");
-                        
-                        //mi forma de aumentar stock logico y fisico
-                        ProductWarehouseController controlpwh = new ProductWarehouseController();
-                        DataTable pwhList = controlpwh.getData();
-                        controlpwh.updateOnlyPhStock(intIdWarehouse.ToString(), idProd.ToString(), int.Parse(row.Cells[3].Value.ToString()) + cantMov);
-                        //update o insert en la tabla stockDocument
-                        updateInsertDevueltos(idProd.ToString(), cantMov, int.Parse(row.Cells[7].Value.ToString()));
-
-                        //DONE
-                        //añadir en la tabla movimientos
-                        ProductionMovementMovementController controlM = new ProductionMovementMovementController();
-                        controlM.insertMovDev(int.Parse(textBox3.Text), 2, intIdWarehouse, 8, 8, idProd.ToString(), 1, cantMov);
-
-                        if (exito == 1)
+                        if (cantMov < 0)
                         {
-                            //Aumentar stock físico y lógico del producto
-                            productionItemMovementController.updateData(idProd, cantMov, typeMovement);
-                            //Grabar movimiento
-                            int movemenType = 2; //Indica que es una entrada
-                            int movementReason = 8;//Indica que es un movimiento por producción
-                            int documentTypes = 8;//Indica que no tiene un documento relacionado para validarlo
-                            int productType = 1;//0:materia prima | 1:producto
-                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
-                            productionItemWarehouseMovementController.insertMovement(idReturn, movemenType, Convert.ToInt32(idWarehouesOrigin), movementReason, documentTypes, isExchange, idProd, cantMov, productType);
-                            numRows2++;
+                            MessageBox.Show("Línea :" + numRows + " Favor de ingresar un valor válido para la cantidad a mover");
+                            continue;
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + ". Solo se puede quitar " + maxMov + " items.");
-                    }
+                        maxMov = Convert.ToInt32(row.Cells[2].Value);
+                        try
+                        {
+                            idReturn = Convert.ToInt32(textBox3.Text);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Favor de ingresar un valor entero para el número de lote de producción");
+                            return;
+                        }
+                        if (idReturn < 0)
+                        {
+                            MessageBox.Show("Favor de ingresar un valor válido para el número de pedido");
+                            return;
+                        }
+                        if (cantMov <= maxMov && cantMov <= int.Parse(row.Cells[7].ToString()))
+                        {
+                            //Se valida que exista la materia prima, el almacén, también que exista la relación materiaPrima-almacén
+                            int intIdWarehouse = 0;
+                            intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
+
+                            availableToMove = productionItemMovementController.availableReturn(idProd, intIdWarehouse);
+                            if (availableToMove != 1)
+                            {
+                                return;
+                            }
+
+                            //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
+                            //exito = productionItemWarehouseMovementController.updateDataProduct(idProd, intIdWarehouse, cantMov, "Entrada", "OK");
+
+                            //mi forma de aumentar stock logico y fisico
+                            ProductWarehouseController controlpwh = new ProductWarehouseController();
+                            DataTable pwhList = controlpwh.getData();
+                            controlpwh.updateOnlyPhStock(intIdWarehouse.ToString(), idProd.ToString(), int.Parse(row.Cells[3].Value.ToString()) + cantMov);
+                            //update o insert en la tabla stockDocument
+                            updateInsertDevueltos(idProd.ToString(), cantMov, int.Parse(row.Cells[7].Value.ToString()));
+
+                            //DONE
+                            //añadir en la tabla movimientos
+                            ProductionMovementMovementController controlM = new ProductionMovementMovementController();
+                            controlM.insertMovDev(int.Parse(textBox3.Text), 2, intIdWarehouse, 8, 8, idProd.ToString(), 1, cantMov);
+
+
+                            if (exito == 1)
+                            {
+                                //Aumentar stock físico y lógico del producto
+                                productionItemMovementController.updateData(idProd, cantMov, typeMovement);
+                                //Grabar movimiento
+                                int movemenType = 2; //Indica que es una entrada
+                                int movementReason = 8;//Indica que es un movimiento por producción
+                                int documentTypes = 8;//Indica que no tiene un documento relacionado para validarlo
+                                int productType = 1;//0:materia prima | 1:producto
+                                int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                                productionItemWarehouseMovementController.insertMovement(idReturn, movemenType, Convert.ToInt32(idWarehouesOrigin), movementReason, documentTypes, isExchange, idProd, cantMov, productType);
+                                numRows2++;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + ". Solo se puede quitar " + maxMov + " items.");
+                        }
+
                 }
                 numRows++;
             }
