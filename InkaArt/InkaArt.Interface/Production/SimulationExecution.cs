@@ -115,9 +115,9 @@ namespace InkaArt.Interface.Production
                         if (line == null)
                             LogHandler.WriteLine("- Miniturno {0}: Nada.", miniturn);
                         else
-                            LogHandler.WriteLine("- Miniturno {0}: ({1:00},{2:00},{3},{4},[{5},{6}])",
-                                miniturn, line.Worker.ID, line.Job.ID, line.Recipe.Description + " " + line.Recipe.Version,
-                                line.Produced, line.MiniturnStart, line.MiniturnStart + line.TotalMiniturnsUsed);
+                            LogHandler.WriteLine("- Miniturno {0}: ({1},{2},{3},{4},[{5},{6}])",
+                                miniturn, line.Worker.FullName, line.Job.Name, line.Recipe.Version,
+                                line.Produced, line.MiniturnStart, line.MiniturnStart + line.MiniturnsUsed);
                     }
                 }
                 LogHandler.WriteLine("");
