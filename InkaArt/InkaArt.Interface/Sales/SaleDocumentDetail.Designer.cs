@@ -59,9 +59,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 31);
+            this.label1.Location = new System.Drawing.Point(23, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 35);
+            this.label1.Size = new System.Drawing.Size(102, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "Pedido -";
             // 
@@ -69,9 +70,10 @@
             // 
             this.label_orderid.AutoSize = true;
             this.label_orderid.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_orderid.Location = new System.Drawing.Point(160, 31);
+            this.label_orderid.Location = new System.Drawing.Point(120, 25);
+            this.label_orderid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_orderid.Name = "label_orderid";
-            this.label_orderid.Size = new System.Drawing.Size(49, 35);
+            this.label_orderid.Size = new System.Drawing.Size(38, 27);
             this.label_orderid.TabIndex = 1;
             this.label_orderid.Text = "99";
             // 
@@ -82,11 +84,11 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(36, 66);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(27, 54);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(640, 146);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(480, 119);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
@@ -94,36 +96,40 @@
             // label_name
             // 
             this.label_name.AutoSize = true;
-            this.label_name.Location = new System.Drawing.Point(155, 85);
+            this.label_name.Location = new System.Drawing.Point(116, 69);
+            this.label_name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_name.Name = "label_name";
-            this.label_name.Size = new System.Drawing.Size(319, 23);
+            this.label_name.Size = new System.Drawing.Size(258, 18);
             this.label_name.TabIndex = 3;
             this.label_name.Text = "Nombre Segundo Apellido Segundo";
             // 
             // label_doc
             // 
             this.label_doc.AutoSize = true;
-            this.label_doc.Location = new System.Drawing.Point(155, 46);
+            this.label_doc.Location = new System.Drawing.Point(116, 37);
+            this.label_doc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_doc.Name = "label_doc";
-            this.label_doc.Size = new System.Drawing.Size(98, 23);
+            this.label_doc.Size = new System.Drawing.Size(80, 18);
             this.label_doc.TabIndex = 2;
             this.label_doc.Text = "20015223";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 46);
+            this.label3.Location = new System.Drawing.Point(17, 37);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 23);
+            this.label3.Size = new System.Drawing.Size(92, 18);
             this.label3.TabIndex = 1;
             this.label3.Text = "Documento:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 85);
+            this.label2.Location = new System.Drawing.Point(17, 69);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 23);
+            this.label2.Size = new System.Drawing.Size(68, 18);
             this.label2.TabIndex = 0;
             this.label2.Text = "Nombre:";
             // 
@@ -132,9 +138,10 @@
             this.label_invoiceid.AutoSize = true;
             this.label_invoiceid.BackColor = System.Drawing.Color.Transparent;
             this.label_invoiceid.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_invoiceid.Location = new System.Drawing.Point(284, 31);
+            this.label_invoiceid.Location = new System.Drawing.Point(213, 25);
+            this.label_invoiceid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_invoiceid.Name = "label_invoiceid";
-            this.label_invoiceid.Size = new System.Drawing.Size(366, 35);
+            this.label_invoiceid.Size = new System.Drawing.Size(294, 27);
             this.label_invoiceid.TabIndex = 4;
             this.label_invoiceid.Text = "Nota de crédito - Nro 9999";
             // 
@@ -150,12 +157,12 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            this.grid_detail.Location = new System.Drawing.Point(25, 39);
-            this.grid_detail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grid_detail.Location = new System.Drawing.Point(19, 32);
+            this.grid_detail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grid_detail.Name = "grid_detail";
             this.grid_detail.ReadOnly = true;
             this.grid_detail.RowTemplate.Height = 24;
-            this.grid_detail.Size = new System.Drawing.Size(587, 218);
+            this.grid_detail.Size = new System.Drawing.Size(440, 177);
             this.grid_detail.TabIndex = 5;
             // 
             // Column1
@@ -186,9 +193,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(381, 273);
+            this.label6.Location = new System.Drawing.Point(286, 222);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 23);
+            this.label6.Size = new System.Drawing.Size(65, 18);
             this.label6.TabIndex = 7;
             this.label6.Text = "Subtotal";
             // 
@@ -196,9 +204,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(424, 296);
+            this.label7.Location = new System.Drawing.Point(318, 240);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 23);
+            this.label7.Size = new System.Drawing.Size(34, 18);
             this.label7.TabIndex = 8;
             this.label7.Text = "IGV";
             // 
@@ -206,9 +215,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(414, 319);
+            this.label8.Location = new System.Drawing.Point(310, 259);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 23);
+            this.label8.Size = new System.Drawing.Size(40, 18);
             this.label8.TabIndex = 9;
             this.label8.Text = "Total";
             // 
@@ -216,10 +226,11 @@
             // 
             this.label_subtotal.AutoSize = true;
             this.label_subtotal.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_subtotal.Location = new System.Drawing.Point(486, 273);
+            this.label_subtotal.Location = new System.Drawing.Point(364, 222);
+            this.label_subtotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_subtotal.Name = "label_subtotal";
             this.label_subtotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label_subtotal.Size = new System.Drawing.Size(43, 23);
+            this.label_subtotal.Size = new System.Drawing.Size(35, 18);
             this.label_subtotal.TabIndex = 10;
             this.label_subtotal.Text = "100";
             this.label_subtotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -228,10 +239,11 @@
             // 
             this.label_igv.AutoSize = true;
             this.label_igv.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_igv.Location = new System.Drawing.Point(486, 296);
+            this.label_igv.Location = new System.Drawing.Point(364, 240);
+            this.label_igv.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_igv.Name = "label_igv";
             this.label_igv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label_igv.Size = new System.Drawing.Size(43, 23);
+            this.label_igv.Size = new System.Drawing.Size(35, 18);
             this.label_igv.TabIndex = 11;
             this.label_igv.Text = "100";
             this.label_igv.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -240,10 +252,11 @@
             // 
             this.label_total.AutoSize = true;
             this.label_total.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_total.Location = new System.Drawing.Point(486, 319);
+            this.label_total.Location = new System.Drawing.Point(364, 259);
+            this.label_total.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_total.Name = "label_total";
             this.label_total.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label_total.Size = new System.Drawing.Size(43, 23);
+            this.label_total.Size = new System.Drawing.Size(35, 18);
             this.label_total.TabIndex = 12;
             this.label_total.Text = "100";
             this.label_total.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -253,10 +266,10 @@
             this.button_cancel.BackColor = System.Drawing.Color.Gray;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(372, 620);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_cancel.Location = new System.Drawing.Point(279, 504);
+            this.button_cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_cancel.Name = "button_cancel";
-            this.button_cancel.Size = new System.Drawing.Size(217, 48);
+            this.button_cancel.Size = new System.Drawing.Size(163, 39);
             this.button_cancel.TabIndex = 33;
             this.button_cancel.Text = "🗙 Cerrar";
             this.button_cancel.UseVisualStyleBackColor = false;
@@ -272,11 +285,11 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label_subtotal);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(37, 219);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Location = new System.Drawing.Point(28, 178);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(639, 373);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(479, 303);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle";
@@ -286,10 +299,10 @@
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
             this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(135, 619);
-            this.button_pdf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_pdf.Location = new System.Drawing.Point(101, 503);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_pdf.Name = "button_pdf";
-            this.button_pdf.Size = new System.Drawing.Size(217, 48);
+            this.button_pdf.Size = new System.Drawing.Size(163, 39);
             this.button_pdf.TabIndex = 39;
             this.button_pdf.Text = "Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
@@ -297,10 +310,10 @@
             // 
             // SaleDocumentDetail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(719, 693);
+            this.ClientSize = new System.Drawing.Size(539, 563);
             this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_cancel);
@@ -308,8 +321,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_orderid);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SaleDocumentDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Documento de Venta";
             this.Load += new System.EventHandler(this.SaleDocumentDetail_Load);
             this.groupBox1.ResumeLayout(false);

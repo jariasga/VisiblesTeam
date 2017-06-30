@@ -352,8 +352,10 @@
             this.Controls.Add(this.button_guardar);
             this.Controls.Add(this.label9);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RegisterAssignedJob";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Informe de Turno";
             this.Load += new System.EventHandler(this.RegisterAssignedJob_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_turn)).EndInit();

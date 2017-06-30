@@ -79,8 +79,8 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGrid_stocks.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGrid_stocks.Location = new System.Drawing.Point(28, 84);
-            this.dataGrid_stocks.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.dataGrid_stocks.Location = new System.Drawing.Point(21, 68);
+            this.dataGrid_stocks.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.dataGrid_stocks.Name = "dataGrid_stocks";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -93,7 +93,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGrid_stocks.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGrid_stocks.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGrid_stocks.Size = new System.Drawing.Size(1269, 404);
+            this.dataGrid_stocks.Size = new System.Drawing.Size(952, 328);
             this.dataGrid_stocks.TabIndex = 25;
             // 
             // Tipo
@@ -135,9 +135,10 @@
             // 
             this.label_todayDate.AutoSize = true;
             this.label_todayDate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_todayDate.Location = new System.Drawing.Point(920, 9);
+            this.label_todayDate.Location = new System.Drawing.Point(690, 7);
+            this.label_todayDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_todayDate.Name = "label_todayDate";
-            this.label_todayDate.Size = new System.Drawing.Size(0, 23);
+            this.label_todayDate.Size = new System.Drawing.Size(0, 18);
             this.label_todayDate.TabIndex = 28;
             // 
             // button_export
@@ -145,9 +146,10 @@
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
             this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(437, 521);
+            this.button_export.Location = new System.Drawing.Point(328, 423);
+            this.button_export.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_export.Name = "button_export";
-            this.button_export.Size = new System.Drawing.Size(234, 51);
+            this.button_export.Size = new System.Drawing.Size(176, 41);
             this.button_export.TabIndex = 29;
             this.button_export.Text = "Exportar a Excel";
             this.button_export.UseVisualStyleBackColor = false;
@@ -158,10 +160,10 @@
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
             this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(702, 522);
-            this.button_pdf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_pdf.Location = new System.Drawing.Point(526, 424);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_pdf.Name = "button_pdf";
-            this.button_pdf.Size = new System.Drawing.Size(198, 50);
+            this.button_pdf.Size = new System.Drawing.Size(148, 41);
             this.button_pdf.TabIndex = 40;
             this.button_pdf.Text = "Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
@@ -169,15 +171,18 @@
             // 
             // StockReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1349, 583);
+            this.ClientSize = new System.Drawing.Size(1012, 474);
             this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.button_export);
             this.Controls.Add(this.label_todayDate);
             this.Controls.Add(this.dataGrid_stocks);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "StockReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Stocks";
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_stocks)).EndInit();
             this.ResumeLayout(false);
