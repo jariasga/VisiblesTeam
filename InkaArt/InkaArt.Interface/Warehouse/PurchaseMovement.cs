@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Purchases;
 using InkaArt.Business.Warehouse;
-
+using System.Globalization;
 
 namespace InkaArt.Interface.Warehouse
 {
     public partial class PurchaseMovement : Form
     {
         string idWh = "";
+
+        private DataTable purchase_orders;
         public PurchaseMovement(string id)
         {
             InitializeComponent();
@@ -26,11 +28,11 @@ namespace InkaArt.Interface.Warehouse
         private void fillCombo()
         {
             PurchaseOrderController control = new PurchaseOrderController();
-            DataTable OcList = control.getData();
+            purchase_orders = control.getData();
 
-            for (int i = 0; i < OcList.Rows.Count; i++)
-                if (OcList.Rows[i]["status"].ToString() == "Enviado")
-                    comboBox_OC.Items.Add(OcList.Rows[i]["id_order"].ToString());
+            for (int i = 0; i < purchase_orders.Rows.Count; i++)
+                if (purchase_orders.Rows[i]["status"].ToString() == "Enviado")
+                    comboBox_OC.Items.Add(purchase_orders.Rows[i]["id_order"].ToString());
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -228,7 +230,7 @@ namespace InkaArt.Interface.Warehouse
                 //insert
                 try
                 {
-                    control.insertData(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+                    control.insertData(idFactura, idRm, cantidad);
                 }
                 catch (Exception m)
                 {
@@ -241,7 +243,7 @@ namespace InkaArt.Interface.Warehouse
                 //update
                 try
                 {
-                    control.updateStock(idFactura, idRm, cantidad, dateTimePicker1.Value.ToShortDateString());
+                    control.updateStock(idFactura, idRm, cantidad);
                 }
                 catch (Exception m)
                 {
@@ -326,7 +328,7 @@ namespace InkaArt.Interface.Warehouse
                                                 //agregar en StockDocument
                                                 updateInStockDocument(comboBox_OC.SelectedItem.ToString(), dataGridView_orders.Rows[i].Cells[0].Value.ToString(), cant_necesaria - cantidad_ingresar);
                                                 //agregar en Movement
-                                                controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, dateTimePicker1.Value.ToShortDateString(), int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()), cantidad_ingresar);
+                                                controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()), cantidad_ingresar);
 
                                                 MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                                 fillGrid(idFactura);
@@ -376,9 +378,16 @@ namespace InkaArt.Interface.Warehouse
                 idSup = fillGrid(0);
                 string nameSup = giveme_supplierName(idSup);
                 textBox_supplier.Text = nameSup;
+                foreach (DataRow row in purchase_orders.Rows)
+                {
+                    if (int.Parse(row["id_order"].ToString()) == aux_idOc)
+                    {                        
+                        dateTime_purchaseOrder.Value = DateTime.Parse(row["delivery_date"].ToString()); //ya tiene formato dd/MM/yyyy
+                    }
+                }
             }
             else
-                MessageBox.Show("Por favor ingrese un numero de factura válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor ingrese un numero de orden de compra válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 

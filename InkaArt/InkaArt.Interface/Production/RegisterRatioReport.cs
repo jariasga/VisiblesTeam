@@ -58,7 +58,7 @@ namespace InkaArt.Interface.Production
                 combobox_recipe.DisplayMember = "Version";
                 grid_column_recipe.DataSource = recipes.List();
                 grid_column_recipe.DisplayMember = "Version";
-                
+
                 date_picker.Value = DateTime.Today;
                 grid_modified_items.Clear();
             }
@@ -115,7 +115,7 @@ namespace InkaArt.Interface.Production
 
         private void combobox_job_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Job job = (Job) combobox_job.SelectedItem;
+            Job job = (Job)combobox_job.SelectedItem;
             if (job != null)
             {
                 combobox_recipe.Items.Clear();
@@ -124,7 +124,7 @@ namespace InkaArt.Interface.Production
                     if (recipes[i].Product == job.Product)
                         combobox_recipe.Items.Add(recipes[i]);
                 }
-            }            
+            }
             combobox_recipe.Text = "";
         }
 
@@ -172,7 +172,7 @@ namespace InkaArt.Interface.Production
                 MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
             if (result == DialogResult.No) return;
-            
+
             if (SaveGridRows()) grid_modified_items.Clear();
         }
 
@@ -193,11 +193,11 @@ namespace InkaArt.Interface.Production
                 string end = grid_reports[5, row].Value.ToString();
                 string broken = grid_reports[6, row].Value.ToString();
                 string produced = grid_reports[7, row].Value.ToString();
-                
+
                 string message = "Ok";
                 int result = ratios.VerifyAndSave(id_ratio, date_picker.Value, worker, job, recipe, start, end,
                     broken, produced, workers, jobs, recipes, ref message);
-                
+
                 if (result <= 0)
                 {
                     MessageBox.Show("Error en la fila " + (row + 1) + ": " + message, "Error", MessageBoxButtons.OK,
@@ -277,7 +277,7 @@ namespace InkaArt.Interface.Production
             //Control de los casilleros de tiempo
             if (grid_reports.CurrentCell.ColumnIndex == 4 || grid_reports.CurrentCell.ColumnIndex == 5)
             {
-                textbox_hour_KeyPress(sender, e); 
+                textbox_hour_KeyPress(sender, e);
             }
             //Control de los casilleros de números
             if (grid_reports.CurrentCell.ColumnIndex == 6 || grid_reports.CurrentCell.ColumnIndex == 7)
@@ -289,7 +289,7 @@ namespace InkaArt.Interface.Production
         private void grid_reports_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             //El índice de la fila debe estar entre [0, RowCount-1>, y no debe repetirse.
-            if (e.RowIndex >= 0 && e.RowIndex < (grid_reports.RowCount-1) && !grid_modified_items.Contains(e.RowIndex))
+            if (e.RowIndex >= 0 && e.RowIndex < (grid_reports.RowCount - 1) && !grid_modified_items.Contains(e.RowIndex))
                 grid_modified_items.Add(e.RowIndex);
         }
 

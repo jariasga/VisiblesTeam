@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
+using InkaArt.Data.Purchases;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -15,6 +16,7 @@ namespace InkaArt.Interface.Warehouse
     {
         private ReasonMovementController reasonMovementController = new ReasonMovementController();
         private TypeMovementController typeMovementController = new TypeMovementController();
+        private PurchaseOrderData purchase = new PurchaseOrderData();
 
         public Movements()
         {
@@ -75,6 +77,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 if(reason == "Compra" && string.Compare(combobox_type.Text,"Entrada")==0)
                 {
+
                     Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(text_warehouse_id.Text);
                     formView.Show();
                 }

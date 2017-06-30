@@ -155,7 +155,7 @@
     <Compile Include="Production\RegisterRatioReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\RegisterRatioReport.designer.cs">
+    <Compile Include="Production\RegisterRatioReport.Designer.cs">
       <DependentUpon>RegisterRatioReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\SimulationConfig.cs">
