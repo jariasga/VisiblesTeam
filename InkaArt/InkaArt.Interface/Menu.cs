@@ -306,7 +306,7 @@ namespace InkaArt.Interface
             }
             catch (Exception e)
             {
-                LogHandler.WriteLine(e.ToString());
+                //LogHandler.WriteLine(e.ToString());
             }
             finally
             {

@@ -14,7 +14,7 @@ namespace InkaArt.Business.Algorithm
     {
         public const int NumberOfIterations = 100;
         public const double Alpha = 0.2;
-        public static int LimitTime = Simulation.LimitTime * 3 / 10; //90 segundos = Un minuto y medio
+        public static int LimitTime = Simulation.LimitTime * 2 / 5; //120 segundos = Un minuto y medio
 
         private Simulation simulation;
         private JobController jobs;
@@ -29,8 +29,10 @@ namespace InkaArt.Business.Algorithm
             this.jobs = jobs;
             this.recipes = recipes;
             this.indexes = indexes;
-            //Líneas de ordenes
-            this.orders = simulation.SelectedOrders.Orders;
+            //Líneas de ordenes: DEBE SER UNA COPIA PROFUNDA, ORDENADA POR FECHA Y LUEGO POR PRIORIDAD DEL CLIENTE.
+            this.orders = new List<Order>();
+            for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
+                this.orders.Add(new Order(simulation.SelectedOrders[i]));
             this.orders = this.orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
             //Número de puestos de trabajo para cada proceso
             Production.ProcessController process_controller = new Production.ProcessController();
