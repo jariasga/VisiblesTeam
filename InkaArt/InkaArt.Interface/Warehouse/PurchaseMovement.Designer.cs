@@ -36,13 +36,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView_orders = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView_details = new System.Windows.Forms.DataGridView();
-            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +44,13 @@
             this.NroFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.idDetail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataGridView_details = new System.Windows.Forms.DataGridView();
+            this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_orders)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -157,6 +157,53 @@
             this.dataGridView_orders.Size = new System.Drawing.Size(794, 171);
             this.dataGridView_orders.TabIndex = 45;
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id Item";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 150;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // CantidadPorMover
+            // 
+            this.CantidadPorMover.HeaderText = "Cantidad por Mover";
+            this.CantidadPorMover.Name = "CantidadPorMover";
+            this.CantidadPorMover.ReadOnly = true;
+            // 
+            // cantMovement
+            // 
+            this.cantMovement.HeaderText = "Cantidad a Mover";
+            this.cantMovement.Name = "cantMovement";
+            // 
+            // NroFactura
+            // 
+            this.NroFactura.HeaderText = "NroFactura";
+            this.NroFactura.Name = "NroFactura";
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            // 
+            // idDetail
+            // 
+            this.idDetail.HeaderText = "idDetail";
+            this.idDetail.Name = "idDetail";
+            this.idDetail.ReadOnly = true;
+            this.idDetail.Visible = false;
+            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
@@ -240,53 +287,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id Item";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 150;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // CantidadPorMover
-            // 
-            this.CantidadPorMover.HeaderText = "Cantidad por Mover";
-            this.CantidadPorMover.Name = "CantidadPorMover";
-            this.CantidadPorMover.ReadOnly = true;
-            // 
-            // cantMovement
-            // 
-            this.cantMovement.HeaderText = "Cantidad a Mover";
-            this.cantMovement.Name = "cantMovement";
-            // 
-            // NroFactura
-            // 
-            this.NroFactura.HeaderText = "NroFactura";
-            this.NroFactura.Name = "NroFactura";
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            // 
-            // idDetail
-            // 
-            this.idDetail.HeaderText = "idDetail";
-            this.idDetail.Name = "idDetail";
-            this.idDetail.ReadOnly = true;
-            this.idDetail.Visible = false;
-            // 
             // PurchaseMovement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,8 +298,10 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PurchaseMovement";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movimiento por Compras";
             this.Load += new System.EventHandler(this.PurchaseMovement_Load);
             this.groupBox1.ResumeLayout(false);

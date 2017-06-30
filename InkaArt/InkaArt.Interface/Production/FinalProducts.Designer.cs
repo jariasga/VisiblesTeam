@@ -133,8 +133,10 @@
             this.Controls.Add(this.button_batch);
             this.Controls.Add(this.dataGridView_finalProductList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FinalProducts";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista de Productos Finales";
             this.Load += new System.EventHandler(this.FinalProducts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_finalProductList)).EndInit();

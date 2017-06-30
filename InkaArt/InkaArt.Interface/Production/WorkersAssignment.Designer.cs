@@ -34,15 +34,15 @@
             this.combo_simulations = new System.Windows.Forms.ComboBox();
             this.button_report = new System.Windows.Forms.Button();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
-            this.simulation_tab_control = new System.Windows.Forms.TabControl();
-            this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
-            this.button_save = new System.Windows.Forms.Button();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.worker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.job = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.index = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulation_tab_control = new System.Windows.Forms.TabControl();
+            this.simulation_tab_assignment = new System.Windows.Forms.TabPage();
+            this.button_save = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.simulation_tab_control.SuspendLayout();
             this.simulation_tab_assignment.SuspendLayout();
@@ -129,6 +129,36 @@
             this.simulation_grid.TabIndex = 1;
             this.simulation_grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulation_grid_CellContentClick);
             // 
+            // date
+            // 
+            this.date.HeaderText = "Fecha";
+            this.date.Name = "date";
+            // 
+            // worker
+            // 
+            this.worker.HeaderText = "Trabajador";
+            this.worker.Name = "worker";
+            // 
+            // job
+            // 
+            this.job.HeaderText = "Proceso y Producto";
+            this.job.Name = "job";
+            // 
+            // recipe
+            // 
+            this.recipe.HeaderText = "Receta";
+            this.recipe.Name = "recipe";
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Cantidad";
+            this.quantity.Name = "quantity";
+            // 
+            // index
+            // 
+            this.index.HeaderText = "Índice de Pérdida";
+            this.index.Name = "index";
+            // 
             // simulation_tab_control
             // 
             this.simulation_tab_control.Controls.Add(this.simulation_tab_assignment);
@@ -163,36 +193,6 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.ButtonSaveClick);
             // 
-            // date
-            // 
-            this.date.HeaderText = "Fecha";
-            this.date.Name = "date";
-            // 
-            // worker
-            // 
-            this.worker.HeaderText = "Trabajador";
-            this.worker.Name = "worker";
-            // 
-            // job
-            // 
-            this.job.HeaderText = "Proceso y Producto";
-            this.job.Name = "job";
-            // 
-            // recipe
-            // 
-            this.recipe.HeaderText = "Receta";
-            this.recipe.Name = "recipe";
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Cantidad";
-            this.quantity.Name = "quantity";
-            // 
-            // index
-            // 
-            this.index.HeaderText = "Índice de Pérdida";
-            this.index.Name = "index";
-            // 
             // WorkersAssignment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -207,8 +207,10 @@
             this.Controls.Add(this.label_select);
             this.Controls.Add(this.button_config);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "WorkersAssignment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Asignación de trabajadores";
             this.Load += new System.EventHandler(this.WorkersAssignment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).EndInit();

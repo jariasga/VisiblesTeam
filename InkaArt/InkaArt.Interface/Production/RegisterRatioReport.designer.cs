@@ -405,8 +405,10 @@
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.label_date);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RegisterRatioReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Informe de Turno";
             this.Load += new System.EventHandler(this.RegisterAssignedJob_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).EndInit();

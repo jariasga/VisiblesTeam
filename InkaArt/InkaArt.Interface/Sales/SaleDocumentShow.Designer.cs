@@ -150,8 +150,10 @@
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_see);
             this.Controls.Add(this.grid_documents);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SaleDocumentShow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Documentos de Venta";
             this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.SaleDocumentShow_Load);
