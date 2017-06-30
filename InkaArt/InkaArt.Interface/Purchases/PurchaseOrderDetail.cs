@@ -310,7 +310,7 @@ namespace InkaArt.Interface.Purchases
             total += subTotalNuevo;
             total += igv;
             total = Math.Round(total, 2);
-            textBox_total.Text = total.ToString();
+            textBox_total.Text = total.ToString(System.Globalization.CultureInfo.InvariantCulture);
             //control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
             //llenarMateriasPedidas();
         }
