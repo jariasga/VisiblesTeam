@@ -321,6 +321,7 @@
             this.textbox_priority.Name = "textbox_priority";
             this.textbox_priority.Size = new System.Drawing.Size(92, 30);
             this.textbox_priority.TabIndex = 29;
+            this.textbox_priority.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textbox_priority_KeyUp);
             // 
             // label4
             // 
@@ -339,6 +340,7 @@
             this.trackbar_priority.Name = "trackbar_priority";
             this.trackbar_priority.Size = new System.Drawing.Size(159, 56);
             this.trackbar_priority.TabIndex = 27;
+            this.trackbar_priority.ValueChanged += new System.EventHandler(this.trackbar_priority_ValueChanged);
             // 
             // textbox_name
             // 

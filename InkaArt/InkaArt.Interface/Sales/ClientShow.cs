@@ -130,5 +130,22 @@ namespace InkaArt.Interface.Sales
             if (radio_natural.Checked)
                 documentLabel.Text = "DNI";
         }
+
+        private void trackbar_priority_ValueChanged(object sender, EventArgs e)
+        {
+            textbox_priority.Text = trackbar_priority.Value.ToString();
+        }
+
+        private void textbox_priority_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (clientController.validateTrackBar(textbox_priority.Text))
+            {
+                trackbar_priority.Value = int.Parse(textbox_priority.Text);
+            }
+            else
+            {
+                MessageBox.Show(this, "La prioridad debe ser un número", "Error", MessageBoxButtons.OK);
+            }
+        }
     }
 }
