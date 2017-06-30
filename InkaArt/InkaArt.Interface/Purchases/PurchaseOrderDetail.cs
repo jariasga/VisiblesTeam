@@ -467,7 +467,7 @@ namespace InkaArt.Interface.Purchases
                 try
                 {
                     //hacer insert
-                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, dateTimePicker_creation.Value, dateTimePicker_delivery.Value, double.Parse(textBox_total.Text));
                     ventanaListaOrdenes.desarrolloBusqueda();
                     textBox_id.Text = buscarValorId(textBox_idsupplier.Text);
                     obtenerMateriasDelSupplier();
@@ -497,7 +497,7 @@ namespace InkaArt.Interface.Purchases
                 //hacer update
                 try {
                     guardarLineasDePedido();
-                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, dateTimePicker_creation.Value, dateTimePicker_delivery.Value, double.Parse(textBox_total.Text));
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
                         if(string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
                         else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
