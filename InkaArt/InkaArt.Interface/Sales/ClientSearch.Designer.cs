@@ -133,7 +133,7 @@
             this.button_select.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_select.ForeColor = System.Drawing.Color.White;
             this.button_select.Location = new System.Drawing.Point(198, 417);
-            this.button_select.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_select.Margin = new System.Windows.Forms.Padding(2);
             this.button_select.Name = "button_select";
             this.button_select.Size = new System.Drawing.Size(150, 39);
             this.button_select.TabIndex = 29;
@@ -147,7 +147,7 @@
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
             this.button_cancel.Location = new System.Drawing.Point(364, 417);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(150, 39);
             this.button_cancel.TabIndex = 30;
@@ -164,8 +164,10 @@
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_select);
             this.Controls.Add(this.grid_clients);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientSearch";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buscar Cliente";
             this.Load += new System.EventHandler(this.ClientSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_clients)).EndInit();

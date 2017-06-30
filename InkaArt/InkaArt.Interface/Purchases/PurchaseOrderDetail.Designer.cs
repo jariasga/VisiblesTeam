@@ -58,10 +58,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView_pedidos = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.button_add = new System.Windows.Forms.Button();
-            this.buttonExport = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.id_detail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idRawMat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +69,10 @@
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Eliminado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.button_add = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -423,58 +423,6 @@
             this.dataGridView_pedidos.Size = new System.Drawing.Size(647, 272);
             this.dataGridView_pedidos.TabIndex = 17;
             // 
-            // buttonDelete
-            // 
-            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
-            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(214, 438);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(104, 41);
-            this.buttonDelete.TabIndex = 15;
-            this.buttonDelete.Text = "🗑 Eliminar";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.button_delete);
-            // 
-            // button_add
-            // 
-            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_add.ForeColor = System.Drawing.Color.White;
-            this.button_add.Location = new System.Drawing.Point(556, 100);
-            this.button_add.Name = "button_add";
-            this.button_add.Size = new System.Drawing.Size(104, 41);
-            this.button_add.TabIndex = 14;
-            this.button_add.Text = "+ Agregar";
-            this.button_add.UseVisualStyleBackColor = false;
-            this.button_add.Click += new System.EventHandler(this.button_add_Click);
-            // 
-            // buttonExport
-            // 
-            this.buttonExport.BackColor = System.Drawing.Color.Gray;
-            this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonExport.ForeColor = System.Drawing.Color.White;
-            this.buttonExport.Location = new System.Drawing.Point(129, 460);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(104, 42);
-            this.buttonExport.TabIndex = 24;
-            this.buttonExport.Text = "🗀 Exportar";
-            this.buttonExport.UseVisualStyleBackColor = false;
-            this.buttonExport.Click += new System.EventHandler(this.generarOrdenDoc);
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Location = new System.Drawing.Point(19, 460);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(104, 42);
-            this.buttonSave.TabIndex = 23;
-            this.buttonSave.Text = "Editar";
-            this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.button_save);
-            // 
             // id_detail
             // 
             this.id_detail.HeaderText = "ID Detail";
@@ -552,6 +500,58 @@
             this.Eliminado.Name = "Eliminado";
             this.Eliminado.Visible = false;
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
+            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.White;
+            this.buttonDelete.Location = new System.Drawing.Point(214, 438);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(104, 41);
+            this.buttonDelete.TabIndex = 15;
+            this.buttonDelete.Text = "🗑 Eliminar";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.button_delete);
+            // 
+            // button_add
+            // 
+            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_add.ForeColor = System.Drawing.Color.White;
+            this.button_add.Location = new System.Drawing.Point(556, 100);
+            this.button_add.Name = "button_add";
+            this.button_add.Size = new System.Drawing.Size(104, 41);
+            this.button_add.TabIndex = 14;
+            this.button_add.Text = "+ Agregar";
+            this.button_add.UseVisualStyleBackColor = false;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.BackColor = System.Drawing.Color.Gray;
+            this.buttonExport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExport.ForeColor = System.Drawing.Color.White;
+            this.buttonExport.Location = new System.Drawing.Point(129, 460);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(104, 42);
+            this.buttonExport.TabIndex = 24;
+            this.buttonExport.Text = "🗀 Exportar";
+            this.buttonExport.UseVisualStyleBackColor = false;
+            this.buttonExport.Click += new System.EventHandler(this.generarOrdenDoc);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSave.ForeColor = System.Drawing.Color.White;
+            this.buttonSave.Location = new System.Drawing.Point(19, 460);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(104, 42);
+            this.buttonSave.TabIndex = 23;
+            this.buttonSave.Text = "Editar";
+            this.buttonSave.UseVisualStyleBackColor = false;
+            this.buttonSave.Click += new System.EventHandler(this.button_save);
+            // 
             // PurchaseOrderDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -563,8 +563,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PurchaseOrderDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle de orden de compra";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
