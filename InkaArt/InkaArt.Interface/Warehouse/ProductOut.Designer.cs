@@ -62,10 +62,10 @@
             this.button_register_out.BackColor = System.Drawing.Color.SteelBlue;
             this.button_register_out.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_register_out.ForeColor = System.Drawing.Color.White;
-            this.button_register_out.Location = new System.Drawing.Point(701, 497);
-            this.button_register_out.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_register_out.Location = new System.Drawing.Point(526, 404);
+            this.button_register_out.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_register_out.Name = "button_register_out";
-            this.button_register_out.Size = new System.Drawing.Size(241, 48);
+            this.button_register_out.Size = new System.Drawing.Size(181, 39);
             this.button_register_out.TabIndex = 44;
             this.button_register_out.Text = "Registrar Salida Total";
             this.button_register_out.UseVisualStyleBackColor = false;
@@ -77,11 +77,9 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.gridProducts);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(514, 32);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(386, 26);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(629, 414);
+            this.groupBox2.Size = new System.Drawing.Size(472, 336);
             this.groupBox2.TabIndex = 41;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Productos";
@@ -90,20 +88,18 @@
             // 
             this.textBox4.BackColor = System.Drawing.Color.White;
             this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(33, 353);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox4.Location = new System.Drawing.Point(25, 287);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(368, 30);
+            this.textBox4.Size = new System.Drawing.Size(277, 26);
             this.textBox4.TabIndex = 24;
             this.textBox4.Text = "S/.  0.00";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 325);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(21, 264);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(113, 23);
+            this.label9.Size = new System.Drawing.Size(87, 18);
             this.label9.TabIndex = 23;
             this.label9.Text = "Monto Total";
             // 
@@ -117,10 +113,10 @@
             this.Producto,
             this.Cantidad,
             this.Column1});
-            this.gridProducts.Location = new System.Drawing.Point(33, 48);
-            this.gridProducts.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.gridProducts.Location = new System.Drawing.Point(25, 39);
+            this.gridProducts.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.gridProducts.Name = "gridProducts";
-            this.gridProducts.Size = new System.Drawing.Size(560, 255);
+            this.gridProducts.Size = new System.Drawing.Size(420, 207);
             this.gridProducts.TabIndex = 22;
             this.gridProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProducts_CellDoubleClick);
             // 
@@ -147,11 +143,9 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(18, 385);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(14, 313);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(445, 192);
+            this.groupBox1.Size = new System.Drawing.Size(334, 156);
             this.groupBox1.TabIndex = 40;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
@@ -160,20 +154,18 @@
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(33, 130);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox3.Location = new System.Drawing.Point(25, 106);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(368, 30);
+            this.textBox3.Size = new System.Drawing.Size(277, 26);
             this.textBox3.TabIndex = 19;
             this.textBox3.Text = "Amantes de Retablos S.A.";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 102);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(21, 83);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
+            this.label2.Size = new System.Drawing.Size(64, 18);
             this.label2.TabIndex = 18;
             this.label2.Text = "Nombre";
             // 
@@ -181,20 +173,18 @@
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(33, 66);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Location = new System.Drawing.Point(25, 54);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(368, 30);
+            this.textBox2.Size = new System.Drawing.Size(277, 26);
             this.textBox2.TabIndex = 17;
             this.textBox2.Text = "019203949322";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 38);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(21, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 23);
+            this.label1.Size = new System.Drawing.Size(42, 18);
             this.label1.TabIndex = 16;
             this.label1.Text = "RUC";
             // 
@@ -210,11 +200,9 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox3.Location = new System.Drawing.Point(18, 32);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Location = new System.Drawing.Point(14, 26);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(445, 346);
+            this.groupBox3.Size = new System.Drawing.Size(334, 281);
             this.groupBox3.TabIndex = 39;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
@@ -226,10 +214,9 @@
             this.comboBox2.Items.AddRange(new object[] {
             "Boleta",
             "Factura"});
-            this.comboBox2.Location = new System.Drawing.Point(33, 202);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox2.Location = new System.Drawing.Point(25, 164);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(139, 31);
+            this.comboBox2.Size = new System.Drawing.Size(105, 26);
             this.comboBox2.TabIndex = 36;
             this.comboBox2.Text = "Boleta";
             // 
@@ -238,20 +225,18 @@
             this.textBox5.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox5.Enabled = false;
             this.textBox5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(185, 202);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox5.Location = new System.Drawing.Point(139, 164);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(216, 30);
+            this.textBox5.Size = new System.Drawing.Size(163, 26);
             this.textBox5.TabIndex = 37;
             this.textBox5.Text = "000000001";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 242);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(21, 197);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 23);
+            this.label7.Size = new System.Drawing.Size(58, 18);
             this.label7.TabIndex = 13;
             this.label7.Text = "Estado";
             // 
@@ -259,10 +244,9 @@
             // 
             this.comboBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(33, 271);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox3.Location = new System.Drawing.Point(25, 220);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(368, 31);
+            this.comboBox3.Size = new System.Drawing.Size(277, 26);
             this.comboBox3.TabIndex = 14;
             this.comboBox3.Text = "Entrega Parcial";
             // 
@@ -270,20 +254,18 @@
             // 
             this.dateTimePicker2.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
             this.dateTimePicker2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(33, 140);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePicker2.Location = new System.Drawing.Point(25, 114);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(368, 30);
+            this.dateTimePicker2.Size = new System.Drawing.Size(277, 26);
             this.dateTimePicker2.TabIndex = 12;
             // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(33, 76);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(25, 62);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(368, 30);
+            this.textBox1.Size = new System.Drawing.Size(277, 26);
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = "000000001";
             // 
@@ -291,44 +273,44 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(28, 112);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(21, 91);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(138, 24);
+            this.label6.Size = new System.Drawing.Size(115, 20);
             this.label6.TabIndex = 11;
             this.label6.Text = "Fecha de entrega";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 176);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(21, 143);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 23);
+            this.label3.Size = new System.Drawing.Size(150, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "Documento de pago";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 48);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(21, 39);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 23);
+            this.label8.Size = new System.Drawing.Size(93, 18);
             this.label8.TabIndex = 4;
             this.label8.Text = "Identificador";
             // 
             // ProductOut
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1173, 605);
+            this.ClientSize = new System.Drawing.Size(880, 492);
             this.Controls.Add(this.button_register_out);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ProductOut";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Salidas de Productos Finales";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

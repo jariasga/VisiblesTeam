@@ -242,8 +242,10 @@
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.button_acept);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Movements";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Movimientos";
             this.Load += new System.EventHandler(this.Movements_Load);
             this.groupBox2.ResumeLayout(false);

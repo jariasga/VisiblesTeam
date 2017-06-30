@@ -362,8 +362,10 @@
             this.Controls.Add(this.groupbox_workers);
             this.Controls.Add(this.groupbox_weight);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SimulationConfig";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuración de datos previos (Simulación)";
             this.Load += new System.EventHandler(this.SimulationConfig_Load);
             this.groupbox_weight.ResumeLayout(false);

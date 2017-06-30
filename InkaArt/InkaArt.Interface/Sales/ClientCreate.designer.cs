@@ -370,8 +370,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 12F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ClientCreate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear Cliente";
             this.Load += new System.EventHandler(this.ClientCreate_Load);
             this.groupBox2.ResumeLayout(false);

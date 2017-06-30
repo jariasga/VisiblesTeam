@@ -54,9 +54,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_rm_sup = new System.Windows.Forms.DataGridView();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.comboBox_status = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.id_materiaPrima = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +61,9 @@
             this.Acción = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Eliminado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.comboBox_status = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -362,43 +362,6 @@
             this.dataGridView_rm_sup.TabIndex = 10;
             this.dataGridView_rm_sup.DoubleClick += new System.EventHandler(this.obtain_idEdit);
             // 
-            // buttonSave
-            // 
-            this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
-            this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Location = new System.Drawing.Point(452, 554);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(144, 42);
-            this.buttonSave.TabIndex = 22;
-            this.buttonSave.Text = "Editar";
-            this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.button_event_click);
-            // 
-            // comboBox_status
-            // 
-            this.comboBox_status.AllowDrop = true;
-            this.comboBox_status.BackColor = System.Drawing.Color.White;
-            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_status.FormattingEnabled = true;
-            this.comboBox_status.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.comboBox_status.Location = new System.Drawing.Point(24, 343);
-            this.comboBox_status.Name = "comboBox_status";
-            this.comboBox_status.Size = new System.Drawing.Size(253, 26);
-            this.comboBox_status.TabIndex = 24;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(21, 322);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 18);
-            this.label9.TabIndex = 25;
-            this.label9.Text = "Estado";
-            // 
             // id_materiaPrima
             // 
             this.id_materiaPrima.HeaderText = "ID";
@@ -447,6 +410,43 @@
             this.Eliminado.Name = "Eliminado";
             this.Eliminado.Visible = false;
             // 
+            // buttonSave
+            // 
+            this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
+            this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSave.ForeColor = System.Drawing.Color.White;
+            this.buttonSave.Location = new System.Drawing.Point(452, 554);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(144, 42);
+            this.buttonSave.TabIndex = 22;
+            this.buttonSave.Text = "Editar";
+            this.buttonSave.UseVisualStyleBackColor = false;
+            this.buttonSave.Click += new System.EventHandler(this.button_event_click);
+            // 
+            // comboBox_status
+            // 
+            this.comboBox_status.AllowDrop = true;
+            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_status.FormattingEnabled = true;
+            this.comboBox_status.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.comboBox_status.Location = new System.Drawing.Point(24, 343);
+            this.comboBox_status.Name = "comboBox_status";
+            this.comboBox_status.Size = new System.Drawing.Size(253, 26);
+            this.comboBox_status.TabIndex = 24;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(21, 322);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(58, 18);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Estado";
+            // 
             // SupplierDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -470,8 +470,10 @@
             this.Controls.Add(this.textBox_idSupplier);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SupplierDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle de proveedor";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_priority)).EndInit();
             this.groupBox1.ResumeLayout(false);

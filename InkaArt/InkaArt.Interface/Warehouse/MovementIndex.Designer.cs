@@ -310,7 +310,9 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.data_grid_movements);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MovementIndex";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MovementIndex";
             this.Load += new System.EventHandler(this.MovementIndex_Load);
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_movements)).EndInit();

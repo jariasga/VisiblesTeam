@@ -251,8 +251,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView_productProceses);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProductionProcess";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Procesos de Producción del Producto";
             this.Load += new System.EventHandler(this.ProductionProcess_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_productProceses)).EndInit();
