@@ -134,10 +134,5 @@ namespace InkaArt.Interface.Sales
         {
 
         }
-
-        private void textbox_priority_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

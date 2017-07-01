@@ -192,7 +192,6 @@
             this.textbox_priority.Name = "textbox_priority";
             this.textbox_priority.Size = new System.Drawing.Size(112, 30);
             this.textbox_priority.TabIndex = 29;
-            this.textbox_priority.TextChanged += new System.EventHandler(this.textbox_priority_TextChanged);
             this.textbox_priority.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textbox_priority_KeyUp);
             // 
             // label4
