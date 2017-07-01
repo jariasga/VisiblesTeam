@@ -158,7 +158,7 @@ namespace InkaArt.Interface.Warehouse
 
         }
 
-        private string fillGrid(int idFactura) //devuelve el idSupplier
+        private string shinFillGrid()
         {
             PurchaseOrderDetailController controlOrderRm = new PurchaseOrderDetailController();
             DataTable orderList = controlOrderRm.getData();
@@ -170,6 +170,59 @@ namespace InkaArt.Interface.Warehouse
 
             dataGridView_orders.Rows.Clear();
             dataGridView_details.Rows.Clear();
+
+            for (int i = 0; i < orderList.Rows.Count; i++)
+            {
+                if (string.Compare(idOrder, orderList.Rows[i]["id_order"].ToString()) == 0 &&
+                    orderList.Rows[i]["status"].ToString() != "Inactivo")
+                {
+                    encontre_fac = true;
+                    idRM = orderList.Rows[i]["id_raw_material"].ToString();
+                    name = giveme_rawName(idRM);
+                    idSup = orderList.Rows[i]["id_suppliers"].ToString();
+                    if (orderList.Rows[i]["status"].ToString() == "Enviado")//llenar el datagrid de detalle de la orden
+                    {
+
+                        if (canIStoreThisMaterial(idRM))
+                        {
+                            quantity = orderList.Rows[i]["quantity"].ToString();
+                            quantityLeft = howMuchCanIMove(idOrder, idRM);
+                            if (string.Compare(quantityLeft, "falso") == 0)//si no esta en la tabla su valor es igual a quantity
+                                quantityLeft = quantity;
+                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "", "", false, orderList.Rows[i]["id_detail"].ToString());
+                        }
+
+                    }
+                    else
+                    {
+                        if (orderList.Rows[i]["status"].ToString() == "Facturado" || orderList.Rows[i]["status"].ToString() == "Entregado")
+                        {
+                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                        }
+                    }
+
+                }
+            }
+            actualizaOrdenes();
+            if (encontre_fac == false)
+                MessageBox.Show("No se encontró la factura, por favor revise el número.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            return idSup;
+        }
+
+        private string updateWGrid(int idFactura) //devuelve el idSupplier
+        {
+            PurchaseOrderDetailController controlOrderRm = new PurchaseOrderDetailController();
+            DataTable orderList = controlOrderRm.getData();
+
+            string idOrder = comboBox_OC.SelectedItem.ToString();
+            string idRM, idSup, quantity, name, quantityLeft;
+            idRM = quantity = name = idSup = quantityLeft = "";
+            bool encontre_fac = false;
+
+            //dataGridView_orders.Rows.Clear();
+            //dataGridView_details.Rows.Clear();
 
             for (int i = 0; i < orderList.Rows.Count; i++)
             {
@@ -193,21 +246,14 @@ namespace InkaArt.Interface.Warehouse
                             {
                                 //la linea pasa a entregada y verifica el total
                                 actualizaLinea(orderList.Rows[i]["id_detail"].ToString(),idFactura);
-                                actualizaOrdenes();
+                                //actualizaOrdenes();
                                 //orderList = controlOrderRm.getData();
 
                             }
-                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
-                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "","", false,orderList.Rows[i]["id_detail"].ToString());
+                            //dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
+                            //dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "","", false,orderList.Rows[i]["id_detail"].ToString());
                         }
 
-                    }
-                    else
-                    {
-                        if (orderList.Rows[i]["status"].ToString() == "Facturado" || orderList.Rows[i]["status"].ToString() == "Entregado")
-                        {
-                            dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
-                        }
                     }
 
                 }
@@ -250,22 +296,6 @@ namespace InkaArt.Interface.Warehouse
             }
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
-        {
-            int aux_idOc;
-            string idSup = "";
-
-            dataGridView_orders.Rows.Clear();
-            if (int.TryParse(comboBox_OC.SelectedItem.ToString(),out aux_idOc))
-            {
-                //fill grid
-                idSup = fillGrid(0);
-                string nameSup = giveme_supplierName(idSup);
-                textBox_supplier.Text = nameSup;
-           }
-            else
-                MessageBox.Show("Por favor ingrese un numero de factura válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
 
         private int maxInWarehouse(string idWh, string idRm, ref int stockFisico,ref int stockLogico)
         {
@@ -329,13 +359,14 @@ namespace InkaArt.Interface.Warehouse
                                                 controlMovement.insertPurchaseRmMovement(comboBox_OC.SelectedItem.ToString(), idWh, dateTimePicker1.Value.ToShortDateString(), int.Parse(dataGridView_orders.Rows[i].Cells[0].Value.ToString()), cantidad_ingresar);
 
                                                 MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                fillGrid(idFactura);
+                                                //este es el problema
+                                                updateWGrid(idFactura);
                                             }
                                             catch (Exception m)
                                             {
                                                 Console.WriteLine("{0} error", m);
                                             }
-                                            reload();
+                                            //reload();
 
                                         }
                                         else
@@ -361,6 +392,7 @@ namespace InkaArt.Interface.Warehouse
                         MessageBox.Show("Cantidad no válida, por favor verifique el valor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            reload();
         }
 
         private void comboBox_OC_SelectedIndexChanged(object sender, EventArgs e)
@@ -373,7 +405,7 @@ namespace InkaArt.Interface.Warehouse
             if (int.TryParse(comboBox_OC.SelectedItem.ToString(), out aux_idOc))
             {
                 //fill grid
-                idSup = fillGrid(0);
+                idSup = shinFillGrid();
                 string nameSup = giveme_supplierName(idSup);
                 textBox_supplier.Text = nameSup;
             }
@@ -386,13 +418,11 @@ namespace InkaArt.Interface.Warehouse
         {
             int aux_idOc;
             string idSup = "";
-
-            dataGridView_orders.Rows.Clear();
             //TODO que solo salgan las listas "Enviadas"
             if (int.TryParse(comboBox_OC.SelectedItem.ToString(), out aux_idOc))
             {
                 //fill grid
-                idSup = fillGrid(0);
+                idSup = shinFillGrid();
                 string nameSup = giveme_supplierName(idSup);
                 textBox_supplier.Text = nameSup;
             }

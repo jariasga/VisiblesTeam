@@ -420,6 +420,7 @@ namespace InkaArt.Interface.Warehouse
             RawMaterialWarehouseController rmWarehouseController = new RawMaterialWarehouseController();
 
             int registros = dataGridView_RawMaterial.Rows.Count;
+            int seActualizoAlguno = 0;
             for (int i = 0; i < registros; i++)
             {
                 string ide = dataGridView_RawMaterial.Rows[i].Cells[6].Value.ToString();
@@ -445,13 +446,14 @@ namespace InkaArt.Interface.Warehouse
                                 try
                                 {
                                     rmWarehouseController.updateMinMax(id, min, max);
-                                    MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    seActualizoAlguno = 1;
+                                    //MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                                 catch (Exception m)
                                 {
                                     Console.WriteLine("{0} error", m);
                                 }
-                                fillGridRawMaterial();
+                                //fillGridRawMaterial();
                             }
                             else
                                 MessageBox.Show("El valor máximo no puede ser menor al minimo, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -466,6 +468,9 @@ namespace InkaArt.Interface.Warehouse
 
                 }
             }
+            if(seActualizoAlguno==1)
+                MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            fillGridRawMaterial();
         }
     }
 }
