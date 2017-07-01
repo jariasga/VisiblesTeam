@@ -106,6 +106,7 @@ namespace InkaArt.Business.Sales
                 return stock >= quantity;
             }
         }
+
         public float getRightPrice(int natType, string strLocalPrice, string strExportPrice)
         {
             float localPrice = float.Parse(strLocalPrice), exportPrice = float.Parse(strExportPrice);
@@ -129,6 +130,12 @@ namespace InkaArt.Business.Sales
             return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
+        public DataTable GetDevolutions()
+        {
+            // activas y sin completar
+            return orderData.GetDevolutions();
+        }
+
         public void updateReturn(string idDoc)
         {
             DataTable table = GetOrders();
@@ -139,6 +146,7 @@ namespace InkaArt.Business.Sales
             updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
             orderData.execute(updateQuery);
         }
+
         public int getClientID(int orderId)
         {
             return orderData.getClientID(orderId);

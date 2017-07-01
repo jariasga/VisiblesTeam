@@ -168,16 +168,17 @@ namespace InkaArt.Business.Warehouse
             return productionItemMovementData.GetLoteData(queryDocument);
         }
 
-        public NpgsqlDataReader getQueryCreditNote(string idWarehouse, int idCreditNote)
+        public NpgsqlDataReader getQueryDevolution(int id_warehouse, string str_devolution)
         {
-            int intAux, intIdWarehouse = -1;
-            string queryDocument = "";
+            int id_devolution;
+            if (!int.TryParse(str_devolution, out id_devolution)) id_devolution = -1;
 
-            if (!idWarehouse.Equals("")) if (int.TryParse(idWarehouse, out intAux)) intIdWarehouse = int.Parse(idWarehouse);
-            queryDocument = "select B.\"idProduct\",D.\"name\",B.\"quantity\",C.\"currentStock\",C.\"minimunStock\",C.\"maximunStock\"  from inkaart.\"Order\" A,inkaart.\"LineItem\" B, inkaart.\"Product-Warehouse\" C, inkaart.\"Product\" D where A.\"idOrder\" = " + idCreditNote + " and A.\"orderStatus\" = 'registrado' and A.\"type\" = 'devolucion' and A.\"idOrder\" = B.\"idOrder\" and B.\"idProduct\" = C.\"idProduct\" and C.\"state\" = 'Activo' and B.\"idProduct\" = D.\"idProduct\" and C.\"idWarehouse\" = " + intIdWarehouse + " and D.\"status\" = 1;";
-
-            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
-            return productionItemMovementData.GetLoteData(queryDocument);
+            string query = "select B.\"idProduct\",D.\"name\",B.\"quantity\",C.\"currentStock\",C.\"minimunStock\",C.\"maximunStock\"  " + 
+                "from inkaart.\"Order\" A,inkaart.\"LineItem\" B, inkaart.\"Product-Warehouse\" C, inkaart.\"Product\" D " + 
+                "where A.\"idOrder\" = " + id_devolution + " and A.\"orderStatus\" = 'registrado' and A.\"type\" = 'devolucion' and A.\"idOrder\" = B.\"idOrder\" and B.\"idProduct\" = C.\"idProduct\" and C.\"state\" = 'Activo' and B.\"idProduct\" = D.\"idProduct\" and C.\"idWarehouse\" = " + id_warehouse + " and D.\"status\" = 1;";         
+         
+            //Obtenemos el data reader
+            return productionItemMovementData.GetLoteData(query);
         }
 
         public NpgsqlDataReader getProductLote(string id = "",string idLote = "")
