@@ -64,7 +64,7 @@ namespace InkaArt.Data.Algorithm
         public double LossIndex
         {
             get { return loss_index; }
-            set { time_index = value; }
+            set { loss_index = value; }
         }
         public double CostValue
         {
@@ -72,6 +72,7 @@ namespace InkaArt.Data.Algorithm
             set { cost_value = value; }
         }
 
+        //Constructor para un índice leído de base de datos
         public Index(int id_index, Worker worker, Job job, Recipe recipe, double average_breakage, double average_time)
         {
             this.id_index = id_index;
@@ -82,6 +83,22 @@ namespace InkaArt.Data.Algorithm
             this.average_time = average_time;
         }
 
+        //Constructor para un índice ficticio al calcular los índices
+        public Index(Worker worker, Job job, Recipe recipe, double average_breakage, double average_time, double loss_index)
+        {
+            this.id_index = 0;
+            this.worker = worker;
+            this.job = job;
+            this.recipe = recipe;
+            this.average_breakage = average_breakage;
+            this.average_time = average_time;
+            this.breakage_index = 1;
+            this.time_index = 1;
+            this.loss_index = loss_index;
+            this.cost_value = loss_index;
+        }
+
+        //Constructor para crear una copia de un índice preexistente
         public Index(Index old_index)
         {
             this.id_index = old_index.id_index;
@@ -165,17 +182,6 @@ namespace InkaArt.Data.Algorithm
             if (rows_affected == 1) return "El índice se eliminó correctamente. ";
             return "Se encontró más de un índice para eliminar. Hay que chequear la base de datos para verificar que " +
                 "no haya sucedido nada malo. ";
-        }
-
-        /*********************************** ASIGNACIÓN DE TRABAJADORES ***********************************/
-
-        public void CalculateIndexes(double average_breakage_mean, double average_time_mean, double breakage_weight,
-            double time_weight, double product_weight)
-        {
-            this.breakage_index = this.average_breakage / average_breakage_mean;
-            this.time_index = this.average_time / average_time_mean;
-            this.loss_index = (this.breakage_index * breakage_weight + this.time_index * time_weight) / product_weight;
-            this.cost_value = this.loss_index;
         }
 
         public double NextCostValue(double objective_function_value, int construction_iteration)

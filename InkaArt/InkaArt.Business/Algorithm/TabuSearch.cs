@@ -190,7 +190,7 @@ namespace InkaArt.Business.Algorithm
         private void decreaseMiniturn(AssignmentLine assignment_pivot, AssignmentLine assignment, int miniturn_pivot, int miniturn)
         {            
             // dividimos bloques de miniturnos y actualizamos sus valores
-            if (assignment_pivot != null && assignment.Equals(assignment_pivot))
+            if (assignment_pivot != null && assignment != null && assignment.Equals(assignment_pivot))
             {                
                 if (miniturn_pivot == miniturn) return;
 
