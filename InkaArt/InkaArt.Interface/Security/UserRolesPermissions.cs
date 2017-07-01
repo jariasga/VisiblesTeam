@@ -226,7 +226,6 @@ namespace InkaArt.Interface.Security
                 if (role.massiveUpload(dialog.FileName))
                 {
                     MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
                 }
                 else MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             

@@ -11,19 +11,18 @@ namespace InkaArt.Business.Purchases
         private DataSet data;
         private DataTable table;
         private DataRow row;
-        public DataTable getData()
+        public PurchaseOrderDetailController()
         {
             purchaseOrderDetail = new PurchaseOrderDetailData();
             adap = new NpgsqlDataAdapter();
             data = new DataSet();
-
+        }
+        public DataTable getData()
+        {
             adap = purchaseOrderDetail.purchaseOrderDetailAdapter();
-
-            data.Reset();
             data = purchaseOrderDetail.getData(adap, "PurchaseOrderDetail");
-
-            table = new DataTable();
-            table = data.Tables[0];
+            
+            table = data.Tables["PurchaseOrderDetail"];
             return table;
         }
         public void insertData(int id_order, int id_raw_material, int id_suppliers,int quantity,double amount,double igv,int factura,string status)
@@ -51,8 +50,6 @@ namespace InkaArt.Business.Purchases
             purchaseOrderDetail.execute(string.Format("UPDATE \"inkaart\".\"PurchaseOrderDetail\" " +
                         "SET quantity = {0}, amount = {1}, igv = {2}, status='{3}'" +
                         "WHERE id_detail = {4}", quantity, amount, igv,estado, id_detail));
-
-           purchaseOrderDetail.updateData(data, adap, "PurchaseOrderDetail");
         }
 
         public void updateLineaEntregada(int id_detail, int id_factura)

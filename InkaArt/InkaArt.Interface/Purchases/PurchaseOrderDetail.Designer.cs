@@ -113,6 +113,7 @@
             // dateTimePicker_creation
             // 
             this.dateTimePicker_creation.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dateTimePicker_creation.CustomFormat = "";
             this.dateTimePicker_creation.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_creation.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_creation.Location = new System.Drawing.Point(12, 184);
@@ -177,6 +178,7 @@
             // dateTimePicker_delivery
             // 
             this.dateTimePicker_delivery.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dateTimePicker_delivery.CustomFormat = "";
             this.dateTimePicker_delivery.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_delivery.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_delivery.Location = new System.Drawing.Point(13, 252);
