@@ -59,6 +59,15 @@ namespace InkaArt.Business.Warehouse
             stockDocument.execute(updateQuery);
         }
 
+        public void updateReturn(int id_stock, int pending)
+        {
+            string updateQuery;
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"StockDocument\" SET product_stock = " + pending +
+                " WHERE id = " + id_stock + ";";
+            stockDocument.execute(updateQuery);
+        }
+
         public void insertReturn(string idDoc, string idProd, int cant)
         {
 
@@ -92,6 +101,15 @@ namespace InkaArt.Business.Warehouse
             table = data.Tables["StockDocument"];
             stockDocument.execute(string.Format("INSERT INTO \"inkaart\".\"StockDocument\"(\"idDocument\", \"documentType\", product_id, product_stock, product_type) VALUES({0},  'FACTURA', {1}, {2}, 'materia_prima');", idFactura ,idProducto, cantStr));
 
+        }
+
+        public void updateInsertDevolution(int id_stock, int id_devolution, int id_product, int to_return, int total)
+        {
+            int pending = total - to_return;
+            if (id_stock > 0)
+                updateReturn(id_stock, pending);
+            else
+                insertReturn(id_devolution.ToString(), id_product.ToString(), pending);
         }
     }
 }

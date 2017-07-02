@@ -15,283 +15,178 @@ namespace InkaArt.Interface.Warehouse
 {
     public partial class ReturnMovement : Form
     {
-        string typeMovement = "";
-
-        string idWarehouesOrigin = "";
-        string nameWarehouseOrigin = "";
-        private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
-        private ProductionItemWarehouseMovementController productionItemWarehouseMovementController = new ProductionItemWarehouseMovementController();
+        int id_warehouse;
+        DataTable devolutions;
+        DataTable devolution_lines;
+        int id_devolution;
 
 
-        public ReturnMovement()
-        {
-            InitializeComponent();
-        }
+        ProductWarehouseController control_pwh = new ProductWarehouseController();
+        StockDocumentController control_stock = new StockDocumentController();
+        ProductionMovementMovementController control_mov = new ProductionMovementMovementController();
+        OrderController control_order = new OrderController();
 
         public ReturnMovement(string idWarehouse, string nameWarehouse, string typeMovement)
         {
-            this.idWarehouesOrigin = idWarehouse;
-            this.nameWarehouseOrigin = nameWarehouse;
-            this.typeMovement = typeMovement;
             InitializeComponent();
-            textBox6.Text = nameWarehouse;
-            textBox5.Text = idWarehouse;
+
+            int.TryParse(idWarehouse, out id_warehouse);
+            grid_devolution.AutoGenerateColumns = false;
+            grid_devolution.Rows.Clear();
+            grid_dev_detail.AutoGenerateColumns = false;
+            grid_dev_detail.Rows.Clear();
+            fillCombo();
+        }        
+
+        // fill
+
+        private void fillCombo()
+        {
+            OrderController control = new OrderController();
+
+            devolutions = control.GetDevolutions();            
+            combobox_dev.DataSource = devolutions;
+            combobox_dev.ValueMember = "idOrder";
         }
 
-
-        private int validarEntero(string entero)
+        private void fillDetailGrid()
         {
-            int enteroNuevo = -1;
-            try
-            {
-                enteroNuevo = Convert.ToInt32(entero);
-            }
-            catch
-            {
-                MessageBox.Show("Por favor ingrese un valor entero y positivo para el número de nota de crédito");
-                return -1;
-            }
-            if (enteroNuevo < 0)
-            {
-                MessageBox.Show("Por favor ingrese un valor positivo para la nota de crédito");
-                return -1;
-            }
-            return enteroNuevo;
+            OrderController order_controller = new OrderController();
+            devolution_lines = order_controller.GetDevolutionLines(id_devolution);
+            grid_dev_detail.DataSource = devolution_lines;
         }
 
-        private int hallaPorDevolver(string idProduct, int cantDev)
+        private void fillDevolutionGrid()
         {
-            int retornar = cantDev;
-            StockDocumentController control = new StockDocumentController();
-            DataTable stockList = control.getData();
+            grid_devolution.DataSource = devolution_lines;
 
-            for (int i = 0; i < stockList.Rows.Count; i++)
+            foreach (DataGridViewRow row in grid_devolution.Rows)
             {
-                if (stockList.Rows[i]["idDocument"].ToString() == textBox3.Text
-                    && stockList.Rows[i]["documentType"].ToString() == "DEVOLUCION"
-                    && stockList.Rows[i]["product_id"].ToString() == idProduct
-                    && stockList.Rows[i]["product_type"].ToString() == "producto")
+                if (row.Cells[idWarehouse.Index].Value == null || row.Cells[product_stock.Index].Value == null)
+                    continue;
+
+                if (row.Cells[idWarehouse.Index].Value.ToString() != id_warehouse.ToString())
                 {
-                    retornar = int.Parse(stockList.Rows[i]["product_stock"].ToString());
-                    break;
+                    grid_devolution.Rows.Remove(row);
+                }
+                else if((int) row.Cells[product_stock.Index].Value < 0)
+                {
+                    row.Cells[product_stock.Index].Value = row.Cells[total_quantity.Index].Value;
                 }
             }
 
-            return retornar;
+            if (grid_devolution.Rows.Count <= 0)
+                MessageBox.Show("No hay productos que este almacén pueda devolver para la devolución ingresada.");
         }
 
-        private void updateInsertDevueltos(string idProduct, int cantADev, int cantDev)
-        {
-            StockDocumentController control = new StockDocumentController();
-            DataTable stockList = control.getData();
+        // eventos
 
-            int encontrado = 0;
-            for (int i = 0; i < stockList.Rows.Count; i++)
-            {
-                if (stockList.Rows[i]["idDocument"].ToString() == textBox3.Text
-                    && stockList.Rows[i]["documentType"].ToString() == "DEVOLUCION"
-                    && stockList.Rows[i]["product_id"].ToString() == idProduct
-                    && stockList.Rows[i]["product_type"].ToString() == "producto")
-                {
-                    //update
-                    control.updateReturn(textBox3.Text, idProduct, cantDev - cantADev);
-                    encontrado = 1;
-                    break;
-                }
-            }
-            if (encontrado == 0)//insertar por primera vez
-            {
-                //insert
-                control.insertReturn(textBox3.Text, idProduct, cantDev - cantADev);
-
-            }
-
-        }
-
-        private void actualizaDocumentos()
-        {
-            OrderController controlOrder = new OrderController();
-            //revisar
-            DataTable orderList = controlOrder.GetOrders();
-
-            //for del datagrid
-            int actualizar = 0;
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                if (dataGridView1.Rows[i].Cells[7].Value != null && int.Parse(dataGridView1.Rows[i].Cells[7].Value.ToString()) != 0)
-                {
-                    actualizar = 1;
-                    break;
-                }
-            if (actualizar == 0)
-                controlOrder.updateReturn(textBox3.Text);
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int numNota = 0;
-            string notaCredStr;
-            NpgsqlDataReader datos;
-
-            //Validación para que el número de nota de crédito sea entero y positivo
-            notaCredStr = textBox3.Text;
-            if ((numNota = validarEntero(notaCredStr)) == -1)
-            {
-                return;
-            }
-
-            //Buscar la nota de crédito en Order
-            datos = productionItemMovementController.getQueryCreditNote(idWarehouesOrigin, numNota);
-            int rowIndex = 0;
-
-            //Limpiamos el datagridview
-            this.dataGridView1.Rows.Clear();
-
-            //Muestra los datos en el gridview
-            while (datos.Read())
-            {
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];//idProduct
-                row.Cells[1].Value = datos[1];//Nombre
-                row.Cells[2].Value = datos[2];//Cantidad total a devolver
-                row.Cells[3].Value = datos[3];//Stock en almacén
-                row.Cells[4].Value = datos[4];//MinimunStock
-                row.Cells[5].Value = datos[5];//MaximunStock
-                row.Cells[6].Value = "";
-                //REVISAR
-                row.Cells[7].Value = hallaPorDevolver(datos[0].ToString(), int.Parse(datos[2].ToString()));
-                row.Cells[8].Value = false;
-                //TODO
-                //verificacion de cells 7 si es 0 actualizar el estado de la devolucion
-                dataGridView1.Rows.Add(row);
-                rowIndex++;
-            }
-            productionItemMovementController.closeConnection();
-            if (rowIndex == 0)
-            {
-                MessageBox.Show("No hay productos que este almacén pueda devolver para la nota de crédito ingresada.");
-                return;
-            }
-            actualizaDocumentos();
-
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void buttonCancelClick(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSaveClick(object sender, EventArgs e)
         {
-            int idProd = 0, cantMov = 0, numRows = 0, maxMov = 0, exito = 0, numRows2 = 0, availableToMove = 0, idReturn = 0;
-            List<int> idProducts = new List<int>();
+            int id, quantity, max, current, pending, stock_id;
+            int num_rows = 0;
+            List<int> id_products = new List<int>();
             List<int> quantities = new List<int>();
-            string nameProd = "";
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                bool s = Convert.ToBoolean(row.Cells[8].Value);
 
-                if (s == true)
+            foreach (DataGridViewRow row in grid_devolution.Rows)
+            {
+                num_rows++;
+                if (!Convert.ToBoolean(row.Cells[update.Index].Value) || row.Cells[to_return.Index].Value == null)
+                    continue;
+
+                id = Convert.ToInt32(row.Cells[id_product.Index].Value);
+                max = Convert.ToInt32(row.Cells[max_stock.Index].Value);
+                current = Convert.ToInt32(row.Cells[current_stock.Index].Value);
+                quantity = Convert.ToInt32(row.Cells[to_return.Index].Value);
+                stock_id = (int) row.Cells[id_stock.Index].Value;
+                pending = Convert.ToInt32(row.Cells[product_stock.Index].Value);
+                pending = pending < 0 ? 0 : pending;                          
+
+                if (quantity <= Math.Min(max, pending))
                 {
-                    idProd = Convert.ToInt32(row.Cells[0].Value);
-                    nameProd = Convert.ToString(row.Cells[1].Value);
-                    try
-                    {
-                        cantMov = Convert.ToInt32(row.Cells[6].Value);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Favor de ingresar un valor entero para el número de productos a mover. Linea: " + (numRows + 1));
-                        return;
-                    }
-                    if (cantMov < 0)
-                    {
-                        MessageBox.Show("Línea :" + numRows + " Favor de ingresar un valor válido para la cantidad a mover");
-                        continue;
-                    }
-                    maxMov = Convert.ToInt32(row.Cells[2].Value);
-                    try
-                    {
-                        idReturn = Convert.ToInt32(textBox3.Text);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Favor de ingresar un valor entero para el número de lote de producción");
-                        return;
-                    }
-                    if (idReturn < 0)
-                    {
-                        MessageBox.Show("Favor de ingresar un valor válido para el número de pedido");
-                        return;
-                    }
-                    if (cantMov <= maxMov && cantMov <= int.Parse(row.Cells[7].Value.ToString()))
-                    {
-                        //Se valida que exista la materia prima, el almacén, también que exista la relación materiaPrima-almacén
-                        int intIdWarehouse = 0;
-                        intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
+                    // tabla Product-Warehouse: Aumentar stock logico y fisico
+                    control_pwh.updateOnlyPhStock(id_warehouse.ToString(), id.ToString(), current + quantity);
+                    // tabla StockDocument: Reducir por devolver
+                    control_stock.updateInsertDevolution(stock_id, id_devolution, id, quantity, pending);
+                    // tabla Movement: Insertar                    
+                    control_mov.insertMovDev(id_devolution, 2, id_warehouse, 8, 8, id.ToString(), 1, quantity);
 
-                        availableToMove = productionItemMovementController.availableReturn(idProd, intIdWarehouse);
-                        if (availableToMove != 1)
-                        {
-                            return;
-                        }
-
-                        //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-                        //exito = productionItemWarehouseMovementController.updateDataProduct(idProd, intIdWarehouse, cantMov, "Entrada", "OK");
-
-                        //mi forma de aumentar stock logico y fisico
-                        ProductWarehouseController controlpwh = new ProductWarehouseController();
-                        DataTable pwhList = controlpwh.getData();
-                        controlpwh.updateOnlyPhStock(intIdWarehouse.ToString(), idProd.ToString(), int.Parse(row.Cells[3].Value.ToString()) + cantMov);
-                        //update o insert en la tabla stockDocument
-                        updateInsertDevueltos(idProd.ToString(), cantMov, int.Parse(row.Cells[7].Value.ToString()));
-
-                        //DONE
-                        //añadir en la tabla movimientos
-                        ProductionMovementMovementController controlM = new ProductionMovementMovementController();
-                        controlM.insertMovDev(int.Parse(textBox3.Text), 2, intIdWarehouse, 8, 8, idProd.ToString(), 1, cantMov);
-
-
-                        idProducts.Add(idProd);
-                        quantities.Add(cantMov);
-
-
-                        if (exito == 1)
-
-                        {
-                            //Aumentar stock físico y lógico del producto
-                            productionItemMovementController.updateData(idProd, cantMov, typeMovement);
-                            //Grabar movimiento
-                            int movemenType = 2; //Indica que es una entrada
-                            int movementReason = 8;//Indica que es un movimiento por producción
-                            int documentTypes = 8;//Indica que no tiene un documento relacionado para validarlo
-                            int productType = 1;//0:materia prima | 1:producto
-                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
-                            productionItemWarehouseMovementController.insertMovement(idReturn, movemenType, Convert.ToInt32(idWarehouesOrigin), movementReason, documentTypes, isExchange, idProd, cantMov, productType);
-                            numRows2++;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + ". Solo se puede quitar " + maxMov + " items.");
-                    }
-
+                    id_products.Add(id);
+                    quantities.Add(quantity);
                 }
-                numRows++;
+                else
+                    MessageBox.Show("Error en la fila " + num_rows + ": Para el producto:" + row.Cells[name.Index].Value.ToString() + ". Solo se puede quitar " + Math.Min(max, pending) + " items.");
             }
 
-            if (idProducts.Count > 0)
+            if (id_products.Count > 0)
             {
-                idProducts.Add(0);
-                quantities.Add(0);
-                OrderController controlOrder = new OrderController();
-                int[] arr_ids = idProducts.ToArray();
-                int[] quants = quantities.ToArray();
-                controlOrder.AddSaleDocumentW(int.Parse(textBox3.Text), arr_ids, quants, 1);
+                MessageBox.Show("Se actualizaron: " + id_products.Count + " Registros.");                
+                fillDevolutionGrid();
+                id_products.Add(0);
+                quantities.Add(0);                
+                control_order.AddSaleDocumentW(id_devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
+                updateDevolution();
+
+                this.Close();
             }
-            //productionItemMovementController.sacarMateria();
-            MessageBox.Show("Se actualizaron: " + numRows2 + " Registros.");
-            this.Close();
+            else
+                MessageBox.Show("Ingrese los datos para registrar el movimiento");            
         }
+        
+        private void gridDevolutionCellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0 || grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value == null)
+                return;
+            if(!validatePositiveInt(grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value.ToString()))
+                grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value = null;
+        }
+        
+        private void comboboxDevSelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataRow devolution = ((DataRowView) combobox_dev.SelectedItem).Row;
+            date_dev.Value = DateTime.Parse(devolution["deliveryDate"].ToString()); // formato
+            textbox_client.Text = devolution["name"].ToString();
+            id_devolution = int.Parse(devolution["idOrder"].ToString()); ;
+
+            fillDetailGrid();
+            fillDevolutionGrid();
+        }
+
+        // otros 
+                
+        private void updateDevolution()
+        {       
+            bool completed = true;
+
+            foreach(DataGridViewRow row in grid_devolution.Rows)
+            {
+                if (row.Cells[product_stock.Index].Value == null)
+                    continue;
+
+                completed &= (int)row.Cells[product_stock.Index].Value == 0;
+                if ((int) row.Cells[product_stock.Index].Value == 0)
+                    control_order.updateDevolutionLine((int)row.Cells[id_line.Index].Value);
+            }
+            if (completed)
+                control_order.updateDevolution(id_devolution);
+        }
+
+        private bool validatePositiveInt(string str_value)
+        {
+            int int_value;
+
+            if (!int.TryParse(str_value, out int_value))
+                MessageBox.Show("Favor de ingresar un valor entero");
+            else if (int_value <= 0)
+                MessageBox.Show("Favor de ingresar un valor positivo mayor a cero");
+
+            return int_value > 0;
+        }
+
     }
 }
