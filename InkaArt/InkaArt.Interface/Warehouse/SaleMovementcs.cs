@@ -134,16 +134,16 @@ namespace InkaArt.Interface.Warehouse
 
                     maxMov = Convert.ToInt32(row.Cells[4].Value);
 
-                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idPedido, typeMovement, "Venta", "Producto","Venta");
+                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idPedido, typeMovement, "VENTA", "Producto", "VENTA");
 
                     if (exito2 == 1)
                     {
                         //Aumentar stock físico y lógico del almacén 
                         movementController.updateProductWarehouse(idProd, idWare, cantMov, typeMovement, "Producto");
                         //Aumentar stock físico y lógico del producto
-                        movementController.updateProductStock(idProd, cantMov, typeMovement,"Venta");
+                        movementController.updateProductStock(idProd, cantMov, typeMovement, "VENTA");
                         //Actualizar el stock que queda para mover
-                        movementController.updateStockDocument(idPedido, idProd, maxMov, cantMov, "Venta");
+                        movementController.updateStockDocument(idPedido, idProd, maxMov, cantMov, "VENTA");
 
                         int movemenType = 13; //Indica que es una salida
                         int movementReason = 2;//Indica que es un movimiento por venta
@@ -169,7 +169,6 @@ namespace InkaArt.Interface.Warehouse
             if (exito > 0)
             {
                 MessageBox.Show("" + exito + " Operaciones realizadas con éxito.");
-                this.Close();
             }
             else
             {
@@ -261,7 +260,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
 
-            datos = productionItemMovementController.getProductOrder(id, textBox5.Text);
+            datos = movementController.getProductStockSales(id, textBox5.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
@@ -279,7 +278,7 @@ namespace InkaArt.Interface.Warehouse
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
-            productionItemMovementController.closeConnection();
+            
             if (rowIndex == 0)
             {
                 MessageBox.Show("No hay productos que este almacén pueda devolver para la orden de pedido ingresada.");

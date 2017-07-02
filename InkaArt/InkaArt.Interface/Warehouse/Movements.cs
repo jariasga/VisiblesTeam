@@ -171,9 +171,9 @@ namespace InkaArt.Interface.Warehouse
 
         private void combobox_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string reason = combobox_reason.Text;
+            string reason = combobox_type.Text;
 
-            if("reason" == "Entrada")
+            if(reason == "Entrada")
             {
                 combobox_reason.Items.Clear();
                 combobox_reason.Items.Add("Compra");
@@ -182,7 +182,7 @@ namespace InkaArt.Interface.Warehouse
                 combobox_reason.Items.Add("Devolución");
                 combobox_reason.Items.Add("Diferencia de stock");
             }
-            else if ("reason" == "Salida")
+            else if (reason == "Salida")
             {
                 combobox_reason.Items.Clear();
                 combobox_reason.Items.Add("Venta");
@@ -190,7 +190,7 @@ namespace InkaArt.Interface.Warehouse
                 combobox_reason.Items.Add("Rotura");
                 combobox_reason.Items.Add("Diferencia de stock");
             }
-            else if ("reason" == "Entrada/Salida")
+            else if (reason == "Entrada/Salida")
             {
                 combobox_reason.Items.Clear();
                 combobox_reason.Items.Add("Traslado");

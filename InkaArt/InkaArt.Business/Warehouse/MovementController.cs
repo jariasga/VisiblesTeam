@@ -21,22 +21,22 @@ namespace InkaArt.Business.Warehouse
             movement_data = new MovementData();
         }
 
-        private void insertaWhereTexto(string query,string fieldName, string name,int existeWhere)
+        private void insertaWhereTexto(ref string query,string fieldName, string name,ref int existeWhere)
         {
             if (name != "")
             {
                 if (existeWhere == 1)
                 {
-                    query = query + " and \"" + fieldName + "\" = " + name;
+                    query = query + " and \"" + fieldName + "\" = " + "'" + name + "'";
                 }
                 else
                 {
-                    query = query + " where \"" + fieldName + "\" = " + name;
+                    query = query + " where \"" + fieldName + "\" = " + "'" + name + "'";
                     existeWhere = 1;
                 }
             }
         }
-        private void insertaWhereInt(string query, string fieldName, int entero, int existeWhere)
+        private void insertaWhereInt(ref string query, string fieldName, int entero,ref int existeWhere)
         {
             if (entero != -2)
             {
@@ -70,10 +70,10 @@ namespace InkaArt.Business.Warehouse
             
             query = "select \"idWarehouse\", \"name\",\"address\", \"state\" from inkaArt.\"Warehouse\" ";
 
-            insertaWhereInt(query, "idWarehouse", idWarehouse, existeWhere);
-            insertaWhereTexto(query, "name", name, existeWhere);
-            insertaWhereTexto(query, "address",address, existeWhere);
-            insertaWhereTexto(query, "state","Activo", existeWhere);
+            insertaWhereInt(ref query, "idWarehouse", idWarehouse,ref existeWhere);
+            insertaWhereTexto(ref query, "name", name,ref existeWhere);
+            insertaWhereTexto(ref query, "address",address,ref existeWhere);
+            insertaWhereTexto(ref query, "state","Activo",ref existeWhere);
             query = query + ";";
 
             return movement_data.executeQueryData(query);
@@ -84,7 +84,7 @@ namespace InkaArt.Business.Warehouse
             NpgsqlDataReader dr;
             string query = "";
 
-            query = "select \"description\" from inkaArt.\"MovementName\";";
+            query = "select \"description\" from inkaArt.\"MovementType\";";
             dr = movement_data.executeQueryData(query);
             return dr;
         }
@@ -162,8 +162,12 @@ namespace InkaArt.Business.Warehouse
         {
             int cantidadPorEntregar = 0;
             string query = "";
+            NpgsqlDataReader dr;
 
-            query = "select \"cantmoved\" from inkaart.\"StockDocument\" where \"idDocument\" = " + idDoc + " and \"product_id\" = " + idProd + " and \"documentType\" = '" + stockMovement + "';";
+            query = "select \"product_stock\" from inkaart.\"StockDocument\" where \"idDocument\" = " + idDoc + " and \"product_id\" = " + idProd + " and \"documentType\" = '" + stockMovement + "';";
+            dr = movement_data.executeQueryData(query);
+            dr.Read();
+            cantidadPorEntregar = Convert.ToInt32(dr[0]);
 
             if (cantidadPorEntregar - numMov < 0)
             {
@@ -172,6 +176,33 @@ namespace InkaArt.Business.Warehouse
             }
 
             return 1;
+        }
+
+        private int verifyUpdateProduct(int idProd,string productType)
+        {
+            string query = "";
+            NpgsqlDataReader dr;
+            int existe = 0;
+
+            //Se obtiene la query para ver los stocks máximos y mínimos
+            if (productType == "Producto")
+            {
+                query = "select count(*) from inkaart.\"Product\" where \"idProduct\" = " + idProd + " and \"status\" = 1;";
+            }
+            else if (productType == "Materia Prima")
+            {
+                query = "select count(*) from inkaart.\"RawMaterial\" where \"id_raw_material\" = " + idProd + " and \"status\" = 'Activo';";
+            }
+            dr = movement_data.executeQueryData(query);
+            dr.Read();
+            existe = Convert.ToInt32(dr[0]);
+            if (existe == 0) {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
         }
 
         //Todos los movimientos verifican esto
@@ -189,6 +220,12 @@ namespace InkaArt.Business.Warehouse
                 if (res1 == -1) return -1;
             }
 
+            //Se verifica que exista el producto
+            res1 = verifyUpdateProduct(idProd, productType);
+            if (res1 == -1) return -1;
+
+            //Se verifica que exista la relación producto-warehouse
+
             return 1;
         }
 
@@ -204,10 +241,11 @@ namespace InkaArt.Business.Warehouse
                 query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
             }else if (productType == "Materia Prima")
             {
-                query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+                query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
             }
             //Se sacan los valores
             dr = movement_data.executeQueryData(query);
+            dr.Read();
             stockAct = Convert.ToInt32(dr[0]);
             minStock = Convert.ToInt32(dr[1]);
             maxStock = Convert.ToInt32(dr[2]);
@@ -216,17 +254,17 @@ namespace InkaArt.Business.Warehouse
             //Verificar los stock mínimo y máximos
             if (typeMovement == "Entrada")
             {
-                if (typeReason == "Produccion")
+                if (typeReason.ToUpper() == "PRODUCCION")
                 {
                     stockAct = stockAct + numMov;
                     logicStock = logicStock + numMov;
                 }
-                if (typeReason == "Hallazgo")
+                if (typeReason.ToUpper() == "HALLAZGO")
                 {
                     stockAct = stockAct + numMov;
                     logicStock = logicStock + numMov;
                 }
-                if (typeReason == "Devolucion")
+                if (typeReason.ToUpper() == "DEVOLUCION")
                 {
                     stockAct = stockAct + numMov;
                     logicStock = logicStock + numMov;
@@ -234,16 +272,16 @@ namespace InkaArt.Business.Warehouse
             }
             if (typeMovement == "Salida")
             {
-                if (typeReason == "Produccion")
+                if (typeReason.ToUpper() == "PRODUCCION")
                 {
                     stockAct = stockAct - numMov;
                 }
-                if (typeReason == "Rotura")
+                if (typeReason.ToUpper() == "ROTURA")
                 {
                     stockAct = stockAct - numMov;
                     logicStock = logicStock - numMov;
                 }
-                if (typeReason == "Venta")
+                if (typeReason.ToUpper() == "VENTA")
                 {
                     stockAct = stockAct - numMov;
                 }
@@ -277,6 +315,8 @@ namespace InkaArt.Business.Warehouse
             int newStock = 0, cantMoved = 0;
             NpgsqlDataReader dr;
             //la variable movementReason podrá ser 'LOTE', 'FACTURA', 'VENTA', ETC.
+
+            //En el caso de que no exista el item en la tabla stock-document este se agregará
 
             newStock = cantidadPorEntregar - movement;
             query = "select \"cantmoved\" from inkaart.\"StockDocument\" where \"idDocument\" = " + idDoc + " and \"product_id\" = " + idProd + " and \"documentType\" = '" + stockMovement + "';";
@@ -369,7 +409,7 @@ namespace InkaArt.Business.Warehouse
             }
         }
 
-        private int getNewStock(int idProd, int idWarehouse, int numMov, string typeMovement, string productType, int stockAct)
+        private int getNewStock(int idProd, int idWarehouse, int numMov, string typeMovement, string productType,ref int stockAct)
         {
             NpgsqlDataReader dr;
             int maxStock = -1, minStock = 9999;//Stock físico
@@ -382,10 +422,11 @@ namespace InkaArt.Business.Warehouse
             }
             else if (productType == "Materia Prima")
             {
-                query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+                query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
             }
             //Se sacan los valores
             dr = movement_data.executeQueryData(query);
+            dr.Read();
             stockAct = Convert.ToInt32(dr[0]);
             minStock = Convert.ToInt32(dr[1]);
             maxStock = Convert.ToInt32(dr[2]);
@@ -419,16 +460,136 @@ namespace InkaArt.Business.Warehouse
             int filModified = 0;
             //ProductType = "Producto" o "Materia Prima"
 
-            filModified = getNewStock(idProd, idWarehouse, numMov, typeMovement, productType, stockAct);
+            filModified = getNewStock(idProd, idWarehouse, numMov, typeMovement, productType,ref stockAct);
             
             string updateQuery = "";
             if (filModified > 0)
             {
-                updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + " ;";
-                movement_data.updateData(updateQuery);
+                if (productType == "Producto")
+                {
+                    updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+                    movement_data.updateData(updateQuery);
+                }
+                if (productType == "Materia Prima")
+                {
+                    updateQuery = "update inkaart.\"RawMaterial-Warehouse\" set \"currentStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
+                    movement_data.updateData(updateQuery);
+                }
             }
             
             return 1;
+        }
+
+        private int existeElementoInt(int elemento, int[] arreglo, int cantidad)
+        {
+            int tam = 0;
+
+            while (tam < cantidad)
+            {
+                if (elemento == arreglo[tam]) return 1;
+                tam++;
+            }
+            return -1;
+        }
+
+        public NpgsqlDataReader getProductStockSales(string id = "", string idDoc = "")
+        {
+            int intId = -1, intAux, intIdLote = -1, intIdWarehouse = -1, existe = 0;
+            string query = "";
+
+            if (!idDoc.Equals("")) if (int.TryParse(idDoc, out intAux)) intIdLote = int.Parse(idDoc);
+            query = "select product_id from inkaart.\"StockDocument\" where \"documentType\" = 'VENTA' and \"idDocument\" = " + idDoc + " order by 1 asc;";
+            NpgsqlDataReader dr = movement_data.executeQueryData(query);
+
+            query = "select B.\"idProduct\", \"quantity\" as \"product_stock\" FROM inkaart.\"Order\" A, inkaart.\"LineItem\" B WHERE A.\"idOrder\" = " + intIdLote + " and A.\"idOrder\" = B.\"idOrder\" and A.\"bdStatus\" = 1 order by 1 asc;";
+            NpgsqlDataReader dr2 = movement_data.executeQueryData(query);
+            int fin = 0, tamDr1 = 0, tamDr2 = 0;
+            int[] arrDr1 = new int[500];
+            int[] arrDr2 = new int[500];
+
+            while (dr.Read())
+            {
+                arrDr1[tamDr1] = Convert.ToInt32(dr[0]);
+                tamDr1++;
+            }
+            while (dr2.Read())
+            {
+                arrDr2[tamDr2] = Convert.ToInt32(dr2[0]);
+                tamDr2++;
+            }
+            for (int i = 0; i < tamDr2; i++)
+            {
+                existe = existeElementoInt(arrDr2[i], arrDr1, tamDr1);
+                if (existe == -1)//Cuando no existe el producto se agrega a la tabla
+                {
+                    query = "insert into inkaart.\"StockDocument\"  (\"idDocument\", \"documentType\", \"product_id\",\"product_stock\") select B.\"idOrder\", 'VENTA', B.\"idProduct\", B.\"quantity\" FROM inkaart.\"Order\" A, inkaart.\"LineItem\" B WHERE A.\"idOrder\" = " + intIdLote + " and B.\"idProduct\" = " + arrDr2[i] + " and A.\"idOrder\" = B.\"idOrder\";";
+                    movement_data.updateData(query);
+                }
+            }
+            for (int i = 0; i < tamDr1; i++)
+            {
+                existe = existeElementoInt(arrDr1[i], arrDr2, tamDr2);
+                if (existe == -1)//Cuando un producto fue eliminado se borra de la tabla
+                {
+                    query = "delete from inkaart.\"StockDocument\" where \"idDocument\" = " + intIdLote + " and \"documentType\" = 'VENTA' and \"product_id\" = " + arrDr1[i] + ";";
+                    movement_data.updateData(query);
+                }
+            }
+            if (!id.Equals("")) if (int.TryParse(id, out intAux)) intIdWarehouse = int.Parse(id);
+
+            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
+            query = "select A.\"idProduct\", E.\"name\", A.\"quantity\", D.\"currentStock\", C.\"product_stock\" from inkaart.\"LineItem\" A,inkaart.\"Order\" B, inkaart.\"StockDocument\" C, inkaart.\"Product-Warehouse\" D, inkaart.\"Product\" E where A.\"idOrder\" = B.\"idOrder\" and A.\"idProduct\" = E.\"idProduct\" and A.\"idOrder\" = C.\"idDocument\" and A.\"idOrder\" = " + intIdLote + " and C.\"product_id\" = A.\"idProduct\" and C.\"documentType\" = 'VENTA' and D.\"idWarehouse\" = " + intIdWarehouse + " and D.\"idProduct\" = A.\"idProduct\" and D.\"state\" = 'Activo';";
+            return movement_data.executeQueryData(query);
+        }
+
+        public NpgsqlDataReader getProductStock(string id = "", string idLote = "")
+        {
+            int intId = -1, intAux, intIdLote = -1, intIdWarehouse = -1, existe = 0;
+            string query = "";
+
+            if (!idLote.Equals("")) if (int.TryParse(idLote, out intAux)) intIdLote = int.Parse(idLote);
+            query = "select product_id from inkaart.\"StockDocument\" where \"documentType\" = 'LOTE' and \"idDocument\" = " + idLote + " order by 1 asc;";
+            NpgsqlDataReader dr = movement_data.executeQueryData(query);
+
+            query = "select id_product, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\" WHERE id_lote = " + intIdLote + " order by 1 asc;";
+            NpgsqlDataReader dr2 = movement_data.executeQueryData(query);
+            int fin = 0, tamDr1 = 0, tamDr2 = 0;
+            int[] arrDr1 = new int[500];
+            int[] arrDr2 = new int[500];
+
+            while (dr.Read())
+            {
+                arrDr1[tamDr1] = Convert.ToInt32(dr[0]);
+                tamDr1++;
+            }
+            while (dr2.Read())
+            {
+                arrDr2[tamDr2] = Convert.ToInt32(dr2[0]);
+                tamDr2++;
+            }
+            for (int i = 0; i < tamDr2; i++)
+            {
+                existe = existeElementoInt(arrDr2[i], arrDr1, tamDr1);
+                if (existe == -1)//Cuando no existe el producto se agrega a la tabla
+                {
+                    query = "insert into inkaart.\"StockDocument\"  (\"idDocument\", \"documentType\", \"product_id\",\"product_stock\") select id_lote as idDocument, 'LOTE', id_product as product_id, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\" WHERE id_lote = " + intIdLote + " and \"id_product\" = " + arrDr2[i] + ";";
+                    movement_data.updateData(query);
+                }
+            }
+            for (int i = 0; i < tamDr1; i++)
+            {
+                existe = existeElementoInt(arrDr1[i], arrDr2, tamDr2);
+                if (existe == -1)//Cuando un producto fue eliminado se borra de la tabla
+                {
+                    query = "delete from inkaart.\"StockDocument\" where \"idDocument\" = " + intIdLote + " and \"documentType\" = 'LOTE' and \"product_id\" = " + arrDr1[i] + ";";
+                    movement_data.updateData(query);
+                }
+            }
+            if (!id.Equals("")) if (int.TryParse(id, out intAux)) intIdWarehouse = int.Parse(id);
+
+            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
+            query = "select A.\"id_lote\", A.\"id_product\", B.\"name\", A.\"produced\", D.\"currentStock\", C.\"product_stock\" from inkaart.\"RatioPerDay\" A,inkaart.\"Product\" B, inkaart.\"StockDocument\" C, inkaart.\"Product-Warehouse\" D where A.\"id_product\" = B.\"idProduct\" and A.\"id_lote\" = C.\"idDocument\" and A.\"id_lote\" = " + intIdLote + " and C.\"product_id\" = A.id_product and C.\"documentType\" = 'LOTE' and D.\"idWarehouse\" = " + intIdWarehouse + " and D.\"idProduct\" = A.\"id_product\" and D.\"state\" = 'Activo';";
+            return movement_data.executeQueryData(query);
         }
 
     }

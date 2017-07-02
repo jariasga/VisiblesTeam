@@ -139,7 +139,6 @@ namespace InkaArt.Interface.Warehouse
             }
             //productionItemMovementController.sacarMateria();
             MessageBox.Show("Se actualizaron: " + numRows2 + " Registros.");
-            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)

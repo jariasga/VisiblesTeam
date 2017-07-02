@@ -58,8 +58,7 @@ namespace InkaArt.Data.Warehouse
         {
             connect();
             NpgsqlDataAdapter userAdapter = new NpgsqlDataAdapter();
-
-            query = "Select * from inkaart.\"Warehouse\"";
+            
             NpgsqlCommand command = new NpgsqlCommand(query, Connection);
             NpgsqlDataReader dr = command.ExecuteReader();
 

@@ -100,15 +100,15 @@ namespace InkaArt.Interface.Warehouse
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[6].Value);//Verifica que línea se ha marcado con un check
+                bool s = Convert.ToBoolean(row.Cells[7].Value);//Verifica que línea se ha marcado con un check
 
                 if (s == true)
                 {
-                    idProd = Convert.ToInt32(row.Cells[0].Value);//No se valida porque viene de la base de datos
-                    nameProd = Convert.ToString(row.Cells[1].Value);//No se valida porque viene de la base de datos
+                    idProd = Convert.ToInt32(row.Cells[1].Value);//No se valida porque viene de la base de datos
+                    nameProd = Convert.ToString(row.Cells[2].Value);//No se valida porque viene de la base de datos
                     try
                     {
-                        cantMov = Convert.ToInt32(row.Cells[5].Value);
+                        cantMov = Convert.ToInt32(row.Cells[6].Value);
                     }
                     catch
                     {
@@ -120,7 +120,7 @@ namespace InkaArt.Interface.Warehouse
                         MessageBox.Show("Línea :" + numRows + " Favor de ingresar un valor válido para la cantidad a mover");
                         continue;
                     }
-                    maxMov = Convert.ToInt32(row.Cells[4].Value);
+                    maxMov = Convert.ToInt32(row.Cells[5].Value);
 
                     exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idLote, typeMovement, "Produccion", "Producto", "LOTE");
 
@@ -157,7 +157,6 @@ namespace InkaArt.Interface.Warehouse
             {
                 MessageBox.Show("No se pudo realizar ningún movimiento...");
             }
-            this.Close();
         }
 
         private void populateDataGridLote(DataTable listList)
@@ -183,7 +182,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
             
-            datos = productionItemMovementController.getProductLote(id, textBox3.Text);
+            datos = movementController.getProductStock(id, textBox3.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
@@ -198,14 +197,14 @@ namespace InkaArt.Interface.Warehouse
                 row.Cells[2].Value = datos[2];
                 row.Cells[3].Value = datos[3];
                 row.Cells[4].Value = datos[4];
+                row.Cells[5].Value = datos[5];
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
             if(rowIndex == 0)
             {
                 MessageBox.Show("El lote ingresado no tiene registros.");
-            }
-            productionItemMovementController.closeConnection();
+            }            
 
         }
     }
