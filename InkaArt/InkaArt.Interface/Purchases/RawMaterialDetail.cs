@@ -213,6 +213,7 @@ namespace InkaArt.Interface.Purchases
                 {
                     MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                MessageBox.Show("Se creó la materia prima de manera exitosa.", "Materia prima guardada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else if(mode==2 && isInEditMode)
@@ -239,6 +240,7 @@ namespace InkaArt.Interface.Purchases
                 {
                     MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                MessageBox.Show("Se guardaron los cambios de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else

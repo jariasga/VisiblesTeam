@@ -44,15 +44,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button_search = new System.Windows.Forms.Button();
             this.grid_clients = new System.Windows.Forms.DataGridView();
-            this.button_create = new System.Windows.Forms.Button();
-            this.button_delete = new System.Windows.Forms.Button();
-            this.button_cargamasiva = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.button_create = new System.Windows.Forms.Button();
+            this.button_delete = new System.Windows.Forms.Button();
+            this.button_cargamasiva = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_clients)).BeginInit();
             this.SuspendLayout();
@@ -71,11 +71,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.button_search);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(45, 38);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(34, 31);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(859, 194);
+            this.groupBox1.Size = new System.Drawing.Size(644, 158);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -95,38 +93,34 @@
             "Nivel 8",
             "Nivel 9",
             "Nivel 10"});
-            this.combobox_priority.Location = new System.Drawing.Point(309, 135);
-            this.combobox_priority.Margin = new System.Windows.Forms.Padding(4);
+            this.combobox_priority.Location = new System.Drawing.Point(232, 110);
             this.combobox_priority.Name = "combobox_priority";
-            this.combobox_priority.Size = new System.Drawing.Size(235, 31);
+            this.combobox_priority.Size = new System.Drawing.Size(177, 26);
             this.combobox_priority.TabIndex = 27;
             // 
             // textbox_id
             // 
             this.textbox_id.BackColor = System.Drawing.Color.White;
-            this.textbox_id.Location = new System.Drawing.Point(47, 62);
-            this.textbox_id.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_id.Location = new System.Drawing.Point(35, 50);
             this.textbox_id.Name = "textbox_id";
-            this.textbox_id.Size = new System.Drawing.Size(235, 30);
+            this.textbox_id.Size = new System.Drawing.Size(177, 26);
             this.textbox_id.TabIndex = 26;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(41, 33);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(31, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 23);
+            this.label5.Size = new System.Drawing.Size(23, 18);
             this.label5.TabIndex = 25;
             this.label5.Text = "ID";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(303, 110);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(227, 89);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 23);
+            this.label4.Size = new System.Drawing.Size(73, 18);
             this.label4.TabIndex = 24;
             this.label4.Text = "Prioridad";
             // 
@@ -137,57 +131,51 @@
             this.combobox_state.Items.AddRange(new object[] {
             "Inactivo",
             "Activo"});
-            this.combobox_state.Location = new System.Drawing.Point(45, 135);
-            this.combobox_state.Margin = new System.Windows.Forms.Padding(4);
+            this.combobox_state.Location = new System.Drawing.Point(34, 110);
             this.combobox_state.Name = "combobox_state";
-            this.combobox_state.Size = new System.Drawing.Size(235, 31);
+            this.combobox_state.Size = new System.Drawing.Size(177, 26);
             this.combobox_state.TabIndex = 22;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 110);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(31, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 23);
+            this.label3.Size = new System.Drawing.Size(58, 18);
             this.label3.TabIndex = 20;
             this.label3.Text = "Estado";
             // 
             // textbox_name
             // 
             this.textbox_name.BackColor = System.Drawing.Color.White;
-            this.textbox_name.Location = new System.Drawing.Point(572, 62);
-            this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_name.Location = new System.Drawing.Point(429, 50);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(235, 30);
+            this.textbox_name.Size = new System.Drawing.Size(177, 26);
             this.textbox_name.TabIndex = 19;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(567, 33);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(425, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
+            this.label2.Size = new System.Drawing.Size(64, 18);
             this.label2.TabIndex = 18;
             this.label2.Text = "Nombre";
             // 
             // textbox_doc
             // 
             this.textbox_doc.BackColor = System.Drawing.Color.White;
-            this.textbox_doc.Location = new System.Drawing.Point(311, 62);
-            this.textbox_doc.Margin = new System.Windows.Forms.Padding(4);
+            this.textbox_doc.Location = new System.Drawing.Point(233, 50);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(235, 30);
+            this.textbox_doc.Size = new System.Drawing.Size(177, 26);
             this.textbox_doc.TabIndex = 17;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 33);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(229, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 23);
+            this.label1.Size = new System.Drawing.Size(42, 18);
             this.label1.TabIndex = 16;
             this.label1.Text = "RUC";
             // 
@@ -196,10 +184,10 @@
             this.button_search.BackColor = System.Drawing.Color.Gray;
             this.button_search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_search.ForeColor = System.Drawing.Color.White;
-            this.button_search.Location = new System.Drawing.Point(635, 119);
-            this.button_search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_search.Location = new System.Drawing.Point(476, 97);
+            this.button_search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_search.Name = "button_search";
-            this.button_search.Size = new System.Drawing.Size(117, 48);
+            this.button_search.Size = new System.Drawing.Size(88, 39);
             this.button_search.TabIndex = 15;
             this.button_search.Text = "🔎 Buscar";
             this.button_search.UseVisualStyleBackColor = false;
@@ -237,54 +225,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid_clients.DefaultCellStyle = dataGridViewCellStyle3;
-            this.grid_clients.Location = new System.Drawing.Point(45, 250);
-            this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.grid_clients.Location = new System.Drawing.Point(34, 203);
+            this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.grid_clients.Name = "grid_clients";
-            this.grid_clients.Size = new System.Drawing.Size(859, 255);
+            this.grid_clients.Size = new System.Drawing.Size(644, 207);
             this.grid_clients.TabIndex = 27;
             this.grid_clients.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentClick);
-            // 
-            // button_create
-            // 
-            this.button_create.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_create.ForeColor = System.Drawing.Color.White;
-            this.button_create.Location = new System.Drawing.Point(160, 527);
-            this.button_create.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button_create.Name = "button_create";
-            this.button_create.Size = new System.Drawing.Size(200, 48);
-            this.button_create.TabIndex = 26;
-            this.button_create.Text = "＋ Crear";
-            this.button_create.UseVisualStyleBackColor = false;
-            this.button_create.Click += new System.EventHandler(this.button_create_Click);
-            // 
-            // button_delete
-            // 
-            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
-            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(389, 527);
-            this.button_delete.Margin = new System.Windows.Forms.Padding(4);
-            this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(201, 48);
-            this.button_delete.TabIndex = 38;
-            this.button_delete.Text = "🗑 Eliminar";
-            this.button_delete.UseVisualStyleBackColor = false;
-            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
-            // 
-            // button_cargamasiva
-            // 
-            this.button_cargamasiva.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_cargamasiva.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_cargamasiva.ForeColor = System.Drawing.Color.White;
-            this.button_cargamasiva.Location = new System.Drawing.Point(617, 527);
-            this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
-            this.button_cargamasiva.Name = "button_cargamasiva";
-            this.button_cargamasiva.Size = new System.Drawing.Size(180, 48);
-            this.button_cargamasiva.TabIndex = 51;
-            this.button_cargamasiva.Text = "Carga masiva";
-            this.button_cargamasiva.UseVisualStyleBackColor = false;
-            this.button_cargamasiva.Click += new System.EventHandler(this.button_cargamasiva_Click);
             // 
             // Producto
             // 
@@ -323,19 +269,61 @@
             this.deleteColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.deleteColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // button_create
+            // 
+            this.button_create.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_create.ForeColor = System.Drawing.Color.White;
+            this.button_create.Location = new System.Drawing.Point(120, 428);
+            this.button_create.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_create.Name = "button_create";
+            this.button_create.Size = new System.Drawing.Size(150, 39);
+            this.button_create.TabIndex = 26;
+            this.button_create.Text = "＋ Crear";
+            this.button_create.UseVisualStyleBackColor = false;
+            this.button_create.Click += new System.EventHandler(this.button_create_Click);
+            // 
+            // button_delete
+            // 
+            this.button_delete.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete.ForeColor = System.Drawing.Color.White;
+            this.button_delete.Location = new System.Drawing.Point(292, 428);
+            this.button_delete.Name = "button_delete";
+            this.button_delete.Size = new System.Drawing.Size(151, 39);
+            this.button_delete.TabIndex = 38;
+            this.button_delete.Text = "🗑 Eliminar";
+            this.button_delete.UseVisualStyleBackColor = false;
+            this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
+            // 
+            // button_cargamasiva
+            // 
+            this.button_cargamasiva.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_cargamasiva.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_cargamasiva.ForeColor = System.Drawing.Color.White;
+            this.button_cargamasiva.Location = new System.Drawing.Point(463, 428);
+            this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
+            this.button_cargamasiva.Name = "button_cargamasiva";
+            this.button_cargamasiva.Size = new System.Drawing.Size(135, 39);
+            this.button_cargamasiva.TabIndex = 51;
+            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.UseVisualStyleBackColor = false;
+            this.button_cargamasiva.Click += new System.EventHandler(this.button_cargamasiva_Click);
+            // 
             // ClientsIndex
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(960, 608);
+            this.ClientSize = new System.Drawing.Size(720, 494);
             this.Controls.Add(this.button_cargamasiva);
             this.Controls.Add(this.button_delete);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grid_clients);
             this.Controls.Add(this.button_create);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ClientsIndex";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.ClientsIndex_Load);
             this.groupBox1.ResumeLayout(false);

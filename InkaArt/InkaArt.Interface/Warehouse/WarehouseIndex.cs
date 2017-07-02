@@ -105,7 +105,7 @@ namespace InkaArt.Interface.Warehouse
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
-                if (rmw_control.massiveUpload(dialog.FileName) != 0) return;
+                if (rmw_control.massiveUpload(dialog2.FileName) != 0) return;
             }
         }
 

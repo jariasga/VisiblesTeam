@@ -125,7 +125,9 @@
             this.Controls.Add(this.combo_item);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.combo_type);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MovementFindIn";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hallazgo";
             this.Load += new System.EventHandler(this.MovementFindIn_Load);
             this.ResumeLayout(false);

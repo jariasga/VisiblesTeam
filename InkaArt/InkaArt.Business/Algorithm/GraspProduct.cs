@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using InkaArt.Data.Algorithm;
+using InkaArt.Classes;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -67,9 +68,11 @@ namespace InkaArt.Business.Algorithm
             for (int i = 0; i < temporal_assignments.Count; i++)
             {
                 AssignmentLine assignment_line = temporal_assignments[i].AssignmentLine;
-                if (assignment_line == null || assignment_line.Worker == null) continue;
+                if (assignment_line == null) continue;
 
-                int line_next_miniturn = assignment_line.MiniturnStart + assignment_line.TotalMiniturnsUsed;
+                //Chequear si el trabajador ya está incluido, si lo está, entonces debe ser el siguiente turno.
+                if (assignment_line.Worker == null) continue;
+                int line_next_miniturn = assignment_line.MiniturnStart + assignment_line.MiniturnsUsed;
                 if (assignment_line.Worker.ID == worker.ID && line_next_miniturn > current_next_miniturn) current_next_miniturn = line_next_miniturn;
             }
             return current_next_miniturn;
@@ -81,7 +84,9 @@ namespace InkaArt.Business.Algorithm
             {
                 AssignmentLine assignment_line = temporal_assignments[i].AssignmentLine;
                 if (assignment_line == null) throw new Exception("Se supone que tenemos completado el producto pero hay casilleros vacios...");
+                LogHandler.WriteLine("- assignment_line.Produced = {0}, quantity_needed = {1}", assignment_line.Produced, quantity_needed);
                 if (assignment_line.Produced < quantity_needed) quantity_needed = assignment_line.Produced;
+                LogHandler.WriteLine("- Nuevo quantity_needed = {0}", quantity_needed);
             }
             return quantity_needed;
         }

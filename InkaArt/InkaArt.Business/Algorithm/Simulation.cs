@@ -13,7 +13,7 @@ namespace InkaArt.Business.Algorithm
 {
     public class Simulation
     {
-        public const int LimitTime = 60;//300;      //60 segundos * 5 minutos como máximo
+        public const int LimitTime = 300;      //60 segundos * 5 minutos como máximo
         public const int MiniturnLength = 10;       //Un miniturno dura 10 minutos, pero debería leerse de SimulationParameters
 
         private int id_simulation;
@@ -167,7 +167,7 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 1) return huaco_weight;
             if (product_id == 2) return huamanga_stone_weight;
             if (product_id == 3) return retable_weight;
-            return 1;                
+            return 1; //Por defecto
         }
 
         /******************* GUARDADO EN BASE DE DATOS *******************/

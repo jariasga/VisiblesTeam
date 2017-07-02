@@ -423,12 +423,13 @@ namespace InkaArt.Interface.Purchases
                 }
                 try
                 {
-                    control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                     guardarCambiosEnMateriasOfrecidas();
                     llenarMateriasProvistas(textBox_idSupplier.Text);
+                    control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) { //si el estado cambio
                         pasarTodasLasLineasAEstado(comboBox_status.Text);
                         estadoInicial = comboBox_status.Text;
+                        llenarMateriasProvistas(textBox_idSupplier.Text);
                     }
                     suppliersWindow.desarrolloBusqueda();
                 }
@@ -436,6 +437,7 @@ namespace InkaArt.Interface.Purchases
                 {
 
                 }
+                MessageBox.Show("Se guardaron los cambios de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else if (mode==2)
@@ -490,6 +492,7 @@ namespace InkaArt.Interface.Purchases
                     MessageBox.Show("No se pudo crear el proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }
+                MessageBox.Show("Se guardó el proveedor de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

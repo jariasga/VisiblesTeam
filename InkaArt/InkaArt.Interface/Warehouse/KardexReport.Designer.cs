@@ -53,7 +53,7 @@
             this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
             this.button_export.Location = new System.Drawing.Point(350, 435);
-            this.button_export.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_export.Margin = new System.Windows.Forms.Padding(2);
             this.button_export.Name = "button_export";
             this.button_export.Size = new System.Drawing.Size(187, 41);
             this.button_export.TabIndex = 18;
@@ -172,7 +172,7 @@
             this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
             this.button_pdf.Location = new System.Drawing.Point(556, 435);
-            this.button_pdf.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
             this.button_pdf.Name = "button_pdf";
             this.button_pdf.Size = new System.Drawing.Size(187, 41);
             this.button_pdf.TabIndex = 40;
@@ -191,7 +191,9 @@
             this.Controls.Add(this.dataGridView_movements);
             this.Controls.Add(this.button_export);
             this.ForeColor = System.Drawing.Color.Black;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "KardexReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte Kardex";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_movements)).EndInit();
             this.ResumeLayout(false);

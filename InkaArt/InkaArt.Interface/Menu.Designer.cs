@@ -95,7 +95,7 @@ namespace InkaArt.Interface
             this.almacénToolStripMenuItem});
             this.menu_strip.Location = new System.Drawing.Point(0, 0);
             this.menu_strip.Name = "menu_strip";
-            this.menu_strip.Size = new System.Drawing.Size(998, 25);
+            this.menu_strip.Size = new System.Drawing.Size(1377, 25);
             this.menu_strip.TabIndex = 1;
             this.menu_strip.Text = "Menú";
             // 
@@ -117,6 +117,7 @@ namespace InkaArt.Interface
             this.parámetrosGeneralesToolStripMenuItem.Name = "parámetrosGeneralesToolStripMenuItem";
             this.parámetrosGeneralesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.parámetrosGeneralesToolStripMenuItem.Text = "Parámetros Generales";
+            this.parámetrosGeneralesToolStripMenuItem.Visible = false;
             this.parámetrosGeneralesToolStripMenuItem.Click += new System.EventHandler(this.parámetrosGeneralesToolStripMenuItem_Click);
             // 
             // listaDeUsuariosToolStripMenuItem
@@ -355,9 +356,9 @@ namespace InkaArt.Interface
             this.status_label,
             this.toolStripProgressBarPing,
             this.toolStripStatusLabelPingStatus});
-            this.status_strip.Location = new System.Drawing.Point(0, 644);
+            this.status_strip.Location = new System.Drawing.Point(0, 717);
             this.status_strip.Name = "status_strip";
-            this.status_strip.Size = new System.Drawing.Size(998, 22);
+            this.status_strip.Size = new System.Drawing.Size(1377, 22);
             this.status_strip.TabIndex = 2;
             this.status_strip.Text = "Estado";
             // 
@@ -381,9 +382,9 @@ namespace InkaArt.Interface
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 25);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(4);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 619);
+            this.splitter1.Size = new System.Drawing.Size(3, 692);
             this.splitter1.TabIndex = 3;
             this.splitter1.TabStop = false;
             // 
@@ -392,13 +393,13 @@ namespace InkaArt.Interface
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(998, 666);
+            this.ClientSize = new System.Drawing.Size(1377, 739);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.status_strip);
             this.Controls.Add(this.menu_strip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menu_strip;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";

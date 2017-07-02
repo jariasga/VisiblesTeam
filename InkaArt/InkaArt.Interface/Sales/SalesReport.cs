@@ -80,14 +80,17 @@ namespace InkaArt.Interface.Sales
             xlexcel.Visible = true;
             xlWorkBook = xlexcel.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[1, 1];
+            for (int j = 0; j < grid_salesReport.Columns.Count; ++j)
+                xlWorkSheet.Cells[1, j + 1] = grid_salesReport.Columns[j].HeaderText;
+            Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[2, 1];
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
         }
 
         private void button_pdf_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("ReporteVentas.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            DateTime date = DateTime.ParseExact(label_todaydate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            FileStream fs = new FileStream("ReporteVentas-" + date.ToString("dd-MM-yyyy") + ".pdf", FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document(PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
@@ -160,7 +163,7 @@ namespace InkaArt.Interface.Sales
             document.Add(new Paragraph(phrase2));
             
             document.Close();
-            MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Se generó el archivo del reporte de ventas exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

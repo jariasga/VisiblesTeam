@@ -111,7 +111,7 @@
             this.buttonMassiveUpload.Name = "buttonMassiveUpload";
             this.buttonMassiveUpload.Size = new System.Drawing.Size(37, 27);
             this.buttonMassiveUpload.TabIndex = 16;
-            this.buttonMassiveUpload.Text = "+";
+            this.buttonMassiveUpload.Text = "⬆";
             this.buttonMassiveUpload.UseVisualStyleBackColor = false;
             this.buttonMassiveUpload.Click += new System.EventHandler(this.buttonMassiveUpload_Click);
             // 
@@ -193,6 +193,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UserRolesPermissions";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Roles de Usuarios";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

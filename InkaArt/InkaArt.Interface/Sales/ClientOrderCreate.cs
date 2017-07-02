@@ -53,6 +53,7 @@ namespace InkaArt.Interface.Sales
 
         private void populateCombobox(ComboBox combo, DataTable dataSource, string displayParam, string valueParam)
         {
+            if (dataSource.Rows.Count == 0) return;
             var dp = displayParam;
             var vp = valueParam;
             Dictionary<string, string> obj = new Dictionary<string, string>();

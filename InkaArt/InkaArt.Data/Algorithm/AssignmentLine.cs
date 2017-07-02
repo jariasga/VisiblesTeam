@@ -14,8 +14,8 @@ namespace InkaArt.Data.Algorithm
         private Recipe recipe;
         private Job job;         //Proceso por producto
 
-        private int miniturn_start;
-        private int total_miniturns_used;
+        private int miniturn_start; //Miniturno de inicio
+        private int miniturns_used; //Número de miniturnos que ocupa
         private int produced;    //Cantidad producida
 
         private double average_time;
@@ -45,10 +45,10 @@ namespace InkaArt.Data.Algorithm
             set { miniturn_start = value; }
         }
 
-        public int TotalMiniturnsUsed
+        public int MiniturnsUsed
         {
-            get { return total_miniturns_used; }
-            set { total_miniturns_used = value; }
+            get { return miniturns_used; }
+            set { miniturns_used = value; }
         }
 
         public int Produced
@@ -56,12 +56,17 @@ namespace InkaArt.Data.Algorithm
             get { return produced; }
             set { produced = value; }
         }
+
+        public double AverageTime
+        {
+            get { return average_time; }
+        }
         public double LossValue
         {
             get { return loss_value; }
         }
 
-        public AssignmentLine(Index index, int miniturn_start, int total_miniturns_used, int produced)
+        public AssignmentLine(Index index, int miniturn_start, int miniturns_used, int produced)
         {
             this.worker = index.Worker;
             this.recipe = index.Recipe;
@@ -70,16 +75,16 @@ namespace InkaArt.Data.Algorithm
             this.loss_value = index.LossIndex;
             this.miniturn_start = miniturn_start;
             this.produced = produced;
-            this.total_miniturns_used = total_miniturns_used;
+            this.miniturns_used = miniturns_used;
         }
 
-        public AssignmentLine(Worker worker, Job job, Recipe recipe, int produced, int total_miniturns)
+        public AssignmentLine(Worker worker, Job job, Recipe recipe, int produced, int miniturns_used)
         {
             this.worker = worker;
             this.job = job;
             this.recipe = recipe;
             this.produced = produced;
-            this.total_miniturns_used = total_miniturns;
+            this.miniturns_used = miniturns_used;
         }
 
         public bool Equals(AssignmentLine other)
@@ -88,7 +93,7 @@ namespace InkaArt.Data.Algorithm
                 || this.recipe == null || other.recipe == null) return false;
             
             return (this.worker.ID == other.worker.ID && this.job.ID == other.job.ID && this.recipe.ID == other.recipe.ID &&
-                this.miniturn_start == other.miniturn_start && this.total_miniturns_used == other.total_miniturns_used
+                this.miniturn_start == other.miniturn_start && this.miniturns_used == other.miniturns_used
                 && this.produced == other.produced);
         }
 
@@ -103,14 +108,14 @@ namespace InkaArt.Data.Algorithm
             command.Parameters.Add(new NpgsqlParameter("id_job", this.Job.ID));
             command.Parameters.Add(new NpgsqlParameter("id_recipe", this.Recipe.ID));
             command.Parameters.Add(new NpgsqlParameter("produced", this.Produced));
-            command.Parameters.Add(new NpgsqlParameter("total_miniturns", this.TotalMiniturnsUsed));
+            command.Parameters.Add(new NpgsqlParameter("total_miniturns", this.MiniturnsUsed));
 
             command.ExecuteNonQuery();
         }
 
         public void calculateProduced(int miniturn_length, double average_time, double average_breakage)
         {
-            double attempts = TotalMiniturnsUsed * miniturn_length / average_time;
+            double attempts = miniturns_used * miniturn_length / average_time;
             produced = Convert.ToInt32(Math.Truncate(attempts * (1 - average_breakage)));
         }
     }

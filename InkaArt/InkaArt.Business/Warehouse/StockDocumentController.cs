@@ -35,7 +35,7 @@ namespace InkaArt.Business.Warehouse
             return stockDocumentList;
         }
 
-        public void updateStock(string idDoc, string idProd, int cant,string date)
+        public void updateStock(string idDoc, string idProd, int cant)
         {
             string updateQuery;
             //string materiaPrima = "materia_prima";
@@ -77,7 +77,7 @@ namespace InkaArt.Business.Warehouse
 
         }
 
-        public void insertData(string idFactura,string idProducto,int cant,string fecha)
+        public void insertData(string idFactura,string idProducto,int cant)
         {
             stockDocument = new StockDocumentData();
             adapt = new NpgsqlDataAdapter();

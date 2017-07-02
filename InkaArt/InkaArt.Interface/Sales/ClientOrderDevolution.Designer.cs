@@ -43,6 +43,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -54,7 +55,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button_doc = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -216,6 +216,19 @@
             this.groupBox3.Text = "Datos Generales";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // comboBox2
+            // 
+            this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Boleta",
+            "Factura"});
+            this.comboBox2.Location = new System.Drawing.Point(28, 107);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(108, 26);
+            this.comboBox2.TabIndex = 23;
+            this.comboBox2.Text = "Boleta";
+            // 
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
@@ -336,19 +349,6 @@
             this.button_doc.Text = "Generar Nota de Crédito";
             this.button_doc.UseVisualStyleBackColor = false;
             // 
-            // comboBox2
-            // 
-            this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Boleta",
-            "Factura"});
-            this.comboBox2.Location = new System.Drawing.Point(28, 107);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(108, 26);
-            this.comboBox2.TabIndex = 23;
-            this.comboBox2.Text = "Boleta";
-            // 
             // ClientOrderDevolution
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,7 +359,9 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_save);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ClientOrderDevolution";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Devolución";
             this.Load += new System.EventHandler(this.ClientOrderDevolution_Load);
             this.groupBox2.ResumeLayout(false);
