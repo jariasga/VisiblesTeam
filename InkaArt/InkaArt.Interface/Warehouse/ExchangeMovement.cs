@@ -70,7 +70,10 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("No se pudo completar el movimiento.");
             }
             //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-            
+            //Se simula como una entrada y salida de un almacén a otro
+            movementController.updateProductWarehouse(idItem, idWarehouseOrigin, cantMov, "Entrada", "Producto");
+            movementController.updateProductWarehouse(idItem, idWarehouseDestiny, cantMov, "Salida", "Producto");
+
             if (exito2 == 1 && exito3 == 1)
             {
                 int movemenType = 1; //Indica que es una entrada/salida
@@ -80,8 +83,8 @@ namespace InkaArt.Interface.Warehouse
                 int productType = 1;//0:materia prima | 1:producto
                 int isExchange = -1;//-1:No es intercambio | otro:es intercambio
                 //Grabar movimiento
-                movementController.insertMovement(-1, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem, cantMov, productType);
-                movementController.insertMovement(-1, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem, cantMov, productType);
+                movementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem, cantMov, productType);
+                movementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem, cantMov, productType);
                 //productionItemWarehouseMovementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem,cantMov,productType);
                 exito++;
             }
