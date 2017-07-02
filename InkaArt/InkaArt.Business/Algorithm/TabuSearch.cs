@@ -99,11 +99,9 @@ namespace InkaArt.Business.Algorithm
                 for (int miniturn_index = 0; miniturn_index < simulation.TotalMiniturns; miniturn_index++)
                 {
                     AssignmentLine assignment = solution[worker_index, miniturn_index];
-                    if (assignment == null || assignment.Equals(current_assignment))
-                        continue;
-                    Index index = indexes.Find(assignment.Worker, assignment.Job, assignment.Recipe);
-                    if (index == null)
-                        continue;
+                    if (assignment == null || assignment.Equals(current_assignment)) continue;
+                    Index index = indexes.FindByWorkerJobAndRecipe(assignment.Worker, assignment.Job, assignment.Recipe);
+                    if (index == null) continue;
                     assigned_workers++;
                     fitness += index.LossIndex;
                 }
@@ -192,18 +190,18 @@ namespace InkaArt.Business.Algorithm
         private void decreaseMiniturn(AssignmentLine assignment_pivot, AssignmentLine assignment, int miniturn_pivot, int miniturn)
         {            
             // dividimos bloques de miniturnos y actualizamos sus valores
-            if (assignment_pivot != null && assignment.Equals(assignment_pivot))
+            if (assignment_pivot != null && assignment != null && assignment.Equals(assignment_pivot))
             {                
                 if (miniturn_pivot == miniturn) return;
 
                 Index index = indexes.FindByAssignment(assignment_pivot);
                 // minuturnos anteriores
                 if (miniturn_pivot > miniturn)
-                    assignment.TotalMiniturnsUsed = miniturn - assignment.MiniturnStart;
+                    assignment.MiniturnsUsed = miniturn - assignment.MiniturnStart;
                 // miniturnos posteriores
                 else
                 {
-                    assignment.TotalMiniturnsUsed -= miniturn_pivot - assignment.MiniturnStart;
+                    assignment.MiniturnsUsed -= miniturn_pivot - assignment.MiniturnStart;
                     assignment.MiniturnStart = miniturn_pivot + 1;                    
                 }
                 assignment.calculateProduced(Simulation.MiniturnLength, index.AverageTime, index.AverageBreakage);
@@ -266,6 +264,8 @@ namespace InkaArt.Business.Algorithm
 
         public void bestSolutionToList()
         {
+            if (BestSolution.Count == 0)
+                BestSolution = initial_solution;
             foreach(Assignment day in BestSolution)
             {
                 day.AssignmentLinesList = day.toList(simulation);

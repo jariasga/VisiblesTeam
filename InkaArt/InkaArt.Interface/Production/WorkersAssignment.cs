@@ -60,8 +60,8 @@ namespace InkaArt.Interface.Production
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            SimulationReport simulation_report = new SimulationReport(current_simulation);
-            simulation_report.Show();
+            /*SimulationReport simulation_report = new SimulationReport(current_simulation);
+            simulation_report.Show();*/
         }
 
         private void ButtonDeleteClick(object sender, EventArgs e)

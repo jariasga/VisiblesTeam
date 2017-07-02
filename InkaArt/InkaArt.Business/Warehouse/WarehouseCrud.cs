@@ -257,7 +257,7 @@ namespace InkaArt.Business.Warehouse
 
         }
 
-        public void massiveUpload(string filename)
+        public int massiveUpload(string filename)
         {
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
@@ -267,22 +267,20 @@ namespace InkaArt.Business.Warehouse
                     var line = reader.ReadLine();
                     var values = line.Split(';');
 
-                    // creamos usuario
-                    int idNote, idBill, idMovementType, idWarehouse, idMovementReason,idProd;
-                    string dateIn="";
-                    idNote = int.Parse(values[2]);
-                    idBill = int.Parse(values[7]);
-                    idProd = int.Parse(values[4]);
-                    idMovementType = int.Parse(values[8]);
-                    idWarehouse = int.Parse(values[0]);
-                    idMovementReason = int.Parse(values[3]);
-                    dateIn = values[6];
-                    createMovement(idNote, idBill, idMovementType, idWarehouse, idMovementReason, dateIn);
-                    insertProductQuery(idProd, idWarehouse);
-                    // agregamos el producto a la tabla producto por almacen                    
+                    // creamos almacen
+                    try
+                    {
+                        createWarehouse(values[0], values[1], values[2]);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("El archivo de carga contiene errores", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return 1;
+                    }           
                 }
-                MessageBox.Show("Carga de movimientos con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             }
+            return 0;
         }
     }
 }

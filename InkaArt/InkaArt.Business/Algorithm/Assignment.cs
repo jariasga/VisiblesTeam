@@ -133,6 +133,7 @@ namespace InkaArt.Business.Algorithm
                 for (int miniturn = 0; miniturn < simulation.TotalMiniturns; miniturn++)
                 {
                     if (current_line != null && current_line.Equals(assignment_lines[worker, miniturn])) continue;
+                    if (assignment_lines[worker, miniturn] == null) continue;
                     list.Add(assignment_lines[worker, miniturn]);
                     current_line = assignment_lines[worker, miniturn];
                 }

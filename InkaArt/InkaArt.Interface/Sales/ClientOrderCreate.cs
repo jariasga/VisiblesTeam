@@ -53,6 +53,7 @@ namespace InkaArt.Interface.Sales
 
         private void populateCombobox(ComboBox combo, DataTable dataSource, string displayParam, string valueParam)
         {
+            if (dataSource.Rows.Count == 0) return;
             var dp = displayParam;
             var vp = valueParam;
             Dictionary<string, string> obj = new Dictionary<string, string>();
@@ -156,7 +157,8 @@ namespace InkaArt.Interface.Sales
                 {
                     if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                     {
-                        label_stock.Text = row["logicalStock"].ToString();
+                        if (int.Parse(row["logicalStock"].ToString()) < 0) label_stock.Text = "0";
+                        else label_stock.Text = row["logicalStock"].ToString();
                     }
                 }
             }
@@ -224,7 +226,8 @@ namespace InkaArt.Interface.Sales
             {
                 if (combo_product.SelectedValue.ToString().Equals(row["idProduct"].ToString()))
                 {
-                    label_stock.Text = row["logicalStock"].ToString();
+                    if (int.Parse(row["logicalStock"].ToString()) < 0) label_stock.Text = "0";
+                    else label_stock.Text = row["logicalStock"].ToString();
                     DataTable recipes = orderController.getProductRecipe(row["idProduct"]);
                     populateCombobox(combo_quality, recipes, "version", "idRecipe");
                 }

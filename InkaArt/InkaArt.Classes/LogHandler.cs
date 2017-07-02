@@ -9,15 +9,43 @@ namespace InkaArt.Classes
 {
     public class LogHandler
     {
+        public static bool Write(string text)
+        {
+            try
+            {
+                StreamWriter stream = new StreamWriter("Log.txt", true);
+                stream.Write(text);
+                stream.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool Write(string text, params object[] parameters)
+        {
+            try
+            {
+                StreamWriter stream = new StreamWriter("Log.txt", true);
+                stream.Write(text, parameters);
+                stream.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public static bool WriteLine()
         {
             try
             {
-                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write);
-                StreamWriter stream = new StreamWriter(file);
+                StreamWriter stream = new StreamWriter("Log.txt", true);
                 stream.WriteLine();
                 stream.Close();
-                file.Close();
                 return true;
             }
             catch (Exception)
@@ -30,11 +58,9 @@ namespace InkaArt.Classes
         {
             try
             {
-                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write);
-                StreamWriter stream = new StreamWriter(file);
+                StreamWriter stream = new StreamWriter("Log.txt", true);
                 stream.WriteLine(text);
                 stream.Close();
-                file.Close();
                 return true;
             }
             catch (Exception)
@@ -47,11 +73,9 @@ namespace InkaArt.Classes
         {
             try
             {
-                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write);
-                StreamWriter stream = new StreamWriter(file);
+                StreamWriter stream = new StreamWriter("Log.txt", true);
                 stream.WriteLine(text, parameters);
                 stream.Close();
-                file.Close();
                 return true;
             }
             catch (Exception)

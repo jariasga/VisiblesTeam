@@ -12,8 +12,9 @@ namespace InkaArt.Business.Algorithm
 {
     public class Grasp
     {
-        public const int NumberOfIterations = 1;
+        public const int NumberOfIterations = 100;
         public const double Alpha = 0.2;
+        public static int LimitTime = Simulation.LimitTime * 2 / 5; //120 segundos = Un minuto y medio
 
         private Simulation simulation;
         private JobController jobs;
@@ -28,23 +29,25 @@ namespace InkaArt.Business.Algorithm
             this.jobs = jobs;
             this.recipes = recipes;
             this.indexes = indexes;
-            //Líneas de ordenes
-            this.orders = simulation.SelectedOrders.Orders;
+            //Líneas de ordenes: DEBE SER UNA COPIA PROFUNDA, ORDENADA POR FECHA Y LUEGO POR PRIORIDAD DEL CLIENTE.
+            this.orders = new List<Order>();
+            for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
+                this.orders.Add(new Order(simulation.SelectedOrders[i]));
             this.orders = this.orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
             //Número de puestos de trabajo para cada proceso
             Production.ProcessController process_controller = new Production.ProcessController();
             processes = process_controller.getData();
         }
 
-        public Assignment ExecuteGraspAlgorithm(int day, int total_miniturns, ref int elapsed_time)
+        public Assignment ExecuteGraspAlgorithm(int day, ref int elapsed_time)
         {
             Assignment best_assignment = null;
             LogHandler.WriteLine("============================= EJECUCIÓN DEL ALGORITMO GRASP ================================");
             LogHandler.WriteLine();
 
-            for (int iteration = 0; elapsed_time < Simulation.LimitTime && iteration < Grasp.NumberOfIterations; iteration++)
+            for (int iteration = 0; elapsed_time < Grasp.LimitTime && iteration < Grasp.NumberOfIterations; iteration++)
             {
-                Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), simulation.SelectedWorkers, total_miniturns);
+                Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), simulation.SelectedWorkers, simulation.TotalMiniturns);
 
                 int order_index = 0;
                 while (order_index < orders.Count && assignment.Date.Date > orders[order_index].DeliveryDate.Date && orders[order_index].IsCompleted()) order_index++;
@@ -100,13 +103,17 @@ namespace InkaArt.Business.Algorithm
                 remaining_processes[i] = new ProcessTuple(id_process, number_of_jobs);
             }
 
-            for (int construction = 1; elapsed_time < Simulation.LimitTime && order_index < orders.Count && candidates.Count > 0; construction++)
+            for (int construction = 1; elapsed_time < Grasp.LimitTime && order_index < orders.Count && candidates.Count > 0; construction++)
             {
+                LogHandler.WriteLine("ITERACIÓN DE CONSTRUCCIÓN #" + construction);
+                LogHandler.WriteLine();
+
                 //Actualizar la función de costo para los candidatos restantes
                 for (int i = 0; i < candidates.Count; i++)
-                    candidates[i].NextCostValue(assignment.ObjectiveFunction, iteration);
+                    candidates[i].NextCostValue(assignment.ObjectiveFunction, construction);
 
-                LogHandler.WriteLine("ITERACIÓN DE CONSTRUCCIÓN #" + construction);
+                for (int i = 0; i < candidates.Count; i++)
+                    LogHandler.WriteLine("- Indice {0}: {1}, CostValue={2}", i + 1, candidates[i].ToString(), candidates[i].CostValue);
                 LogHandler.WriteLine();
 
                 //Obtener una lista de los trabajadores más eficientes. Si no se pudo realizar el producto, borrar el producto y quitar las asignaciones realizadas
@@ -115,8 +122,9 @@ namespace InkaArt.Business.Algorithm
                 if (rcl == null)
                 {
                     LogHandler.WriteLine("RCL salió nulo, actualizando líneas de orden");
-                    if (!this.RemoveOrderLines(ref current_line_items, ref order_index, current_product))
+                    if (!RemoveOrderLines(ref current_line_items, ref order_index, current_product))
                         UndoProduct(ref current_product, candidates, current_deleted_indexes);
+                    else construction--;
                     continue;
                 }
 
@@ -132,7 +140,8 @@ namespace InkaArt.Business.Algorithm
                 if (new_assignment_line == null && this.RemoveWorkers(chosen_candidate.Worker, candidates, current_deleted_indexes, ref current_product)) continue;
 
                 //Actualizamos la función objetivo y quitamos el candidato seleccionado
-                current_product.SetAssignmentLine(new_assignment_line, chosen_candidate.Job);
+                if (current_product.SetAssignmentLine(new_assignment_line, chosen_candidate.Job) == false)
+                    throw new Exception("Hice un assignment line que no forma parte del producto.");
                 assignment.ObjectiveFunction += chosen_candidate.CostValue;
                 current_deleted_indexes.Add(new Index(chosen_candidate));
                 candidates.Remove(chosen_candidate);
@@ -162,7 +171,11 @@ namespace InkaArt.Business.Algorithm
             for (int i = 0; i < candidates.Count; i++)
             {
                 //Si current_product es nulo, añadir los candidatos cuya receta esté dentro de la lista de recetas de la orden actual.
-                if (current_product == null && current_line_items.Find(order => order.Recipe.ID == candidates[i].Recipe.ID) != null) rcl.Add(candidates[i]);
+                if (current_product == null)
+                {
+                    for (int j = 0; j < current_line_items.Count; j++)
+                        if (candidates[i].Recipe.ID == current_line_items[j].Recipe.ID) { rcl.Add(candidates[i]); break; }
+                }
                 //Si current_product está con datos, añadir los candidatos cuyo puesto de trabajo esté dentro de la lista de puestos para el producto y cuya receta sea la misma que el producto que estamos elaborando.
                 if (current_product != null && current_product.ContainsJob(candidates[i].Job) && candidates[i].Recipe.ID == current_product.CurrentRecipe.ID) rcl.Add(candidates[i]);
             }
@@ -172,7 +185,7 @@ namespace InkaArt.Business.Algorithm
             ///////////////////////////////////////////////////////////////////////////////
             LogHandler.WriteLine("-------------- RCL antes del filtrado ------------");
             for (int i = 0; i < rcl.Count; i++)
-                LogHandler.WriteLine("Item del RCL #{0:000}: {1}", i + 1, rcl[i].ToString());
+                LogHandler.WriteLine("Item del RCL #{0:000}: {1}, CostValue={2}", i + 1, rcl[i].ToString(), rcl[i].CostValue);
             ///////////////////////////////////////////////////////////////////////////////
 
             //Calcular el máximo y el mínimo costo de los candidatos que podrían pertenecer al RCL
@@ -187,14 +200,16 @@ namespace InkaArt.Business.Algorithm
             LogHandler.WriteLine("Minimo = {0}, Maximo = {1}, Rango = [{0}, {2}]", min, max, max_rcl);
 
             //Obtener el rango del RCL y quitar los índices del RCL que no estén en el rango
-            rcl.RemoveAll(candidate => candidate.CostValue < min || candidate.CostValue > max_rcl);
+            for (int i = rcl.Count - 1; i >= 0; i--)
+                if (candidates[i].CostValue < min || candidates[i].CostValue > max_rcl) rcl.RemoveAt(i);
 
             ///////////////////////////////////////////////////////////////////////////////
             LogHandler.WriteLine("-------------- RCL despues del filtrado ------------");
             for (int i = 0; i < rcl.Count; i++)
-                LogHandler.WriteLine("Item del RCL #{0:000}: {1}", i + 1, rcl[i].ToString());
+                LogHandler.WriteLine("Item del RCL #{0:000}: {1}, CostValue={2}", i + 1, rcl[i].ToString(), rcl[i].CostValue);
             ///////////////////////////////////////////////////////////////////////////////
 
+            if (rcl.Count <= 0) return null; //No se encontraron candidatos
             return rcl;
         }
 
@@ -213,7 +228,8 @@ namespace InkaArt.Business.Algorithm
             {
                 LogHandler.WriteLine("RCL: Estábamos preparando un producto y a la mitad de prepararlo nos quedamos sin candidatos. Entonces, se quitará la línea de orden con la receta.");
                 int id_recipe = current_product.CurrentRecipe.ID;
-                current_line_items.RemoveAll(line_item => line_item.Recipe.ID == id_recipe);
+                for (int i = current_line_items.Count - 1; i >= 0; i--)
+                    if (current_line_items[i].Recipe.ID == id_recipe) current_line_items.RemoveAt(i);
                 return false;
             }
         }
@@ -221,11 +237,12 @@ namespace InkaArt.Business.Algorithm
         public AssignmentLine GetNextAssignmentLine(Assignment assignment, Index chosen_candidate, GraspProduct current_product)
         {
             int worker_index = simulation.SelectedWorkers.GetIndex(chosen_candidate.Worker.ID);
-            LogHandler.WriteLine("Función GetNextAssignmentLine():\n- WorkerIndex = {0}", worker_index);
+            LogHandler.WriteLine("Función GetNextAssignmentLine():");
+            LogHandler.WriteLine("- WorkerIndex = {0}", worker_index);
 
             int next_miniturn = simulation.TotalMiniturns;
             while (next_miniturn > 0 && assignment[worker_index, next_miniturn - 1] == null) next_miniturn--;
-            LogHandler.WriteLine("- next_miniturn al recorrer la matriz: {0}.", next_miniturn);
+            LogHandler.WriteLine("- next_miniturn al recorrer la matriz: {0} (total_miniturns={1}).", next_miniturn, simulation.TotalMiniturns);
             if (next_miniturn >= simulation.TotalMiniturns) return null;
 
             next_miniturn = current_product.NextMiniturn(chosen_candidate.Worker, next_miniturn);
@@ -265,19 +282,45 @@ namespace InkaArt.Business.Algorithm
             while (order_line_index < orders[order_index].NumberOfLineItems && orders[order_index][order_line_index].Recipe.ID != current_product.CurrentRecipe.ID) order_line_index++;
             if (order_line_index >= orders[order_index].NumberOfLineItems) return false;
 
-            int quantity_needed = orders[order_index][order_line_index].Quantity - orders[order_index][order_line_index].Produced;
-            quantity_needed = current_product.GetLowestQuantity(quantity_needed);
+            LogHandler.WriteLine("Ahorita la linea de orden escogida es orders[{0}][{1}] = {2}", order_index, order_line_index, orders[order_index][order_line_index].ToString());
 
-            //FALTA RECALCULAR LOS TIEMPOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            
+            int quantity_needed = orders[order_index][order_line_index].Quantity - orders[order_index][order_line_index].Produced;
+            LogHandler.WriteLine("Esta linea de orden necesita que se fabriquen {0} productos.", quantity_needed);
+            quantity_needed = current_product.GetLowestQuantity(quantity_needed);
+            LogHandler.WriteLine("Esta linea de orden necesita que se fabriquen {0} productos.", quantity_needed);
+
+            //Recalcular los tiempos de proceso (inicio de miniturno y total de miniturnos)
+
+            //COPIAR LO DE GETASSIGNMENT BLA BLA BLA, POR ESO SE CAE. ES UN TORMENTO GGWP
+
+            /*current_product[0].MiniturnsUsed = Convert.ToInt32(Math.Ceiling(current_product[0].AverageTime * quantity_needed / Simulation.MiniturnLength));
+            for (int i = 1; i < current_product.NumberOfTuples; i++)
+            {
+                //Espero que funcione :(
+                current_product[i].MiniturnStart = current_product[i - 1].MiniturnStart + Convert.ToInt32(Math.Ceiling(current_product[0].AverageTime / Simulation.MiniturnLength));
+                LogHandler.WriteLine("current_product[{0}].MiniturnStart = {1} + {2} (debería ser menor a {3}", i, current_product[i - 1].MiniturnStart, current_product[i - 1].MiniturnsUsed, simulation.TotalMiniturns);
+                if (current_product[i].MiniturnStart >= simulation.TotalMiniturns) throw new Exception("Al recalcular los tiempos de proceso el inicio del miniturno fue mayor al numero total de miniturnos.");
+
+                current_product[i].MiniturnsUsed = Convert.ToInt32(Math.Ceiling(current_product[i].AverageTime * quantity_needed / Simulation.MiniturnLength));
+                LogHandler.WriteLine("current_product[{0}].MiniturnsUsed = RedondearParaArriba({1}*{2}/{3}) = {4} (debería ser menor a {5}", i, current_product[i].AverageTime, quantity_needed, Simulation.MiniturnLength, current_product[i].MiniturnsUsed, simulation.TotalMiniturns);
+                if (current_product[i].MiniturnStart >= simulation.TotalMiniturns) throw new Exception("Al recalcular los tiempos de proceso el nuevo numero de miniturnos ocupados fue mayor al numero total de miniturnos.");
+            }*/
+
             //Colocar en la matriz las líneas de asignación.
             for (int i = 0; i < current_product.NumberOfTuples; i++)
             {
+                current_product[i].Produced = quantity_needed;
                 int worker_index = simulation.SelectedWorkers.GetIndex(current_product[i].Worker.ID);
-                for (int j = 0; j < current_product[i].TotalMiniturnsUsed; j++)
+                for (int j = 0; j < current_product[i].MiniturnsUsed; j++)
                     assignment[worker_index, current_product[i].MiniturnStart + j] = current_product[i];
             }
 
+            //Actualizar las líneas de orden
+            LogHandler.WriteLine("orders[{0}][{1}] = {2} = {3} = current_line_items[{1}]", order_index, order_line_index, orders[order_index][order_line_index].Produced, current_line_items[order_line_index].Produced);
+            orders[order_index][order_line_index].Produced += quantity_needed;
+            //current_line_items[order_line_index].Produced += quantity_needed;
+            LogHandler.WriteLine("orders[{0}][{1}] = {2} = {3} = current_line_items[{1}]", order_index, order_line_index, orders[order_index][order_line_index].Produced, current_line_items[order_line_index].Produced);
+            
             for (int i = 0; i < current_product.NumberOfTuples; i++)
             {
                 //Espero que funcione :(
@@ -292,10 +335,11 @@ namespace InkaArt.Business.Algorithm
         private void RemoveProcesses(ProcessTuple[] remaining_processes, List<Index> candidates, List<Index> current_deleted_indexes, ref GraspProduct current_product)
         {
             //Eliminar los procesos que ya se agotaron
-            for (int i = 0; i < remaining_processes.Count(); i++)
+            for (int process = 0; process < remaining_processes.Count(); process++)
             {
-                if (remaining_processes[i].NumberOfJobs > 0) continue;
-                candidates.RemoveAll(index => index.Job.Process == remaining_processes[i].ID);
+                if (remaining_processes[process].NumberOfJobs > 0) continue;
+                for (int index = candidates.Count - 1; index >= 0; index--)
+                    if (candidates[index].Job.Process == remaining_processes[process].ID) candidates.RemoveAt(index);
             }
             //Eliminar para un trabajador el resto de procesos para que siempre se quede en un proceso
             for (int i = 0; i < current_product.NumberOfTuples; i++)

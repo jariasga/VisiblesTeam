@@ -125,7 +125,9 @@
             this.Controls.Add(this.combo_item);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.combo_type);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BrokenItems";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Items Rotos";
             this.Load += new System.EventHandler(this.BrokenItems_Load);
             this.ResumeLayout(false);

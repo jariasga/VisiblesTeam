@@ -149,9 +149,10 @@ namespace InkaArt.Data.Reports
                                             "inkaart.\"User\" u "+
                                     "where  ra.\"id_job\" = j.\"idJob\" and " +
                                             "ra.\"id_recipe\" = re.\"idRecipe\" and "+
+                                            "ra.\"id_worker\" = w.\"id_worker\" and " +
                                             "w.\"id_user\" = u.\"id_user\" and " +
                                             "u.\"status\" = 1 and " +
-                                            "u.\"id_role\" = 27) ";
+                                            "u.\"id_role\" = 2) ";
             command_query +=        "select * 	from tablaPerformance " +
                                     "where		\"date\" >= '" + fechaIni + "' " +
                                     "and         \"date\" <= '" + fechaFin + "' ";

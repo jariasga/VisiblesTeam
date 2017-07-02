@@ -103,10 +103,12 @@
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.progress_bar);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SimulationExecution";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ejecutando simulación...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimulationLoadingScreen_FormClosing);
             this.Load += new System.EventHandler(this.NewSimulation_Load);

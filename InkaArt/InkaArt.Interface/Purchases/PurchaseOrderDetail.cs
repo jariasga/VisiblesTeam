@@ -11,6 +11,7 @@ using InkaArt.Business.Purchases;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using InkaArt.Business.Warehouse;
 
 namespace InkaArt.Interface.Purchases
 {
@@ -249,14 +250,23 @@ namespace InkaArt.Interface.Purchases
                 MessageBox.Show("No se puede agregar un pedido con cantidad cero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            
             textBox_subtotal.Text = textBox_subtotal.Text.Trim();
             if (textBox_subtotal.Text.Length==0 || double.Parse(textBox_subtotal.Text) < 0.01)
             {
                 MessageBox.Show("No se puede agregar un pedido con subtotal cero", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            int id_order = int.Parse(textBox_id.Text);
+
+            int cant = int.Parse(textBox_cantidad.Text);
             int id_rm = int.Parse(textBox_idrm.Text);
+            int maximoEstablecido = cantidadSuperaMaximo(id_rm);
+            if (maximoEstablecido < cant)
+            {
+                MessageBox.Show("No se puede pedir más de " + maximoEstablecido + " de este materia prima.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int id_order = int.Parse(textBox_id.Text);
             int id_sup = int.Parse(textBox_idsupplier.Text);
             double subTotalNuevo = Math.Round(double.Parse(textBox_subtotal.Text),2);
             double igv = Math.Round(double.Parse(textBox_igv.Text),2);
@@ -304,7 +314,26 @@ namespace InkaArt.Interface.Purchases
             //control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
             //llenarMateriasPedidas();
         }
-        
+        private int cantidadSuperaMaximo(int id_rm)
+        {
+            DataRow[] rows;
+            RawMaterialWarehouseController control_rw = new RawMaterialWarehouseController();
+            DataTable tablaAuxiliar = control_rw.getData();
+            rows = tablaAuxiliar.Select("idRawMaterial = " + id_rm+ " AND state = 'Activo'");
+            if (rows.Any()) tablaAuxiliar = rows.CopyToDataTable();
+            else tablaAuxiliar.Rows.Clear();
+            string sortQuery = string.Format("idWarehouse");
+            tablaAuxiliar.DefaultView.Sort = sortQuery;
+            int numero = tablaAuxiliar.Rows.Count;
+            int maximo = 0;
+            int stockActual= 0;
+            for (int i = 0; i < numero; i++)
+            {
+                maximo += int.Parse(tablaAuxiliar.Rows[i]["maximunStock"].ToString());
+                stockActual += int.Parse(tablaAuxiliar.Rows[i]["currentStock"].ToString());
+            }
+            return (maximo-stockActual);
+        }
         private int estaEnDataGrid(int id_rm)
         {
             //solo devuelve los ids de filas que no estan eliminadas
@@ -438,7 +467,7 @@ namespace InkaArt.Interface.Purchases
                 try
                 {
                     //hacer insert
-                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, dateTimePicker_creation.Value, dateTimePicker_delivery.Value, double.Parse(textBox_total.Text));
                     ventanaListaOrdenes.desarrolloBusqueda();
                     textBox_id.Text = buscarValorId(textBox_idsupplier.Text);
                     obtenerMateriasDelSupplier();
@@ -468,7 +497,7 @@ namespace InkaArt.Interface.Purchases
                 //hacer update
                 try {
                     guardarLineasDePedido();
-                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, dateTimePicker_creation.Value, dateTimePicker_delivery.Value, double.Parse(textBox_total.Text));
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
                         if(string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
                         else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");

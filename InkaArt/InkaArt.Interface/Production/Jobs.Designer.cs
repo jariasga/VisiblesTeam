@@ -104,8 +104,10 @@
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.dataGridView_process);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Jobs";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Procesos de Producción";
             this.Load += new System.EventHandler(this.Jobs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_process)).EndInit();

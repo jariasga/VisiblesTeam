@@ -242,6 +242,7 @@
             this.Controls.Add(this.groupBox2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Movements";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Movimientos";
             this.Load += new System.EventHandler(this.Movements_Load);
             this.groupBox2.ResumeLayout(false);

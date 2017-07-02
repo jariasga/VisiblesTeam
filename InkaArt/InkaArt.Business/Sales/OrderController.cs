@@ -23,8 +23,11 @@ namespace InkaArt.Business.Sales
             string clientDoc = getClientDoc(clientId.ToString());
             int selectedDoc = -1;
             if (orderType == 1) selectedDoc = 6;
-            if (clientDoc.Length == 11) selectedDoc = 2;
-            else selectedDoc = 1;
+            else
+            {
+                if (clientDoc.Length == 11) selectedDoc = 2;
+                else selectedDoc = 1;
+            }
             //////////////////////////
             float amount = 0;
             if (idProd.Length != 0 && quantity.Length != 0)
@@ -126,6 +129,16 @@ namespace InkaArt.Business.Sales
             return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
+        public void updateReturn(string idDoc)
+        {
+            DataTable table = GetOrders();
+
+            string updateQuery;
+            updateQuery = "UPDATE inkaart.\"Order\" SET ";
+            updateQuery = updateQuery + "\"orderStatus\" = 'facturado' ";
+            updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
+            orderData.execute(updateQuery);
+        }
         public int getClientID(int orderId)
         {
             return orderData.getClientID(orderId);
@@ -194,7 +207,7 @@ namespace InkaArt.Business.Sales
 
         public string makeValidations(string clientDoc, string clientName, DataTable orderLines, string type, string reason, DateTime selectedDate, string docId = "null")
         {
-            if(type.Equals("pedido")) if (!isMoreThanToday(selectedDate)) return "La fecha de emisión que ha ingresado no es válida";
+            if(type.Equals("pedido")) if (!isMoreThanToday(selectedDate)) return "La fecha de entrega que ha ingresado no es válida";
             if (type.Equals("devolucion")) if (docId.Equals("")) return "Debe seleccionar un pedido antes de continuar.";
             if (orderLines.Rows.Count == 0) return "Debe añadir productos para realizar un pedido.";
             if (type.Equals("devolucion") && reason.Equals("")) return "Debe ingresar un motivo para continuar.";

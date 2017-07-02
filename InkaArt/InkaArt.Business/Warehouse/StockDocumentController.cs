@@ -35,7 +35,7 @@ namespace InkaArt.Business.Warehouse
             return stockDocumentList;
         }
 
-        public void updateStock(string idDoc, string idProd, int cant,string date)
+        public void updateStock(string idDoc, string idProd, int cant)
         {
             string updateQuery;
             //string materiaPrima = "materia_prima";
@@ -48,7 +48,36 @@ namespace InkaArt.Business.Warehouse
             stockDocument.execute(updateQuery);
         }
 
-        public void insertData(string idFactura,string idProducto,int cant,string fecha)
+        public void updateReturn(string idDoc, string idProd, int cant)
+        {
+            string updateQuery;
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"StockDocument\" SET ";
+            updateQuery = updateQuery + "product_stock = " + cant + " ";
+            updateQuery = updateQuery + " WHERE \"idDocument\"= " + idDoc + " AND \"product_id\"= " + idProd +
+               " AND \"documentType\"= 'DEVOLUCION' " + " AND \"product_type\"= 'producto' ;";
+            stockDocument.execute(updateQuery);
+        }
+
+        public void insertReturn(string idDoc, string idProd, int cant)
+        {
+
+            stockDocument = new StockDocumentData();
+            adapt = new NpgsqlDataAdapter();
+            data = new DataSet();
+
+            adapt = stockDocument.stockDocumentAdapter();
+
+            string cantStr = cant.ToString();
+            data.Clear();
+            data = stockDocument.getData(adapt, "StockDocument");
+
+            table = data.Tables["StockDocument"];
+            stockDocument.execute(string.Format("INSERT INTO \"inkaart\".\"StockDocument\"(\"idDocument\", \"documentType\", product_id, product_stock, product_type) VALUES({0},  'DEVOLUCION', {1}, {2}, 'producto');", idDoc, idProd, cantStr));
+
+        }
+
+        public void insertData(string idFactura,string idProducto,int cant)
         {
             stockDocument = new StockDocumentData();
             adapt = new NpgsqlDataAdapter();

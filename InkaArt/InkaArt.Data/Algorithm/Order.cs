@@ -43,6 +43,17 @@ namespace InkaArt.Data.Algorithm
             this.line_items = new List<OrderLineItem>();
         }
 
+        //Este constructor debe crear una copia profunda del objeto, para evitar referencias
+        public Order(Order copy)
+        {
+            this.id_order = copy.id_order;
+            this.client = copy.client;
+            this.delivery_date = copy.delivery_date;
+            this.line_items = new List<OrderLineItem>();
+            for (int i = 0; i < copy.NumberOfLineItems; i++)
+                this.line_items.Add(new OrderLineItem(copy.line_items[i]));
+        }
+
         public List<OrderLineItem> OrderLineItems
         {
             get { return line_items; }

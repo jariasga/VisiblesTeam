@@ -58,6 +58,7 @@ namespace InkaArt.Business.Algorithm
                 Recipe recipe = recipes.GetByID(reader.GetInt32(3));
                 double average_breakage = reader.GetDouble(4);
                 double average_time = reader.GetDouble(5);
+                if (worker == null || job == null || recipe == null) continue;
                 Index index = new Index(id_index, worker, job, recipe, average_breakage, average_time);
                 indexes.Add(index);
             }
@@ -95,71 +96,89 @@ namespace InkaArt.Business.Algorithm
 
         public void CalculateIndexes(Simulation simulation)
         {
-            double[,] average_breakage_mean = new double[recipes.NumberOfRecipes, jobs.NumberOfJobs];
-            double[,] average_time_mean = new double[recipes.NumberOfRecipes, jobs.NumberOfJobs];
-            int[,] average_mean_count = new int[recipes.NumberOfRecipes, jobs.NumberOfJobs];
-
-            //Calcular los promedios de average_breakage y average_time. Esta función es O(n^3) :(
-            for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
-            {
-                List<Job> product_jobs = jobs.GetJobsByProduct(recipes[recipe].Product);
-                LogHandler.WriteLine("Receta {0}: {1}", recipe + 1, "ID: " + recipes[recipe].ID + ", Version: " + recipes[recipe].Version);
-                for (int job = 0; job < product_jobs.Count; job++)
+            double[,] average_breakage_mean = new double[this.recipes.NumberOfRecipes, this.jobs.NumberOfJobs];
+            double[,] average_time_mean = new double[this.recipes.NumberOfRecipes, this.jobs.NumberOfJobs];
+            int[,] average_mean_count = new int[this.recipes.NumberOfRecipes, this.jobs.NumberOfJobs];
+            for (int i = 0; i < this.recipes.NumberOfRecipes; i++)
+                for (int j = 0; j < this.jobs.NumberOfJobs; j++)
                 {
-                    int job_index = jobs.GetIndex(product_jobs[job].ID);
-                    int recipe_index = recipes.GetIndex(recipes[recipe].ID);
-                    if (job_index < 0 || recipe_index < 0) continue;
-                    LogHandler.WriteLine("- Puesto de trabajo {0}: index={1}, ID={2}, Nombre={3}", job + 1, job_index, product_jobs[job].ID, product_jobs[job].Name);
-
-                    for (int index = 0; index < indexes.Count; index++)
-                    {
-                        LogHandler.WriteLine("  - index.Job={0}={1}=product_jobs[{2}], index.Recipe={3}={4}=recipes[{5}]", indexes[index].Job.ID,
-                            product_jobs[job].ID, job, indexes[index].Recipe.ID, recipes[recipe].ID, recipe);
-                        if (indexes[index].Job.ID == product_jobs[job].ID && indexes[index].Recipe.ID == recipes[recipe].ID)
-                        {
-                            average_mean_count[recipe_index, job_index]++;
-                            average_breakage_mean[recipe_index, job_index] += indexes[index].AverageBreakage;
-                            average_time_mean[recipe_index, job_index] += indexes[index].AverageTime;
-                            LogHandler.WriteLine("    Nuevo average_mean[{0},{1}]: Count={2}, Breakage={3}, Time={4}", recipe_index, job_index,
-                                average_mean_count[recipe_index, job_index], average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index]);
-                        }
-                    }
-
-                    average_breakage_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
-                        ? -1 : average_breakage_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
-                    average_time_mean[recipe_index, job_index] = (average_mean_count[recipe_index, job_index] <= 0)
-                        ? -1 : average_time_mean[recipe_index, job_index] / average_mean_count[recipe_index, job_index];
+                    average_mean_count[i, j] = 0;
+                    average_breakage_mean[i, j] = 0;
+                    average_time_mean[i, j] = 0;
                 }
+
+            //Calcular las sumas de AverageBreakage y AverageTime
+            for (int i = this.indexes.Count - 1; i >= 0; i--)
+            {
+                Index index = this.indexes[i];
+                if (index == null || index.Job == null || index.Recipe == null) this.indexes.RemoveAt(i);
+                int job_index = this.jobs.GetIndex(index.Job.ID);
+                int recipe_index = this.recipes.GetIndex(index.Recipe.ID);
+                //Agregar a la suma de AverageBreakage y AverageTime
+                average_mean_count[recipe_index, job_index]++;
+                average_breakage_mean[recipe_index, job_index] += index.AverageBreakage;
+                average_time_mean[recipe_index, job_index] += index.AverageTime;
             }
 
-            //Calcular los promedios de average_breakage y average_time. Esta función es O(n^4). Ineficiencia 100% :(
-            for (int worker = 0; worker < simulation.SelectedWorkers.Count(); worker++)
+            //Calcular los promedios de AverageBreakage y AverageTime
+            for (int r = 0; r < recipes.NumberOfRecipes; r++)
             {
-                for (int recipe = 0; recipe < recipes.NumberOfRecipes; recipe++)
+                LogHandler.Write("{0}", recipes[r].Version);
+                for (int j = 0; j < jobs.NumberOfJobs; j++)
                 {
-                    List<Job> product_jobs = jobs.GetJobsByProduct(recipes[recipe].Product);
-                    for (int job = 0; job < product_jobs.Count; job++)
-                    {
-                        int job_index = jobs.GetIndex(product_jobs[job].ID);
-                        int recipe_index = recipes.GetIndex(recipes[recipe].ID);
-                        Worker worker_object = simulation.SelectedWorkers[worker];
-
-                        Index index = FindByWorkerJobAndRecipe(worker_object, jobs[job_index], recipes[recipe_index]);
-                        bool is_new_index = false;
-                        if (index == null)
-                        {
-                            if (average_mean_count[recipe_index, job_index] <= 0) continue;
-                            index = new Index(0, worker_object, jobs[job_index], recipes[recipe_index],
-                                average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index]);
-                            is_new_index = true;
-                        }
-
-                        double product_weight = simulation.ProductWeight(jobs.GetByID(index.Job.ID).Product);
-                        index.CalculateIndexes(average_breakage_mean[recipe_index, job_index], average_time_mean[recipe_index, job_index],
-                            simulation.BreakageWeight, simulation.TimeWeight, product_weight);
-                        if (is_new_index) indexes.Add(index);
-                    }
+                    LogHandler.Write(";{0},{1:0.0000},{2:0.0000}", average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
+                    average_breakage_mean[r, j] = average_breakage_mean[r, j] / average_mean_count[r, j];
+                    average_time_mean[r, j] = average_time_mean[r, j] / average_mean_count[r, j];
+                    LogHandler.Write(",{0:0.0000},{1:0.0000}", average_breakage_mean[r, j], average_time_mean[r, j]);
                 }
+                LogHandler.WriteLine();
+            }
+
+            //Calcular el BreakageIndex, TimeIndex y LossIndex
+            for (int r = 0; r < recipes.NumberOfRecipes; r++)
+            {
+                for (int j = 0; j < jobs.NumberOfJobs; j++)
+                {
+                    //Debemos asegurar que la receta y el puesto de trabajo tengan coherencia
+                    if (recipes[r].Product != jobs[j].Product) continue;
+
+                    double product_weight = simulation.ProductWeight(recipes[r].Product);
+
+                    //Si el contador de índices por receta y puesto de trabajo es 0, entonces para cada trabajador debe crearse un índice ficticio
+                    if (average_mean_count[r, j] <= 0)
+                    {
+                        double loss_index = (simulation.BreakageWeight + simulation.TimeWeight) / product_weight;
+                        for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
+                            indexes.Add(new Index(simulation.SelectedWorkers[w], jobs[j], recipes[r], 0, Simulation.MiniturnLength, loss_index));
+                        continue;
+                    }
+
+                    for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
+                    {
+                        Index index = FindByWorkerJobAndRecipe(simulation.SelectedWorkers[w], jobs[j], recipes[r]);
+
+                        if (index != null)
+                        {
+                            index.BreakageIndex = index.AverageBreakage / average_breakage_mean[r, j];
+                            index.TimeIndex = index.AverageTime / average_time_mean[r, j];
+                            LogHandler.Write("{0};{1};{2};{3:0.0000} / [{4},{5}]={6:0.0000} = {7:0.0000};{8:0.0000} / [{4},{5}]={9:0.0000} = {10:0.0000};",
+                                   index.Worker.FullName, index.Recipe.Version, index.Job.Name, index.AverageBreakage, r + 1, j + 1, average_breakage_mean[r, j],
+                                   index.BreakageIndex, index.AverageTime, average_time_mean[r, j], index.TimeIndex);
+                            index.LossIndex = (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight) / product_weight;
+                            index.CostValue = index.LossIndex;
+                            LogHandler.WriteLine("({0:0.0000}*{1:0.0000} + {2:0.0000}*{3:0.0000}) / {4:0.0000} = {5:0.0000};{6:0.0000}", index.BreakageIndex,
+                                simulation.BreakageWeight, index.TimeIndex, simulation.TimeWeight, product_weight, index.LossIndex, index.CostValue);
+                            continue;
+                        }
+                        //Si el índice es nulo, crear un índice ficticio para el trabajador
+                        double loss_index = (simulation.BreakageWeight + simulation.TimeWeight) / product_weight;
+                        indexes.Add(new Index(simulation.SelectedWorkers[w], jobs[j], recipes[r], average_breakage_mean[r, j],
+                            average_time_mean[r, j], loss_index));
+                    }
+                    LogHandler.WriteLine("Terminado el puesto de trabajo {0} para la receta {1} (count={2}, breakage={3}, mean={4})",
+                        jobs[j].Name, recipes[r].Version, average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
+                }
+                LogHandler.WriteLine("Terminada la receta {0}", recipes[r].Version);
             }
         }
 
@@ -197,26 +216,19 @@ namespace InkaArt.Business.Algorithm
             this.indexes.Remove(index);
         }
 
-        public Index Find(Worker worker, Job job, Recipe recipe)
-        {
-            if (worker == null || job == null || recipe == null) return null;
-            return indexes.Find(index => index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID);
-        }
-
         public Index FindByAssignment(AssignmentLine line)
         {
-            if (line == null) return null;
-            return indexes.Find(index => index.Worker != null && index.Worker.ID == line.Worker.ID 
-                && index.Job != null && index.Job.ID == line.Job.ID 
-                && index.Recipe != null && index.Recipe.ID == line.Recipe.ID);
+            return (line == null) ? null : FindByWorkerJobAndRecipe(line.Worker, line.Job, line.Recipe);
         }
-
 
         public Index FindByWorkerJobAndRecipe(Worker worker, Job job, Recipe recipe)
         {
             if (worker == null || job == null || recipe == null) return null;
-            foreach (Index index in indexes)
-                if (index.Worker.ID == worker.ID && index.Job.ID == job.ID && index.Recipe.ID == recipe.ID) return index;
+            for (int i = 0; i < indexes.Count; i++)
+            {
+                if (indexes[i] == null || indexes[i].Worker == null || indexes[i].Job == null || indexes[i].Recipe == null) continue;
+                if (indexes[i].Worker.ID == worker.ID && indexes[i].Job.ID == job.ID && indexes[i].Recipe.ID == recipe.ID) return indexes[i];
+            }
             return null;
         }
 
@@ -234,7 +246,7 @@ namespace InkaArt.Business.Algorithm
                 var br = index.BreakageIndex.ToString();
                 var ti = index.TimeIndex.ToString();
                 var lo = index.LossIndex.ToString();
-                var newLine = string.Format("{0}; {1}; {2}; {3}; {4}; {5}; {6}", worker_id, worker, job, recipe, br, ti, lo);
+                var newLine = string.Format("{0};{1};{2};{3};{4};{5};{6}", worker_id, worker, job, recipe, br, ti, lo);
                 csv.AppendLine(newLine);
             }
                         

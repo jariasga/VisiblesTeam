@@ -48,11 +48,19 @@ namespace InkaArt.Business.Security
         public int updateData(string username, string description, int status, int role, System.Byte[] photo, int userID)
         {
             table = data.Tables["User"];
+            try
+            {
+                if (photo[5] != null)
+                    user.insertPhoto(photo, userID);
+            }
+            catch (Exception)
+            {                
+            }
 
-            user.insertPhoto(photo, userID);
             return user.execute(string.Format("UPDATE \"inkaart\".\"User\" " +
-                "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
-                "WHERE id_user = {4}", username, status, description, role, userID));
+                    "SET username = '{0}', status = {1}, description = '{2}', id_role = {3} " +
+                    "WHERE id_user = {4}", username, status, description, role, userID));
+
         }
 
         public int insertData(string username, string description, int status, ref string password, int role, System.Byte [] photo)
@@ -108,28 +116,35 @@ namespace InkaArt.Business.Security
             return row;
         }
 
-        public void massiveUpload(string filename, WorkerController worker)
+        public bool massiveUpload(string filename, WorkerController worker)
         {
-            string password = "";   // las contrase;as las creamos vacias
-            table = showData();     // obtenemos la tabla de usuarios
-
-            using (var fs = File.OpenRead(filename))
-            using (var reader = new StreamReader(fs))
+            try
             {
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(';');
+                string password = "";   // las contrase;as las creamos vacias
+                table = showData();     // obtenemos la tabla de usuarios
 
-                    // creamos usuario
-                    int userCreated = insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]), null);
-                    // creamos trabajador
-                    if (userCreated == 1)
+                using (var fs = File.OpenRead(filename))
+                using (var reader = new StreamReader(fs))
+                {
+                    while (!reader.EndOfStream)
                     {
-                        worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
-                        worker.sendPassword(values[10], values[0], password);
+                        var line = reader.ReadLine();
+                        var values = line.Split(';');
+                        // creamos usuario
+                        int userCreated = insertData(values[0], values[1], int.Parse(values[2]), ref password, int.Parse(values[3]), null);
+                        // creamos trabajador
+                        if (userCreated == 1)
+                        {
+                            worker.insertData(values[4], values[5], int.Parse(values[6]), int.Parse(values[7]), worker.getUserID(values[0]), int.Parse(values[8]), values[9], values[10]);
+                            worker.sendPassword(values[10], values[0], password);
+                        }
                     }
                 }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }            
         }
 

@@ -77,6 +77,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 if(reason == "Compra" && string.Compare(combobox_type.Text,"Entrada")==0)
                 {
+
                     Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(text_warehouse_id.Text);
                     formView.Show();
                 }

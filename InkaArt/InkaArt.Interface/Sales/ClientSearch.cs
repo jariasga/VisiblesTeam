@@ -59,7 +59,7 @@ namespace InkaArt.Interface.Sales
         {
             int index = grid_clients.CurrentCell.RowIndex;
             SelectedClientId = int.Parse(grid_clients.Rows[index].Cells[0].Value.ToString());
-            SelectedClientDoc = int.Parse(grid_clients.Rows[index].Cells[1].Value.ToString());
+            SelectedClientDoc = long.Parse(grid_clients.Rows[index].Cells[1].Value.ToString());
             SelectedClientName = (grid_clients.Rows[index].Cells[2].Value.ToString());
             SelectedClientType = int.Parse(grid_clients.Rows[index].Cells[5].Value.ToString());
             SelectedClientTypeNat = int.Parse(grid_clients.Rows[index].Cells[6].Value.ToString());
