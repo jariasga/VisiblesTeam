@@ -436,6 +436,7 @@ namespace InkaArt.Interface.Purchases
                 {
 
                 }
+                MessageBox.Show("Se guardaron los cambios de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else if (mode==2)
@@ -490,6 +491,7 @@ namespace InkaArt.Interface.Purchases
                     MessageBox.Show("No se pudo crear el proveedor.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }
+                MessageBox.Show("Se guardó el proveedor de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
