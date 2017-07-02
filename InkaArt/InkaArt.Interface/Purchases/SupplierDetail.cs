@@ -423,12 +423,13 @@ namespace InkaArt.Interface.Purchases
                 }
                 try
                 {
-                    control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                     guardarCambiosEnMateriasOfrecidas();
                     llenarMateriasProvistas(textBox_idSupplier.Text);
+                    control.updateData(textBox_idSupplier.Text, textBox_name.Text, textBox_ruc.Text, textBox_contactName.Text, int.Parse(textBox_telephone.Text), textBox_email.Text, textBox_address.Text, int.Parse(textBox_priority.Text), comboBox_status.Text);
                     if (string.Compare(comboBox_status.Text, estadoInicial) != 0) { //si el estado cambio
                         pasarTodasLasLineasAEstado(comboBox_status.Text);
                         estadoInicial = comboBox_status.Text;
+                        llenarMateriasProvistas(textBox_idSupplier.Text);
                     }
                     suppliersWindow.desarrolloBusqueda();
                 }
