@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Npgsql;
 using InkaArt.Business.Warehouse;
 
 namespace InkaArt.Interface.Warehouse
@@ -15,10 +16,10 @@ namespace InkaArt.Interface.Warehouse
     {
         public int id = 0;
         public string name = "";
-        TextBox text1New;
-        TextBox text2New;
+        TextBox idWarehouse;
+        TextBox nameWarehouse;
 
-        private WarehouseMovementController warehouseMovementController = new WarehouseMovementController();
+        private MovementController movementController = new MovementController();
 
         public WarehouseSearchMovement()
         {
@@ -27,59 +28,69 @@ namespace InkaArt.Interface.Warehouse
 
         public WarehouseSearchMovement(TextBox text1, TextBox text2)
         {
-            text1New = text1;
-            text2New = text2;
+            idWarehouse = text1;
+            nameWarehouse = text2;
             InitializeComponent();
         }
 
-        private void populateDataGridWarehouseMovement(DataTable listList)
+        private void populateDataGridWarehouseMovement(NpgsqlDataReader listRows)
         {
             dataGridView1.Rows.Clear();
-            foreach (DataRow row in listList.Rows)
+
+            while (listRows.Read())
             {
-                dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["address"], row["state"]);
-            }
+                dataGridView1.Rows.Add(listRows[0], listRows[1], listRows[2], listRows[3]);
+            }            
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private int validarEnteroPositivo(string stringTexto)
         {
-            DataTable warehouseList;
+            int valor=0;
+            if(textBox_id.Text == "")
+            {
+                return -2;
+            }
             if (textBox_id.Text != "")
             {
                 try
                 {
-                    Convert.ToInt32(textBox_id.Text);
+                    valor = Convert.ToInt32(textBox_id.Text);
                 }
                 catch
                 {
                     MessageBox.Show("Favor de ingresar un valor entero para el id del almacén");
-                    return;
+                    return -1;
                 }
             }
+            if (valor < 0)
+            {
+                MessageBox.Show("Favor de ingresar un valor entero positivo para el id del almacén");
+                return -1;
+            } return valor;
+        }
 
-            if (textBox_id.Text.Equals("") && textBox_supplier.Text.Equals(""))
-            {
-                //Búsqueda en materiales y productos
-                warehouseList = warehouseMovementController.GetWarehouseMovementList();
-                populateDataGridWarehouseMovement(warehouseList);                
-            }
-            else
-            {
-                //string materialType = comboBox_status.SelectedIndex.ToString;
-                warehouseList = warehouseMovementController.GetWarehouseMovementList(textBox_id.Text, textBox_supplier.Text, textBox_address.Text);
-                populateDataGridWarehouseMovement(warehouseList);                
-            }
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            NpgsqlDataReader  warehouseList;
+            int idWarehouse = 0;
+
+            idWarehouse = validarEnteroPositivo(textBox_id.Text);
+            if (idWarehouse == -1) return;
+
+            warehouseList = movementController.GetWarehouseList(idWarehouse, textBox_name.Text, textBox_address.Text);
+            populateDataGridWarehouseMovement(warehouseList);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            text1New.Text = "";
-            text2New.Text = "";
+            idWarehouse.Text = "";
+            nameWarehouse.Text = "";
             this.Close();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            int cant = 0;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 bool s = Convert.ToBoolean(row.Cells[4].Value);
@@ -88,11 +99,15 @@ namespace InkaArt.Interface.Warehouse
                 {
                     id = Convert.ToInt32(row.Cells[0].Value);
                     name = Convert.ToString(row.Cells[1].Value);
+                    cant++;
                     break;
                 }
             }
-            text1New.Text = Convert.ToString(id);
-            text2New.Text = name;
+            if(cant > 0)
+            {
+                idWarehouse.Text = Convert.ToString(id);
+                nameWarehouse.Text = name;
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

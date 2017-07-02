@@ -23,6 +23,16 @@ namespace InkaArt.Data.Warehouse
             table_name = "Movement";
         }
 
+        public NpgsqlDataReader executeQueryData(string query)
+        {
+            connect();
+            NpgsqlCommand command = new NpgsqlCommand(query, Connection);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            //closeConnection();
+            return dr;
+        }
+
         public NpgsqlDataAdapter movementAdapter()
         {
             NpgsqlDataAdapter orderAdapter = new NpgsqlDataAdapter();
@@ -218,6 +228,12 @@ namespace InkaArt.Data.Warehouse
             raw_datatable = raw_data.GetRawMaterial(raw_id);
 
             return raw_datatable.Rows[0];
+        }
+
+        public void updateData(string queryUpdate)
+        {
+            connect();
+            execute(queryUpdate);
         }
 
     }

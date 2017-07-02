@@ -27,7 +27,7 @@ namespace InkaArt.Interface.Warehouse
             datetime_movement.Checked = false;
             datetime_movement.AllowDrop = false;
             initializeComboType();
-            initializeComboReason();
+            //initializeComboReason();
             initializeComboWarehouse();
             initializeComboStatus();            
             updateDataGrid();
@@ -66,8 +66,8 @@ namespace InkaArt.Interface.Warehouse
         private void initializeComboReason()
         {
             MovementReasonController reason_controller = new MovementReasonController();
-            DataTable types = reason_controller.GetMovementReasons();
-            combobox_reason.DataSource = types;
+            //DataTable types = reason_controller.GetMovementReasons();
+            //combobox_reason.DataSource = types;
             combobox_reason.DisplayMember = "description";
             combobox_reason.ValueMember = "idMovName";
             combobox_reason.SelectedValue = -1;

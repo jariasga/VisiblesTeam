@@ -111,7 +111,7 @@ namespace InkaArt.Interface.Warehouse
                         if (exito2 == 1)
                         {
                             //Actualizar el stock por mover
-                            productionItemWarehouseMovementController.updateStockDocument(idLote, idProd, maxMov, cantMov, "Salida");
+                            //productionItemWarehouseMovementController.updateStockDocument(idLote, idProd, maxMov, cantMov, "Salida");
                             //Grabar movimiento
                             int movemenType = 2; //Indica que es una entrada
                             int movementReason = 3;//Indica que es un movimiento por producción

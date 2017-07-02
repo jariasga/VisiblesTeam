@@ -25,6 +25,11 @@ namespace InkaArt.Interface
         private string pingText;
         public Menu(Form login)
         {
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("es-ES");
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat = new System.Globalization.CultureInfo("en").NumberFormat;
+
             InitializeComponent();
             this.login = login;
             if (LoginController.needPassChange)
@@ -43,6 +48,7 @@ namespace InkaArt.Interface
             checkConnectorThread.Start();*/
 
             toolStripProgressBarPing.Maximum = 1000;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)

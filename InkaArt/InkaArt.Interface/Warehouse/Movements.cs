@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InkaArt.Business.Warehouse;
+using Npgsql;
 
 namespace InkaArt.Interface.Warehouse
 {
@@ -15,6 +16,7 @@ namespace InkaArt.Interface.Warehouse
     {
         private ReasonMovementController reasonMovementController = new ReasonMovementController();
         private TypeMovementController typeMovementController = new TypeMovementController();
+        private MovementController movementBusiness = new MovementController();
 
         public Movements()
         {
@@ -75,6 +77,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 if(reason == "Compra" && string.Compare(combobox_type.Text,"Entrada")==0)
                 {
+
                     Form formView = new InkaArt.Interface.Warehouse.PurchaseMovement(text_warehouse_id.Text);
                     formView.Show();
                 }
@@ -147,23 +150,13 @@ namespace InkaArt.Interface.Warehouse
         {
             this.Close();
         }
-
+        
         private void Movements_Load(object sender, EventArgs e)
         {
-            DataTable movementReasonList;
-            DataTable movementTypeList;
-
-            movementReasonList = reasonMovementController.GetReasonMovementList();
-            foreach (DataRow row in movementReasonList.Rows)
-            {
-                combobox_reason.Items.Add(row["description"]);
-            }
-
-            movementTypeList = typeMovementController.GetTypeMovementList();
-            foreach (DataRow row in movementTypeList.Rows)
-            {
-                combobox_type.Items.Add(row["description"]);
-            }
+            NpgsqlDataReader dr;
+            
+            dr = movementBusiness.GetTypeMovementList();
+            movementBusiness.populateComboBox(dr, combobox_type);
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
@@ -174,6 +167,35 @@ namespace InkaArt.Interface.Warehouse
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void combobox_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string reason = combobox_type.Text;
+
+            if(reason == "Entrada")
+            {
+                combobox_reason.Items.Clear();
+                combobox_reason.Items.Add("Compra");
+                combobox_reason.Items.Add("Produccion");
+                combobox_reason.Items.Add("Hallazgo");
+                combobox_reason.Items.Add("Devolución");
+                combobox_reason.Items.Add("Diferencia de stock");
+            }
+            else if (reason == "Salida")
+            {
+                combobox_reason.Items.Clear();
+                combobox_reason.Items.Add("Venta");
+                combobox_reason.Items.Add("Produccion");
+                combobox_reason.Items.Add("Rotura");
+                combobox_reason.Items.Add("Diferencia de stock");
+            }
+            else if (reason == "Entrada/Salida")
+            {
+                combobox_reason.Items.Clear();
+                combobox_reason.Items.Add("Traslado");
+                combobox_reason.Items.Add("Diferencia de stock");
+            }
         }
     }
 }
