@@ -44,7 +44,7 @@ namespace InkaArt.Interface.Warehouse
         private ProductionMovementMovementController productionMovementMovementController = new ProductionMovementMovementController();
         private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
         private ProductionItemWarehouseMovementController productionItemWarehouseMovementController = new ProductionItemWarehouseMovementController();
-        
+        private MovementController movementController = new MovementController();
 
         //private void button_create_Click(object sender, EventArgs e)
         //{
@@ -134,48 +134,41 @@ namespace InkaArt.Interface.Warehouse
 
                     maxMov = Convert.ToInt32(row.Cells[4].Value);
 
-                    if (cantMov <= maxMov)
+                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idPedido, typeMovement, "VENTA", "Producto", "VENTA");
+
+                    if (exito2 == 1)
                     {
                         //Aumentar stock físico y lógico del almacén 
-                        exito2 = productionItemWarehouseMovementController.updateData(idProd, idWare, cantMov, "Salida","OK");
-                        if (exito2 == 1)
-                        {
-                            //Aumentar stock físico y lógico del producto
-                            productionItemMovementController.updateData(idProd, cantMov, typeMovement);
-                            //Actualizar el stock que queda para mover
-                            productionItemWarehouseMovementController.updateStockDocument(idPedido, idProd, maxMov, cantMov, "Salida");
-                            //Grabar movimiento
-                            int movemenType = 13; //Indica que es una salida
-                            int movementReason = 2;//Indica que es un movimiento por venta
-                            int documentTypes = 4;//Indica que el documento relacionado es un número de pedido
-                            int productType = 1;//0:materia prima | 1:producto
-                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
-                            productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd,cantMov, productType);
-                            movementReason = 10;
-                            productionItemWarehouseMovementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd, cantMov, productType);
-                            //productionItemWarehouseMovementController.updateOrder(idPedido);
+                        movementController.updateProductWarehouse(idProd, idWare, cantMov, typeMovement, "Producto");
+                        //Aumentar stock físico y lógico del producto
+                        movementController.updateProductStock(idProd, cantMov, typeMovement, "VENTA");
+                        //Actualizar el stock que queda para mover
+                        movementController.updateStockDocument(idPedido, idProd, maxMov, cantMov, "VENTA");
 
-                            arrIdProd[countArr] = idProd;
-                            arrCantProd[countArr] = cantMov;
-                            countArr++;
-                            exito++;
-                        }
+                        int movemenType = 13; //Indica que es una salida
+                        int movementReason = 2;//Indica que es un movimiento por venta
+                        int documentTypes = 4;//Indica que el documento relacionado es un número de pedido
+                        int productType = 1;//0:materia prima | 1:producto
+                        int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                                            //Grabar movimiento
+                        movementController.insertMovement(idPedido, movemenType, idWare, movementReason, documentTypes, isExchange, idProd,cantMov, productType);
+                        arrIdProd[countArr] = idProd;
+                        arrCantProd[countArr] = cantMov;
+                        countArr++;
+                        exito++;
                     }
                     else
                     {
-                        MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + "Solo quedan " + maxMov + " por asignar según el lote:" + idPedido + ".");
+                        MessageBox.Show("No se pudo completar el movimiento para la línea: " + (numRows + 1) + ".");
                     }
                 }
                 numRows++;
             }
-            productionItemWarehouseMovementController.updateOrder(idPedido);
-
+            movementController.updateOrder(idPedido);
             //cantMov = Convert.ToInt32(numericUpDown2.Value);
             if (exito > 0)
             {
-                classFacture.AddSaleDocumentW(idPedido, arrIdProd, arrCantProd);
                 MessageBox.Show("" + exito + " Operaciones realizadas con éxito.");
-                this.Close();
             }
             else
             {
@@ -267,7 +260,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
 
-            datos = productionItemMovementController.getProductOrder(id, textBox5.Text);
+            datos = movementController.getProductStockSales(id, textBox5.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
@@ -285,7 +278,7 @@ namespace InkaArt.Interface.Warehouse
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
-            productionItemMovementController.closeConnection();
+            
             if (rowIndex == 0)
             {
                 MessageBox.Show("No hay productos que este almacén pueda devolver para la orden de pedido ingresada.");

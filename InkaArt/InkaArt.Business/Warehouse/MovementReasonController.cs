@@ -16,10 +16,6 @@ namespace InkaArt.Business.Warehouse
         {
             type_data = new MovementReasonData();
         }
-
-        public DataTable GetMovementReasons()
-        {
-            return type_data.GetMovementReasons();
-        }
+        
     }
 }

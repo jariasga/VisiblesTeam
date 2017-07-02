@@ -15,6 +15,7 @@ namespace InkaArt.Interface.Warehouse
     {
         string typeMovement = "";
         private ProductionItemWarehouseMovementController productionItemWarehouseMovementController = new ProductionItemWarehouseMovementController();
+        private MovementController movementController = new MovementController();
 
         public ExchangeMovement()
         {
@@ -56,38 +57,42 @@ namespace InkaArt.Interface.Warehouse
             string itemType = textBox7.Text;
 
             int exito2 = 0,exito3=0,exito=0;
+
+            //Verificar si se puede realizar el movimiento
+            exito2 = movementController.verifyMovement(idItem, idWarehouseOrigin, cantMov, -1, typeMovement, "Rotura", "Producto", "");
+            if(exito2 == -1)
+            {
+                MessageBox.Show("No se pudo completar el movimiento.");
+            }
+            exito3 = movementController.verifyMovement(idItem, idWarehouseDestiny, cantMov, -1, typeMovement, "Hallazgo", "Producto", "");
+            if (exito3 == -1)
+            {
+                MessageBox.Show("No se pudo completar el movimiento.");
+            }
             //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-            exito3 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseOrigin, cantMov, "Salida","OK");
-            if(exito3 == 1)
-            {
-                exito2 = productionItemWarehouseMovementController.updateData(idItem, idWarehouseDestiny, cantMov, "Entrada","OK");
-            }
-            if(exito2 != 1) //Si el almacén destino no admite el producto se revierte el movimiento
-            {
-                productionItemWarehouseMovementController.updateData(idItem, idWarehouseOrigin, cantMov, "Entrada");
-            }
-            
+            //Se simula como una entrada y salida de un almacén a otro
+            movementController.updateProductWarehouse(idItem, idWarehouseOrigin, cantMov, "Entrada", "Producto");
+            movementController.updateProductWarehouse(idItem, idWarehouseDestiny, cantMov, "Salida", "Producto");
+
             if (exito2 == 1 && exito3 == 1)
             {
-                //Grabar movimiento
                 int movemenType = 1; //Indica que es una entrada/salida
                 int movementReason = 5;//Indica que es un movimiento por traslado entre almacenes
                 int documentTypes = 5;//Indica que no hay documento relacionado porque es una transferencia
                 int idDocument = -1;//No se genera documento porque es una transferencia
                 int productType = 1;//0:materia prima | 1:producto
                 int isExchange = -1;//-1:No es intercambio | otro:es intercambio
-                productionItemWarehouseMovementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem,cantMov,productType);
+                //Grabar movimiento
+                movementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem, cantMov, productType);
+                movementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem, cantMov, productType);
+                //productionItemWarehouseMovementController.insertMovement(idDocument, movemenType, idWarehouseOrigin, movementReason, documentTypes, idWarehouseDestiny, idItem,cantMov,productType);
                 exito++;
             }
             if (exito > 0)
             {
                 MessageBox.Show("" + exito + " Operaciones realizadas con éxito.");
+                this.Close();
             }
-            else
-            {
-                MessageBox.Show("No se pudo realizar ningún movimiento...");
-            }
-            this.Close();
 
         }
     }
