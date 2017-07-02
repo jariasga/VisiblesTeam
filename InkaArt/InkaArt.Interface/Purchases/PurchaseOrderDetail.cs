@@ -481,7 +481,7 @@ namespace InkaArt.Interface.Purchases
                     MessageBox.Show("No se pudo crear la orden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }
-                MessageBox.Show("Se creo de manera exitosa el borrador de la orden.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se creo de manera exitosa el borrador de la orden.", "Creacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (mode == 2 && isInEditMode)
             {
@@ -518,7 +518,7 @@ namespace InkaArt.Interface.Purchases
                 {
                     MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                MessageBox.Show("Se guardaron los cambios de manera exitosa.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se guardaron los cambios de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else
