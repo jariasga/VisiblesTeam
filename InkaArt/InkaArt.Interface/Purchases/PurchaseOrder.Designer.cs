@@ -321,8 +321,10 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView_purchaseOrder);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PurchaseOrder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de orden de compra";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).EndInit();
             this.groupBox1.ResumeLayout(false);

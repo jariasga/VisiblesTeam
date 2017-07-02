@@ -50,9 +50,6 @@ namespace InkaArt.Business.Purchases
             purchaseOrder.execute(string.Format("UPDATE \"inkaart\".\"PurcharseOrder\" " +
                         "SET id_supplier = {0}, status = '{1}', creation_date = to_date('{2}','DD/MM/YYYY'), delivery_date = to_date('{3}','DD/MM/YYYY'), total = {4} " +
                         "WHERE id_order = {5}", proveedor, estado, creacion.ToString(), entrega.ToString(), total, id));
-
-           
-            purchaseOrder.updateData(data, adap, "PurcharseOrder");
         }
 
         public void updateOrdenEntregada(int id_order)

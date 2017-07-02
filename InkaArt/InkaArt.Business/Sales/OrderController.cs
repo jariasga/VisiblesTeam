@@ -136,14 +136,27 @@ namespace InkaArt.Business.Sales
             return orderData.GetDevolutions();
         }
 
-        public void updateReturn(string idDoc)
+        public DataTable GetDevolutionLines(int id_devolution)
+        {
+            // activas y sin completar
+            return orderData.GetDevolutionLines(id_devolution);
+        }
+
+        public void updateDevolution(int id_order)
         {
             DataTable table = GetOrders();
+            string updateQuery = "UPDATE inkaart.\"Order\" SET \"orderStatus\" = 'devuelto' " + 
+                "WHERE \"idOrder\" = " + id_order + ";";
+            orderData.execute(updateQuery);
+        }
 
-            string updateQuery;
-            updateQuery = "UPDATE inkaart.\"Order\" SET ";
-            updateQuery = updateQuery + "\"orderStatus\" = 'facturado' ";
-            updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
+
+
+        public void updateDevolutionLine(int id_line)
+        {
+            DataTable table = GetOrders();
+            string updateQuery = "UPDATE inkaart.\"LineItem\" SET \"lineStatus\" = 'devuelto' " +
+                "WHERE \"idLineItem\" = " + id_line + ";";
             orderData.execute(updateQuery);
         }
 

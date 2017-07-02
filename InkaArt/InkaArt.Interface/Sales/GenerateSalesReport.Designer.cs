@@ -52,9 +52,9 @@
             this.groupBox1.Controls.Add(this.dateTimePicker_fechaFin);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(29, 116);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(499, 181);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -66,7 +66,7 @@
             this.button_generateSalesResport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generateSalesResport.ForeColor = System.Drawing.Color.White;
             this.button_generateSalesResport.Location = new System.Drawing.Point(338, 111);
-            this.button_generateSalesResport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_generateSalesResport.Margin = new System.Windows.Forms.Padding(2);
             this.button_generateSalesResport.Name = "button_generateSalesResport";
             this.button_generateSalesResport.Size = new System.Drawing.Size(104, 41);
             this.button_generateSalesResport.TabIndex = 22;
@@ -78,7 +78,7 @@
             // 
             this.comboBox_products.FormattingEnabled = true;
             this.comboBox_products.Location = new System.Drawing.Point(312, 63);
-            this.comboBox_products.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_products.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_products.Name = "comboBox_products";
             this.comboBox_products.Size = new System.Drawing.Size(170, 26);
             this.comboBox_products.TabIndex = 8;
@@ -121,7 +121,7 @@
             this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 63);
-            this.dateTimePicker_fechaIni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker_fechaIni.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
             this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(162, 24);
             this.dateTimePicker_fechaIni.TabIndex = 4;
@@ -131,7 +131,7 @@
             this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(21, 129);
-            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
             this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(162, 24);
             this.dateTimePicker_fechaFin.TabIndex = 6;
@@ -142,7 +142,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(29, 10);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(499, 84);
@@ -158,8 +158,10 @@
             this.ClientSize = new System.Drawing.Size(560, 333);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GenerateSalesReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Reporte de Ventas";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

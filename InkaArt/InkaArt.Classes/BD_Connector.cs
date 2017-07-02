@@ -21,14 +21,15 @@ namespace InkaArt.Classes
         {
             ConnectionString = new NpgsqlConnectionStringBuilder();
 
-            serverAddress = "skeletpiece.homeip.net";
-            databaseName = "desarrolloprogramas1";
+            serverAddress = "200.16.7.71";
+            databaseName = "dp1";
 
             ConnectionString.Host = serverAddress;
             ConnectionString.Database = databaseName;
-            ConnectionString.Username = "admin";
-            ConnectionString.Password = "fae48";
+            ConnectionString.Username = "postgres";
+            ConnectionString.Password = "in64hm";
             ConnectionString.Pooling = true;
+            ConnectionString.Port = 1043;
             ConnectionString.ApplicationName = Environment.UserName + "@" + Environment.UserDomainName + " on InkaArt Application";
         }
 

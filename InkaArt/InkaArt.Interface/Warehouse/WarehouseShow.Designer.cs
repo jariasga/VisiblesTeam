@@ -37,17 +37,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_rawMaterial = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
             this.button_updateP = new System.Windows.Forms.Button();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.buttonAdd_RawMaterial = new System.Windows.Forms.Button();
             this.dataGridView_RawMaterial = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockMaximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonDelete_RawMaterial = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox_RM = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage_Products = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.button_updateRm = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
@@ -66,16 +76,6 @@
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.idPW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonDelete_Product = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockMaximo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage_rawMaterial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -202,6 +202,17 @@
             this.tabPage_rawMaterial.Text = "Materias Primas";
             this.tabPage_rawMaterial.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(28, 293);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(553, 18);
+            this.label11.TabIndex = 83;
+            this.label11.Text = "* El stock actual y virtual solo son editables mediante movimientos de almacén.";
+            // 
             // button_updateP
             // 
             this.button_updateP.BackColor = System.Drawing.Color.SteelBlue;
@@ -278,6 +289,54 @@
             this.dataGridView_RawMaterial.Size = new System.Drawing.Size(584, 210);
             this.dataGridView_RawMaterial.TabIndex = 55;
             this.dataGridView_RawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_RawMaterial_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // stockActual
+            // 
+            this.stockActual.HeaderText = "Stock Actual";
+            this.stockActual.Name = "stockActual";
+            this.stockActual.ReadOnly = true;
+            // 
+            // stockVirtual
+            // 
+            this.stockVirtual.HeaderText = "Stock Virtual";
+            this.stockVirtual.Name = "stockVirtual";
+            this.stockVirtual.ReadOnly = true;
+            // 
+            // stockMinimo
+            // 
+            this.stockMinimo.HeaderText = "Stock Mínimo";
+            this.stockMinimo.Name = "stockMinimo";
+            // 
+            // stockMaximo
+            // 
+            this.stockMaximo.HeaderText = "Stock Máximo";
+            this.stockMaximo.Name = "stockMaximo";
+            // 
+            // borrar
+            // 
+            this.borrar.HeaderText = "Seleccionar";
+            this.borrar.Name = "borrar";
+            this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IdRMW
+            // 
+            this.IdRMW.HeaderText = "IdRMW";
+            this.IdRMW.Name = "IdRMW";
+            this.IdRMW.ReadOnly = true;
+            this.IdRMW.Visible = false;
             // 
             // buttonDelete_RawMaterial
             // 
@@ -358,6 +417,17 @@
             this.tabPage_Products.TabIndex = 1;
             this.tabPage_Products.Text = "Productos";
             this.tabPage_Products.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(28, 293);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(553, 18);
+            this.label10.TabIndex = 82;
+            this.label10.Text = "* El stock actual y virtual solo son editables mediante movimientos de almacén.";
             // 
             // button_updateRm
             // 
@@ -542,76 +612,6 @@
             this.buttonDelete_Product.UseVisualStyleBackColor = false;
             this.buttonDelete_Product.Click += new System.EventHandler(this.buttonDelete_Product_Click);
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // stockActual
-            // 
-            this.stockActual.HeaderText = "Stock Actual";
-            this.stockActual.Name = "stockActual";
-            this.stockActual.ReadOnly = true;
-            // 
-            // stockVirtual
-            // 
-            this.stockVirtual.HeaderText = "Stock Virtual";
-            this.stockVirtual.Name = "stockVirtual";
-            this.stockVirtual.ReadOnly = true;
-            // 
-            // stockMinimo
-            // 
-            this.stockMinimo.HeaderText = "Stock Mínimo";
-            this.stockMinimo.Name = "stockMinimo";
-            // 
-            // stockMaximo
-            // 
-            this.stockMaximo.HeaderText = "Stock Máximo";
-            this.stockMaximo.Name = "stockMaximo";
-            // 
-            // borrar
-            // 
-            this.borrar.HeaderText = "Seleccionar";
-            this.borrar.Name = "borrar";
-            this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // IdRMW
-            // 
-            this.IdRMW.HeaderText = "IdRMW";
-            this.IdRMW.Name = "IdRMW";
-            this.IdRMW.ReadOnly = true;
-            this.IdRMW.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(28, 293);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(553, 18);
-            this.label10.TabIndex = 82;
-            this.label10.Text = "* El stock actual y virtual solo son editables mediante movimientos de almacén.";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(28, 293);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(553, 18);
-            this.label11.TabIndex = 83;
-            this.label11.Text = "* El stock actual y virtual solo son editables mediante movimientos de almacén.";
-            // 
             // WarehouseShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -626,8 +626,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox_name);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WarehouseShow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vista Almacen";
             this.Load += new System.EventHandler(this.WarehouseShow_Load);
             this.tabControl1.ResumeLayout(false);

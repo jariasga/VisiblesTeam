@@ -167,7 +167,7 @@ namespace InkaArt.Business.Algorithm
             if (product_id == 1) return huaco_weight;
             if (product_id == 2) return huamanga_stone_weight;
             if (product_id == 3) return retable_weight;
-            return 1;                
+            return 1; //Por defecto
         }
 
         /******************* GUARDADO EN BASE DE DATOS *******************/
