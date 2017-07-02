@@ -19,6 +19,7 @@ namespace InkaArt.Interface.Warehouse
         string typeMovement = "";
         private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
         private ProductionItemWarehouseMovementController productionItemWarehouseMovementController = new ProductionItemWarehouseMovementController();
+        private MovementController movementController = new MovementController();
 
         public ProductionMovementOut()
         {
@@ -106,37 +107,32 @@ namespace InkaArt.Interface.Warehouse
                         continue;
                     }
                     maxMov = Convert.ToInt32(row.Cells[2].Value);
+                    int intIdWarehouse = 0;
+                    intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
 
-                    if (cantMov <= maxMov)
+                    availableToMove = movementController.verifyMovement(idProd, intIdWarehouse, cantMov, -1, typeMovement, "Produccion", "Materia Prima", "");
+
+                    if (availableToMove == 1)
                     {
                         //Se valida que exista la materia prima, el almacén, también que exista la relación materiaPrima-almacén
-                        int intIdWarehouse = 0;
-                        intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
-
-                        availableToMove = productionItemMovementController.availableProductionOut(idProd, intIdWarehouse);
-                        if (availableToMove != 1)
-                        {
-                            return;
-                        }
                         
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-                        exito =productionItemWarehouseMovementController.updateDataRawMaterialOut(idProd, intIdWarehouse, cantMov, "Salida", "OK");
+                        movementController.updateProductWarehouse(idProd, intIdWarehouse, cantMov, typeMovement, "Materia Prima");
+                        //exito =productionItemWarehouseMovementController.updateDataRawMaterialOut(idProd, intIdWarehouse, cantMov, "Salida", "OK");
 
-                        if (exito == 1)
-                        {
-                            //Grabar movimiento
-                            int movemenType = 13; //Indica que es una salida
-                            int movementReason = 3;//Indica que es un movimiento por producción
-                            int documentTypes = -1;//Indica que no tiene un documento relacionado para validarlo
-                            int productType = 0;//0:materia prima | 1:producto
-                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
-                            productionItemWarehouseMovementController.insertMovement(-1, movemenType, Convert.ToInt32(idWarehouesOrigin), movementReason, documentTypes, isExchange, idProd, cantMov, productType);
-                            numRows2++;
-                        }
+                        //Grabar movimiento
+                        int movemenType = 13; //Indica que es una salida
+                        int movementReason = 3;//Indica que es un movimiento por producción
+                        int documentTypes = -1;//Indica que no tiene un documento relacionado para validarlo
+                        int productType = 0;//0:materia prima | 1:producto
+                        int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                        movementController.insertMovement(-1, movemenType, intIdWarehouse, movementReason, documentTypes, isExchange, idProd, cantMov, productType);
+                        //productionItemWarehouseMovementController.insertMovement(-1, movemenType, Convert.ToInt32(idWarehouesOrigin), movementReason, documentTypes, isExchange, idProd, cantMov, productType);
+                        numRows2++;
                     }
                     else
                     {
-                        MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + ". Solo se puede quitar " + maxMov + " items.");
+                        MessageBox.Show("No se pudo completar el movimiento para la línea: " + (numRows + 1) + ".");
                     }
                 }
                 numRows++;

@@ -81,7 +81,7 @@ namespace InkaArt.Data.Warehouse
             //query = "Select * from inkaart.\"Warehouse\"";
             NpgsqlCommand command = new NpgsqlCommand(query, Connection);
             NpgsqlDataReader dr = command.ExecuteReader();
-
+            
             //closeConnection();
             return dr;
         }

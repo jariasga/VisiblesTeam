@@ -92,21 +92,15 @@ namespace InkaArt.Business.Warehouse
             productionItemWarehouseMovementData.updateDataExecute(query);
         }
 
-        public void updateStockDocument(int idLote, int idProd, int currentStock,int movement, string typeMovement)
+        public void updateStockDocument(int idLote, int idProd, int currentStock,int movement)
         {
             string query = "";
-            int newStock = 0;
+            int newStock = 0, cantMoved=0;
 
-            if(typeMovement == "Entrada")
-            {
-                newStock = currentStock - movement;
-            }
-            else //Movimiento por salida de producto de almacén
-            {
-                newStock = currentStock - movement;
-            }
+            newStock = currentStock - movement;
+            cantMoved = cantMoved + movement;
 
-            query = "update inkaart.\"StockDocument\" set \"product_stock\" = " + newStock + " where \"idDocument\" = " + idLote + " and \"product_id\" = " + idProd + " and \"documentType\" = 'LOTE';";  
+            query = "update inkaart.\"StockDocument\" set \"product_stock\" = " + newStock + ", \"cantmoved\" = " + cantMoved + " where \"idDocument\" = " + idLote + " and \"product_id\" = " + idProd + " and \"documentType\" = 'LOTE';";  
             productionItemWarehouseMovementData.updateDataExecute(query);
             productionItemWarehouseMovementData.closeConnection();
         }

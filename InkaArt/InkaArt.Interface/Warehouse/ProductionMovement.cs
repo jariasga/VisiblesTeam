@@ -21,6 +21,7 @@ namespace InkaArt.Interface.Warehouse
         private ProductionMovementMovementController productionMovementMovementController = new ProductionMovementMovementController();
         private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
         private ProductionItemWarehouseMovementController productionItemWarehouseMovementController = new ProductionItemWarehouseMovementController();
+        private MovementController movementController = new MovementController();
 
         public ProductionMovement()
         {
@@ -95,14 +96,16 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("Favor de ingresar un valor válido para el lote");
                 return;
             }
+            //Fin de validaciones
+
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                bool s = Convert.ToBoolean(row.Cells[6].Value);
+                bool s = Convert.ToBoolean(row.Cells[6].Value);//Verifica que línea se ha marcado con un check
 
                 if (s == true)
                 {
-                    idProd = Convert.ToInt32(row.Cells[0].Value);
-                    nameProd = Convert.ToString(row.Cells[1].Value);
+                    idProd = Convert.ToInt32(row.Cells[0].Value);//No se valida porque viene de la base de datos
+                    nameProd = Convert.ToString(row.Cells[1].Value);//No se valida porque viene de la base de datos
                     try
                     {
                         cantMov = Convert.ToInt32(row.Cells[5].Value);
@@ -119,29 +122,28 @@ namespace InkaArt.Interface.Warehouse
                     }
                     maxMov = Convert.ToInt32(row.Cells[4].Value);
 
-                    if (cantMov <= maxMov)
+                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idLote, typeMovement, "Produccion", "Producto", "LOTE");
+
+                    if (exito2 == 1)
                     {
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
-                        exito2=productionItemWarehouseMovementController.updateData(idProd, idWare, cantMov, "Entrada","OK");
-                        if (exito2 == 1)
-                        {
-                            //Aumentar stock físico y lógico del producto
-                            productionItemMovementController.updateData(idProd, cantMov, typeMovement);
-                            //Actualizar el stock por mover
-                            productionItemWarehouseMovementController.updateStockDocument(idLote, idProd, maxMov, cantMov, "Entrada");
-                            //Grabar movimiento
-                            int movemenType = 2; //Indica que es una entrada
-                            int movementReason = 3;//Indica que es un movimiento por producción
-                            int documentTypes = 3;//Indica que el documento relacionado es un número de lote
-                            int productType = 1;//0:materia prima | 1:producto
-                            int isExchange = -1;//-1:No es intercambio | otro:es intercambio
-                            productionItemWarehouseMovementController.insertMovement(idLote, movemenType, idWare, movementReason, documentTypes,isExchange,idProd,cantMov,productType);
-                            exito++;
-                        }
+                        movementController.updateProductWarehouse(idProd, idWare, cantMov, typeMovement, "Producto");
+                        //Aumentar stock físico y lógico del producto
+                        movementController.updateProductStock(idProd, cantMov, typeMovement, "Produccion");
+                        //Actualizar el stock por mover
+                        movementController.updateStockDocument(idLote, idProd, maxMov, cantMov, "LOTE");
+                        //Grabar movimiento
+                        int movemenType = 2; //Indica que es una entrada
+                        int movementReason = 3;//Indica que es un movimiento por producción
+                        int documentTypes = 3;//Indica que el documento relacionado es un número de lote
+                        int productType = 1;//0:materia prima | 1:producto
+                        int isExchange = -1;//-1:No es intercambio | otro:es intercambio
+                        movementController.insertMovement(idLote, movemenType, idWare, movementReason, documentTypes, isExchange, idProd, cantMov, productType);
+                        exito++;
                     }
                     else
                     {
-                        MessageBox.Show("Error en la fila " + numRows + ": Para el producto:" + nameProd + "Solo quedan " + maxMov + " por asignar según el lote:" + idLote + ".");
+                        MessageBox.Show("No se pudo completar el movimiento para la línea: " + (numRows + 1) + ".");
                     }
                 }
                 numRows++;
