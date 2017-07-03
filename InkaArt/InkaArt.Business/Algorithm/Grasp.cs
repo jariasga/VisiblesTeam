@@ -349,11 +349,10 @@ namespace InkaArt.Business.Algorithm
             //Actualizar las líneas de orden
             LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
             orders[0][order_line_index].Produced += quantity_needed;
+            LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
+
             if (orders[0][order_line_index].Produced >= orders[0][order_line_index].Quantity) orders[0].RemoveLineItem(order_line_index);
             if (orders[0].NumberOfLineItems <= 0) orders.RemoveAt(0);
-
-            //current_line_items[order_line_index].Produced += quantity_needed;
-            LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
             
             for (int i = 0; i < current_product.NumberOfTuples; i++)
                 for (int j = 0; j < remaining_processes.Count(); j++)
