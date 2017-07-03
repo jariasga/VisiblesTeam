@@ -27,6 +27,7 @@ namespace InkaArt.Interface.Warehouse
         private ProductionItemMovementController productionItemMovementController = new ProductionItemMovementController();
         private MaterialMovementController materialMovementController = new MaterialMovementController();
         private ProductMovementController productMovementController = new ProductMovementController();
+        private MovementController movementController = new MovementController();
 
         public ExchangeItem()
         {
@@ -135,26 +136,40 @@ namespace InkaArt.Interface.Warehouse
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            NpgsqlDataReader datos;
+            NpgsqlDataReader drProduct;
 
-            datos = productionItemMovementController.getProductWarehouseWarehouse(idWarehouseOrigin, idWarehouseDestiny);
+            drProduct = movementController.getProductWarehouse(idWarehouseOrigin, idWarehouseDestiny);
             int rowIndex = 0;
 
 
             dataGridView1.Rows.Clear();
 
             //Muestra los datos en el gridview
-            while (datos.Read())
+            while (drProduct.Read())
             {
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];
-                row.Cells[1].Value = datos[1];
-                row.Cells[2].Value = datos[2];
+                row.Cells[0].Value = drProduct[0];
+                row.Cells[1].Value = drProduct[1];
+                row.Cells[2].Value = drProduct[2];
                 dataGridView1.Rows.Add(row);
                 rowIndex++;
             }
-            productionItemMovementController.closeConnection();
+            //productionItemMovementController.closeConnection();
+            NpgsqlDataReader drRawMaterial;
 
+            drRawMaterial = movementController.getRawMaterialWarehouse(idWarehouseOrigin, idWarehouseDestiny);
+            rowIndex = 0;
+
+            //Muestra los datos en el gridview
+            while (drRawMaterial.Read())
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                row.Cells[0].Value = drRawMaterial[0];
+                row.Cells[1].Value = drRawMaterial[1];
+                row.Cells[2].Value = drRawMaterial[2];
+                dataGridView1.Rows.Add(row);
+                rowIndex++;
+            }
 
         }
     }

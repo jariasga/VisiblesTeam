@@ -16,6 +16,7 @@ namespace InkaArt.Interface.Warehouse
     {
         public int id = 0;
         public string name = "";
+        int prohibitedWarehouse = 0;
         TextBox idWarehouse;
         TextBox nameWarehouse;
 
@@ -30,6 +31,14 @@ namespace InkaArt.Interface.Warehouse
         {
             idWarehouse = text1;
             nameWarehouse = text2;
+            InitializeComponent();
+        }
+
+        public WarehouseSearchMovement(TextBox text1, TextBox text2, int prohibitWare)
+        {
+            idWarehouse = text1;
+            nameWarehouse = text2;
+            prohibitedWarehouse = prohibitWare;
             InitializeComponent();
         }
 
@@ -77,7 +86,7 @@ namespace InkaArt.Interface.Warehouse
             idWarehouse = validarEnteroPositivo(textBox_id.Text);
             if (idWarehouse == -1) return;
 
-            warehouseList = movementController.GetWarehouseList(idWarehouse, textBox_name.Text, textBox_address.Text);
+            warehouseList = movementController.GetWarehouseList(idWarehouse, textBox_name.Text, textBox_address.Text,prohibitedWarehouse);
             populateDataGridWarehouseMovement(warehouseList);
         }
 

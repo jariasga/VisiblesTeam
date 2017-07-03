@@ -141,7 +141,7 @@ namespace InkaArt.Business.Warehouse
         public NpgsqlDataReader getProductWarehouseWarehouse(string idWarehouseOrigin,string idWarehouseDestiny) {
             string query = "";
             //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
-            query = "select A.\"idProduct\", C.\"name\", 'Producto' as \"typeItem\" from inkaart.\"Product-Warehouse\" A, inkaart.\"Product-Warehouse\" B, inkaart.\"Product\" C where A.\"idWarehouse\" = " + idWarehouseOrigin + " and B.\"idWarehouse\" =" + idWarehouseDestiny + " and A.\"idProduct\" = B.\"idProduct\" and A.\"idProduct\" = C.\"idProduct\";";
+            query = "select A.\"idRawMaterial\", C.\"name\", 'Producto' as \"typeItem\" from inkaart.\"Product-Warehouse\" A, inkaart.\"Product-Warehouse\" B, inkaart.\"Product\" C where A.\"idWarehouse\" = " + idWarehouseOrigin + " and B.\"idWarehouse\" =" + idWarehouseDestiny + " and A.\"idProduct\" = B.\"idProduct\" and A.\"idProduct\" = C.\"idProduct\";";
             return productionItemMovementData.GetLoteData(query);
         }
 
