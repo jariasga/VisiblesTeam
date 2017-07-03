@@ -97,7 +97,13 @@ namespace InkaArt.Business.Algorithm
                 AssignmentLine current_line = temporal_assignments[i].AssignmentLine;
                 int temp_start = temporal_assignments[i - 1].AssignmentLine.MiniturnStart;
                 temp_start += AssignmentLine.ProducedToMiniturns(1, current_line.AverageTime, Simulation.MiniturnLength);
-                if (temp_start > current_line.MiniturnStart) current_line.MiniturnStart = temp_start;
+                if (temp_start > current_line.MiniturnStart)
+                {
+                    current_line.MiniturnStart = temp_start;
+                    current_line.MiniturnsUsed = total_miniturns - temp_start;
+                    current_line.Produced = AssignmentLine.MiniturnsToProduced(current_line.MiniturnsUsed, current_line.AverageTime,
+                        Simulation.MiniturnLength);
+                }
                 if (current_line.Produced < quantity_needed) quantity_needed = current_line.Produced;
             }
             //Actualizar la cantidad de miniturnos y la cantidad producida
@@ -107,7 +113,7 @@ namespace InkaArt.Business.Algorithm
                 current_line.Produced = quantity_needed;
                 current_line.MiniturnsUsed = AssignmentLine.ProducedToMiniturns(quantity_needed, current_line.AverageTime, Simulation.MiniturnLength);
                 //Ver si nos pasamos de los miniturnos :(
-                if (current_line.MiniturnStart + current_line.MiniturnsUsed >= total_miniturns)
+                if (current_line.MiniturnStart + current_line.MiniturnsUsed > total_miniturns)
                     throw new Exception("Nos pasamos de la cantidad de miniturnos :(");
             }
             return quantity_needed;

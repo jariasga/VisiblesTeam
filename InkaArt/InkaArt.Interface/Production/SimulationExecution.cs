@@ -207,8 +207,7 @@ namespace InkaArt.Interface.Production
 
         private void SimulationLoadingScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            if (!worker.IsBusy || elapsed_seconds >= Simulation.LimitTime) return;
+            if (!background_simulation.IsBusy || elapsed_seconds >= Simulation.LimitTime) return;
 
             DialogResult result = MessageBox.Show("¿Está seguro de cancelar la simulación de la asignación de trabajadores?",
                 "Inka Art", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
