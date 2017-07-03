@@ -586,11 +586,10 @@ namespace InkaArt.Data.Sales
             curAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
             curAdap.SelectCommand.Parameters[0].SourceColumn = "idProduct";
             curAdap.SelectCommand.Parameters[0].NpgsqlValue = id;
-            //curData.Clear();
             curData = getData(curAdap, "Product");
             DataTable orderLine = new DataTable();
             orderLine = curData.Tables[0];
-            if (isNationalClient(idClient)) return orderLine.Rows[0]["localPrice"].ToString();
+            if (idClient == -1 || isNationalClient(idClient)) return orderLine.Rows[0]["localPrice"].ToString();
             else return orderLine.Rows[0]["exportPrice"].ToString();
         }
 
