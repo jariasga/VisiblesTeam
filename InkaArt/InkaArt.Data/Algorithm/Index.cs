@@ -196,8 +196,8 @@ namespace InkaArt.Data.Algorithm
             string recipe = (this.recipe == null) ? "null" : "ID " + this.recipe.ID + ": " + this.recipe.Version;
             string job = (this.job == null) ? "null" : this.job.Name;
 
-            return string.Format("{0};{1};{2};{3};{4:0.0000};{5:0.0000};{6:0.0000};{7:0.0000};{8:0.0000}", this.id_index,
-               worker, recipe, job, this.average_breakage, this.average_time, this.breakage_index, this.time_index, this.loss_index);
+            return string.Format("{0};{1};{2};{3};{4:0.0000};{5:0.0000};{6:0.0000};{7:0.0000};{8:0.0000},{9:0.0000}", this.id_index, worker, recipe,
+                job, this.average_breakage, this.average_time, this.breakage_index, this.time_index, this.loss_index, this.cost_value);
         }
 
     }

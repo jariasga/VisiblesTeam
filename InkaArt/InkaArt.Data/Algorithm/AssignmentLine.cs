@@ -86,7 +86,7 @@ namespace InkaArt.Data.Algorithm
 
             this.miniturn_start = miniturn_start;
             this.miniturns_used = total_miniturns - miniturn_start;
-            this.produced = MiniturnsToProduced(miniturn_length);
+            this.produced = MiniturnsToProduced(this.miniturns_used, this.average_time, miniturn_length);
         }
 
         /// <summary>
@@ -132,16 +132,18 @@ namespace InkaArt.Data.Algorithm
 
             command.ExecuteNonQuery();
         }
+        
+        /* Funciones auxiliares */
 
-        public int MiniturnsToProduced(int miniturn_length)
+        public static int MiniturnsToProduced(int miniturns_used, double average_time, int miniturn_length)
         {
-            double attempts = this.miniturns_used * miniturn_length / this.average_time;
+            double attempts = miniturns_used * miniturn_length / average_time;
             return Convert.ToInt32(Math.Truncate(attempts));
         }
 
-        public int ProducedToMiniturns(int miniturn_length)
+        public static int ProducedToMiniturns(int produced, double average_time, int miniturn_length)
         {
-            double miniturns = this.produced * this.average_time / miniturn_length;
+            double miniturns = produced * average_time / miniturn_length;
             return Convert.ToInt32(Math.Ceiling(miniturns));
         }
 
@@ -150,7 +152,7 @@ namespace InkaArt.Data.Algorithm
             string worker = (this.worker == null) ? "null" : this.worker.FullName;
             string recipe = (this.recipe == null) ? "null" : this.recipe.Version;
             string job = (this.job == null) ? "null" : this.job.Name;
-            return string.Format("{0},{1},{2},{3},{4},{5},{6},[{7},{8}],{9}", worker, recipe, job, average_breakage, average_time,
+            return string.Format("{0},{1},{2},{3},{4},{5},[{6},{7}],{8}", worker, recipe, job, average_breakage, average_time,
                 loss_index, miniturn_start, miniturn_start + miniturns_used, produced);
         }
     }

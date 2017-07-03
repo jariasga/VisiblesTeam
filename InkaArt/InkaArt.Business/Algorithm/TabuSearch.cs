@@ -204,13 +204,14 @@ namespace InkaArt.Business.Algorithm
                     assignment.MiniturnsUsed -= miniturn_pivot - assignment.MiniturnStart;
                     assignment.MiniturnStart = miniturn_pivot + 1;                    
                 }
-                assignment.Produced = assignment.MiniturnsToProduced(Simulation.MiniturnLength);
+                assignment.Produced = AssignmentLine.MiniturnsToProduced(assignment.MiniturnsUsed, assignment.AverageTime, Simulation.MiniturnLength);
             }
         }
 
         private AssignmentLine updateMiniturn(AssignmentLine assignment, Worker worker)
         {
-            if (assignment != null) assignment.Produced = assignment.MiniturnsToProduced(Simulation.MiniturnLength);
+            if (assignment != null)
+                assignment.Produced = AssignmentLine.MiniturnsToProduced(assignment.MiniturnsUsed, assignment.AverageTime, Simulation.MiniturnLength);
             return assignment;
         }
 

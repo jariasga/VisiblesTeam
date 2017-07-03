@@ -50,8 +50,7 @@ namespace InkaArt.Data.Algorithm
             this.client = copy.client;
             this.delivery_date = copy.delivery_date;
             this.line_items = new List<OrderLineItem>();
-            for (int i = 0; i < copy.NumberOfLineItems; i++)
-                this.line_items.Add(new OrderLineItem(copy.line_items[i]));
+            for (int i = 0; i < copy.NumberOfLineItems; i++) this.line_items.Add(new OrderLineItem(copy.line_items[i]));
         }
 
         public List<OrderLineItem> OrderLineItems
@@ -75,6 +74,12 @@ namespace InkaArt.Data.Algorithm
             for (int i = 0; i < line_items.Count; i++)
                 if (line_items[i].Produced < line_items[i].Quantity) return false;
             return true;
+        }
+
+        public bool RemoveLineItem(int order_line_index)
+        {
+            this.line_items.RemoveAt(order_line_index);
+            return (this.line_items.Count <= 0);
         }
     }
 }
