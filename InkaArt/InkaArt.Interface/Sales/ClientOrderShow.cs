@@ -43,6 +43,8 @@ namespace InkaArt.Interface.Sales
         {
             foreach (DataRow row in orderObject.Rows)
             {
+                if (row["orderStatus"].ToString().Equals("facturado")) button_fac.Visible = false;
+                else button_fac.Visible = true;
                 int totalFinished = 0, totalInvoiced = 0, auxResult;
                 string clientDoc = "", docType="";
                 toFacAmount = 0;
@@ -148,6 +150,11 @@ namespace InkaArt.Interface.Sales
         {
             SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
             form.Show();
+        }
+
+        private void button_fac_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
