@@ -154,7 +154,10 @@ namespace InkaArt.Interface.Warehouse
                                     //update d la tabla
                                     try
                                     {
-                                        controlRm.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical - aIngresar);
+                                        currentLogical = currentLogical - aIngresar;
+                                        if (currentLogical < 0)
+                                            currentLogical = 0;
+                                        controlRm.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical);
                                         controlM.insertBrokenFindMovement(13, warehouse_id, 4, DateTime.Now.ToShortDateString(), item_id, 0, aIngresar);
                                     }
                                     catch (Exception m)
