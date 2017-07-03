@@ -43,23 +43,34 @@ namespace InkaArt.Interface.Sales
         {
             foreach (DataRow row in orderObject.Rows)
             {
-                int totalFinished = 0, totalInvoiced = 0;
+                int totalFinished = 0, totalInvoiced = 0, auxResult;
+                string clientDoc = "", docType="";
                 toFacAmount = 0;
                 date_deliverydate.Value = Convert.ToDateTime(row["deliveryDate"]);
                 combo_orderstatus.Text = row["orderStatus"].ToString();
                 textbox_amount.Text = row["saleAmount"].ToString();
                 textbox_igv.Text = row["igv"].ToString();
                 textbox_total.Text = row["totalAmount"].ToString();
-                clientId = int.Parse(row["idClient"].ToString());
-                string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType="Boleta";
-                textbox_ruc.Text = clientDoc;
-                textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
-                if (clientDoc.Length == 11)
+                if (int.TryParse(row["idClient"].ToString(), out auxResult))
                 {
-                    docType = "Factura";
-                    label_doc.Text = "RUC";
+                    clientId = auxResult;
+                    clientDoc = orderController.getClientDoc(row["idClient"].ToString());
+                    textbox_ruc.Text = clientDoc;
+                    textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
+                } 
+                if (!clientDoc.Equals(""))
+                {
+                    if (clientDoc.Length == 11)
+                    {
+                        docType = "Factura";
+                        label_doc.Text = "RUC";
+                    }
+                    else
+                    {
+                        docType = "Boleta";
+                        label_doc.Text = "DNI";
+                    }
                 }
-                else label_doc.Text = "DNI";
                 combo_doc.Text = docType;
                 orderLine = orderController.getOrderLines(row["idOrder"].ToString());
                 orderLineToFac = orderLine.Clone();
@@ -67,7 +78,10 @@ namespace InkaArt.Interface.Sales
                 foreach (DataRow orderline in orderLine.Rows)
                 {
                     string productId = orderline["idProduct"].ToString();
-                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId,row["idClient"].ToString());
+                    string name = orderController.getProductName(productId);
+                    string pu;
+                    if (clientId == 0 && clientDoc.Equals("")) pu = orderController.getProductPU(productId);
+                    else pu = orderController.getProductPU(productId, row["idClient"].ToString());
                     string curStock = orderController.getCurrentStock(productId);
                     if (int.Parse(curStock) < 0) curStock = "0";
                     totalFinished += int.Parse(curStock);

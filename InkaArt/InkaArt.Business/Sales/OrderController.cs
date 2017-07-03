@@ -219,7 +219,7 @@ namespace InkaArt.Business.Sales
         {
             return orderData.GetProducts();
         }
-        public string getProductPU(string id, string idClient)
+        public string getProductPU(string id, string idClient = "-1")
         {
             int parsedID = int.Parse(id);
             int parsedIdClient = int.Parse(idClient);
