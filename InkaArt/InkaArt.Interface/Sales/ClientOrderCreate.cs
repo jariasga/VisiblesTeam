@@ -176,7 +176,7 @@ namespace InkaArt.Interface.Sales
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
+            if (isVersionAdded()) MessageBox.Show(this, "Esa versión ya ha sido agregada.", "Versión", MessageBoxButtons.OK);
             else
             {
                 bool canAdd = true;
@@ -202,14 +202,19 @@ namespace InkaArt.Interface.Sales
                 textbox_total.Text = orderController.getPolishedTotal(amount);
             }
         }
-
-        private bool isProductAdded()
+        
+        private bool isVersionAdded()
         {
             string selectedProduct = combo_product.SelectedItem.ToString();
-            foreach(DataGridViewRow row in grid_orderline.Rows)
+            string selectedVersion = combo_quality.SelectedItem.ToString();
+            foreach (DataGridViewRow row in grid_orderline.Rows)
             {
                 string cellProduct = row.Cells[0].Value.ToString();
-                if (selectedProduct.Contains(cellProduct)) return true;
+                if (selectedProduct.Contains(cellProduct))
+                {
+                    string cellVersion = row.Cells[1].Value.ToString();
+                    if (selectedVersion.Contains(cellVersion)) return true;
+                }
             }
             return false;
         }
