@@ -56,10 +56,6 @@ namespace InkaArt.Interface.Production
             indexes.Load();
             indexes.CalculateIndexes(simulation);
 
-            /*this.timer.Stop();
-            this.PrintIndexes(indexes);
-            this.timer.Start();*/
-
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
                 LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
@@ -85,10 +81,8 @@ namespace InkaArt.Interface.Production
                 initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
                 background_worker.ReportProgress(0, null);
             }
-
-            this.timer.Stop();
+            
             PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
-            this.timer.Start();
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
@@ -163,12 +157,7 @@ namespace InkaArt.Interface.Production
                     for (int m = 0; m < simulation.TotalMiniturns; m++)
                     {
                         AssignmentLine line = assignments[day][w, m];
-                        if (line == null) continue;
-                        string worker = (line.Worker == null) ? "null" : line.Worker.FullName;
-                        string job = (line.Job == null) ? "null" : line.Job.Name;
-                        string recipe = (line.Recipe == null) ? null : line.Recipe.Version;
-                        worksheet.Cells[m + 3, w + 1] = string.Format("{0}, {1}, {2}, {3}, [{4},{5}]", worker, job, recipe, line.Produced,
-                            line.MiniturnStart, line.MiniturnsUsed);
+                        worksheet.Cells[m + 3, w + 1] = (line == null) ? "Nada" : line.ToString();
                     }
                 }
 
@@ -192,13 +181,13 @@ namespace InkaArt.Interface.Production
         {
             this.timer.Stop();
 
-            if (e.Cancelled == false)
+            BackgroundWorker worker = sender as BackgroundWorker;
+            if (!worker.CancellationPending || e.Cancelled == false)
             {
                 MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
-            else
-                this.DialogResult = DialogResult.Cancel;
+            else this.DialogResult = DialogResult.Cancel;
 
             this.Close();
         }
@@ -218,7 +207,8 @@ namespace InkaArt.Interface.Production
 
         private void SimulationLoadingScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!background_simulation.IsBusy || elapsed_seconds >= Simulation.LimitTime) return;
+            BackgroundWorker worker = sender as BackgroundWorker;
+            if (!worker.IsBusy || elapsed_seconds >= Simulation.LimitTime) return;
 
             DialogResult result = MessageBox.Show("¿Está seguro de cancelar la simulación de la asignación de trabajadores?",
                 "Inka Art", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);

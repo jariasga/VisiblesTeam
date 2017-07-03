@@ -14,8 +14,6 @@ namespace InkaArt.Business.Algorithm
     {
         public const int NumberOfIterations = 100;
         public const double Alpha = 0.2;
-        public const int Treshold = 2; //A partir de una capacidad de dos productos, ya se considera al trabajador como lleno.
-        public int treshold_counter = 1;
         public static int LimitTime = Simulation.LimitTime * 2 / 5; //120 segundos = dos minutos
 
         private Simulation simulation;
@@ -81,7 +79,7 @@ namespace InkaArt.Business.Algorithm
                 this.ExecuteGraspConstructionPhase(assignment, iteration, orders, ref elapsed_time);
 
                 //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día por la nueva asignación generada
-                day_assignments.AddAssignment(assignment, orders);
+                if (elapsed_time < Grasp.LimitTime) day_assignments.AddAssignment(assignment, orders);
             }
 
             return day_assignments.GetBestAssignment(ref this.original_orders);
@@ -272,17 +270,8 @@ namespace InkaArt.Business.Algorithm
 
             LogHandler.WriteLine(";{0};{0}*{1}/{2:0.0000}={3:0.0000}", assignment_line.MiniturnsUsed, Simulation.MiniturnLength,
                 assignment_line.AverageTime, assignment_line.Produced);
-
-            //AQUÍ PODRÍA NECESITAR DE UN TRESHOLD. VOY A PROBARLO CON UN MESSAGEBOX.
-            //SI ESTE EXCEPTION SALE, REEMPLAZAR ESTAS DOS LÍNEAS QUE SIGUEN, POR LA LÍNEA COMENTADA.
-            if (assignment_line.Produced > 0 && assignment_line.Produced <= Grasp.Treshold)
-            {
-                MessageBox.Show("Esta es la vez #" + this.treshold_counter + " que pasa esto.");
-                MessageBox.Show("Si no esta botando nada, favor de poner el treshold.");
-                treshold_counter++;
-            }
+            
             if (assignment_line.Produced <= 0) return null;
-            //if (assignment_line.Produced <= Grasp.Treshold) return null;
             LogHandler.WriteLine("Aceptado!");
             LogHandler.WriteLine();
 
@@ -345,6 +334,10 @@ namespace InkaArt.Business.Algorithm
                 for (int j = 0; j < current_product[i].MiniturnsUsed; j++)
                     assignment[worker_index, current_product[i].MiniturnStart + j] = current_product[i];
             }
+            //Actualizar la función objetivo
+            LogHandler.WriteLine("Función objetivo antigua: {0}", assignment.ObjectiveFunction);
+            assignment.ObjectiveFunction += current_product.ObjectiveFunction;
+            LogHandler.WriteLine("Función objetivo actual: {0}", assignment.ObjectiveFunction);
 
             //Actualizar las líneas de orden
             LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);

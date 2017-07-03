@@ -123,6 +123,7 @@ namespace InkaArt.Interface.Production
                     //Llegó la hora de la verdad: ejecutar la simulación de asignación de trabajadores
                     Form loading_screen = new SimulationExecution(simulations, simulation, workers);
                     DialogResult result = loading_screen.ShowDialog();
+                    MessageBox.Show("Result: " + result.ToString());
                     if (result == DialogResult.Cancel) return;
 
                     //Habiendo terminado la simulación sin cancelarse, añadirla a la lista y actualizar el combo
