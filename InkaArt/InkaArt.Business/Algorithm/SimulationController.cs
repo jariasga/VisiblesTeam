@@ -15,7 +15,7 @@ namespace InkaArt.Business.Algorithm
     public class SimulationController
     {
         private BindingList<Simulation> simulations;
-        JobController jobs;
+        private JobController jobs;
 
         public SimulationController()
         {
@@ -126,13 +126,14 @@ namespace InkaArt.Business.Algorithm
                 int id_worker = int.Parse(reader["id_worker"].ToString());
                 int id_job = int.Parse(reader["id_job"].ToString());
                 int id_recipe = int.Parse(reader["id_recipe"].ToString());
+                int miniturn_start = int.Parse(reader["miniturn_start"].ToString());
+                int miniturns_used = int.Parse(reader["total_miniturns"].ToString());
                 int produced = int.Parse(reader["produced"].ToString());
-                int total_miniturns = int.Parse(reader["total_miniturns"].ToString());
 
                 Worker worker = workers.GetByID(id_worker);
                 Recipe recipe = recipes.GetByID(id_recipe);
                 Job job = jobs.GetByID(id_job);
-                AssignmentLine line = new AssignmentLine(worker, job, recipe, produced, total_miniturns);
+                AssignmentLine line = new AssignmentLine(worker, job, recipe,miniturn_start, miniturns_used, produced);
 
                 Assignment assignment = all_assignments.Where(ass => ass.ID.Equals(id_assignment)).ToList().First();
                 assignment.AssignmentLinesList.Add(line);
@@ -157,7 +158,7 @@ namespace InkaArt.Business.Algorithm
                 int altarpiece_produced = int.Parse(reader["altarpiece_produced"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
 
-                Assignment assignment = new Assignment(id_assignment, id_simulation, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date);
+                Assignment assignment = new Assignment(id_assignment, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date);
                 Simulation simulation = simulations.Where(s => s.ID.Equals(id_simulation)).ToList().First();
                 simulation.Assignments.Add(assignment);
                 list.Add(assignment);

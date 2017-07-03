@@ -13,7 +13,6 @@ namespace InkaArt.Business.Algorithm
     public class Assignment
     {
         private int id_assignment;
-        private int id_simulation;
         private DateTime date;
         private double objective_function_value;
         private AssignmentLine[,] assignment_lines;
@@ -72,20 +71,27 @@ namespace InkaArt.Business.Algorithm
             set { this.assignment_lines[worker_index, miniturn_index] = value; }
         }
         
+        /// <summary>
+        /// Constructor utilizado en el algoritmo GRASP.
+        /// </summary>
         public Assignment(DateTime date, WorkerController selected_workers, int total_miniturns)
         {
             this.date = date;
             this.objective_function_value = 0;
+
             this.assignment_lines = new AssignmentLine[selected_workers.NumberOfWorkers, total_miniturns];
             for (int i = 0; i < selected_workers.NumberOfWorkers; i++)
                 for (int j = 0; j < total_miniturns; j++)
                     assignment_lines[i, j] = null;
+
             this.huacos_produced = 0;
             this.huamanga_produced = 0;
             this.altarpiece_produced = 0;
         }
 
-        /* Tabu: para crear vecinos */        
+        /// <summary>
+        /// Constructor usado en el algoritmo Tabú para crear vecinos.
+        /// </summary>
         public Assignment(Assignment assignment)
         {
             this.date = assignment.date;
@@ -96,10 +102,9 @@ namespace InkaArt.Business.Algorithm
             this.altarpiece_produced = assignment.altarpiece_produced;
         }
         /* Para cargar de la BD */
-        public Assignment(int id_assignment, int id_simulation, int tabu_iterations, double objective_function_value, int huamanga_produced, int huacos_produced, int altarpiece_produced, DateTime date)
+        public Assignment(int id_assignment, int tabu_iterations, double objective_function_value, int huamanga_produced, int huacos_produced, int altarpiece_produced, DateTime date)
         {
             this.id_assignment = id_assignment;
-            this.id_simulation = id_simulation;
             this.tabu_iterations = tabu_iterations;
             this.objective_function_value = objective_function_value;
             this.huamanga_produced = huamanga_produced;
