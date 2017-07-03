@@ -152,8 +152,8 @@ namespace InkaArt.Data.Algorithm
             string worker = (this.worker == null) ? "null" : this.worker.FullName;
             string recipe = (this.recipe == null) ? "null" : this.recipe.Version;
             string job = (this.job == null) ? "null" : this.job.Name;
-            return string.Format("{0},{1},{2},{3},{4},{5},[{6},{7}],{8}", worker, recipe, job, average_breakage, average_time,
-                loss_index, miniturn_start, miniturn_start + miniturns_used, produced);
+            return string.Format("{0},{1},{2},{3:0.0000},{4:0.0000},{5:0.0000},[{6},{7}],{8}", worker, recipe, job, average_breakage,
+                average_time, loss_index, miniturn_start, miniturn_start + miniturns_used, produced);
         }
     }
 }

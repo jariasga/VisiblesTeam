@@ -48,6 +48,7 @@ namespace InkaArt.Interface.Production
 
             //Carga de controladores
 
+            if (background_worker.CancellationPending && (e.Cancel = true)) return;
             JobController jobs = new JobController();
             jobs.Load();
             RecipeController recipes = new RecipeController();
@@ -55,10 +56,6 @@ namespace InkaArt.Interface.Production
             IndexController indexes = new IndexController(workers, jobs, recipes);
             indexes.Load();
             indexes.CalculateIndexes(simulation);
-
-            /*this.timer.Stop();
-            this.PrintIndexes(indexes);
-            this.timer.Start();*/
 
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
@@ -68,6 +65,7 @@ namespace InkaArt.Interface.Production
             }
 
             //Temporal: Determinar el tiempo total del turno y los miniturnos
+            if (background_worker.CancellationPending && (e.Cancel = true)) return;
             Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
             for (int i = 0; i < workers.NumberOfWorkers; i++)
                 if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
@@ -82,13 +80,20 @@ namespace InkaArt.Interface.Production
 
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
                 initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
                 background_worker.ReportProgress(0, null);
             }
 
-            this.timer.Stop();
-            PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
-            this.timer.Start();
+            try
+            {
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
+            }
+            catch
+            {
+                MessageBox.Show("No se pudo guardar el Excel de los resultados del algoritmo GRASP.");
+            }
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
@@ -97,12 +102,15 @@ namespace InkaArt.Interface.Production
             TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
             /*for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
                 tabu.run(ref elapsed_seconds, day);
                 background_worker.ReportProgress(0, null);
             }*/
 
             tabu.bestSolutionToList();
             simulation.Assignments = tabu.BestSolution;
+
+            if (background_worker.CancellationPending && (e.Cancel = true)) return;
             simulation.Assignments = new List<Assignment>();
         }
 
@@ -152,23 +160,31 @@ namespace InkaArt.Interface.Production
 
             for (int day = 0; day < simulation.Days; day++)
             {
-                Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Item[day + 1];
+                Excel.Worksheet worksheet;
+                if (day <= 0) worksheet = (Excel.Worksheet)workbook.Worksheets.Item[day + 1];
+                else worksheet = (Excel.Worksheet)workbook.Worksheets.Add(workbook.Worksheets[1]);
 
                 worksheet.Name = "Día " + (day + 1);
-                worksheet.Cells[1, 1] = "Valor de la función objetivo";
-                worksheet.Cells[1, 2] = assignments[day].ObjectiveFunction;
-                for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
+                if (assignments[day] == null) worksheet.Cells[1, 1] = "Nada registrado para dicho día.";
+                else
                 {
-                    worksheet.Cells[2, w + 1] = simulation.SelectedWorkers[w].FullName;
-                    for (int m = 0; m < simulation.TotalMiniturns; m++)
+                    worksheet.Cells[1, 1] = "Valor de la función objetivo";
+                    worksheet.Cells[1, 2] = assignments[day].ObjectiveFunction;
+                    worksheet.Cells[2, 1] = "Huacos producidos";
+                    worksheet.Cells[3, 2] = assignments[day].HuacosProduced;
+                    worksheet.Cells[2, 2] = "Piedras de Huamanga producidas";
+                    worksheet.Cells[3, 2] = assignments[day].HuamangaProduced;
+                    worksheet.Cells[3, 1] = "Retablos producidos";
+                    worksheet.Cells[3, 2] = assignments[day].AltarpieceProduced;
+
+                    for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
                     {
-                        AssignmentLine line = assignments[day][w, m];
-                        if (line == null) continue;
-                        string worker = (line.Worker == null) ? "null" : line.Worker.FullName;
-                        string job = (line.Job == null) ? "null" : line.Job.Name;
-                        string recipe = (line.Recipe == null) ? null : line.Recipe.Version;
-                        worksheet.Cells[m + 3, w + 1] = string.Format("{0}, {1}, {2}, {3}, [{4},{5}]", worker, job, recipe, line.Produced,
-                            line.MiniturnStart, line.MiniturnsUsed);
+                        worksheet.Cells[5, w + 1] = simulation.SelectedWorkers[w].FullName;
+                        for (int m = 0; m < simulation.TotalMiniturns; m++)
+                        {
+                            AssignmentLine line = assignments[day][w, m];
+                            worksheet.Cells[m + 6, w + 1] = (line == null) ? "Nada" : line.ToString();
+                        }
                     }
                 }
 
@@ -191,14 +207,13 @@ namespace InkaArt.Interface.Production
         private void background_simulation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.timer.Stop();
-
+            
             if (e.Cancelled == false)
             {
                 MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
-            else
-                this.DialogResult = DialogResult.Cancel;
+            else this.DialogResult = DialogResult.Cancel;
 
             this.Close();
         }
