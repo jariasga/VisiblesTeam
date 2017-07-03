@@ -14,10 +14,10 @@ namespace InkaArt.Business.Algorithm
         private int count;
         private int best_index;
 
-        public GraspAssignments()
+        public GraspAssignments(int number_of_iterations)
         {
-            this.assignments = new Assignment[Grasp.NumberOfIterations];
-            this.orders = new List<Order>[Grasp.NumberOfIterations];
+            this.assignments = new Assignment[number_of_iterations];
+            this.orders = new List<Order>[number_of_iterations];
             this.count = 0;
             this.best_index = -1;
         }

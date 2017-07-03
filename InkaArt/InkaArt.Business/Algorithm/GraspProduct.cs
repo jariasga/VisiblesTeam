@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using InkaArt.Data.Algorithm;
 using InkaArt.Classes;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -91,11 +93,10 @@ namespace InkaArt.Business.Algorithm
 
         public int GetLowestQuantity(int quantity_needed, int total_miniturns)
         {
-            //Determinar primero el inicio ordenado de cada línea
-            for (int i = 1; i < temporal_assignments.Count; i++)
+            for (int i = 0; i < temporal_assignments.Count; i++)
             {
                 AssignmentLine current_line = temporal_assignments[i].AssignmentLine;
-                int temp_start = temporal_assignments[i - 1].AssignmentLine.MiniturnStart;
+                int temp_start = (i <= 0) ? 0 : temporal_assignments[i - 1].AssignmentLine.MiniturnStart;
                 temp_start += AssignmentLine.ProducedToMiniturns(1, current_line.AverageTime, Simulation.MiniturnLength);
                 if (temp_start > current_line.MiniturnStart)
                 {
@@ -106,6 +107,10 @@ namespace InkaArt.Business.Algorithm
                 }
                 if (current_line.Produced < quantity_needed) quantity_needed = current_line.Produced;
             }
+
+            Grasp.PrintCurrentProduct(this, "Estado intermedio de las asignaciones temporales: se determinó el inicio ordenado de cada línea");
+            LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
+
             //Actualizar la cantidad de miniturnos y la cantidad producida
             for (int i = 0; i < temporal_assignments.Count; i++)
             {
@@ -114,8 +119,12 @@ namespace InkaArt.Business.Algorithm
                 current_line.MiniturnsUsed = AssignmentLine.ProducedToMiniturns(quantity_needed, current_line.AverageTime, Simulation.MiniturnLength);
                 //Ver si nos pasamos de los miniturnos :(
                 if (current_line.MiniturnStart + current_line.MiniturnsUsed > total_miniturns)
-                    throw new Exception("Nos pasamos de la cantidad de miniturnos :(");
+                    MessageBox.Show("GRASP: Nos pasamos de la cantidad de miniturnos :(");
             }
+
+            Grasp.PrintCurrentProduct(this, "Estado final de las asignaciones temporales del producto escogido");
+            LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
+
             return quantity_needed;
         }
     }

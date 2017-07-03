@@ -12,9 +12,9 @@ namespace InkaArt.Business.Algorithm
 {
     public class Grasp
     {
-        public const int NumberOfIterations = 100;
-        public const double Alpha = 0.2;
-        public static int LimitTime = Simulation.LimitTime * 2 / 5; //120 segundos = dos minutos
+        public int NumberOfIterations = 100;
+        public double Alpha = 0.2;
+        public int LimitTime;
 
         private Simulation simulation;
         private JobController jobs;
@@ -39,6 +39,12 @@ namespace InkaArt.Business.Algorithm
             this.jobs = jobs;
             this.recipes = recipes;
             this.indexes = indexes;
+
+            //Parámetros de GRASP
+            this.NumberOfIterations = 100;
+            this.Alpha = 0.2;
+            this.LimitTime = (Simulation.LimitTime * 2) / (5 * simulation.Days); //Tiempo: 120 segundos / # de días
+
             //Líneas de ordenes original
             this.original_orders = simulation.SelectedOrders.Orders;
             //Número de puestos de trabajo para cada proceso
@@ -51,13 +57,10 @@ namespace InkaArt.Business.Algorithm
         /// </summary>
         public Assignment ExecuteGraspAlgorithm(int day, ref int elapsed_time)
         {
-            this.day_assignments = new GraspAssignments();
+            this.day_assignments = new GraspAssignments(this.NumberOfIterations);
 
-            for (int iteration = 0; elapsed_time < Grasp.LimitTime && iteration < Grasp.NumberOfIterations; iteration++)
+            for (int iteration = 0; this.HasTime(ref elapsed_time, day) && iteration < this.NumberOfIterations; iteration++)
             {
-                Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), simulation.SelectedWorkers,
-                    simulation.TotalMiniturns);
-
                 //Crear una COPIA PROFUNDA de la lista de órdenes
                 List<Order> orders = new List<Order>();
                 for (int i = 0; i < original_orders.Count; i++) orders.Add(new Order(simulation.SelectedOrders[i]));
@@ -76,26 +79,32 @@ namespace InkaArt.Business.Algorithm
                     if (simulation.SelectedWorkers.GetByID(indexes[i].Worker.ID) != null) candidates.Add(indexes[i]);
 
                 //Ejecutar la fase de construcción del algoritmo GRASP.
-                this.ExecuteGraspConstructionPhase(assignment, iteration, orders, ref elapsed_time);
+                Assignment assignment = this.ExecuteGraspConstructionPhase(day, iteration, orders, ref elapsed_time);
 
                 //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día por la nueva asignación generada
-                if (elapsed_time < Grasp.LimitTime) day_assignments.AddAssignment(assignment, orders);
+                if (this.HasTime(ref elapsed_time, day)) day_assignments.AddAssignment(assignment, orders);
             }
 
             return day_assignments.GetBestAssignment(ref this.original_orders);
         }
 
+        private bool HasTime(ref int elapsed_time, int day)
+        {
+            return (elapsed_time < (this.LimitTime + this.LimitTime * day));
+        }
+
         /// <summary>
         /// Ejecuta la fase de construcción del algoritmo GRASP para la asignación de trabajadores de un día determinado.
         /// </summary>
-        private void ExecuteGraspConstructionPhase(Assignment assignment, int iteration, List<Order> orders, ref int elapsed_time)
+        private Assignment ExecuteGraspConstructionPhase(int day, int iteration, List<Order> orders, ref int elapsed_time)
         {
             //Inicializar las variables principales
+            Assignment assignment = new Assignment(simulation.StartDate.AddDays(day), simulation.SelectedWorkers, simulation.TotalMiniturns);
             this.current_product = null;
             List<Index> current_deleted_indexes = new List<Index>();
             ProcessTuple[] remaining_processes = this.GetRemainingProcesses();
 
-            for (int construction = 1; elapsed_time < Grasp.LimitTime && orders.Count > 0 && candidates.Count > 0; construction++)
+            for (int construction = 1; this.HasTime(ref elapsed_time, day) && orders.Count > 0 && candidates.Count > 0; construction++)
             {
                 LogHandler.WriteLine("Iteración GRASP #{0}, current_product = {1}", construction, current_product != null);
 
@@ -131,7 +140,7 @@ namespace InkaArt.Business.Algorithm
                     if (!order_line_selected && this.UndoProduct(current_deleted_indexes, ref construction)) continue;
                 }
                 if (current_product.SetAssignmentLine(new_assignment_line, chosen_candidate.CostValue) == false)
-                    throw new Exception("El AssignmentLine no forma parte del producto");
+                    MessageBox.Show("GRASP: El AssignmentLine no forma parte del producto");
 
                 //Quitar temporalmente tanto el candidato seleccionado como los candidatos asociados a ese trabajador
                 for (int i = candidates.Count - 1; i >= 0; i--)
@@ -151,8 +160,10 @@ namespace InkaArt.Business.Algorithm
 
                 //Revisar estado de la matriz
                 PrintAssignmentMatrix(assignment, "Estado de la matriz al final de la iteración de construcción " + construction);
-                PrintCurrentProduct("Estado del producto actual al final de la iteración de construcción " + construction);
+                PrintCurrentProduct(current_product, "Estado del producto actual al final de la iteración de construcción " + construction);
             }
+
+            return assignment;
         }
 
         private ProcessTuple[] GetRemainingProcesses()
@@ -318,6 +329,9 @@ namespace InkaArt.Business.Algorithm
 
             int quantity_needed = orders[0][order_line_index].Quantity - orders[0][order_line_index].Produced;
             LogHandler.WriteLine("- Esta linea de orden necesita que se fabriquen {0} productos.", quantity_needed);
+            
+            Grasp.PrintCurrentProduct(current_product, "Estado inicial de las asignaciones temporales del producto escogido");
+            LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
 
             //Recalcular los tiempos de proceso (inicio de miniturno y total de miniturnos)
             quantity_needed = current_product.GetLowestQuantity(quantity_needed, simulation.TotalMiniturns);
@@ -325,7 +339,7 @@ namespace InkaArt.Business.Algorithm
 
             if (quantity_needed <= 0) return false;
 
-            PrintCurrentProduct("Producto actual justo antes de la asignación a la matriz de asignaciones");
+            PrintCurrentProduct(current_product, "Producto actual justo antes de la asignación a la matriz de asignaciones");
 
             //Colocar en la matriz las líneas de asignación.
             for (int i = 0; i < current_product.NumberOfTuples; i++)
@@ -334,10 +348,13 @@ namespace InkaArt.Business.Algorithm
                 for (int j = 0; j < current_product[i].MiniturnsUsed; j++)
                     assignment[worker_index, current_product[i].MiniturnStart + j] = current_product[i];
             }
-            //Actualizar la función objetivo
+            //Actualizar la asignación: función objetivo y cantidad producida en el día
             LogHandler.WriteLine("Función objetivo antigua: {0}", assignment.ObjectiveFunction);
             assignment.ObjectiveFunction += current_product.ObjectiveFunction;
             LogHandler.WriteLine("Función objetivo actual: {0}", assignment.ObjectiveFunction);
+            if (current_product.CurrentRecipe.Product == 1) assignment.HuacosProduced += quantity_needed;
+            if (current_product.CurrentRecipe.Product == 2) assignment.HuamangaProduced += quantity_needed;
+            if (current_product.CurrentRecipe.Product == 3) assignment.AltarpieceProduced += quantity_needed;
 
             //Actualizar las líneas de orden
             LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
@@ -409,13 +426,13 @@ namespace InkaArt.Business.Algorithm
             LogHandler.WriteLine();
         }
 
-        private void PrintCurrentProduct(string title)
+        public static void PrintCurrentProduct(GraspProduct current_product, string title)
         {
             LogHandler.WriteLine(title);
             if (current_product == null) LogHandler.WriteLine("(null)");
             else
             {
-                LogHandler.WriteLine("Receta escogida: {0}", current_product.CurrentRecipe);
+                LogHandler.WriteLine("Receta escogida: {0}", current_product.CurrentRecipe.Version);
                 LogHandler.WriteLine("Trabajador,Receta,Puesto de trabajo,Prom. rotura,Tiempo prom.,Índ. pérdida,Rango,Producido");
                 for (int i = 0; i < current_product.NumberOfTuples; i++)
                     LogHandler.WriteLine("{0}", (current_product[i] == null) ? "Nada" : current_product[i].ToString());
