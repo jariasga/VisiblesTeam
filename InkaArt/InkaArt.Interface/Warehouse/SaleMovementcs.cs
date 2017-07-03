@@ -248,11 +248,12 @@ namespace InkaArt.Interface.Warehouse
         private void button3_Click(object sender, EventArgs e)
         {
             NpgsqlDataReader datos;
-            string id = "";
+            string idWarehouse = "", idDoc = "";
             try
             {
-                Convert.ToInt32(textBox3.Text);
-                id = textBox3.Text;
+                Convert.ToInt32(textBox5.Text);
+                idWarehouse = textBox5.Text;
+                idDoc = textBox3.Text;
             }
             catch
             {
@@ -260,7 +261,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
 
-            datos = movementController.getProductStockSales(id, textBox5.Text);
+            datos = movementController.getProductStockSales(idWarehouse, idDoc);
             int rowIndex = 0;
 
             //Limpiamos el datagridview

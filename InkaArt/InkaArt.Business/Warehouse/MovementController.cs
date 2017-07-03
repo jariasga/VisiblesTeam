@@ -63,12 +63,20 @@ namespace InkaArt.Business.Warehouse
             return rowIndex;
         }
 
-        public NpgsqlDataReader GetWarehouseList(int idWarehouse = -2, string name = "", string address = "")
+        public NpgsqlDataReader GetWarehouseList(int idWarehouse = -2, string name = "", string address = "",int prohibitedWarehouse = 0)
         {
             int existeWhere =0;
             string query = "";
             
-            query = "select \"idWarehouse\", \"name\",\"address\", \"state\" from inkaArt.\"Warehouse\" ";
+            if(prohibitedWarehouse == 0)
+            {
+                query = "select \"idWarehouse\", \"name\",\"address\", \"state\" from inkaArt.\"Warehouse\" ";
+            }
+            else
+            {
+                query = "select \"idWarehouse\", \"name\",\"address\", \"state\" from inkaArt.\"Warehouse\" where \"idWarehouse\" <> " + prohibitedWarehouse;
+                existeWhere = 1;
+            }            
 
             insertaWhereInt(ref query, "idWarehouse", idWarehouse,ref existeWhere);
             insertaWhereTexto(ref query, "name", name,ref existeWhere);
@@ -231,25 +239,34 @@ namespace InkaArt.Business.Warehouse
 
         private int verifyUpdateProductWarehouse(int idProd, int idWarehouse, int numMov, string typeMovement,string typeReason, string productType)
         {
-            NpgsqlDataReader dr;
-            int stockAct = -1, maxStock = -1, minStock = 9999,logicStock=-1;//Stock físico
-            string query = "";
+            NpgsqlDataReader dr,dr2;
+            int stockAct = -1, maxStock = -1, minStock = 9999,logicStockProd=-1, actualStockProd = -1;//Stock físico
+            string query = "",query2 = "";
 
             //Se obtiene la query para ver los stocks máximos y mínimos
             if(productType == "Producto")
             {
                 query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"Product-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
-            }else if (productType == "Materia Prima")
+                query2 = "select \"logicalStock\", \"actualStock\" from inkaart.\"Product\" where \"idProduct\" = " + idProd + " and \"status\" = 1;";
+            }
+            else if (productType == "Materia Prima")
             {
                 query = "select \"currentStock\",\"minimunStock\", \"maximunStock\", \"virtualStock\" from inkaart.\"RawMaterial-Warehouse\" where \"idWarehouse\" = " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
             }
             //Se sacan los valores
             dr = movement_data.executeQueryData(query);
             dr.Read();
+            //Se sacan los valores
+            if(query2 != "")
+            {
+                dr2 = movement_data.executeQueryData(query2);
+                dr2.Read();
+                logicStockProd = Convert.ToInt32(dr2[0]);
+                actualStockProd = Convert.ToInt32(dr2[1]);
+            }
             stockAct = Convert.ToInt32(dr[0]);
             minStock = Convert.ToInt32(dr[1]);
             maxStock = Convert.ToInt32(dr[2]);
-            logicStock = Convert.ToInt32(dr[3]);
 
             //Verificar los stock mínimo y máximos
             if (typeMovement == "Entrada")
@@ -257,17 +274,20 @@ namespace InkaArt.Business.Warehouse
                 if (typeReason.ToUpper() == "PRODUCCION")
                 {
                     stockAct = stockAct + numMov;
-                    logicStock = logicStock + numMov;
+                    actualStockProd = actualStockProd + numMov;
+                    logicStockProd = logicStockProd + numMov;
                 }
                 if (typeReason.ToUpper() == "HALLAZGO")
                 {
                     stockAct = stockAct + numMov;
-                    logicStock = logicStock + numMov;
+                    actualStockProd = actualStockProd + numMov;
+                    logicStockProd = logicStockProd + numMov;
                 }
                 if (typeReason.ToUpper() == "DEVOLUCION")
                 {
                     stockAct = stockAct + numMov;
-                    logicStock = logicStock + numMov;
+                    actualStockProd = actualStockProd + numMov;
+                    logicStockProd = logicStockProd + numMov;
                 }
             }
             if (typeMovement == "Salida")
@@ -275,15 +295,18 @@ namespace InkaArt.Business.Warehouse
                 if (typeReason.ToUpper() == "PRODUCCION")
                 {
                     stockAct = stockAct - numMov;
+                    actualStockProd = actualStockProd - numMov;
                 }
                 if (typeReason.ToUpper() == "ROTURA")
                 {
                     stockAct = stockAct - numMov;
-                    logicStock = logicStock - numMov;
+                    actualStockProd = actualStockProd - numMov;
+                    logicStockProd = logicStockProd - numMov;
                 }
                 if (typeReason.ToUpper() == "VENTA")
                 {
                     stockAct = stockAct - numMov;
+                    actualStockProd = actualStockProd - numMov;
                 }
             }
             //Se verifica que el nuevo stock no pase del máximo
@@ -299,9 +322,9 @@ namespace InkaArt.Business.Warehouse
                 return -1;
             }
             //Verificar que el stock virtual nunca sea mayor al físico
-            if (stockAct < logicStock)
+            if (actualStockProd < logicStockProd)
             {
-                MessageBox.Show("Su stock virtual es: " + logicStock + " y su físico es: " + stockAct + ". Su stock virtual no puede ser mayor al físico, favor de revisar");
+                MessageBox.Show("Su stock virtual será: " + logicStockProd + " y su físico será: " + stockAct + ". Su stock virtual no puede ser mayor al físico, favor de revisar");
                 return -1;
             }
 
@@ -539,6 +562,22 @@ namespace InkaArt.Business.Warehouse
 
             //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
             query = "select A.\"idProduct\", E.\"name\", A.\"quantity\", D.\"currentStock\", C.\"product_stock\" from inkaart.\"LineItem\" A,inkaart.\"Order\" B, inkaart.\"StockDocument\" C, inkaart.\"Product-Warehouse\" D, inkaart.\"Product\" E where A.\"idOrder\" = B.\"idOrder\" and A.\"idProduct\" = E.\"idProduct\" and A.\"idOrder\" = C.\"idDocument\" and A.\"idOrder\" = " + intIdLote + " and C.\"product_id\" = A.\"idProduct\" and C.\"documentType\" = 'VENTA' and D.\"idWarehouse\" = " + intIdWarehouse + " and D.\"idProduct\" = A.\"idProduct\" and D.\"state\" = 'Activo';";
+            return movement_data.executeQueryData(query);
+        }
+
+        public NpgsqlDataReader getProductWarehouse(string idWarehouseOrigin, string idWarehouseDestiny)
+        {
+            string query = "";
+            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
+            query = "select A.\"idProduct\", C.\"name\", 'Producto' as \"typeItem\" from inkaart.\"Product-Warehouse\" A, inkaart.\"Product-Warehouse\" B, inkaart.\"Product\" C where A.\"idWarehouse\" = " + idWarehouseOrigin + " and B.\"idWarehouse\" =" + idWarehouseDestiny + " and A.\"idProduct\" = B.\"idProduct\" and A.\"idProduct\" = C.\"idProduct\" and C.\"status\" = 1 and A.\"state\" = 'Activo' and B.\"state\" =  'Activo';";
+            return movement_data.executeQueryData(query);
+        }
+
+        public NpgsqlDataReader getRawMaterialWarehouse(string idWarehouseOrigin, string idWarehouseDestiny)
+        {
+            string query = "";
+            //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
+            query = "select A.\"idRawMaterial\", C.\"name\", 'Materia Prima' as \"typeItem\" from inkaart.\"RawMaterial-Warehouse\" A, inkaart.\"RawMaterial-Warehouse\" B, inkaart.\"RawMaterial\" C where A.\"idWarehouse\" = " + idWarehouseOrigin + " and B.\"idWarehouse\" =" + idWarehouseDestiny + " and A.\"idRawMaterial\" = B.\"idRawMaterial\" and A.\"idRawMaterial\" = C.\"id_raw_material\" and C.\"status\" = 'Activo' and A.\"state\" = 'Activo' and B.\"state\" =  'Activo';";
             return movement_data.executeQueryData(query);
         }
 
