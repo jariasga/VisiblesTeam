@@ -184,21 +184,20 @@ namespace InkaArt.Data.Algorithm
                 "no haya sucedido nada malo. ";
         }
 
-        public double NextCostValue(double objective_function_value, int construction_iteration)
+        public double NextCostValue(double objective_function_value, double objective_function_addition, int construction_iteration)
         {
-            this.cost_value = (this.loss_index - objective_function_value) / construction_iteration;
-            LogHandler.WriteLine("LossIndex={0}, ObjectiveFunction={1}, Iteration={2}, CostValue={3}", loss_index, objective_function_value, construction_iteration, cost_value);
+            this.cost_value = (this.loss_index - objective_function_value - objective_function_addition) / construction_iteration;
             return this.cost_value;
         }
 
         public override string ToString()
         {
             string worker = (this.worker == null) ? "null" : this.Worker.FullName;
-            string job = (this.job == null) ? "null" : this.job.Name;
             string recipe = (this.recipe == null) ? "null" : "ID " + this.recipe.ID + ": " + this.recipe.Version;
+            string job = (this.job == null) ? "null" : this.job.Name;
 
-            return string.Format("ID={0}, Worker={1}, Job={2}, Recipe={3}, AvgBreakage={4}, AvgTime={5}, BreakageIndex={6}, TimeIndex={7}, LossIndex={8}",
-                this.id_index, worker, job, recipe, average_breakage, average_time, breakage_index, time_index, loss_index);
+            return string.Format("{0};{1};{2};{3};{4:0.0000};{5:0.0000};{6:0.0000};{7:0.0000};{8:0.0000},{9:0.0000}", this.id_index, worker, recipe,
+                job, this.average_breakage, this.average_time, this.breakage_index, this.time_index, this.loss_index, this.cost_value);
         }
 
     }
