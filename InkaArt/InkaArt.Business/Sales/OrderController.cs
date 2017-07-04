@@ -50,6 +50,10 @@ namespace InkaArt.Business.Sales
                         }
                     }
                 }
+                for (int i = 0; i < idProd.Length && i < quantity.Length; i++)
+                {
+                    orderData.updateStockDocumentLine(orderId,idProd[i],quantity[i]);
+                }
                 string pamount = getPolishedAmount(amount);
                 string igv = getPolishedIGV(amount);
                 string total = getPolishedTotal(amount);
@@ -95,6 +99,11 @@ namespace InkaArt.Business.Sales
         public string getCurrentStock(string productId)
         {
             return orderData.getProductLogicalStock(int.Parse(productId));
+        }
+
+        public string getStockDocumentParam(int orderId, string productId, string paramName)
+        {
+            return orderData.getStockDocumentParam(orderId, int.Parse(productId), paramName);
         }
 
         public bool verifyStock(int natType, string strStock, string strQuantity)

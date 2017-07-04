@@ -44,10 +44,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textbox_igv = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toFacColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -80,9 +82,9 @@
             this.groupBox2.Controls.Add(this.grid_orderline);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox2.Location = new System.Drawing.Point(460, 30);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(755, 519);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
@@ -120,7 +122,7 @@
             this.textbox_amount_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_amount_todoc.Enabled = false;
             this.textbox_amount_todoc.Location = new System.Drawing.Point(27, 63);
-            this.textbox_amount_todoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_amount_todoc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_amount_todoc.Name = "textbox_amount_todoc";
             this.textbox_amount_todoc.Size = new System.Drawing.Size(284, 30);
             this.textbox_amount_todoc.TabIndex = 36;
@@ -131,7 +133,7 @@
             this.textbox_igv_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv_todoc.Enabled = false;
             this.textbox_igv_todoc.Location = new System.Drawing.Point(27, 124);
-            this.textbox_igv_todoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_igv_todoc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_igv_todoc.Name = "textbox_igv_todoc";
             this.textbox_igv_todoc.Size = new System.Drawing.Size(284, 30);
             this.textbox_igv_todoc.TabIndex = 38;
@@ -142,7 +144,7 @@
             this.textbox_total_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total_todoc.Enabled = false;
             this.textbox_total_todoc.Location = new System.Drawing.Point(24, 185);
-            this.textbox_total_todoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_total_todoc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_total_todoc.Name = "textbox_total_todoc";
             this.textbox_total_todoc.Size = new System.Drawing.Size(284, 30);
             this.textbox_total_todoc.TabIndex = 40;
@@ -200,7 +202,7 @@
             this.textbox_amount.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_amount.Enabled = false;
             this.textbox_amount.Location = new System.Drawing.Point(27, 63);
-            this.textbox_amount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_amount.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_amount.Name = "textbox_amount";
             this.textbox_amount.Size = new System.Drawing.Size(284, 30);
             this.textbox_amount.TabIndex = 30;
@@ -211,7 +213,7 @@
             this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total.Enabled = false;
             this.textbox_total.Location = new System.Drawing.Point(25, 185);
-            this.textbox_total.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_total.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_total.Name = "textbox_total";
             this.textbox_total.Size = new System.Drawing.Size(284, 30);
             this.textbox_total.TabIndex = 34;
@@ -242,7 +244,7 @@
             this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Location = new System.Drawing.Point(27, 124);
-            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_igv.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_igv.Name = "textbox_igv";
             this.textbox_igv.Size = new System.Drawing.Size(284, 30);
             this.textbox_igv.TabIndex = 32;
@@ -256,19 +258,28 @@
             this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column5,
             this.Producto,
             this.Column1,
             this.Column2,
             this.Cantidad,
+            this.toFacColumn,
             this.Column3,
             this.Column4});
             this.grid_orderline.Location = new System.Drawing.Point(27, 32);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_orderline.Name = "grid_orderline";
-            this.grid_orderline.ReadOnly = true;
             this.grid_orderline.RowHeadersVisible = false;
             this.grid_orderline.Size = new System.Drawing.Size(697, 203);
             this.grid_orderline.TabIndex = 22;
+            this.grid_orderline.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grid_orderline_KeyUp);
+            // 
+            // Column5
+            // 
+            this.Column5.FillWeight = 30F;
+            this.Column5.HeaderText = "Id";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // Producto
             // 
@@ -292,21 +303,27 @@
             // 
             // Cantidad
             // 
-            this.Cantidad.FillWeight = 70F;
+            this.Cantidad.FillWeight = 50F;
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
             // 
+            // toFacColumn
+            // 
+            this.toFacColumn.FillWeight = 50F;
+            this.toFacColumn.HeaderText = "A Facturar";
+            this.toFacColumn.Name = "toFacColumn";
+            // 
             // Column3
             // 
-            this.Column3.FillWeight = 75F;
-            this.Column3.HeaderText = "Stock";
+            this.Column3.FillWeight = 50F;
+            this.Column3.HeaderText = "Disponible";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
-            this.Column4.FillWeight = 75F;
+            this.Column4.FillWeight = 50F;
             this.Column4.HeaderText = "Facturado";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -319,9 +336,9 @@
             this.groupBox1.Controls.Add(this.label_doc);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(37, 385);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(415, 218);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
@@ -332,7 +349,7 @@
             this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_name.Enabled = false;
             this.textbox_name.Location = new System.Drawing.Point(24, 140);
-            this.textbox_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_name.Name = "textbox_name";
             this.textbox_name.Size = new System.Drawing.Size(367, 30);
             this.textbox_name.TabIndex = 19;
@@ -352,7 +369,7 @@
             this.textbox_ruc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_ruc.Enabled = false;
             this.textbox_ruc.Location = new System.Drawing.Point(24, 76);
-            this.textbox_ruc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textbox_ruc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_ruc.Name = "textbox_ruc";
             this.textbox_ruc.Size = new System.Drawing.Size(367, 30);
             this.textbox_ruc.TabIndex = 17;
@@ -377,9 +394,9 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox3.Location = new System.Drawing.Point(37, 30);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(415, 346);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
@@ -394,7 +411,7 @@
             "Boleta",
             "Factura"});
             this.combo_doc.Location = new System.Drawing.Point(23, 167);
-            this.combo_doc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combo_doc.Margin = new System.Windows.Forms.Padding(4);
             this.combo_doc.Name = "combo_doc";
             this.combo_doc.Size = new System.Drawing.Size(368, 31);
             this.combo_doc.TabIndex = 36;
@@ -419,7 +436,7 @@
             "Entrega Parcial",
             "Entregado"});
             this.combo_orderstatus.Location = new System.Drawing.Point(24, 258);
-            this.combo_orderstatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combo_orderstatus.Margin = new System.Windows.Forms.Padding(4);
             this.combo_orderstatus.Name = "combo_orderstatus";
             this.combo_orderstatus.Size = new System.Drawing.Size(368, 31);
             this.combo_orderstatus.TabIndex = 14;
@@ -431,7 +448,7 @@
             this.date_deliverydate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(23, 78);
-            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.date_deliverydate.Margin = new System.Windows.Forms.Padding(4);
             this.date_deliverydate.Name = "date_deliverydate";
             this.date_deliverydate.Size = new System.Drawing.Size(368, 30);
             this.date_deliverydate.TabIndex = 12;
@@ -463,7 +480,7 @@
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
             this.button_delete.Location = new System.Drawing.Point(957, 555);
-            this.button_delete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button_delete.Margin = new System.Windows.Forms.Padding(4);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(143, 48);
             this.button_delete.TabIndex = 38;
@@ -497,7 +514,7 @@
             this.button_fac.TabIndex = 41;
             this.button_fac.Text = "Facturar";
             this.button_fac.UseVisualStyleBackColor = false;
-            this.button_fac.Click += new System.EventHandler(this.button_fac_Click_1);
+            this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
             // 
             // ClientOrderShow
             // 
@@ -512,7 +529,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ClientOrderShow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vista de venta";
@@ -563,12 +580,14 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button_fac;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toFacColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.Button button_fac;
     }
 }
