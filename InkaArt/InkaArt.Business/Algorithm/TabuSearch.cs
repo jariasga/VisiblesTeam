@@ -83,30 +83,34 @@ namespace InkaArt.Business.Algorithm
 
             return read;
         }
-                
-        public double getFitness(Assignment solution)
+
+        /// <summary>
+        /// Calcula la función objetivo de la asignación promediando los índices de pérdida de cada línea de asignación.
+        /// </summary>
+        public double GetFitness(Assignment assignment)
         {
-            /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
+            /* 
              * Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
              */
 
             double fitness = 0;
             int assigned_workers = 0;
-            AssignmentLine current_assignment = null;
 
             for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
             {
+                AssignmentLine current_assignment_line = null;
                 for (int miniturn_index = 0; miniturn_index < simulation.TotalMiniturns; miniturn_index++)
                 {
-                    AssignmentLine assignment = solution[worker_index, miniturn_index];
-                    if (assignment == null || assignment.Equals(current_assignment)) continue;
-                    Index index = indexes.FindByWorkerJobAndRecipe(assignment.Worker, assignment.Job, assignment.Recipe);
-                    if (index == null) continue;
+                    //Leer cada línea de asignación de la matriz y ver que no esté repetida
+                    AssignmentLine assignment_line = assignment[worker_index, miniturn_index];
+                    if (assignment_line == null) continue;
+                    if (!current_assignment_line.Equals(assignment_line)) current_assignment_line = assignment_line;
+                    //Aumentar el fitness total y la cantidad de trabajadores asignados
                     assigned_workers++;
-                    fitness += index.LossIndex;
+                    fitness += assignment_line.LossIndex;
                 }
             }
-            if (assigned_workers == 0) assigned_workers++;
+            if (assigned_workers <= 0) assigned_workers = 1;
 
             //Dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
@@ -256,14 +260,11 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        public void bestSolutionToList()
+        public void BestSolutionToList()
         {
-            if (BestSolution.Count == 0)
-                BestSolution = initial_solution;
-            foreach(Assignment day in BestSolution)
-            {
-                day.AssignmentLinesList = day.toList(simulation);
-            }
+            if (best_solution.Count <= 0) best_solution = initial_solution;
+            foreach (Assignment assignment_day in best_solution)
+                assignment_day.AssignmentLinesList = assignment_day.MatrixToList(simulation);
         }
 
         /* Flujo del algoritmo */
@@ -282,7 +283,7 @@ namespace InkaArt.Business.Algorithm
             int no_growth_count = 0;
 
             // fitness
-            double initial_fitness = getFitness(current_solution);
+            double initial_fitness = GetFitness(current_solution);
             double current_fitness = initial_fitness;
             double neighbor_fitness = 0;
             best_fitness = current_fitness;
@@ -309,7 +310,7 @@ namespace InkaArt.Business.Algorithm
                     {
                         success = true;
                         // evalua el vecindario con la funcion objetivo
-                        neighbor_fitness = getFitness(neighbor);
+                        neighbor_fitness = GetFitness(neighbor);
                         // best improved: a penas encuentre un vecino que supere a la solucion actual, salimos
                         if (current_fitness > neighbor_fitness)
                             break;
