@@ -101,16 +101,20 @@ namespace InkaArt.Business.Algorithm
             this.huamanga_produced = assignment.huamanga_produced;
             this.altarpiece_produced = assignment.altarpiece_produced;
         }
-        /* Para cargar de la BD */
-        public Assignment(int id_assignment, int tabu_iterations, double objective_function_value, int huamanga_produced, int huacos_produced, int altarpiece_produced, DateTime date)
+
+        /// <summary>
+        /// Constructor usado en la carga desde base de datos.
+        /// </summary>
+        public Assignment(int id_assignment, DateTime date, double objective_function_value, int tabu_iterations, int huamanga_produced, int huacos_produced, int altarpiece_produced)
         {
             this.id_assignment = id_assignment;
-            this.tabu_iterations = tabu_iterations;
+            this.date = date;
             this.objective_function_value = objective_function_value;
+            this.tabu_iterations = tabu_iterations;
+
             this.huamanga_produced = huamanga_produced;
             this.huacos_produced = huacos_produced;
             this.altarpiece_produced = altarpiece_produced;
-            this.date = date;
 
             this.assignment_lines_list = new List<AssignmentLine>();
         }
@@ -128,7 +132,10 @@ namespace InkaArt.Business.Algorithm
             return -1;
         }
 
-        public List<AssignmentLine> toList(Simulation simulation)
+        /// <summary>
+        /// Convierte la matriz de líneas de asignación a una lista de líneas de asignación.
+        /// </summary>
+        public List<AssignmentLine> MatrixToList(Simulation simulation)
         {
             List<AssignmentLine> list = new List<AssignmentLine>();
 
@@ -137,35 +144,38 @@ namespace InkaArt.Business.Algorithm
                 AssignmentLine current_line = null;
                 for (int miniturn = 0; miniturn < simulation.TotalMiniturns; miniturn++)
                 {
-                    if (current_line != null && current_line.Equals(assignment_lines[worker, miniturn])) continue;
-                    if (assignment_lines[worker, miniturn] == null) continue;
-                    list.Add(assignment_lines[worker, miniturn]);
+                    AssignmentLine line = assignment_lines[worker, miniturn];
+                    if (line == null || line == current_line) continue;
                     current_line = assignment_lines[worker, miniturn];
+                    list.Add(current_line);
                 }
             }
 
             return list;
         }
 
-        public bool save(Simulation simulation, NpgsqlConnection connection)
+        public bool Insert(Simulation simulation, NpgsqlConnection connection)
         {
-            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Assignment\" " + 
-                "(tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date, assigned_workers) " +
-                "values (:id_simulation, :tabu_iterations, :objective_function_value, :huamanga_produced, :huacos_produced, :altarpiece_produced, :date, :assigned_workers) " +
-                "returning inkaart.\"Assignment\".id_assignment", connection);
+            string command_line = "INSERT inkaart.\"Assignment\" (id_simulation, date, objective_function_value, tabu_iterations, " +
+                                                                "huamanga_produced, huacos_produced, altarpiece_produced, assigned_workers)";
+            command_line += "VALUES (:id_simulation, :date, :objective_function_value, :tabu_iterations, " +
+                                    ":huamanga_produced, :huacos_produced, :altarpiece_produced, :assigned_workers)";
+            command_line += "RETURNING inkaart.\"Assignment\".id_assignment";
+            NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
 
-            command.Parameters.Add(new NpgsqlParameter("tabu_iterations", this.tabu_iterations));
+            command.Parameters.Add(new NpgsqlParameter("date", this.date));
             command.Parameters.Add(new NpgsqlParameter("objective_function_value", this.objective_function_value));
+            command.Parameters.Add(new NpgsqlParameter("tabu_iterations", this.tabu_iterations));
             command.Parameters.Add(new NpgsqlParameter("huamanga_produced", this.huamanga_produced));
             command.Parameters.Add(new NpgsqlParameter("huacos_produced", this.huacos_produced));
             command.Parameters.Add(new NpgsqlParameter("altarpiece_produced", this.altarpiece_produced));
-            command.Parameters.Add(new NpgsqlParameter("date", this.date));
             command.Parameters.Add(new NpgsqlParameter("assigned_workers", simulation.SelectedWorkers.NumberOfWorkers));
-
+            
             int id_assginment = int.Parse(command.ExecuteScalar().ToString());
 
-            foreach(AssignmentLine line in this.toList(simulation))
-                line.save(id_assginment,connection);
+            List<AssignmentLine> assignment_lines = this.MatrixToList(simulation);
+            for (int i = 0; i < assignment_lines.Count; i++)
+                assignment_lines[i].Insert(connection);
 
             return true;
         }
