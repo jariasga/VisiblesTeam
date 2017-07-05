@@ -41,7 +41,7 @@ namespace InkaArt.Business.Algorithm
         
         public bool Delete(Simulation simulation)
         {
-            if (simulation.ID > 0)
+            if(simulation.ID > 0)
             {
                 try
                 {
@@ -77,7 +77,7 @@ namespace InkaArt.Business.Algorithm
 
         public bool Save(Simulation simulation)
         {
-            return simulation.Insert();
+            return simulation.save();
         }
 
         private void loadSelectedWorkers(NpgsqlConnection connection, WorkerController workers)
@@ -158,7 +158,7 @@ namespace InkaArt.Business.Algorithm
                 int altarpiece_produced = int.Parse(reader["altarpiece_produced"].ToString());
                 DateTime date = DateTime.Parse(reader["date"].ToString());
 
-                Assignment assignment = new Assignment(id_assignment, date, objective_function_value, tabu_iterations, huamanga_produced, huacos_produced, altarpiece_produced);
+                Assignment assignment = new Assignment(id_assignment, tabu_iterations, objective_function_value, huamanga_produced, huacos_produced, altarpiece_produced, date);
                 Simulation simulation = simulations.Where(s => s.ID.Equals(id_simulation)).ToList().First();
                 simulation.Assignments.Add(assignment);
                 list.Add(assignment);

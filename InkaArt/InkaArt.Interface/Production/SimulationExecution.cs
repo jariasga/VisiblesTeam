@@ -107,7 +107,7 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(0, null);
             }*/
 
-            tabu.BestSolutionToList();
+            tabu.bestSolutionToList();
             simulation.Assignments = tabu.BestSolution;
 
             if (background_worker.CancellationPending && (e.Cancel = true)) return;
