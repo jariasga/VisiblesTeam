@@ -66,7 +66,6 @@ namespace InkaArt.Business.Purchases
                     var values = line.Split(';');
                     string nombre=values[0].Trim();
                     string abreviatura=values[1].Trim();
-                    string estado=values[2].Trim();
                     if (values[0].Length <= 280 && values[1].Length <= 10)
                     {
                         try

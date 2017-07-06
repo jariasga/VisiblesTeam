@@ -167,7 +167,7 @@ namespace InkaArt.Interface.Purchases
                     MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                else MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             textBox_id.Text = "";
             textBox_name.Text = "";

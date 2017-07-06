@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView_rawMaterialsList = new System.Windows.Forms.DataGridView();
+            this.id_raw_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.average_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
@@ -40,14 +48,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonCargaMasiva = new System.Windows.Forms.Button();
-            this.id_raw_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.average_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterialsList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +75,54 @@
             this.dataGridView_rawMaterialsList.Size = new System.Drawing.Size(663, 208);
             this.dataGridView_rawMaterialsList.TabIndex = 3;
             this.dataGridView_rawMaterialsList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editRawMaterialDetail);
+            // 
+            // id_raw_material
+            // 
+            this.id_raw_material.HeaderText = "ID";
+            this.id_raw_material.Name = "id_raw_material";
+            this.id_raw_material.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Nombre";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.HeaderText = "Descripción";
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // unitName
+            // 
+            this.unitName.HeaderText = "Unidad";
+            this.unitName.Name = "unitName";
+            this.unitName.ReadOnly = true;
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // average_price
+            // 
+            this.average_price.HeaderText = "Precio promedio";
+            this.average_price.Name = "average_price";
+            this.average_price.Visible = false;
+            // 
+            // unit
+            // 
+            this.unit.HeaderText = "Id unit";
+            this.unit.Name = "unit";
+            this.unit.Visible = false;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Width = 50;
             // 
             // groupBox1
             // 
@@ -212,54 +260,6 @@
             this.buttonCargaMasiva.UseVisualStyleBackColor = false;
             this.buttonCargaMasiva.Click += new System.EventHandler(this.button_cargamasivaclic);
             // 
-            // id_raw_material
-            // 
-            this.id_raw_material.HeaderText = "ID";
-            this.id_raw_material.Name = "id_raw_material";
-            this.id_raw_material.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Nombre";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.HeaderText = "Descripción";
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
-            // unitName
-            // 
-            this.unitName.HeaderText = "Unidad";
-            this.unitName.Name = "unitName";
-            this.unitName.ReadOnly = true;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Estado";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            // 
-            // average_price
-            // 
-            this.average_price.HeaderText = "Precio promedio";
-            this.average_price.Name = "average_price";
-            this.average_price.Visible = false;
-            // 
-            // unit
-            // 
-            this.unit.HeaderText = "Id unit";
-            this.unit.Name = "unit";
-            this.unit.Visible = false;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Width = 50;
-            // 
             // RawMaterials
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -272,8 +272,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView_rawMaterialsList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RawMaterials";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de materia prima";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterialsList)).EndInit();
             this.groupBox1.ResumeLayout(false);

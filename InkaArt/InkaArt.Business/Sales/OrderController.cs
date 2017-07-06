@@ -23,8 +23,11 @@ namespace InkaArt.Business.Sales
             string clientDoc = getClientDoc(clientId.ToString());
             int selectedDoc = -1;
             if (orderType == 1) selectedDoc = 6;
-            if (clientDoc.Length == 11) selectedDoc = 2;
-            else selectedDoc = 1;
+            else
+            {
+                if (clientDoc.Length == 11) selectedDoc = 2;
+                else selectedDoc = 1;
+            }
             //////////////////////////
             float amount = 0;
             if (idProd.Length != 0 && quantity.Length != 0)
@@ -103,6 +106,7 @@ namespace InkaArt.Business.Sales
                 return stock >= quantity;
             }
         }
+
         public float getRightPrice(int natType, string strLocalPrice, string strExportPrice)
         {
             float localPrice = float.Parse(strLocalPrice), exportPrice = float.Parse(strExportPrice);
@@ -126,16 +130,36 @@ namespace InkaArt.Business.Sales
             return orderData.GetOrders(id, strType, intDoc,clientName, strOrderStatus,ini, end);
         }
 
-        public void updateReturn(string idDoc)
+        public DataTable GetDevolutions()
+        {
+            // activas y sin completar
+            return orderData.GetDevolutions();
+        }
+
+        public DataTable GetDevolutionLines(int id_devolution)
+        {
+            // activas y sin completar
+            return orderData.GetDevolutionLines(id_devolution);
+        }
+
+        public void updateDevolution(int id_order)
         {
             DataTable table = GetOrders();
-
-            string updateQuery;
-            updateQuery = "UPDATE inkaart.\"Order\" SET ";
-            updateQuery = updateQuery + "orderStatus = 'facturado' ";
-            updateQuery = updateQuery + " WHERE \"idOrder\"= " + idDoc + " AND \"type\"= 'devolucion' ";
+            string updateQuery = "UPDATE inkaart.\"Order\" SET \"orderStatus\" = 'devuelto' " + 
+                "WHERE \"idOrder\" = " + id_order + ";";
             orderData.execute(updateQuery);
         }
+
+
+
+        public void updateDevolutionLine(int id_line)
+        {
+            DataTable table = GetOrders();
+            string updateQuery = "UPDATE inkaart.\"LineItem\" SET \"lineStatus\" = 'devuelto' " +
+                "WHERE \"idLineItem\" = " + id_line + ";";
+            orderData.execute(updateQuery);
+        }
+
         public int getClientID(int orderId)
         {
             return orderData.getClientID(orderId);
@@ -195,7 +219,7 @@ namespace InkaArt.Business.Sales
         {
             return orderData.GetProducts();
         }
-        public string getProductPU(string id, string idClient)
+        public string getProductPU(string id, string idClient = "-1")
         {
             int parsedID = int.Parse(id);
             int parsedIdClient = int.Parse(idClient);

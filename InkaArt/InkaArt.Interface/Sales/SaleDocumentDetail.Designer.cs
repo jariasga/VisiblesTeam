@@ -49,6 +49,7 @@
             this.label_total = new System.Windows.Forms.Label();
             this.button_cancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button_pdf = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_detail)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -84,9 +85,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(27, 54);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Size = new System.Drawing.Size(480, 119);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -157,7 +158,7 @@
             this.Column3,
             this.Column4});
             this.grid_detail.Location = new System.Drawing.Point(19, 32);
-            this.grid_detail.Margin = new System.Windows.Forms.Padding(2);
+            this.grid_detail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grid_detail.Name = "grid_detail";
             this.grid_detail.ReadOnly = true;
             this.grid_detail.RowTemplate.Height = 24;
@@ -192,7 +193,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(339, 227);
+            this.label6.Location = new System.Drawing.Point(286, 222);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 18);
@@ -203,7 +204,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(371, 245);
+            this.label7.Location = new System.Drawing.Point(318, 240);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 18);
@@ -214,7 +215,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(364, 264);
+            this.label8.Location = new System.Drawing.Point(310, 259);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 18);
@@ -225,7 +226,7 @@
             // 
             this.label_subtotal.AutoSize = true;
             this.label_subtotal.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_subtotal.Location = new System.Drawing.Point(418, 227);
+            this.label_subtotal.Location = new System.Drawing.Point(364, 222);
             this.label_subtotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_subtotal.Name = "label_subtotal";
             this.label_subtotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -238,7 +239,7 @@
             // 
             this.label_igv.AutoSize = true;
             this.label_igv.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_igv.Location = new System.Drawing.Point(418, 245);
+            this.label_igv.Location = new System.Drawing.Point(364, 240);
             this.label_igv.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_igv.Name = "label_igv";
             this.label_igv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -251,7 +252,7 @@
             // 
             this.label_total.AutoSize = true;
             this.label_total.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_total.Location = new System.Drawing.Point(418, 264);
+            this.label_total.Location = new System.Drawing.Point(364, 259);
             this.label_total.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_total.Name = "label_total";
             this.label_total.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -265,10 +266,10 @@
             this.button_cancel.BackColor = System.Drawing.Color.Gray;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(198, 504);
-            this.button_cancel.Margin = new System.Windows.Forms.Padding(2);
+            this.button_cancel.Location = new System.Drawing.Point(279, 504);
+            this.button_cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_cancel.Name = "button_cancel";
-            this.button_cancel.Size = new System.Drawing.Size(130, 39);
+            this.button_cancel.Size = new System.Drawing.Size(163, 39);
             this.button_cancel.TabIndex = 33;
             this.button_cancel.Text = "🗙 Cerrar";
             this.button_cancel.UseVisualStyleBackColor = false;
@@ -285,13 +286,27 @@
             this.groupBox2.Controls.Add(this.label_subtotal);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(28, 178);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Size = new System.Drawing.Size(479, 303);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalle";
+            // 
+            // button_pdf
+            // 
+            this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.ForeColor = System.Drawing.Color.White;
+            this.button_pdf.Location = new System.Drawing.Point(101, 503);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_pdf.Name = "button_pdf";
+            this.button_pdf.Size = new System.Drawing.Size(163, 39);
+            this.button_pdf.TabIndex = 39;
+            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.UseVisualStyleBackColor = false;
+            this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
             // 
             // SaleDocumentDetail
             // 
@@ -299,14 +314,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(539, 563);
+            this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.label_invoiceid);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_orderid);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SaleDocumentDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Documento de Venta";
             this.Load += new System.EventHandler(this.SaleDocumentDetail_Load);
             this.groupBox1.ResumeLayout(false);
@@ -342,5 +360,6 @@
         private System.Windows.Forms.Label label_total;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button_pdf;
     }
 }

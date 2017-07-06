@@ -263,8 +263,10 @@
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView_suppliersList);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Suppliers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mantenimiento de proveedores";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_suppliersList)).EndInit();
             this.groupBox1.ResumeLayout(false);

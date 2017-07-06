@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button_create = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreInsumo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockLogico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockRequerido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_create = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +55,35 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(674, 210);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Width = 80;
+            // 
+            // NombreInsumo
+            // 
+            this.NombreInsumo.HeaderText = "Nombre de insumo";
+            this.NombreInsumo.Name = "NombreInsumo";
+            this.NombreInsumo.Width = 220;
+            // 
+            // StockLogico
+            // 
+            this.StockLogico.HeaderText = "Stock físico";
+            this.StockLogico.Name = "StockLogico";
+            // 
+            // StockRequerido
+            // 
+            this.StockRequerido.HeaderText = "Stock mín. requerido";
+            this.StockRequerido.Name = "StockRequerido";
+            this.StockRequerido.Width = 103;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.Width = 127;
             // 
             // label1
             // 
@@ -102,35 +131,6 @@
             this.button_create.UseVisualStyleBackColor = false;
             this.button_create.Click += new System.EventHandler(this.button_create_Click);
             // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Width = 80;
-            // 
-            // NombreInsumo
-            // 
-            this.NombreInsumo.HeaderText = "Nombre de insumo";
-            this.NombreInsumo.Name = "NombreInsumo";
-            this.NombreInsumo.Width = 220;
-            // 
-            // StockLogico
-            // 
-            this.StockLogico.HeaderText = "Stock físico";
-            this.StockLogico.Name = "StockLogico";
-            // 
-            // StockRequerido
-            // 
-            this.StockRequerido.HeaderText = "Stock mín. requerido";
-            this.StockRequerido.Name = "StockRequerido";
-            this.StockRequerido.Width = 103;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 127;
-            // 
             // AlertLackSupplies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -140,8 +140,10 @@
             this.Controls.Add(this.button_create);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AlertLackSupplies";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alerta por falta de insumos";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);

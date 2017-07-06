@@ -26,7 +26,7 @@ namespace InkaArt.Business.Warehouse
         }
 
 
-        public void insertPurchaseRmMovement(string idFactura, string idWh, string fecha,int idItem,int cant)
+        public void insertPurchaseRmMovement(string idFactura, string idWh, int idItem,int cant)
         {
             NpgsqlDataAdapter adapt;
             DataSet data;
@@ -39,7 +39,7 @@ namespace InkaArt.Business.Warehouse
 
             table = data.Tables["Movement"];
             productionMovementMovementData.execute(string.Format(
-                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"status\", \"idDocumentType\", \"dateIn\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, {4}, {5}, to_date('{6}', 'DD/MM/YYYY'), {7}, 0, {8});", idFactura, 2, idWh, 1, 1, 7,fecha,idItem,cant));
+                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"status\", \"idDocumentType\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, {4}, {5}, {6}, 0, {7});", idFactura, 2, idWh, 1, 1, 7, idItem,cant));
         }
 
         public void insertBrokenFindMovement(int idMovementType, string idWh, int idMovementReason,string dateIn,string idItem, int idItemType,int quantity)
@@ -85,7 +85,7 @@ namespace InkaArt.Business.Warehouse
 
             table = data.Tables["Movement"];
             productionMovementMovementData.execute(string.Format(
-                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"dateIn\", \"status\", \"idDocumentType\" \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, to_date('{4}', 'DD/MM/YYYY'), {5}, '{6}', '{7}', {8}, {9});", idDoc, movement_type, idWare, id_reason, date,1,idDocType, idItem, idItemType, quantity));
+                "INSERT INTO \"inkaart\".\"Movement\"(\"idBill\", \"idMovementType\", \"idWarehouse\", \"idMovementReason\", \"dateIn\", \"status\", \"idDocumentType\", \"idItem\", \"itemType\", \"quantity\" ) VALUES({0},  {1}, {2}, {3}, to_date('{4}', 'DD/MM/YYYY'), {5}, '{6}', '{7}', {8}, {9});", idDoc, movement_type, idWare, id_reason, date,1,idDocType, idItem, idItemType, quantity));
 
         }
     }

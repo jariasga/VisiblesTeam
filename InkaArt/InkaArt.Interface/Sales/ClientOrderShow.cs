@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InkaArt.Interface.Production;
 
 namespace InkaArt.Interface.Sales
 {
@@ -15,6 +16,7 @@ namespace InkaArt.Interface.Sales
     {
         int orderId;
         OrderController orderController;
+        FinalProducts fp;
         DataTable orderLine;
         DataTable orderLineToFac;
         private double toFacAmount;
@@ -24,6 +26,7 @@ namespace InkaArt.Interface.Sales
             InitializeComponent();
             orderId = int.Parse(id);
             orderController = new OrderController();
+            fp = new FinalProducts();
             orderLine = new DataTable();
             orderLineToFac = new DataTable();
             toFacAmount = 0;
@@ -31,6 +34,7 @@ namespace InkaArt.Interface.Sales
 
         private void ClientOrderShow_Load(object sender, EventArgs e)
         {
+            fp.hallaStock();
             DataTable orderObject = orderController.GetOrders(orderId);
             populateFields(orderObject);
         }
@@ -39,23 +43,36 @@ namespace InkaArt.Interface.Sales
         {
             foreach (DataRow row in orderObject.Rows)
             {
-                int totalFinished = 0, totalInvoiced = 0;
+                if (row["orderStatus"].ToString().Equals("facturado")) button_fac.Visible = false;
+                else button_fac.Visible = true;
+                int totalFinished = 0, totalInvoiced = 0, auxResult;
+                string clientDoc = "", docType="";
                 toFacAmount = 0;
                 date_deliverydate.Value = Convert.ToDateTime(row["deliveryDate"]);
                 combo_orderstatus.Text = row["orderStatus"].ToString();
                 textbox_amount.Text = row["saleAmount"].ToString();
                 textbox_igv.Text = row["igv"].ToString();
                 textbox_total.Text = row["totalAmount"].ToString();
-                clientId = int.Parse(row["idClient"].ToString());
-                string clientDoc = orderController.getClientDoc(row["idClient"].ToString()), docType="Boleta";
-                textbox_ruc.Text = clientDoc;
-                textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
-                if (clientDoc.Length == 11)
+                if (int.TryParse(row["idClient"].ToString(), out auxResult))
                 {
-                    docType = "Factura";
-                    label_doc.Text = "RUC";
+                    clientId = auxResult;
+                    clientDoc = orderController.getClientDoc(row["idClient"].ToString());
+                    textbox_ruc.Text = clientDoc;
+                    textbox_name.Text = orderController.getClientName(row["idClient"].ToString());
+                } 
+                if (!clientDoc.Equals(""))
+                {
+                    if (clientDoc.Length == 11)
+                    {
+                        docType = "Factura";
+                        label_doc.Text = "RUC";
+                    }
+                    else
+                    {
+                        docType = "Boleta";
+                        label_doc.Text = "DNI";
+                    }
                 }
-                else label_doc.Text = "DNI";
                 combo_doc.Text = docType;
                 orderLine = orderController.getOrderLines(row["idOrder"].ToString());
                 orderLineToFac = orderLine.Clone();
@@ -63,8 +80,12 @@ namespace InkaArt.Interface.Sales
                 foreach (DataRow orderline in orderLine.Rows)
                 {
                     string productId = orderline["idProduct"].ToString();
-                    string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId,row["idClient"].ToString());
+                    string name = orderController.getProductName(productId);
+                    string pu;
+                    if (clientId == 0 && clientDoc.Equals("")) pu = orderController.getProductPU(productId);
+                    else pu = orderController.getProductPU(productId, row["idClient"].ToString());
                     string curStock = orderController.getCurrentStock(productId);
+                    if (int.Parse(curStock) < 0) curStock = "0";
                     totalFinished += int.Parse(curStock);
                     totalInvoiced += int.Parse(orderline["quantityInvoiced"].ToString());
                     if (int.Parse(orderline["quantityProduced"].ToString()) > 0) orderLineToFac.Rows.Add(orderline.ItemArray);
@@ -129,6 +150,11 @@ namespace InkaArt.Interface.Sales
         {
             SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
             form.Show();
+        }
+
+        private void button_fac_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

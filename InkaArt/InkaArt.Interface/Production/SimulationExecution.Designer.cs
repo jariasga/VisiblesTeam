@@ -65,7 +65,7 @@
             this.label_state.AutoSize = true;
             this.label_state.Location = new System.Drawing.Point(12, 15);
             this.label_state.Name = "label_state";
-            this.label_state.Size = new System.Drawing.Size(178, 18);
+            this.label_state.Size = new System.Drawing.Size(223, 23);
             this.label_state.TabIndex = 41;
             this.label_state.Text = "Estado de la simulación:";
             // 
@@ -79,7 +79,7 @@
             this.label_time.AutoSize = true;
             this.label_time.Location = new System.Drawing.Point(632, 15);
             this.label_time.Name = "label_time";
-            this.label_time.Size = new System.Drawing.Size(137, 18);
+            this.label_time.Size = new System.Drawing.Size(174, 23);
             this.label_time.TabIndex = 42;
             this.label_time.Text = "Tiempo: 00 m 00 s";
             this.label_time.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -94,19 +94,21 @@
             // 
             // SimulationExecution
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(782, 146);
+            this.ClientSize = new System.Drawing.Size(800, 139);
             this.Controls.Add(this.label_time);
             this.Controls.Add(this.label_state);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.progress_bar);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SimulationExecution";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ejecutando simulación...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimulationLoadingScreen_FormClosing);
             this.Load += new System.EventHandler(this.NewSimulation_Load);

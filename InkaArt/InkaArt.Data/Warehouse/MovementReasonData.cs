@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InkaArt.Data.Warehouse;
 
 namespace InkaArt.Data.Warehouse
 {
@@ -21,8 +22,9 @@ namespace InkaArt.Data.Warehouse
             table_name = "MovementName";
             data = new DataSet();
         }
+        
 
-        public DataTable GetMovementReasons()
+        public DataTable GetMovementReasonsOld()
         {
             adap = movementReasonAdapter();
             adap.SelectCommand.CommandText += ";";

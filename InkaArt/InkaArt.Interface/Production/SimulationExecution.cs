@@ -1,12 +1,15 @@
 ﻿using InkaArt.Business.Algorithm;
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
+using Excel = Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,7 +47,8 @@ namespace InkaArt.Interface.Production
             background_worker.ReportProgress(0, "Estado de la simulación: Cargando datos...");
 
             //Carga de controladores
-            
+
+            if (background_worker.CancellationPending && (e.Cancel = true)) return;
             JobController jobs = new JobController();
             jobs.Load();
             RecipeController recipes = new RecipeController();
@@ -52,8 +56,6 @@ namespace InkaArt.Interface.Production
             IndexController indexes = new IndexController(workers, jobs, recipes);
             indexes.Load();
             indexes.CalculateIndexes(simulation);
-            for (int i = 0; i < indexes.Count(); i++)
-                LogHandler.WriteLine("INDICE {0}: {1}", i + 1, indexes[i].ToString());
 
             for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
             {
@@ -63,6 +65,7 @@ namespace InkaArt.Interface.Production
             }
 
             //Temporal: Determinar el tiempo total del turno y los miniturnos
+            if (background_worker.CancellationPending && (e.Cancel = true)) return;
             Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
             for (int i = 0; i < workers.NumberOfWorkers; i++)
                 if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
@@ -77,51 +80,122 @@ namespace InkaArt.Interface.Production
 
             for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
                 initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
                 background_worker.ReportProgress(0, null);
             }
-            
-            PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
+
+            try
+            {
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
+            }
+            catch
+            {
+                MessageBox.Show("No se pudo guardar el Excel de los resultados del algoritmo GRASP.");
+            }
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
             //Algoritmo de Búsqueda Tabú
 
             TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
-            
-            for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+            /*for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
             {
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
                 tabu.run(ref elapsed_seconds, day);
                 background_worker.ReportProgress(0, null);
-            }
+            }*/
 
             tabu.bestSolutionToList();
             simulation.Assignments = tabu.BestSolution;
+
+            if (background_worker.CancellationPending && (e.Cancel = true)) return;
+            simulation.Assignments = new List<Assignment>();
+        }
+
+        private void PrintIndexes(IndexController indexes)
+        {
+            Excel.Application app = new Excel.Application();
+            if (app == null) return;
+            Excel.Workbook workbook = app.Workbooks.Add(Missing.Value);
+            Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Item[1];
+            worksheet.Cells[1, 1] = "ID";
+            worksheet.Cells[1, 2] = "Trabajador";
+            worksheet.Cells[1, 3] = "Receta";
+            worksheet.Cells[1, 4] = "Puesto de trabajo";
+            worksheet.Cells[1, 5] = "% promedio de rotura [0, 1]";
+            worksheet.Cells[1, 6] = "Tiempo promedio [0, ?]";
+            worksheet.Cells[1, 7] = "Índice de rotura [0, 1]";
+            worksheet.Cells[1, 8] = "Índice de tiempo [0, 1]";
+            worksheet.Cells[1, 9] = "Índice de pérdida";
+            for (int index = 0; index < indexes.Count(); index++)
+            {
+                worksheet.Cells[index + 2, 1] = indexes[index].ID;
+                worksheet.Cells[index + 2, 2] = (indexes[index].Worker == null) ? "null" : indexes[index].Worker.FullName;
+                worksheet.Cells[index + 2, 3] = (indexes[index].Recipe == null) ? "null" : indexes[index].Recipe.Version;
+                worksheet.Cells[index + 2, 4] = (indexes[index].Job == null) ? "null" : indexes[index].Job.Name;
+                worksheet.Cells[index + 2, 5] = indexes[index].AverageBreakage;
+                worksheet.Cells[index + 2, 6] = indexes[index].AverageTime;
+                worksheet.Cells[index + 2, 7] = indexes[index].BreakageIndex;
+                worksheet.Cells[index + 2, 8] = indexes[index].TimeIndex;
+                worksheet.Cells[index + 2, 9] = indexes[index].LossIndex;
+            }
+            workbook.SaveAs("CalculatedIndexes.xlsx", Excel.XlFileFormat.xlWorkbookDefault);
+            workbook.Close(true, Missing.Value, Missing.Value);
+            app.Quit();
+
+            Marshal.ReleaseComObject(worksheet);
+            Marshal.ReleaseComObject(workbook);
+            Marshal.ReleaseComObject(app);
+
+            this.timer.Start();
         }
 
         private void PrintGraspResults(List<Assignment> assignments, int total_miniturns)
         {
-            for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+            Excel.Application app = new Excel.Application();
+            if (app == null) return;
+            Excel.Workbook workbook = app.Workbooks.Add(Missing.Value);
+
+            for (int day = 0; day < simulation.Days; day++)
             {
-                LogHandler.WriteLine("============ DÍA {0} ============", day + 1);
-                LogHandler.WriteLine("Valor de la función objetivo = " + assignments[day].ObjectiveFunction);
-                for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
+                Excel.Worksheet worksheet;
+                if (day <= 0) worksheet = (Excel.Worksheet)workbook.Worksheets.Item[day + 1];
+                else worksheet = (Excel.Worksheet)workbook.Worksheets.Add(workbook.Worksheets[1]);
+
+                worksheet.Name = "Día " + (day + 1);
+                if (assignments[day] == null) worksheet.Cells[1, 1] = "Nada registrado para dicho día.";
+                else
                 {
-                    LogHandler.WriteLine("");
-                    LogHandler.WriteLine("TRABAJADOR 1:");
-                    for (int miniturn = 0; miniturn < total_miniturns; miniturn++)
+                    worksheet.Cells[1, 1] = "Valor de la función objetivo";
+                    worksheet.Cells[1, 2] = assignments[day].ObjectiveFunction;
+                    worksheet.Cells[2, 1] = "Huacos producidos";
+                    worksheet.Cells[3, 2] = assignments[day].HuacosProduced;
+                    worksheet.Cells[2, 2] = "Piedras de Huamanga producidas";
+                    worksheet.Cells[3, 2] = assignments[day].HuamangaProduced;
+                    worksheet.Cells[3, 1] = "Retablos producidos";
+                    worksheet.Cells[3, 2] = assignments[day].AltarpieceProduced;
+
+                    for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
                     {
-                        AssignmentLine line = assignments[day][worker_index, miniturn];
-                        if (line == null)
-                            LogHandler.WriteLine("- Miniturno {0}: Nada.", miniturn);
-                        else
-                            LogHandler.WriteLine("- Miniturno {0}: ({1:00},{2:00},{3},{4},[{5},{6}])",
-                                miniturn, line.Worker.ID, line.Job.ID, line.Recipe.Description + " " + line.Recipe.Version,
-                                line.Produced, line.MiniturnStart, line.MiniturnStart + line.TotalMiniturnsUsed);
+                        worksheet.Cells[5, w + 1] = simulation.SelectedWorkers[w].FullName;
+                        for (int m = 0; m < simulation.TotalMiniturns; m++)
+                        {
+                            AssignmentLine line = assignments[day][w, m];
+                            worksheet.Cells[m + 6, w + 1] = (line == null) ? "Nada" : line.ToString();
+                        }
                     }
                 }
-                LogHandler.WriteLine("");
+
+                Marshal.ReleaseComObject(worksheet);
             }
+            workbook.SaveAs("GraspResults.xlsx", Excel.XlFileFormat.xlWorkbookDefault);
+            workbook.Close(true, Missing.Value, Missing.Value);
+            app.Quit();
+
+            Marshal.ReleaseComObject(workbook);
+            Marshal.ReleaseComObject(app);
         }
         
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -133,14 +207,13 @@ namespace InkaArt.Interface.Production
         private void background_simulation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.timer.Stop();
-
+            
             if (e.Cancelled == false)
             {
                 MessageBox.Show("¡Se realizó la asignación con éxito!", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
-            else
-                this.DialogResult = DialogResult.Cancel;
+            else this.DialogResult = DialogResult.Cancel;
 
             this.Close();
         }

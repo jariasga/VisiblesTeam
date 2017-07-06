@@ -49,6 +49,7 @@ namespace InkaArt.Interface.Purchases
             textBox_cantidad.Enabled = false;
             textBox_total.Text = "0";
             buttonSave.Text = "🖫 Guardar";
+            buttonExport.Visible = false;
         }
         public PurchaseOrderDetail(PurchaseOrderController controlForm,PurchaseOrder ventana)
         {
@@ -65,6 +66,7 @@ namespace InkaArt.Interface.Purchases
             comboBox_status.Enabled = false;
             textBox_cantidad.Enabled = false;
             buttonDelete.Enabled = false;
+            buttonExport.Visible = false;
             dateTimePicker_creation.Value = DateTime.Now;
             dateTimePicker_delivery.Value = DateTime.Today.AddDays(8);
             textBox_total.Text = "0";
@@ -456,6 +458,7 @@ namespace InkaArt.Interface.Purchases
                 }
 
                 buttonSave.Text = "Editar";
+                buttonExport.Visible = false;
                 mode = 2;
                 isInEditMode = false;
                 comboBox_supplier.Enabled = false;
@@ -467,18 +470,18 @@ namespace InkaArt.Interface.Purchases
                 try
                 {
                     //hacer insert
-                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
+                    control.inserData(int.Parse(textBox_idsupplier.Text), comboBox_status.Text, dateTimePicker_creation.Value, dateTimePicker_delivery.Value, double.Parse(textBox_total.Text));
                     ventanaListaOrdenes.desarrolloBusqueda();
                     textBox_id.Text = buscarValorId(textBox_idsupplier.Text);
                     obtenerMateriasDelSupplier();
                     llenarMateriasPedidas();
-
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("No se pudo crear la orden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }
+                MessageBox.Show("Se creo de manera exitosa el borrador de la orden.", "Creacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (mode == 2 && isInEditMode)
             {
@@ -497,19 +500,25 @@ namespace InkaArt.Interface.Purchases
                 //hacer update
                 try {
                     guardarLineasDePedido();
-                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, DateTime.Parse(dateTimePicker_creation.Text), DateTime.Parse(dateTimePicker_delivery.Text), double.Parse(textBox_total.Text));
-                    if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
-                        if(string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
-                        else if(string.Compare(comboBox_status.Text, "Enviado")==0) pasarTodasLasLineasAEstado("Enviado");
-                        estadoInicial = comboBox_status.Text;
-                    }
                     llenarMateriasPedidas();
+                    control.updateData(textBox_id.Text, int.Parse(textBox_idsupplier.Text), comboBox_status.Text, dateTimePicker_creation.Value, dateTimePicker_delivery.Value, double.Parse(textBox_total.Text));
+                    if (string.Compare(comboBox_status.Text, estadoInicial) != 0) {//cambioElEstado
+                        if (string.Compare(comboBox_status.Text, "Eliminado") == 0) pasarTodasLasLineasAEstado("Eliminado");
+                        else if (string.Compare(comboBox_status.Text, "Enviado") == 0)
+                        {
+                            pasarTodasLasLineasAEstado("Enviado");
+                            buttonExport.Visible = true;
+                        }
+                        estadoInicial = comboBox_status.Text;
+                        llenarMateriasPedidas();
+                    }
                     ventanaListaOrdenes.desarrolloBusqueda();
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("No se pudo guardar los cambios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                MessageBox.Show("Se guardaron los cambios de manera exitosa.", "Cambios guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else
@@ -523,10 +532,13 @@ namespace InkaArt.Interface.Purchases
                     textBox_cantidad.Enabled = true;
                     button_add.Enabled = true;
                     buttonDelete.Enabled = true;
+                    buttonExport.Visible = false;
+                    llenarMateriasPedidas();
                     comboBoxRawMaterialName.Enabled = true;
                     activarBotonAgregar();
+                    dataGridView_pedidos.Enabled = true;
                 }
-                dataGridView_pedidos.Enabled = true;
+                
 
             }
         }

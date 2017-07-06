@@ -27,7 +27,7 @@ namespace InkaArt.Interface.Production
             
         }
 
-        private void hallaStock()
+        public void hallaStock()
         {
             int huaco, piedra, retablo, huacoL, piedraL, retabloL;
             huaco = piedra = retablo = huacoL = piedraL = retabloL = 0;

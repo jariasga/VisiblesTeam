@@ -47,6 +47,15 @@ namespace InkaArt.Data.Algorithm
             this.produced = produced;
         }
 
+        public OrderLineItem(OrderLineItem copy)
+        {
+            this.id_line_item = copy.id_line_item;
+            this.date = copy.date;
+            this.recipe = copy.recipe;
+            this.quantity = copy.quantity;
+            this.produced = copy.produced;
+        }
+
         public override string ToString()
         {
             string recipe = (this.recipe == null) ? "null" : this.recipe.Description + " " + this.recipe.Version;

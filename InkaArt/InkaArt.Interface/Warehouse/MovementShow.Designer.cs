@@ -38,25 +38,25 @@
             this.textbox_warehouse_name = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textbox_date = new System.Windows.Forms.TextBox();
+            this.textbox_doc_number = new System.Windows.Forms.TextBox();
             this.combobox_type = new System.Windows.Forms.ComboBox();
+            this.combobox_doc_type = new System.Windows.Forms.ComboBox();
             this.combobox_reason = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.combobox_status = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textbox_quantity = new System.Windows.Forms.TextBox();
+            this.textbox_item_name = new System.Windows.Forms.TextBox();
             this.combobox_item_type = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textbox_item_name = new System.Windows.Forms.TextBox();
-            this.textbox_quantity = new System.Windows.Forms.TextBox();
-            this.textbox_doc_number = new System.Windows.Forms.TextBox();
-            this.combobox_doc_type = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textbox_date = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -191,6 +191,28 @@
             this.groupBox2.Text = "Movimiento";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // textbox_date
+            // 
+            this.textbox_date.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_date.Enabled = false;
+            this.textbox_date.Location = new System.Drawing.Point(17, 92);
+            this.textbox_date.Margin = new System.Windows.Forms.Padding(2);
+            this.textbox_date.Name = "textbox_date";
+            this.textbox_date.ReadOnly = true;
+            this.textbox_date.Size = new System.Drawing.Size(237, 26);
+            this.textbox_date.TabIndex = 49;
+            // 
+            // textbox_doc_number
+            // 
+            this.textbox_doc_number.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_doc_number.Enabled = false;
+            this.textbox_doc_number.Location = new System.Drawing.Point(270, 141);
+            this.textbox_doc_number.Margin = new System.Windows.Forms.Padding(2);
+            this.textbox_doc_number.Name = "textbox_doc_number";
+            this.textbox_doc_number.ReadOnly = true;
+            this.textbox_doc_number.Size = new System.Drawing.Size(237, 26);
+            this.textbox_doc_number.TabIndex = 46;
+            // 
             // combobox_type
             // 
             this.combobox_type.Enabled = false;
@@ -204,6 +226,19 @@
             this.combobox_type.Size = new System.Drawing.Size(237, 25);
             this.combobox_type.TabIndex = 43;
             // 
+            // combobox_doc_type
+            // 
+            this.combobox_doc_type.Enabled = false;
+            this.combobox_doc_type.Font = new System.Drawing.Font("Arial", 11F);
+            this.combobox_doc_type.FormattingEnabled = true;
+            this.combobox_doc_type.Items.AddRange(new object[] {
+            "Activo",
+            "Inactivo"});
+            this.combobox_doc_type.Location = new System.Drawing.Point(17, 141);
+            this.combobox_doc_type.Name = "combobox_doc_type";
+            this.combobox_doc_type.Size = new System.Drawing.Size(237, 25);
+            this.combobox_doc_type.TabIndex = 48;
+            // 
             // combobox_reason
             // 
             this.combobox_reason.Enabled = false;
@@ -216,6 +251,25 @@
             this.combobox_reason.Name = "combobox_reason";
             this.combobox_reason.Size = new System.Drawing.Size(237, 25);
             this.combobox_reason.TabIndex = 42;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(265, 121);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(169, 18);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "Número de Documento";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(14, 120);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(144, 18);
+            this.label11.TabIndex = 45;
+            this.label11.Text = "Tipo de Documento";
             // 
             // combobox_status
             // 
@@ -287,6 +341,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Producto";
             // 
+            // textbox_quantity
+            // 
+            this.textbox_quantity.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_quantity.Enabled = false;
+            this.textbox_quantity.Location = new System.Drawing.Point(15, 91);
+            this.textbox_quantity.Margin = new System.Windows.Forms.Padding(2);
+            this.textbox_quantity.Name = "textbox_quantity";
+            this.textbox_quantity.ReadOnly = true;
+            this.textbox_quantity.Size = new System.Drawing.Size(237, 26);
+            this.textbox_quantity.TabIndex = 44;
+            // 
+            // textbox_item_name
+            // 
+            this.textbox_item_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_item_name.Enabled = false;
+            this.textbox_item_name.Location = new System.Drawing.Point(270, 41);
+            this.textbox_item_name.Margin = new System.Windows.Forms.Padding(2);
+            this.textbox_item_name.Name = "textbox_item_name";
+            this.textbox_item_name.ReadOnly = true;
+            this.textbox_item_name.Size = new System.Drawing.Size(237, 26);
+            this.textbox_item_name.TabIndex = 38;
+            // 
             // combobox_item_type
             // 
             this.combobox_item_type.Enabled = false;
@@ -329,82 +405,6 @@
             this.label10.TabIndex = 26;
             this.label10.Text = "Tipo";
             // 
-            // textbox_item_name
-            // 
-            this.textbox_item_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textbox_item_name.Enabled = false;
-            this.textbox_item_name.Location = new System.Drawing.Point(270, 41);
-            this.textbox_item_name.Margin = new System.Windows.Forms.Padding(2);
-            this.textbox_item_name.Name = "textbox_item_name";
-            this.textbox_item_name.ReadOnly = true;
-            this.textbox_item_name.Size = new System.Drawing.Size(237, 26);
-            this.textbox_item_name.TabIndex = 38;
-            // 
-            // textbox_quantity
-            // 
-            this.textbox_quantity.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textbox_quantity.Enabled = false;
-            this.textbox_quantity.Location = new System.Drawing.Point(15, 91);
-            this.textbox_quantity.Margin = new System.Windows.Forms.Padding(2);
-            this.textbox_quantity.Name = "textbox_quantity";
-            this.textbox_quantity.ReadOnly = true;
-            this.textbox_quantity.Size = new System.Drawing.Size(237, 26);
-            this.textbox_quantity.TabIndex = 44;
-            // 
-            // textbox_doc_number
-            // 
-            this.textbox_doc_number.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textbox_doc_number.Enabled = false;
-            this.textbox_doc_number.Location = new System.Drawing.Point(270, 141);
-            this.textbox_doc_number.Margin = new System.Windows.Forms.Padding(2);
-            this.textbox_doc_number.Name = "textbox_doc_number";
-            this.textbox_doc_number.ReadOnly = true;
-            this.textbox_doc_number.Size = new System.Drawing.Size(237, 26);
-            this.textbox_doc_number.TabIndex = 46;
-            // 
-            // combobox_doc_type
-            // 
-            this.combobox_doc_type.Enabled = false;
-            this.combobox_doc_type.Font = new System.Drawing.Font("Arial", 11F);
-            this.combobox_doc_type.FormattingEnabled = true;
-            this.combobox_doc_type.Items.AddRange(new object[] {
-            "Activo",
-            "Inactivo"});
-            this.combobox_doc_type.Location = new System.Drawing.Point(17, 141);
-            this.combobox_doc_type.Name = "combobox_doc_type";
-            this.combobox_doc_type.Size = new System.Drawing.Size(237, 25);
-            this.combobox_doc_type.TabIndex = 48;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(265, 121);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(169, 18);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "Número de Documento";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(14, 120);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(144, 18);
-            this.label11.TabIndex = 45;
-            this.label11.Text = "Tipo de Documento";
-            // 
-            // textbox_date
-            // 
-            this.textbox_date.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textbox_date.Enabled = false;
-            this.textbox_date.Location = new System.Drawing.Point(17, 92);
-            this.textbox_date.Margin = new System.Windows.Forms.Padding(2);
-            this.textbox_date.Name = "textbox_date";
-            this.textbox_date.ReadOnly = true;
-            this.textbox_date.Size = new System.Drawing.Size(237, 26);
-            this.textbox_date.TabIndex = 49;
-            // 
             // MovementShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,7 +414,9 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MovementShow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movimiento";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

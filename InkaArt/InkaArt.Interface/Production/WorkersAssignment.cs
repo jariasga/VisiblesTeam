@@ -60,8 +60,8 @@ namespace InkaArt.Interface.Production
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            SimulationReport simulation_report = new SimulationReport(current_simulation);
-            simulation_report.Show();
+            /*SimulationReport simulation_report = new SimulationReport(current_simulation);
+            simulation_report.Show();*/
         }
 
         private void ButtonDeleteClick(object sender, EventArgs e)
@@ -122,7 +122,7 @@ namespace InkaArt.Interface.Production
                     row.Cells[job.Index].Value = miniturn.Job.Name;
                     row.Cells[recipe.Index].Value = miniturn.Recipe.Description;
                     row.Cells[quantity.Index].Value = miniturn.Produced;
-                    row.Cells[index.Index].Value = miniturn.LossValue;
+                    row.Cells[index.Index].Value = miniturn.LossIndex;
                     simulation_grid.Rows.Add(row);
                 }
             }

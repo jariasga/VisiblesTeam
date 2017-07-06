@@ -50,6 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nroLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,16 +77,20 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(754, 559);
+            this.groupBox1.Location = new System.Drawing.Point(752, 554);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Size = new System.Drawing.Size(755, 270);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item";
+            this.groupBox1.Visible = false;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(59, 221);
+            this.numericUpDown2.Location = new System.Drawing.Point(59, 222);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(179, 30);
             this.numericUpDown2.TabIndex = 37;
@@ -93,7 +98,8 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(335, 221);
+            this.textBox4.Location = new System.Drawing.Point(335, 222);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(401, 30);
@@ -124,8 +130,8 @@
             this.button_create.BackColor = System.Drawing.Color.SteelBlue;
             this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create.ForeColor = System.Drawing.Color.White;
-            this.button_create.Location = new System.Drawing.Point(10, 28);
-            this.button_create.Margin = new System.Windows.Forms.Padding(2);
+            this.button_create.Location = new System.Drawing.Point(11, 28);
+            this.button_create.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_create.Name = "button_create";
             this.button_create.Size = new System.Drawing.Size(204, 48);
             this.button_create.TabIndex = 25;
@@ -137,6 +143,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(335, 55);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(401, 30);
@@ -146,6 +153,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(335, 133);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(401, 30);
@@ -180,7 +188,9 @@
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(25, 25);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Size = new System.Drawing.Size(755, 128);
             this.groupBox3.TabIndex = 35;
             this.groupBox3.TabStop = false;
@@ -189,6 +199,7 @@
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(548, 70);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(188, 30);
@@ -197,7 +208,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(558, 44);
+            this.label5.Location = new System.Drawing.Point(557, 44);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(27, 23);
             this.label5.TabIndex = 32;
@@ -205,7 +216,8 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(10, 70);
+            this.textBox6.Location = new System.Drawing.Point(11, 70);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.Size = new System.Drawing.Size(481, 30);
@@ -215,7 +227,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 44);
+            this.label9.Location = new System.Drawing.Point(5, 44);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(79, 23);
             this.label9.TabIndex = 28;
@@ -227,7 +239,8 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(440, 504);
+            this.buttonDelete.Location = new System.Drawing.Point(440, 505);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(184, 48);
             this.buttonDelete.TabIndex = 56;
@@ -240,8 +253,8 @@
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(150, 504);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(149, 505);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(184, 48);
             this.button2.TabIndex = 55;
@@ -257,7 +270,9 @@
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(25, 171);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Size = new System.Drawing.Size(769, 326);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
@@ -268,8 +283,8 @@
             this.button1.BackColor = System.Drawing.Color.Gray;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(699, 24);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(699, 25);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 38);
             this.button1.TabIndex = 57;
@@ -288,7 +303,8 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(503, 29);
+            this.textBox3.Location = new System.Drawing.Point(503, 30);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(188, 30);
             this.textBox3.TabIndex = 34;
@@ -299,6 +315,7 @@
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nroLote,
             this.idProduct,
             this.ProductName,
             this.Cant,
@@ -306,10 +323,17 @@
             this.CurrentCant,
             this.MovCant,
             this.Modificar});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 78);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(753, 230);
             this.dataGridView1.TabIndex = 57;
+            // 
+            // nroLote
+            // 
+            this.nroLote.HeaderText = "Número de Lote";
+            this.nroLote.Name = "nroLote";
+            this.nroLote.ReadOnly = true;
             // 
             // idProduct
             // 
@@ -356,13 +380,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(806, 589);
+            this.ClientSize = new System.Drawing.Size(817, 590);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ProductionMovement";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductionMovement";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -400,6 +427,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nroLote;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cant;
