@@ -57,9 +57,12 @@ namespace InkaArt.Interface.Sales
 
         private void button_see_Click(object sender, EventArgs e)
         {
-            int index = grid_documents.CurrentCell.RowIndex;
-            SaleDocumentDetail form = new SaleDocumentDetail(grid_documents.Rows[index], currentOrderId, currentClientId);
-            form.Show();
+            if (grid_documents.CurrentCell != null)
+            {
+                int index = grid_documents.CurrentCell.RowIndex;
+                SaleDocumentDetail form = new SaleDocumentDetail(grid_documents.Rows[index], currentOrderId, currentClientId);
+                form.Show();
+            }
         }
     }
 }
