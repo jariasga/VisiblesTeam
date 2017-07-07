@@ -272,7 +272,7 @@
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(114, 39);
             this.button_add.TabIndex = 26;
-            this.button_add.Text = "🖫 Guardar";
+            this.button_add.Text = "+ Agregar";
             this.button_add.UseVisualStyleBackColor = false;
             this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
