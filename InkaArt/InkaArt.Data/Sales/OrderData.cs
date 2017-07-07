@@ -198,6 +198,7 @@ namespace InkaArt.Data.Sales
             string query = "SELECT o.*, c.name FROM inkaart.\"Order\" o, inkaart.\"Client\" c " +
                 "WHERE o.\"bdStatus\" = 1 " +
                 "AND o.\"type\" = 'devolucion' " +
+                "AND o.\"orderStatus\" != 'facturado' " +
                 "AND c.\"idClient\" = o.\"idClient\";";
             NpgsqlCommand command = new NpgsqlCommand(query, connection);
             connection.Open();
@@ -209,15 +210,36 @@ namespace InkaArt.Data.Sales
             return dev_list;
         }
 
-        public DataTable GetDevolutionLines(int id_order)
+        public DataTable GetDevolutionLines(int id_order, int id_warehouse)
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             string query = "SELECT pr.\"name\", l.*, coalesce(pw.\"idWarehouse\", -1) as id_warehouse, coalesce(pw.\"currentStock\", -1) as current_stock, coalesce(pw.\"maximunStock\", -1) as max_stock, coalesce(pw.\"minimunStock\", -1) as min_stock, coalesce(sd.\"id\", -1) as id_stock, coalesce(sd.product_stock, -1) as product_stock " +
                 "from inkaart.\"Product\" pr, inkaart.\"LineItem\" l " +
-                "left join inkaart.\"Product-Warehouse\" pw on l.\"idProduct\" = pw.\"idProduct\" " +
+                "left join inkaart.\"Product-Warehouse\" pw on l.\"idProduct\" = pw.\"idProduct\"  AND pw.\"idWarehouse\" = :id_warehouse " +
                 "left join inkaart.\"StockDocument\" sd on l.\"idOrder\" = sd.\"idDocument\" " +
                 "where l.\"idOrder\" = :id_order " +
                 "and l.\"idProduct\" = pr.\"idProduct\" ";
+            NpgsqlCommand command = new NpgsqlCommand(query, connection);
+            command.Parameters.AddWithValue("id_order", NpgsqlDbType.Integer, id_order);
+            command.Parameters.AddWithValue("id_warehouse", NpgsqlDbType.Integer, id_warehouse);
+
+            connection.Open();
+            NpgsqlDataReader reader = command.ExecuteReader();
+            DataSet dev_set = new DataSet();
+            dev_set.EnforceConstraints = false;
+            DataTable dev_list = new DataTable();
+            dev_list.Load(reader);            
+            connection.Close();
+
+            return dev_list;
+        }
+
+        public DataTable GetDevolutionDetail(int id_order)
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            string query = "SELECT pr.\"name\", l.* " +
+                "FROM inkaart.\"Product\" pr, inkaart.\"LineItem\" l " +
+                "WHERE l.\"idOrder\" = :id_order AND l.\"idProduct\" = pr.\"idProduct\"; ";
             NpgsqlCommand command = new NpgsqlCommand(query, connection);
             command.Parameters.AddWithValue("id_order", NpgsqlDbType.Integer, id_order);
 
@@ -226,7 +248,7 @@ namespace InkaArt.Data.Sales
             DataSet dev_set = new DataSet();
             dev_set.EnforceConstraints = false;
             DataTable dev_list = new DataTable();
-            dev_list.Load(reader);            
+            dev_list.Load(reader);
             connection.Close();
 
             return dev_list;
