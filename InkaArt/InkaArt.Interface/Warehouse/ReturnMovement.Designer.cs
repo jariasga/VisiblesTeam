@@ -32,7 +32,10 @@
             this.grid_devolution = new System.Windows.Forms.DataGridView();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button_save = new System.Windows.Forms.Button();
-            this.grid_dev_detail = new System.Windows.Forms.DataGridView();
+            this.grid_devolution_detail = new System.Windows.Forms.DataGridView();
+            this.product = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.combobox_dev = new System.Windows.Forms.ComboBox();
             this.date_dev = new System.Windows.Forms.DateTimePicker();
@@ -40,9 +43,6 @@
             this.textbox_client = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.current_stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.min_stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,15 +50,14 @@
             this.total_quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.product_stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.to_return = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.update = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_line = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idWarehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_warehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id_stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockLogico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_devolution)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grid_dev_detail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_devolution_detail)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,10 +89,9 @@
             this.total_quantity,
             this.product_stock,
             this.to_return,
-            this.update,
             this.id_product,
             this.id_line,
-            this.idWarehouse,
+            this.id_warehouse,
             this.id_stock,
             this.StockLogico});
             this.grid_devolution.Location = new System.Drawing.Point(26, 41);
@@ -132,24 +130,46 @@
             // 
             // grid_dev_detail
             // 
-            this.grid_dev_detail.AllowUserToAddRows = false;
-            this.grid_dev_detail.AllowUserToDeleteRows = false;
-            this.grid_dev_detail.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_dev_detail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.grid_dev_detail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_dev_detail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_devolution_detail.AllowUserToAddRows = false;
+            this.grid_devolution_detail.AllowUserToDeleteRows = false;
+            this.grid_devolution_detail.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.grid_devolution_detail.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_devolution_detail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_devolution_detail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.product,
             this.quantity,
             this.status});
-            this.grid_dev_detail.Location = new System.Drawing.Point(474, 32);
-            this.grid_dev_detail.Margin = new System.Windows.Forms.Padding(2);
-            this.grid_dev_detail.Name = "grid_dev_detail";
-            this.grid_dev_detail.Size = new System.Drawing.Size(394, 119);
-            this.grid_dev_detail.TabIndex = 56;
+            this.grid_devolution_detail.Location = new System.Drawing.Point(474, 32);
+            this.grid_devolution_detail.Margin = new System.Windows.Forms.Padding(2);
+            this.grid_devolution_detail.Name = "grid_dev_detail";
+            this.grid_devolution_detail.Size = new System.Drawing.Size(394, 119);
+            this.grid_devolution_detail.TabIndex = 56;
+            // 
+            // product
+            // 
+            this.product.DataPropertyName = "name";
+            this.product.HeaderText = "Producto";
+            this.product.Name = "product";
+            this.product.ReadOnly = true;
+            this.product.Width = 150;
+            // 
+            // quantity
+            // 
+            this.quantity.DataPropertyName = "quantity";
+            this.quantity.HeaderText = "Cantidad";
+            this.quantity.Name = "quantity";
+            // 
+            // status
+            // 
+            this.status.DataPropertyName = "lineStatus";
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            this.status.Width = 150;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.grid_dev_detail);
+            this.groupBox3.Controls.Add(this.grid_devolution_detail);
             this.groupBox3.Controls.Add(this.combobox_dev);
             this.groupBox3.Controls.Add(this.date_dev);
             this.groupBox3.Controls.Add(this.label1);
@@ -226,28 +246,6 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "ID";
             // 
-            // product
-            // 
-            this.product.DataPropertyName = "name";
-            this.product.HeaderText = "Producto";
-            this.product.Name = "product";
-            this.product.ReadOnly = true;
-            this.product.Width = 150;
-            // 
-            // quantity
-            // 
-            this.quantity.DataPropertyName = "quantity";
-            this.quantity.HeaderText = "Cantidad";
-            this.quantity.Name = "quantity";
-            // 
-            // status
-            // 
-            this.status.DataPropertyName = "lineStatus";
-            this.status.HeaderText = "Estado";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Width = 150;
-            // 
             // name
             // 
             this.name.DataPropertyName = "name";
@@ -296,11 +294,6 @@
             this.to_return.HeaderText = "Cantidad Ingreso";
             this.to_return.Name = "to_return";
             // 
-            // update
-            // 
-            this.update.HeaderText = "Modificar";
-            this.update.Name = "update";
-            // 
             // id_product
             // 
             this.id_product.DataPropertyName = "idProduct";
@@ -316,12 +309,12 @@
             this.id_line.Name = "id_line";
             this.id_line.Visible = false;
             // 
-            // idWarehouse
+            // id_warehouse
             // 
-            this.idWarehouse.DataPropertyName = "id_warehouse";
-            this.idWarehouse.HeaderText = "Almacen";
-            this.idWarehouse.Name = "idWarehouse";
-            this.idWarehouse.Visible = false;
+            this.id_warehouse.DataPropertyName = "id_warehouse";
+            this.id_warehouse.HeaderText = "Almacen";
+            this.id_warehouse.Name = "id_warehouse";
+            this.id_warehouse.Visible = false;
             // 
             // id_stock
             // 
@@ -352,7 +345,7 @@
             this.Text = "Movimiento de Devolución";
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid_devolution)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grid_dev_detail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_devolution_detail)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -364,7 +357,7 @@
         private System.Windows.Forms.DataGridView grid_devolution;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Button button_save;
-        private System.Windows.Forms.DataGridView grid_dev_detail;
+        private System.Windows.Forms.DataGridView grid_devolution_detail;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox combobox_dev;
         private System.Windows.Forms.DateTimePicker date_dev;
@@ -372,6 +365,9 @@
         private System.Windows.Forms.TextBox textbox_client;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn product;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn current_stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn min_stock;
@@ -379,14 +375,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn total_quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn to_return;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn update;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_product;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_line;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idWarehouse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_warehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn id_stock;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockLogico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
     }
 }

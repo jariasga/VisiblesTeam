@@ -44,5 +44,13 @@ namespace InkaArt.Data.Warehouse
         {
             execute(query);
         }
+
+        public new void execute(string query)
+        {
+            if (Connection == null)
+                connect();
+            base.execute(query);
+        }
+
     }
 }
