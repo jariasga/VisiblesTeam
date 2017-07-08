@@ -152,13 +152,6 @@ namespace InkaArt.Interface
             workers_assignment.Show();
         }
 
-        private void productividadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form reporte_productividad = new GeneratePerformanceReport();
-            reporte_productividad.MdiParent = this;
-            reporte_productividad.Show();
-        }
-
         /* Sales */
 
         private void verClientesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -337,6 +330,13 @@ namespace InkaArt.Interface
                 }
                 Thread.Sleep(50);
             }
+        }
+
+        private void generarReporteDeProductividadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form performance_report = new GeneratePerformanceReport();
+            performance_report.MdiParent = this;
+            performance_report.Show();
         }
 
         private void showConnectWarning(bool value)

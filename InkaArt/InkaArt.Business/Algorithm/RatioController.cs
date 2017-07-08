@@ -70,6 +70,11 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
+        public DataTable GetDataTable()
+        {
+            throw new NotImplementedException();
+        }
+
         public Ratio Verify(int id_ratio, DateTime date, string worker_text, string job_text, string recipe_text,
             string start_text, string end_text, string broken_text, string produced_text, WorkerController workers,
             JobController jobs, RecipeController recipes, ref string message)

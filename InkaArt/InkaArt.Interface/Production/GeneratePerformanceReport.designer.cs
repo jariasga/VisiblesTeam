@@ -29,142 +29,168 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneratePerformanceReport));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button_generate = new System.Windows.Forms.Button();
-            this.groupbox_workers = new System.Windows.Forms.GroupBox();
-            this.checkBox_allWorkers = new System.Windows.Forms.CheckBox();
-            this.list_workers = new System.Windows.Forms.CheckedListBox();
-            this.dateTimePicker_ini = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker_fin = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
+            this.groupbox_parameters = new System.Windows.Forms.GroupBox();
+            this.groupbox_dates = new System.Windows.Forms.GroupBox();
+            this.checkbox_dates = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.date_picker_start = new System.Windows.Forms.DateTimePicker();
+            this.date_picker_end = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupbox_workers = new System.Windows.Forms.GroupBox();
+            this.checkbox_workers = new System.Windows.Forms.CheckBox();
+            this.list_workers = new System.Windows.Forms.CheckedListBox();
+            this.button_generate = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
+            this.groupbox_parameters.SuspendLayout();
+            this.groupbox_dates.SuspendLayout();
             this.groupbox_workers.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupbox_parameters
             // 
-            this.groupBox1.Controls.Add(this.button_generate);
-            this.groupBox1.Controls.Add(this.groupbox_workers);
-            this.groupBox1.Controls.Add(this.dateTimePicker_ini);
-            this.groupBox1.Controls.Add(this.dateTimePicker_fin);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(38, 119);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(494, 305);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Parámetros para el reporte";
+            this.groupbox_parameters.Controls.Add(this.groupbox_dates);
+            this.groupbox_parameters.Controls.Add(this.groupbox_workers);
+            this.groupbox_parameters.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupbox_parameters.Location = new System.Drawing.Point(11, 110);
+            this.groupbox_parameters.Margin = new System.Windows.Forms.Padding(2);
+            this.groupbox_parameters.Name = "groupbox_parameters";
+            this.groupbox_parameters.Padding = new System.Windows.Forms.Padding(2);
+            this.groupbox_parameters.Size = new System.Drawing.Size(556, 290);
+            this.groupbox_parameters.TabIndex = 0;
+            this.groupbox_parameters.TabStop = false;
+            this.groupbox_parameters.Text = "Parámetros para el reporte";
             // 
-            // button_generate
+            // groupbox_dates
             // 
-            this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_generate.ForeColor = System.Drawing.Color.White;
-            this.button_generate.Location = new System.Drawing.Point(33, 211);
-            this.button_generate.Margin = new System.Windows.Forms.Padding(2);
-            this.button_generate.Name = "button_generate";
-            this.button_generate.Size = new System.Drawing.Size(104, 41);
-            this.button_generate.TabIndex = 24;
-            this.button_generate.Text = "Generar";
-            this.button_generate.UseVisualStyleBackColor = false;
-            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
+            this.groupbox_dates.Controls.Add(this.checkbox_dates);
+            this.groupbox_dates.Controls.Add(this.label1);
+            this.groupbox_dates.Controls.Add(this.date_picker_start);
+            this.groupbox_dates.Controls.Add(this.date_picker_end);
+            this.groupbox_dates.Controls.Add(this.label2);
+            this.groupbox_dates.Location = new System.Drawing.Point(15, 36);
+            this.groupbox_dates.Name = "groupbox_dates";
+            this.groupbox_dates.Size = new System.Drawing.Size(163, 231);
+            this.groupbox_dates.TabIndex = 35;
+            this.groupbox_dates.TabStop = false;
+            this.groupbox_dates.Text = "Intervalo de fechas";
             // 
-            // groupbox_workers
+            // checkbox_dates
             // 
-            this.groupbox_workers.Controls.Add(this.checkBox_allWorkers);
-            this.groupbox_workers.Controls.Add(this.list_workers);
-            this.groupbox_workers.Location = new System.Drawing.Point(178, 50);
-            this.groupbox_workers.Margin = new System.Windows.Forms.Padding(2);
-            this.groupbox_workers.Name = "groupbox_workers";
-            this.groupbox_workers.Padding = new System.Windows.Forms.Padding(2);
-            this.groupbox_workers.Size = new System.Drawing.Size(298, 236);
-            this.groupbox_workers.TabIndex = 34;
-            this.groupbox_workers.TabStop = false;
-            this.groupbox_workers.Text = "Trabajadores a considerar";
-            // 
-            // checkBox_allWorkers
-            // 
-            this.checkBox_allWorkers.AutoSize = true;
-            this.checkBox_allWorkers.Checked = true;
-            this.checkBox_allWorkers.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_allWorkers.Location = new System.Drawing.Point(11, 197);
-            this.checkBox_allWorkers.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox_allWorkers.Name = "checkBox_allWorkers";
-            this.checkBox_allWorkers.Size = new System.Drawing.Size(69, 22);
-            this.checkBox_allWorkers.TabIndex = 49;
-            this.checkBox_allWorkers.Text = "Todos";
-            this.checkBox_allWorkers.UseVisualStyleBackColor = true;
-            this.checkBox_allWorkers.CheckedChanged += new System.EventHandler(this.checkBox_allWorkers_CheckedChanged);
-            // 
-            // list_workers
-            // 
-            this.list_workers.CheckOnClick = true;
-            this.list_workers.Enabled = false;
-            this.list_workers.FormattingEnabled = true;
-            this.list_workers.Location = new System.Drawing.Point(11, 24);
-            this.list_workers.Margin = new System.Windows.Forms.Padding(2);
-            this.list_workers.Name = "list_workers";
-            this.list_workers.Size = new System.Drawing.Size(263, 151);
-            this.list_workers.TabIndex = 45;
-            // 
-            // dateTimePicker_ini
-            // 
-            this.dateTimePicker_ini.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_ini.Location = new System.Drawing.Point(27, 71);
-            this.dateTimePicker_ini.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker_ini.Name = "dateTimePicker_ini";
-            this.dateTimePicker_ini.Size = new System.Drawing.Size(120, 24);
-            this.dateTimePicker_ini.TabIndex = 3;
-            // 
-            // dateTimePicker_fin
-            // 
-            this.dateTimePicker_fin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker_fin.Location = new System.Drawing.Point(27, 149);
-            this.dateTimePicker_fin.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker_fin.Name = "dateTimePicker_fin";
-            this.dateTimePicker_fin.Size = new System.Drawing.Size(120, 24);
-            this.dateTimePicker_fin.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 128);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Fecha final";
+            this.checkbox_dates.AutoSize = true;
+            this.checkbox_dates.Checked = true;
+            this.checkbox_dates.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkbox_dates.Location = new System.Drawing.Point(11, 174);
+            this.checkbox_dates.Margin = new System.Windows.Forms.Padding(2);
+            this.checkbox_dates.Name = "checkbox_dates";
+            this.checkbox_dates.Size = new System.Drawing.Size(69, 22);
+            this.checkbox_dates.TabIndex = 50;
+            this.checkbox_dates.Text = "Todos";
+            this.checkbox_dates.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 50);
+            this.label1.Location = new System.Drawing.Point(8, 35);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Fecha inicial";
             // 
+            // date_picker_start
+            // 
+            this.date_picker_start.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_picker_start.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_picker_start.Location = new System.Drawing.Point(11, 58);
+            this.date_picker_start.Margin = new System.Windows.Forms.Padding(2);
+            this.date_picker_start.Name = "date_picker_start";
+            this.date_picker_start.Size = new System.Drawing.Size(120, 24);
+            this.date_picker_start.TabIndex = 3;
+            // 
+            // date_picker_end
+            // 
+            this.date_picker_end.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_picker_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_picker_end.Location = new System.Drawing.Point(11, 126);
+            this.date_picker_end.Margin = new System.Windows.Forms.Padding(2);
+            this.date_picker_end.Name = "date_picker_end";
+            this.date_picker_end.Size = new System.Drawing.Size(120, 24);
+            this.date_picker_end.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(8, 103);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Fecha final";
+            // 
+            // groupbox_workers
+            // 
+            this.groupbox_workers.Controls.Add(this.checkbox_workers);
+            this.groupbox_workers.Controls.Add(this.list_workers);
+            this.groupbox_workers.Location = new System.Drawing.Point(196, 36);
+            this.groupbox_workers.Margin = new System.Windows.Forms.Padding(2);
+            this.groupbox_workers.Name = "groupbox_workers";
+            this.groupbox_workers.Padding = new System.Windows.Forms.Padding(2);
+            this.groupbox_workers.Size = new System.Drawing.Size(344, 231);
+            this.groupbox_workers.TabIndex = 34;
+            this.groupbox_workers.TabStop = false;
+            this.groupbox_workers.Text = "Trabajadores a considerar";
+            // 
+            // checkbox_workers
+            // 
+            this.checkbox_workers.AutoSize = true;
+            this.checkbox_workers.Checked = true;
+            this.checkbox_workers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkbox_workers.Location = new System.Drawing.Point(13, 200);
+            this.checkbox_workers.Margin = new System.Windows.Forms.Padding(2);
+            this.checkbox_workers.Name = "checkbox_workers";
+            this.checkbox_workers.Size = new System.Drawing.Size(69, 22);
+            this.checkbox_workers.TabIndex = 49;
+            this.checkbox_workers.Text = "Todos";
+            this.checkbox_workers.UseVisualStyleBackColor = true;
+            this.checkbox_workers.CheckedChanged += new System.EventHandler(this.checkbox_workers_CheckedChanged);
+            // 
+            // list_workers
+            // 
+            this.list_workers.CheckOnClick = true;
+            this.list_workers.Enabled = false;
+            this.list_workers.FormattingEnabled = true;
+            this.list_workers.Location = new System.Drawing.Point(13, 24);
+            this.list_workers.Margin = new System.Windows.Forms.Padding(2);
+            this.list_workers.Name = "list_workers";
+            this.list_workers.Size = new System.Drawing.Size(317, 172);
+            this.list_workers.TabIndex = 45;
+            // 
+            // button_generate
+            // 
+            this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_generate.ForeColor = System.Drawing.Color.White;
+            this.button_generate.Location = new System.Drawing.Point(207, 407);
+            this.button_generate.Margin = new System.Windows.Forms.Padding(2);
+            this.button_generate.Name = "button_generate";
+            this.button_generate.Size = new System.Drawing.Size(158, 41);
+            this.button_generate.TabIndex = 24;
+            this.button_generate.Text = "Generar reporte";
+            this.button_generate.UseVisualStyleBackColor = false;
+            this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
+            // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(38, 22);
+            this.textBox1.Location = new System.Drawing.Point(11, 11);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(494, 75);
+            this.textBox1.Size = new System.Drawing.Size(556, 84);
             this.textBox1.TabIndex = 36;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -174,16 +200,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(578, 466);
+            this.ClientSize = new System.Drawing.Size(578, 459);
+            this.Controls.Add(this.button_generate);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupbox_parameters);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GeneratePerformanceReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Reporte de Rendimiento de Trabajadores";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupbox_parameters.ResumeLayout(false);
+            this.groupbox_dates.ResumeLayout(false);
+            this.groupbox_dates.PerformLayout();
             this.groupbox_workers.ResumeLayout(false);
             this.groupbox_workers.PerformLayout();
             this.ResumeLayout(false);
@@ -193,15 +221,17 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_ini;
-        private System.Windows.Forms.DateTimePicker dateTimePicker_fin;
+        private System.Windows.Forms.GroupBox groupbox_parameters;
+        private System.Windows.Forms.DateTimePicker date_picker_start;
+        private System.Windows.Forms.DateTimePicker date_picker_end;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_generate;
         private System.Windows.Forms.GroupBox groupbox_workers;
-        private System.Windows.Forms.CheckBox checkBox_allWorkers;
+        private System.Windows.Forms.CheckBox checkbox_workers;
         private System.Windows.Forms.CheckedListBox list_workers;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox groupbox_dates;
+        private System.Windows.Forms.CheckBox checkbox_dates;
     }
 }

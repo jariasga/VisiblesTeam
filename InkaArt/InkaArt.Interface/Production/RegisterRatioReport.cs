@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,9 @@ namespace InkaArt.Interface.Production
             ratios = new RatioController(workers, jobs, recipes);
 
             grid_modified_items = new List<int>();
+
+            //Asegurar que las fechas se estén leyendo correctamente
+            this.date_picker.CustomFormat = "dd/MM/yyyy";
         }
 
         private void RegisterAssignedJob_Load(object sender, EventArgs e)
@@ -324,33 +328,34 @@ namespace InkaArt.Interface.Production
                     }
                     //Formatear los datos a ingresar
                     DateTime date;
-                    if (!DateTime.TryParse(values[0], out date))
+                    if (!DateTime.TryParseExact(values[0], "dd/MM/yyyy", new CultureInfo("es-PE"), DateTimeStyles.AllowWhiteSpaces, out date))
                     {
-                        MessageBox.Show("La fecha colocada en el ratio de la línea " + line_index + " no es válida.",
-                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        success = false;
-                        continue;
-                    }
-                    string message = "";
-                    int id_ratio = ratios.VerifyAndSave(0, date, values[1], values[2], values[3], values[4], values[5],
-                        values[6], values[7], workers, jobs, recipes, ref message);
-                    if (id_ratio <= 0)
-                    {
-                        result = MessageBox.Show("Error en el ratio leído en la línea " + line_index + ": " + message,
+                        result = MessageBox.Show("La fecha colocada en el ratio de la línea " + line_index + " no es válida. Asegúrese de que la fecha esté en el formato dd/MM/yyyy."
+                            + Environment.NewLine + Environment.NewLine + "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.",
                             "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         success = false;
                         if (result == DialogResult.OK) continue;
                         if (result == DialogResult.Cancel) break;
                     }
-                    else LogHandler.WriteLine(message);
+
+                    string message = "";
+                    int id_ratio = ratios.VerifyAndSave(0, date, values[1], values[2], values[3], values[4], values[5], values[6], values[7], workers, jobs, recipes, ref message);
+
+                    LogHandler.WriteLine(message);
+                    if (id_ratio <= 0)
+                    {
+                        result = MessageBox.Show("Error en el ratio leído en la línea " + line_index + ": " + message + Environment.NewLine + Environment.NewLine +
+                            "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        success = false;
+                        if (result == DialogResult.OK) continue;
+                        if (result == DialogResult.Cancel) break;
+                    }
                 }
                 reader.Close();
 
                 //Actualizar la lista de ratios de la fecha seleccionada actualmente
-                if (success) MessageBox.Show("Datos leídos correctamente.", "Inka Art", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-                else MessageBox.Show("Hubieron errores al leer los datos.", "Inka Art", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                if (success) MessageBox.Show("Datos leídos correctamente.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show("Hubieron errores al leer los datos.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //Actualizar la lista de ratios de la fecha especificada
                 date_picker_ValueChanged(sender, e);
@@ -360,6 +365,20 @@ namespace InkaArt.Interface.Production
                 MessageBox.Show("Ocurrió una excepción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogHandler.WriteLine(ex.ToString());
             }
+        }
+
+        private void RegisterRatioReport_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (grid_modified_items.Count <= 0) return;
+
+            DialogResult result = MessageBox.Show("Hay datos modificados en la grilla de informes de turno." + Environment.NewLine + Environment.NewLine +
+                    "¿Desea guardarlos antes de salir?", "Inka Art", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+
+            //Si el usuario colocó "Cancelar" cancelar el cierre del formulario.
+            if (result == DialogResult.Cancel) e.Cancel = true;
+            //Si el usuario colocó "Sí", guardar las filas y salir. Si ocurre un problema, cancelar el cierre del formulario.
+            if (result == DialogResult.Yes && !SaveGridRows()) e.Cancel = true;
+            //Si el usuario colocó "No" no hacer nada.
         }
     }
 }

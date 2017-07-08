@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using InkaArt.Business.Algorithm;
 using InkaArt.Business.Reports;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
@@ -15,29 +16,35 @@ namespace InkaArt.Interface.Production
     {
         private ReportsController reportControl = new ReportsController();
 
-        public PerformanceReport(List<string> workersList, string fechaIni, string fechaFin)
+        public PerformanceReport(WorkerController workers, DateTime start_date, DateTime end_date)
         {
             InitializeComponent();
-            showData(workersList, fechaIni, fechaFin);            
-        }
 
-        public void showData(List<string> workersList, string fechaIni, string fechaFin)
-        {
             label_today.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            System.Data.DataTable performanceReportList = reportControl.getDataPerformance(workersList, fechaIni, fechaFin);
-            populateDataGrid(performanceReportList);           
+
+            /*DataTable performanceReportList = reportControl.getDataPerformance(workers, start_date, end_date);
+            populateDataGrid(performanceReportList);*/
         }
 
-        private void populateDataGrid(System.Data.DataTable performanceReportList)
+        public PerformanceReport(WorkerController workers)
+        {
+            InitializeComponent();
+
+            label_today.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+
+        }
+
+        private void populateDataGrid(DataTable performanceReportList)
         {
             int i = 0, cantP = 0, cantR = 0;
             decimal tiempos = 0;
-            dataGridView_performance.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dataGridView_performance.Rows.Clear();
-            dataGridView_performance.Columns[6].DefaultCellStyle.Format = "0.##";
+            grid_performance.Columns[0].DefaultCellStyle.Format = "dd/MM/yyyy";
+            grid_performance.Rows.Clear();
+            grid_performance.Columns[6].DefaultCellStyle.Format = "0.##";
             foreach (DataRow row in performanceReportList.Rows)
             {
-                dataGridView_performance.Rows.Add(row["Fecha"], row["Trabajador"], row["Puesto"], row["Receta"], row["CantidadRota"], row["CantidadProducida"], row["Tiempo"]);
+                grid_performance.Rows.Add(row["Fecha"], row["Trabajador"], row["Puesto"], row["Receta"], row["CantidadRota"], row["CantidadProducida"], row["Tiempo"]);
             }
             foreach (DataRow row in performanceReportList.Rows)
             {
@@ -60,9 +67,9 @@ namespace InkaArt.Interface.Production
         private void copyAlltoClipboard()
         {
             //to remove the first blank column from datagridview
-            dataGridView_performance.RowHeadersVisible = false;
-            dataGridView_performance.SelectAll();
-            DataObject dataObj = dataGridView_performance.GetClipboardContent();
+            grid_performance.RowHeadersVisible = false;
+            grid_performance.SelectAll();
+            DataObject dataObj = grid_performance.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
         }
@@ -78,8 +85,8 @@ namespace InkaArt.Interface.Production
             xlexcel.Visible = true;
             xlWorkBook = xlexcel.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            for (int j = 0; j < dataGridView_performance.Columns.Count; ++j)
-                xlWorkSheet.Cells[1, j + 1] = dataGridView_performance.Columns[j].HeaderText;
+            for (int j = 0; j < grid_performance.Columns.Count; ++j)
+                xlWorkSheet.Cells[1, j + 1] = grid_performance.Columns[j].HeaderText;
             Excel.Range CR = (Excel.Range)xlWorkSheet.Cells[2, 1];
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
@@ -111,27 +118,27 @@ namespace InkaArt.Interface.Production
                 WidthPercentage = 100,
             };
             
-            for (int i = 0; i < dataGridView_performance.Columns.Count; i++)
+            for (int i = 0; i < grid_performance.Columns.Count; i++)
             {
-                table.AddCell(dataGridView_performance.Columns[i].HeaderText);
+                table.AddCell(grid_performance.Columns[i].HeaderText);
             }
-            for (int i = 0; i < dataGridView_performance.Rows.Count; i++)
+            for (int i = 0; i < grid_performance.Rows.Count; i++)
             {
-                for (int j = 0; j < dataGridView_performance.Columns.Count; j++)
+                for (int j = 0; j < grid_performance.Columns.Count; j++)
                 {
-                    if (dataGridView_performance.Rows[i].Cells[j].Value != null)
+                    if (grid_performance.Rows[i].Cells[j].Value != null)
                     {
                         if (j == 0)
                         {
-                            table.AddCell(dataGridView_performance.Rows[i].Cells[j].Value.ToString().Substring(0,10));
+                            table.AddCell(grid_performance.Rows[i].Cells[j].Value.ToString().Substring(0,10));
                         } else if (j == 6)
                         {
-                            decimal t = Convert.ToDecimal(dataGridView_performance.Rows[i].Cells[j].Value);
+                            decimal t = Convert.ToDecimal(grid_performance.Rows[i].Cells[j].Value);
                             t = Math.Truncate(t * 1000m) / 1000m;
                             table.AddCell(t.ToString());
                         }
                         else
-                        table.AddCell(dataGridView_performance.Rows[i].Cells[j].Value.ToString());
+                        table.AddCell(grid_performance.Rows[i].Cells[j].Value.ToString());
                     }
                     else
                     {

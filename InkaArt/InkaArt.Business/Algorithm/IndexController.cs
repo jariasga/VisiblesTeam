@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using System.IO;
+using System.Data;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -46,8 +47,7 @@ namespace InkaArt.Business.Algorithm
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
             
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status ORDER BY id_index ASC", connection);
-            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = TRUE ORDER BY id_index ASC", connection);
             
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -64,6 +64,36 @@ namespace InkaArt.Business.Algorithm
             }
 
             connection.Close();
+        }
+
+        public DataTable GetDataTable()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = TRUE ORDER BY id_index ASC", connection);
+
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            DataSet data_set = new DataSet();
+            adapter.Fill(data_set);
+
+            DataTable data_table = data_set.Tables[0];
+            for (int i = data_table.Rows.Count; i >= 0; i--)
+            {
+                int id_worker, id_recipe, id_job;
+                //Asegurar de que los IDs de los trabajadores, recetas y puestos de trabajo se hayan leído correctamente
+                bool can_stay = int.TryParse(data_table.Rows[i]["id_worker"].ToString(), out id_worker);
+                can_stay &= int.TryParse(data_table.Rows[i]["id_recipe"].ToString(), out id_recipe);
+                can_stay &= int.TryParse(data_table.Rows[i]["id_job"].ToString(), out id_job);
+                //Asegurar de que los trabajadores, recetas y puestos de trabajo existan y se encuentren dentro de los controladores asociados a este
+                can_stay &= (this.workers.GetByID(id_worker) != null);
+                can_stay &= (this.recipes.GetByID(id_recipe) != null);
+                can_stay &= (this.jobs.GetByID(id_job) != null);
+                //En caso no se hayan cumplido con los requerimientos necesarios, eliminar el DataRow
+                if (!can_stay) data_table.Rows.RemoveAt(i);
+            }
+
+            return data_table;
         }
 
         /************************ INSERTAR O ACTUALIZAR EN LAS TABLAS INDEX Y RATIOPERDAY ************************/
