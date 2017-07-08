@@ -71,7 +71,7 @@ namespace InkaArt.Interface.Warehouse
 
         //Botón de aceptar para crear el movimiento
         //AGREGAR: Debería registrarse el lote de producción de donde viene el producto.
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSaveClick(object sender, EventArgs e)
         {
             int idProd = 0, idWare = 0, idPedido = 0, exito2 = 0;
             OrderController classFacture = new OrderController();
