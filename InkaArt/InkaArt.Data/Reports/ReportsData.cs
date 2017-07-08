@@ -232,7 +232,8 @@ namespace InkaArt.Data.Reports
                                                 "m.\"quantity\" "+
                                     "from       inkaart.\"Movement\" m, inkaart.\"Warehouse\" a, inkaart.\"RawMaterial\" r, "+
                                                 "inkaart.\"MovementName\" mn, inkaart.\"MovementType\" mt "+
-                                    "where      m.\"idWarehouse\" = a.\"idWarehouse\" "+
+                                    "where      m.\"itemType\" = 0 "+
+                                    "and        m.\"idWarehouse\" = a.\"idWarehouse\" " +
                                     "and        m.\"idItem\" = r.\"id_raw_material\" "+
                                     "and        m.\"idMovementType\" = mt.\"idMovementType\" "+
                                     "and        m.\"idMovementReason\" = mn.\"idMovName\" "+
@@ -246,7 +247,8 @@ namespace InkaArt.Data.Reports
                                                 "m.\"quantity\" " +
                                     "from        inkaart.\"Movement\" m, inkaart.\"Warehouse\" a, inkaart.\"Product\" p, "+
                                                 "inkaart.\"MovementName\" mn, inkaart.\"MovementType\" mt "+
-                                    "where       m.\"idWarehouse\" = a.\"idWarehouse\" "+
+                                    "where       m.\"itemType\" = 1 " +
+                                    "and         m.\"idWarehouse\" = a.\"idWarehouse\" " +
                                     "and         m.\"idItem\" = p.\"idProduct\"  " +
                                     "and         m.\"idMovementType\" = mt.\"idMovementType\"  " +
                                     "and         m.\"idMovementReason\" = mn.\"idMovName\") "+
