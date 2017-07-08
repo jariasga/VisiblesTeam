@@ -131,7 +131,52 @@ namespace InkaArt.Business.Production
             }
             return retorno;
             
-        }   
+        }
+
+        public void updateStockOnlyOne(string item, int value, int operacion)//0 is operacion +, 1 is operacion -
+        {
+            adapt = finalProduct.finalProductAdapter();
+            data = finalProduct.getData(adapt, "Product");
+            int current, logical;
+            current = logical=0;
+            table = data.Tables["Product"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                string a = table.Rows[i]["idProduct"].ToString();
+                if (table.Rows[i]["idProduct"].ToString() == item)
+                {
+                     current = int.Parse(table.Rows[i]["actualStock"].ToString());
+                     logical = int.Parse(table.Rows[i]["logicalStock"].ToString());
+                    if (operacion == 0)
+                    {
+                        current = current + value;
+                        logical = logical + value;
+                    }
+                    else if (operacion == 1)
+                    {
+                        current = current - value;
+                        logical = logical - value;
+                        if (current < 0)
+                            current = 0;
+                        if (logical < 0)
+                            logical = 0;
+                    }
+                    break;
+                }
+            }
+            //update
+            //return finalProduct.updateData(data, adapt, "Product");
+            
+            string updateQuery;
+            string pstr = current.ToString();
+            string lstr = logical.ToString();
+            table = getData();
+            updateQuery = "UPDATE inkaart.\"Product\" SET ";
+            updateQuery = updateQuery + "\"actualStock\"= " + pstr + ", ";
+            updateQuery = updateQuery + "\"logicalStock\" = " + lstr;
+            updateQuery = updateQuery + " WHERE \"idProduct\"= " + item + " ;";
+            finalProduct.execute(updateQuery);
+        } 
 
         public int updateStock(int h, int p,int r, int hl, int pl, int rl)
         {
