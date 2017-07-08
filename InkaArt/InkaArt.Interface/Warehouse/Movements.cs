@@ -85,7 +85,7 @@ namespace InkaArt.Interface.Warehouse
                 {
                     if (reason == "Venta")
                     {
-                        Form formView = new InkaArt.Interface.Warehouse.SaleMovementcs(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
+                        Form formView = new InkaArt.Interface.Warehouse.SaleMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
                         formView.Show();
                     }
                     else
