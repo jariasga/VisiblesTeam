@@ -86,6 +86,7 @@
             this.checkbox_dates.TabIndex = 50;
             this.checkbox_dates.Text = "Todos";
             this.checkbox_dates.UseVisualStyleBackColor = true;
+            this.checkbox_dates.CheckedChanged += new System.EventHandler(this.checkbox_dates_CheckedChanged);
             // 
             // label1
             // 
@@ -100,6 +101,7 @@
             // 
             // date_picker_start
             // 
+            this.date_picker_start.Enabled = false;
             this.date_picker_start.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker_start.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_picker_start.Location = new System.Drawing.Point(11, 58);
@@ -110,6 +112,7 @@
             // 
             // date_picker_end
             // 
+            this.date_picker_end.Enabled = false;
             this.date_picker_end.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_picker_end.Location = new System.Drawing.Point(11, 126);

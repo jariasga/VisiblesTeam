@@ -328,7 +328,7 @@ namespace InkaArt.Interface.Production
                     }
                     //Formatear los datos a ingresar
                     DateTime date;
-                    if (!DateTime.TryParseExact(values[0], "dd/MM/yyyy", new CultureInfo("es-PE"), DateTimeStyles.AllowWhiteSpaces, out date))
+                    if (!DateTime.TryParseExact(values[0], "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                     {
                         result = MessageBox.Show("La fecha colocada en el ratio de la línea " + line_index + " no es válida. Asegúrese de que la fecha esté en el formato dd/MM/yyyy."
                             + Environment.NewLine + Environment.NewLine + "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.",

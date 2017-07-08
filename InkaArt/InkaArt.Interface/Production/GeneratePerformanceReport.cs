@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InkaArt.Business.Algorithm;
+using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,11 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using InkaArt.Business.Algorithm;
-//using InkaArt.Business.Security;
-using InkaArt.Data;
-using InkaArt.Data.Algorithm;
-using InkaArt.Business.Production;
 
 namespace InkaArt.Interface.Production
 {
@@ -44,12 +42,30 @@ namespace InkaArt.Interface.Production
         {
             if (!button_generate_ValidateFilters()) return;
 
-            WorkerController selected_workers = new WorkerController();
-            for (int i = 0; i < list_workers.Items.Count; i++)
-                if (list_workers.GetItemChecked(i)) selected_workers.Add((Worker)list_workers.Items[i]);
+            WorkerController selected_workers;
+            if (checkbox_workers.Checked == false)
+            {
+                selected_workers = new WorkerController();
+                for (int i = 0; i < list_workers.Items.Count; i++)
+                    if (list_workers.GetItemChecked(i)) selected_workers.Add((Worker)list_workers.Items[i]);
+            }
+            else selected_workers = this.workers;
 
-            PerformanceReport performance_report = new PerformanceReport(selected_workers, date_picker_start.Value, date_picker_end.Value);
-            performance_report.Show();
+            try
+            {
+                PerformanceReport performance_report;
+                if (checkbox_dates.Checked == false)
+                    performance_report = new PerformanceReport(selected_workers, date_picker_start.Value, date_picker_end.Value);
+                else
+                    performance_report = new PerformanceReport(selected_workers);
+                performance_report.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al intentar generar el reporte de rendimiento. " + ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                LogHandler.WriteLine("Error al intentar generar el reporte de rendimiento: " + ex.ToString());
+            }
         }
 
         private bool button_generate_ValidateFilters()
@@ -64,7 +80,7 @@ namespace InkaArt.Interface.Production
                 MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (list_workers.CheckedItems.Count <= 0)
+            if (!checkbox_workers.Checked && list_workers.CheckedItems.Count <= 0)
             {
                 MessageBox.Show(this, "Por favor, seleccione por lo menos un trabajador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -74,13 +90,13 @@ namespace InkaArt.Interface.Production
 
         private void checkbox_workers_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkbox_workers.Enabled)
-            {
-                for (int i = 0; i < list_workers.Items.Count; i++)
-                    list_workers.SetItemChecked(i, true);
-                list_workers.Enabled = false;
-            }
-            else list_workers.Enabled = true;
+            list_workers.Enabled = (checkbox_workers.Checked) ? false : true;
+        }
+
+        private void checkbox_dates_CheckedChanged(object sender, EventArgs e)
+        {
+            date_picker_start.Enabled = (checkbox_dates.Checked) ? false : true;
+            date_picker_end.Enabled = (checkbox_dates.Checked) ? false : true;
         }
     }
 }

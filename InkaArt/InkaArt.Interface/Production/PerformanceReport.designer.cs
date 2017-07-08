@@ -28,28 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label_today = new System.Windows.Forms.Label();
             this.grid_performance = new System.Windows.Forms.DataGridView();
             this.button_export = new System.Windows.Forms.Button();
             this.label_tprom = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label_cant = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label_rota = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.button_pdf = new System.Windows.Forms.Button();
-            this.grid_column_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_worker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_job = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grid_column_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.save_pdf_dialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.grid_performance)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,63 +53,63 @@
             // 
             this.label_today.AutoSize = true;
             this.label_today.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_today.Location = new System.Drawing.Point(927, 7);
+            this.label_today.Location = new System.Drawing.Point(729, 18);
             this.label_today.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_today.Name = "label_today";
-            this.label_today.Size = new System.Drawing.Size(0, 18);
+            this.label_today.Size = new System.Drawing.Size(52, 18);
             this.label_today.TabIndex = 29;
+            this.label_today.Text = "Fecha";
+            this.label_today.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // grid_performance
             // 
             this.grid_performance.AllowUserToAddRows = false;
             this.grid_performance.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_performance.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_performance.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.grid_performance.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.grid_performance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_performance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_performance.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.grid_performance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_performance.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.grid_column_date,
             this.grid_column_worker,
             this.grid_column_recipe,
             this.grid_column_job,
             this.grid_column_broken,
-            this.grid_column_produced,
             this.grid_column_time});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_performance.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_performance.DefaultCellStyle = dataGridViewCellStyle23;
             this.grid_performance.Location = new System.Drawing.Point(17, 49);
             this.grid_performance.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.grid_performance.Name = "grid_performance";
             this.grid_performance.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_performance.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_performance.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.grid_performance.RowHeadersVisible = false;
             this.grid_performance.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_performance.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grid_performance.RowsDefaultCellStyle = dataGridViewCellStyle25;
             this.grid_performance.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_performance.Size = new System.Drawing.Size(1007, 270);
+            this.grid_performance.Size = new System.Drawing.Size(848, 404);
             this.grid_performance.TabIndex = 30;
             // 
             // button_export
@@ -121,7 +117,7 @@
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
             this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(344, 532);
+            this.button_export.Location = new System.Drawing.Point(254, 470);
             this.button_export.Margin = new System.Windows.Forms.Padding(2);
             this.button_export.Name = "button_export";
             this.button_export.Size = new System.Drawing.Size(161, 41);
@@ -140,17 +136,6 @@
             this.label_tprom.Size = new System.Drawing.Size(0, 17);
             this.label_tprom.TabIndex = 33;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(729, 423);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(163, 17);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "Tiempo promedio (min):";
-            // 
             // label_cant
             // 
             this.label_cant.AutoSize = true;
@@ -160,17 +145,6 @@
             this.label_cant.Name = "label_cant";
             this.label_cant.Size = new System.Drawing.Size(0, 17);
             this.label_cant.TabIndex = 35;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(729, 457);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(225, 17);
-            this.label3.TabIndex = 34;
-            this.label3.Text = "Cantidad producida promedio (u):";
             // 
             // label_rota
             // 
@@ -182,23 +156,12 @@
             this.label_rota.Size = new System.Drawing.Size(0, 17);
             this.label_rota.TabIndex = 37;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(729, 492);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(186, 17);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "Cantidad rota promedio (u):";
-            // 
             // button_pdf
             // 
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
             this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(531, 532);
+            this.button_pdf.Location = new System.Drawing.Point(463, 470);
             this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
             this.button_pdf.Name = "button_pdf";
             this.button_pdf.Size = new System.Drawing.Size(148, 41);
@@ -206,12 +169,6 @@
             this.button_pdf.Text = "Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
             this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
-            // 
-            // grid_column_date
-            // 
-            this.grid_column_date.HeaderText = "Fecha";
-            this.grid_column_date.Name = "grid_column_date";
-            this.grid_column_date.ReadOnly = true;
             // 
             // grid_column_worker
             // 
@@ -240,40 +197,35 @@
             // grid_column_broken
             // 
             this.grid_column_broken.FillWeight = 44.76743F;
-            this.grid_column_broken.HeaderText = "Cantidad rota";
+            this.grid_column_broken.HeaderText = "% de rotura";
             this.grid_column_broken.Name = "grid_column_broken";
             this.grid_column_broken.ReadOnly = true;
-            this.grid_column_broken.Width = 90;
-            // 
-            // grid_column_produced
-            // 
-            this.grid_column_produced.FillWeight = 44.76743F;
-            this.grid_column_produced.HeaderText = "Cantidad producida";
-            this.grid_column_produced.Name = "grid_column_produced";
-            this.grid_column_produced.ReadOnly = true;
-            this.grid_column_produced.Width = 90;
+            this.grid_column_broken.Width = 110;
             // 
             // grid_column_time
             // 
             this.grid_column_time.FillWeight = 44.76743F;
-            this.grid_column_time.HeaderText = "Tiempo (min)";
+            this.grid_column_time.HeaderText = "Tiempo promedio";
             this.grid_column_time.Name = "grid_column_time";
             this.grid_column_time.ReadOnly = true;
-            this.grid_column_time.Width = 141;
+            this.grid_column_time.Width = 150;
+            // 
+            // save_pdf_dialog
+            // 
+            this.save_pdf_dialog.FileName = "ReporteProductividad";
+            this.save_pdf_dialog.Filter = "Portable Document File|*.pdf";
+            this.save_pdf_dialog.Title = "Exportar a un documento PDF...";
             // 
             // PerformanceReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1038, 582);
+            this.ClientSize = new System.Drawing.Size(884, 522);
             this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.label_rota);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label_cant);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label_tprom);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button_export);
             this.Controls.Add(this.grid_performance);
             this.Controls.Add(this.label_today);
@@ -282,6 +234,7 @@
             this.Name = "PerformanceReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Rendimiento";
+            this.Load += new System.EventHandler(this.PerformanceReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_performance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -294,18 +247,14 @@
         private System.Windows.Forms.DataGridView grid_performance;
         private System.Windows.Forms.Button button_export;
         private System.Windows.Forms.Label label_tprom;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_cant;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label_rota;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_pdf;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_worker;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_recipe;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_job;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_broken;
-        private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_produced;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_time;
+        private System.Windows.Forms.SaveFileDialog save_pdf_dialog;
     }
 }

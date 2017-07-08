@@ -131,7 +131,18 @@ namespace InkaArt.Data.Reports
 
             return stocksTable;
         }
-        
+
+        public DataTable GetDataPerformance()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add(new DataColumn("worker", typeof(string)));
+            table.Columns.Add(new DataColumn("recipe", typeof(string)));
+            table.Columns.Add(new DataColumn("job", typeof(string)));
+            table.Columns.Add(new DataColumn("breakage", typeof(double)));
+            table.Columns.Add(new DataColumn("time", typeof(double)));
+            return table;
+        }
+
         public DataTable getDataSimulation(string name)
         {
             string command_query = "select  a.\"date\", "+
