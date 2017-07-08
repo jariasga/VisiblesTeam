@@ -3,6 +3,7 @@ using Npgsql;
 using System.Data;
 using System.IO;
 using System;
+using System.Linq;
 
 namespace InkaArt.Business.Purchases
 {
@@ -52,8 +53,18 @@ namespace InkaArt.Business.Purchases
             
             unitOfMeasurement.updateData(data,adap, "UnitOfMeasurement");
         }
+        public bool comprobarCarga(string nombre, string abreviatura)
+        {
+            DataTable resultados = getData();
+            DataRow[] rows;
+            rows = resultados.Select("name LIKE '%" + nombre + "%' AND abbreviature LIKE '%" + abreviatura + "%'");
+            
+            if (rows.Any()) return true; //ya existe en la BD
+            else return false;
+        }
         public int massiveUpload(string filename)
         {
+            bool primero=true;
             table = getData();     // obtenemos la tabla de unidades
 
             using (var fs = File.OpenRead(filename))
@@ -66,11 +77,16 @@ namespace InkaArt.Business.Purchases
                     var values = line.Split(';');
                     string nombre=values[0].Trim();
                     string abreviatura=values[1].Trim();
-                    if (values[0].Length <= 280 && values[1].Length <= 10)
+                    if (nombre.Length <= 280 && abreviatura.Length <= 10)
                     {
+                        if (primero)
+                        {
+                            if (comprobarCarga(values[0],values[1])) return 2;
+                            primero = false;
+                        }
                         try
                         {
-                            insertData(values[0], values[1], "Activo");
+                            insertData(nombre, abreviatura, "Activo");
                         }
                         catch (Exception)
                         {
