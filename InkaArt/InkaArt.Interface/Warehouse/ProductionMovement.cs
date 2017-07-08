@@ -15,7 +15,7 @@ namespace InkaArt.Interface.Warehouse
     public partial class ProductionMovement : Form
     {
         string nameWarehouseOrigin = "";
-        string idWarehouesOrigin= "";
+        string id_warehouse= "";
         string typeMovement = "";
 
         private ProductionMovementMovementController productionMovementMovementController = new ProductionMovementMovementController();
@@ -30,12 +30,14 @@ namespace InkaArt.Interface.Warehouse
 
         public ProductionMovement(string idWarehouse,string nameWarehouse,string typeMovement)
         {
-            this.idWarehouesOrigin = idWarehouse;
+            InitializeComponent();
+            
+            this.id_warehouse = idWarehouse;
             this.nameWarehouseOrigin = nameWarehouse;
             this.typeMovement = typeMovement;
-            InitializeComponent();
-            textBox6.Text = nameWarehouse;
-            textBox5.Text = idWarehouse;
+            
+            text_name_warehouse.Text = nameWarehouse;
+            text_id_warehouse.Text = idWarehouse;
         }
 
         private void button_create_Click(object sender, EventArgs e)
@@ -70,7 +72,7 @@ namespace InkaArt.Interface.Warehouse
             int cantMov = 0, maxMov=0,exito=0;
             int numRows = 0;
             try {
-                idWare = Convert.ToInt32(textBox5.Text);
+                idWare = Convert.ToInt32(text_id_warehouse.Text);
             }
             catch
             {
@@ -84,7 +86,7 @@ namespace InkaArt.Interface.Warehouse
             }
             try
             {
-                idLote = Convert.ToInt32(textBox3.Text);
+                idLote = Convert.ToInt32(text_lote.Text);
             }
             catch
             {
@@ -166,23 +168,20 @@ namespace InkaArt.Interface.Warehouse
                 dataGridView1.Rows.Add(row["idProduct"], row["name"], "Producto");
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
+
+        private void buttonSearchClick(object sender, EventArgs e)
+        {            
             NpgsqlDataReader datos;
-            string id = "";
-            try
+
+            int id_lote;
+
+            if (!int.TryParse(text_lote.Text, out id_lote) || id_lote <= 0)
             {
-                Convert.ToInt32(textBox5.Text);
-                id = textBox5.Text;
-            }
-            catch
-            {
-                MessageBox.Show("Favor de ingresar un valor entero para el número de lote de producción");
+                MessageBox.Show("Favor de ingresar un valor entero y existente para el número de lote");
                 return;
             }
             
-            datos = movementController.getProductStock(id, textBox3.Text);
+            datos = movementController.getProductStock(this.id_warehouse, text_lote.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
