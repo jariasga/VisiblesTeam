@@ -658,7 +658,8 @@ namespace InkaArt.Interface.Purchases
         {
             if(mode==2 && string.Compare(comboBox_status.Text, "Eliminado") != 0)
             {
-                FileStream fs = new FileStream("OrdenPrueba.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+                string titulo = "Orden" + textBox_id.Text + ".pdf";
+                FileStream fs = new FileStream(titulo, FileMode.Create, FileAccess.Write, FileShare.None);
                 Document document = new Document(PageSize.A4);
                 PdfWriter writer = PdfWriter.GetInstance(document, fs);
                 document.Open();

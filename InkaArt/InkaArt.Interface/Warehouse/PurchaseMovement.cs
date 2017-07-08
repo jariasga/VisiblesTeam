@@ -192,7 +192,7 @@ namespace InkaArt.Interface.Warehouse
                             if (string.Compare(quantityLeft, "falso") == 0)//si no esta en la tabla su valor es igual a quantity
                                 quantityLeft = quantity;
                             dataGridView_details.Rows.Add(name, orderList.Rows[i]["status"].ToString());
-                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, "", "", false, orderList.Rows[i]["id_detail"].ToString());
+                            dataGridView_orders.Rows.Add(idRM, name, quantity, quantityLeft, quantity, "", false, orderList.Rows[i]["id_detail"].ToString());
                         }
 
                     }
