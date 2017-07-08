@@ -517,28 +517,28 @@ namespace InkaArt.Business.Warehouse
 
         public NpgsqlDataReader getProductStockSales(string id_warehouse = "", string id_order = "")
         {
-            int intId = -1, intAux, int_order = -1, intIdWarehouse = -1, existe = 0;
+            int intAux, int_order = -1, intIdWarehouse = -1, existe = 0;
             string query = "";
 
             int.TryParse(id_order, out int_order);
 
             query = "select product_id from inkaart.\"StockDocument\" where \"documentType\" = 'VENTA' and \"idDocument\" = " + id_order + " order by 1 asc;";
-            NpgsqlDataReader dr = movement_data.executeQueryData(query);
+            NpgsqlDataReader dr_stock = movement_data.executeQueryData(query);
 
             query = "select B.\"idProduct\", \"quantity\" as \"product_stock\" FROM inkaart.\"Order\" A, inkaart.\"LineItem\" B WHERE A.\"idOrder\" = " + int_order + " and A.\"idOrder\" = B.\"idOrder\" and A.\"bdStatus\" = 1 order by 1 asc;";
-            NpgsqlDataReader dr2 = movement_data.executeQueryData(query);
-            int fin = 0, tamDr1 = 0, tamDr2 = 0;
+            NpgsqlDataReader dr_lines = movement_data.executeQueryData(query);
+            int tamDr1 = 0, tamDr2 = 0;
             int[] arrDr1 = new int[500];
             int[] arrDr2 = new int[500];
 
-            while (dr.Read())
+            while (dr_stock.Read())
             {
-                arrDr1[tamDr1] = Convert.ToInt32(dr[0]);
+                arrDr1[tamDr1] = Convert.ToInt32(dr_stock[0]);
                 tamDr1++;
             }
-            while (dr2.Read())
+            while (dr_lines.Read())
             {
-                arrDr2[tamDr2] = Convert.ToInt32(dr2[0]);
+                arrDr2[tamDr2] = Convert.ToInt32(dr_lines[0]);
                 tamDr2++;
             }
             for (int i = 0; i < tamDr2; i++)
@@ -584,7 +584,7 @@ namespace InkaArt.Business.Warehouse
 
         public NpgsqlDataReader getProductStock(string id = "", string idLote = "")
         {
-            int intId = -1, intAux, intIdLote = -1, intIdWarehouse = -1, existe = 0;
+            int intAux, intIdLote = -1, intIdWarehouse = -1, existe = 0;
             string query = "";
 
             if (!idLote.Equals("")) if (int.TryParse(idLote, out intAux)) intIdLote = int.Parse(idLote);
@@ -593,7 +593,7 @@ namespace InkaArt.Business.Warehouse
 
             query = "select id_product, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\" WHERE id_lote = " + intIdLote + " order by 1 asc;";
             NpgsqlDataReader dr2 = movement_data.executeQueryData(query);
-            int fin = 0, tamDr1 = 0, tamDr2 = 0;
+            int tamDr1 = 0, tamDr2 = 0;
             int[] arrDr1 = new int[500];
             int[] arrDr2 = new int[500];
 

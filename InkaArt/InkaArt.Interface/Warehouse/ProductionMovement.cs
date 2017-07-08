@@ -39,14 +39,7 @@ namespace InkaArt.Interface.Warehouse
             text_name_warehouse.Text = nameWarehouse;
             text_id_warehouse.Text = idWarehouse;
         }
-
-        private void button_create_Click(object sender, EventArgs e)
-        {
-            //Form new_warehouse_window = new Form1(ref textBox1,ref textBox2,ref textBox4);
-            Form new_warehouse_window = new ExchangeItem(textBox1, textBox2, textBox4,"","",null);
-            new_warehouse_window.Show();
-        }
-
+        
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
 
@@ -160,15 +153,7 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("No se pudo realizar ningún movimiento...");
             }
         }
-
-        private void populateDataGridLote(DataTable listList)
-        {
-            foreach (DataRow row in listList.Rows)
-            {
-                dataGridView1.Rows.Add(row["idProduct"], row["name"], "Producto");
-            }
-        }
-
+        
         private void buttonSearchClick(object sender, EventArgs e)
         {            
             NpgsqlDataReader datos;
