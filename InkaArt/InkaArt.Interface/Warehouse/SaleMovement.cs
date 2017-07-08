@@ -13,25 +13,26 @@ using InkaArt.Business.Warehouse;
 
 namespace InkaArt.Interface.Warehouse
 {
-    public partial class SaleMovementcs : Form
+    public partial class SaleMovement : Form
     {
-        public SaleMovementcs()
+
+        string name_warehouse = "";
+        string id_warehouse = "";
+        string type_movement = "";
+
+        public SaleMovement()
         {
             InitializeComponent();
-        }
+        }        
 
-        string nameWarehouseOrigin = "";
-        string idWarehouesOrigin = "";
-        string typeMovement = "";
-
-        public SaleMovementcs(string idWarehouse, string nameWarehouse, string typeMovement)
+        public SaleMovement(string idWarehouse, string nameWarehouse, string typeMovement)
         {
-            this.idWarehouesOrigin = idWarehouse;
-            this.nameWarehouseOrigin = nameWarehouse;
-            this.typeMovement = typeMovement;
+            this.id_warehouse = idWarehouse;
+            this.name_warehouse = nameWarehouse;
+            this.type_movement = typeMovement;
             InitializeComponent();
             textBox6.Text = nameWarehouse;
-            textBox5.Text = idWarehouse;
+            text_id_warehouse.Text = idWarehouse;
 
         }
 
@@ -83,7 +84,7 @@ namespace InkaArt.Interface.Warehouse
             int numRows = 0;
             try
             {
-                idWare = Convert.ToInt32(textBox5.Text);
+                idWare = Convert.ToInt32(text_id_warehouse.Text);
             }
             catch
             {
@@ -97,7 +98,7 @@ namespace InkaArt.Interface.Warehouse
             }
             try
             {
-                idPedido = Convert.ToInt32(textBox3.Text);
+                idPedido = Convert.ToInt32(text_order.Text);
             }
             catch
             {
@@ -134,14 +135,14 @@ namespace InkaArt.Interface.Warehouse
 
                     maxMov = Convert.ToInt32(row.Cells[4].Value);
 
-                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idPedido, typeMovement, "VENTA", "Producto", "VENTA");
+                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idPedido, type_movement, "VENTA", "Producto", "VENTA");
 
                     if (exito2 == 1)
                     {
                         //Aumentar stock físico y lógico del almacén 
-                        movementController.updateProductWarehouse(idProd, idWare, cantMov, typeMovement, "Producto");
+                        movementController.updateProductWarehouse(idProd, idWare, cantMov, type_movement, "Producto");
                         //Aumentar stock físico y lógico del producto
-                        movementController.updateProductStock(idProd, cantMov, typeMovement, "VENTA");
+                        movementController.updateProductStock(idProd, cantMov, type_movement, "VENTA");
                         //Actualizar el stock que queda para mover
                         movementController.updateStockDocument(idPedido, idProd, maxMov, cantMov, "VENTA");
 
@@ -190,8 +191,8 @@ namespace InkaArt.Interface.Warehouse
             string id = "";
             try
             {
-                Convert.ToInt32(textBox3.Text);
-                id = textBox3.Text;
+                Convert.ToInt32(text_order.Text);
+                id = text_order.Text;
             }
             catch
             {
@@ -199,7 +200,7 @@ namespace InkaArt.Interface.Warehouse
                 return;
             }
 
-            datos = productionItemMovementController.getProductLote(id, textBox5.Text);
+            datos = productionItemMovementController.getProductLote(id, text_id_warehouse.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
@@ -219,49 +220,19 @@ namespace InkaArt.Interface.Warehouse
             productionItemMovementController.closeConnection();
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*************************************************/
-        /*************************************************/
-        /*************************************************/
-
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-
-        private void button3_Click(object sender, EventArgs e)
+        
+        private void buttonSearchClick(object sender, EventArgs e)
         {
             NpgsqlDataReader datos;
-            string idWarehouse = "", idDoc = "";
-            try
+            int id_order;
+
+            if(!int.TryParse(text_order.Text, out id_order) || id_order <= 0)
             {
-                Convert.ToInt32(textBox5.Text);
-                idWarehouse = textBox5.Text;
-                idDoc = textBox3.Text;
-            }
-            catch
-            {
-                MessageBox.Show("Favor de ingresar un valor entero para el número de orden de pedido");
+                MessageBox.Show("Favor de ingresar un valor entero y existente para el número de pedido");
                 return;
             }
 
-            datos = movementController.getProductStockSales(idWarehouse, idDoc);
+            datos = movementController.getProductStockSales(id_warehouse, text_order.Text);
             int rowIndex = 0;
 
             //Limpiamos el datagridview
