@@ -81,7 +81,7 @@ namespace InkaArt.Business.Purchases
                     {
                         if (primero)
                         {
-                            if (comprobarCarga(values[0],values[1])) return 2;
+                            if (comprobarCarga(values[0], values[1])) return 2;
                             primero = false;
                         }
                         try
@@ -93,6 +93,7 @@ namespace InkaArt.Business.Purchases
                             return 1;
                         }
                     }
+                    else continue;
                 }
             }
             return 0;
