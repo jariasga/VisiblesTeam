@@ -57,7 +57,7 @@ namespace InkaArt.Interface.Warehouse
 
         //Botón de aceptar para crear el movimiento
         //AGREGAR: Debería registrarse el lote de producción de donde viene el producto.
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSaveClick(object sender, EventArgs e)
         {
             int idProd = 0, idWare = 0, idLote = 0,exito2=0;
             string nameProd="";
@@ -117,14 +117,14 @@ namespace InkaArt.Interface.Warehouse
                     }
                     maxMov = Convert.ToInt32(row.Cells[5].Value);
 
-                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idLote, typeMovement, "Produccion", "Producto", "LOTE");
+                    exito2 = movementController.verifyMovement(idProd, idWare, cantMov, idLote, typeMovement, "Producción", "Producto", "LOTE");
 
                     if (exito2 == 1)
                     {
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
                         movementController.updateProductWarehouse(idProd, idWare, cantMov, typeMovement, "Producto");
                         //Aumentar stock físico y lógico del producto
-                        movementController.updateProductStock(idProd, cantMov, typeMovement, "Produccion");
+                        movementController.updateProductStock(idProd, cantMov, typeMovement, "Producción");
                         //Actualizar el stock por mover
                         movementController.updateStockDocument(idLote, idProd, maxMov, cantMov, "LOTE");
                         //Grabar movimiento
