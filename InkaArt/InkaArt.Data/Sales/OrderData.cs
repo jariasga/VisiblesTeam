@@ -57,6 +57,26 @@ namespace InkaArt.Data.Sales
             return rowsAffected;
         }
 
+        public void updateStockDocumentLine(int orderId, int productId, int quantity)
+        {
+            NpgsqlDataAdapter myAdap = stockDocumentAdapter();
+            DataSet myData = getData(myAdap, "StockDocument");
+            table = myData.Tables["StockDocument"];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                if (string.Compare(table.Rows[i]["idDocument"].ToString(), orderId.ToString()) == 0 &&
+                    string.Compare(table.Rows[i]["product_id"].ToString(), productId.ToString()) == 0)
+                {
+                    int result;
+                    table.Rows[i]["documentType"] = "VENTAS";
+                    result = int.Parse(table.Rows[i]["cantMoved"].ToString()) - quantity;
+                    table.Rows[i]["cantMoved"] = result < 0 ? 0 : result;
+                    break;
+                }
+            }
+            updateData(myData, myAdap, "Order");
+        }
+
         public DataTable GetInvoice(int salesDocumentId)
         {
             NpgsqlDataAdapter curAdap = new NpgsqlDataAdapter();
@@ -101,6 +121,38 @@ namespace InkaArt.Data.Sales
             DataTable orderLine = new DataTable();
             orderLine = curData.Tables[0];
             return orderLine;
+        }
+
+        public string getStockDocumentParam(int idDocument, int product_id, string paramName)
+        {
+            NpgsqlDataAdapter myAdap = stockDocumentAdapter();
+            DataSet myData = getData(myAdap, "Order");
+            myAdap.SelectCommand.CommandText += " WHERE \"idDocument\" = :idDocument AND product_id = :product_id";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idDocument", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idDocument";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = idDocument;
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("product_id", DbType.Int32));
+            myAdap.SelectCommand.Parameters[1].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[1].SourceColumn = "product_id";
+            myAdap.SelectCommand.Parameters[1].NpgsqlValue = product_id;
+            myData.Clear();
+            myData = getData(myAdap, "StockDocument");
+            DataTable list = new DataTable();
+            list = myData.Tables[0];
+            if (list.Rows.Count != 0)
+            {
+                string param = list.Rows[0][paramName].ToString();                
+                return param;
+            }
+            else return "";
+        }
+
+        private NpgsqlDataAdapter stockDocumentAdapter()
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"StockDocument\"", Connection);
+            return adapter;
         }
 
         public void updateOrderStatus(string orderId, string orderStatus)
