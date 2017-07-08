@@ -141,7 +141,7 @@ namespace InkaArt.Interface.Purchases
                 }
                 else if (resultado == 2)
                 {
-                    MessageBox.Show("No se realizó la carga porque estos usuarios ya existen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se realizó la carga porque estas unidades ya existen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
