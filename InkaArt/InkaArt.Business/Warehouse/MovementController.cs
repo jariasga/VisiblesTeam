@@ -517,52 +517,79 @@ namespace InkaArt.Business.Warehouse
 
         public NpgsqlDataReader getProductStockSales(string id_warehouse = "", string id_order = "")
         {
-            int intAux, int_order = -1, intIdWarehouse = -1, existe = 0;
+            int intAux, int_order = -1, int_warehouse = -1, existe = 0;
             string query = "";
 
             int.TryParse(id_order, out int_order);
 
-            query = "select product_id from inkaart.\"StockDocument\" where \"documentType\" = 'VENTA' and \"idDocument\" = " + id_order + " order by 1 asc;";
+            query = "SELECT product_id FROM inkaart.\"StockDocument\" " + 
+                "WHERE \"documentType\" = 'VENTA' AND \"idDocument\" = " + id_order + " ORDER BY 1 asc;";
             NpgsqlDataReader dr_stock = movement_data.executeQueryData(query);
 
-            query = "select B.\"idProduct\", \"quantity\" as \"product_stock\" FROM inkaart.\"Order\" A, inkaart.\"LineItem\" B WHERE A.\"idOrder\" = " + int_order + " and A.\"idOrder\" = B.\"idOrder\" and A.\"bdStatus\" = 1 order by 1 asc;";
+            query = "SELECT B.\"idProduct\", sum(\"quantity\") as \"product_stock\" " + 
+                "FROM inkaart.\"Order\" A, inkaart.\"LineItem\" B " + 
+                "WHERE A.\"idOrder\" = " + int_order + " AND A.\"idOrder\" = B.\"idOrder\" AND A.\"bdStatus\" = 1 " + 
+                "GROUP BY B.\"idProduct\" ORDER BY 1 asc;";
             NpgsqlDataReader dr_lines = movement_data.executeQueryData(query);
-            int tamDr1 = 0, tamDr2 = 0;
-            int[] arrDr1 = new int[500];
-            int[] arrDr2 = new int[500];
+
+            int tam_stock = 0, tam_lines = 0;
+            int[] arr_stock = new int[500];
+            int[] arr_lines = new int[500];
 
             while (dr_stock.Read())
             {
-                arrDr1[tamDr1] = Convert.ToInt32(dr_stock[0]);
-                tamDr1++;
+                arr_stock[tam_stock] = Convert.ToInt32(dr_stock[0]);
+                tam_stock++;
             }
             while (dr_lines.Read())
             {
-                arrDr2[tamDr2] = Convert.ToInt32(dr_lines[0]);
-                tamDr2++;
+                arr_lines[tam_lines] = Convert.ToInt32(dr_lines[0]);
+                tam_lines++;
             }
-            for (int i = 0; i < tamDr2; i++)
+            for (int i = 0; i < tam_lines; i++)
             {
-                existe = existeElementoInt(arrDr2[i], arrDr1, tamDr1);
+                existe = existeElementoInt(arr_lines[i], arr_stock, tam_stock);
                 if (existe == -1)//Cuando no existe el producto se agrega a la tabla
                 {
-                    query = "insert into inkaart.\"StockDocument\"  (\"idDocument\", \"documentType\", \"product_id\",\"product_stock\") select B.\"idOrder\", 'VENTA', B.\"idProduct\", B.\"quantity\" FROM inkaart.\"Order\" A, inkaart.\"LineItem\" B WHERE A.\"idOrder\" = " + int_order + " and B.\"idProduct\" = " + arrDr2[i] + " and A.\"idOrder\" = B.\"idOrder\";";
+                    query = "INSERT INTO inkaart.\"StockDocument\" " + 
+                        "(\"idDocument\", \"documentType\", \"product_id\",\"product_stock\") " +
+                        "SELECT B.\"idOrder\", 'VENTA', B.\"idProduct\", sum(B.\"quantity\") " +
+                        "FROM inkaart.\"LineItem\" B " +
+                        "WHERE B.\"idOrder\" = " + int_order + " AND B.\"idProduct\" = " + arr_lines[i] +
+                        "GROUP BY B.\"idOrder\", B.\"idProduct\";";
                     movement_data.updateData(query);
                 }
             }
-            for (int i = 0; i < tamDr1; i++)
+            for (int i = 0; i < tam_stock; i++)
             {
-                existe = existeElementoInt(arrDr1[i], arrDr2, tamDr2);
+                existe = existeElementoInt(arr_stock[i], arr_lines, tam_lines);
                 if (existe == -1)//Cuando un producto fue eliminado se borra de la tabla
                 {
-                    query = "delete from inkaart.\"StockDocument\" where \"idDocument\" = " + int_order + " and \"documentType\" = 'VENTA' and \"product_id\" = " + arrDr1[i] + ";";
+                    query = "DELETE FROM inkaart.\"StockDocument\" " +
+                        "WHERE \"idDocument\" = " + int_order + " AND \"documentType\" = 'VENTA' AND \"product_id\" = " + arr_stock[i] + ";";
                     movement_data.updateData(query);
                 }
             }
-            if (!id_warehouse.Equals("")) if (int.TryParse(id_warehouse, out intAux)) intIdWarehouse = int.Parse(id_warehouse);
+            if (!id_warehouse.Equals("")) if (int.TryParse(id_warehouse, out intAux)) int_warehouse = int.Parse(id_warehouse);
 
             //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
-            query = "select A.\"idProduct\", E.\"name\", A.\"quantity\", D.\"currentStock\", C.\"product_stock\" from inkaart.\"LineItem\" A,inkaart.\"Order\" B, inkaart.\"StockDocument\" C, inkaart.\"Product-Warehouse\" D, inkaart.\"Product\" E where A.\"idOrder\" = B.\"idOrder\" and A.\"idProduct\" = E.\"idProduct\" and A.\"idOrder\" = C.\"idDocument\" and A.\"idOrder\" = " + int_order + " and C.\"product_id\" = A.\"idProduct\" and C.\"documentType\" = 'VENTA' and D.\"idWarehouse\" = " + intIdWarehouse + " and D.\"idProduct\" = A.\"idProduct\" and D.\"state\" = 'Activo';";
+
+            query = "WITH table_lines " +
+                "AS (" +
+                    "SELECT li.\"idOrder\", p.name, li.\"idProduct\", pw.\"currentStock\", sum(\"quantity\") AS \"quantity\" " +
+                    "FROM inkaart.\"Order\" o, inkaart.\"LineItem\" li, inkaart.\"Product-Warehouse\" pw, inkaart.\"Product\" p " +
+                    "WHERE " +
+                        "o.\"type\" = 'pedido' AND o.\"bdStatus\" = 1 AND o.\"idOrder\" = " + id_order +" AND " +
+                        "pw.state = 'Activo' AND pw.\"idWarehouse\" = " + id_warehouse + " AND " +
+                        "o.\"idOrder\" = li.\"idOrder\" AND li.\"lineStatus\" != 'facturado' AND " +
+                        "pw.\"idProduct\" = li.\"idProduct\" AND pw.\"idProduct\" = p.\"idProduct\" " +
+                    "GROUP BY li.\"idOrder\", p.name, li.\"idProduct\", pw.\"currentStock\" " +
+                    "ORDER BY 1 ASC " +
+                ") " +
+                "SELECT tl.\"idProduct\", tl.name, tl.quantity, tl.\"currentStock\", sd.product_stock " +
+                    "FROM table_lines tl, inkaart.\"StockDocument\" sd " +
+                    "WHERE tl.\"idOrder\" = sd.\"idDocument\" AND tl.\"idProduct\" = sd.product_id; ";
+            //query = "select A.\"idProduct\", E.\"name\", A.\"quantity\", D.\"currentStock\", C.\"product_stock\" from inkaart.\"LineItem\" A,inkaart.\"Order\" B, inkaart.\"StockDocument\" C, inkaart.\"Product-Warehouse\" D, inkaart.\"Product\" E where A.\"idOrder\" = B.\"idOrder\" and A.\"idProduct\" = E.\"idProduct\" and A.\"idOrder\" = C.\"idDocument\" and A.\"idOrder\" = " + int_order + " and C.\"product_id\" = A.\"idProduct\" and C.\"documentType\" = 'VENTA' and D.\"idWarehouse\" = " + int_warehouse + " and D.\"idProduct\" = A.\"idProduct\" and D.\"state\" = 'Activo';";
             return movement_data.executeQueryData(query);
         }
 
