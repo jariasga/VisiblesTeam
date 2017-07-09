@@ -95,7 +95,7 @@ namespace InkaArt.Business.Algorithm
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"RatioPerDay\" SET produced = produced - :produced " +
                     "WHERE date = :date AND id_product = :id_product RETURNING id_lote", connection);
                 
-            command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, ratio.Produced);
+            command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, ratio.FinalProduced);
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, ratio.Date);
             command.Parameters.AddWithValue("id_product", NpgsqlDbType.Integer, ratio.Job.Product);
             int id_lote = Convert.ToInt32(command.ExecuteScalar());
