@@ -57,14 +57,14 @@
             // button_generate
             // 
             this.button_generate.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_generate.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
             this.button_generate.Location = new System.Drawing.Point(38, 219);
-            this.button_generate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_generate.Margin = new System.Windows.Forms.Padding(2);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(104, 41);
             this.button_generate.TabIndex = 20;
-            this.button_generate.Text = "Generar";
+            this.button_generate.Text = "🗀 Generar";
             this.button_generate.UseVisualStyleBackColor = false;
             this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
             // 
@@ -80,9 +80,9 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(20, 99);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1000, 300);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
@@ -94,9 +94,9 @@
             this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.list_warehouses);
             this.groupBox4.Location = new System.Drawing.Point(764, 41);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(208, 236);
             this.groupBox4.TabIndex = 48;
             this.groupBox4.TabStop = false;
@@ -108,7 +108,7 @@
             this.checkBox_allW.Checked = true;
             this.checkBox_allW.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_allW.Location = new System.Drawing.Point(11, 197);
-            this.checkBox_allW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_allW.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_allW.Name = "checkBox_allW";
             this.checkBox_allW.Size = new System.Drawing.Size(69, 22);
             this.checkBox_allW.TabIndex = 51;
@@ -121,9 +121,9 @@
             this.groupBox5.Controls.Add(this.checkedListBox2);
             this.groupBox5.Enabled = false;
             this.groupBox5.Location = new System.Drawing.Point(234, 0);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(237, 311);
             this.groupBox5.TabIndex = 47;
             this.groupBox5.TabStop = false;
@@ -134,7 +134,7 @@
             this.checkedListBox2.CheckOnClick = true;
             this.checkedListBox2.FormattingEnabled = true;
             this.checkedListBox2.Location = new System.Drawing.Point(11, 25);
-            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBox2.Name = "checkedListBox2";
             this.checkedListBox2.Size = new System.Drawing.Size(182, 256);
             this.checkedListBox2.TabIndex = 45;
@@ -143,9 +143,10 @@
             // 
             this.list_warehouses.CheckOnClick = true;
             this.list_warehouses.Enabled = false;
+            this.list_warehouses.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_warehouses.FormattingEnabled = true;
             this.list_warehouses.Location = new System.Drawing.Point(11, 25);
-            this.list_warehouses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.list_warehouses.Margin = new System.Windows.Forms.Padding(2);
             this.list_warehouses.Name = "list_warehouses";
             this.list_warehouses.Size = new System.Drawing.Size(182, 151);
             this.list_warehouses.TabIndex = 45;
@@ -155,9 +156,9 @@
             this.groupBox2.Controls.Add(this.checkBox_allRM);
             this.groupBox2.Controls.Add(this.list_rawMaterials);
             this.groupBox2.Location = new System.Drawing.Point(466, 41);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(254, 236);
             this.groupBox2.TabIndex = 46;
             this.groupBox2.TabStop = false;
@@ -169,7 +170,7 @@
             this.checkBox_allRM.Checked = true;
             this.checkBox_allRM.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_allRM.Location = new System.Drawing.Point(14, 197);
-            this.checkBox_allRM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_allRM.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_allRM.Name = "checkBox_allRM";
             this.checkBox_allRM.Size = new System.Drawing.Size(69, 22);
             this.checkBox_allRM.TabIndex = 50;
@@ -181,9 +182,10 @@
             // 
             this.list_rawMaterials.CheckOnClick = true;
             this.list_rawMaterials.Enabled = false;
+            this.list_rawMaterials.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_rawMaterials.FormattingEnabled = true;
             this.list_rawMaterials.Location = new System.Drawing.Point(14, 25);
-            this.list_rawMaterials.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.list_rawMaterials.Margin = new System.Windows.Forms.Padding(2);
             this.list_rawMaterials.Name = "list_rawMaterials";
             this.list_rawMaterials.Size = new System.Drawing.Size(194, 151);
             this.list_rawMaterials.TabIndex = 45;
@@ -193,9 +195,9 @@
             this.groupbox_workers.Controls.Add(this.checkBox_allProd);
             this.groupbox_workers.Controls.Add(this.list_products);
             this.groupbox_workers.Location = new System.Drawing.Point(205, 41);
-            this.groupbox_workers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupbox_workers.Margin = new System.Windows.Forms.Padding(2);
             this.groupbox_workers.Name = "groupbox_workers";
-            this.groupbox_workers.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupbox_workers.Padding = new System.Windows.Forms.Padding(2);
             this.groupbox_workers.Size = new System.Drawing.Size(230, 236);
             this.groupbox_workers.TabIndex = 33;
             this.groupbox_workers.TabStop = false;
@@ -207,7 +209,7 @@
             this.checkBox_allProd.Checked = true;
             this.checkBox_allProd.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_allProd.Location = new System.Drawing.Point(11, 197);
-            this.checkBox_allProd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_allProd.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_allProd.Name = "checkBox_allProd";
             this.checkBox_allProd.Size = new System.Drawing.Size(69, 22);
             this.checkBox_allProd.TabIndex = 49;
@@ -219,9 +221,10 @@
             // 
             this.list_products.CheckOnClick = true;
             this.list_products.Enabled = false;
+            this.list_products.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_products.FormattingEnabled = true;
             this.list_products.Location = new System.Drawing.Point(11, 24);
-            this.list_products.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.list_products.Margin = new System.Windows.Forms.Padding(2);
             this.list_products.Name = "list_products";
             this.list_products.Size = new System.Drawing.Size(182, 151);
             this.list_products.TabIndex = 45;
@@ -229,10 +232,10 @@
             // dateTimePicker_fechaIni
             // 
             this.dateTimePicker_fechaIni.CustomFormat = "";
-            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(16, 66);
-            this.dateTimePicker_fechaIni.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker_fechaIni.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker_fechaIni.Name = "dateTimePicker_fechaIni";
             this.dateTimePicker_fechaIni.Size = new System.Drawing.Size(159, 24);
             this.dateTimePicker_fechaIni.TabIndex = 31;
@@ -241,10 +244,10 @@
             // 
             this.dateTimePicker_fechaFin.CalendarFont = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaFin.CustomFormat = "";
-            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(16, 146);
-            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker_fechaFin.Name = "dateTimePicker_fechaFin";
             this.dateTimePicker_fechaFin.Size = new System.Drawing.Size(159, 24);
             this.dateTimePicker_fechaFin.TabIndex = 32;
@@ -277,7 +280,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(20, 19);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(1000, 66);
@@ -294,7 +297,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GenerateKardexReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Reporte Kardex";

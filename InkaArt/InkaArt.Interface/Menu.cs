@@ -48,7 +48,8 @@ namespace InkaArt.Interface
             checkConnectorThread.Start();*/
 
             toolStripProgressBarPing.Maximum = 1000;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;            
+
         }
         
         private void listaDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -150,13 +151,6 @@ namespace InkaArt.Interface
             Form workers_assignment = new WorkersAssignment();
             workers_assignment.MdiParent = this;
             workers_assignment.Show();
-        }
-
-        private void productividadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form reporte_productividad = new GeneratePerformanceReport();
-            reporte_productividad.MdiParent = this;
-            reporte_productividad.Show();
         }
 
         /* Sales */
@@ -337,6 +331,18 @@ namespace InkaArt.Interface
                 }
                 Thread.Sleep(50);
             }
+        }
+
+        private void generarReporteDeProductividadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form performance_report = new GeneratePerformanceReport();
+            performance_report.MdiParent = this;
+            performance_report.Show();
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void showConnectWarning(bool value)

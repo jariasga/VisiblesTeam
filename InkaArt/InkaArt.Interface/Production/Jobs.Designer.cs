@@ -62,6 +62,7 @@
             this.Id.HeaderText = "Id";
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
+            this.Id.Width = 80;
             // 
             // PrecioLocal
             // 
@@ -74,6 +75,7 @@
             this.PrecioExportacion.HeaderText = "Cantidad de puestos";
             this.PrecioExportacion.Name = "PrecioExportacion";
             this.PrecioExportacion.ReadOnly = true;
+            this.PrecioExportacion.Width = 120;
             // 
             // Detalles
             // 
@@ -100,7 +102,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(500, 335);
+            this.ClientSize = new System.Drawing.Size(497, 327);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.dataGridView_process);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

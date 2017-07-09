@@ -66,7 +66,7 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(468, 375);
+            this.button_save.Location = new System.Drawing.Point(455, 360);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(107, 39);
@@ -85,7 +85,7 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(383, 34);
+            this.groupBox2.Location = new System.Drawing.Point(370, 19);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(465, 328);
             this.groupBox2.TabIndex = 23;
@@ -96,9 +96,10 @@
             // 
             this.textBox4.BackColor = System.Drawing.Color.White;
             this.textBox4.Enabled = false;
+            this.textBox4.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox4.Location = new System.Drawing.Point(25, 276);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(277, 26);
+            this.textBox4.Size = new System.Drawing.Size(277, 24);
             this.textBox4.TabIndex = 21;
             this.textBox4.Text = "S/.  0.00";
             // 
@@ -162,18 +163,20 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(25, 53);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(165, 26);
+            this.comboBox1.Size = new System.Drawing.Size(165, 25);
             this.comboBox1.TabIndex = 13;
             this.comboBox1.Text = "Retablo";
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Font = new System.Drawing.Font("Arial", 11F);
             this.numericUpDown1.Location = new System.Drawing.Point(209, 54);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(108, 26);
+            this.numericUpDown1.Size = new System.Drawing.Size(108, 24);
             this.numericUpDown1.TabIndex = 19;
             // 
             // label4
@@ -208,7 +211,7 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox3.Location = new System.Drawing.Point(32, 35);
+            this.groupBox3.Location = new System.Drawing.Point(19, 20);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(334, 379);
             this.groupBox3.TabIndex = 26;
@@ -219,13 +222,14 @@
             // comboBox2
             // 
             this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox2.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Boleta",
             "Factura"});
             this.comboBox2.Location = new System.Drawing.Point(28, 107);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(108, 26);
+            this.comboBox2.Size = new System.Drawing.Size(108, 25);
             this.comboBox2.TabIndex = 23;
             this.comboBox2.Text = "Boleta";
             // 
@@ -233,10 +237,10 @@
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox3.Enabled = false;
-            this.textBox3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.Location = new System.Drawing.Point(142, 107);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(166, 26);
+            this.textBox3.Size = new System.Drawing.Size(166, 24);
             this.textBox3.TabIndex = 35;
             this.textBox3.Text = "000000001";
             // 
@@ -254,7 +258,7 @@
             // 
             this.textBox2.BackColor = System.Drawing.Color.White;
             this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(28, 264);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -275,6 +279,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 11F);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(29, 214);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(280, 24);
@@ -299,20 +304,21 @@
             this.dateTimePicker2.CalendarTrailingForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dateTimePicker2.Cursor = System.Windows.Forms.Cursors.Default;
             this.dateTimePicker2.Enabled = false;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker2.Location = new System.Drawing.Point(29, 162);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(280, 25);
+            this.dateTimePicker2.Size = new System.Drawing.Size(280, 24);
             this.dateTimePicker2.TabIndex = 29;
             // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(29, 55);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(279, 26);
+            this.textBox1.Size = new System.Drawing.Size(279, 24);
             this.textBox1.TabIndex = 27;
             this.textBox1.Text = "000000001";
             // 
@@ -341,12 +347,12 @@
             this.button_doc.BackColor = System.Drawing.Color.Gray;
             this.button_doc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_doc.ForeColor = System.Drawing.Color.White;
-            this.button_doc.Location = new System.Drawing.Point(591, 375);
+            this.button_doc.Location = new System.Drawing.Point(578, 360);
             this.button_doc.Margin = new System.Windows.Forms.Padding(2);
             this.button_doc.Name = "button_doc";
             this.button_doc.Size = new System.Drawing.Size(217, 39);
             this.button_doc.TabIndex = 27;
-            this.button_doc.Text = "Generar Nota de Crédito";
+            this.button_doc.Text = "🗀 Generar Nota de Crédito";
             this.button_doc.UseVisualStyleBackColor = false;
             // 
             // ClientOrderDevolution
@@ -354,7 +360,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(886, 458);
+            this.ClientSize = new System.Drawing.Size(857, 421);
             this.Controls.Add(this.button_doc);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);

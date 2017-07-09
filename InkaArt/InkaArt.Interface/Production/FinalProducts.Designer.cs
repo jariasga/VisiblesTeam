@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.dataGridView_finalProductList = new System.Windows.Forms.DataGridView();
+            this.button_batch = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,7 +38,6 @@
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detalles = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Receta = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button_batch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_finalProductList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,12 +63,26 @@
             this.dataGridView_finalProductList.TabIndex = 0;
             this.dataGridView_finalProductList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // button_batch
+            // 
+            this.button_batch.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_batch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_batch.ForeColor = System.Drawing.Color.White;
+            this.button_batch.Location = new System.Drawing.Point(382, 285);
+            this.button_batch.Name = "button_batch";
+            this.button_batch.Size = new System.Drawing.Size(147, 42);
+            this.button_batch.TabIndex = 22;
+            this.button_batch.Text = "⬆ Carga Masiva";
+            this.button_batch.UseVisualStyleBackColor = false;
+            this.button_batch.Click += new System.EventHandler(this.button_batch_Click);
+            // 
             // Id
             // 
             this.Id.HeaderText = "Id";
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
             this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Id.Width = 80;
             // 
             // Nombre
             // 
@@ -111,19 +125,6 @@
             this.Receta.HeaderText = "Receta";
             this.Receta.Name = "Receta";
             // 
-            // button_batch
-            // 
-            this.button_batch.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_batch.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_batch.ForeColor = System.Drawing.Color.White;
-            this.button_batch.Location = new System.Drawing.Point(382, 285);
-            this.button_batch.Name = "button_batch";
-            this.button_batch.Size = new System.Drawing.Size(147, 42);
-            this.button_batch.TabIndex = 22;
-            this.button_batch.Text = "Carga Productos";
-            this.button_batch.UseVisualStyleBackColor = false;
-            this.button_batch.Click += new System.EventHandler(this.button_batch_Click);
-            // 
             // FinalProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -147,6 +148,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView_finalProductList;
+        private System.Windows.Forms.Button button_batch;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioLocal;
@@ -155,6 +157,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.DataGridViewButtonColumn Detalles;
         private System.Windows.Forms.DataGridViewButtonColumn Receta;
-        private System.Windows.Forms.Button button_batch;
     }
 }

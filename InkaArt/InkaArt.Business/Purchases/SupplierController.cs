@@ -64,9 +64,19 @@ namespace InkaArt.Business.Purchases
             supplier.updateData(data, adap, "Supplier");
             return 1;
         }
+        public bool comprobarCarga(string ruc)
+        {
+            DataTable resultados = getData();
+            DataRow[] rows;
+            rows = resultados.Select("ruc LIKE '%" + ruc + "%'");
+
+            if (rows.Any()) return true; //ya existe en la BD
+            else return false;
+        }
         public int massiveUpload(string filename)
         {
             table = getData();     // obtenemos la tabla de materia prima
+            bool primero = true;
 
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
@@ -91,6 +101,11 @@ namespace InkaArt.Business.Purchases
                     if (values[1].Length != 11) continue;
                     if (values[2].Length < 6) continue;
                     if (values[5].Length < 7) continue;
+                    if (primero)
+                    {
+                        if (comprobarCarga(values[1])) return 2;
+                        primero = false;
+                    }
                     try
                     {
                         // creamos materia prima

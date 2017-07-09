@@ -1,14 +1,14 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
+using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using InkaArt.Classes;
-using InkaArt.Data.Algorithm;
-using System.IO;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -29,25 +29,12 @@ namespace InkaArt.Business.Algorithm
             this.recipes = recipes;
         }
 
-        public IndexController()
-        {
-            this.indexes = new List<Index>();
-
-            this.workers = new WorkerController();
-            this.workers.Load();
-            this.jobs = new JobController();
-            this.jobs.Load();
-            this.recipes = new RecipeController();
-            this.recipes.Load();
-        }
-
         public void Load()
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
             
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status ORDER BY id_index ASC", connection);
-            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = TRUE ORDER BY id_index ASC", connection);
             
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -66,6 +53,24 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
+        /// <summary>
+        /// Obtiene un <see cref="DataTable"/> con los índices de la base de datos.
+        /// </summary>
+        public DataTable GetDataTable()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = TRUE ORDER BY id_index ASC", connection);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            DataSet data_set = new DataSet();
+            adapter.Fill(data_set);
+
+            connection.Close();
+
+            return data_set.Tables[0];
+        }
+
         /************************ INSERTAR O ACTUALIZAR EN LAS TABLAS INDEX Y RATIOPERDAY ************************/
 
         public string InsertOrUpdate(Ratio ratio, int initial_count_ratios)
@@ -78,7 +83,7 @@ namespace InkaArt.Business.Algorithm
             ratio.AverageValues(out average_breakage, out average_time);
 
             return Index.Update(ratio, average_breakage, average_time);
-        }
+        } 
 
         public string UpdateOrDelete(Ratio ratio)
         {

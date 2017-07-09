@@ -3,6 +3,7 @@ using Npgsql;
 using System.Data;
 using System.IO;
 using System;
+using System.Linq;
 
 namespace InkaArt.Business.Purchases
 {
@@ -63,9 +64,19 @@ namespace InkaArt.Business.Purchases
 
             return rawMaterial_supplier.insertData(data, adap, "RawMaterial-Supplier");
         }
+        public bool comprobarCarga(string mat,string sup)
+        {
+            DataTable resultados = getData();
+            DataRow[] rows;
+            rows = resultados.Select("id_raw_material = "+mat+" AND id_supplier = "+sup);
+
+            if (rows.Any()) return true; //ya existe en la BD
+            else return false;
+        }
         public int massiveUpload(string filename)
         {
             table = getData();     // obtenemos la tabla de productos
+            bool primero = true;
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
             {
@@ -73,7 +84,11 @@ namespace InkaArt.Business.Purchases
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(';');
-
+                    if (primero)
+                    {
+                        if (comprobarCarga(values[0], values[1])) return 2;
+                        primero = false;
+                    }
                     try
                     {
                         //string idMat,string idSup,string price,string status)

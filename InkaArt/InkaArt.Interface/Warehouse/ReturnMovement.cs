@@ -135,13 +135,12 @@ namespace InkaArt.Interface.Warehouse
         // otros 
                 
         private void updateDevolution()
-        {       
-            bool completed = true;
-
+        {   
             DataRow[] rows = table_devolution.Select("lineStatus != 'devuelto'");
             int pending = rows.Sum(r => r.Field<int>("product_stock"));
             control_order.updateDevolution(devolution, pending);
 
+            //bool completed = true;
             //grid_devolution.Columns[product_stock.Index].
 
             //foreach(DataGridViewRow row in grid_devolution.Rows)
@@ -161,7 +160,7 @@ namespace InkaArt.Interface.Warehouse
             if (!int.TryParse(str_value, out int_value))
                 MessageBox.Show("Fila " + row + ": Favor de ingresar un valor entero");
             else if (int_value <= 0)
-                MessageBox.Show("Fila " + row + ": Favor de ingresar un valor positivo mayor a cero");
+                MessageBox.Show("Fila " + row + ": Favor de ingresar un valor positivo");
             else if (int_value > pending)
                 MessageBox.Show("Fila " + row + ": Favor de ingresar una cantidad menor o igual a la pendiente de devolución");
             else

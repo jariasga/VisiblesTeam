@@ -119,7 +119,7 @@
   </resheader>
   <data name="textBox1.Text" xml:space="preserve">
     <value>
-El presente reporte mostrará por cada día de trabajo que se encuentre en el intervalo de fechas elegidas, el trabajador, su puesto de trabajo, la receta realizada, cantidad producida, cantidad rota y el tiempo que demoró en realizar dicho trabajo.
+El presente reporte mostrará por cada día de trabajo que se encuentre en el intervalo de fechas elegidas, el trabajador, la receta realizada, su puesto de trabajo, el tiempo promedio que se demora en dicho producto y el porcentaje promedio de productos que rompe en una jornada de trabajo.
 
 </value>
   </data>
