@@ -612,49 +612,51 @@ namespace InkaArt.Business.Warehouse
 
         public NpgsqlDataReader getProductStock(string id = "", string idLote = "")
         {
-            int intAux, intIdLote = -1, intIdWarehouse = -1, existe = 0;
+            int intIdLote, intIdWarehouse, existe = 0;
             string query = "";
 
-            if (!idLote.Equals("")) if (int.TryParse(idLote, out intAux)) intIdLote = int.Parse(idLote);
-            query = "select product_id from inkaart.\"StockDocument\" where \"documentType\" = 'LOTE' and \"idDocument\" = " + idLote + " order by 1 asc;";
-            NpgsqlDataReader dr = movement_data.executeQueryData(query);
+            int.TryParse(idLote, out intIdLote);
+            query = "select product_id from inkaart.\"StockDocument\" " + 
+                "where \"documentType\" = 'LOTE' and \"idDocument\" = " + intIdLote + " order by 1 asc;";
+            NpgsqlDataReader dr_stock = movement_data.executeQueryData(query);
 
-            query = "select id_product, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\" WHERE id_lote = " + intIdLote + " order by 1 asc;";
-            NpgsqlDataReader dr2 = movement_data.executeQueryData(query);
-            int tamDr1 = 0, tamDr2 = 0;
-            int[] arrDr1 = new int[500];
-            int[] arrDr2 = new int[500];
+            query = "select id_product, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\"  " + 
+                "WHERE id_lote = " + intIdLote + " order by 1 asc;";
+            NpgsqlDataReader dr_ratio = movement_data.executeQueryData(query);
+            int tam_stock = 0, tam_ratio = 0;
+            int[] arr_stock = new int[500];
+            int[] arr_ratio = new int[500];
 
-            while (dr.Read())
+            while (dr_stock.Read())
             {
-                arrDr1[tamDr1] = Convert.ToInt32(dr[0]);
-                tamDr1++;
+                arr_stock[tam_stock] = Convert.ToInt32(dr_stock[0]);
+                tam_stock++;
             }
-            while (dr2.Read())
+            while (dr_ratio.Read())
             {
-                arrDr2[tamDr2] = Convert.ToInt32(dr2[0]);
-                tamDr2++;
+                arr_ratio[tam_ratio] = Convert.ToInt32(dr_ratio[0]);
+                tam_ratio++;
             }
-            for (int i = 0; i < tamDr2; i++)
+            for (int i = 0; i < tam_ratio; i++)
             {
-                existe = existeElementoInt(arrDr2[i], arrDr1, tamDr1);
+                existe = existeElementoInt(arr_ratio[i], arr_stock, tam_stock);
                 if (existe == -1)//Cuando no existe el producto se agrega a la tabla
                 {
-                    query = "insert into inkaart.\"StockDocument\"  (\"idDocument\", \"documentType\", \"product_id\",\"product_stock\") select id_lote as idDocument, 'LOTE', id_product as product_id, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\" WHERE id_lote = " + intIdLote + " and \"id_product\" = " + arrDr2[i] + ";";
+                    query = "insert into inkaart.\"StockDocument\"  (\"idDocument\", \"documentType\", \"product_id\",\"product_stock\") select id_lote as idDocument, 'LOTE', id_product as product_id, produced as \"product_stock\" FROM inkaart.\"RatioPerDay\" WHERE id_lote = " + intIdLote + " and \"id_product\" = " + arr_ratio[i] + ";";
                     movement_data.updateData(query);
                 }
             }
-            for (int i = 0; i < tamDr1; i++)
+            for (int i = 0; i < tam_stock; i++)
             {
-                existe = existeElementoInt(arrDr1[i], arrDr2, tamDr2);
+                existe = existeElementoInt(arr_stock[i], arr_ratio, tam_ratio);
                 if (existe == -1)//Cuando un producto fue eliminado se borra de la tabla
                 {
-                    query = "delete from inkaart.\"StockDocument\" where \"idDocument\" = " + intIdLote + " and \"documentType\" = 'LOTE' and \"product_id\" = " + arrDr1[i] + ";";
+                    query = "delete from inkaart.\"StockDocument\" where \"idDocument\" = " + intIdLote + " and \"documentType\" = 'LOTE' and \"product_id\" = " + arr_stock[i] + ";";
                     movement_data.updateData(query);
                 }
             }
-            if (!id.Equals("")) if (int.TryParse(id, out intAux)) intIdWarehouse = int.Parse(id);
 
+            int.TryParse(id, out intIdWarehouse);
             //Obtenemos los productos de ese lote que son admitidos por el almacén seleccionado
             query = "select A.\"id_lote\", A.\"id_product\", B.\"name\", A.\"produced\", D.\"currentStock\", C.\"product_stock\" from inkaart.\"RatioPerDay\" A,inkaart.\"Product\" B, inkaart.\"StockDocument\" C, inkaart.\"Product-Warehouse\" D where A.\"id_product\" = B.\"idProduct\" and A.\"id_lote\" = C.\"idDocument\" and A.\"id_lote\" = " + intIdLote + " and C.\"product_id\" = A.id_product and C.\"documentType\" = 'LOTE' and D.\"idWarehouse\" = " + intIdWarehouse + " and D.\"idProduct\" = A.\"id_product\" and D.\"state\" = 'Activo';";
             return movement_data.executeQueryData(query);
