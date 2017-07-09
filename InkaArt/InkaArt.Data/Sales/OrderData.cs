@@ -564,7 +564,6 @@ namespace InkaArt.Data.Sales
                 if (isClientSelected)
                 {
                     updateLogicalStock(currentProductId, cant, type);
-                    lineStatus = "despachado";
                     produced = cant;
                 }
                 row["quantityProduced"] = produced;
