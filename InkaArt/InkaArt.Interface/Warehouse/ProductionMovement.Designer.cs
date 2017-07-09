@@ -97,7 +97,6 @@
             this.text_name_warehouse.ReadOnly = true;
             this.text_name_warehouse.Size = new System.Drawing.Size(362, 24);
             this.text_name_warehouse.TabIndex = 29;
-            this.text_name_warehouse.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // label9
             // 
@@ -108,7 +107,6 @@
             this.label9.Size = new System.Drawing.Size(64, 18);
             this.label9.TabIndex = 28;
             this.label9.Text = "Nombre";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // button_save
             // 
@@ -171,8 +169,9 @@
             this.text_lote.Name = "text_lote";
             this.text_lote.Size = new System.Drawing.Size(142, 24);
             this.text_lote.TabIndex = 34;
+            this.text_lote.TextChanged += new System.EventHandler(this.textLoteTextChanged);
             // 
-            // dataGridView1
+            // grid_lote
             // 
             this.grid_lote.AllowUserToAddRows = false;
             this.grid_lote.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
@@ -189,42 +188,49 @@
             this.Modificar});
             this.grid_lote.Location = new System.Drawing.Point(23, 68);
             this.grid_lote.Margin = new System.Windows.Forms.Padding(2);
-            this.grid_lote.Name = "dataGridView1";
+            this.grid_lote.Name = "grid_lote";
             this.grid_lote.Size = new System.Drawing.Size(844, 187);
             this.grid_lote.TabIndex = 57;
+            this.grid_lote.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridLoteCellValueChanged);
             // 
             // nroLote
             // 
+            this.nroLote.DataPropertyName = "id_lote";
             this.nroLote.HeaderText = "Número de Lote";
             this.nroLote.Name = "nroLote";
             this.nroLote.ReadOnly = true;
             // 
             // idProduct
             // 
+            this.idProduct.DataPropertyName = "id_product";
             this.idProduct.HeaderText = "Id Producto";
             this.idProduct.Name = "idProduct";
             this.idProduct.ReadOnly = true;
             // 
             // ProductName
             // 
+            this.ProductName.DataPropertyName = "name";
             this.ProductName.HeaderText = "Producto";
             this.ProductName.Name = "ProductName";
             this.ProductName.ReadOnly = true;
             // 
             // Cant
             // 
+            this.Cant.DataPropertyName = "produced";
             this.Cant.HeaderText = "Cantidad Total";
             this.Cant.Name = "Cant";
             this.Cant.ReadOnly = true;
             // 
             // stockWarehouse
             // 
+            this.stockWarehouse.DataPropertyName = "currentStock";
             this.stockWarehouse.HeaderText = "Stock en Almacén";
             this.stockWarehouse.Name = "stockWarehouse";
             this.stockWarehouse.ReadOnly = true;
             // 
             // CurrentCant
             // 
+            this.CurrentCant.DataPropertyName = "product_stock";
             this.CurrentCant.HeaderText = "Cantidad por mover";
             this.CurrentCant.Name = "CurrentCant";
             this.CurrentCant.ReadOnly = true;
