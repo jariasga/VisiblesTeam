@@ -59,7 +59,7 @@
             this.date_picker = new System.Windows.Forms.DateTimePicker();
             this.button_load = new System.Windows.Forms.Button();
             this.open_file_dialog = new System.Windows.Forms.OpenFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_grid = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -69,11 +69,11 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(305, 486);
+            this.button_save.Location = new System.Drawing.Point(293, 486);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(185, 42);
+            this.button_save.Size = new System.Drawing.Size(176, 42);
             this.button_save.TabIndex = 65;
-            this.button_save.Text = "🖫 Guardar Vitácora";
+            this.button_save.Text = "🖫 Guardar Jornada";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_guardar_Click);
             // 
@@ -158,11 +158,11 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(687, 486);
+            this.button_delete.Location = new System.Drawing.Point(727, 486);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(185, 42);
             this.button_delete.TabIndex = 60;
-            this.button_delete.Text = "🗑 Eliminar Informe";
+            this.button_delete.Text = "🗑 Eliminar Registro";
             this.button_delete.UseVisualStyleBackColor = false;
             this.button_delete.Click += new System.EventHandler(this.button_delete_Click);
             // 
@@ -171,11 +171,11 @@
             this.button_add.BackColor = System.Drawing.Color.SteelBlue;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
-            this.button_add.Location = new System.Drawing.Point(114, 486);
+            this.button_add.Location = new System.Drawing.Point(67, 486);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(185, 42);
             this.button_add.TabIndex = 55;
-            this.button_add.Text = "+ Agregar Informe";
+            this.button_add.Text = "+ Agregar Registro";
             this.button_add.UseVisualStyleBackColor = false;
             this.button_add.Click += new System.EventHandler(this.button_agregar_Click);
             // 
@@ -185,15 +185,15 @@
             this.label_date.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_date.Location = new System.Drawing.Point(22, 17);
             this.label_date.Name = "label_date";
-            this.label_date.Size = new System.Drawing.Size(133, 18);
+            this.label_date.Size = new System.Drawing.Size(130, 18);
             this.label_date.TabIndex = 25;
-            this.label_date.Text = "Fecha de vitácora";
+            this.label_date.Text = "Fecha de jornada";
             // 
             // label_worker
             // 
             this.label_worker.AutoSize = true;
             this.label_worker.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_worker.Location = new System.Drawing.Point(48, 29);
+            this.label_worker.Location = new System.Drawing.Point(7, 29);
             this.label_worker.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_worker.Name = "label_worker";
             this.label_worker.Size = new System.Drawing.Size(57, 18);
@@ -204,16 +204,16 @@
             // 
             this.combobox_worker.FormattingEnabled = true;
             this.combobox_worker.ItemHeight = 18;
-            this.combobox_worker.Location = new System.Drawing.Point(51, 50);
+            this.combobox_worker.Location = new System.Drawing.Point(10, 50);
             this.combobox_worker.Name = "combobox_worker";
-            this.combobox_worker.Size = new System.Drawing.Size(405, 26);
+            this.combobox_worker.Size = new System.Drawing.Size(446, 26);
             this.combobox_worker.TabIndex = 10;
             // 
             // label_job
             // 
             this.label_job.AutoSize = true;
             this.label_job.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_job.Location = new System.Drawing.Point(48, 90);
+            this.label_job.Location = new System.Drawing.Point(7, 90);
             this.label_job.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_job.Name = "label_job";
             this.label_job.Size = new System.Drawing.Size(143, 18);
@@ -223,7 +223,7 @@
             // combobox_job
             // 
             this.combobox_job.FormattingEnabled = true;
-            this.combobox_job.Location = new System.Drawing.Point(51, 111);
+            this.combobox_job.Location = new System.Drawing.Point(10, 113);
             this.combobox_job.Name = "combobox_job";
             this.combobox_job.Size = new System.Drawing.Size(200, 26);
             this.combobox_job.TabIndex = 15;
@@ -250,7 +250,7 @@
             this.groupBox1.Size = new System.Drawing.Size(939, 161);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Agregar un informe de turno";
+            this.groupBox1.Text = "Agregar un registro";
             // 
             // label_recipe
             // 
@@ -274,7 +274,7 @@
             // textbox_produced
             // 
             this.textbox_produced.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_produced.Location = new System.Drawing.Point(683, 113);
+            this.textbox_produced.Location = new System.Drawing.Point(724, 111);
             this.textbox_produced.Name = "textbox_produced";
             this.textbox_produced.Size = new System.Drawing.Size(200, 24);
             this.textbox_produced.TabIndex = 40;
@@ -283,7 +283,7 @@
             // textbox_end
             // 
             this.textbox_end.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_end.Location = new System.Drawing.Point(683, 50);
+            this.textbox_end.Location = new System.Drawing.Point(724, 50);
             this.textbox_end.Name = "textbox_end";
             this.textbox_end.Size = new System.Drawing.Size(200, 24);
             this.textbox_end.TabIndex = 30;
@@ -292,7 +292,7 @@
             // textbox_broken
             // 
             this.textbox_broken.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_broken.Location = new System.Drawing.Point(472, 113);
+            this.textbox_broken.Location = new System.Drawing.Point(495, 111);
             this.textbox_broken.Name = "textbox_broken";
             this.textbox_broken.Size = new System.Drawing.Size(200, 24);
             this.textbox_broken.TabIndex = 35;
@@ -302,7 +302,7 @@
             // 
             this.label_produced.AutoSize = true;
             this.label_produced.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_produced.Location = new System.Drawing.Point(680, 90);
+            this.label_produced.Location = new System.Drawing.Point(721, 90);
             this.label_produced.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_produced.Name = "label_produced";
             this.label_produced.Size = new System.Drawing.Size(194, 18);
@@ -313,7 +313,7 @@
             // 
             this.label_end.AutoSize = true;
             this.label_end.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_end.Location = new System.Drawing.Point(680, 29);
+            this.label_end.Location = new System.Drawing.Point(721, 29);
             this.label_end.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_end.Name = "label_end";
             this.label_end.Size = new System.Drawing.Size(74, 18);
@@ -324,7 +324,7 @@
             // 
             this.label_broken.AutoSize = true;
             this.label_broken.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_broken.Location = new System.Drawing.Point(469, 90);
+            this.label_broken.Location = new System.Drawing.Point(492, 90);
             this.label_broken.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_broken.Name = "label_broken";
             this.label_broken.Size = new System.Drawing.Size(151, 18);
@@ -334,7 +334,7 @@
             // textbox_start
             // 
             this.textbox_start.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_start.Location = new System.Drawing.Point(472, 50);
+            this.textbox_start.Location = new System.Drawing.Point(495, 50);
             this.textbox_start.Name = "textbox_start";
             this.textbox_start.Size = new System.Drawing.Size(200, 24);
             this.textbox_start.TabIndex = 25;
@@ -344,7 +344,7 @@
             // 
             this.label_start.AutoSize = true;
             this.label_start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_start.Location = new System.Drawing.Point(469, 29);
+            this.label_start.Location = new System.Drawing.Point(492, 29);
             this.label_start.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_start.Name = "label_start";
             this.label_start.Size = new System.Drawing.Size(86, 18);
@@ -366,11 +366,11 @@
             this.button_load.BackColor = System.Drawing.Color.Gray;
             this.button_load.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_load.ForeColor = System.Drawing.Color.White;
-            this.button_load.Location = new System.Drawing.Point(496, 486);
+            this.button_load.Location = new System.Drawing.Point(517, 486);
             this.button_load.Name = "button_load";
-            this.button_load.Size = new System.Drawing.Size(185, 42);
+            this.button_load.Size = new System.Drawing.Size(165, 42);
             this.button_load.TabIndex = 66;
-            this.button_load.Text = "⬆ Cargar Masiva";
+            this.button_load.Text = "⬆ Carga Masiva";
             this.button_load.UseVisualStyleBackColor = false;
             this.button_load.Click += new System.EventHandler(this.button_load_Click);
             // 
@@ -379,15 +379,15 @@
             this.open_file_dialog.Filter = "Hojas de estilo en cascada|*.csv|Archivos de texto|*.txt|Todos los archivos|*.*";
             this.open_file_dialog.Title = "Seleccione un archivo...";
             // 
-            // label1
+            // label_grid
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 224);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 18);
-            this.label1.TabIndex = 67;
-            this.label1.Text = "Vitácora laboral";
+            this.label_grid.AutoSize = true;
+            this.label_grid.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_grid.Location = new System.Drawing.Point(22, 224);
+            this.label_grid.Name = "label_grid";
+            this.label_grid.Size = new System.Drawing.Size(230, 18);
+            this.label_grid.TabIndex = 67;
+            this.label_grid.Text = "Jornadas de trabajo registradas";
             // 
             // RegisterRatioReport
             // 
@@ -395,7 +395,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(984, 552);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label_grid);
             this.Controls.Add(this.button_load);
             this.Controls.Add(this.date_picker);
             this.Controls.Add(this.groupBox1);
@@ -409,7 +409,8 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RegisterRatioReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Informe de Turno";
+            this.Text = "Registro de Jornadas de Trabajo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterRatioReport_FormClosing);
             this.Load += new System.EventHandler(this.RegisterAssignedJob_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -443,7 +444,7 @@
         private System.Windows.Forms.TextBox textbox_start;
         private System.Windows.Forms.Button button_load;
         private System.Windows.Forms.OpenFileDialog open_file_dialog;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_grid;
         private System.Windows.Forms.DataGridViewTextBoxColumn grid_column_id;
         private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_worker;
         private System.Windows.Forms.DataGridViewComboBoxColumn grid_column_job;
