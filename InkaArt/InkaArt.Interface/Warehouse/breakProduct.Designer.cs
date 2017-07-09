@@ -58,19 +58,20 @@
             this.groupBox3.Controls.Add(this.textBox6);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(9, 25);
+            this.groupBox3.Location = new System.Drawing.Point(16, 18);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(620, 104);
+            this.groupBox3.Size = new System.Drawing.Size(637, 104);
             this.groupBox3.TabIndex = 37;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Almacén";
             // 
             // textBox5
             // 
+            this.textBox5.BackColor = System.Drawing.Color.White;
             this.textBox5.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(424, 57);
+            this.textBox5.Location = new System.Drawing.Point(22, 57);
             this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
@@ -80,7 +81,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(419, 36);
+            this.label5.Location = new System.Drawing.Point(19, 36);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 18);
@@ -89,18 +90,19 @@
             // 
             // textBox6
             // 
+            this.textBox6.BackColor = System.Drawing.Color.White;
             this.textBox6.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(21, 57);
+            this.textBox6.Location = new System.Drawing.Point(231, 57);
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(362, 24);
+            this.textBox6.Size = new System.Drawing.Size(384, 24);
             this.textBox6.TabIndex = 29;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 36);
+            this.label9.Location = new System.Drawing.Point(228, 36);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 18);
@@ -112,7 +114,7 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(325, 431);
+            this.buttonDelete.Location = new System.Drawing.Point(342, 419);
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(138, 39);
@@ -125,7 +127,7 @@
             this.button2.BackColor = System.Drawing.Color.SteelBlue;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(182, 431);
+            this.button2.Location = new System.Drawing.Point(189, 419);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(138, 39);
             this.button2.TabIndex = 60;
@@ -140,11 +142,11 @@
             this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(9, 146);
+            this.groupBox2.Location = new System.Drawing.Point(16, 141);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(620, 265);
+            this.groupBox2.Size = new System.Drawing.Size(637, 265);
             this.groupBox2.TabIndex = 62;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lote de Producción";
@@ -154,7 +156,7 @@
             this.button1.BackColor = System.Drawing.Color.Gray;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(568, 20);
+            this.button1.Location = new System.Drawing.Point(578, 20);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(45, 31);
@@ -166,7 +168,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(350, 26);
+            this.label3.Location = new System.Drawing.Point(376, 26);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 18);
@@ -176,16 +178,16 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(422, 24);
+            this.textBox3.Location = new System.Drawing.Point(448, 24);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(142, 24);
+            this.textBox3.Size = new System.Drawing.Size(126, 24);
             this.textBox3.TabIndex = 34;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idProduct,
@@ -194,7 +196,7 @@
             this.CurrentCant,
             this.MovementCant,
             this.Modificar});
-            this.dataGridView1.Location = new System.Drawing.Point(4, 63);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 63);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(609, 187);
@@ -202,47 +204,53 @@
             // 
             // idProduct
             // 
-            this.idProduct.HeaderText = "Id Producto";
+            this.idProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idProduct.FillWeight = 80F;
+            this.idProduct.HeaderText = "ID";
             this.idProduct.Name = "idProduct";
             this.idProduct.ReadOnly = true;
-            this.idProduct.Width = 80;
             // 
             // ProductName
             // 
+            this.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ProductName.HeaderText = "Producto";
             this.ProductName.Name = "ProductName";
             this.ProductName.ReadOnly = true;
             // 
             // Cant
             // 
+            this.Cant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Cant.HeaderText = "Cantidad Total";
             this.Cant.Name = "Cant";
             this.Cant.ReadOnly = true;
             // 
             // CurrentCant
             // 
+            this.CurrentCant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CurrentCant.FillWeight = 105F;
             this.CurrentCant.HeaderText = "Cantidad por mover";
             this.CurrentCant.Name = "CurrentCant";
             this.CurrentCant.ReadOnly = true;
-            this.CurrentCant.Width = 105;
             // 
             // MovementCant
             // 
+            this.MovementCant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.MovementCant.HeaderText = "Cantidad a mover";
             this.MovementCant.Name = "MovementCant";
             // 
             // Modificar
             // 
+            this.Modificar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Modificar.FillWeight = 80F;
             this.Modificar.HeaderText = "Modificar";
             this.Modificar.Name = "Modificar";
-            this.Modificar.Width = 80;
             // 
             // breakProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(638, 500);
+            this.ClientSize = new System.Drawing.Size(672, 474);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.button2);
@@ -251,7 +259,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "breakProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "breakProduct";
+            this.Text = "Rotura de producto";
             this.Load += new System.EventHandler(this.breakProduct_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
