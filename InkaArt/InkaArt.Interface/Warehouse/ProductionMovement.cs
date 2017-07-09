@@ -93,11 +93,11 @@ namespace InkaArt.Interface.Warehouse
             }
             //Fin de validaciones
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in grid_lote.Rows)
             {
                 bool s = Convert.ToBoolean(row.Cells[7].Value);//Verifica que línea se ha marcado con un check
 
-                if (s == true)
+                if (s && row.Cells["nroLote"].Value != null)
                 {
                     idProd = Convert.ToInt32(row.Cells[1].Value);//No se valida porque viene de la base de datos
                     nameProd = Convert.ToString(row.Cells[2].Value);//No se valida porque viene de la base de datos
@@ -167,29 +167,33 @@ namespace InkaArt.Interface.Warehouse
             }
             
             datos = movementController.getProductStock(this.id_warehouse, text_lote.Text);
-            int rowIndex = 0;
+            DataTable table_lote = new DataTable();
+            table_lote.Load(datos);
 
-            //Limpiamos el datagridview
-            this.dataGridView1.Rows.Clear();
+            grid_lote.DataSource = table_lote;
+            if (grid_lote.Rows.Count <= 0)
+                MessageBox.Show("No hay productos que este almacén pueda recibir para el lote ingresada.");
 
-            //Muestra los datos en el gridview
-            while (datos.Read())
-            {
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];
-                row.Cells[1].Value = datos[1];
-                row.Cells[2].Value = datos[2];
-                row.Cells[3].Value = datos[3];
-                row.Cells[4].Value = datos[4];
-                row.Cells[5].Value = datos[5];
-                dataGridView1.Rows.Add(row);
-                rowIndex++;
-            }
-            if(rowIndex == 0)
-            {
-                MessageBox.Show("El lote ingresado no tiene registros.");
-            }            
-
+            //int rowIndex = 0;
+            ////Limpiamos el datagridview
+            //this.grid_lote.Rows.Clear();
+            ////Muestra los datos en el gridview
+            //while (datos.Read())
+            //{
+            //    DataGridViewRow row = (DataGridViewRow)grid_lote.Rows[0].Clone();
+            //    row.Cells[0].Value = datos[0];
+            //    row.Cells[1].Value = datos[1];
+            //    row.Cells[2].Value = datos[2];
+            //    row.Cells[3].Value = datos[3];
+            //    row.Cells[4].Value = datos[4];
+            //    row.Cells[5].Value = datos[5];
+            //    grid_lote.Rows.Add(row);
+            //    rowIndex++;
+            //}
+            //if(rowIndex == 0)
+            //{
+            //    MessageBox.Show("El lote ingresado no tiene registros.");
+            //}            
         }
     }
 }
