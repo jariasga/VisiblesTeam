@@ -155,8 +155,8 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -216,32 +216,37 @@
             // 
             // idItem
             // 
+            this.idItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idItem.FillWeight = 70F;
             this.idItem.HeaderText = "ID";
             this.idItem.Name = "idItem";
-            this.idItem.Width = 70;
             // 
             // Nombre
             // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.FillWeight = 250F;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 250;
             // 
             // TipoDeProducto
             // 
+            this.TipoDeProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TipoDeProducto.FillWeight = 110F;
             this.TipoDeProducto.HeaderText = "Tipo de Producto";
             this.TipoDeProducto.Name = "TipoDeProducto";
-            this.TipoDeProducto.Width = 110;
             // 
             // cantMov
             // 
+            this.cantMov.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.cantMov.HeaderText = "Cantidad a mover";
             this.cantMov.Name = "cantMov";
             // 
             // Seleccionar
             // 
+            this.Seleccionar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Seleccionar.FillWeight = 94F;
             this.Seleccionar.HeaderText = "Seleccionar";
             this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.Width = 93;
             // 
             // ExchangeItem
             // 

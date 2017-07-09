@@ -56,6 +56,7 @@
             // 
             // textbox_password_old
             // 
+            this.textbox_password_old.BackColor = System.Drawing.Color.White;
             this.textbox_password_old.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_password_old.Location = new System.Drawing.Point(328, 29);
             this.textbox_password_old.Margin = new System.Windows.Forms.Padding(2);
@@ -77,6 +78,7 @@
             // 
             // textbox_password_new_1
             // 
+            this.textbox_password_new_1.BackColor = System.Drawing.Color.White;
             this.textbox_password_new_1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_password_new_1.Location = new System.Drawing.Point(328, 75);
             this.textbox_password_new_1.Margin = new System.Windows.Forms.Padding(2);
@@ -99,6 +101,7 @@
             // 
             // textbox_password_new_2
             // 
+            this.textbox_password_new_2.BackColor = System.Drawing.Color.White;
             this.textbox_password_new_2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_password_new_2.Location = new System.Drawing.Point(328, 123);
             this.textbox_password_new_2.Margin = new System.Windows.Forms.Padding(2);
@@ -127,7 +130,7 @@
             this.groupBox1.Controls.Add(this.labelLowerChar);
             this.groupBox1.Controls.Add(this.labelUpperChar);
             this.groupBox1.Controls.Add(this.label8Char);
-            this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(39, 160);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(271, 109);
@@ -138,36 +141,40 @@
             // labelNumberChar
             // 
             this.labelNumberChar.AutoSize = true;
+            this.labelNumberChar.Font = new System.Drawing.Font("Arial", 11F);
             this.labelNumberChar.Location = new System.Drawing.Point(6, 82);
             this.labelNumberChar.Name = "labelNumberChar";
-            this.labelNumberChar.Size = new System.Drawing.Size(141, 20);
+            this.labelNumberChar.Size = new System.Drawing.Size(151, 17);
             this.labelNumberChar.TabIndex = 3;
             this.labelNumberChar.Text = "- Al menos un número";
             // 
             // labelLowerChar
             // 
             this.labelLowerChar.AutoSize = true;
+            this.labelLowerChar.Font = new System.Drawing.Font("Arial", 11F);
             this.labelLowerChar.Location = new System.Drawing.Point(6, 62);
             this.labelLowerChar.Name = "labelLowerChar";
-            this.labelLowerChar.Size = new System.Drawing.Size(162, 20);
+            this.labelLowerChar.Size = new System.Drawing.Size(176, 17);
             this.labelLowerChar.TabIndex = 2;
             this.labelLowerChar.Text = "- Al menos una minúscula";
             // 
             // labelUpperChar
             // 
             this.labelUpperChar.AutoSize = true;
+            this.labelUpperChar.Font = new System.Drawing.Font("Arial", 11F);
             this.labelUpperChar.Location = new System.Drawing.Point(6, 42);
             this.labelUpperChar.Name = "labelUpperChar";
-            this.labelUpperChar.Size = new System.Drawing.Size(166, 20);
+            this.labelUpperChar.Size = new System.Drawing.Size(180, 17);
             this.labelUpperChar.TabIndex = 1;
             this.labelUpperChar.Text = "- Al menos una mayúscula";
             // 
             // label8Char
             // 
             this.label8Char.AutoSize = true;
+            this.label8Char.Font = new System.Drawing.Font("Arial", 11F);
             this.label8Char.Location = new System.Drawing.Point(6, 22);
             this.label8Char.Name = "label8Char";
-            this.label8Char.Size = new System.Drawing.Size(151, 20);
+            this.label8Char.Size = new System.Drawing.Size(163, 17);
             this.label8Char.TabIndex = 0;
             this.label8Char.Text = "- Al menos 8 caracteres";
             // 

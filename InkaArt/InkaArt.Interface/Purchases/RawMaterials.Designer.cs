@@ -28,7 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_rawMaterialsList = new System.Windows.Forms.DataGridView();
+            this.id_raw_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.average_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
@@ -40,14 +49,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonCargaMasiva = new System.Windows.Forms.Button();
-            this.id_raw_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.average_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterialsList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -69,12 +70,78 @@
             this.average_price,
             this.unit,
             this.Eliminar});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_rawMaterialsList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_rawMaterialsList.Location = new System.Drawing.Point(15, 185);
             this.dataGridView_rawMaterialsList.MultiSelect = false;
             this.dataGridView_rawMaterialsList.Name = "dataGridView_rawMaterialsList";
             this.dataGridView_rawMaterialsList.Size = new System.Drawing.Size(663, 208);
             this.dataGridView_rawMaterialsList.TabIndex = 3;
             this.dataGridView_rawMaterialsList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editRawMaterialDetail);
+            // 
+            // id_raw_material
+            // 
+            this.id_raw_material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id_raw_material.FillWeight = 70F;
+            this.id_raw_material.HeaderText = "ID";
+            this.id_raw_material.Name = "id_raw_material";
+            this.id_raw_material.ReadOnly = true;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.FillWeight = 125F;
+            this.name.HeaderText = "Nombre";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.FillWeight = 180F;
+            this.description.HeaderText = "Descripción";
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            // 
+            // unitName
+            // 
+            this.unitName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.unitName.FillWeight = 80F;
+            this.unitName.HeaderText = "Unidad";
+            this.unitName.Name = "unitName";
+            this.unitName.ReadOnly = true;
+            // 
+            // status
+            // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.status.FillWeight = 85F;
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // average_price
+            // 
+            this.average_price.HeaderText = "Precio promedio";
+            this.average_price.Name = "average_price";
+            this.average_price.Visible = false;
+            // 
+            // unit
+            // 
+            this.unit.HeaderText = "Id unit";
+            this.unit.Name = "unit";
+            this.unit.Visible = false;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Width = 50;
             // 
             // groupBox1
             // 
@@ -211,64 +278,6 @@
             this.buttonCargaMasiva.Text = "⬆ Carga masiva";
             this.buttonCargaMasiva.UseVisualStyleBackColor = false;
             this.buttonCargaMasiva.Click += new System.EventHandler(this.button_cargamasivaclic);
-            // 
-            // id_raw_material
-            // 
-            this.id_raw_material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.id_raw_material.FillWeight = 70F;
-            this.id_raw_material.HeaderText = "ID";
-            this.id_raw_material.Name = "id_raw_material";
-            this.id_raw_material.ReadOnly = true;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.FillWeight = 125F;
-            this.name.HeaderText = "Nombre";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.description.FillWeight = 180F;
-            this.description.HeaderText = "Descripción";
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
-            // unitName
-            // 
-            this.unitName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.unitName.FillWeight = 80F;
-            this.unitName.HeaderText = "Unidad";
-            this.unitName.Name = "unitName";
-            this.unitName.ReadOnly = true;
-            // 
-            // status
-            // 
-            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.status.FillWeight = 85F;
-            this.status.HeaderText = "Estado";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            // 
-            // average_price
-            // 
-            this.average_price.HeaderText = "Precio promedio";
-            this.average_price.Name = "average_price";
-            this.average_price.Visible = false;
-            // 
-            // unit
-            // 
-            this.unit.HeaderText = "Id unit";
-            this.unit.Name = "unit";
-            this.unit.Visible = false;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Width = 50;
             // 
             // RawMaterials
             // 

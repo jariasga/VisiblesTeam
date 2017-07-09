@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,14 +41,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView_unitOfMeasurement = new System.Windows.Forms.DataGridView();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.button_cargamasiva = new System.Windows.Forms.Button();
             this.id_unitM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.abreviatura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonCreate = new System.Windows.Forms.Button();
+            this.button_cargamasiva = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_unitOfMeasurement)).BeginInit();
             this.SuspendLayout();
@@ -187,11 +188,57 @@
             this.abreviatura,
             this.status,
             this.Eliminar});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_unitOfMeasurement.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_unitOfMeasurement.Location = new System.Drawing.Point(21, 186);
             this.dataGridView_unitOfMeasurement.Name = "dataGridView_unitOfMeasurement";
             this.dataGridView_unitOfMeasurement.Size = new System.Drawing.Size(663, 184);
             this.dataGridView_unitOfMeasurement.TabIndex = 45;
             this.dataGridView_unitOfMeasurement.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editUnitOfMeasurement);
+            // 
+            // id_unitM
+            // 
+            this.id_unitM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id_unitM.FillWeight = 110F;
+            this.id_unitM.HeaderText = "ID";
+            this.id_unitM.Name = "id_unitM";
+            this.id_unitM.ReadOnly = true;
+            // 
+            // nameUnit
+            // 
+            this.nameUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameUnit.FillWeight = 448.9796F;
+            this.nameUnit.HeaderText = "Nombre";
+            this.nameUnit.Name = "nameUnit";
+            this.nameUnit.ReadOnly = true;
+            // 
+            // abreviatura
+            // 
+            this.abreviatura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.abreviatura.FillWeight = 297.0068F;
+            this.abreviatura.HeaderText = "Abreviatura";
+            this.abreviatura.Name = "abreviatura";
+            this.abreviatura.ReadOnly = true;
+            // 
+            // status
+            // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.status.FillWeight = 150.0068F;
+            this.status.HeaderText = "Estatus";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Width = 50;
             // 
             // buttonDelete
             // 
@@ -233,44 +280,6 @@
             this.button_cargamasiva.Text = "⬆ Carga masiva";
             this.button_cargamasiva.UseVisualStyleBackColor = false;
             this.button_cargamasiva.Click += new System.EventHandler(this.button_cargamasivaclick);
-            // 
-            // id_unitM
-            // 
-            this.id_unitM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.id_unitM.FillWeight = 110F;
-            this.id_unitM.HeaderText = "ID";
-            this.id_unitM.Name = "id_unitM";
-            this.id_unitM.ReadOnly = true;
-            // 
-            // nameUnit
-            // 
-            this.nameUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameUnit.FillWeight = 448.9796F;
-            this.nameUnit.HeaderText = "Nombre";
-            this.nameUnit.Name = "nameUnit";
-            this.nameUnit.ReadOnly = true;
-            // 
-            // abreviatura
-            // 
-            this.abreviatura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.abreviatura.FillWeight = 297.0068F;
-            this.abreviatura.HeaderText = "Abreviatura";
-            this.abreviatura.Name = "abreviatura";
-            this.abreviatura.ReadOnly = true;
-            // 
-            // status
-            // 
-            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.status.FillWeight = 150.0068F;
-            this.status.HeaderText = "Estatus";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Width = 50;
             // 
             // UnitOfMeasurementList
             // 
