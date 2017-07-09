@@ -271,7 +271,7 @@ namespace InkaArt.Business.Warehouse
             //Verificar los stock mínimo y máximos
             if (typeMovement == "Entrada")
             {
-                if (typeReason.ToUpper() == "PRODUCCION")
+                if (typeReason.ToUpper() == "PRODUCCIÓN")
                 {
                     stockAct = stockAct + numMov;
                     actualStockProd = actualStockProd + numMov;
@@ -292,7 +292,7 @@ namespace InkaArt.Business.Warehouse
             }
             if (typeMovement == "Salida")
             {
-                if (typeReason.ToUpper() == "PRODUCCION")
+                if (typeReason.ToUpper() == "PRODUCCIÓN")
                 {
                     stockAct = stockAct - numMov;
                     actualStockProd = actualStockProd - numMov;
@@ -385,7 +385,7 @@ namespace InkaArt.Business.Warehouse
 
             if (typeMovement == "Entrada")
             {
-                if(typeReason == "Produccion")
+                if(typeReason == "Producción")
                 {
                     stockAct = stockAct + numMov;
                     logicStock = logicStock + numMov;
@@ -406,7 +406,7 @@ namespace InkaArt.Business.Warehouse
             }
             if (typeMovement == "Salida")
             {
-                if (typeReason == "Produccion")
+                if (typeReason == "Producción")
                 {
                     stockAct = stockAct - numMov;
                     makeUpdate = 1;
@@ -496,7 +496,7 @@ namespace InkaArt.Business.Warehouse
                 }
                 if (productType == "Materia Prima")
                 {
-                    updateQuery = "update inkaart.\"RawMaterial-Warehouse\" set \"currentStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
+                    updateQuery = "update inkaart.\"RawMaterial-Warehouse\" set \"currentStock\" = " + stockAct + ", \"virtualStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idRawMaterial\" = " + idProd + " and \"state\" = 'Activo';";
                     movement_data.updateData(updateQuery);
                 }
             }
