@@ -135,13 +135,12 @@ namespace InkaArt.Interface.Warehouse
         // otros 
                 
         private void updateDevolution()
-        {       
-            bool completed = true;
-
+        {   
             DataRow[] rows = table_devolution.Select("lineStatus != 'devuelto'");
             int pending = rows.Sum(r => r.Field<int>("product_stock"));
             control_order.updateDevolution(devolution, pending);
 
+            //bool completed = true;
             //grid_devolution.Columns[product_stock.Index].
 
             //foreach(DataGridViewRow row in grid_devolution.Rows)

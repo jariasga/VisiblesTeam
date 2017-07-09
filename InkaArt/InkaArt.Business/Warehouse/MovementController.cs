@@ -307,6 +307,7 @@ namespace InkaArt.Business.Warehouse
                 {
                     stockAct = stockAct - numMov;
                     actualStockProd = actualStockProd - numMov;
+                    logicStockProd = logicStockProd - numMov;
                 }
             }
             //Se verifica que el nuevo stock no pase del máximo
@@ -490,7 +491,7 @@ namespace InkaArt.Business.Warehouse
             {
                 if (productType == "Producto")
                 {
-                    updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
+                    updateQuery = "update inkaart.\"Product-Warehouse\" set \"currentStock\" = " + stockAct + ", \"virtualStock\" = " + stockAct + " where \"idWarehouse\"= " + idWarehouse + " and \"idProduct\" = " + idProd + " and \"state\" = 'Activo';";
                     movement_data.updateData(updateQuery);
                 }
                 if (productType == "Materia Prima")
