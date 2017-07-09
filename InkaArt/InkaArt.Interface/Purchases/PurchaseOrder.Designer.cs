@@ -31,14 +31,6 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_purchaseOrder = new System.Windows.Forms.DataGridView();
-            this.id_order = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.delivery_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_dateInclude = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,6 +44,14 @@
             this.textBox_name = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.id_order = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.creation_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delivery_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_purchaseOrder)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -87,8 +87,8 @@
             this.dataGridView_purchaseOrder.AllowUserToAddRows = false;
             this.dataGridView_purchaseOrder.AllowUserToDeleteRows = false;
             this.dataGridView_purchaseOrder.AllowUserToResizeRows = false;
-            this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_purchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_purchaseOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_order,
@@ -104,61 +104,6 @@
             this.dataGridView_purchaseOrder.Size = new System.Drawing.Size(774, 272);
             this.dataGridView_purchaseOrder.TabIndex = 8;
             this.dataGridView_purchaseOrder.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editPurchaseOrder);
-            // 
-            // id_order
-            // 
-            this.id_order.HeaderText = "ID";
-            this.id_order.Name = "id_order";
-            this.id_order.ReadOnly = true;
-            // 
-            // suppName
-            // 
-            this.suppName.HeaderText = "Proveedor";
-            this.suppName.Name = "suppName";
-            this.suppName.ReadOnly = true;
-            this.suppName.Width = 250;
-            // 
-            // creation_date
-            // 
-            this.creation_date.HeaderText = "Fecha de emisión";
-            this.creation_date.Name = "creation_date";
-            this.creation_date.ReadOnly = true;
-            this.creation_date.Width = 140;
-            // 
-            // delivery_date
-            // 
-            this.delivery_date.HeaderText = "Fecha de entrega";
-            this.delivery_date.Name = "delivery_date";
-            this.delivery_date.ReadOnly = true;
-            this.delivery_date.Visible = false;
-            // 
-            // total
-            // 
-            this.total.HeaderText = "Total";
-            this.total.Name = "total";
-            this.total.ReadOnly = true;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Estado";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Width = 80;
-            // 
-            // id_supplier
-            // 
-            this.id_supplier.HeaderText = "ID Prov";
-            this.id_supplier.Name = "id_supplier";
-            this.id_supplier.ReadOnly = true;
-            this.id_supplier.Visible = false;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.Width = 40;
             // 
             // groupBox1
             // 
@@ -309,6 +254,66 @@
             this.buttonSearch.Text = "🔎 Buscar";
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.button_search);
+            // 
+            // id_order
+            // 
+            this.id_order.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id_order.HeaderText = "ID";
+            this.id_order.Name = "id_order";
+            this.id_order.ReadOnly = true;
+            // 
+            // suppName
+            // 
+            this.suppName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.suppName.FillWeight = 250F;
+            this.suppName.HeaderText = "Proveedor";
+            this.suppName.Name = "suppName";
+            this.suppName.ReadOnly = true;
+            // 
+            // creation_date
+            // 
+            this.creation_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.creation_date.FillWeight = 140F;
+            this.creation_date.HeaderText = "Fecha de emisión";
+            this.creation_date.Name = "creation_date";
+            this.creation_date.ReadOnly = true;
+            // 
+            // delivery_date
+            // 
+            this.delivery_date.HeaderText = "Fecha de entrega";
+            this.delivery_date.Name = "delivery_date";
+            this.delivery_date.ReadOnly = true;
+            this.delivery_date.Visible = false;
+            // 
+            // total
+            // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.total.HeaderText = "Total";
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            // 
+            // status
+            // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.status.FillWeight = 80F;
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
+            // 
+            // id_supplier
+            // 
+            this.id_supplier.HeaderText = "ID Prov";
+            this.id_supplier.Name = "id_supplier";
+            this.id_supplier.ReadOnly = true;
+            this.id_supplier.Visible = false;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.Width = 40;
             // 
             // PurchaseOrder
             // 

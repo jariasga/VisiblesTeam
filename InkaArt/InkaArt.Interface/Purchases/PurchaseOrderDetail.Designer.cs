@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox_supplier = new System.Windows.Forms.ComboBox();
             this.dateTimePicker_creation = new System.Windows.Forms.DateTimePicker();
@@ -58,6 +59,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dataGridView_pedidos = new System.Windows.Forms.DataGridView();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.button_add = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.id_detail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idRawMat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,10 +74,6 @@
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Actualizar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Eliminado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.button_add = new System.Windows.Forms.Button();
-            this.buttonExport = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_pedidos)).BeginInit();
@@ -405,8 +406,8 @@
             this.dataGridView_pedidos.AllowUserToAddRows = false;
             this.dataGridView_pedidos.AllowUserToDeleteRows = false;
             this.dataGridView_pedidos.AllowUserToResizeRows = false;
-            this.dataGridView_pedidos.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_pedidos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_pedidos.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_pedidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_pedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_pedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_detail,
@@ -420,87 +421,18 @@
             this.Eliminar,
             this.Actualizar,
             this.Eliminado});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_pedidos.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_pedidos.Location = new System.Drawing.Point(13, 159);
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(647, 272);
             this.dataGridView_pedidos.TabIndex = 17;
-            // 
-            // id_detail
-            // 
-            this.id_detail.HeaderText = "ID Detail";
-            this.id_detail.Name = "id_detail";
-            this.id_detail.ReadOnly = true;
-            this.id_detail.Visible = false;
-            this.id_detail.Width = 70;
-            // 
-            // idRawMat
-            // 
-            this.idRawMat.HeaderText = "ID Mat.";
-            this.idRawMat.Name = "idRawMat";
-            this.idRawMat.ReadOnly = true;
-            this.idRawMat.Width = 65;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 80;
-            // 
-            // Subtotal
-            // 
-            this.Subtotal.HeaderText = "Subtotal";
-            this.Subtotal.Name = "Subtotal";
-            this.Subtotal.ReadOnly = true;
-            this.Subtotal.Width = 75;
-            // 
-            // Igv
-            // 
-            this.Igv.HeaderText = "Igv";
-            this.Igv.Name = "Igv";
-            this.Igv.ReadOnly = true;
-            this.Igv.Width = 75;
-            // 
-            // Factura
-            // 
-            this.Factura.HeaderText = "Factura";
-            this.Factura.MaxInputLength = 9;
-            this.Factura.Name = "Factura";
-            this.Factura.Width = 75;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 80;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.FalseValue = "False";
-            this.Eliminar.HeaderText = "";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Eliminar.TrueValue = "True";
-            this.Eliminar.Width = 50;
-            // 
-            // Actualizar
-            // 
-            this.Actualizar.HeaderText = "Actualizar";
-            this.Actualizar.Name = "Actualizar";
-            this.Actualizar.Visible = false;
-            // 
-            // Eliminado
-            // 
-            this.Eliminado.HeaderText = "Eliminado";
-            this.Eliminado.Name = "Eliminado";
-            this.Eliminado.Visible = false;
             // 
             // buttonDelete
             // 
@@ -553,6 +485,93 @@
             this.buttonSave.Text = "🖉 Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
+            // 
+            // id_detail
+            // 
+            this.id_detail.FillWeight = 70F;
+            this.id_detail.HeaderText = "ID Detail";
+            this.id_detail.Name = "id_detail";
+            this.id_detail.ReadOnly = true;
+            this.id_detail.Visible = false;
+            this.id_detail.Width = 70;
+            // 
+            // idRawMat
+            // 
+            this.idRawMat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idRawMat.FillWeight = 65F;
+            this.idRawMat.HeaderText = "ID Mat.";
+            this.idRawMat.Name = "idRawMat";
+            this.idRawMat.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cantidad.FillWeight = 80F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Subtotal
+            // 
+            this.Subtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Subtotal.FillWeight = 75F;
+            this.Subtotal.HeaderText = "Subtotal";
+            this.Subtotal.Name = "Subtotal";
+            this.Subtotal.ReadOnly = true;
+            // 
+            // Igv
+            // 
+            this.Igv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Igv.FillWeight = 75F;
+            this.Igv.HeaderText = "Igv";
+            this.Igv.Name = "Igv";
+            this.Igv.ReadOnly = true;
+            // 
+            // Factura
+            // 
+            this.Factura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Factura.FillWeight = 75F;
+            this.Factura.HeaderText = "Factura";
+            this.Factura.MaxInputLength = 9;
+            this.Factura.Name = "Factura";
+            this.Factura.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Estado.FillWeight = 80F;
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.FalseValue = "False";
+            this.Eliminar.HeaderText = "";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Eliminar.TrueValue = "True";
+            this.Eliminar.Width = 50;
+            // 
+            // Actualizar
+            // 
+            this.Actualizar.HeaderText = "Actualizar";
+            this.Actualizar.Name = "Actualizar";
+            this.Actualizar.Visible = false;
+            // 
+            // Eliminado
+            // 
+            this.Eliminado.HeaderText = "Eliminado";
+            this.Eliminado.Name = "Eliminado";
+            this.Eliminado.Visible = false;
             // 
             // PurchaseOrderDetail
             // 

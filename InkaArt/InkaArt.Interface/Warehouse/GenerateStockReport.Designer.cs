@@ -43,9 +43,9 @@
             this.groupBox1.Controls.Add(this.checkBox_product);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(32, 188);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(254, 131);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -55,7 +55,7 @@
             // 
             this.checkBox_rawMaterial.AutoSize = true;
             this.checkBox_rawMaterial.Location = new System.Drawing.Point(33, 87);
-            this.checkBox_rawMaterial.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_rawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_rawMaterial.Name = "checkBox_rawMaterial";
             this.checkBox_rawMaterial.Size = new System.Drawing.Size(140, 22);
             this.checkBox_rawMaterial.TabIndex = 1;
@@ -67,7 +67,7 @@
             // 
             this.checkBox_product.AutoSize = true;
             this.checkBox_product.Location = new System.Drawing.Point(33, 39);
-            this.checkBox_product.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBox_product.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_product.Name = "checkBox_product";
             this.checkBox_product.Size = new System.Drawing.Size(98, 22);
             this.checkBox_product.TabIndex = 0;
@@ -80,11 +80,11 @@
             this.button_generate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generate.ForeColor = System.Drawing.Color.White;
             this.button_generate.Location = new System.Drawing.Point(100, 340);
-            this.button_generate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_generate.Margin = new System.Windows.Forms.Padding(2);
             this.button_generate.Name = "button_generate";
             this.button_generate.Size = new System.Drawing.Size(104, 41);
             this.button_generate.TabIndex = 22;
-            this.button_generate.Text = "Generar";
+            this.button_generate.Text = "🗀 Generar";
             this.button_generate.UseVisualStyleBackColor = false;
             this.button_generate.Click += new System.EventHandler(this.button_generate_Click);
             // 
@@ -94,7 +94,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(32, 27);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(254, 131);
@@ -112,7 +112,7 @@
             this.Controls.Add(this.button_generate);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GenerateStockReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generar Reporte de Stocks";
