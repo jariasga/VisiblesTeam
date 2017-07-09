@@ -45,10 +45,10 @@
             this.button_register_out.BackColor = System.Drawing.Color.SteelBlue;
             this.button_register_out.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_register_out.ForeColor = System.Drawing.Color.White;
-            this.button_register_out.Location = new System.Drawing.Point(164, 308);
-            this.button_register_out.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_register_out.Location = new System.Drawing.Point(154, 308);
+            this.button_register_out.Margin = new System.Windows.Forms.Padding(2);
             this.button_register_out.Name = "button_register_out";
-            this.button_register_out.Size = new System.Drawing.Size(92, 39);
+            this.button_register_out.Size = new System.Drawing.Size(102, 39);
             this.button_register_out.TabIndex = 54;
             this.button_register_out.Text = "🖫 Guardar";
             this.button_register_out.UseVisualStyleBackColor = false;
@@ -56,22 +56,22 @@
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(223, 55);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(158, 26);
+            this.textBox2.Size = new System.Drawing.Size(158, 24);
             this.textBox2.TabIndex = 58;
             this.textBox2.Text = "Albufera Ameba";
             // 
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(32, 55);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(158, 26);
+            this.textBox1.Size = new System.Drawing.Size(158, 24);
             this.textBox1.TabIndex = 57;
             this.textBox1.Text = "9 de mayo del 2017";
             // 
@@ -141,7 +141,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_register_out);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ProductRegisterOutTotal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProductRegisterOutTotal";

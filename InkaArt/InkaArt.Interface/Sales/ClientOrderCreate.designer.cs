@@ -77,8 +77,8 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(406, 487);
-            this.button_save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_save.Location = new System.Drawing.Point(384, 487);
+            this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(107, 39);
             this.button_save.TabIndex = 2;
@@ -108,7 +108,7 @@
             // 
             // date_delivery
             // 
-            this.date_delivery.Font = new System.Drawing.Font("Arial", 11F);
+            this.date_delivery.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_delivery.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_delivery.Location = new System.Drawing.Point(26, 66);
             this.date_delivery.Name = "date_delivery";
@@ -133,14 +133,15 @@
             // combo_doctype
             // 
             this.combo_doctype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_doctype.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_doctype.FormattingEnabled = true;
             this.combo_doctype.Items.AddRange(new object[] {
             "Boleta",
             "Factura"});
             this.combo_doctype.Location = new System.Drawing.Point(26, 140);
-            this.combo_doctype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.combo_doctype.Margin = new System.Windows.Forms.Padding(2);
             this.combo_doctype.Name = "combo_doctype";
-            this.combo_doctype.Size = new System.Drawing.Size(276, 26);
+            this.combo_doctype.Size = new System.Drawing.Size(276, 25);
             this.combo_doctype.TabIndex = 13;
             this.combo_doctype.Visible = false;
             // 
@@ -166,7 +167,7 @@
             this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create.ForeColor = System.Drawing.Color.White;
             this.button_create.Location = new System.Drawing.Point(58, 169);
-            this.button_create.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_create.Margin = new System.Windows.Forms.Padding(2);
             this.button_create.Name = "button_create";
             this.button_create.Size = new System.Drawing.Size(101, 39);
             this.button_create.TabIndex = 24;
@@ -178,9 +179,10 @@
             // 
             this.textbox_name.BackColor = System.Drawing.Color.White;
             this.textbox_name.Enabled = false;
+            this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(25, 128);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(277, 26);
+            this.textbox_name.Size = new System.Drawing.Size(277, 24);
             this.textbox_name.TabIndex = 19;
             // 
             // label2
@@ -196,9 +198,10 @@
             // 
             this.textbox_doc.BackColor = System.Drawing.Color.White;
             this.textbox_doc.Enabled = false;
+            this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_doc.Location = new System.Drawing.Point(25, 68);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(277, 26);
+            this.textbox_doc.Size = new System.Drawing.Size(277, 24);
             this.textbox_doc.TabIndex = 17;
             // 
             // button_search
@@ -207,7 +210,7 @@
             this.button_search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_search.ForeColor = System.Drawing.Color.White;
             this.button_search.Location = new System.Drawing.Point(163, 169);
-            this.button_search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_search.Margin = new System.Windows.Forms.Padding(2);
             this.button_search.Name = "button_search";
             this.button_search.Size = new System.Drawing.Size(101, 39);
             this.button_search.TabIndex = 15;
@@ -254,7 +257,7 @@
             // label_stock
             // 
             this.label_stock.AutoSize = true;
-            this.label_stock.Location = new System.Drawing.Point(70, 96);
+            this.label_stock.Location = new System.Drawing.Point(68, 96);
             this.label_stock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_stock.Name = "label_stock";
             this.label_stock.Size = new System.Drawing.Size(0, 18);
@@ -264,7 +267,7 @@
             // label_stockLabel
             // 
             this.label_stockLabel.AutoSize = true;
-            this.label_stockLabel.Location = new System.Drawing.Point(24, 96);
+            this.label_stockLabel.Location = new System.Drawing.Point(22, 96);
             this.label_stockLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_stockLabel.Name = "label_stockLabel";
             this.label_stockLabel.Size = new System.Drawing.Size(52, 18);
@@ -277,7 +280,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(324, 83);
+            this.button_delete.Location = new System.Drawing.Point(324, 86);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(121, 39);
             this.button_delete.TabIndex = 38;
@@ -289,9 +292,10 @@
             // 
             this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total.Enabled = false;
+            this.textbox_total.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_total.Location = new System.Drawing.Point(24, 409);
             this.textbox_total.Name = "textbox_total";
-            this.textbox_total.Size = new System.Drawing.Size(165, 26);
+            this.textbox_total.Size = new System.Drawing.Size(165, 24);
             this.textbox_total.TabIndex = 28;
             this.textbox_total.Text = "S/.  0.00";
             // 
@@ -308,9 +312,10 @@
             // 
             this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv.Enabled = false;
+            this.textbox_igv.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_igv.Location = new System.Drawing.Point(25, 360);
             this.textbox_igv.Name = "textbox_igv";
-            this.textbox_igv.Size = new System.Drawing.Size(165, 26);
+            this.textbox_igv.Size = new System.Drawing.Size(165, 24);
             this.textbox_igv.TabIndex = 26;
             this.textbox_igv.Text = "S/.  0.00";
             // 
@@ -326,10 +331,11 @@
             // combo_quality
             // 
             this.combo_quality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_quality.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_quality.FormattingEnabled = true;
             this.combo_quality.Location = new System.Drawing.Point(196, 53);
             this.combo_quality.Name = "combo_quality";
-            this.combo_quality.Size = new System.Drawing.Size(165, 26);
+            this.combo_quality.Size = new System.Drawing.Size(165, 25);
             this.combo_quality.TabIndex = 23;
             // 
             // label1
@@ -345,9 +351,10 @@
             // 
             this.textbox_amount.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_amount.Enabled = false;
+            this.textbox_amount.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_amount.Location = new System.Drawing.Point(25, 310);
             this.textbox_amount.Name = "textbox_amount";
-            this.textbox_amount.Size = new System.Drawing.Size(165, 26);
+            this.textbox_amount.Size = new System.Drawing.Size(165, 24);
             this.textbox_amount.TabIndex = 21;
             this.textbox_amount.Text = "S/.  0.00";
             // 
@@ -429,8 +436,8 @@
             this.button_add.Enabled = false;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
-            this.button_add.Location = new System.Drawing.Point(212, 83);
-            this.button_add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_add.Location = new System.Drawing.Point(212, 86);
+            this.button_add.Margin = new System.Windows.Forms.Padding(2);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(107, 39);
             this.button_add.TabIndex = 21;
@@ -441,15 +448,17 @@
             // combo_product
             // 
             this.combo_product.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_product.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_product.FormattingEnabled = true;
             this.combo_product.Location = new System.Drawing.Point(25, 53);
             this.combo_product.Name = "combo_product";
-            this.combo_product.Size = new System.Drawing.Size(165, 26);
+            this.combo_product.Size = new System.Drawing.Size(165, 25);
             this.combo_product.TabIndex = 13;
             this.combo_product.SelectedIndexChanged += new System.EventHandler(this.combo_product_SelectedIndexChanged);
             // 
             // numeric_quantity
             // 
+            this.numeric_quantity.Font = new System.Drawing.Font("Arial", 11F);
             this.numeric_quantity.Location = new System.Drawing.Point(365, 54);
             this.numeric_quantity.Maximum = new decimal(new int[] {
             10000,
@@ -457,7 +466,7 @@
             0,
             0});
             this.numeric_quantity.Name = "numeric_quantity";
-            this.numeric_quantity.Size = new System.Drawing.Size(80, 26);
+            this.numeric_quantity.Size = new System.Drawing.Size(80, 24);
             this.numeric_quantity.TabIndex = 19;
             this.numeric_quantity.ValueChanged += new System.EventHandler(this.numeric_quantity_ValueChanged);
             this.numeric_quantity.KeyUp += new System.Windows.Forms.KeyEventHandler(this.numeric_quantity_KeyUp);

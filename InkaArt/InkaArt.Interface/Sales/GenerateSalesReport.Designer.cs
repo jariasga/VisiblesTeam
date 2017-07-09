@@ -65,7 +65,7 @@
             this.button_generateSalesResport.BackColor = System.Drawing.Color.SteelBlue;
             this.button_generateSalesResport.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_generateSalesResport.ForeColor = System.Drawing.Color.White;
-            this.button_generateSalesResport.Location = new System.Drawing.Point(338, 111);
+            this.button_generateSalesResport.Location = new System.Drawing.Point(326, 112);
             this.button_generateSalesResport.Margin = new System.Windows.Forms.Padding(2);
             this.button_generateSalesResport.Name = "button_generateSalesResport";
             this.button_generateSalesResport.Size = new System.Drawing.Size(104, 41);
@@ -76,18 +76,19 @@
             // 
             // comboBox_products
             // 
+            this.comboBox_products.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_products.FormattingEnabled = true;
-            this.comboBox_products.Location = new System.Drawing.Point(312, 63);
+            this.comboBox_products.Location = new System.Drawing.Point(275, 63);
             this.comboBox_products.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_products.Name = "comboBox_products";
-            this.comboBox_products.Size = new System.Drawing.Size(170, 26);
+            this.comboBox_products.Size = new System.Drawing.Size(207, 25);
             this.comboBox_products.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(309, 41);
+            this.label3.Location = new System.Drawing.Point(272, 41);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 18);
@@ -118,7 +119,7 @@
             // 
             // dateTimePicker_fechaIni
             // 
-            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaIni.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaIni.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaIni.Location = new System.Drawing.Point(21, 63);
             this.dateTimePicker_fechaIni.Margin = new System.Windows.Forms.Padding(2);
@@ -128,7 +129,7 @@
             // 
             // dateTimePicker_fechaFin
             // 
-            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fechaFin.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fechaFin.Location = new System.Drawing.Point(21, 129);
             this.dateTimePicker_fechaFin.Margin = new System.Windows.Forms.Padding(2);

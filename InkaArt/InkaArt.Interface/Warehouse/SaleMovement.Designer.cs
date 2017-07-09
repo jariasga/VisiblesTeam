@@ -106,10 +106,11 @@
             // 
             // text_order
             // 
+            this.text_order.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.text_order.Location = new System.Drawing.Point(573, 35);
             this.text_order.Margin = new System.Windows.Forms.Padding(2);
             this.text_order.Name = "text_order";
-            this.text_order.Size = new System.Drawing.Size(142, 26);
+            this.text_order.Size = new System.Drawing.Size(142, 24);
             this.text_order.TabIndex = 34;
             // 
             // dataGridView1
@@ -189,11 +190,12 @@
             // 
             // text_id_warehouse
             // 
+            this.text_id_warehouse.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.text_id_warehouse.Location = new System.Drawing.Point(19, 62);
             this.text_id_warehouse.Margin = new System.Windows.Forms.Padding(2);
             this.text_id_warehouse.Name = "text_id_warehouse";
             this.text_id_warehouse.ReadOnly = true;
-            this.text_id_warehouse.Size = new System.Drawing.Size(202, 26);
+            this.text_id_warehouse.Size = new System.Drawing.Size(202, 24);
             this.text_id_warehouse.TabIndex = 33;
             // 
             // label5
@@ -208,11 +210,12 @@
             // 
             // textBox6
             // 
+            this.textBox6.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.Location = new System.Drawing.Point(240, 62);
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(524, 26);
+            this.textBox6.Size = new System.Drawing.Size(524, 24);
             this.textBox6.TabIndex = 29;
             // 
             // label9
