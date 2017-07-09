@@ -563,12 +563,8 @@ namespace InkaArt.Data.Sales
                 row["idOrder"] = orderId;
                 if (isClientSelected)
                 {
-                    if (clientNat == 0)
-                    {
-                        updateLogicalStock(currentProductId, cant, type);
-                        lineStatus = "despachado";
-                        produced = cant;
-                    }
+                    updateLogicalStock(currentProductId, cant, type);
+                    produced = cant;
                 }
                 row["quantityProduced"] = produced;
                 row["lineStatus"] = lineStatus;
@@ -592,7 +588,9 @@ namespace InkaArt.Data.Sales
             {
                 if (string.Compare(myTable.Rows[i]["idProduct"].ToString(), currentProductId.ToString()) == 0)
                 {
-                    myTable.Rows[i]["logicalStock"] = int.Parse(myTable.Rows[i]["logicalStock"].ToString()) - cant;
+                    int curLogicalStock = int.Parse(myTable.Rows[i]["logicalStock"].ToString());
+                    int updatedStock = curLogicalStock - cant;
+                    myTable.Rows[i]["logicalStock"] = updatedStock;
                     break;
                 }
             }
