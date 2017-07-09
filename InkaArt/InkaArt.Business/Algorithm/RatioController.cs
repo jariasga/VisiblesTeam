@@ -10,6 +10,7 @@ using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using InkaArt.Business.Production;
 using System.Data;
+using System.Globalization;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -33,7 +34,7 @@ namespace InkaArt.Business.Algorithm
             this.recipes = recipes;
 
             this.indexes = new IndexController(workers, jobs, recipes);
-            this.ratios_per_day = new RatioPerDayController();
+            this.ratios_per_day = new RatioPerDayController(jobs);
         }
 
         public void Load(DateTime date)
@@ -68,6 +69,36 @@ namespace InkaArt.Business.Algorithm
             }
 
             connection.Close();
+        }
+
+        /// <summary>
+        /// Obtiene un <see cref="DataTable"/> con los ratios filtrados por un intervalo de fechas inicial y final.
+        /// </summary>
+        public DataTable GetDataTable(DateTime start_date, DateTime end_date)
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Ratio\" WHERE status = TRUE ORDER BY id_ratio ASC", connection);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            DataSet data_set = new DataSet();
+            adapter.Fill(data_set);
+
+            connection.Close();
+
+            DataTable data_table = data_set.Tables[0];
+            for (int i = data_table.Rows.Count - 1; i >= 0; i--)
+            {
+                DateTime date;
+                //Asegurar de que la fecha se haya leído correctamente
+                bool can_stay = DateTime.TryParse(data_table.Rows[i]["date"].ToString(), out date);
+                //Asegurar de que la fecha del ratio leído está entre las fechas indicadas
+                if (can_stay) can_stay &= (date.Date >= start_date.Date && date.Date <= end_date.Date);
+                //En caso no se hayan cumplido con los requerimientos necesarios, eliminar el DataRow
+                if (!can_stay) data_table.Rows.RemoveAt(i);
+            }
+
+            return data_table;
         }
 
         public Ratio Verify(int id_ratio, DateTime date, string worker_text, string job_text, string recipe_text,
