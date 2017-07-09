@@ -81,12 +81,16 @@ namespace InkaArt.Interface.Warehouse
 
             MessageBox.Show("Almacenes eliminados", "Eliminar almacén", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
         }
-
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void realizarBusqueda()
         {
             DataTable warehouseList;
             warehouseList = warehouseController.GetWarehouses(textBox_id.Text, textBox_name.Text, textBox_description.Text, textBox_address.Text, comboBox_status.Text);
             populateDataGrid(warehouseList);
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            realizarBusqueda();
         }
 
         private void button_bulk_upload_Click(object sender, EventArgs e)
@@ -107,6 +111,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 if (rmw_control.massiveUpload(dialog2.FileName) != 0) return;
             }
+            realizarBusqueda();
         }
 
         /*private void button_bulk_upload_Click(object sender, EventArgs e)

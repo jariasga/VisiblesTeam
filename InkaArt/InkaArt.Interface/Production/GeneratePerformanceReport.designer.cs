@@ -102,7 +102,7 @@
             // date_picker_start
             // 
             this.date_picker_start.Enabled = false;
-            this.date_picker_start.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_picker_start.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker_start.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_picker_start.Location = new System.Drawing.Point(11, 58);
             this.date_picker_start.Margin = new System.Windows.Forms.Padding(2);
@@ -113,7 +113,7 @@
             // date_picker_end
             // 
             this.date_picker_end.Enabled = false;
-            this.date_picker_end.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_picker_end.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_picker_end.Location = new System.Drawing.Point(11, 126);
             this.date_picker_end.Margin = new System.Windows.Forms.Padding(2);
@@ -163,6 +163,7 @@
             // 
             this.list_workers.CheckOnClick = true;
             this.list_workers.Enabled = false;
+            this.list_workers.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_workers.FormattingEnabled = true;
             this.list_workers.Location = new System.Drawing.Point(13, 24);
             this.list_workers.Margin = new System.Windows.Forms.Padding(2);

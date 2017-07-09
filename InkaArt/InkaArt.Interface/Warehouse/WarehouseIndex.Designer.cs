@@ -267,7 +267,7 @@
             this.button_bulk_upload.Name = "button_bulk_upload";
             this.button_bulk_upload.Size = new System.Drawing.Size(151, 39);
             this.button_bulk_upload.TabIndex = 47;
-            this.button_bulk_upload.Text = "Carga Masiva";
+            this.button_bulk_upload.Text = "⬆ Carga Masiva";
             this.button_bulk_upload.UseVisualStyleBackColor = false;
             this.button_bulk_upload.Click += new System.EventHandler(this.button_bulk_upload_Click);
             // 

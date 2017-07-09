@@ -87,7 +87,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(103, 39);
             this.buttonSave.TabIndex = 17;
-            this.buttonSave.Text = "Editar";
+            this.buttonSave.Text = "🖉 Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 

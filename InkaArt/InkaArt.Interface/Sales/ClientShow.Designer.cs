@@ -86,10 +86,11 @@
             // 
             this.textbox_email.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_email.Enabled = false;
+            this.textbox_email.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_email.Location = new System.Drawing.Point(23, 252);
             this.textbox_email.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_email.Name = "textbox_email";
-            this.textbox_email.Size = new System.Drawing.Size(281, 26);
+            this.textbox_email.Size = new System.Drawing.Size(281, 24);
             this.textbox_email.TabIndex = 33;
             // 
             // label9
@@ -106,10 +107,11 @@
             // 
             this.textbox_contact.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_contact.Enabled = false;
+            this.textbox_contact.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_contact.Location = new System.Drawing.Point(23, 190);
             this.textbox_contact.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_contact.Name = "textbox_contact";
-            this.textbox_contact.Size = new System.Drawing.Size(281, 26);
+            this.textbox_contact.Size = new System.Drawing.Size(281, 24);
             this.textbox_contact.TabIndex = 31;
             // 
             // label3
@@ -126,10 +128,11 @@
             // 
             this.textbox_phone.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_phone.Enabled = false;
+            this.textbox_phone.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_phone.Location = new System.Drawing.Point(23, 127);
             this.textbox_phone.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_phone.Name = "textbox_phone";
-            this.textbox_phone.Size = new System.Drawing.Size(281, 26);
+            this.textbox_phone.Size = new System.Drawing.Size(281, 24);
             this.textbox_phone.TabIndex = 29;
             // 
             // label7
@@ -146,10 +149,11 @@
             // 
             this.textbox_address.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_address.Enabled = false;
+            this.textbox_address.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_address.Location = new System.Drawing.Point(23, 64);
             this.textbox_address.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_address.Name = "textbox_address";
-            this.textbox_address.Size = new System.Drawing.Size(281, 26);
+            this.textbox_address.Size = new System.Drawing.Size(281, 24);
             this.textbox_address.TabIndex = 27;
             // 
             // label6
@@ -225,9 +229,10 @@
             this.radio_active.AutoSize = true;
             this.radio_active.Checked = true;
             this.radio_active.Enabled = false;
+            this.radio_active.Font = new System.Drawing.Font("Arial", 11F);
             this.radio_active.Location = new System.Drawing.Point(23, 25);
             this.radio_active.Name = "radio_active";
-            this.radio_active.Size = new System.Drawing.Size(69, 22);
+            this.radio_active.Size = new System.Drawing.Size(65, 21);
             this.radio_active.TabIndex = 31;
             this.radio_active.TabStop = true;
             this.radio_active.Text = "Activo";
@@ -237,9 +242,10 @@
             // 
             this.radio_inactive.AutoSize = true;
             this.radio_inactive.Enabled = false;
+            this.radio_inactive.Font = new System.Drawing.Font("Arial", 11F);
             this.radio_inactive.Location = new System.Drawing.Point(145, 25);
             this.radio_inactive.Name = "radio_inactive";
-            this.radio_inactive.Size = new System.Drawing.Size(78, 22);
+            this.radio_inactive.Size = new System.Drawing.Size(75, 21);
             this.radio_inactive.TabIndex = 32;
             this.radio_inactive.Text = "Inactivo";
             this.radio_inactive.UseVisualStyleBackColor = true;
@@ -259,9 +265,10 @@
             // 
             this.radio_national.AutoSize = true;
             this.radio_national.Enabled = false;
+            this.radio_national.Font = new System.Drawing.Font("Arial", 11F);
             this.radio_national.Location = new System.Drawing.Point(23, 24);
             this.radio_national.Name = "radio_national";
-            this.radio_national.Size = new System.Drawing.Size(87, 22);
+            this.radio_national.Size = new System.Drawing.Size(82, 21);
             this.radio_national.TabIndex = 34;
             this.radio_national.Text = "Nacional";
             this.radio_national.UseVisualStyleBackColor = true;
@@ -270,9 +277,10 @@
             // 
             this.radio_inter.AutoSize = true;
             this.radio_inter.Enabled = false;
+            this.radio_inter.Font = new System.Drawing.Font("Arial", 11F);
             this.radio_inter.Location = new System.Drawing.Point(145, 24);
             this.radio_inter.Name = "radio_inter";
-            this.radio_inter.Size = new System.Drawing.Size(113, 22);
+            this.radio_inter.Size = new System.Drawing.Size(108, 21);
             this.radio_inter.TabIndex = 35;
             this.radio_inter.Text = "Internacional";
             this.radio_inter.UseVisualStyleBackColor = true;
@@ -292,9 +300,10 @@
             // 
             this.radio_natural.AutoSize = true;
             this.radio_natural.Enabled = false;
+            this.radio_natural.Font = new System.Drawing.Font("Arial", 11F);
             this.radio_natural.Location = new System.Drawing.Point(145, 25);
             this.radio_natural.Name = "radio_natural";
-            this.radio_natural.Size = new System.Drawing.Size(75, 22);
+            this.radio_natural.Size = new System.Drawing.Size(72, 21);
             this.radio_natural.TabIndex = 38;
             this.radio_natural.Text = "Natural";
             this.radio_natural.UseVisualStyleBackColor = true;
@@ -304,9 +313,10 @@
             // 
             this.radio_juridic.AutoSize = true;
             this.radio_juridic.Enabled = false;
+            this.radio_juridic.Font = new System.Drawing.Font("Arial", 11F);
             this.radio_juridic.Location = new System.Drawing.Point(23, 25);
             this.radio_juridic.Name = "radio_juridic";
-            this.radio_juridic.Size = new System.Drawing.Size(80, 22);
+            this.radio_juridic.Size = new System.Drawing.Size(76, 21);
             this.radio_juridic.TabIndex = 37;
             this.radio_juridic.Text = "Jurídica";
             this.radio_juridic.UseVisualStyleBackColor = true;
@@ -316,10 +326,11 @@
             // 
             this.textbox_priority.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_priority.Enabled = false;
+            this.textbox_priority.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_priority.Location = new System.Drawing.Point(197, 292);
             this.textbox_priority.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_priority.Name = "textbox_priority";
-            this.textbox_priority.Size = new System.Drawing.Size(92, 26);
+            this.textbox_priority.Size = new System.Drawing.Size(92, 24);
             this.textbox_priority.TabIndex = 29;
             this.textbox_priority.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textbox_priority_KeyUp);
             // 
@@ -346,10 +357,11 @@
             // 
             this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_name.Enabled = false;
+            this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(31, 174);
             this.textbox_name.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(258, 26);
+            this.textbox_name.Size = new System.Drawing.Size(258, 24);
             this.textbox_name.TabIndex = 26;
             // 
             // label2
@@ -366,10 +378,11 @@
             // 
             this.textbox_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_doc.Enabled = false;
+            this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_doc.Location = new System.Drawing.Point(31, 111);
             this.textbox_doc.Margin = new System.Windows.Forms.Padding(4);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(258, 26);
+            this.textbox_doc.Size = new System.Drawing.Size(258, 24);
             this.textbox_doc.TabIndex = 24;
             // 
             // documentLabel

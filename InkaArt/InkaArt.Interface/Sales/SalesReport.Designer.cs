@@ -57,14 +57,14 @@
             // button_export
             // 
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
             this.button_export.Location = new System.Drawing.Point(253, 451);
-            this.button_export.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_export.Margin = new System.Windows.Forms.Padding(2);
             this.button_export.Name = "button_export";
             this.button_export.Size = new System.Drawing.Size(166, 41);
             this.button_export.TabIndex = 19;
-            this.button_export.Text = "Exportar a Excel";
+            this.button_export.Text = "🗀 Exportar a Excel";
             this.button_export.UseVisualStyleBackColor = false;
             this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
@@ -227,14 +227,14 @@
             // button_pdf
             // 
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(460, 452);
-            this.button_pdf.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_pdf.Location = new System.Drawing.Point(448, 451);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
             this.button_pdf.Name = "button_pdf";
-            this.button_pdf.Size = new System.Drawing.Size(148, 41);
+            this.button_pdf.Size = new System.Drawing.Size(166, 41);
             this.button_pdf.TabIndex = 39;
-            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.Text = "🗀 Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
             this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
             // 
@@ -279,7 +279,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_export);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SalesReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Ventas";

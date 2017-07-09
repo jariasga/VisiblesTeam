@@ -39,11 +39,11 @@
             // 
             // progress_bar
             // 
-            this.progress_bar.Location = new System.Drawing.Point(13, 46);
+            this.progress_bar.Location = new System.Drawing.Point(28, 46);
             this.progress_bar.Margin = new System.Windows.Forms.Padding(4);
             this.progress_bar.Maximum = 1000;
             this.progress_bar.Name = "progress_bar";
-            this.progress_bar.Size = new System.Drawing.Size(756, 37);
+            this.progress_bar.Size = new System.Drawing.Size(741, 37);
             this.progress_bar.Step = 1;
             this.progress_bar.TabIndex = 0;
             // 
@@ -52,20 +52,20 @@
             this.button_cancel.BackColor = System.Drawing.Color.Firebrick;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
-            this.button_cancel.Location = new System.Drawing.Point(280, 90);
+            this.button_cancel.Location = new System.Drawing.Point(303, 90);
             this.button_cancel.Name = "button_cancel";
             this.button_cancel.Size = new System.Drawing.Size(192, 44);
             this.button_cancel.TabIndex = 40;
-            this.button_cancel.Text = "Cancelar simulación";
+            this.button_cancel.Text = "🗙 Cancelar simulación";
             this.button_cancel.UseVisualStyleBackColor = false;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // label_state
             // 
             this.label_state.AutoSize = true;
-            this.label_state.Location = new System.Drawing.Point(12, 15);
+            this.label_state.Location = new System.Drawing.Point(25, 24);
             this.label_state.Name = "label_state";
-            this.label_state.Size = new System.Drawing.Size(223, 23);
+            this.label_state.Size = new System.Drawing.Size(178, 18);
             this.label_state.TabIndex = 41;
             this.label_state.Text = "Estado de la simulación:";
             // 
@@ -77,9 +77,9 @@
             // label_time
             // 
             this.label_time.AutoSize = true;
-            this.label_time.Location = new System.Drawing.Point(632, 15);
+            this.label_time.Location = new System.Drawing.Point(632, 24);
             this.label_time.Name = "label_time";
-            this.label_time.Size = new System.Drawing.Size(174, 23);
+            this.label_time.Size = new System.Drawing.Size(137, 18);
             this.label_time.TabIndex = 42;
             this.label_time.Text = "Tiempo: 00 m 00 s";
             this.label_time.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -94,7 +94,7 @@
             // 
             // SimulationExecution
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 139);

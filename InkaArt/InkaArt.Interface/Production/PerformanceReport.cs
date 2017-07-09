@@ -130,5 +130,10 @@ namespace InkaArt.Interface.Production
                 LogHandler.WriteLine(ex.ToString());
             }
         }
+
+        private void PerformanceReport_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -34,11 +34,11 @@
             this.buttonMassiveUpload = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonFilter = new System.Windows.Forms.Button();
             this.textBoxLastnameFilter = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxNameFilter = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUserMaintenance)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -129,21 +129,35 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // buttonFilter
+            // 
+            this.buttonFilter.BackColor = System.Drawing.Color.Gray;
+            this.buttonFilter.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFilter.ForeColor = System.Drawing.Color.White;
+            this.buttonFilter.Location = new System.Drawing.Point(754, 51);
+            this.buttonFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonFilter.Name = "buttonFilter";
+            this.buttonFilter.Size = new System.Drawing.Size(111, 39);
+            this.buttonFilter.TabIndex = 3;
+            this.buttonFilter.Text = "🔎 Buscar";
+            this.buttonFilter.UseVisualStyleBackColor = false;
+            this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
+            // 
             // textBoxLastnameFilter
             // 
             this.textBoxLastnameFilter.BackColor = System.Drawing.Color.White;
-            this.textBoxLastnameFilter.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLastnameFilter.Location = new System.Drawing.Point(244, 57);
+            this.textBoxLastnameFilter.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLastnameFilter.Location = new System.Drawing.Point(370, 57);
             this.textBoxLastnameFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxLastnameFilter.Name = "textBoxLastnameFilter";
-            this.textBoxLastnameFilter.Size = new System.Drawing.Size(190, 26);
+            this.textBoxLastnameFilter.Size = new System.Drawing.Size(346, 24);
             this.textBoxLastnameFilter.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F);
-            this.label2.Location = new System.Drawing.Point(240, 32);
+            this.label2.Location = new System.Drawing.Point(367, 32);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 18);
@@ -153,11 +167,11 @@
             // textBoxNameFilter
             // 
             this.textBoxNameFilter.BackColor = System.Drawing.Color.White;
-            this.textBoxNameFilter.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNameFilter.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNameFilter.Location = new System.Drawing.Point(33, 57);
             this.textBoxNameFilter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxNameFilter.Name = "textBoxNameFilter";
-            this.textBoxNameFilter.Size = new System.Drawing.Size(190, 26);
+            this.textBoxNameFilter.Size = new System.Drawing.Size(301, 24);
             this.textBoxNameFilter.TabIndex = 1;
             // 
             // label1
@@ -170,20 +184,6 @@
             this.label1.Size = new System.Drawing.Size(64, 18);
             this.label1.TabIndex = 16;
             this.label1.Text = "Nombre";
-            // 
-            // buttonFilter
-            // 
-            this.buttonFilter.BackColor = System.Drawing.Color.Gray;
-            this.buttonFilter.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFilter.ForeColor = System.Drawing.Color.White;
-            this.buttonFilter.Location = new System.Drawing.Point(479, 39);
-            this.buttonFilter.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonFilter.Name = "buttonFilter";
-            this.buttonFilter.Size = new System.Drawing.Size(111, 39);
-            this.buttonFilter.TabIndex = 3;
-            this.buttonFilter.Text = "🔎 Buscar";
-            this.buttonFilter.UseVisualStyleBackColor = false;
-            this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
             // UserMaintenance
             // 

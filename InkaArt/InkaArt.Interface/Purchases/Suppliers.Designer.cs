@@ -90,10 +90,10 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(158, 445);
+            this.buttonAdd.Location = new System.Drawing.Point(149, 445);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(142, 39);
+            this.buttonAdd.Size = new System.Drawing.Size(151, 39);
             this.buttonAdd.TabIndex = 39;
             this.buttonAdd.Text = "＋ Crear";
             this.buttonAdd.UseVisualStyleBackColor = false;
@@ -245,9 +245,9 @@
             this.button_cargamasiva.Location = new System.Drawing.Point(461, 445);
             this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
             this.button_cargamasiva.Name = "button_cargamasiva";
-            this.button_cargamasiva.Size = new System.Drawing.Size(124, 39);
+            this.button_cargamasiva.Size = new System.Drawing.Size(151, 39);
             this.button_cargamasiva.TabIndex = 50;
-            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.Text = "⬆ Carga masiva";
             this.button_cargamasiva.UseVisualStyleBackColor = false;
             this.button_cargamasiva.Click += new System.EventHandler(this.cargaMasiva);
             // 
