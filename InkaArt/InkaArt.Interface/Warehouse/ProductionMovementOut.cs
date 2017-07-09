@@ -110,7 +110,7 @@ namespace InkaArt.Interface.Warehouse
                     int intIdWarehouse = 0;
                     intIdWarehouse = Convert.ToInt32(idWarehouesOrigin);
 
-                    availableToMove = movementController.verifyMovement(idProd, intIdWarehouse, cantMov, -1, typeMovement, "Produccion", "Materia Prima", "");
+                    availableToMove = movementController.verifyMovement(idProd, intIdWarehouse, cantMov, -1, typeMovement, "Producción", "Materia Prima", "");
 
                     if (availableToMove == 1)
                     {

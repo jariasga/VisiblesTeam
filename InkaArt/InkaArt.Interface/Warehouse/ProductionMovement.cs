@@ -73,7 +73,7 @@ namespace InkaArt.Interface.Warehouse
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE
                         movementController.updateProductWarehouse(idProd, idWare, cantMov, typeMovement, "Producto");
                         //Aumentar stock físico y lógico del producto
-                        movementController.updateProductStock(idProd, cantMov, typeMovement, "Produccion");
+                        movementController.updateProductStock(idProd, cantMov, typeMovement, "Producción");
                         //Actualizar el stock por mover
                         movementController.updateStockDocument(idLote, idProd, maxMov, cantMov, "LOTE");
                         //Grabar movimiento                        
