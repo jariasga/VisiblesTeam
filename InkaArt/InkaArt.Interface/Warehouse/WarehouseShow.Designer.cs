@@ -46,6 +46,14 @@
             this.num_rm_min = new System.Windows.Forms.NumericUpDown();
             this.button_add_rm = new System.Windows.Forms.Button();
             this.grid_rm = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rm_stock_min = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rm_stock_max = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_delete_rm = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.combo_rm = new System.Windows.Forms.ComboBox();
@@ -61,7 +69,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button_add_product = new System.Windows.Forms.Button();
             this.grid_product = new System.Windows.Forms.DataGridView();
-            this.button_delete_product = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +77,7 @@
             this.pr_stock_max = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.idPW = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockVirtual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rm_stock_min = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rm_stock_max = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.IdRMW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_delete_product = new System.Windows.Forms.Button();
             this.tab_items.SuspendLayout();
             this.tabPage_rawMaterial.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_rm_max)).BeginInit();
@@ -298,6 +298,68 @@
             this.grid_rm.TabIndex = 55;
             this.grid_rm.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_RawMaterial_CellContentClick);
             // 
+            // Id
+            // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Id.FillWeight = 60F;
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // nombre
+            // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.FillWeight = 120F;
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // stockActual
+            // 
+            this.stockActual.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.stockActual.FillWeight = 70.08122F;
+            this.stockActual.HeaderText = "Stock Actual";
+            this.stockActual.Name = "stockActual";
+            this.stockActual.ReadOnly = true;
+            // 
+            // stockVirtual
+            // 
+            this.stockVirtual.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.stockVirtual.FillWeight = 70F;
+            this.stockVirtual.HeaderText = "Stock Virtual";
+            this.stockVirtual.Name = "stockVirtual";
+            this.stockVirtual.ReadOnly = true;
+            this.stockVirtual.Visible = false;
+            // 
+            // rm_stock_min
+            // 
+            this.rm_stock_min.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.rm_stock_min.FillWeight = 70.08122F;
+            this.rm_stock_min.HeaderText = "Stock Mínimo";
+            this.rm_stock_min.Name = "rm_stock_min";
+            // 
+            // rm_stock_max
+            // 
+            this.rm_stock_max.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.rm_stock_max.FillWeight = 70.08122F;
+            this.rm_stock_max.HeaderText = "Stock Máximo";
+            this.rm_stock_max.Name = "rm_stock_max";
+            // 
+            // borrar
+            // 
+            this.borrar.FillWeight = 80.08122F;
+            this.borrar.HeaderText = "Seleccionar";
+            this.borrar.Name = "borrar";
+            this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IdRMW
+            // 
+            this.IdRMW.HeaderText = "IdRMW";
+            this.IdRMW.Name = "IdRMW";
+            this.IdRMW.ReadOnly = true;
+            this.IdRMW.Visible = false;
+            // 
             // button_delete_rm
             // 
             this.button_delete_rm.BackColor = System.Drawing.Color.Firebrick;
@@ -326,6 +388,7 @@
             // combo_rm
             // 
             this.combo_rm.BackColor = System.Drawing.Color.White;
+            this.combo_rm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_rm.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_rm.FormattingEnabled = true;
             this.combo_rm.Location = new System.Drawing.Point(23, 34);
@@ -518,20 +581,6 @@
             this.grid_product.Size = new System.Drawing.Size(584, 210);
             this.grid_product.TabIndex = 65;
             // 
-            // button_delete_product
-            // 
-            this.button_delete_product.BackColor = System.Drawing.Color.Firebrick;
-            this.button_delete_product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_delete_product.ForeColor = System.Drawing.Color.White;
-            this.button_delete_product.Location = new System.Drawing.Point(261, 318);
-            this.button_delete_product.Margin = new System.Windows.Forms.Padding(2);
-            this.button_delete_product.Name = "button_delete_product";
-            this.button_delete_product.Size = new System.Drawing.Size(106, 39);
-            this.button_delete_product.TabIndex = 73;
-            this.button_delete_product.Text = "🗑 Eliminar";
-            this.button_delete_product.UseVisualStyleBackColor = false;
-            this.button_delete_product.Click += new System.EventHandler(this.buttonDeleteProductClick);
-            // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -594,67 +643,19 @@
             this.idPW.ReadOnly = true;
             this.idPW.Visible = false;
             // 
-            // Id
+            // button_delete_product
             // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Id.FillWeight = 60F;
-            this.Id.HeaderText = "ID";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // nombre
-            // 
-            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nombre.FillWeight = 120F;
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // stockActual
-            // 
-            this.stockActual.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.stockActual.FillWeight = 70.08122F;
-            this.stockActual.HeaderText = "Stock Actual";
-            this.stockActual.Name = "stockActual";
-            this.stockActual.ReadOnly = true;
-            // 
-            // stockVirtual
-            // 
-            this.stockVirtual.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.stockVirtual.FillWeight = 70F;
-            this.stockVirtual.HeaderText = "Stock Virtual";
-            this.stockVirtual.Name = "stockVirtual";
-            this.stockVirtual.ReadOnly = true;
-            this.stockVirtual.Visible = false;
-            // 
-            // rm_stock_min
-            // 
-            this.rm_stock_min.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.rm_stock_min.FillWeight = 70.08122F;
-            this.rm_stock_min.HeaderText = "Stock Mínimo";
-            this.rm_stock_min.Name = "rm_stock_min";
-            // 
-            // rm_stock_max
-            // 
-            this.rm_stock_max.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.rm_stock_max.FillWeight = 70.08122F;
-            this.rm_stock_max.HeaderText = "Stock Máximo";
-            this.rm_stock_max.Name = "rm_stock_max";
-            // 
-            // borrar
-            // 
-            this.borrar.FillWeight = 80.08122F;
-            this.borrar.HeaderText = "Seleccionar";
-            this.borrar.Name = "borrar";
-            this.borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // IdRMW
-            // 
-            this.IdRMW.HeaderText = "IdRMW";
-            this.IdRMW.Name = "IdRMW";
-            this.IdRMW.ReadOnly = true;
-            this.IdRMW.Visible = false;
+            this.button_delete_product.BackColor = System.Drawing.Color.Firebrick;
+            this.button_delete_product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_delete_product.ForeColor = System.Drawing.Color.White;
+            this.button_delete_product.Location = new System.Drawing.Point(261, 318);
+            this.button_delete_product.Margin = new System.Windows.Forms.Padding(2);
+            this.button_delete_product.Name = "button_delete_product";
+            this.button_delete_product.Size = new System.Drawing.Size(106, 39);
+            this.button_delete_product.TabIndex = 73;
+            this.button_delete_product.Text = "🗑 Eliminar";
+            this.button_delete_product.UseVisualStyleBackColor = false;
+            this.button_delete_product.Click += new System.EventHandler(this.buttonDeleteProductClick);
             // 
             // WarehouseShow
             // 
