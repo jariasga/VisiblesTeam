@@ -21,6 +21,7 @@ namespace InkaArt.Interface.Sales
         DataTable orderLineToFac;
         private double toFacAmount;
         private int clientId;
+        private List<int> idProd = new List<int>(), quantity = new List<int>();
         public ClientOrderShow(string id)
         {
             InitializeComponent();
@@ -91,7 +92,11 @@ namespace InkaArt.Interface.Sales
                     if (int.Parse(orderline["quantityProduced"].ToString()) > 0) orderLineToFac.Rows.Add(orderline.ItemArray);
                     float price = float.Parse(pu.ToString());
                     toFacAmount = orderController.updateAmount(toFacAmount, price, decimal.Parse(orderline["quantityProduced"].ToString()));
-                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"], curStock, orderline["quantityInvoiced"]);
+
+                    string cantMoved = orderController.getStockDocumentParam(orderId,productId,"cantMoved");
+                    if (cantMoved.Equals("") || int.Parse(cantMoved) < 0) cantMoved = "0";
+
+                    grid_orderline.Rows.Add(productId,name, orderline["quality"], pu, orderline["quantity"],0, cantMoved, orderline["quantityInvoiced"]);
                 }
                 if (totalInvoiced > 0) button_seedoc.Visible = true;
                 else button_seedoc.Visible = true;
@@ -135,26 +140,54 @@ namespace InkaArt.Interface.Sales
 
         }
 
-        private void button_fac_Click(object sender, EventArgs e)
-        {
-            int response = orderController.AddSaleDocument(combo_doc.SelectedIndex, textbox_amount_todoc.Text, textbox_igv_todoc.Text, textbox_total_todoc.Text, orderId, orderLineToFac, clientId);
-            if (response >= 0)
-            {
-                MessageBox.Show(this, "Se ha generado el documento de venta exitosamente", "Documento de Venta", MessageBoxButtons.OK);
-                DataTable orderObject = orderController.GetOrders(orderId, clientId);
-                populateFields(orderObject);
-            }
-        }
 
         private void button_seedoc_Click(object sender, EventArgs e)
         {
             SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
             form.Show();
         }
-
-        private void button_fac_Click_1(object sender, EventArgs e)
+        private string validateDataGrid()
         {
+            int numZeros = 0;
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
+                    return "La cantidad a facturar supera a la cantidad disponible, por favor corriga los datos.";
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
+                    numZeros++;
+            }
+            if (numZeros > 1) return "Por favor ingrese una cantidad a facturar en la columna 'A Facturar'.";
+            return "OK";
+        }
 
+        private void button_fac_Click(object sender, EventArgs e)
+        {
+            string response = validateDataGrid();
+            if (response.Equals("OK"))
+            {
+                for (int i = 0; i < grid_orderline.Rows.Count; i++)
+                {
+                    int curProductId = int.Parse(grid_orderline.Rows[i].Cells[0].Value.ToString());
+                    int curQuantity = int.Parse(grid_orderline.Rows[i].Cells[5].Value.ToString());
+                    if (curQuantity != 0)
+                    {
+                        idProd.Add(curProductId);
+                        quantity.Add(curQuantity);
+                    }
+                }
+                orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray());
+                MessageBox.Show("Se ha generado una nota de crédito exitosamente.", "Éxito", MessageBoxButtons.OK);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show(response, "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void grid_orderline_KeyUp(object sender, KeyEventArgs e)
+        {
+            
         }
     }
 }

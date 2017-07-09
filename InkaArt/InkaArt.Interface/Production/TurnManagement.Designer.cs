@@ -40,17 +40,17 @@
             // 
             // textBox_horaIni
             // 
-            this.textBox_horaIni.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_horaIni.Location = new System.Drawing.Point(41, 58);
+            this.textBox_horaIni.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_horaIni.Location = new System.Drawing.Point(21, 90);
             this.textBox_horaIni.Name = "textBox_horaIni";
-            this.textBox_horaIni.Size = new System.Drawing.Size(205, 24);
+            this.textBox_horaIni.Size = new System.Drawing.Size(137, 24);
             this.textBox_horaIni.TabIndex = 24;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 37);
+            this.label1.Location = new System.Drawing.Point(18, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 18);
             this.label1.TabIndex = 23;
@@ -58,17 +58,17 @@
             // 
             // textBox_horaFin
             // 
-            this.textBox_horaFin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_horaFin.Location = new System.Drawing.Point(41, 129);
+            this.textBox_horaFin.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_horaFin.Location = new System.Drawing.Point(200, 90);
             this.textBox_horaFin.Name = "textBox_horaFin";
-            this.textBox_horaFin.Size = new System.Drawing.Size(205, 24);
+            this.textBox_horaFin.Size = new System.Drawing.Size(137, 24);
             this.textBox_horaFin.TabIndex = 26;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(38, 108);
+            this.label2.Location = new System.Drawing.Point(197, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 18);
             this.label2.TabIndex = 25;
@@ -79,7 +79,7 @@
             this.button_guardar.BackColor = System.Drawing.Color.SteelBlue;
             this.button_guardar.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_guardar.ForeColor = System.Drawing.Color.White;
-            this.button_guardar.Location = new System.Drawing.Point(80, 305);
+            this.button_guardar.Location = new System.Drawing.Point(117, 244);
             this.button_guardar.Name = "button_guardar";
             this.button_guardar.Size = new System.Drawing.Size(120, 42);
             this.button_guardar.TabIndex = 27;
@@ -89,18 +89,18 @@
             // 
             // textBox_desc
             // 
-            this.textBox_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_desc.Location = new System.Drawing.Point(41, 198);
+            this.textBox_desc.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_desc.Location = new System.Drawing.Point(21, 150);
             this.textBox_desc.Multiline = true;
             this.textBox_desc.Name = "textBox_desc";
-            this.textBox_desc.Size = new System.Drawing.Size(205, 86);
+            this.textBox_desc.Size = new System.Drawing.Size(316, 86);
             this.textBox_desc.TabIndex = 31;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(38, 177);
+            this.label4.Location = new System.Drawing.Point(18, 129);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 18);
             this.label4.TabIndex = 30;
@@ -108,10 +108,10 @@
             // 
             // textbox_id
             // 
-            this.textbox_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_id.Location = new System.Drawing.Point(41, 10);
+            this.textbox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_id.Location = new System.Drawing.Point(21, 25);
             this.textbox_id.Name = "textbox_id";
-            this.textbox_id.Size = new System.Drawing.Size(205, 24);
+            this.textbox_id.Size = new System.Drawing.Size(316, 24);
             this.textbox_id.TabIndex = 32;
             this.textbox_id.Visible = false;
             // 
@@ -120,7 +120,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(289, 377);
+            this.ClientSize = new System.Drawing.Size(359, 304);
             this.Controls.Add(this.textbox_id);
             this.Controls.Add(this.textBox_desc);
             this.Controls.Add(this.label4);

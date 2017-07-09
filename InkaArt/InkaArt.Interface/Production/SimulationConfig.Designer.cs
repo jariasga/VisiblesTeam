@@ -87,9 +87,10 @@
             // numeric_altarpiece
             // 
             this.numeric_altarpiece.DecimalPlaces = 2;
-            this.numeric_altarpiece.Location = new System.Drawing.Point(176, 209);
+            this.numeric_altarpiece.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numeric_altarpiece.Location = new System.Drawing.Point(181, 210);
             this.numeric_altarpiece.Name = "numeric_altarpiece";
-            this.numeric_altarpiece.Size = new System.Drawing.Size(104, 26);
+            this.numeric_altarpiece.Size = new System.Drawing.Size(92, 24);
             this.numeric_altarpiece.TabIndex = 40;
             this.numeric_altarpiece.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numeric_altarpiece.Value = new decimal(new int[] {
@@ -101,9 +102,10 @@
             // numeric_stones
             // 
             this.numeric_stones.DecimalPlaces = 2;
-            this.numeric_stones.Location = new System.Drawing.Point(176, 167);
+            this.numeric_stones.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numeric_stones.Location = new System.Drawing.Point(181, 166);
             this.numeric_stones.Name = "numeric_stones";
-            this.numeric_stones.Size = new System.Drawing.Size(104, 26);
+            this.numeric_stones.Size = new System.Drawing.Size(92, 24);
             this.numeric_stones.TabIndex = 35;
             this.numeric_stones.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numeric_stones.Value = new decimal(new int[] {
@@ -115,9 +117,10 @@
             // numeric_huacos
             // 
             this.numeric_huacos.DecimalPlaces = 2;
-            this.numeric_huacos.Location = new System.Drawing.Point(176, 126);
+            this.numeric_huacos.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numeric_huacos.Location = new System.Drawing.Point(181, 122);
             this.numeric_huacos.Name = "numeric_huacos";
-            this.numeric_huacos.Size = new System.Drawing.Size(104, 26);
+            this.numeric_huacos.Size = new System.Drawing.Size(92, 24);
             this.numeric_huacos.TabIndex = 30;
             this.numeric_huacos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numeric_huacos.Value = new decimal(new int[] {
@@ -129,9 +132,10 @@
             // numeric_time
             // 
             this.numeric_time.DecimalPlaces = 2;
-            this.numeric_time.Location = new System.Drawing.Point(176, 73);
+            this.numeric_time.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numeric_time.Location = new System.Drawing.Point(181, 76);
             this.numeric_time.Name = "numeric_time";
-            this.numeric_time.Size = new System.Drawing.Size(104, 26);
+            this.numeric_time.Size = new System.Drawing.Size(92, 24);
             this.numeric_time.TabIndex = 25;
             this.numeric_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numeric_time.Value = new decimal(new int[] {
@@ -143,9 +147,10 @@
             // numeric_breakage
             // 
             this.numeric_breakage.DecimalPlaces = 2;
-            this.numeric_breakage.Location = new System.Drawing.Point(176, 31);
+            this.numeric_breakage.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numeric_breakage.Location = new System.Drawing.Point(181, 32);
             this.numeric_breakage.Name = "numeric_breakage";
-            this.numeric_breakage.Size = new System.Drawing.Size(104, 26);
+            this.numeric_breakage.Size = new System.Drawing.Size(92, 24);
             this.numeric_breakage.TabIndex = 20;
             this.numeric_breakage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numeric_breakage.Value = new decimal(new int[] {
@@ -158,7 +163,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 162);
+            this.label4.Location = new System.Drawing.Point(16, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 36);
             this.label4.TabIndex = 27;
@@ -168,7 +173,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 73);
+            this.label2.Location = new System.Drawing.Point(16, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(151, 18);
             this.label2.TabIndex = 23;
@@ -178,7 +183,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(9, 211);
+            this.label8.Location = new System.Drawing.Point(16, 211);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(161, 18);
             this.label8.TabIndex = 25;
@@ -188,7 +193,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 129);
+            this.label3.Location = new System.Drawing.Point(15, 123);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 18);
             this.label3.TabIndex = 25;
@@ -198,7 +203,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 33);
+            this.label1.Location = new System.Drawing.Point(16, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(145, 18);
             this.label1.TabIndex = 13;
@@ -219,9 +224,10 @@
             // checkbox_workers
             // 
             this.checkbox_workers.AutoSize = true;
+            this.checkbox_workers.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkbox_workers.Location = new System.Drawing.Point(18, 30);
             this.checkbox_workers.Name = "checkbox_workers";
-            this.checkbox_workers.Size = new System.Drawing.Size(153, 22);
+            this.checkbox_workers.Size = new System.Drawing.Size(144, 21);
             this.checkbox_workers.TabIndex = 46;
             this.checkbox_workers.Text = "Seleccionar todos";
             this.checkbox_workers.UseVisualStyleBackColor = true;
@@ -230,6 +236,7 @@
             // list_workers
             // 
             this.list_workers.CheckOnClick = true;
+            this.list_workers.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_workers.FormattingEnabled = true;
             this.list_workers.Location = new System.Drawing.Point(15, 52);
             this.list_workers.Name = "list_workers";
@@ -266,7 +273,7 @@
             // label_end
             // 
             this.label_end.AutoSize = true;
-            this.label_end.Location = new System.Drawing.Point(9, 137);
+            this.label_end.Location = new System.Drawing.Point(16, 137);
             this.label_end.Name = "label_end";
             this.label_end.Size = new System.Drawing.Size(84, 18);
             this.label_end.TabIndex = 24;
@@ -275,16 +282,17 @@
             // date_picker_end
             // 
             this.date_picker_end.Enabled = false;
+            this.date_picker_end.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_picker_end.Location = new System.Drawing.Point(130, 133);
+            this.date_picker_end.Location = new System.Drawing.Point(137, 132);
             this.date_picker_end.Name = "date_picker_end";
-            this.date_picker_end.Size = new System.Drawing.Size(150, 26);
+            this.date_picker_end.Size = new System.Drawing.Size(136, 24);
             this.date_picker_end.TabIndex = 15;
             // 
             // label_start
             // 
             this.label_start.AutoSize = true;
-            this.label_start.Location = new System.Drawing.Point(9, 101);
+            this.label_start.Location = new System.Drawing.Point(16, 101);
             this.label_start.Name = "label_start";
             this.label_start.Size = new System.Drawing.Size(115, 18);
             this.label_start.TabIndex = 1;
@@ -293,25 +301,26 @@
             // date_picker_start
             // 
             this.date_picker_start.Enabled = false;
+            this.date_picker_start.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker_start.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_picker_start.Location = new System.Drawing.Point(130, 97);
+            this.date_picker_start.Location = new System.Drawing.Point(137, 96);
             this.date_picker_start.Name = "date_picker_start";
-            this.date_picker_start.Size = new System.Drawing.Size(150, 26);
+            this.date_picker_start.Size = new System.Drawing.Size(136, 24);
             this.date_picker_start.TabIndex = 10;
             // 
             // textbox_name
             // 
             this.textbox_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_name.Location = new System.Drawing.Point(12, 52);
+            this.textbox_name.Location = new System.Drawing.Point(19, 52);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(268, 24);
+            this.textbox_name.Size = new System.Drawing.Size(254, 24);
             this.textbox_name.TabIndex = 5;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(9, 31);
+            this.label10.Location = new System.Drawing.Point(16, 30);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 18);
             this.label10.TabIndex = 13;
@@ -332,9 +341,10 @@
             // checkbox_orders
             // 
             this.checkbox_orders.AutoSize = true;
+            this.checkbox_orders.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkbox_orders.Location = new System.Drawing.Point(18, 30);
             this.checkbox_orders.Name = "checkbox_orders";
-            this.checkbox_orders.Size = new System.Drawing.Size(153, 22);
+            this.checkbox_orders.Size = new System.Drawing.Size(144, 21);
             this.checkbox_orders.TabIndex = 47;
             this.checkbox_orders.Text = "Seleccionar todos";
             this.checkbox_orders.UseVisualStyleBackColor = true;
@@ -343,6 +353,7 @@
             // list_orders
             // 
             this.list_orders.CheckOnClick = true;
+            this.list_orders.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_orders.FormattingEnabled = true;
             this.list_orders.HorizontalScrollbar = true;
             this.list_orders.Location = new System.Drawing.Point(16, 52);

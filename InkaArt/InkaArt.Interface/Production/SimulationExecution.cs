@@ -107,49 +107,11 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(0, null);
             }*/
 
-            tabu.bestSolutionToList();
+            tabu.BestSolutionToList();
             simulation.Assignments = tabu.BestSolution;
 
             if (background_worker.CancellationPending && (e.Cancel = true)) return;
             simulation.Assignments = new List<Assignment>();
-        }
-
-        private void PrintIndexes(IndexController indexes)
-        {
-            Excel.Application app = new Excel.Application();
-            if (app == null) return;
-            Excel.Workbook workbook = app.Workbooks.Add(Missing.Value);
-            Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Item[1];
-            worksheet.Cells[1, 1] = "ID";
-            worksheet.Cells[1, 2] = "Trabajador";
-            worksheet.Cells[1, 3] = "Receta";
-            worksheet.Cells[1, 4] = "Puesto de trabajo";
-            worksheet.Cells[1, 5] = "% promedio de rotura [0, 1]";
-            worksheet.Cells[1, 6] = "Tiempo promedio [0, ?]";
-            worksheet.Cells[1, 7] = "Índice de rotura [0, 1]";
-            worksheet.Cells[1, 8] = "Índice de tiempo [0, 1]";
-            worksheet.Cells[1, 9] = "Índice de pérdida";
-            for (int index = 0; index < indexes.Count(); index++)
-            {
-                worksheet.Cells[index + 2, 1] = indexes[index].ID;
-                worksheet.Cells[index + 2, 2] = (indexes[index].Worker == null) ? "null" : indexes[index].Worker.FullName;
-                worksheet.Cells[index + 2, 3] = (indexes[index].Recipe == null) ? "null" : indexes[index].Recipe.Version;
-                worksheet.Cells[index + 2, 4] = (indexes[index].Job == null) ? "null" : indexes[index].Job.Name;
-                worksheet.Cells[index + 2, 5] = indexes[index].AverageBreakage;
-                worksheet.Cells[index + 2, 6] = indexes[index].AverageTime;
-                worksheet.Cells[index + 2, 7] = indexes[index].BreakageIndex;
-                worksheet.Cells[index + 2, 8] = indexes[index].TimeIndex;
-                worksheet.Cells[index + 2, 9] = indexes[index].LossIndex;
-            }
-            workbook.SaveAs("CalculatedIndexes.xlsx", Excel.XlFileFormat.xlWorkbookDefault);
-            workbook.Close(true, Missing.Value, Missing.Value);
-            app.Quit();
-
-            Marshal.ReleaseComObject(worksheet);
-            Marshal.ReleaseComObject(workbook);
-            Marshal.ReleaseComObject(app);
-
-            this.timer.Start();
         }
 
         private void PrintGraspResults(List<Assignment> assignments, int total_miniturns)
@@ -171,11 +133,11 @@ namespace InkaArt.Interface.Production
                     worksheet.Cells[1, 1] = "Valor de la función objetivo";
                     worksheet.Cells[1, 2] = assignments[day].ObjectiveFunction;
                     worksheet.Cells[2, 1] = "Huacos producidos";
-                    worksheet.Cells[3, 2] = assignments[day].HuacosProduced;
-                    worksheet.Cells[2, 2] = "Piedras de Huamanga producidas";
+                    worksheet.Cells[2, 2] = assignments[day].HuacosProduced;
+                    worksheet.Cells[3, 1] = "Piedras de Huamanga producidas";
                     worksheet.Cells[3, 2] = assignments[day].HuamangaProduced;
-                    worksheet.Cells[3, 1] = "Retablos producidos";
-                    worksheet.Cells[3, 2] = assignments[day].AltarpieceProduced;
+                    worksheet.Cells[4, 1] = "Retablos producidos";
+                    worksheet.Cells[4, 2] = assignments[day].AltarpieceProduced;
 
                     for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
                     {

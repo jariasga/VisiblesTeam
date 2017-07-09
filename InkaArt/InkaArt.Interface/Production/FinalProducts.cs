@@ -19,7 +19,7 @@ namespace InkaArt.Interface.Production
         public FinalProducts()
         {
             FinalProductController control = new FinalProductController();
-            hallaStock();
+            //hallaStock();
             DataTable finalProductList = control.getData();
             maxrow = finalProductList.Rows.Count;
             InitializeComponent();
@@ -29,6 +29,7 @@ namespace InkaArt.Interface.Production
 
         public void hallaStock()
         {
+            /*
             int huaco, piedra, retablo, huacoL, piedraL, retabloL;
             huaco = piedra = retablo = huacoL = piedraL = retabloL = 0;
             ProductWarehouseController control = new ProductWarehouseController();
@@ -53,11 +54,13 @@ namespace InkaArt.Interface.Production
                     retablo += int.Parse(whList.Rows[i]["currentStock"].ToString());
                     retabloL += int.Parse(whList.Rows[i]["virtualStock"].ToString());
 
-                }
+                
             }
             FinalProductController controlFp = new FinalProductController();
             DataTable finalProductList = controlFp.getData();
             controlFp.updateStock(huaco, piedra, retablo, huacoL, piedraL, retabloL);
+            }
+            */
         }
 
         public void fillGrid()
@@ -137,7 +140,7 @@ namespace InkaArt.Interface.Production
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 if (control.massiveUpload(dialog.FileName) == 0)
-                    MessageBox.Show("Productos cargados de manera exitosa.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Productos cargados de manera exitosa.", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                     MessageBox.Show("No se pudo cargar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

@@ -93,13 +93,14 @@
             // comboBox2
             // 
             this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox2.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Boleta",
             "Factura"});
             this.comboBox2.Location = new System.Drawing.Point(25, 212);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(277, 26);
+            this.comboBox2.Size = new System.Drawing.Size(277, 25);
             this.comboBox2.TabIndex = 36;
             this.comboBox2.Text = "Boleta";
             // 
@@ -107,6 +108,7 @@
             // 
             this.dateTimePicker2.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
             this.dateTimePicker2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker2.Location = new System.Drawing.Point(25, 62);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(277, 26);
@@ -116,9 +118,10 @@
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox3.Enabled = false;
+            this.textBox3.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox3.Location = new System.Drawing.Point(25, 162);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(277, 26);
+            this.textBox3.Size = new System.Drawing.Size(277, 24);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = "Retablos Lovers S.A.";
             // 
@@ -126,9 +129,10 @@
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox2.Enabled = false;
+            this.textBox2.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox2.Location = new System.Drawing.Point(26, 112);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(277, 26);
+            this.textBox2.Size = new System.Drawing.Size(277, 24);
             this.textBox2.TabIndex = 6;
             this.textBox2.Text = "000000001";
             // 
@@ -136,9 +140,10 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox1.Location = new System.Drawing.Point(25, 262);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(277, 26);
+            this.textBox1.Size = new System.Drawing.Size(277, 24);
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = "000000001";
             // 
@@ -210,9 +215,10 @@
             // 
             this.textBox6.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox6.Enabled = false;
+            this.textBox6.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox6.Location = new System.Drawing.Point(22, 301);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(278, 26);
+            this.textBox6.Size = new System.Drawing.Size(278, 24);
             this.textBox6.TabIndex = 34;
             this.textBox6.Text = "S/.  0.00";
             // 
@@ -287,9 +293,10 @@
             // 
             this.textBox4.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox4.Enabled = false;
+            this.textBox4.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox4.Location = new System.Drawing.Point(23, 202);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(278, 26);
+            this.textBox4.Size = new System.Drawing.Size(278, 24);
             this.textBox4.TabIndex = 30;
             this.textBox4.Text = "S/.  0.00";
             // 
@@ -306,9 +313,10 @@
             // 
             this.textBox5.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox5.Enabled = false;
+            this.textBox5.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox5.Location = new System.Drawing.Point(23, 252);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(278, 26);
+            this.textBox5.Size = new System.Drawing.Size(278, 24);
             this.textBox5.TabIndex = 32;
             this.textBox5.Text = "S/.  0.00";
             // 

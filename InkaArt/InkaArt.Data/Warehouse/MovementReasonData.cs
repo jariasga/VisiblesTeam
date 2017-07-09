@@ -63,5 +63,17 @@ namespace InkaArt.Data.Warehouse
         {
             return getData(adapter, table_name);
         }
+
+        public DataTable GetMovementReasons()
+        {
+            adap = movementReasonAdapter();
+            adap.SelectCommand.CommandText += ";";
+
+            data.Clear();
+            data = getData(adap, table_name);
+            DataTable movement_list = new DataTable();
+            movement_list = data.Tables[0];
+            return movement_list;
+        }
     }
 }

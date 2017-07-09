@@ -49,7 +49,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(64, 86);
+            this.label1.Location = new System.Drawing.Point(25, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 17);
             this.label1.TabIndex = 1;
@@ -68,7 +68,7 @@
             this.Column4,
             this.Column5,
             this.Column6});
-            this.simulation_grid.Location = new System.Drawing.Point(68, 149);
+            this.simulation_grid.Location = new System.Drawing.Point(28, 107);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(5);
             this.simulation_grid.Name = "simulation_grid";
             this.simulation_grid.ReadOnly = true;
@@ -115,13 +115,13 @@
             // button_export
             // 
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(331, 513);
+            this.button_export.Location = new System.Drawing.Point(296, 466);
             this.button_export.Name = "button_export";
             this.button_export.Size = new System.Drawing.Size(218, 44);
             this.button_export.TabIndex = 32;
-            this.button_export.Text = "Exportar a Excel";
+            this.button_export.Text = "🗀 Exportar a Excel";
             this.button_export.UseVisualStyleBackColor = false;
             this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
@@ -138,7 +138,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(64, 29);
+            this.label2.Location = new System.Drawing.Point(25, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 17);
             this.label2.TabIndex = 35;
@@ -148,7 +148,7 @@
             // 
             this.label_simulationName.AutoSize = true;
             this.label_simulationName.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_simulationName.Location = new System.Drawing.Point(177, 29);
+            this.label_simulationName.Location = new System.Drawing.Point(138, 29);
             this.label_simulationName.Name = "label_simulationName";
             this.label_simulationName.Size = new System.Drawing.Size(0, 17);
             this.label_simulationName.TabIndex = 36;
@@ -157,7 +157,7 @@
             // 
             this.label_simulationTime.AutoSize = true;
             this.label_simulationTime.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_simulationTime.Location = new System.Drawing.Point(302, 86);
+            this.label_simulationTime.Location = new System.Drawing.Point(263, 65);
             this.label_simulationTime.Name = "label_simulationTime";
             this.label_simulationTime.Size = new System.Drawing.Size(0, 17);
             this.label_simulationTime.TabIndex = 37;
@@ -165,14 +165,14 @@
             // button_pdf
             // 
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(576, 513);
+            this.button_pdf.Location = new System.Drawing.Point(541, 466);
             this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
             this.button_pdf.Name = "button_pdf";
             this.button_pdf.Size = new System.Drawing.Size(218, 44);
             this.button_pdf.TabIndex = 41;
-            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.Text = "🗀 Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
             this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
             // 
@@ -181,7 +181,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1134, 579);
+            this.ClientSize = new System.Drawing.Size(1053, 527);
             this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.label_simulationTime);
             this.Controls.Add(this.label_simulationName);

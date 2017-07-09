@@ -31,12 +31,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -54,6 +48,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -70,7 +70,7 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(378, 25);
+            this.groupBox2.Location = new System.Drawing.Point(370, 13);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(472, 389);
             this.groupBox2.TabIndex = 26;
@@ -105,36 +105,6 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(420, 165);
             this.dataGridView1.TabIndex = 22;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Precio Unitario";
-            this.Column2.Name = "Column2";
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Estado";
-            this.status.Name = "status";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Entregar";
-            this.Column3.Name = "Column3";
             // 
             // label4
             // 
@@ -196,7 +166,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox3.Location = new System.Drawing.Point(25, 25);
+            this.groupBox3.Location = new System.Drawing.Point(17, 13);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(334, 329);
             this.groupBox3.TabIndex = 27;
@@ -206,32 +176,35 @@
             // comboBox2
             // 
             this.comboBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.comboBox2.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Boleta",
             "Factura"});
             this.comboBox2.Location = new System.Drawing.Point(25, 212);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(277, 26);
+            this.comboBox2.Size = new System.Drawing.Size(277, 25);
             this.comboBox2.TabIndex = 36;
             this.comboBox2.Text = "Boleta";
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.dateTimePicker2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Font = new System.Drawing.Font("Arial Narrow", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker2.Location = new System.Drawing.Point(25, 62);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(277, 26);
+            this.dateTimePicker2.Size = new System.Drawing.Size(277, 24);
             this.dateTimePicker2.TabIndex = 12;
             // 
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox3.Enabled = false;
+            this.textBox3.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox3.Location = new System.Drawing.Point(25, 162);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(277, 26);
+            this.textBox3.Size = new System.Drawing.Size(277, 24);
             this.textBox3.TabIndex = 6;
             this.textBox3.Text = "Retablos Lovers S.A.";
             // 
@@ -239,9 +212,10 @@
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox2.Enabled = false;
+            this.textBox2.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox2.Location = new System.Drawing.Point(26, 112);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(277, 26);
+            this.textBox2.Size = new System.Drawing.Size(277, 24);
             this.textBox2.TabIndex = 6;
             this.textBox2.Text = "000000001";
             // 
@@ -249,9 +223,10 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox1.Location = new System.Drawing.Point(25, 262);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(277, 26);
+            this.textBox1.Size = new System.Drawing.Size(277, 24);
             this.textBox1.TabIndex = 6;
             this.textBox1.Text = "000000001";
             // 
@@ -306,7 +281,7 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(134, 375);
+            this.button_save.Location = new System.Drawing.Point(126, 355);
             this.button_save.Margin = new System.Windows.Forms.Padding(2);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(107, 39);
@@ -314,12 +289,43 @@
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             // 
+            // Producto
+            // 
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Precio Unitario";
+            this.Column2.Name = "Column2";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // status
+            // 
+            this.status.HeaderText = "Estado";
+            this.status.Name = "status";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Entregar";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 80;
+            // 
             // ClientOrderDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(883, 446);
+            this.ClientSize = new System.Drawing.Size(861, 421);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -346,12 +352,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
@@ -364,5 +364,11 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
     }
 }

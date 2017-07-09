@@ -496,11 +496,11 @@
     <Compile Include="Warehouse\ReturnMovement.Designer.cs">
       <DependentUpon>ReturnMovement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\SaleMovementcs.cs">
+    <Compile Include="Warehouse\SaleMovement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Warehouse\SaleMovementcs.Designer.cs">
-      <DependentUpon>SaleMovementcs.cs</DependentUpon>
+    <Compile Include="Warehouse\SaleMovement.Designer.cs">
+      <DependentUpon>SaleMovement.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\SalesOut.cs">
       <SubType>Form</SubType>
@@ -752,8 +752,8 @@
     <EmbeddedResource Include="Warehouse\ReturnMovement.resx">
       <DependentUpon>ReturnMovement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\SaleMovementcs.resx">
-      <DependentUpon>SaleMovementcs.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\SaleMovement.resx">
+      <DependentUpon>SaleMovement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\SalesOut.resx">
       <DependentUpon>SalesOut.cs</DependentUpon>

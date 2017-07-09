@@ -50,6 +50,10 @@ namespace InkaArt.Business.Sales
                         }
                     }
                 }
+                for (int i = 0; i < idProd.Length && i < quantity.Length; i++)
+                {
+                    orderData.updateStockDocumentLine(orderId,idProd[i],quantity[i]);
+                }
                 string pamount = getPolishedAmount(amount);
                 string igv = getPolishedIGV(amount);
                 string total = getPolishedTotal(amount);
@@ -97,6 +101,11 @@ namespace InkaArt.Business.Sales
             return orderData.getProductLogicalStock(int.Parse(productId));
         }
 
+        public string getStockDocumentParam(int orderId, string productId, string paramName)
+        {
+            return orderData.getStockDocumentParam(orderId, int.Parse(productId), paramName);
+        }
+
         public bool verifyStock(int natType, string strStock, string strQuantity)
         {
             if (natType == 1) return true;
@@ -132,30 +141,36 @@ namespace InkaArt.Business.Sales
 
         public DataTable GetDevolutions()
         {
-            // activas y sin completar
+            // devoluciones activas y sin completar
             return orderData.GetDevolutions();
         }
 
-        public DataTable GetDevolutionLines(int id_devolution)
+        public DataTable GetDevolutionLines(int id_devolution, int id_warehouse)
         {
             // activas y sin completar
-            return orderData.GetDevolutionLines(id_devolution);
+            return orderData.GetDevolutionLines(id_devolution, id_warehouse);
         }
 
-        public void updateDevolution(int id_order)
+        public DataTable GetDevolutionDetail(int id_devolution)
+        {
+            // activas y sin completar
+            return orderData.GetDevolutionDetail(id_devolution);
+        }
+
+        public void updateDevolution(int id_order, int pending)
         {
             DataTable table = GetOrders();
+            string status = pending > 0 ? "parcial" : "devuelto";
             string updateQuery = "UPDATE inkaart.\"Order\" SET \"orderStatus\" = 'devuelto' " + 
                 "WHERE \"idOrder\" = " + id_order + ";";
             orderData.execute(updateQuery);
         }
 
-
-
-        public void updateDevolutionLine(int id_line)
+        public void updateDevolutionLine(int id_line, int pending, int quantity)
         {
             DataTable table = GetOrders();
-            string updateQuery = "UPDATE inkaart.\"LineItem\" SET \"lineStatus\" = 'devuelto' " +
+            string status = pending - quantity > 0 ? "parcial" : "devuelto";            
+            string updateQuery = "UPDATE inkaart.\"LineItem\" SET \"lineStatus\" = '" + status + "' " +
                 "WHERE \"idLineItem\" = " + id_line + ";";
             orderData.execute(updateQuery);
         }

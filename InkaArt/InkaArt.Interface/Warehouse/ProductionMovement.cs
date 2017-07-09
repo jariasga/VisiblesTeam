@@ -15,7 +15,7 @@ namespace InkaArt.Interface.Warehouse
     public partial class ProductionMovement : Form
     {
         string nameWarehouseOrigin = "";
-        string idWarehouesOrigin= "";
+        string id_warehouse= "";
         string typeMovement = "";
 
         private ProductionMovementMovementController productionMovementMovementController = new ProductionMovementMovementController();
@@ -30,21 +30,16 @@ namespace InkaArt.Interface.Warehouse
 
         public ProductionMovement(string idWarehouse,string nameWarehouse,string typeMovement)
         {
-            this.idWarehouesOrigin = idWarehouse;
+            InitializeComponent();
+            
+            this.id_warehouse = idWarehouse;
             this.nameWarehouseOrigin = nameWarehouse;
             this.typeMovement = typeMovement;
-            InitializeComponent();
-            textBox6.Text = nameWarehouse;
-            textBox5.Text = idWarehouse;
+            
+            text_name_warehouse.Text = nameWarehouse;
+            text_id_warehouse.Text = idWarehouse;
         }
-
-        private void button_create_Click(object sender, EventArgs e)
-        {
-            //Form new_warehouse_window = new Form1(ref textBox1,ref textBox2,ref textBox4);
-            Form new_warehouse_window = new ExchangeItem(textBox1, textBox2, textBox4,"","",null);
-            new_warehouse_window.Show();
-        }
-
+        
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
 
@@ -62,7 +57,7 @@ namespace InkaArt.Interface.Warehouse
 
         //Botón de aceptar para crear el movimiento
         //AGREGAR: Debería registrarse el lote de producción de donde viene el producto.
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSaveClick(object sender, EventArgs e)
         {
             int idProd = 0, idWare = 0, idLote = 0,exito2=0;
             string nameProd="";
@@ -70,7 +65,7 @@ namespace InkaArt.Interface.Warehouse
             int cantMov = 0, maxMov=0,exito=0;
             int numRows = 0;
             try {
-                idWare = Convert.ToInt32(textBox5.Text);
+                idWare = Convert.ToInt32(text_id_warehouse.Text);
             }
             catch
             {
@@ -84,7 +79,7 @@ namespace InkaArt.Interface.Warehouse
             }
             try
             {
-                idLote = Convert.ToInt32(textBox3.Text);
+                idLote = Convert.ToInt32(text_lote.Text);
             }
             catch
             {
@@ -98,11 +93,11 @@ namespace InkaArt.Interface.Warehouse
             }
             //Fin de validaciones
 
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in grid_lote.Rows)
             {
                 bool s = Convert.ToBoolean(row.Cells[7].Value);//Verifica que línea se ha marcado con un check
 
-                if (s == true)
+                if (s && row.Cells["nroLote"].Value != null)
                 {
                     idProd = Convert.ToInt32(row.Cells[1].Value);//No se valida porque viene de la base de datos
                     nameProd = Convert.ToString(row.Cells[2].Value);//No se valida porque viene de la base de datos
@@ -158,54 +153,47 @@ namespace InkaArt.Interface.Warehouse
                 MessageBox.Show("No se pudo realizar ningún movimiento...");
             }
         }
-
-        private void populateDataGridLote(DataTable listList)
-        {
-            foreach (DataRow row in listList.Rows)
-            {
-                dataGridView1.Rows.Add(row["idProduct"], row["name"], "Producto");
-            }
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
+        
+        private void buttonSearchClick(object sender, EventArgs e)
+        {            
             NpgsqlDataReader datos;
-            string id = "";
-            try
+
+            int id_lote;
+
+            if (!int.TryParse(text_lote.Text, out id_lote) || id_lote <= 0)
             {
-                Convert.ToInt32(textBox5.Text);
-                id = textBox5.Text;
-            }
-            catch
-            {
-                MessageBox.Show("Favor de ingresar un valor entero para el número de lote de producción");
+                MessageBox.Show("Favor de ingresar un valor entero y existente para el número de lote");
                 return;
             }
             
-            datos = movementController.getProductStock(id, textBox3.Text);
-            int rowIndex = 0;
+            datos = movementController.getProductStock(this.id_warehouse, text_lote.Text);
+            DataTable table_lote = new DataTable();
+            table_lote.Load(datos);
 
-            //Limpiamos el datagridview
-            this.dataGridView1.Rows.Clear();
+            grid_lote.DataSource = table_lote;
+            if (grid_lote.Rows.Count <= 0)
+                MessageBox.Show("No hay productos que este almacén pueda recibir para el lote ingresada.");
 
-            //Muestra los datos en el gridview
-            while (datos.Read())
-            {
-                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                row.Cells[0].Value = datos[0];
-                row.Cells[1].Value = datos[1];
-                row.Cells[2].Value = datos[2];
-                row.Cells[3].Value = datos[3];
-                row.Cells[4].Value = datos[4];
-                row.Cells[5].Value = datos[5];
-                dataGridView1.Rows.Add(row);
-                rowIndex++;
-            }
-            if(rowIndex == 0)
-            {
-                MessageBox.Show("El lote ingresado no tiene registros.");
-            }            
-
+            //int rowIndex = 0;
+            ////Limpiamos el datagridview
+            //this.grid_lote.Rows.Clear();
+            ////Muestra los datos en el gridview
+            //while (datos.Read())
+            //{
+            //    DataGridViewRow row = (DataGridViewRow)grid_lote.Rows[0].Clone();
+            //    row.Cells[0].Value = datos[0];
+            //    row.Cells[1].Value = datos[1];
+            //    row.Cells[2].Value = datos[2];
+            //    row.Cells[3].Value = datos[3];
+            //    row.Cells[4].Value = datos[4];
+            //    row.Cells[5].Value = datos[5];
+            //    grid_lote.Rows.Add(row);
+            //    rowIndex++;
+            //}
+            //if(rowIndex == 0)
+            //{
+            //    MessageBox.Show("El lote ingresado no tiene registros.");
+            //}            
         }
     }
 }

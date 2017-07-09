@@ -52,8 +52,8 @@ namespace InkaArt.Interface.Warehouse
         private void initializeComboReason()
         {
             MovementReasonController reason_controller = new MovementReasonController();
-            //DataTable types = reason_controller.GetMovementReasons();
-            //combobox_reason.DataSource = types;
+            DataTable types = reason_controller.GetMovementReasons();
+            combobox_reason.DataSource = types;
             combobox_reason.DisplayMember = "description";
             combobox_reason.ValueMember = "idMovName";
             combobox_reason.SelectedValue = -1;
@@ -84,13 +84,11 @@ namespace InkaArt.Interface.Warehouse
             Dictionary<int, string> types = new Dictionary<int, string>();
             types.Add(0, "Materia Prima");
             types.Add(1, "Producto");
-            combobox_item_type.DataSource = new BindingSource(types, null);
-            combobox_item_type.DisplayMember = "Value";
-            combobox_item_type.ValueMember = "Key";
         }
 
         private void populateForm()
         {
+            int typeMov = Int32.Parse(movement["idMovementType"].ToString());
             // movement
             combobox_reason.SelectedValue = movement["idMovementReason"].ToString();
             combobox_type.SelectedValue = movement["idMovementType"].ToString();
@@ -101,17 +99,37 @@ namespace InkaArt.Interface.Warehouse
             if (int.TryParse(movement["idDocumentType"].ToString(), out id_doc_type))
                 combobox_doc_type.SelectedValue = id_doc_type;
             textbox_doc_number.Text = movement["idBill"].ToString() == "" ? movement["idNote"].ToString() : movement["idBill"].ToString();
-            // warehouse
-            textbox_warehouse_id.Text = movement["idWarehouse"].ToString();
-            textbox_warehouse_name.Text = movement_controller.getWarehouseName(textbox_warehouse_id.Text);
-            textbox_warehouse_id_d.Text = movement["idWarehouseDestiny"].ToString();
-            if (textbox_warehouse_id_d.Text != "")
-                textbox_warehouse_name_d.Text = movement_controller.getWarehouseName(textbox_warehouse_id_d.Text);
+
+            if (typeMov == 2) //entrada
+            {
+                textbox_warehouse_idO.Text = "-";
+                textbox_warehouse_nameO.Text = "-";
+                textbox_warehouse_idD.Text = movement["idWarehouse"].ToString();
+                textbox_warehouse_nameD.Text = movement_controller.getWarehouseName(textbox_warehouse_idD.Text);
+            } else if (typeMov == 13) //salida
+            {
+                textbox_warehouse_idD.Text = "-";
+                textbox_warehouse_nameD.Text = "-";
+                textbox_warehouse_idO.Text = movement["idWarehouse"].ToString();
+                textbox_warehouse_nameO.Text = movement_controller.getWarehouseName(textbox_warehouse_idO.Text);
+            } else //entrada-salida
+            {
+                // warehouse
+                textbox_warehouse_idO.Text = movement["idWarehouse"].ToString();
+                textbox_warehouse_nameO.Text = movement_controller.getWarehouseName(textbox_warehouse_idO.Text);
+                textbox_warehouse_idD.Text = movement["idWarehouseDestiny"].ToString();
+                if (textbox_warehouse_idD.Text != "")
+                    textbox_warehouse_nameD.Text = movement_controller.getWarehouseName(textbox_warehouse_idD.Text);
+            }
+            
             // product
             int item_type;
             if (int.TryParse(movement["itemType"].ToString(), out item_type))
             {
-                combobox_item_type.SelectedValue = item_type;
+                if (item_type == 0)
+                    groupBox_item.Text = "Materia Prima";
+                else
+                    groupBox_item.Text = "Producto";
                 textbox_item_name.Text = movement_controller.getItemName(item_type, movement["idItem"].ToString());
                 textbox_quantity.Text = movement["quantity"].ToString();
             }
