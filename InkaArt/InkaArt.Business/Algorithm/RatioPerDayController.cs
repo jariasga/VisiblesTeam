@@ -60,7 +60,7 @@ namespace InkaArt.Business.Algorithm
 
                 connection.Close();
 
-                if (rows_affected <= 0) return "Error al intentar insertar en la tabla de ratios por día. ";
+                if (rows_affected <= 0) return "Error al intentar insertar en la tabla de lotes. ";
                 return "Se insertó la fila con éxito en la tabla de ratios por día. ";
             }
             else
@@ -82,7 +82,7 @@ namespace InkaArt.Business.Algorithm
 
                 connection.Close();
 
-                if (rows_affected <= 0) return "Error al intentar actualizar en la tabla de ratios por día. ";
+                if (rows_affected <= 0) return "Error al intentar actualizar en la tabla de lotes. ";
                 return "Se actualizó la fila con éxito en la tabla de ratios por día. ";
             }
         }
@@ -93,16 +93,23 @@ namespace InkaArt.Business.Algorithm
             connection.Open();
 
             NpgsqlCommand command = new NpgsqlCommand("UPDATE inkaart.\"RatioPerDay\" SET produced = produced - :produced " +
-                    "WHERE date = :date AND id_product = :id_product", connection);
-
+                    "WHERE date = :date AND id_product = :id_product RETURNING id_lote", connection);
+                
             command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, ratio.Produced);
             command.Parameters.AddWithValue("date", NpgsqlDbType.Date, ratio.Date);
             command.Parameters.AddWithValue("id_product", NpgsqlDbType.Integer, ratio.Job.Product);
+            int id_lote = Convert.ToInt32(command.ExecuteScalar());
 
+            if (id_lote <= 0) return "Error al intentar actualizar o eliminar en la tabla de ratios por día. ";
+
+            command.CommandText = "UPDATE inkaart.\"StockDocument\" SET product_stock = product_stock - :produced " +
+                "WHERE \"idDocument\" = :id_lote AND product_id = :id_product";
+            command.Parameters.AddWithValue("id_lote", NpgsqlDbType.Integer, id_lote);
             int rows_affected = command.ExecuteNonQuery();
+
             connection.Close();
 
-            if (rows_affected <= 0) return "Error al intentar actualizar o eliminar en la tabla de ratios por día. ";
+            if (rows_affected <= 0) return "Error al intentar actualizar o eliminar en la tabla de lotes. ";
             return "Se actualizó o eliminó (soft) la fila con éxito en la tabla de ratios por día. ";
         }
     }
