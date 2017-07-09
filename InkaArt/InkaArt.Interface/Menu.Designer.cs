@@ -406,6 +406,7 @@ namespace InkaArt.Interface
             this.Text = "Inka Art";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Menu_FormClosed);
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.menu_strip.ResumeLayout(false);
             this.menu_strip.PerformLayout();
             this.status_strip.ResumeLayout(false);

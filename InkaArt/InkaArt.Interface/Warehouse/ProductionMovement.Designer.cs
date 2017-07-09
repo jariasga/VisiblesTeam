@@ -100,7 +100,6 @@
             this.text_name_warehouse.ReadOnly = true;
             this.text_name_warehouse.Size = new System.Drawing.Size(638, 24);
             this.text_name_warehouse.TabIndex = 29;
-            this.text_name_warehouse.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // label9
             // 
@@ -111,7 +110,6 @@
             this.label9.Size = new System.Drawing.Size(64, 18);
             this.label9.TabIndex = 28;
             this.label9.Text = "Nombre";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // button_save
             // 
@@ -174,6 +172,7 @@
             this.text_lote.Name = "text_lote";
             this.text_lote.Size = new System.Drawing.Size(142, 24);
             this.text_lote.TabIndex = 34;
+            this.text_lote.TextChanged += new System.EventHandler(this.textLoteTextChanged);
             // 
             // grid_lote
             // 
@@ -203,6 +202,7 @@
             this.grid_lote.Name = "grid_lote";
             this.grid_lote.Size = new System.Drawing.Size(844, 187);
             this.grid_lote.TabIndex = 57;
+            this.grid_lote.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridLoteCellValueChanged);
             // 
             // nroLote
             // 
@@ -224,12 +224,14 @@
             // 
             this.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ProductName.FillWeight = 120F;
+            this.ProductName.DataPropertyName = "name";
             this.ProductName.HeaderText = "Producto";
             this.ProductName.Name = "ProductName";
             this.ProductName.ReadOnly = true;
             // 
             // Cant
             // 
+            this.Cant.DataPropertyName = "produced";
             this.Cant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Cant.FillWeight = 90F;
             this.Cant.HeaderText = "Cantidad Total";
@@ -238,6 +240,7 @@
             // 
             // stockWarehouse
             // 
+            this.stockWarehouse.DataPropertyName = "currentStock";
             this.stockWarehouse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.stockWarehouse.FillWeight = 90F;
             this.stockWarehouse.HeaderText = "Stock en almacén";
@@ -248,6 +251,7 @@
             // 
             this.CurrentCant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.CurrentCant.FillWeight = 105F;
+            this.CurrentCant.DataPropertyName = "product_stock";
             this.CurrentCant.HeaderText = "Cantidad por mover";
             this.CurrentCant.Name = "CurrentCant";
             this.CurrentCant.ReadOnly = true;

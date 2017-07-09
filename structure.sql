@@ -2759,7 +2759,7 @@ INSERT INTO "Turn" ("idTurn", start, "end", description) VALUES (1, '08:00:00', 
 
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (1, 'Compra');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (2, 'Venta');
-INSERT INTO inkaart."MovementName" ("idMovName", description)VALUES (3, 'Produccion');
+INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (3, 'Produccion');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (4, 'Rotura');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (5, 'Traslado');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (7, 'Hallazgo');
@@ -2770,3 +2770,4 @@ INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (10, 'Factu
 INSERT INTO inkaart."MovementType" ("idMovementType", description) VALUES (1, 'Entrada/Salida');
 INSERT INTO inkaart."MovementType" ("idMovementType", description) VALUES (2, 'Entrada');
 INSERT INTO inkaart."MovementType" ("idMovementType", description) VALUES (13, 'Salida');
+
