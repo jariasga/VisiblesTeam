@@ -17,7 +17,8 @@ namespace InkaArt.Interface.Purchases
             InitializeComponent();
             control = new UnitOfMeasurementController();
             unitsList = control.getData();
-            string sortQuery = string.Format("id_unit");
+            desarrolloBusqueda();
+            /*string sortQuery = string.Format("id_unit");
             unitsList.DefaultView.Sort = sortQuery;
 
             dataGridView_unitOfMeasurement.DataSource = unitsList;
@@ -25,7 +26,7 @@ namespace InkaArt.Interface.Purchases
             dataGridView_unitOfMeasurement.Columns["id_unit"].HeaderText = "ID";
             dataGridView_unitOfMeasurement.Columns["name"].HeaderText = "Nombre";
             dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
-            dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
+            dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";*/
         }
         
 
@@ -64,12 +65,17 @@ namespace InkaArt.Interface.Purchases
             textBox_name.Text = textBox_name.Text.Trim();
 
             filter();
-            dataGridView_unitOfMeasurement.DataSource = unitsList;
+            dataGridView_unitOfMeasurement.Rows.Clear();
+            for (int i = 0; i < unitsList.Rows.Count; i++)
+            {
+                int id_unit = int.Parse(unitsList.Rows[i]["id_unit"].ToString());
+                string nombre = unitsList.Rows[i]["name"].ToString();
+                string abreviatura = unitsList.Rows[i]["abbreviature"].ToString();
+                string estado = unitsList.Rows[i]["status"].ToString();
+                dataGridView_unitOfMeasurement.Rows.Add(id_unit, nombre, abreviatura, estado, false);
+            }
+            dataGridView_unitOfMeasurement.Sort(dataGridView_unitOfMeasurement.Columns["id_unitM"], System.ComponentModel.ListSortDirection.Ascending);
 
-            dataGridView_unitOfMeasurement.Columns["id_unit"].HeaderText = "ID";
-            dataGridView_unitOfMeasurement.Columns["name"].HeaderText = "Nombre";
-            dataGridView_unitOfMeasurement.Columns["abbreviature"].HeaderText = "Abreviatura";
-            dataGridView_unitOfMeasurement.Columns["status"].HeaderText = "Estado";
             canReturn = true;
         }
         private void button_search(object sender, EventArgs e)
@@ -108,15 +114,15 @@ namespace InkaArt.Interface.Purchases
             int registros = dataGridView_unitOfMeasurement.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                if (Convert.ToBoolean(dataGridView_unitOfMeasurement.Rows[i].Cells[0].Value) == true)
+                if (Convert.ToBoolean(dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value) == true)
                 {
-                    string idUnit = dataGridView_unitOfMeasurement.Rows[i].Cells[1].Value.ToString();
-                    string name = dataGridView_unitOfMeasurement.Rows[i].Cells[2].Value.ToString();
-                    string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
-                    string status = dataGridView_unitOfMeasurement.Rows[i].Cells[4].Value.ToString();
+                    string idUnit = dataGridView_unitOfMeasurement.Rows[i].Cells[0].Value.ToString();
+                    string name = dataGridView_unitOfMeasurement.Rows[i].Cells[1].Value.ToString();
+                    string abbrev = dataGridView_unitOfMeasurement.Rows[i].Cells[2].Value.ToString();
+                    string status = dataGridView_unitOfMeasurement.Rows[i].Cells[3].Value.ToString();
                     try { 
                         control.updateData(idUnit,name, abbrev, "Inactivo");
-                        desarrolloBusqueda();
+                        
                     }
                     catch (Exception)
                     {
@@ -125,6 +131,7 @@ namespace InkaArt.Interface.Purchases
 
                 }
             }
+            desarrolloBusqueda();
         }
         private void button_cargamasivaclick(object sender, EventArgs e)
         {
