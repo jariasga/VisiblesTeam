@@ -108,8 +108,11 @@ namespace InkaArt.Data.Sales
             for (int i = 0; i < idProd.Length; i++)
             {
                 if (idProd[i] == 0) break;
-                if (idProd[i+1] == 0) curAdap.SelectCommand.CommandText += ":idProduct";
-                else curAdap.SelectCommand.CommandText += ":idProduct,";
+                if (i < idProd.Length - 1)
+                {
+                    if (idProd[i+1] == 0) curAdap.SelectCommand.CommandText += ":idProduct";
+                    else curAdap.SelectCommand.CommandText += ":idProduct,";
+                }else curAdap.SelectCommand.CommandText += ":idProduct";
                 curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
                 curAdap.SelectCommand.Parameters[i + 1].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[i + 1].SourceColumn = "idProduct";
