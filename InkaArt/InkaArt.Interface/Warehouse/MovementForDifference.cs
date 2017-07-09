@@ -117,6 +117,7 @@ namespace InkaArt.Interface.Warehouse
         {
             ProductWarehouseController control = new ProductWarehouseController();
             RawMaterialWarehouseController controlRm = new RawMaterialWarehouseController();
+            FinalProductController controlP = new FinalProductController();
             ProductionMovementMovementController controlM = new ProductionMovementMovementController();
 
             DataTable pwhList = control.getData();
@@ -216,6 +217,8 @@ namespace InkaArt.Interface.Warehouse
                                     try
                                     {
                                         control.updateStock(warehouse_id, item_id, currentStock - aIngresar, currentLogical - aIngresar);
+                                        //update product
+                                        controlP.updateStockOnlyOne(item_id, aIngresar, 1);
                                         controlM.insertBrokenFindMovement(13, warehouse_id, 9, DateTime.Now.ToShortDateString(), item_id, 1, aIngresar);
                                     }
                                     catch (Exception m)

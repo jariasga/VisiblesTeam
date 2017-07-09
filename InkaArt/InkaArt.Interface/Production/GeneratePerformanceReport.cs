@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InkaArt.Business.Algorithm;
+using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,84 +10,93 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using InkaArt.Business.Algorithm;
-//using InkaArt.Business.Security;
-using InkaArt.Data;
-using InkaArt.Data.Algorithm;
-using InkaArt.Business.Production;
 
 namespace InkaArt.Interface.Production
 {
     public partial class GeneratePerformanceReport : Form
     {
-        private List<int> indexList = new List<int>();
-        WorkerController workers = new WorkerController();
-        private List<string> workersList;
+        private WorkerController workers;
 
+        /// <summary>
+        /// Constructor del formulario para generar el reporte de productividad de los trabajadores.
+        /// </summary>
         public GeneratePerformanceReport()
         {
             InitializeComponent();
-            workersList = new List<string>();
-            /*WorkerController workerControl = new WorkerController();
-            workerControl.Load();
-            foreach (var worker in workerControl.List())
-            {
-                comboBox_workers.Items.Add(worker.Name + " " + worker.LastName);
-                indexList.Add(worker.ID);
-            }*/
-            
-            workers.Load();
+
+            this.workers = new WorkerController();
+            this.workers.Load();
             this.list_workers.DataSource = workers.List();
             this.list_workers.DisplayMember = "FullName";
-            this.dateTimePicker_ini.Format = DateTimePickerFormat.Custom;
-            dateTimePicker_ini.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker_fin.Format = DateTimePickerFormat.Custom;
-            dateTimePicker_fin.CustomFormat = "dd/MM/yyyy";
+
+            this.date_picker_start.Format = DateTimePickerFormat.Custom;
+            date_picker_start.CustomFormat = "dd/MM/yyyy";
+            this.date_picker_end.Format = DateTimePickerFormat.Custom;
+            date_picker_end.CustomFormat = "dd/MM/yyyy";
         }
 
+        /// <summary>
+        /// Genera un reporte de productividad para los trabajadores seleccionados en un intervalo de fechas determinado.
+        /// </summary>
         private void button_generate_Click(object sender, EventArgs e)
         {
-            int response = validateData();
-            if (response == 1)
+            if (!button_generate_ValidateFilters()) return;
+
+            WorkerController selected_workers;
+            if (checkbox_workers.Checked == false)
             {
-                /*int cIndex = comboBox_workers.SelectedIndex;
-                PerformanceReport productivity_form = new PerformanceReport(comboBox_workers.Text, indexList[cIndex], dateTimePicker_ini.Value.ToString("M/d/yyyy HH:MM"), dateTimePicker_fin.Value.ToString("M/d/yyyy HH:MM"));
-                productivity_form.Show();*/
+                selected_workers = new WorkerController();
                 for (int i = 0; i < list_workers.Items.Count; i++)
-                {
-                    if (list_workers.GetItemChecked(i))
-                    {
-                        string str = ((Worker)list_workers.Items[i]).FullName;
-                        workersList.Add(str);
-                    }
-                }
-                PerformanceReport productivity_form = new PerformanceReport(workersList, dateTimePicker_ini.Value.ToString("M/d/yyyy HH:MM"), dateTimePicker_fin.Value.ToString("M/d/yyyy HH:MM"));
-                productivity_form.Show();
-                workersList.Clear();
-            }            
+                    if (list_workers.GetItemChecked(i)) selected_workers.Add((Worker)list_workers.Items[i]);
+            }
+            else selected_workers = this.workers;
+
+            try
+            {
+                PerformanceReport performance_report;
+                if (checkbox_dates.Checked == false)
+                    performance_report = new PerformanceReport(selected_workers, date_picker_start.Value, date_picker_end.Value);
+                else
+                    performance_report = new PerformanceReport(selected_workers);
+                performance_report.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al intentar generar el reporte de rendimiento. " + ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                LogHandler.WriteLine("Error al intentar generar el reporte de rendimiento: " + ex.ToString());
+            }
         }
 
-        private int validateData()
+        private bool button_generate_ValidateFilters()
         {            
-            if (dateTimePicker_ini.Value > dateTimePicker_fin.Value)
+            if (date_picker_start.Value > date_picker_end.Value)
             {
-                MessageBox.Show(this, "Por favor, ingresar fecha inicial menor a la fecha final", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
+                MessageBox.Show(this, "Por favor, ingrese una fecha inicial menor a la fecha final.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            else if (dateTimePicker_fin.Value > DateTime.Now)
+            if (date_picker_end.Value > DateTime.Now)
             {
-                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
+                MessageBox.Show(this, "La fecha final no debe ser mayor a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            else return 1;
+            if (!checkbox_workers.Checked && list_workers.CheckedItems.Count <= 0)
+            {
+                MessageBox.Show(this, "Por favor, seleccione por lo menos un trabajador.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
 
-        private void checkBox_allWorkers_CheckedChanged(object sender, EventArgs e)
+        private void checkbox_workers_CheckedChanged(object sender, EventArgs e)
         {
-            if (!checkBox_allWorkers.Checked)
-                list_workers.Enabled = true;
-            else
-                list_workers.Enabled = false;
+            list_workers.Enabled = (checkbox_workers.Checked) ? false : true;
+        }
+
+        private void checkbox_dates_CheckedChanged(object sender, EventArgs e)
+        {
+            date_picker_start.Enabled = (checkbox_dates.Checked) ? false : true;
+            date_picker_end.Enabled = (checkbox_dates.Checked) ? false : true;
         }
     }
 }

@@ -14,10 +14,9 @@ namespace InkaArt.Business.Algorithm
     {
         private JobController jobs;
 
-        public RatioPerDayController()
+        public RatioPerDayController(JobController jobs)
         {
-            this.jobs = new JobController();
-            this.jobs.Load();
+            this.jobs = jobs;
         }
 
         public string InsertOrUpdate(Ratio ratio)

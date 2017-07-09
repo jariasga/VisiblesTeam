@@ -38,7 +38,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.text_lote = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.grid_lote = new System.Windows.Forms.DataGridView();
             this.nroLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +49,7 @@
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_lote)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -121,14 +121,14 @@
             this.button_save.TabIndex = 55;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
-            this.button_save.Click += new System.EventHandler(this.button2_Click);
+            this.button_save.Click += new System.EventHandler(this.buttonSaveClick);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.text_lote);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.grid_lote);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(25, 139);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
@@ -174,10 +174,11 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grid_lote.AllowUserToAddRows = false;
+            this.grid_lote.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.grid_lote.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_lote.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_lote.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nroLote,
             this.idProduct,
             this.ProductName,
@@ -186,11 +187,11 @@
             this.CurrentCant,
             this.MovCant,
             this.Modificar});
-            this.dataGridView1.Location = new System.Drawing.Point(23, 68);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(844, 187);
-            this.dataGridView1.TabIndex = 57;
+            this.grid_lote.Location = new System.Drawing.Point(23, 68);
+            this.grid_lote.Margin = new System.Windows.Forms.Padding(2);
+            this.grid_lote.Name = "dataGridView1";
+            this.grid_lote.Size = new System.Drawing.Size(844, 187);
+            this.grid_lote.TabIndex = 57;
             // 
             // nroLote
             // 
@@ -256,7 +257,7 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_lote)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -271,7 +272,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox text_lote;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView grid_lote;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nroLote;
         private System.Windows.Forms.DataGridViewTextBoxColumn idProduct;
