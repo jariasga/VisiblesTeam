@@ -95,7 +95,7 @@ namespace InkaArt.Interface
             this.almacénToolStripMenuItem});
             this.menu_strip.Location = new System.Drawing.Point(0, 0);
             this.menu_strip.Name = "menu_strip";
-            this.menu_strip.Size = new System.Drawing.Size(1377, 25);
+            this.menu_strip.Size = new System.Drawing.Size(1362, 25);
             this.menu_strip.TabIndex = 1;
             this.menu_strip.Text = "Menú";
             // 
@@ -358,7 +358,7 @@ namespace InkaArt.Interface
             this.toolStripStatusLabelPingStatus});
             this.status_strip.Location = new System.Drawing.Point(0, 717);
             this.status_strip.Name = "status_strip";
-            this.status_strip.Size = new System.Drawing.Size(1377, 22);
+            this.status_strip.Size = new System.Drawing.Size(1362, 22);
             this.status_strip.TabIndex = 2;
             this.status_strip.Text = "Estado";
             // 
@@ -393,7 +393,7 @@ namespace InkaArt.Interface
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1377, 739);
+            this.ClientSize = new System.Drawing.Size(1362, 739);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.status_strip);
             this.Controls.Add(this.menu_strip);
@@ -405,6 +405,7 @@ namespace InkaArt.Interface
             this.Text = "Inka Art";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Menu_FormClosed);
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.menu_strip.ResumeLayout(false);
             this.menu_strip.PerformLayout();
             this.status_strip.ResumeLayout(false);

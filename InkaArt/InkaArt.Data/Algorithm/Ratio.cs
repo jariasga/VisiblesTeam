@@ -76,6 +76,10 @@ namespace InkaArt.Data.Algorithm
             get { return time; }
             //set { time = value; }
         }
+        public int FinalProduced
+        {
+            get { return produced-broken; }
+        }
 
         public Ratio (Ratio old_ratio)
         {
@@ -91,6 +95,7 @@ namespace InkaArt.Data.Algorithm
             this.breakage = old_ratio.breakage;
             this.time = old_ratio.time;
         }
+
 
         public Ratio (int id_ratio, DateTime date, Worker worker, Job job, Recipe recipe, TimeSpan start, TimeSpan end,
             int broken, int produced, double breakage, double time)
@@ -118,7 +123,7 @@ namespace InkaArt.Data.Algorithm
                 "start_time, end_time, broken, produced, breakage, time) VALUES(:date, :id_worker, :id_job, :id_recipe, " +
                 ":start_time, :end_time, :broken, :produced, :breakage, :time) RETURNING id_ratio", connection);
 
-            command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
+            command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date); 
             command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, worker.ID);
             command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, job.ID);
             command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, recipe.ID);
