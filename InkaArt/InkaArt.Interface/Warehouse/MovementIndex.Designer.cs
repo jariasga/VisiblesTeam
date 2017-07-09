@@ -165,11 +165,12 @@
             // 
             // datetime_movement
             // 
+            this.datetime_movement.Font = new System.Drawing.Font("Arial", 11F);
             this.datetime_movement.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.datetime_movement.Location = new System.Drawing.Point(240, 109);
             this.datetime_movement.Name = "datetime_movement";
             this.datetime_movement.ShowCheckBox = true;
-            this.datetime_movement.Size = new System.Drawing.Size(193, 26);
+            this.datetime_movement.Size = new System.Drawing.Size(193, 24);
             this.datetime_movement.TabIndex = 37;
             this.datetime_movement.ValueChanged += new System.EventHandler(this.datetimeMovementValueChanged);
             // 

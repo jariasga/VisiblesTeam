@@ -82,7 +82,7 @@
             // 
             // textBox_count
             // 
-            this.textBox_count.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_count.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_count.Location = new System.Drawing.Point(22, 183);
             this.textBox_count.Name = "textBox_count";
             this.textBox_count.Size = new System.Drawing.Size(219, 24);

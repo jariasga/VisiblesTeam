@@ -48,9 +48,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(19, 25);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(334, 172);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -59,7 +59,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(16, 125);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(179, 26);
             this.textBox2.TabIndex = 6;
@@ -90,7 +90,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(16, 54);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(179, 26);
             this.textBox1.TabIndex = 4;
@@ -111,11 +111,11 @@
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
             this.buttonDelete.Location = new System.Drawing.Point(202, 224);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(104, 39);
             this.buttonDelete.TabIndex = 56;
-            this.buttonDelete.Text = "Cancelar";
+            this.buttonDelete.Text = "🗙 Cancelar";
             this.buttonDelete.UseVisualStyleBackColor = false;
             // 
             // button2
@@ -140,7 +140,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SalesOut";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar Salida por Venta";

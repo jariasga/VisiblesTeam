@@ -92,10 +92,10 @@
             this.button_edit.BackColor = System.Drawing.Color.SteelBlue;
             this.button_edit.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_edit.ForeColor = System.Drawing.Color.White;
-            this.button_edit.Location = new System.Drawing.Point(74, 365);
+            this.button_edit.Location = new System.Drawing.Point(74, 358);
             this.button_edit.Margin = new System.Windows.Forms.Padding(2);
             this.button_edit.Name = "button_edit";
-            this.button_edit.Size = new System.Drawing.Size(95, 34);
+            this.button_edit.Size = new System.Drawing.Size(95, 41);
             this.button_edit.TabIndex = 56;
             this.button_edit.Text = "🖉 Editar";
             this.button_edit.UseVisualStyleBackColor = false;
@@ -218,19 +218,20 @@
             this.button_updateP.BackColor = System.Drawing.Color.SteelBlue;
             this.button_updateP.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_updateP.ForeColor = System.Drawing.Color.White;
-            this.button_updateP.Location = new System.Drawing.Point(168, 323);
+            this.button_updateP.Location = new System.Drawing.Point(208, 323);
             this.button_updateP.Margin = new System.Windows.Forms.Padding(2);
             this.button_updateP.Name = "button_updateP";
-            this.button_updateP.Size = new System.Drawing.Size(106, 32);
+            this.button_updateP.Size = new System.Drawing.Size(106, 41);
             this.button_updateP.TabIndex = 66;
-            this.button_updateP.Text = "＋ Guardar";
+            this.button_updateP.Text = "🖫 Guardar";
             this.button_updateP.UseVisualStyleBackColor = false;
             this.button_updateP.Click += new System.EventHandler(this.button_updateRm_Click);
             // 
             // numericUpDown2
             // 
             this.numericUpDown2.Enabled = false;
-            this.numericUpDown2.Location = new System.Drawing.Point(320, 37);
+            this.numericUpDown2.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown2.Location = new System.Drawing.Point(388, 37);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             1000000,
@@ -238,13 +239,14 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(90, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(90, 24);
             this.numericUpDown2.TabIndex = 65;
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Location = new System.Drawing.Point(175, 40);
+            this.numericUpDown1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown1.Location = new System.Drawing.Point(270, 37);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             1000000,
@@ -252,7 +254,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(90, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(90, 24);
             this.numericUpDown1.TabIndex = 58;
             // 
             // buttonAdd_RawMaterial
@@ -260,10 +262,10 @@
             this.buttonAdd_RawMaterial.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd_RawMaterial.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd_RawMaterial.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd_RawMaterial.Location = new System.Drawing.Point(484, 28);
+            this.buttonAdd_RawMaterial.Location = new System.Drawing.Point(500, 20);
             this.buttonAdd_RawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd_RawMaterial.Name = "buttonAdd_RawMaterial";
-            this.buttonAdd_RawMaterial.Size = new System.Drawing.Size(106, 32);
+            this.buttonAdd_RawMaterial.Size = new System.Drawing.Size(106, 41);
             this.buttonAdd_RawMaterial.TabIndex = 64;
             this.buttonAdd_RawMaterial.Text = "＋ Agregar";
             this.buttonAdd_RawMaterial.UseVisualStyleBackColor = false;
@@ -343,10 +345,10 @@
             this.buttonDelete_RawMaterial.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_RawMaterial.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_RawMaterial.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(372, 323);
+            this.buttonDelete_RawMaterial.Location = new System.Drawing.Point(319, 323);
             this.buttonDelete_RawMaterial.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_RawMaterial.Name = "buttonDelete_RawMaterial";
-            this.buttonDelete_RawMaterial.Size = new System.Drawing.Size(106, 32);
+            this.buttonDelete_RawMaterial.Size = new System.Drawing.Size(106, 41);
             this.buttonDelete_RawMaterial.TabIndex = 63;
             this.buttonDelete_RawMaterial.Text = "🗑 Eliminar";
             this.buttonDelete_RawMaterial.UseVisualStyleBackColor = false;
@@ -356,7 +358,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(20, 15);
+            this.label5.Location = new System.Drawing.Point(19, 15);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 18);
@@ -367,18 +369,19 @@
             // 
             this.comboBox_RM.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBox_RM.Enabled = false;
+            this.comboBox_RM.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_RM.FormattingEnabled = true;
-            this.comboBox_RM.Location = new System.Drawing.Point(22, 39);
+            this.comboBox_RM.Location = new System.Drawing.Point(22, 36);
             this.comboBox_RM.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_RM.Name = "comboBox_RM";
-            this.comboBox_RM.Size = new System.Drawing.Size(128, 21);
+            this.comboBox_RM.Size = new System.Drawing.Size(228, 25);
             this.comboBox_RM.TabIndex = 61;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(316, 15);
+            this.label7.Location = new System.Drawing.Point(385, 15);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(107, 18);
@@ -389,7 +392,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(172, 15);
+            this.label6.Location = new System.Drawing.Point(267, 15);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 18);
@@ -434,19 +437,20 @@
             this.button_updateRm.BackColor = System.Drawing.Color.SteelBlue;
             this.button_updateRm.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_updateRm.ForeColor = System.Drawing.Color.White;
-            this.button_updateRm.Location = new System.Drawing.Point(167, 323);
+            this.button_updateRm.Location = new System.Drawing.Point(202, 318);
             this.button_updateRm.Margin = new System.Windows.Forms.Padding(2);
             this.button_updateRm.Name = "button_updateRm";
-            this.button_updateRm.Size = new System.Drawing.Size(106, 32);
+            this.button_updateRm.Size = new System.Drawing.Size(106, 42);
             this.button_updateRm.TabIndex = 81;
-            this.button_updateRm.Text = "＋ Guardar";
+            this.button_updateRm.Text = "🖫 Guardar";
             this.button_updateRm.UseVisualStyleBackColor = false;
             this.button_updateRm.Click += new System.EventHandler(this.button_updateProduct_Click);
             // 
             // numericUpDown3
             // 
             this.numericUpDown3.Enabled = false;
-            this.numericUpDown3.Location = new System.Drawing.Point(328, 42);
+            this.numericUpDown3.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown3.Location = new System.Drawing.Point(387, 42);
             this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             1000000,
@@ -454,13 +458,14 @@
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(90, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(90, 24);
             this.numericUpDown3.TabIndex = 80;
             // 
             // numericUpDown4
             // 
             this.numericUpDown4.Enabled = false;
-            this.numericUpDown4.Location = new System.Drawing.Point(183, 45);
+            this.numericUpDown4.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown4.Location = new System.Drawing.Point(271, 42);
             this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             1000000,
@@ -468,14 +473,14 @@
             0,
             0});
             this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(90, 20);
+            this.numericUpDown4.Size = new System.Drawing.Size(90, 24);
             this.numericUpDown4.TabIndex = 77;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 20);
+            this.label1.Location = new System.Drawing.Point(19, 20);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 18);
@@ -486,18 +491,19 @@
             // 
             this.comboBox_Producto.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBox_Producto.Enabled = false;
+            this.comboBox_Producto.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Producto.FormattingEnabled = true;
-            this.comboBox_Producto.Location = new System.Drawing.Point(31, 44);
+            this.comboBox_Producto.Location = new System.Drawing.Point(22, 41);
             this.comboBox_Producto.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_Producto.Name = "comboBox_Producto";
-            this.comboBox_Producto.Size = new System.Drawing.Size(128, 21);
+            this.comboBox_Producto.Size = new System.Drawing.Size(220, 25);
             this.comboBox_Producto.TabIndex = 79;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(325, 20);
+            this.label8.Location = new System.Drawing.Point(384, 20);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(107, 18);
@@ -508,7 +514,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(180, 20);
+            this.label9.Location = new System.Drawing.Point(268, 20);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(102, 18);
@@ -520,10 +526,10 @@
             this.buttonAdd_Product.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd_Product.Location = new System.Drawing.Point(482, 31);
+            this.buttonAdd_Product.Location = new System.Drawing.Point(500, 25);
             this.buttonAdd_Product.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd_Product.Name = "buttonAdd_Product";
-            this.buttonAdd_Product.Size = new System.Drawing.Size(106, 32);
+            this.buttonAdd_Product.Size = new System.Drawing.Size(106, 41);
             this.buttonAdd_Product.TabIndex = 74;
             this.buttonAdd_Product.Text = "＋ Agregar";
             this.buttonAdd_Product.UseVisualStyleBackColor = false;
@@ -603,10 +609,10 @@
             this.buttonDelete_Product.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete_Product.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete_Product.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete_Product.Location = new System.Drawing.Point(373, 323);
+            this.buttonDelete_Product.Location = new System.Drawing.Point(312, 318);
             this.buttonDelete_Product.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete_Product.Name = "buttonDelete_Product";
-            this.buttonDelete_Product.Size = new System.Drawing.Size(106, 32);
+            this.buttonDelete_Product.Size = new System.Drawing.Size(106, 42);
             this.buttonDelete_Product.TabIndex = 73;
             this.buttonDelete_Product.Text = "🗑 Eliminar";
             this.buttonDelete_Product.UseVisualStyleBackColor = false;

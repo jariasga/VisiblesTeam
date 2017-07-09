@@ -160,5 +160,10 @@ namespace InkaArt.Interface.Production
             document.Close();
             MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void PerformanceReport_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

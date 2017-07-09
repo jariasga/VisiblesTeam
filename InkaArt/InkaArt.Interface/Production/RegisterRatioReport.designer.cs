@@ -73,7 +73,7 @@
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(185, 42);
             this.button_save.TabIndex = 65;
-            this.button_save.Text = "🖫 Guardar Vitácora";
+            this.button_save.Text = "🖫 Guardar Bitácora";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_guardar_Click);
             // 
@@ -185,9 +185,9 @@
             this.label_date.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_date.Location = new System.Drawing.Point(22, 17);
             this.label_date.Name = "label_date";
-            this.label_date.Size = new System.Drawing.Size(133, 18);
+            this.label_date.Size = new System.Drawing.Size(135, 18);
             this.label_date.TabIndex = 25;
-            this.label_date.Text = "Fecha de vitácora";
+            this.label_date.Text = "Fecha de bitácora";
             // 
             // label_worker
             // 
@@ -202,11 +202,12 @@
             // 
             // combobox_worker
             // 
+            this.combobox_worker.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combobox_worker.FormattingEnabled = true;
-            this.combobox_worker.ItemHeight = 18;
+            this.combobox_worker.ItemHeight = 17;
             this.combobox_worker.Location = new System.Drawing.Point(51, 50);
             this.combobox_worker.Name = "combobox_worker";
-            this.combobox_worker.Size = new System.Drawing.Size(405, 26);
+            this.combobox_worker.Size = new System.Drawing.Size(405, 25);
             this.combobox_worker.TabIndex = 10;
             // 
             // label_job
@@ -222,10 +223,11 @@
             // 
             // combobox_job
             // 
+            this.combobox_job.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combobox_job.FormattingEnabled = true;
             this.combobox_job.Location = new System.Drawing.Point(51, 111);
             this.combobox_job.Name = "combobox_job";
-            this.combobox_job.Size = new System.Drawing.Size(200, 26);
+            this.combobox_job.Size = new System.Drawing.Size(200, 25);
             this.combobox_job.TabIndex = 15;
             this.combobox_job.SelectedIndexChanged += new System.EventHandler(this.combobox_job_SelectedIndexChanged);
             // 
@@ -265,15 +267,16 @@
             // 
             // combobox_recipe
             // 
+            this.combobox_recipe.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combobox_recipe.FormattingEnabled = true;
             this.combobox_recipe.Location = new System.Drawing.Point(256, 111);
             this.combobox_recipe.Name = "combobox_recipe";
-            this.combobox_recipe.Size = new System.Drawing.Size(200, 26);
+            this.combobox_recipe.Size = new System.Drawing.Size(200, 25);
             this.combobox_recipe.TabIndex = 20;
             // 
             // textbox_produced
             // 
-            this.textbox_produced.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_produced.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_produced.Location = new System.Drawing.Point(683, 113);
             this.textbox_produced.Name = "textbox_produced";
             this.textbox_produced.Size = new System.Drawing.Size(200, 24);
@@ -282,7 +285,7 @@
             // 
             // textbox_end
             // 
-            this.textbox_end.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_end.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_end.Location = new System.Drawing.Point(683, 50);
             this.textbox_end.Name = "textbox_end";
             this.textbox_end.Size = new System.Drawing.Size(200, 24);
@@ -291,7 +294,7 @@
             // 
             // textbox_broken
             // 
-            this.textbox_broken.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_broken.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_broken.Location = new System.Drawing.Point(472, 113);
             this.textbox_broken.Name = "textbox_broken";
             this.textbox_broken.Size = new System.Drawing.Size(200, 24);
@@ -333,7 +336,7 @@
             // 
             // textbox_start
             // 
-            this.textbox_start.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_start.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_start.Location = new System.Drawing.Point(472, 50);
             this.textbox_start.Name = "textbox_start";
             this.textbox_start.Size = new System.Drawing.Size(200, 24);
@@ -353,10 +356,11 @@
             // 
             // date_picker
             // 
+            this.date_picker.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_picker.Location = new System.Drawing.Point(198, 12);
             this.date_picker.Name = "date_picker";
-            this.date_picker.Size = new System.Drawing.Size(216, 26);
+            this.date_picker.Size = new System.Drawing.Size(216, 24);
             this.date_picker.TabIndex = 5;
             this.date_picker.Value = new System.DateTime(2017, 6, 4, 18, 31, 53, 0);
             this.date_picker.ValueChanged += new System.EventHandler(this.date_picker_ValueChanged);
@@ -370,7 +374,7 @@
             this.button_load.Name = "button_load";
             this.button_load.Size = new System.Drawing.Size(185, 42);
             this.button_load.TabIndex = 66;
-            this.button_load.Text = "⬆ Cargar Masiva";
+            this.button_load.Text = "⬆ Carga Masiva";
             this.button_load.UseVisualStyleBackColor = false;
             this.button_load.Click += new System.EventHandler(this.button_load_Click);
             // 

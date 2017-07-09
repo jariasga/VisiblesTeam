@@ -70,11 +70,12 @@
             // 
             // text_id_warehouse
             // 
+            this.text_id_warehouse.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.text_id_warehouse.Location = new System.Drawing.Point(23, 54);
             this.text_id_warehouse.Margin = new System.Windows.Forms.Padding(2);
             this.text_id_warehouse.Name = "text_id_warehouse";
             this.text_id_warehouse.ReadOnly = true;
-            this.text_id_warehouse.Size = new System.Drawing.Size(174, 26);
+            this.text_id_warehouse.Size = new System.Drawing.Size(174, 24);
             this.text_id_warehouse.TabIndex = 33;
             // 
             // label5
@@ -89,11 +90,12 @@
             // 
             // text_name_warehouse
             // 
+            this.text_name_warehouse.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.text_name_warehouse.Location = new System.Drawing.Point(229, 54);
             this.text_name_warehouse.Margin = new System.Windows.Forms.Padding(2);
             this.text_name_warehouse.Name = "text_name_warehouse";
             this.text_name_warehouse.ReadOnly = true;
-            this.text_name_warehouse.Size = new System.Drawing.Size(362, 26);
+            this.text_name_warehouse.Size = new System.Drawing.Size(362, 24);
             this.text_name_warehouse.TabIndex = 29;
             this.text_name_warehouse.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
@@ -163,10 +165,11 @@
             // 
             // text_lote
             // 
+            this.text_lote.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.text_lote.Location = new System.Drawing.Point(675, 27);
             this.text_lote.Margin = new System.Windows.Forms.Padding(2);
             this.text_lote.Name = "text_lote";
-            this.text_lote.Size = new System.Drawing.Size(142, 26);
+            this.text_lote.Size = new System.Drawing.Size(142, 24);
             this.text_lote.TabIndex = 34;
             // 
             // dataGridView1

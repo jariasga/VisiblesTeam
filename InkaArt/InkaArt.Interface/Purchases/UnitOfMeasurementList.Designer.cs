@@ -215,9 +215,9 @@
             this.button_cargamasiva.Location = new System.Drawing.Point(419, 379);
             this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
             this.button_cargamasiva.Name = "button_cargamasiva";
-            this.button_cargamasiva.Size = new System.Drawing.Size(124, 39);
+            this.button_cargamasiva.Size = new System.Drawing.Size(132, 39);
             this.button_cargamasiva.TabIndex = 49;
-            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.Text = "⬆ Carga masiva";
             this.button_cargamasiva.UseVisualStyleBackColor = false;
             this.button_cargamasiva.Click += new System.EventHandler(this.button_cargamasivaclick);
             // 

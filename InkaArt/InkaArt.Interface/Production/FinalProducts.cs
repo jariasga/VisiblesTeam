@@ -137,7 +137,7 @@ namespace InkaArt.Interface.Production
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 if (control.massiveUpload(dialog.FileName) == 0)
-                    MessageBox.Show("Productos cargados de manera exitosa.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Productos cargados de manera exitosa.", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                     MessageBox.Show("No se pudo cargar el archivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

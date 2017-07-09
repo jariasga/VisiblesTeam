@@ -95,7 +95,7 @@
             // 
             this.textbox_reason.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_reason.Enabled = false;
-            this.textbox_reason.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_reason.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_reason.Location = new System.Drawing.Point(202, 244);
             this.textbox_reason.Multiline = true;
             this.textbox_reason.Name = "textbox_reason";
@@ -106,9 +106,10 @@
             // 
             this.textbox_devtotal.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_devtotal.Enabled = false;
+            this.textbox_devtotal.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_devtotal.Location = new System.Drawing.Point(25, 344);
             this.textbox_devtotal.Name = "textbox_devtotal";
-            this.textbox_devtotal.Size = new System.Drawing.Size(165, 26);
+            this.textbox_devtotal.Size = new System.Drawing.Size(165, 24);
             this.textbox_devtotal.TabIndex = 28;
             this.textbox_devtotal.Text = "S/.  0.00";
             // 
@@ -125,9 +126,10 @@
             // 
             this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_igv.Enabled = false;
+            this.textbox_igv.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_igv.Location = new System.Drawing.Point(26, 294);
             this.textbox_igv.Name = "textbox_igv";
-            this.textbox_igv.Size = new System.Drawing.Size(165, 26);
+            this.textbox_igv.Size = new System.Drawing.Size(165, 24);
             this.textbox_igv.TabIndex = 26;
             this.textbox_igv.Text = "S/.  0.00";
             // 
@@ -144,9 +146,10 @@
             // 
             this.textbox_devamount.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_devamount.Enabled = false;
+            this.textbox_devamount.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_devamount.Location = new System.Drawing.Point(26, 244);
             this.textbox_devamount.Name = "textbox_devamount";
-            this.textbox_devamount.Size = new System.Drawing.Size(165, 26);
+            this.textbox_devamount.Size = new System.Drawing.Size(165, 24);
             this.textbox_devamount.TabIndex = 21;
             this.textbox_devamount.Text = "S/.  0.00";
             // 
@@ -229,9 +232,10 @@
             // 
             this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_name.Enabled = false;
+            this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(25, 120);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(277, 26);
+            this.textbox_name.Size = new System.Drawing.Size(277, 24);
             this.textbox_name.TabIndex = 19;
             // 
             // label2
@@ -247,9 +251,10 @@
             // 
             this.textbox_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_doc.Enabled = false;
+            this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_doc.Location = new System.Drawing.Point(25, 60);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(277, 26);
+            this.textbox_doc.Size = new System.Drawing.Size(277, 24);
             this.textbox_doc.TabIndex = 17;
             // 
             // clientIdentifierLabel
@@ -281,9 +286,10 @@
             // 
             this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textbox_total.Enabled = false;
-            this.textbox_total.Location = new System.Drawing.Point(23, 207);
+            this.textbox_total.Font = new System.Drawing.Font("Arial", 11F);
+            this.textbox_total.Location = new System.Drawing.Point(23, 200);
             this.textbox_total.Name = "textbox_total";
-            this.textbox_total.Size = new System.Drawing.Size(278, 26);
+            this.textbox_total.Size = new System.Drawing.Size(278, 24);
             this.textbox_total.TabIndex = 30;
             this.textbox_total.Text = "S/.  0.00";
             // 
@@ -292,19 +298,20 @@
             this.combo_doc.BackColor = System.Drawing.Color.White;
             this.combo_doc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_doc.Enabled = false;
+            this.combo_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_doc.FormattingEnabled = true;
             this.combo_doc.Items.AddRange(new object[] {
             "Boleta",
             "Factura"});
             this.combo_doc.Location = new System.Drawing.Point(25, 55);
             this.combo_doc.Name = "combo_doc";
-            this.combo_doc.Size = new System.Drawing.Size(278, 26);
+            this.combo_doc.Size = new System.Drawing.Size(278, 25);
             this.combo_doc.TabIndex = 36;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(21, 186);
+            this.label11.Location = new System.Drawing.Point(21, 179);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(87, 18);
             this.label11.TabIndex = 29;
@@ -315,7 +322,7 @@
             this.date_deliverydate.Enabled = false;
             this.date_deliverydate.Font = new System.Drawing.Font("Arial", 11F);
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliverydate.Location = new System.Drawing.Point(24, 136);
+            this.date_deliverydate.Location = new System.Drawing.Point(24, 128);
             this.date_deliverydate.Name = "date_deliverydate";
             this.date_deliverydate.Size = new System.Drawing.Size(277, 24);
             this.date_deliverydate.TabIndex = 12;
@@ -324,7 +331,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F);
-            this.label6.Location = new System.Drawing.Point(21, 115);
+            this.label6.Location = new System.Drawing.Point(21, 107);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(135, 18);
             this.label6.TabIndex = 11;
@@ -358,7 +365,7 @@
             this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_seedoc.ForeColor = System.Drawing.Color.White;
             this.button_seedoc.Location = new System.Drawing.Point(519, 439);
-            this.button_seedoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_seedoc.Margin = new System.Windows.Forms.Padding(2);
             this.button_seedoc.Name = "button_seedoc";
             this.button_seedoc.Size = new System.Drawing.Size(183, 39);
             this.button_seedoc.TabIndex = 42;

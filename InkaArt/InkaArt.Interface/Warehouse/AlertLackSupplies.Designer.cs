@@ -98,10 +98,11 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(16, 56);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(217, 26);
+            this.textBox1.Size = new System.Drawing.Size(217, 24);
             this.textBox1.TabIndex = 2;
             // 
             // groupBox1

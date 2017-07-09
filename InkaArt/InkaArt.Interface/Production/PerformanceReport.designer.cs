@@ -150,21 +150,21 @@
             // button_export
             // 
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(344, 532);
+            this.button_export.Location = new System.Drawing.Point(360, 532);
             this.button_export.Margin = new System.Windows.Forms.Padding(2);
             this.button_export.Name = "button_export";
             this.button_export.Size = new System.Drawing.Size(161, 41);
             this.button_export.TabIndex = 31;
-            this.button_export.Text = "Exportar a Excel";
+            this.button_export.Text = "🗀 Exportar a Excel";
             this.button_export.UseVisualStyleBackColor = false;
             this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // label_tprom
             // 
             this.label_tprom.AutoSize = true;
-            this.label_tprom.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_tprom.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_tprom.Location = new System.Drawing.Point(888, 423);
             this.label_tprom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_tprom.Name = "label_tprom";
@@ -174,7 +174,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(729, 423);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
@@ -185,7 +185,7 @@
             // label_cant
             // 
             this.label_cant.AutoSize = true;
-            this.label_cant.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cant.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_cant.Location = new System.Drawing.Point(952, 457);
             this.label_cant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_cant.Name = "label_cant";
@@ -195,7 +195,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(729, 457);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
@@ -206,7 +206,7 @@
             // label_rota
             // 
             this.label_rota.AutoSize = true;
-            this.label_rota.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_rota.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_rota.Location = new System.Drawing.Point(914, 492);
             this.label_rota.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_rota.Name = "label_rota";
@@ -216,7 +216,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(729, 492);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
@@ -227,14 +227,14 @@
             // button_pdf
             // 
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(531, 532);
+            this.button_pdf.Location = new System.Drawing.Point(525, 532);
             this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
             this.button_pdf.Name = "button_pdf";
-            this.button_pdf.Size = new System.Drawing.Size(148, 41);
+            this.button_pdf.Size = new System.Drawing.Size(161, 41);
             this.button_pdf.TabIndex = 38;
-            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.Text = "🗀  Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
             this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
             // 
@@ -259,6 +259,7 @@
             this.Name = "PerformanceReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Rendimiento";
+            this.Load += new System.EventHandler(this.PerformanceReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_performance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

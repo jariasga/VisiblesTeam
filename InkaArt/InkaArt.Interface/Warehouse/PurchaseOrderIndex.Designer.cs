@@ -71,30 +71,33 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Font = new System.Drawing.Font("Arial", 11F);
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(240, 110);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(299, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(299, 24);
             this.dateTimePicker1.TabIndex = 28;
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Arial", 11F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Activo",
             "Inactivo"});
             this.comboBox1.Location = new System.Drawing.Point(25, 110);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(192, 26);
+            this.comboBox1.Size = new System.Drawing.Size(192, 25);
             this.comboBox1.TabIndex = 27;
             // 
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.Color.White;
             this.textBox2.Enabled = false;
+            this.textBox2.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox2.Location = new System.Drawing.Point(25, 50);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(192, 26);
+            this.textBox2.Size = new System.Drawing.Size(192, 24);
             this.textBox2.TabIndex = 26;
             // 
             // label5
@@ -128,9 +131,10 @@
             // 
             this.textBox4.BackColor = System.Drawing.Color.White;
             this.textBox4.Enabled = false;
+            this.textBox4.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox4.Location = new System.Drawing.Point(240, 50);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(410, 26);
+            this.textBox4.Size = new System.Drawing.Size(410, 24);
             this.textBox4.TabIndex = 17;
             // 
             // label1

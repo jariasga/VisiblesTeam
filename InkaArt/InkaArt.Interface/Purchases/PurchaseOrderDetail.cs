@@ -457,7 +457,7 @@ namespace InkaArt.Interface.Purchases
                     return;
                 }
 
-                buttonSave.Text = "Editar";
+                buttonSave.Text = "🖉 Editar";
                 buttonExport.Visible = false;
                 mode = 2;
                 isInEditMode = false;
@@ -489,7 +489,7 @@ namespace InkaArt.Interface.Purchases
                 {
                     return;
                 }
-                buttonSave.Text = "Editar";
+                buttonSave.Text = "🖉 Editar";
                 isInEditMode = false;
                 comboBox_supplier.Enabled = false;
                 dateTimePicker_creation.Enabled = false;

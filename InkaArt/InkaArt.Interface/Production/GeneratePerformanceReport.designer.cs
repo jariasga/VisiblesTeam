@@ -106,6 +106,7 @@
             // 
             this.list_workers.CheckOnClick = true;
             this.list_workers.Enabled = false;
+            this.list_workers.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.list_workers.FormattingEnabled = true;
             this.list_workers.Location = new System.Drawing.Point(11, 24);
             this.list_workers.Margin = new System.Windows.Forms.Padding(2);
@@ -115,7 +116,7 @@
             // 
             // dateTimePicker_ini
             // 
-            this.dateTimePicker_ini.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_ini.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_ini.Location = new System.Drawing.Point(27, 71);
             this.dateTimePicker_ini.Margin = new System.Windows.Forms.Padding(2);
@@ -125,7 +126,7 @@
             // 
             // dateTimePicker_fin
             // 
-            this.dateTimePicker_fin.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker_fin.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker_fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_fin.Location = new System.Drawing.Point(27, 149);
             this.dateTimePicker_fin.Margin = new System.Windows.Forms.Padding(2);
@@ -136,22 +137,22 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(24, 128);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 17);
+            this.label2.Size = new System.Drawing.Size(84, 18);
             this.label2.TabIndex = 1;
             this.label2.Text = "Fecha final";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(24, 50);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 17);
+            this.label1.Size = new System.Drawing.Size(96, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Fecha inicial";
             // 

@@ -86,10 +86,11 @@
             // 
             // combo_simulations
             // 
+            this.combo_simulations.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_simulations.FormattingEnabled = true;
             this.combo_simulations.Location = new System.Drawing.Point(200, 17);
             this.combo_simulations.Name = "combo_simulations";
-            this.combo_simulations.Size = new System.Drawing.Size(212, 26);
+            this.combo_simulations.Size = new System.Drawing.Size(212, 25);
             this.combo_simulations.TabIndex = 44;
             this.combo_simulations.SelectedIndexChanged += new System.EventHandler(this.ComboSimulationsSelectedIndexChanged);
             this.combo_simulations.MouseClick += new System.Windows.Forms.MouseEventHandler(this.combo_simulations_MouseClick);
@@ -104,7 +105,7 @@
             this.button_report.Name = "button_report";
             this.button_report.Size = new System.Drawing.Size(187, 43);
             this.button_report.TabIndex = 45;
-            this.button_report.Text = "Generar Reporte";
+            this.button_report.Text = "🗀 Generar Reporte";
             this.button_report.UseVisualStyleBackColor = false;
             this.button_report.Click += new System.EventHandler(this.ButtonReportClick);
             // 
