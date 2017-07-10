@@ -101,9 +101,9 @@ namespace InkaArt.Interface.Warehouse
             {
                 MessageBox.Show("Se actualizaron: " + id_products.Count + " Registros.");                
                 fillGrids();
-                id_products.Add(0);
-                quantities.Add(0);                
-                control_order.AddSaleDocumentW(devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
+                //id_products.Add(0);
+                //quantities.Add(0);                
+                //control_order.AddSaleDocumentW(devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
                 updateDevolution();
 
                 this.Close();
