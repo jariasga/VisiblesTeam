@@ -256,9 +256,18 @@ namespace InkaArt.Business.Warehouse
         {
 
         }
+        private bool comprobarCarga(string nombre,string direccion)
+        {
+            DataTable resultados = GetWarehouses();
+            DataRow[] rows;
+            rows = resultados.Select("name LIKE '" + nombre + "' AND address LIKE '" + direccion + "'");
 
+            if (rows.Any()) return true; //ya existe en la BD
+            else return false;
+        }
         public int massiveUpload(string filename)
         {
+            bool primero = true;
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
             {
@@ -268,17 +277,21 @@ namespace InkaArt.Business.Warehouse
                     var values = line.Split(';');
 
                     // creamos almacen
+                    if(primero) {
+                        if(comprobarCarga(values[0], values[2])) return 2;
+                        primero = false;
+                    }
                     try
                     {
                         createWarehouse(values[0], values[1], values[2]);
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("El archivo de carga contiene errores", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("El archivo de carga contiene errores", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return 1;
                     }           
                 }
-                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                MessageBox.Show("La carga de almacenes se realizó con éxito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return 0;
         }
