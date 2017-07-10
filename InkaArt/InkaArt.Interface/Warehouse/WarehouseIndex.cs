@@ -112,7 +112,7 @@ namespace InkaArt.Interface.Warehouse
             int resultados2;       
             RawMaterialWarehouseController rmw_control = new RawMaterialWarehouseController();
             OpenFileDialog dialog2 = new OpenFileDialog();
-            dialog2.Title = "Seleccione el archivo de stocks";
+            dialog2.Title = "Seleccione archivo de stocks materias primas";
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
@@ -126,7 +126,7 @@ namespace InkaArt.Interface.Warehouse
 
             WarehouseCrud movimientos2 = new WarehouseCrud();
             OpenFileDialog dialog3 = new OpenFileDialog();
-            dialog3.Title = "Open Product File";
+            dialog3.Title = "Seleccione archivo de stocks productos";
             dialog3.Filter = "CSV files|*.csv";
             if (dialog3.ShowDialog() == DialogResult.OK)
             {
