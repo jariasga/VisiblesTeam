@@ -98,12 +98,25 @@ namespace InkaArt.Interface.Production
                     MessageBoxIcon.Error);
             else
             {
-                FileStream fs = new FileStream("ReporteStocks.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
-                Document document = new Document(PageSize.A4);
-                PdfWriter writer = PdfWriter.GetInstance(document, fs);
-                document.Open();
-                var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
-                var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
+            SaveFileDialog dialogo = new SaveFileDialog();
+            string x = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string titulo = "ReporteStocks.pdf";
+            dialogo.Title = "Guardar reporte";
+            dialogo.InitialDirectory = x;
+            dialogo.FileName = titulo;
+            dialogo.Filter = "Pdf Files|*.pdf";
+            if (dialogo.ShowDialog() == DialogResult.OK)
+            {
+                titulo = dialogo.FileName;
+            }
+            else return;
+
+            FileStream fs = new FileStream(titulo, FileMode.Create, FileAccess.Write, FileShare.None);
+            Document document = new Document(PageSize.A4);
+            PdfWriter writer = PdfWriter.GetInstance(document, fs);
+            document.Open();
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+            var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
 
                 Paragraph title = new Paragraph("REPORTE DE STOCKS", titleFont);
                 title.Alignment = Element.ALIGN_CENTER;

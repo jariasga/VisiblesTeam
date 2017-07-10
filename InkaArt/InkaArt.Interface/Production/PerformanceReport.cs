@@ -94,8 +94,7 @@ namespace InkaArt.Interface.Production
         private void button_pdf_Click(object sender, EventArgs e)
         {
             if (grid_performance.Rows.Count == 0)
-                MessageBox.Show("No se generó el reporte debido a que no existe información sobre el o los trabajadores en el intervalo de tiempo elegido", "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("No se generó el reporte debido a que no existe información sobre el o los trabajadores en el intervalo de tiempo elegido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 DialogResult result = this.save_pdf_dialog.ShowDialog();
