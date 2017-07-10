@@ -110,7 +110,7 @@ namespace InkaArt.Interface.Production
             Excel.Application app = new Excel.Application();
             Excel.Workbook workbook = app.Workbooks.Add(Missing.Value);
 
-            for (int day = 0; day < simulation.Days; day++)
+            for (int day = 0; day < assignments.Count; day++)
             {
                 Excel.Worksheet worksheet;
                 if (day <= 0) worksheet = (Excel.Worksheet)workbook.Worksheets.Item[day + 1];
