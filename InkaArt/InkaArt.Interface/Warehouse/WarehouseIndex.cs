@@ -95,21 +95,32 @@ namespace InkaArt.Interface.Warehouse
 
         private void button_bulk_upload_Click(object sender, EventArgs e)
         {
+            int resultados;
             WarehouseCrud movimientos = new WarehouseCrud();
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Open Warehouse File";
+            dialog.Title = "Seleccione el archivo de almacenes";
             dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK) { 
-                if (movimientos.massiveUpload(dialog.FileName) != 0) return;
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                resultados = movimientos.massiveUpload(dialog.FileName);
+                if (resultados != 0) return;
+                else if (resultados == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque los almacenes ya existen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            
+            int resultados2;       
             RawMaterialWarehouseController rmw_control = new RawMaterialWarehouseController();
             OpenFileDialog dialog2 = new OpenFileDialog();
-            dialog2.Title = "Open Stock File";
+            dialog2.Title = "Seleccione el archivo de stocks";
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
-                if (rmw_control.massiveUpload(dialog2.FileName) != 0) return;
+                resultados2 = rmw_control.massiveUpload(dialog2.FileName);
+                if (resultados2 != 0) return;
+                else if (resultados2 == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque los registros ya existen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             realizarBusqueda();
         }
