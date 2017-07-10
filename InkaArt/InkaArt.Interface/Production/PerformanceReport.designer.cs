@@ -35,17 +35,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label_today = new System.Windows.Forms.Label();
             this.grid_performance = new System.Windows.Forms.DataGridView();
+            this.grid_column_worker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_job = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_export = new System.Windows.Forms.Button();
             this.label_tprom = new System.Windows.Forms.Label();
             this.label_cant = new System.Windows.Forms.Label();
             this.label_rota = new System.Windows.Forms.Label();
             this.button_pdf = new System.Windows.Forms.Button();
             this.save_pdf_dialog = new System.Windows.Forms.SaveFileDialog();
-            this.grid_column_worker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_recipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_job = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_performance)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,10 +53,9 @@
             // 
             this.label_today.AutoSize = true;
             this.label_today.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_today.Location = new System.Drawing.Point(729, 18);
-            this.label_today.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_today.Location = new System.Drawing.Point(972, 22);
             this.label_today.Name = "label_today";
-            this.label_today.Size = new System.Drawing.Size(52, 18);
+            this.label_today.Size = new System.Drawing.Size(64, 23);
             this.label_today.TabIndex = 29;
             this.label_today.Text = "Fecha";
             this.label_today.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -92,8 +91,8 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grid_performance.DefaultCellStyle = dataGridViewCellStyle3;
-            this.grid_performance.Location = new System.Drawing.Point(17, 49);
-            this.grid_performance.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.grid_performance.Location = new System.Drawing.Point(23, 60);
+            this.grid_performance.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.grid_performance.Name = "grid_performance";
             this.grid_performance.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -109,72 +108,8 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_performance.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.grid_performance.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grid_performance.Size = new System.Drawing.Size(848, 404);
+            this.grid_performance.Size = new System.Drawing.Size(1131, 497);
             this.grid_performance.TabIndex = 30;
-            // 
-            // button_export
-            // 
-            this.button_export.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_export.Font = new System.Drawing.Font("Arial", 12F);
-            this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(254, 470);
-            this.button_export.Margin = new System.Windows.Forms.Padding(2);
-            this.button_export.Name = "button_export";
-            this.button_export.Size = new System.Drawing.Size(161, 41);
-            this.button_export.TabIndex = 31;
-            this.button_export.Text = "🗀 Exportar a Excel";
-            this.button_export.UseVisualStyleBackColor = false;
-            this.button_export.Click += new System.EventHandler(this.button_export_Click);
-            // 
-            // label_tprom
-            // 
-            this.label_tprom.AutoSize = true;
-            this.label_tprom.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_tprom.Location = new System.Drawing.Point(888, 423);
-            this.label_tprom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_tprom.Name = "label_tprom";
-            this.label_tprom.Size = new System.Drawing.Size(0, 17);
-            this.label_tprom.TabIndex = 33;
-            // 
-            // label_cant
-            // 
-            this.label_cant.AutoSize = true;
-            this.label_cant.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_cant.Location = new System.Drawing.Point(952, 457);
-            this.label_cant.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_cant.Name = "label_cant";
-            this.label_cant.Size = new System.Drawing.Size(0, 17);
-            this.label_cant.TabIndex = 35;
-            // 
-            // label_rota
-            // 
-            this.label_rota.AutoSize = true;
-            this.label_rota.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_rota.Location = new System.Drawing.Point(914, 492);
-            this.label_rota.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_rota.Name = "label_rota";
-            this.label_rota.Size = new System.Drawing.Size(0, 17);
-            this.label_rota.TabIndex = 37;
-            // 
-            // button_pdf
-            // 
-            this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F);
-            this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(463, 470);
-            this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
-            this.button_pdf.Name = "button_pdf";
-            this.button_pdf.Size = new System.Drawing.Size(148, 41);
-            this.button_pdf.TabIndex = 38;
-            this.button_pdf.Text = "🗀 Exportar a PDF";
-            this.button_pdf.UseVisualStyleBackColor = false;
-            this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
-            // 
-            // save_pdf_dialog
-            // 
-            this.save_pdf_dialog.FileName = "ReporteProductividad";
-            this.save_pdf_dialog.Filter = "Portable Document File|*.pdf";
-            this.save_pdf_dialog.Title = "Exportar a un documento PDF...";
             // 
             // grid_column_worker
             // 
@@ -216,12 +151,73 @@
             this.grid_column_time.Name = "grid_column_time";
             this.grid_column_time.ReadOnly = true;
             // 
+            // button_export
+            // 
+            this.button_export.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_export.Font = new System.Drawing.Font("Arial", 12F);
+            this.button_export.ForeColor = System.Drawing.Color.White;
+            this.button_export.Location = new System.Drawing.Point(339, 578);
+            this.button_export.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_export.Name = "button_export";
+            this.button_export.Size = new System.Drawing.Size(215, 50);
+            this.button_export.TabIndex = 31;
+            this.button_export.Text = "🗀 Exportar a Excel";
+            this.button_export.UseVisualStyleBackColor = false;
+            this.button_export.Click += new System.EventHandler(this.button_export_Click);
+            // 
+            // label_tprom
+            // 
+            this.label_tprom.AutoSize = true;
+            this.label_tprom.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_tprom.Location = new System.Drawing.Point(1184, 521);
+            this.label_tprom.Name = "label_tprom";
+            this.label_tprom.Size = new System.Drawing.Size(0, 22);
+            this.label_tprom.TabIndex = 33;
+            // 
+            // label_cant
+            // 
+            this.label_cant.AutoSize = true;
+            this.label_cant.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cant.Location = new System.Drawing.Point(1269, 562);
+            this.label_cant.Name = "label_cant";
+            this.label_cant.Size = new System.Drawing.Size(0, 22);
+            this.label_cant.TabIndex = 35;
+            // 
+            // label_rota
+            // 
+            this.label_rota.AutoSize = true;
+            this.label_rota.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_rota.Location = new System.Drawing.Point(1219, 606);
+            this.label_rota.Name = "label_rota";
+            this.label_rota.Size = new System.Drawing.Size(0, 22);
+            this.label_rota.TabIndex = 37;
+            // 
+            // button_pdf
+            // 
+            this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F);
+            this.button_pdf.ForeColor = System.Drawing.Color.White;
+            this.button_pdf.Location = new System.Drawing.Point(617, 578);
+            this.button_pdf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button_pdf.Name = "button_pdf";
+            this.button_pdf.Size = new System.Drawing.Size(197, 50);
+            this.button_pdf.TabIndex = 38;
+            this.button_pdf.Text = "🗀 Exportar a PDF";
+            this.button_pdf.UseVisualStyleBackColor = false;
+            this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
+            // 
+            // save_pdf_dialog
+            // 
+            this.save_pdf_dialog.FileName = "ReporteProductividad";
+            this.save_pdf_dialog.Filter = "Portable Document File|*.pdf";
+            this.save_pdf_dialog.Title = "Exportar a un documento PDF...";
+            // 
             // PerformanceReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(884, 522);
+            this.ClientSize = new System.Drawing.Size(1179, 642);
             this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.label_rota);
             this.Controls.Add(this.label_cant);
@@ -230,7 +226,7 @@
             this.Controls.Add(this.grid_performance);
             this.Controls.Add(this.label_today);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PerformanceReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reporte de Rendimiento";

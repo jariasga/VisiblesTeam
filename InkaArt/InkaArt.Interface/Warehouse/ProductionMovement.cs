@@ -107,6 +107,16 @@ namespace InkaArt.Interface.Warehouse
         private void updateGrid()
         {
             int id_lote;
+
+            //if (text_lote.Text == "")
+            //{
+            //    id_lote = 0;
+            //}
+            //else
+            //{
+            //    int.TryParse(text_lote.Text, out id_lote);
+            //}
+
             int.TryParse(text_lote.Text, out id_lote);
 
             NpgsqlDataReader datos = movementController.getProductStock(this.id_warehouse, id_lote);

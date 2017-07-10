@@ -128,15 +128,15 @@ namespace InkaArt.Business.Algorithm
             //Calcular los promedios de AverageBreakage y AverageTime
             for (int r = 0; r < recipes.NumberOfRecipes; r++)
             {
-                LogHandler.Write("{0}", recipes[r].Version);
+                //LogHandler.Write("{0}", recipes[r].Version);
                 for (int j = 0; j < jobs.NumberOfJobs; j++)
                 {
-                    LogHandler.Write(";{0},{1:0.0000},{2:0.0000}", average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
+                    //LogHandler.Write(";{0},{1:0.0000},{2:0.0000}", average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
                     average_breakage_mean[r, j] = average_breakage_mean[r, j] / average_mean_count[r, j];
                     average_time_mean[r, j] = average_time_mean[r, j] / average_mean_count[r, j];
-                    LogHandler.Write(",{0:0.0000},{1:0.0000}", average_breakage_mean[r, j], average_time_mean[r, j]);
+                    //LogHandler.Write(",{0:0.0000},{1:0.0000}", average_breakage_mean[r, j], average_time_mean[r, j]);
                 }
-                LogHandler.WriteLine();
+                //LogHandler.WriteLine();
             }
 
             //Calcular el BreakageIndex, TimeIndex y LossIndex
@@ -166,13 +166,13 @@ namespace InkaArt.Business.Algorithm
                         {
                             index.BreakageIndex = index.AverageBreakage / average_breakage_mean[r, j];
                             index.TimeIndex = index.AverageTime / average_time_mean[r, j];
-                            LogHandler.Write("{0};{1};{2};{3:0.0000} / [{4},{5}]={6:0.0000} = {7:0.0000};{8:0.0000} / [{4},{5}]={9:0.0000} = {10:0.0000};",
-                                   index.Worker.FullName, index.Recipe.Version, index.Job.Name, index.AverageBreakage, r + 1, j + 1, average_breakage_mean[r, j],
-                                   index.BreakageIndex, index.AverageTime, average_time_mean[r, j], index.TimeIndex);
+                            //LogHandler.Write("{0};{1};{2};{3:0.0000} / [{4},{5}]={6:0.0000} = {7:0.0000};{8:0.0000} / [{4},{5}]={9:0.0000} = {10:0.0000};",
+                            //       index.Worker.FullName, index.Recipe.Version, index.Job.Name, index.AverageBreakage, r + 1, j + 1, average_breakage_mean[r, j],
+                            //       index.BreakageIndex, index.AverageTime, average_time_mean[r, j], index.TimeIndex);
                             index.LossIndex = (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight) / product_weight;
                             index.CostValue = index.LossIndex;
-                            LogHandler.WriteLine("({0:0.0000}*{1:0.0000} + {2:0.0000}*{3:0.0000}) / {4:0.0000} = {5:0.0000};{6:0.0000}", index.BreakageIndex,
-                                simulation.BreakageWeight, index.TimeIndex, simulation.TimeWeight, product_weight, index.LossIndex, index.CostValue);
+                            //LogHandler.WriteLine("({0:0.0000}*{1:0.0000} + {2:0.0000}*{3:0.0000}) / {4:0.0000} = {5:0.0000};{6:0.0000}", index.BreakageIndex,
+                            //    simulation.BreakageWeight, index.TimeIndex, simulation.TimeWeight, product_weight, index.LossIndex, index.CostValue);
                             continue;
                         }
                         //Si el índice es nulo, crear un índice ficticio para el trabajador
@@ -180,10 +180,9 @@ namespace InkaArt.Business.Algorithm
                         indexes.Add(new Index(simulation.SelectedWorkers[w], jobs[j], recipes[r], average_breakage_mean[r, j],
                             average_time_mean[r, j], loss_index));
                     }
-                    LogHandler.WriteLine("Terminado el puesto de trabajo {0} para la receta {1} (count={2}, breakage={3}, mean={4})",
-                        jobs[j].Name, recipes[r].Version, average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
+                    //LogHandler.WriteLine("Terminado el puesto de trabajo {0} para la receta {1} (count={2}, breakage={3}, mean={4})", jobs[j].Name, recipes[r].Version, average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
                 }
-                LogHandler.WriteLine("Terminada la receta {0}", recipes[r].Version);
+                //LogHandler.WriteLine("Terminada la receta {0}", recipes[r].Version);
             }
         }
 

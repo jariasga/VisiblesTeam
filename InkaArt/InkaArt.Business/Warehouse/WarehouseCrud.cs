@@ -16,6 +16,8 @@ namespace InkaArt.Business.Warehouse
     public class WarehouseCrud
     {
         private WarehouseData warehouseData;
+        private MovementController movementController = new MovementController();
+        private MovementData movement_data = new MovementData();
 
         public WarehouseCrud()
         {
@@ -256,8 +258,25 @@ namespace InkaArt.Business.Warehouse
         {
 
         }
+        private bool comprobarCarga(string nombre,string direccion)
+        {
+            DataTable resultados = GetWarehouses();
+            DataRow[] rows;
+            rows = resultados.Select("name LIKE '" + nombre + "' AND address LIKE '" + direccion + "'");
+            if (rows.Any()) return true; //ya existe en la BD
+            else return false;
+        }
 
-        public int massiveUpload(string filename)
+        public void insertProductWarehouse(string idProduct, string idWarehouse, string actStock, string minStock, string maxStock, string state)
+        {
+            string query = "";
+
+            query = "insert into inkaart.\"Product-Warehouse\" (\"idProduct\", \"idWarehouse\", \"currentStock\", \"minimunStock\", \"maximunStock\", \"state\") values(" + idProduct + ", " + idWarehouse + ", " + actStock + ", " + minStock + ", " + maxStock + ", '" + state + "')";
+
+            movement_data.updateData(query);
+        }
+
+        public int massiveUploadProducts(string filename)
         {
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
@@ -270,15 +289,46 @@ namespace InkaArt.Business.Warehouse
                     // creamos almacen
                     try
                     {
-                        createWarehouse(values[0], values[1], values[2]);
+                        insertProductWarehouse(values[0], values[1], values[2], values[3], values[4], values[5]);
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("El archivo de carga contiene errores", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return 1;
+                    }
+                }
+                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            return 0;
+        }        
+
+        public int massiveUpload(string filename)
+        {
+            bool primero = true;
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    // creamos almacen
+                    if(primero) {
+                        if(comprobarCarga(values[0], values[2])) return 2;
+                        primero = false;
+                    }
+                    try
+                    {
+                        createWarehouse(values[0], values[1], values[2]);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("El archivo de carga contiene errores", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return 1;
                     }           
                 }
-                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                MessageBox.Show("La carga de almacenes se realizó con éxito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return 0;
         }

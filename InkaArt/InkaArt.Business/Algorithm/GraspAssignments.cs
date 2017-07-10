@@ -27,9 +27,17 @@ namespace InkaArt.Business.Algorithm
             this.assignments[count] = assignment;
             this.orders[count] = orders;
             //Si la nueva asignación es mejor que la mejor de la lista de asignaciones, actualizar el índice de la mejor asignación
-            if (best_index < 0 || assignment.ObjectiveFunction < this.assignments[best_index].ObjectiveFunction) best_index = count;
+            if (best_index < 0 || this.IsBetterAssignment(assignment)) best_index = count;
             this.count++;
             return best_index;
+        }
+
+        private bool IsBetterAssignment(Assignment assignment)
+        {
+            Assignment current_best_assignment = this.assignments[best_index];
+            bool discard = (assignment.HuacosProduced < current_best_assignment.HuacosProduced) && (assignment.HuamangaProduced <
+                current_best_assignment.HuamangaProduced) && (assignment.AltarpieceProduced < current_best_assignment.AltarpieceProduced);
+            return (assignment.ObjectiveFunction < current_best_assignment.ObjectiveFunction) && !discard;
         }
 
         public Assignment GetBestAssignment(ref List<Order> orders)
