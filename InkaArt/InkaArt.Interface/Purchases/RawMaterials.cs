@@ -158,6 +158,7 @@ namespace InkaArt.Interface.Purchases
 
         private void button_cargamasivaclic(object sender, EventArgs e)
         {
+            
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Raw Materials File";
             dialog.Filter = "CSV files|*.csv";
