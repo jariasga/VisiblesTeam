@@ -108,8 +108,11 @@ namespace InkaArt.Data.Sales
             for (int i = 0; i < idProd.Length; i++)
             {
                 if (idProd[i] == 0) break;
-                if (idProd[i+1] == 0) curAdap.SelectCommand.CommandText += ":idProduct";
-                else curAdap.SelectCommand.CommandText += ":idProduct,";
+                if (i < idProd.Length - 1)
+                {
+                    if (idProd[i+1] == 0) curAdap.SelectCommand.CommandText += ":idProduct";
+                    else curAdap.SelectCommand.CommandText += ":idProduct,";
+                }else curAdap.SelectCommand.CommandText += ":idProduct";
                 curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
                 curAdap.SelectCommand.Parameters[i + 1].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[i + 1].SourceColumn = "idProduct";
@@ -563,12 +566,8 @@ namespace InkaArt.Data.Sales
                 row["idOrder"] = orderId;
                 if (isClientSelected)
                 {
-                    if (clientNat == 0)
-                    {
-                        updateLogicalStock(currentProductId, cant, type);
-                        lineStatus = "despachado";
-                        produced = cant;
-                    }
+                    updateLogicalStock(currentProductId, cant, type);
+                    produced = cant;
                 }
                 row["quantityProduced"] = produced;
                 row["lineStatus"] = lineStatus;
@@ -592,7 +591,9 @@ namespace InkaArt.Data.Sales
             {
                 if (string.Compare(myTable.Rows[i]["idProduct"].ToString(), currentProductId.ToString()) == 0)
                 {
-                    myTable.Rows[i]["logicalStock"] = int.Parse(myTable.Rows[i]["logicalStock"].ToString()) - cant;
+                    int curLogicalStock = int.Parse(myTable.Rows[i]["logicalStock"].ToString());
+                    int updatedStock = curLogicalStock - cant;
+                    myTable.Rows[i]["logicalStock"] = updatedStock;
                     break;
                 }
             }

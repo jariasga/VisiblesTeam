@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_idSupplier = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -173,6 +174,7 @@
             // 
             // textBox_priority
             // 
+            this.textBox_priority.BackColor = System.Drawing.Color.White;
             this.textBox_priority.Enabled = false;
             this.textBox_priority.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_priority.Location = new System.Drawing.Point(231, 283);
@@ -294,6 +296,7 @@
             // comboBox_rawMaterial
             // 
             this.comboBox_rawMaterial.AllowDrop = true;
+            this.comboBox_rawMaterial.BackColor = System.Drawing.Color.WhiteSmoke;
             this.comboBox_rawMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_rawMaterial.FormattingEnabled = true;
             this.comboBox_rawMaterial.Location = new System.Drawing.Point(23, 54);
@@ -345,8 +348,8 @@
             this.dataGridView_rm_sup.AllowUserToDeleteRows = false;
             this.dataGridView_rm_sup.AllowUserToResizeColumns = false;
             this.dataGridView_rm_sup.AllowUserToResizeRows = false;
-            this.dataGridView_rm_sup.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_rm_sup.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rm_sup.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_rm_sup.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_rm_sup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_rm_sup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_materiaPrima,
@@ -356,6 +359,14 @@
             this.Acción,
             this.Actualizar,
             this.Eliminado});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_rm_sup.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_rm_sup.Location = new System.Drawing.Point(23, 109);
             this.dataGridView_rm_sup.Name = "dataGridView_rm_sup";
             this.dataGridView_rm_sup.Size = new System.Drawing.Size(389, 347);
@@ -364,20 +375,24 @@
             // 
             // id_materiaPrima
             // 
+            this.id_materiaPrima.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id_materiaPrima.FillWeight = 80F;
             this.id_materiaPrima.HeaderText = "ID";
             this.id_materiaPrima.Name = "id_materiaPrima";
             this.id_materiaPrima.ReadOnly = true;
-            this.id_materiaPrima.Width = 80;
             // 
             // nombre
             // 
+            this.nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nombre.FillWeight = 110F;
             this.nombre.HeaderText = "Nombre";
             this.nombre.Name = "nombre";
             this.nombre.ReadOnly = true;
-            this.nombre.Width = 110;
             // 
             // Precio
             // 
+            this.Precio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Precio.FillWeight = 90F;
             this.Precio.HeaderText = "Precio";
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
@@ -419,14 +434,14 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(144, 42);
             this.buttonSave.TabIndex = 22;
-            this.buttonSave.Text = "Editar";
+            this.buttonSave.Text = "🖉 Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_event_click);
             // 
             // comboBox_status
             // 
             this.comboBox_status.AllowDrop = true;
-            this.comboBox_status.BackColor = System.Drawing.Color.White;
+            this.comboBox_status.BackColor = System.Drawing.Color.WhiteSmoke;
             this.comboBox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_status.FormattingEnabled = true;
             this.comboBox_status.Items.AddRange(new object[] {

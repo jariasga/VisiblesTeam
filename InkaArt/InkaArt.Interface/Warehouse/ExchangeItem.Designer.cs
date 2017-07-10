@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox_id = new System.Windows.Forms.TextBox();
@@ -37,13 +39,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.idItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoDeProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.buttonAdd = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -59,9 +61,9 @@
             this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(16, 17);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(532, 128);
             this.groupBox1.TabIndex = 43;
             this.groupBox1.TabStop = false;
@@ -76,7 +78,7 @@
             "Activo",
             "Inactivo"});
             this.comboBox1.Location = new System.Drawing.Point(19, 93);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(138, 26);
             this.comboBox1.Sorted = true;
@@ -88,7 +90,7 @@
             this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_id.Location = new System.Drawing.Point(19, 41);
-            this.textBox_id.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_id.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_id.Name = "textBox_id";
             this.textBox_id.Size = new System.Drawing.Size(145, 24);
             this.textBox_id.TabIndex = 26;
@@ -121,7 +123,7 @@
             this.textBox_supplier.BackColor = System.Drawing.Color.White;
             this.textBox_supplier.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_supplier.Location = new System.Drawing.Point(181, 41);
-            this.textBox_supplier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_supplier.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_supplier.Name = "textBox_supplier";
             this.textBox_supplier.Size = new System.Drawing.Size(348, 24);
             this.textBox_supplier.TabIndex = 17;
@@ -153,8 +155,16 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idItem,
@@ -162,48 +172,29 @@
             this.TipoDeProducto,
             this.cantMov,
             this.Seleccionar});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(16, 17);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(532, 312);
+            this.dataGridView1.Size = new System.Drawing.Size(666, 312);
             this.dataGridView1.TabIndex = 44;
-            // 
-            // idItem
-            // 
-            this.idItem.HeaderText = "idItem";
-            this.idItem.Name = "idItem";
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.Width = 250;
-            // 
-            // TipoDeProducto
-            // 
-            this.TipoDeProducto.HeaderText = "Tipo de Producto";
-            this.TipoDeProducto.Name = "TipoDeProducto";
-            this.TipoDeProducto.Width = 120;
-            // 
-            // cantMov
-            // 
-            this.cantMov.HeaderText = "Cantidad a mover";
-            this.cantMov.Name = "cantMov";
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
             // 
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(125, 351);
+            this.buttonAdd.Location = new System.Drawing.Point(233, 344);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(106, 32);
+            this.buttonAdd.Size = new System.Drawing.Size(106, 39);
             this.buttonAdd.TabIndex = 56;
             this.buttonAdd.Text = "Aceptar";
             this.buttonAdd.UseVisualStyleBackColor = false;
@@ -214,27 +205,61 @@
             this.buttonDelete.BackColor = System.Drawing.Color.Firebrick;
             this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonDelete.Location = new System.Drawing.Point(320, 351);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete.Location = new System.Drawing.Point(356, 344);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(113, 32);
+            this.buttonDelete.Size = new System.Drawing.Size(113, 39);
             this.buttonDelete.TabIndex = 55;
-            this.buttonDelete.Text = "Cancelar";
+            this.buttonDelete.Text = "🗙 Cancelar";
             this.buttonDelete.UseVisualStyleBackColor = false;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // idItem
+            // 
+            this.idItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idItem.FillWeight = 70F;
+            this.idItem.HeaderText = "ID";
+            this.idItem.Name = "idItem";
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.FillWeight = 250F;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // TipoDeProducto
+            // 
+            this.TipoDeProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TipoDeProducto.FillWeight = 110F;
+            this.TipoDeProducto.HeaderText = "Tipo de Producto";
+            this.TipoDeProducto.Name = "TipoDeProducto";
+            // 
+            // cantMov
+            // 
+            this.cantMov.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cantMov.HeaderText = "Cantidad a mover";
+            this.cantMov.Name = "cantMov";
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Seleccionar.FillWeight = 94F;
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
             // 
             // ExchangeItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(572, 401);
+            this.ClientSize = new System.Drawing.Size(701, 401);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ExchangeItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccionar Item";

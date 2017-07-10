@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_suppliersList = new System.Windows.Forms.DataGridView();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -53,13 +55,23 @@
             // 
             this.dataGridView_suppliersList.AllowUserToAddRows = false;
             this.dataGridView_suppliersList.AllowUserToDeleteRows = false;
-            this.dataGridView_suppliersList.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_suppliersList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_suppliersList.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_suppliersList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_suppliersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_suppliersList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Eliminar});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_suppliersList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_suppliersList.Location = new System.Drawing.Point(25, 183);
             this.dataGridView_suppliersList.Name = "dataGridView_suppliersList";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView_suppliersList.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_suppliersList.Size = new System.Drawing.Size(709, 251);
             this.dataGridView_suppliersList.TabIndex = 8;
             this.dataGridView_suppliersList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editCurrentSupplier);
@@ -90,10 +102,10 @@
             this.buttonAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonAdd.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(158, 445);
+            this.buttonAdd.Location = new System.Drawing.Point(149, 445);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(142, 39);
+            this.buttonAdd.Size = new System.Drawing.Size(151, 39);
             this.buttonAdd.TabIndex = 39;
             this.buttonAdd.Text = "＋ Crear";
             this.buttonAdd.UseVisualStyleBackColor = false;
@@ -245,9 +257,9 @@
             this.button_cargamasiva.Location = new System.Drawing.Point(461, 445);
             this.button_cargamasiva.Margin = new System.Windows.Forms.Padding(2);
             this.button_cargamasiva.Name = "button_cargamasiva";
-            this.button_cargamasiva.Size = new System.Drawing.Size(124, 39);
+            this.button_cargamasiva.Size = new System.Drawing.Size(151, 39);
             this.button_cargamasiva.TabIndex = 50;
-            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.Text = "⬆ Carga masiva";
             this.button_cargamasiva.UseVisualStyleBackColor = false;
             this.button_cargamasiva.Click += new System.EventHandler(this.cargaMasiva);
             // 

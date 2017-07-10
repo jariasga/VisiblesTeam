@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_save = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.text_order = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.text_id_warehouse = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.idProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,11 +47,6 @@
             this.MovementCant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MovementQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.text_id_warehouse = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -56,7 +57,7 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(350, 471);
+            this.button_save.Location = new System.Drawing.Point(345, 474);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(138, 39);
             this.button_save.TabIndex = 56;
@@ -71,7 +72,7 @@
             this.groupBox2.Controls.Add(this.text_order);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(28, 148);
+            this.groupBox2.Location = new System.Drawing.Point(21, 159);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
@@ -85,7 +86,7 @@
             this.button3.BackColor = System.Drawing.Color.Gray;
             this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(719, 32);
+            this.button3.Location = new System.Drawing.Point(719, 28);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(45, 31);
@@ -97,7 +98,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(431, 38);
+            this.label1.Location = new System.Drawing.Point(431, 34);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(138, 18);
@@ -106,16 +107,17 @@
             // 
             // text_order
             // 
-            this.text_order.Location = new System.Drawing.Point(573, 35);
+            this.text_order.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.text_order.Location = new System.Drawing.Point(573, 31);
             this.text_order.Margin = new System.Windows.Forms.Padding(2);
             this.text_order.Name = "text_order";
-            this.text_order.Size = new System.Drawing.Size(142, 26);
+            this.text_order.Size = new System.Drawing.Size(142, 24);
             this.text_order.TabIndex = 34;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idProduct,
@@ -125,51 +127,19 @@
             this.MovementCant,
             this.MovementQuantity,
             this.Modificar});
-            this.dataGridView1.Location = new System.Drawing.Point(19, 83);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Location = new System.Drawing.Point(19, 73);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(745, 199);
+            this.dataGridView1.Size = new System.Drawing.Size(745, 215);
             this.dataGridView1.TabIndex = 57;
-            // 
-            // idProduct
-            // 
-            this.idProduct.HeaderText = "Id Producto";
-            this.idProduct.Name = "idProduct";
-            this.idProduct.ReadOnly = true;
-            // 
-            // ProductName
-            // 
-            this.ProductName.HeaderText = "Producto";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            // 
-            // Cant
-            // 
-            this.Cant.HeaderText = "Cantidad Total";
-            this.Cant.Name = "Cant";
-            this.Cant.ReadOnly = true;
-            // 
-            // CurrentCant
-            // 
-            this.CurrentCant.HeaderText = "Stock en Almacén";
-            this.CurrentCant.Name = "CurrentCant";
-            this.CurrentCant.ReadOnly = true;
-            // 
-            // MovementCant
-            // 
-            this.MovementCant.HeaderText = "Cantidad por mover";
-            this.MovementCant.Name = "MovementCant";
-            this.MovementCant.ReadOnly = true;
-            // 
-            // MovementQuantity
-            // 
-            this.MovementQuantity.HeaderText = "Cantidad a mover";
-            this.MovementQuantity.Name = "MovementQuantity";
-            // 
-            // Modificar
-            // 
-            this.Modificar.HeaderText = "Modificar";
-            this.Modificar.Name = "Modificar";
             // 
             // groupBox3
             // 
@@ -178,7 +148,7 @@
             this.groupBox3.Controls.Add(this.textBox6);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(28, 23);
+            this.groupBox3.Location = new System.Drawing.Point(21, 18);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -189,11 +159,13 @@
             // 
             // text_id_warehouse
             // 
+            this.text_id_warehouse.BackColor = System.Drawing.Color.White;
+            this.text_id_warehouse.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.text_id_warehouse.Location = new System.Drawing.Point(19, 62);
             this.text_id_warehouse.Margin = new System.Windows.Forms.Padding(2);
             this.text_id_warehouse.Name = "text_id_warehouse";
             this.text_id_warehouse.ReadOnly = true;
-            this.text_id_warehouse.Size = new System.Drawing.Size(202, 26);
+            this.text_id_warehouse.Size = new System.Drawing.Size(202, 24);
             this.text_id_warehouse.TabIndex = 33;
             // 
             // label5
@@ -208,11 +180,13 @@
             // 
             // textBox6
             // 
+            this.textBox6.BackColor = System.Drawing.Color.White;
+            this.textBox6.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.Location = new System.Drawing.Point(240, 62);
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(524, 26);
+            this.textBox6.Size = new System.Drawing.Size(524, 24);
             this.textBox6.TabIndex = 29;
             // 
             // label9
@@ -225,12 +199,66 @@
             this.label9.TabIndex = 28;
             this.label9.Text = "Nombre";
             // 
+            // idProduct
+            // 
+            this.idProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idProduct.FillWeight = 80F;
+            this.idProduct.HeaderText = "ID";
+            this.idProduct.Name = "idProduct";
+            this.idProduct.ReadOnly = true;
+            // 
+            // ProductName
+            // 
+            this.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProductName.FillWeight = 150F;
+            this.ProductName.HeaderText = "Producto";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            // 
+            // Cant
+            // 
+            this.Cant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cant.FillWeight = 90F;
+            this.Cant.HeaderText = "Cantidad Total";
+            this.Cant.Name = "Cant";
+            this.Cant.ReadOnly = true;
+            // 
+            // CurrentCant
+            // 
+            this.CurrentCant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CurrentCant.FillWeight = 90F;
+            this.CurrentCant.HeaderText = "Stock en Almacén";
+            this.CurrentCant.Name = "CurrentCant";
+            this.CurrentCant.ReadOnly = true;
+            // 
+            // MovementCant
+            // 
+            this.MovementCant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MovementCant.FillWeight = 90F;
+            this.MovementCant.HeaderText = "Cantidad por mover";
+            this.MovementCant.Name = "MovementCant";
+            this.MovementCant.ReadOnly = true;
+            // 
+            // MovementQuantity
+            // 
+            this.MovementQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.MovementQuantity.FillWeight = 90F;
+            this.MovementQuantity.HeaderText = "Cantidad a mover";
+            this.MovementQuantity.Name = "MovementQuantity";
+            // 
+            // Modificar
+            // 
+            this.Modificar.FillWeight = 90F;
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            this.Modificar.Width = 90;
+            // 
             // SaleMovement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(839, 522);
+            this.ClientSize = new System.Drawing.Size(824, 522);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_save);
@@ -238,7 +266,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SaleMovement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SaleMovementcs";
+            this.Text = "Movimiento de venta";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

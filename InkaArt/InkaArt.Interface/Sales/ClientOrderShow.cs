@@ -148,11 +148,15 @@ namespace InkaArt.Interface.Sales
         }
         private string validateDataGrid()
         {
+            int numZeros = 0;
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
                     return "La cantidad a facturar supera a la cantidad disponible, por favor corriga los datos.";
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
+                    numZeros++;
             }
+            if (numZeros > 1) return "Por favor ingrese una cantidad a facturar en la columna 'A Facturar'.";
             return "OK";
         }
 
@@ -172,6 +176,8 @@ namespace InkaArt.Interface.Sales
                     }
                 }
                 orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray());
+                MessageBox.Show("Se ha generado una nota de crédito exitosamente.", "Éxito", MessageBoxButtons.OK);
+                Close();
             }
             else
             {

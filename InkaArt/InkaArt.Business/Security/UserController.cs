@@ -153,13 +153,14 @@ namespace InkaArt.Business.Security
             bool i;
             WorkerController worker = new WorkerController();
             row = getUserRow(username, out i);
-            DataTable workerTable = worker.showData();
-            int idUser = Convert.ToInt32(row["id_user"]);
-
-            DataRow [] rows = workerTable.Select("id_user = " + idUser);
-            row = rows[0];
             if (row != null)
             {
+                DataTable workerTable = worker.showData();
+                int idUser = Convert.ToInt32(row["id_user"]);
+
+                DataRow [] rows = workerTable.Select("id_user = " + idUser);
+                row = rows[0];
+            
                 string newPass = sha.getMiniSHA();
                 worker.sendPassword(row["email"].ToString(), username, newPass);
                 updatePassword(idUser, newPass, true);

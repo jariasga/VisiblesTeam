@@ -74,35 +74,35 @@
             this.groupBox1.Controls.Add(this.pictureBoxUser);
             this.groupBox1.Controls.Add(this.buttonSave);
             this.groupBox1.Controls.Add(this.tabControl1);
-            this.groupBox1.Location = new System.Drawing.Point(16, 18);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(18, 16);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(533, 327);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(600, 294);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del Trabajador";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.BackColor = System.Drawing.Color.Gray;
+            this.buttonCancel.BackColor = System.Drawing.Color.Firebrick;
             this.buttonCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Location = new System.Drawing.Point(419, 267);
+            this.buttonCancel.Location = new System.Drawing.Point(471, 240);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(88, 39);
+            this.buttonCancel.Size = new System.Drawing.Size(99, 35);
             this.buttonCancel.TabIndex = 4;
-            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.Text = "🗙 Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // pictureBoxUser
             // 
             this.pictureBoxUser.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxUser.Image")));
-            this.pictureBoxUser.Location = new System.Drawing.Point(401, 58);
+            this.pictureBoxUser.Location = new System.Drawing.Point(457, 54);
             this.pictureBoxUser.Name = "pictureBoxUser";
-            this.pictureBoxUser.Size = new System.Drawing.Size(120, 150);
+            this.pictureBoxUser.Size = new System.Drawing.Size(128, 135);
             this.pictureBoxUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxUser.TabIndex = 13;
             this.pictureBoxUser.TabStop = false;
@@ -113,12 +113,12 @@
             this.buttonSave.BackColor = System.Drawing.Color.SteelBlue;
             this.buttonSave.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Location = new System.Drawing.Point(419, 224);
+            this.buttonSave.Location = new System.Drawing.Point(471, 202);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(88, 39);
+            this.buttonSave.Size = new System.Drawing.Size(99, 35);
             this.buttonSave.TabIndex = 3;
-            this.buttonSave.Text = "Guardar";
+            this.buttonSave.Text = "🖫 Guardar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -127,11 +127,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(13, 31);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabControl1.Location = new System.Drawing.Point(15, 28);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(381, 273);
+            this.tabControl1.Size = new System.Drawing.Size(429, 246);
             this.tabControl1.TabIndex = 12;
             // 
             // tabPage1
@@ -149,142 +149,142 @@
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(373, 240);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(421, 215);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Info. Personal";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // textBoxAddress
             // 
-            this.textBoxAddress.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxAddress.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAddress.Location = new System.Drawing.Point(14, 142);
-            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxAddress.BackColor = System.Drawing.Color.White;
+            this.textBoxAddress.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxAddress.Location = new System.Drawing.Point(16, 128);
+            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(345, 26);
+            this.textBoxAddress.Size = new System.Drawing.Size(388, 24);
             this.textBoxAddress.TabIndex = 5;
             // 
             // textBoxPhone
             // 
-            this.textBoxPhone.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxPhone.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPhone.Location = new System.Drawing.Point(194, 86);
-            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxPhone.BackColor = System.Drawing.Color.White;
+            this.textBoxPhone.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPhone.Location = new System.Drawing.Point(218, 77);
+            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPhone.MaxLength = 9;
             this.textBoxPhone.Name = "textBoxPhone";
-            this.textBoxPhone.Size = new System.Drawing.Size(165, 26);
+            this.textBoxPhone.Size = new System.Drawing.Size(185, 24);
             this.textBoxPhone.TabIndex = 4;
             this.textBoxPhone.TextChanged += new System.EventHandler(this.textBoxPhone_TextChanged);
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxEmail.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxEmail.Location = new System.Drawing.Point(13, 198);
-            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxEmail.BackColor = System.Drawing.Color.White;
+            this.textBoxEmail.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxEmail.Location = new System.Drawing.Point(15, 178);
+            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(345, 26);
+            this.textBoxEmail.Size = new System.Drawing.Size(388, 24);
             this.textBoxEmail.TabIndex = 6;
             // 
             // textBoxDNI
             // 
-            this.textBoxDNI.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxDNI.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDNI.Location = new System.Drawing.Point(13, 86);
-            this.textBoxDNI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxDNI.BackColor = System.Drawing.Color.White;
+            this.textBoxDNI.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDNI.Location = new System.Drawing.Point(15, 77);
+            this.textBoxDNI.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxDNI.MaxLength = 8;
             this.textBoxDNI.Name = "textBoxDNI";
-            this.textBoxDNI.Size = new System.Drawing.Size(165, 26);
+            this.textBoxDNI.Size = new System.Drawing.Size(185, 24);
             this.textBoxDNI.TabIndex = 3;
             this.textBoxDNI.TextChanged += new System.EventHandler(this.textBoxDNI_TextChanged_1);
             // 
             // textBoxLastName
             // 
-            this.textBoxLastName.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxLastName.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxLastName.Location = new System.Drawing.Point(193, 30);
-            this.textBoxLastName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxLastName.BackColor = System.Drawing.Color.White;
+            this.textBoxLastName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLastName.Location = new System.Drawing.Point(217, 27);
+            this.textBoxLastName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(165, 26);
+            this.textBoxLastName.Size = new System.Drawing.Size(185, 24);
             this.textBoxLastName.TabIndex = 2;
             // 
             // textBoxName
             // 
-            this.textBoxName.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxName.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxName.Location = new System.Drawing.Point(13, 30);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxName.BackColor = System.Drawing.Color.White;
+            this.textBoxName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxName.Location = new System.Drawing.Point(15, 27);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(165, 26);
+            this.textBoxName.Size = new System.Drawing.Size(185, 24);
             this.textBoxName.TabIndex = 1;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(9, 117);
+            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(10, 105);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 20);
+            this.label8.Size = new System.Drawing.Size(79, 18);
             this.label8.TabIndex = 24;
             this.label8.Text = "Dirección:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(189, 61);
+            this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(213, 55);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 20);
+            this.label7.Size = new System.Drawing.Size(70, 18);
             this.label7.TabIndex = 22;
             this.label7.Text = "Teléfono:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(8, 173);
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 156);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 20);
+            this.label5.Size = new System.Drawing.Size(57, 18);
             this.label5.TabIndex = 20;
             this.label5.Text = "E-mail:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 61);
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(9, 55);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 20);
+            this.label4.Size = new System.Drawing.Size(38, 18);
             this.label4.TabIndex = 18;
             this.label4.Text = "DNI:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(188, 5);
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(212, 4);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 20);
+            this.label2.Size = new System.Drawing.Size(69, 18);
             this.label2.TabIndex = 16;
             this.label2.Text = "Apellido:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 5);
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 4);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 20);
+            this.label1.Size = new System.Drawing.Size(68, 18);
             this.label1.TabIndex = 14;
             this.label1.Text = "Nombre:";
             // 
@@ -301,65 +301,65 @@
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.labelUsuario);
             this.tabPage2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(373, 240);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(421, 215);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Info. Usuario";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBoxIDRol
             // 
-            this.textBoxIDRol.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxIDRol.BackColor = System.Drawing.Color.White;
             this.textBoxIDRol.Enabled = false;
-            this.textBoxIDRol.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxIDRol.Location = new System.Drawing.Point(185, 144);
-            this.textBoxIDRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxIDRol.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxIDRol.Location = new System.Drawing.Point(208, 130);
+            this.textBoxIDRol.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxIDRol.Name = "textBoxIDRol";
-            this.textBoxIDRol.Size = new System.Drawing.Size(45, 26);
+            this.textBoxIDRol.Size = new System.Drawing.Size(50, 24);
             this.textBoxIDRol.TabIndex = 21;
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxDescription.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDescription.Location = new System.Drawing.Point(12, 202);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxDescription.BackColor = System.Drawing.Color.White;
+            this.textBoxDescription.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDescription.Location = new System.Drawing.Point(14, 182);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(165, 26);
+            this.textBoxDescription.Size = new System.Drawing.Size(185, 24);
             this.textBoxDescription.TabIndex = 10;
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBoxUsername.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUsername.Location = new System.Drawing.Point(12, 30);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBoxUsername.BackColor = System.Drawing.Color.White;
+            this.textBoxUsername.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxUsername.Location = new System.Drawing.Point(14, 27);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(165, 26);
+            this.textBoxUsername.Size = new System.Drawing.Size(185, 24);
             this.textBoxUsername.TabIndex = 7;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(181, 119);
+            this.label12.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(204, 107);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(49, 20);
+            this.label12.Size = new System.Drawing.Size(54, 18);
             this.label12.TabIndex = 22;
             this.label12.Text = "ID Rol:";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(8, 177);
+            this.label11.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(9, 159);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(80, 20);
+            this.label11.Size = new System.Drawing.Size(92, 18);
             this.label11.TabIndex = 20;
             this.label11.Text = "Descripción";
             // 
@@ -368,22 +368,23 @@
             this.comboBoxRoles.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBoxRoles.DisplayMember = "Activo";
             this.comboBoxRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRoles.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRoles.FormattingEnabled = true;
-            this.comboBoxRoles.Location = new System.Drawing.Point(12, 144);
-            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBoxRoles.Location = new System.Drawing.Point(14, 130);
+            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxRoles.Name = "comboBoxRoles";
-            this.comboBoxRoles.Size = new System.Drawing.Size(165, 28);
+            this.comboBoxRoles.Size = new System.Drawing.Size(185, 25);
             this.comboBoxRoles.TabIndex = 9;
             this.comboBoxRoles.SelectedIndexChanged += new System.EventHandler(this.comboBoxRoles_SelectedIndexChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(8, 119);
+            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(9, 107);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(33, 20);
+            this.label10.Size = new System.Drawing.Size(35, 18);
             this.label10.TabIndex = 18;
             this.label10.Text = "Rol:";
             // 
@@ -392,46 +393,47 @@
             this.comboBoxUserStatus.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.comboBoxUserStatus.DisplayMember = "Activo";
             this.comboBoxUserStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxUserStatus.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxUserStatus.FormattingEnabled = true;
             this.comboBoxUserStatus.Items.AddRange(new object[] {
             "Bloqueado",
             "Activo",
             "Cesado"});
-            this.comboBoxUserStatus.Location = new System.Drawing.Point(13, 86);
-            this.comboBoxUserStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBoxUserStatus.Location = new System.Drawing.Point(15, 77);
+            this.comboBoxUserStatus.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxUserStatus.Name = "comboBoxUserStatus";
-            this.comboBoxUserStatus.Size = new System.Drawing.Size(165, 28);
+            this.comboBoxUserStatus.Size = new System.Drawing.Size(185, 25);
             this.comboBoxUserStatus.TabIndex = 8;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(8, 61);
+            this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(9, 55);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 20);
+            this.label6.Size = new System.Drawing.Size(62, 18);
             this.label6.TabIndex = 16;
             this.label6.Text = "Estado:";
             // 
             // labelUsuario
             // 
             this.labelUsuario.AutoSize = true;
-            this.labelUsuario.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsuario.Location = new System.Drawing.Point(8, 5);
+            this.labelUsuario.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUsuario.Location = new System.Drawing.Point(9, 4);
             this.labelUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUsuario.Name = "labelUsuario";
-            this.labelUsuario.Size = new System.Drawing.Size(58, 20);
+            this.labelUsuario.Size = new System.Drawing.Size(66, 18);
             this.labelUsuario.TabIndex = 14;
             this.labelUsuario.Text = "Usuario:";
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.gMapControl1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 27);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(373, 240);
+            this.tabPage4.Size = new System.Drawing.Size(421, 215);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Mapa";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -444,7 +446,7 @@
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemmory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(3, 6);
+            this.gMapControl1.Location = new System.Drawing.Point(3, 5);
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 2;
             this.gMapControl1.MinZoom = 2;
@@ -457,20 +459,20 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(364, 228);
+            this.gMapControl1.Size = new System.Drawing.Size(410, 205);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             // 
             // PersonalData
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(569, 355);
+            this.ClientSize = new System.Drawing.Size(640, 319);
             this.Controls.Add(this.groupBox1);
-            this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "PersonalData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
