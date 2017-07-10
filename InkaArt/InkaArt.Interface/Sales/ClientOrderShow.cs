@@ -246,6 +246,7 @@ namespace InkaArt.Interface.Sales
                 }
                 orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray(), idVer.ToArray());
                 MessageBox.Show("Se ha generado el documento de venta exitosamente.", "Éxito", MessageBoxButtons.OK);
+                DialogResult = DialogResult.OK;
                 Close();
             }
             else
