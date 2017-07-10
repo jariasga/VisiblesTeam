@@ -102,8 +102,7 @@ namespace InkaArt.Business.Algorithm
         }
 
         public Ratio Verify(int id_ratio, DateTime date, string worker_text, string job_text, string recipe_text,
-            string start_text, string end_text, string broken_text, string produced_text, WorkerController workers,
-            JobController jobs, RecipeController recipes, ref string message)
+            string start_text, string end_text, string broken_text, string produced_text, ref string message)
         {
             if (id_ratio < 0)
             {
@@ -177,10 +176,9 @@ namespace InkaArt.Business.Algorithm
         }
 
         public int VerifyAndSave(int id_ratio, DateTime date, string worker, string job, string recipe,
-            string start, string end, string broken, string produced, WorkerController workers,
-            JobController jobs, RecipeController recipes, ref string message)
+            string start, string end, string broken, string produced, ref string message)
         {
-            Ratio ratio = Verify(id_ratio, date, worker, job, recipe, start, end, broken, produced, workers, jobs, recipes, ref message);
+            Ratio ratio = Verify(id_ratio, date, worker, job, recipe, start, end, broken, produced, ref message);
             if (ratio == null) return 0;
 
             if (id_ratio == 0) return Insert(ratio, ref message);

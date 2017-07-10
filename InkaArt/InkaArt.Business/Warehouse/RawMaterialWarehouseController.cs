@@ -4,6 +4,7 @@ using InkaArt.Data.Warehouse;
 using System.Data;
 using System.IO;
 using Npgsql;
+using System.Linq;
 
 namespace InkaArt.Business.Warehouse
 {
@@ -108,8 +109,19 @@ namespace InkaArt.Business.Warehouse
             rmWarehouse.execute(updateQuery);
 
         }
+        private bool comprobarCarga(string idW,string idR)
+        {
+            DataTable resultados = getData();
+            DataRow[] rows;
+            rows = resultados.Select("idWarehouse LIKE '" + idW + "' AND idRawMaterial LIKE '" + idR + "'");
+
+            if (rows.Any()) return true; //ya existe en la BD
+            else return false;
+        }
         public int massiveUpload(string filename)
         {
+            bool primero=true;
+            int intMod;
             using (var fs = File.OpenRead(filename))
             using (var reader = new StreamReader(fs))
             {
@@ -118,7 +130,17 @@ namespace InkaArt.Business.Warehouse
                     var line = reader.ReadLine();
                     var values = line.Split(';');
 
+                    if (!int.TryParse(values[0], out intMod)) continue;
+                    if (!int.TryParse(values[1], out intMod)) continue;
+                    if (!int.TryParse(values[2], out intMod)) continue;
+                    if (!int.TryParse(values[3], out intMod)) continue;
+
                     // creamos almacen
+                    if (primero)
+                    {
+                        if (comprobarCarga(values[0], values[1])) return 2;
+                        primero = false;
+                    }
                     try
                     {
                         //id_warehouse,id_rawMaterial,nombre,min,max
@@ -130,7 +152,7 @@ namespace InkaArt.Business.Warehouse
                         return 1;
                     }
                 }
-                MessageBox.Show("La carga de stocks se realizó con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                MessageBox.Show("La carga de stocks se realizó con éxito", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return 0;
         }
