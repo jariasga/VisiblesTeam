@@ -112,7 +112,7 @@ namespace InkaArt.Interface.Warehouse
             int resultados2;       
             RawMaterialWarehouseController rmw_control = new RawMaterialWarehouseController();
             OpenFileDialog dialog2 = new OpenFileDialog();
-            dialog2.Title = "Seleccione archivo de stocks materias primas";
+            dialog2.Title = "Seleccione archivo de stocks insumos";
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
