@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox_supplier = new System.Windows.Forms.ComboBox();
             this.dateTimePicker_creation = new System.Windows.Forms.DateTimePicker();
@@ -274,6 +273,7 @@
             // 
             // textBox_igv
             // 
+            this.textBox_igv.BackColor = System.Drawing.Color.White;
             this.textBox_igv.Enabled = false;
             this.textBox_igv.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_igv.Location = new System.Drawing.Point(295, 111);
@@ -285,6 +285,7 @@
             // 
             // textBox_idrm
             // 
+            this.textBox_idrm.BackColor = System.Drawing.Color.White;
             this.textBox_idrm.Enabled = false;
             this.textBox_idrm.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idrm.Location = new System.Drawing.Point(16, 54);
@@ -315,6 +316,7 @@
             // 
             // idUnit
             // 
+            this.idUnit.BackColor = System.Drawing.Color.White;
             this.idUnit.Enabled = false;
             this.idUnit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.idUnit.Location = new System.Drawing.Point(427, 54);
@@ -324,6 +326,7 @@
             // 
             // unitAbrev
             // 
+            this.unitAbrev.BackColor = System.Drawing.Color.White;
             this.unitAbrev.Enabled = false;
             this.unitAbrev.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitAbrev.Location = new System.Drawing.Point(505, 54);
@@ -363,6 +366,7 @@
             // 
             // textBox_cantidad
             // 
+            this.textBox_cantidad.BackColor = System.Drawing.Color.White;
             this.textBox_cantidad.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_cantidad.Location = new System.Drawing.Point(16, 111);
             this.textBox_cantidad.Name = "textBox_cantidad";
@@ -421,14 +425,6 @@
             this.Eliminar,
             this.Actualizar,
             this.Eliminado});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_pedidos.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_pedidos.Location = new System.Drawing.Point(13, 159);
             this.dataGridView_pedidos.Name = "dataGridView_pedidos";
             this.dataGridView_pedidos.Size = new System.Drawing.Size(647, 272);

@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button_calculate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textbox_amount_todoc = new System.Windows.Forms.TextBox();
             this.textbox_igv_todoc = new System.Windows.Forms.TextBox();
@@ -92,6 +93,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button_calculate);
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.textbox_amount_todoc);
             this.groupBox5.Controls.Add(this.textbox_igv_todoc);
@@ -107,10 +109,24 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "A Facturar";
             // 
+            // button_calculate
+            // 
+            this.button_calculate.BackColor = System.Drawing.Color.Gray;
+            this.button_calculate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_calculate.ForeColor = System.Drawing.Color.White;
+            this.button_calculate.Location = new System.Drawing.Point(184, 23);
+            this.button_calculate.Margin = new System.Windows.Forms.Padding(2);
+            this.button_calculate.Name = "button_calculate";
+            this.button_calculate.Size = new System.Drawing.Size(107, 39);
+            this.button_calculate.TabIndex = 42;
+            this.button_calculate.Text = "+ Calcular";
+            this.button_calculate.UseVisualStyleBackColor = false;
+            this.button_calculate.Click += new System.EventHandler(this.button_calculate_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 28);
+            this.label1.Location = new System.Drawing.Point(15, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 18);
             this.label1.TabIndex = 35;
@@ -121,7 +137,7 @@
             this.textbox_amount_todoc.BackColor = System.Drawing.Color.White;
             this.textbox_amount_todoc.Enabled = false;
             this.textbox_amount_todoc.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_amount_todoc.Location = new System.Drawing.Point(20, 51);
+            this.textbox_amount_todoc.Location = new System.Drawing.Point(19, 74);
             this.textbox_amount_todoc.Name = "textbox_amount_todoc";
             this.textbox_amount_todoc.Size = new System.Drawing.Size(271, 24);
             this.textbox_amount_todoc.TabIndex = 36;
@@ -132,7 +148,7 @@
             this.textbox_igv_todoc.BackColor = System.Drawing.Color.White;
             this.textbox_igv_todoc.Enabled = false;
             this.textbox_igv_todoc.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_igv_todoc.Location = new System.Drawing.Point(20, 105);
+            this.textbox_igv_todoc.Location = new System.Drawing.Point(19, 122);
             this.textbox_igv_todoc.Name = "textbox_igv_todoc";
             this.textbox_igv_todoc.Size = new System.Drawing.Size(271, 24);
             this.textbox_igv_todoc.TabIndex = 38;
@@ -143,7 +159,7 @@
             this.textbox_total_todoc.BackColor = System.Drawing.Color.White;
             this.textbox_total_todoc.Enabled = false;
             this.textbox_total_todoc.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_total_todoc.Location = new System.Drawing.Point(18, 161);
+            this.textbox_total_todoc.Location = new System.Drawing.Point(18, 171);
             this.textbox_total_todoc.Name = "textbox_total_todoc";
             this.textbox_total_todoc.Size = new System.Drawing.Size(273, 24);
             this.textbox_total_todoc.TabIndex = 40;
@@ -152,7 +168,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 141);
+            this.label8.Location = new System.Drawing.Point(17, 150);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 18);
             this.label8.TabIndex = 39;
@@ -161,7 +177,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 84);
+            this.label5.Location = new System.Drawing.Point(17, 101);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 18);
             this.label5.TabIndex = 37;
@@ -187,7 +203,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 28);
+            this.label4.Location = new System.Drawing.Point(16, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 18);
             this.label4.TabIndex = 29;
@@ -198,7 +214,7 @@
             this.textbox_amount.BackColor = System.Drawing.Color.White;
             this.textbox_amount.Enabled = false;
             this.textbox_amount.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_amount.Location = new System.Drawing.Point(20, 51);
+            this.textbox_amount.Location = new System.Drawing.Point(19, 74);
             this.textbox_amount.Name = "textbox_amount";
             this.textbox_amount.Size = new System.Drawing.Size(272, 24);
             this.textbox_amount.TabIndex = 30;
@@ -209,7 +225,7 @@
             this.textbox_total.BackColor = System.Drawing.Color.White;
             this.textbox_total.Enabled = false;
             this.textbox_total.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_total.Location = new System.Drawing.Point(20, 161);
+            this.textbox_total.Location = new System.Drawing.Point(20, 171);
             this.textbox_total.Name = "textbox_total";
             this.textbox_total.Size = new System.Drawing.Size(272, 24);
             this.textbox_total.TabIndex = 34;
@@ -218,7 +234,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 84);
+            this.label9.Location = new System.Drawing.Point(17, 101);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 18);
             this.label9.TabIndex = 31;
@@ -227,7 +243,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 141);
+            this.label10.Location = new System.Drawing.Point(17, 150);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 18);
             this.label10.TabIndex = 33;
@@ -238,7 +254,7 @@
             this.textbox_igv.BackColor = System.Drawing.Color.White;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_igv.Location = new System.Drawing.Point(20, 105);
+            this.textbox_igv.Location = new System.Drawing.Point(20, 122);
             this.textbox_igv.Name = "textbox_igv";
             this.textbox_igv.Size = new System.Drawing.Size(272, 24);
             this.textbox_igv.TabIndex = 32;
@@ -466,7 +482,7 @@
             // Column5
             // 
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.FillWeight = 50F;
+            this.Column5.FillWeight = 45F;
             this.Column5.HeaderText = "ID";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
@@ -483,14 +499,14 @@
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.FillWeight = 80F;
-            this.Column1.HeaderText = "Calidad";
+            this.Column1.HeaderText = "Versión";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.FillWeight = 70F;
+            this.Column2.FillWeight = 60F;
             this.Column2.HeaderText = "PU";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -513,8 +529,8 @@
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.FillWeight = 70F;
-            this.Column3.HeaderText = "Disponible";
+            this.Column3.FillWeight = 80F;
+            this.Column3.HeaderText = "Disponible para entrega";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
@@ -590,6 +606,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button_fac;
+        private System.Windows.Forms.Button button_calculate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;

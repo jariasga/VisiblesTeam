@@ -58,7 +58,8 @@ namespace InkaArt.Interface.Warehouse
             foreach (DataRow row in warehouseList.Rows)
             {
                 string status = row["state"].ToString();
-                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["description"], row["address"]);
+                //if (status.Equals("Activo"))
+                dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["description"], row["address"]);
             }
         }
 
@@ -95,22 +96,43 @@ namespace InkaArt.Interface.Warehouse
 
         private void button_bulk_upload_Click(object sender, EventArgs e)
         {
+            int resultados;
             WarehouseCrud movimientos = new WarehouseCrud();
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Open Warehouse File";
+            dialog.Title = "Seleccione el archivo de almacenes";
             dialog.Filter = "CSV files|*.csv";
-            if (dialog.ShowDialog() == DialogResult.OK) { 
-                if (movimientos.massiveUpload(dialog.FileName) != 0) return;
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                resultados = movimientos.massiveUpload(dialog.FileName);
+                if (resultados != 0) return;
+                else if (resultados == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque los almacenes ya existen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            
+            int resultados2;       
             RawMaterialWarehouseController rmw_control = new RawMaterialWarehouseController();
             OpenFileDialog dialog2 = new OpenFileDialog();
-            dialog2.Title = "Open Stock File";
+            dialog2.Title = "Seleccione archivo de stocks insumos";
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
-                if (rmw_control.massiveUpload(dialog2.FileName) != 0) return;
+                resultados2 = rmw_control.massiveUpload(dialog2.FileName);
+                if (resultados2 != 0) return;
+                else if (resultados2 == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque los registros ya existen", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+
+            WarehouseCrud movimientos2 = new WarehouseCrud();
+            OpenFileDialog dialog3 = new OpenFileDialog();
+            dialog3.Title = "Seleccione archivo de stocks productos";
+            dialog3.Filter = "CSV files|*.csv";
+            if (dialog3.ShowDialog() == DialogResult.OK)
+            {
+                if (movimientos2.massiveUploadProducts(dialog3.FileName) != 0) return;
+            }
+
             realizarBusqueda();
         }
 

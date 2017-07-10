@@ -656,9 +656,22 @@ namespace InkaArt.Interface.Purchases
         
         private void generarOrdenDoc(object sender, EventArgs e)
         {
-            if(mode==2 && string.Compare(comboBox_status.Text, "Eliminado") != 0)
+            
+            if (mode==2 && string.Compare(comboBox_status.Text, "Eliminado") != 0)
             {
-                string titulo = "Orden" + textBox_id.Text + ".pdf";
+                SaveFileDialog dialogo = new SaveFileDialog();
+                string x = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string titulo;
+                dialogo.Title = "Guardar orden";
+                dialogo.InitialDirectory = x;
+                dialogo.FileName = "Orden" + textBox_id.Text + ".pdf";
+                dialogo.Filter = "Pdf Files|*.pdf";
+                if (dialogo.ShowDialog() == DialogResult.OK)
+                {
+                    titulo = dialogo.FileName;
+                }
+                else return;
+                //titulo = "Orden" + textBox_id.Text + ".pdf";
                 FileStream fs = new FileStream(titulo, FileMode.Create, FileAccess.Write, FileShare.None);
                 Document document = new Document(PageSize.A4);
                 PdfWriter writer = PdfWriter.GetInstance(document, fs);

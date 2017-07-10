@@ -62,7 +62,7 @@
             // grid_orders
             // 
             this.grid_orders.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
             this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_orders.BackgroundColor = System.Drawing.Color.WhiteSmoke;

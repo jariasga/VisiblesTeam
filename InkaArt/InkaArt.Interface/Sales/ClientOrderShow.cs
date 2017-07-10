@@ -21,7 +21,7 @@ namespace InkaArt.Interface.Sales
         DataTable orderLineToFac;
         private double toFacAmount;
         private int clientId;
-        private List<int> idProd = new List<int>(), quantity = new List<int>();
+        private List<int> idProd = new List<int>(), quantity = new List<int>(), idVer = new List<int>();
         public ClientOrderShow(string id)
         {
             InitializeComponent();
@@ -100,13 +100,10 @@ namespace InkaArt.Interface.Sales
                 }
                 if (totalInvoiced > 0) button_seedoc.Visible = true;
                 else button_seedoc.Visible = true;
-                textbox_amount_todoc.Text = orderController.getPolishedAmount(toFacAmount);
-                textbox_igv_todoc.Text = orderController.getPolishedIGV(toFacAmount);
-                textbox_total_todoc.Text = orderController.getPolishedTotal(toFacAmount);
             }
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
-                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[6].Value.ToString()))
+                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[4].Value.ToString()))
                 {
                     return;
                 }
@@ -156,7 +153,7 @@ namespace InkaArt.Interface.Sales
         }
         private string validateDataGrid()
         {
-            int numZeros = 0, curToFac = 0;
+            int numValid = 0, curToFac = 0;
             int[] cant = new int[3];
             bool fail = false;
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
@@ -176,12 +173,21 @@ namespace InkaArt.Interface.Sales
             }
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
+                if (int.Parse(gridRow.Cells[4].Value.ToString()) <= int.Parse(gridRow.Cells[7].Value.ToString()))
+                {
+                    if (int.Parse(gridRow.Cells[5].Value.ToString()) != 0) return "No se puede volver a facturar una línea ya facturada, por favor corriga los datos.";
+                }
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > 0)
+                {
+                    if (int.Parse(gridRow.Cells[7].Value.ToString()) + int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[4].Value.ToString()))
+                        return "No se puede facturar más de lo que se ha pedido";
+                }
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
                     return "La cantidad a facturar supera a la cantidad disponible, por favor corriga los datos.";
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[4].Value.ToString()))
                     return "La cantidad a facturar supera a la cantidad que se ha pedido, por favor corriga los datos.";
-                if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
-                    numZeros++;
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > 0)
+                    numValid++;
                 curToFac = int.Parse(gridRow.Cells[5].Value.ToString());
                 switch (int.Parse(gridRow.Cells[0].Value.ToString()))
                 {
@@ -200,26 +206,45 @@ namespace InkaArt.Interface.Sales
                 }
                 if (fail) return "La cantidad total a facturar de un producto supera a la cantidad disponible, por favor corriga los datos.";
             }
-            if (numZeros > 1) return "Por favor ingrese una cantidad a facturar válida en la columna 'A Facturar'.";
+            if (numValid == 0) return "Por favor ingrese una cantidad a facturar válida en la columna 'A Facturar'.";
             return "OK";
+        }
+
+        private void button_calculate_Click(object sender, EventArgs e)
+        {
+            double amount = 0;
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                int toFacCant = int.Parse(gridRow.Cells[5].Value.ToString());
+                if (toFacCant > 0)
+                {
+                    float price = int.Parse(gridRow.Cells[3].Value.ToString());
+                    amount = orderController.updateAmount(amount, price,decimal.Parse(toFacCant.ToString()));
+                }
+            }
+            textbox_amount_todoc.Text = orderController.getPolishedAmount(amount);
+            textbox_igv_todoc.Text = orderController.getPolishedIGV(amount);
+            textbox_total_todoc.Text = orderController.getPolishedTotal(amount);
         }
 
         private void button_fac_Click(object sender, EventArgs e)
         {
-            string response = validateDataGrid();
+           string response = validateDataGrid();
             if (response.Equals("OK"))
             {
                 for (int i = 0; i < grid_orderline.Rows.Count; i++)
                 {
                     int curProductId = int.Parse(grid_orderline.Rows[i].Cells[0].Value.ToString());
                     int curQuantity = int.Parse(grid_orderline.Rows[i].Cells[5].Value.ToString());
+                    int curVersionId = orderController.getVersionId(grid_orderline.Rows[i].Cells[2].Value.ToString());
                     if (curQuantity != 0)
                     {
                         idProd.Add(curProductId);
                         quantity.Add(curQuantity);
+                        idVer.Add(curVersionId);
                     }
                 }
-                orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray());
+                orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray(), idVer.ToArray());
                 MessageBox.Show("Se ha generado el documento de venta exitosamente.", "Éxito", MessageBoxButtons.OK);
                 Close();
             }
