@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_delete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -40,11 +41,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textbox_devamount = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.combo_product = new System.Windows.Forms.ComboBox();
@@ -68,6 +64,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button_save = new System.Windows.Forms.Button();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_orderline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numeric_quantity)).BeginInit();
@@ -95,9 +96,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(386, 15);
+            this.groupBox2.Location = new System.Drawing.Point(350, 15);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(465, 455);
+            this.groupBox2.Size = new System.Drawing.Size(501, 455);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Devolución";
@@ -108,9 +109,9 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(324, 84);
+            this.button_delete.Location = new System.Drawing.Point(370, 84);
             this.button_delete.Name = "button_delete";
-            this.button_delete.Size = new System.Drawing.Size(121, 39);
+            this.button_delete.Size = new System.Drawing.Size(107, 39);
             this.button_delete.TabIndex = 39;
             this.button_delete.Text = "🗑 Eliminar";
             this.button_delete.UseVisualStyleBackColor = false;
@@ -119,7 +120,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(198, 283);
+            this.label12.Location = new System.Drawing.Point(231, 287);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 18);
             this.label12.TabIndex = 35;
@@ -129,7 +130,7 @@
             // 
             this.textbox_reason.BackColor = System.Drawing.Color.White;
             this.textbox_reason.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_reason.Location = new System.Drawing.Point(201, 306);
+            this.textbox_reason.Location = new System.Drawing.Point(233, 306);
             this.textbox_reason.Multiline = true;
             this.textbox_reason.Name = "textbox_reason";
             this.textbox_reason.Size = new System.Drawing.Size(244, 125);
@@ -144,26 +145,26 @@
             "Premium",
             "Estandar",
             "Económico"});
-            this.combo_quality.Location = new System.Drawing.Point(196, 53);
+            this.combo_quality.Location = new System.Drawing.Point(225, 53);
             this.combo_quality.Name = "combo_quality";
-            this.combo_quality.Size = new System.Drawing.Size(165, 25);
+            this.combo_quality.Size = new System.Drawing.Size(155, 25);
             this.combo_quality.TabIndex = 29;
             // 
             // textbox_devtotal
             // 
-            this.textbox_devtotal.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_devtotal.BackColor = System.Drawing.Color.White;
             this.textbox_devtotal.Enabled = false;
             this.textbox_devtotal.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_devtotal.Location = new System.Drawing.Point(24, 405);
+            this.textbox_devtotal.Location = new System.Drawing.Point(24, 410);
             this.textbox_devtotal.Name = "textbox_devtotal";
-            this.textbox_devtotal.Size = new System.Drawing.Size(165, 24);
+            this.textbox_devtotal.Size = new System.Drawing.Size(182, 24);
             this.textbox_devtotal.TabIndex = 28;
             this.textbox_devtotal.Text = "S/.  0.00";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(22, 384);
+            this.label10.Location = new System.Drawing.Point(22, 389);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(121, 18);
             this.label10.TabIndex = 27;
@@ -171,19 +172,19 @@
             // 
             // textbox_igv
             // 
-            this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_igv.BackColor = System.Drawing.Color.White;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_igv.Location = new System.Drawing.Point(25, 356);
+            this.textbox_igv.Location = new System.Drawing.Point(25, 357);
             this.textbox_igv.Name = "textbox_igv";
-            this.textbox_igv.Size = new System.Drawing.Size(165, 24);
+            this.textbox_igv.Size = new System.Drawing.Size(181, 24);
             this.textbox_igv.TabIndex = 26;
             this.textbox_igv.Text = "S/.  0.00";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(22, 335);
+            this.label9.Location = new System.Drawing.Point(22, 336);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 18);
             this.label9.TabIndex = 25;
@@ -191,12 +192,12 @@
             // 
             // textbox_devamount
             // 
-            this.textbox_devamount.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_devamount.BackColor = System.Drawing.Color.White;
             this.textbox_devamount.Enabled = false;
             this.textbox_devamount.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_devamount.Location = new System.Drawing.Point(25, 306);
+            this.textbox_devamount.Location = new System.Drawing.Point(25, 303);
             this.textbox_devamount.Name = "textbox_devamount";
-            this.textbox_devamount.Size = new System.Drawing.Size(165, 24);
+            this.textbox_devamount.Size = new System.Drawing.Size(181, 24);
             this.textbox_devamount.TabIndex = 21;
             this.textbox_devamount.Text = "S/.  0.00";
             // 
@@ -204,8 +205,8 @@
             // 
             this.grid_orderline.AllowUserToAddRows = false;
             this.grid_orderline.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_orderline.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -222,46 +223,25 @@
             this.cost,
             this.Cantidad,
             this.deleteColumn});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.DefaultCellStyle = dataGridViewCellStyle2;
             this.grid_orderline.Location = new System.Drawing.Point(25, 139);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.grid_orderline.Name = "grid_orderline";
-            this.grid_orderline.Size = new System.Drawing.Size(420, 136);
+            this.grid_orderline.Size = new System.Drawing.Size(452, 136);
             this.grid_orderline.TabIndex = 22;
             this.grid_orderline.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_orderline_CellValueChanged);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // cost
-            // 
-            this.cost.HeaderText = "PU";
-            this.cost.Name = "cost";
-            this.cost.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // deleteColumn
-            // 
-            this.deleteColumn.HeaderText = "Eliminar";
-            this.deleteColumn.Name = "deleteColumn";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 287);
+            this.label7.Location = new System.Drawing.Point(21, 284);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 18);
             this.label7.TabIndex = 20;
@@ -269,11 +249,11 @@
             // 
             // button_add
             // 
-            this.button_add.BackColor = System.Drawing.Color.Gray;
+            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
             this.button_add.Enabled = false;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
-            this.button_add.Location = new System.Drawing.Point(212, 84);
+            this.button_add.Location = new System.Drawing.Point(258, 84);
             this.button_add.Margin = new System.Windows.Forms.Padding(2);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(107, 39);
@@ -293,7 +273,7 @@
             "Huaco"});
             this.combo_product.Location = new System.Drawing.Point(25, 53);
             this.combo_product.Name = "combo_product";
-            this.combo_product.Size = new System.Drawing.Size(165, 25);
+            this.combo_product.Size = new System.Drawing.Size(181, 25);
             this.combo_product.TabIndex = 13;
             this.combo_product.SelectedIndexChanged += new System.EventHandler(this.combo_product_SelectedIndexChanged);
             // 
@@ -301,7 +281,7 @@
             // 
             this.numeric_quantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numeric_quantity.Font = new System.Drawing.Font("Arial", 11F);
-            this.numeric_quantity.Location = new System.Drawing.Point(365, 54);
+            this.numeric_quantity.Location = new System.Drawing.Point(397, 54);
             this.numeric_quantity.Name = "numeric_quantity";
             this.numeric_quantity.Size = new System.Drawing.Size(80, 24);
             this.numeric_quantity.TabIndex = 19;
@@ -311,7 +291,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(193, 33);
+            this.label1.Location = new System.Drawing.Point(222, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 18);
             this.label1.TabIndex = 16;
@@ -320,7 +300,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(362, 33);
+            this.label4.Location = new System.Drawing.Point(394, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 18);
             this.label4.TabIndex = 18;
@@ -344,19 +324,19 @@
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox1.Location = new System.Drawing.Point(29, 337);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 182);
+            this.groupBox1.Size = new System.Drawing.Size(300, 182);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
             // 
             // textbox_name
             // 
-            this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_name.BackColor = System.Drawing.Color.White;
             this.textbox_name.Enabled = false;
             this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(25, 120);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(277, 24);
+            this.textbox_name.Size = new System.Drawing.Size(250, 24);
             this.textbox_name.TabIndex = 19;
             // 
             // label2
@@ -370,12 +350,12 @@
             // 
             // textbox_doc
             // 
-            this.textbox_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_doc.BackColor = System.Drawing.Color.White;
             this.textbox_doc.Enabled = false;
             this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_doc.Location = new System.Drawing.Point(25, 60);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(277, 24);
+            this.textbox_doc.Size = new System.Drawing.Size(250, 24);
             this.textbox_doc.TabIndex = 17;
             // 
             // clientIdentifierLabel
@@ -392,7 +372,7 @@
             this.button_search.BackColor = System.Drawing.Color.Gray;
             this.button_search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_search.ForeColor = System.Drawing.Color.White;
-            this.button_search.Location = new System.Drawing.Point(112, 143);
+            this.button_search.Location = new System.Drawing.Point(89, 139);
             this.button_search.Margin = new System.Windows.Forms.Padding(2);
             this.button_search.Name = "button_search";
             this.button_search.Size = new System.Drawing.Size(101, 39);
@@ -415,19 +395,19 @@
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox3.Location = new System.Drawing.Point(29, 15);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(334, 316);
+            this.groupBox3.Size = new System.Drawing.Size(300, 316);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
             // 
             // textbox_total
             // 
-            this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_total.BackColor = System.Drawing.Color.White;
             this.textbox_total.Enabled = false;
             this.textbox_total.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_total.Location = new System.Drawing.Point(24, 268);
             this.textbox_total.Name = "textbox_total";
-            this.textbox_total.Size = new System.Drawing.Size(278, 24);
+            this.textbox_total.Size = new System.Drawing.Size(251, 24);
             this.textbox_total.TabIndex = 30;
             this.textbox_total.Text = "S/.  0.00";
             // 
@@ -443,7 +423,7 @@
             "Factura"});
             this.combo_doc.Location = new System.Drawing.Point(25, 55);
             this.combo_doc.Name = "combo_doc";
-            this.combo_doc.Size = new System.Drawing.Size(277, 25);
+            this.combo_doc.Size = new System.Drawing.Size(250, 25);
             this.combo_doc.TabIndex = 36;
             // 
             // label11
@@ -462,7 +442,7 @@
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(25, 212);
             this.date_deliverydate.Name = "date_deliverydate";
-            this.date_deliverydate.Size = new System.Drawing.Size(277, 24);
+            this.date_deliverydate.Size = new System.Drawing.Size(250, 24);
             this.date_deliverydate.TabIndex = 12;
             // 
             // textbox_docid
@@ -472,7 +452,7 @@
             this.textbox_docid.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_docid.Location = new System.Drawing.Point(25, 108);
             this.textbox_docid.Name = "textbox_docid";
-            this.textbox_docid.Size = new System.Drawing.Size(277, 24);
+            this.textbox_docid.Size = new System.Drawing.Size(250, 24);
             this.textbox_docid.TabIndex = 6;
             // 
             // label6
@@ -516,6 +496,43 @@
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 90F;
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // cost
+            // 
+            this.cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cost.FillWeight = 83F;
+            this.cost.HeaderText = "PU";
+            this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cantidad.FillWeight = 90F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // deleteColumn
+            // 
+            this.deleteColumn.FillWeight = 80F;
+            this.deleteColumn.HeaderText = "Eliminar";
+            this.deleteColumn.Name = "deleteColumn";
             // 
             // DevolutionCreate
             // 

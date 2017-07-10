@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_save = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,17 +55,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textbox_amount = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label7 = new System.Windows.Forms.Label();
             this.button_add = new System.Windows.Forms.Button();
             this.combo_product = new System.Windows.Forms.ComboBox();
             this.numeric_quantity = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -89,7 +90,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 104);
+            this.label3.Location = new System.Drawing.Point(22, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(150, 18);
             this.label3.TabIndex = 4;
@@ -249,7 +250,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
             this.groupBox2.Location = new System.Drawing.Point(382, 22);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(465, 455);
+            this.groupBox2.Size = new System.Drawing.Size(501, 455);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Productos";
@@ -280,7 +281,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(324, 86);
+            this.button_delete.Location = new System.Drawing.Point(360, 86);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(121, 39);
             this.button_delete.TabIndex = 38;
@@ -290,10 +291,10 @@
             // 
             // textbox_total
             // 
-            this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_total.BackColor = System.Drawing.Color.White;
             this.textbox_total.Enabled = false;
             this.textbox_total.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_total.Location = new System.Drawing.Point(24, 409);
+            this.textbox_total.Location = new System.Drawing.Point(24, 414);
             this.textbox_total.Name = "textbox_total";
             this.textbox_total.Size = new System.Drawing.Size(165, 24);
             this.textbox_total.TabIndex = 28;
@@ -302,7 +303,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(22, 388);
+            this.label10.Location = new System.Drawing.Point(22, 393);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 18);
             this.label10.TabIndex = 27;
@@ -310,7 +311,7 @@
             // 
             // textbox_igv
             // 
-            this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_igv.BackColor = System.Drawing.Color.White;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_igv.Location = new System.Drawing.Point(25, 360);
@@ -333,15 +334,15 @@
             this.combo_quality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_quality.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combo_quality.FormattingEnabled = true;
-            this.combo_quality.Location = new System.Drawing.Point(196, 53);
+            this.combo_quality.Location = new System.Drawing.Point(248, 53);
             this.combo_quality.Name = "combo_quality";
-            this.combo_quality.Size = new System.Drawing.Size(165, 25);
+            this.combo_quality.Size = new System.Drawing.Size(140, 25);
             this.combo_quality.TabIndex = 23;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(192, 31);
+            this.label1.Location = new System.Drawing.Point(245, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 18);
             this.label1.TabIndex = 24;
@@ -349,10 +350,10 @@
             // 
             // textbox_amount
             // 
-            this.textbox_amount.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_amount.BackColor = System.Drawing.Color.White;
             this.textbox_amount.Enabled = false;
             this.textbox_amount.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_amount.Location = new System.Drawing.Point(25, 310);
+            this.textbox_amount.Location = new System.Drawing.Point(25, 306);
             this.textbox_amount.Name = "textbox_amount";
             this.textbox_amount.Size = new System.Drawing.Size(165, 24);
             this.textbox_amount.TabIndex = 21;
@@ -362,12 +363,12 @@
             // 
             this.grid_orderline.AllowUserToAddRows = false;
             this.grid_orderline.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_orderline.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_orderline.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -380,51 +381,25 @@
             this.cost,
             this.Cantidad,
             this.deleteColumn});
-            this.grid_orderline.Location = new System.Drawing.Point(25, 140);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_orderline.DefaultCellStyle = dataGridViewCellStyle2;
+            this.grid_orderline.Location = new System.Drawing.Point(15, 137);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.grid_orderline.Name = "grid_orderline";
-            this.grid_orderline.Size = new System.Drawing.Size(420, 136);
+            this.grid_orderline.Size = new System.Drawing.Size(476, 136);
             this.grid_orderline.TabIndex = 22;
             this.grid_orderline.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_orderline_CellContentClick);
-            // 
-            // Producto
-            // 
-            this.Producto.FillWeight = 141.1049F;
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.FillWeight = 141.1049F;
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // cost
-            // 
-            this.cost.FillWeight = 77.87196F;
-            this.cost.HeaderText = "PU";
-            this.cost.Name = "cost";
-            this.cost.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.FillWeight = 76.14214F;
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // deleteColumn
-            // 
-            this.deleteColumn.FillWeight = 63.7762F;
-            this.deleteColumn.HeaderText = "Eliminar";
-            this.deleteColumn.Name = "deleteColumn";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 287);
+            this.label7.Location = new System.Drawing.Point(21, 283);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 18);
             this.label7.TabIndex = 20;
@@ -432,11 +407,11 @@
             // 
             // button_add
             // 
-            this.button_add.BackColor = System.Drawing.Color.Gray;
+            this.button_add.BackColor = System.Drawing.Color.SteelBlue;
             this.button_add.Enabled = false;
             this.button_add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add.ForeColor = System.Drawing.Color.White;
-            this.button_add.Location = new System.Drawing.Point(212, 86);
+            this.button_add.Location = new System.Drawing.Point(248, 86);
             this.button_add.Margin = new System.Windows.Forms.Padding(2);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(107, 39);
@@ -452,14 +427,14 @@
             this.combo_product.FormattingEnabled = true;
             this.combo_product.Location = new System.Drawing.Point(25, 53);
             this.combo_product.Name = "combo_product";
-            this.combo_product.Size = new System.Drawing.Size(165, 25);
+            this.combo_product.Size = new System.Drawing.Size(205, 25);
             this.combo_product.TabIndex = 13;
             this.combo_product.SelectedIndexChanged += new System.EventHandler(this.combo_product_SelectedIndexChanged);
             // 
             // numeric_quantity
             // 
             this.numeric_quantity.Font = new System.Drawing.Font("Arial", 11F);
-            this.numeric_quantity.Location = new System.Drawing.Point(365, 54);
+            this.numeric_quantity.Location = new System.Drawing.Point(401, 54);
             this.numeric_quantity.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -474,7 +449,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(362, 31);
+            this.label4.Location = new System.Drawing.Point(398, 31);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 18);
             this.label4.TabIndex = 18;
@@ -489,12 +464,46 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Producto";
             // 
+            // Producto
+            // 
+            this.Producto.FillWeight = 120.1049F;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 90.1049F;
+            this.Column1.HeaderText = "Calidad";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // cost
+            // 
+            this.cost.FillWeight = 70.87196F;
+            this.cost.HeaderText = "PU";
+            this.cost.Name = "cost";
+            this.cost.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.FillWeight = 76.14214F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // deleteColumn
+            // 
+            this.deleteColumn.FillWeight = 70.7762F;
+            this.deleteColumn.HeaderText = "Eliminar";
+            this.deleteColumn.Name = "deleteColumn";
+            // 
             // ClientOrderCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(874, 537);
+            this.ClientSize = new System.Drawing.Size(906, 537);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
