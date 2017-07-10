@@ -109,7 +109,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::InkaArt.Interface.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(64, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(206, 156);
@@ -123,13 +123,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(329, 352);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button_Login);
             this.Controls.Add(this.label_forgot);
             this.Controls.Add(this.textbox_password);
             this.Controls.Add(this.textbox_user);
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_user);
-            this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;

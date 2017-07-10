@@ -352,6 +352,7 @@ namespace InkaArt.Interface
             // 
             // status_strip
             // 
+            this.status_strip.BackColor = System.Drawing.Color.White;
             this.status_strip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status_label,
@@ -382,6 +383,7 @@ namespace InkaArt.Interface
             // 
             // splitter1
             // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.Control;
             this.splitter1.Location = new System.Drawing.Point(0, 25);
             this.splitter1.Margin = new System.Windows.Forms.Padding(4);
             this.splitter1.Name = "splitter1";
@@ -395,7 +397,7 @@ namespace InkaArt.Interface
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::InkaArt.Interface.Properties.Resources.logo;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1362, 739);
             this.Controls.Add(this.splitter1);
