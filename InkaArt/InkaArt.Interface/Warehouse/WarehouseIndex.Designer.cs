@@ -112,7 +112,6 @@
             this.comboBox_status.Name = "comboBox_status";
             this.comboBox_status.Size = new System.Drawing.Size(192, 25);
             this.comboBox_status.TabIndex = 27;
-            this.comboBox_status.Visible = false;
             // 
             // textBox_id
             // 
@@ -149,7 +148,6 @@
             this.label3.Size = new System.Drawing.Size(58, 18);
             this.label3.TabIndex = 20;
             this.label3.Text = "Estado";
-            this.label3.Visible = false;
             // 
             // textBox_name
             // 
