@@ -17,7 +17,7 @@ namespace InkaArt.Interface.Sales
         private int orderId;
         private int clientId;
         OrderController orderController;
-        private List<int> idProd = new List<int>(), quantity = new List<int>();
+        private List<int> idProd = new List<int>(), quantity = new List<int>(), idVer = new List<int>();
         public DevolutionShow(string id)
         {
             InitializeComponent();
@@ -62,7 +62,7 @@ namespace InkaArt.Interface.Sales
 
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
-                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[6].Value.ToString()))
+                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[4].Value.ToString()))
                 {
                     return;
                 }
@@ -99,13 +99,15 @@ namespace InkaArt.Interface.Sales
                 {
                     int curProductId = int.Parse(grid_orderline.Rows[i].Cells[0].Value.ToString());
                     int curQuantity = int.Parse(grid_orderline.Rows[i].Cells[5].Value.ToString());
+                    int curVersionId = orderController.getVersionId(grid_orderline.Rows[i].Cells[2].Value.ToString());
                     if (curQuantity != 0)
                     {
                         idProd.Add(curProductId);
                         quantity.Add(curQuantity);
+                        idVer.Add(curVersionId);
                     }
                 }
-                orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray(),1);
+                orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray(), idVer.ToArray(), 1);
                 MessageBox.Show("Se ha generado la nota de crédito exitosamente.", "Éxito", MessageBoxButtons.OK);
                 Close();
             }
