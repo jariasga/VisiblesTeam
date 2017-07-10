@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_config = new System.Windows.Forms.Button();
             this.button_delete = new System.Windows.Forms.Button();
             this.label_select = new System.Windows.Forms.Label();
@@ -113,7 +114,8 @@
             // 
             this.simulation_grid.AllowUserToOrderColumns = true;
             this.simulation_grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.simulation_grid.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.simulation_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.date,
@@ -122,6 +124,14 @@
             this.recipe,
             this.quantity,
             this.index});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.simulation_grid.DefaultCellStyle = dataGridViewCellStyle1;
             this.simulation_grid.Location = new System.Drawing.Point(24, 23);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.simulation_grid.Name = "simulation_grid";

@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.simulation_grid = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_export = new System.Windows.Forms.Button();
             this.label_todaydate = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_simulationName = new System.Windows.Forms.Label();
             this.label_simulationTime = new System.Windows.Forms.Label();
             this.button_pdf = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.simulation_grid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +61,16 @@
             // 
             this.simulation_grid.AllowUserToDeleteRows = false;
             this.simulation_grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.simulation_grid.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.simulation_grid.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.simulation_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simulation_grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.simulation_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulation_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -68,6 +79,14 @@
             this.Column4,
             this.Column5,
             this.Column6});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.simulation_grid.DefaultCellStyle = dataGridViewCellStyle2;
             this.simulation_grid.Location = new System.Drawing.Point(28, 107);
             this.simulation_grid.Margin = new System.Windows.Forms.Padding(5);
             this.simulation_grid.Name = "simulation_grid";
@@ -75,42 +94,6 @@
             this.simulation_grid.RowHeadersVisible = false;
             this.simulation_grid.Size = new System.Drawing.Size(996, 335);
             this.simulation_grid.TabIndex = 2;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Fecha";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "N° iteraciones tabu";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Huacos producidos";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Piedras de Huamanga producidas";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Retablos producidos";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "# trabajadores asignados";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
             // 
             // button_export
             // 
@@ -176,6 +159,43 @@
             this.button_pdf.UseVisualStyleBackColor = false;
             this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
             // 
+            // Column1
+            // 
+            this.Column1.FillWeight = 90F;
+            this.Column1.HeaderText = "Fecha";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "N° iteraciones tabu";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Huacos producidos";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Piedras de Huamanga producidas";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Retablos producidos";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "# trabajadores asignados";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
             // SimulationReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -210,12 +230,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label_simulationName;
         private System.Windows.Forms.Label label_simulationTime;
+        private System.Windows.Forms.Button button_pdf;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.Button button_pdf;
     }
 }
