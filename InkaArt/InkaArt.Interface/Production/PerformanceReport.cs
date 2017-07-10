@@ -54,80 +54,91 @@ namespace InkaArt.Interface.Production
 
         private void button_export_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Excel.Application excel = new Excel.Application();
-                Excel.Workbook workbook = excel.Workbooks.Add(Missing.Value);
-                Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Item[1];
-
-                worksheet.Cells[1, 1] = "Trabajador";
-                worksheet.Cells[1, 2] = "Receta";
-                worksheet.Cells[1, 3] = "Puesto de trabajo";
-                worksheet.Cells[1, 4] = "% promedio de rotura";
-                worksheet.Cells[1, 5] = "Tiempo promedio";
-
-                for (int r = 0; r < grid_performance.Rows.Count; r++)
-                    for (int c = 0; c < grid_performance.Columns.Count; c++)
-                        worksheet.Cells[r + 2, c + 1] = grid_performance[c, r].Value.ToString();
-
-                Excel.Range first_row = worksheet.Range["A1", "E1"];
-                first_row.Font.Bold = true;
-                first_row.Font.Color = ColorTranslator.ToOle(Color.White);
-                first_row.Interior.Color = ColorTranslator.ToOle(Color.Black);
-                worksheet.Columns.AutoFit();
-
-                excel.Visible = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo exportar el reporte a Microsoft Excel. " + ex.Message, "Error", MessageBoxButtons.OK,
+            if (grid_performance.Rows.Count == 0)
+                MessageBox.Show("No se generó el reporte debido a que no existe información sobre el o los trabajadores en el intervalo de tiempo elegido", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                LogHandler.WriteLine(ex.ToString());
+            else { 
+                try
+                {
+                    Excel.Application excel = new Excel.Application();
+                    Excel.Workbook workbook = excel.Workbooks.Add(Missing.Value);
+                    Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Item[1];
+
+                    worksheet.Cells[1, 1] = "Trabajador";
+                    worksheet.Cells[1, 2] = "Receta";
+                    worksheet.Cells[1, 3] = "Puesto de trabajo";
+                    worksheet.Cells[1, 4] = "% promedio de rotura";
+                    worksheet.Cells[1, 5] = "Tiempo promedio";
+
+                    for (int r = 0; r < grid_performance.Rows.Count; r++)
+                        for (int c = 0; c < grid_performance.Columns.Count; c++)
+                            worksheet.Cells[r + 2, c + 1] = grid_performance[c, r].Value.ToString();
+
+                    Excel.Range first_row = worksheet.Range["A1", "E1"];
+                    first_row.Font.Bold = true;
+                    first_row.Font.Color = ColorTranslator.ToOle(Color.White);
+                    first_row.Interior.Color = ColorTranslator.ToOle(Color.Black);
+                    worksheet.Columns.AutoFit();
+
+                    excel.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No se pudo exportar el reporte a Microsoft Excel. " + ex.Message, "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    LogHandler.WriteLine(ex.ToString());
+                }
             }
         }
 
         private void button_pdf_Click(object sender, EventArgs e)
         {
-            DialogResult result = this.save_pdf_dialog.ShowDialog();
-            if (result != DialogResult.OK) return;
-
-            try
-            {
-                FileStream file = new FileStream(this.save_pdf_dialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-                Document document = new Document(PageSize.A4);
-                PdfWriter writer = PdfWriter.GetInstance(document, file);
-                document.Open();
-
-                Paragraph title = new Paragraph("REPORTE DE DESEMPEÑO DE TRABAJADORES", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20));
-                title.Alignment = Element.ALIGN_CENTER;
-                document.Add(title);
-
-                document.Add(new Paragraph("   "));
-                Chunk date_chunk = new Chunk("Fecha de generación de reporte:    " + label_today.Text);
-                date_chunk.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
-                document.Add(new Paragraph(date_chunk));
-                document.Add(new Paragraph("   "));
-
-                PdfPTable table = new PdfPTable(5);
-                table.WidthPercentage = 100;
-                for (int i = 0; i < grid_performance.Columns.Count; i++)
-                    table.AddCell(grid_performance.Columns[i].HeaderText);
-                for (int r = 0; r < grid_performance.Rows.Count; r++)
-                    for (int c = 0; c < grid_performance.Columns.Count; c++)
-                        table.AddCell(grid_performance[c, r].Value.ToString());
-                document.Add(table);
-
-                document.Close();
-                file.Close();
-
-                MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Inka Art",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo exportar el reporte a PDF. " + ex.Message, "Error", MessageBoxButtons.OK,
+            if (grid_performance.Rows.Count == 0)
+                MessageBox.Show("No se generó el reporte debido a que no existe información sobre el o los trabajadores en el intervalo de tiempo elegido", "Error", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                LogHandler.WriteLine(ex.ToString());
+            else
+            {
+                DialogResult result = this.save_pdf_dialog.ShowDialog();
+                if (result != DialogResult.OK) return;
+
+                try
+                {
+                    FileStream file = new FileStream(this.save_pdf_dialog.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                    Document document = new Document(PageSize.A4);
+                    PdfWriter writer = PdfWriter.GetInstance(document, file);
+                    document.Open();
+
+                    Paragraph title = new Paragraph("REPORTE DE DESEMPEÑO DE TRABAJADORES", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20));
+                    title.Alignment = Element.ALIGN_CENTER;
+                    document.Add(title);
+
+                    document.Add(new Paragraph("   "));
+                    Chunk date_chunk = new Chunk("Fecha de generación de reporte:    " + label_today.Text);
+                    date_chunk.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
+                    document.Add(new Paragraph(date_chunk));
+                    document.Add(new Paragraph("   "));
+
+                    PdfPTable table = new PdfPTable(5);
+                    table.WidthPercentage = 100;
+                    for (int i = 0; i < grid_performance.Columns.Count; i++)
+                        table.AddCell(grid_performance.Columns[i].HeaderText);
+                    for (int r = 0; r < grid_performance.Rows.Count; r++)
+                        for (int c = 0; c < grid_performance.Columns.Count; c++)
+                            table.AddCell(grid_performance[c, r].Value.ToString());
+                    document.Add(table);
+
+                    document.Close();
+                    file.Close();
+
+                    MessageBox.Show("Se generó el archivo del reporte de desempeño de trabajadores exitosamente.", "Inka Art",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No se pudo exportar el reporte a PDF. " + ex.Message, "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    LogHandler.WriteLine(ex.ToString());
+                }
             }
         }
 
