@@ -88,6 +88,7 @@ namespace InkaArt.Interface.Production
 
         private void button_pdf_Click(object sender, EventArgs e)
         {
+            this.save_pdf_dialog.InitialDirectory= Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             DialogResult result = this.save_pdf_dialog.ShowDialog();
             if (result != DialogResult.OK) return;
 

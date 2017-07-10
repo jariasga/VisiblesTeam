@@ -68,7 +68,19 @@ namespace InkaArt.Interface.Sales
 
         private void button_pdf_Click(object sender, EventArgs e)
         {
-            FileStream fs = new FileStream("Factura-Pedido"+label_orderid.Text+".pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            SaveFileDialog dialogo = new SaveFileDialog();
+            string x = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string titulo = "Factura-Pedido" + label_orderid.Text + ".pdf"; ;
+            dialogo.Title = "Guardar documento";
+            dialogo.InitialDirectory = x;
+            dialogo.FileName = titulo;
+            dialogo.Filter = "Pdf Files|*.pdf";
+            if (dialogo.ShowDialog() == DialogResult.OK)
+            {
+                titulo = dialogo.FileName;
+            }
+            else return;
+            FileStream fs = new FileStream(titulo, FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document(PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();

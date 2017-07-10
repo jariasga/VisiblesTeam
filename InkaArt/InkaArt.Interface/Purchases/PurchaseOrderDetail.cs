@@ -661,10 +661,10 @@ namespace InkaArt.Interface.Purchases
             {
                 SaveFileDialog dialogo = new SaveFileDialog();
                 string x = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string titulo;
+                string titulo= "Orden" + textBox_id.Text + ".pdf"; ;
                 dialogo.Title = "Guardar orden";
                 dialogo.InitialDirectory = x;
-                dialogo.FileName = "Orden" + textBox_id.Text + ".pdf";
+                dialogo.FileName = titulo;
                 dialogo.Filter = "Pdf Files|*.pdf";
                 if (dialogo.ShowDialog() == DialogResult.OK)
                 {
