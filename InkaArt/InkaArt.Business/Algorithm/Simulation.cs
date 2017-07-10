@@ -179,10 +179,10 @@ namespace InkaArt.Business.Algorithm
                 NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
                 connection.Open();
 
-                string command_line = "INSERT INTO inkaart.\"Simulation\"(name, start_date, end_date, number_of_days, breakage_weight, time_weight " +
-                                      ", huaco_weight, huamanga_weight, altarpiece_weight, limit_time) ";
+                string command_line = "INSERT INTO inkaart.\"Simulation\"(name, start_date, end_date, number_of_days, breakage_weight, " +
+                                      "time_weight, huaco_weight, huamanga_weight, altarpiece_weight) ";
                 command_line += "VALUES (:name, :start_date, :end_date, :number_of_days, :breakage_weight, :time_weight, " +
-                                ":huaco_weight, :huamanga_weight, :altarpiece_weight, :limit_time)";
+                                ":huaco_weight, :huamanga_weight, :altarpiece_weight)";
                 command_line += "RETURNING inkaart.\"Simulation\".id_simulation";
                 NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
                 
@@ -195,9 +195,9 @@ namespace InkaArt.Business.Algorithm
                 command.Parameters.Add(new NpgsqlParameter("huaco_weight", huaco_weight));
                 command.Parameters.Add(new NpgsqlParameter("huamanga_weight", huamanga_stone_weight));
                 command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
-                command.Parameters.Add(new NpgsqlParameter("limit_time", LimitTime));
 
-                this.id_simulation = int.Parse(command.ExecuteScalar().ToString());
+                object result = command.ExecuteScalar();
+                this.id_simulation = Convert.ToInt32(result);
 
                 bool save_workers = this.SaveSelectedWorkers(connection);
                 bool save_orders = this.SaveSelectedOrders(connection);

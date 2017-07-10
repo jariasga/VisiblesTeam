@@ -156,26 +156,28 @@ namespace InkaArt.Business.Algorithm
 
         public bool Insert(Simulation simulation, NpgsqlConnection connection)
         {
-            string command_line = "INSERT inkaart.\"Assignment\" (id_simulation, date, objective_function_value, tabu_iterations, " +
-                                                                "huamanga_produced, huacos_produced, altarpiece_produced, assigned_workers)";
+            string command_line = "INSERT INTO inkaart.\"Assignment\" (id_simulation, date, objective_function_value, tabu_iterations, " +
+                                  "huamanga_produced, huacos_produced, altarpiece_produced, assigned_workers)";
             command_line += "VALUES (:id_simulation, :date, :objective_function_value, :tabu_iterations, " +
                                     ":huamanga_produced, :huacos_produced, :altarpiece_produced, :assigned_workers)";
             command_line += "RETURNING inkaart.\"Assignment\".id_assignment";
             NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
 
-            command.Parameters.Add(new NpgsqlParameter("date", this.date));
-            command.Parameters.Add(new NpgsqlParameter("objective_function_value", this.objective_function_value));
-            command.Parameters.Add(new NpgsqlParameter("tabu_iterations", this.tabu_iterations));
-            command.Parameters.Add(new NpgsqlParameter("huamanga_produced", this.huamanga_produced));
-            command.Parameters.Add(new NpgsqlParameter("huacos_produced", this.huacos_produced));
-            command.Parameters.Add(new NpgsqlParameter("altarpiece_produced", this.altarpiece_produced));
-            command.Parameters.Add(new NpgsqlParameter("assigned_workers", simulation.SelectedWorkers.NumberOfWorkers));
-            
-            int id_assginment = int.Parse(command.ExecuteScalar().ToString());
+            command.Parameters.AddWithValue("id_simulation", NpgsqlDbType.Integer, simulation.ID);
+            command.Parameters.AddWithValue("date", NpgsqlDbType.Date, date);
+            command.Parameters.AddWithValue("objective_function_value", NpgsqlDbType.Double, this.objective_function_value);
+            command.Parameters.AddWithValue("tabu_iterations", NpgsqlDbType.Integer, this.tabu_iterations);
+            command.Parameters.AddWithValue("huamanga_produced", NpgsqlDbType.Integer, this.huamanga_produced);
+            command.Parameters.AddWithValue("huacos_produced", NpgsqlDbType.Integer, this.huacos_produced);
+            command.Parameters.AddWithValue("altarpiece_produced", NpgsqlDbType.Integer, this.altarpiece_produced);
+            command.Parameters.AddWithValue("assigned_workers", NpgsqlDbType.Integer, simulation.SelectedWorkers.NumberOfWorkers);
+
+            object result = command.ExecuteScalar();
+            this.id_assignment = Convert.ToInt32(result);
 
             List<AssignmentLine> assignment_lines = this.MatrixToList(simulation);
             for (int i = 0; i < assignment_lines.Count; i++)
-                assignment_lines[i].Insert(connection);
+                if (assignment_lines[i].Insert(connection, this.id_assignment) <= 0) return false;
 
             return true;
         }
