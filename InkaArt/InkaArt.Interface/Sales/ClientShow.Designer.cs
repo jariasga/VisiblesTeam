@@ -84,7 +84,7 @@
             // 
             // textbox_email
             // 
-            this.textbox_email.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_email.BackColor = System.Drawing.Color.White;
             this.textbox_email.Enabled = false;
             this.textbox_email.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_email.Location = new System.Drawing.Point(23, 252);
@@ -105,7 +105,7 @@
             // 
             // textbox_contact
             // 
-            this.textbox_contact.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_contact.BackColor = System.Drawing.Color.White;
             this.textbox_contact.Enabled = false;
             this.textbox_contact.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_contact.Location = new System.Drawing.Point(23, 190);
@@ -126,7 +126,7 @@
             // 
             // textbox_phone
             // 
-            this.textbox_phone.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_phone.BackColor = System.Drawing.Color.White;
             this.textbox_phone.Enabled = false;
             this.textbox_phone.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_phone.Location = new System.Drawing.Point(23, 127);
@@ -147,7 +147,7 @@
             // 
             // textbox_address
             // 
-            this.textbox_address.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_address.BackColor = System.Drawing.Color.White;
             this.textbox_address.Enabled = false;
             this.textbox_address.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_address.Location = new System.Drawing.Point(23, 64);
@@ -324,7 +324,7 @@
             // 
             // textbox_priority
             // 
-            this.textbox_priority.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_priority.BackColor = System.Drawing.Color.White;
             this.textbox_priority.Enabled = false;
             this.textbox_priority.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_priority.Location = new System.Drawing.Point(197, 292);
@@ -355,7 +355,7 @@
             // 
             // textbox_name
             // 
-            this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_name.BackColor = System.Drawing.Color.White;
             this.textbox_name.Enabled = false;
             this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(31, 174);
@@ -376,7 +376,7 @@
             // 
             // textbox_doc
             // 
-            this.textbox_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_doc.BackColor = System.Drawing.Color.White;
             this.textbox_doc.Enabled = false;
             this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_doc.Location = new System.Drawing.Point(31, 111);
