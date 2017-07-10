@@ -148,7 +148,9 @@ namespace InkaArt.Interface.Sales
         }
         private string validateDataGrid()
         {
-            int numZeros = 0;
+            int numZeros = 0, curToFac = 0;
+            int[] cant = new int[3];
+            bool fail = false;
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
@@ -157,6 +159,26 @@ namespace InkaArt.Interface.Sales
                     return "La cantidad a facturar supera a la cantidad que se ha pedido, por favor corriga los datos.";
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
                     numZeros++;
+                curToFac = int.Parse(gridRow.Cells[5].Value.ToString());
+                switch (int.Parse(gridRow.Cells[0].Value.ToString()))
+                {
+                    case 1:
+                        cant[0] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        cant[0] -= curToFac;
+                        if (cant[0] < 0) fail = true;
+                        break;
+                    case 2:
+                        cant[1] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        cant[1] -= curToFac;
+                        if (cant[1] < 0) fail = true;
+                        break;
+                    case 3:
+                        cant[2] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        cant[2] -= curToFac;
+                        if (cant[2] < 0) fail = true;
+                        break;
+                }
+                if (fail) return "La cantidad total a facturar de un producto supera a la cantidad disponible, por favor corriga los datos.";
             }
             if (numZeros > 1) return "Por favor ingrese una cantidad a facturar en la columna 'A Facturar'.";
             return "OK";
