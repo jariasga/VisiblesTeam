@@ -152,7 +152,7 @@ namespace InkaArt.Interface.Warehouse
                             {
                                 aIngresar = int.Parse(textBox6.Text);
                                 int quantity = maxStock- currentStock -aIngresar;
-                                if (quantity > 0)
+                                if (quantity >= 0)
                                 {
                                     encontrado = 1;
                                     //update d la tabla
@@ -208,7 +208,7 @@ namespace InkaArt.Interface.Warehouse
                             {
                                 aIngresar = int.Parse(textBox6.Text);
                                 int quantity = maxStock-currentStock - aIngresar;
-                                if (quantity > 0)
+                                if (quantity >= 0)
                                 {
                                     encontrado = 1;
                                     //update d la tabla

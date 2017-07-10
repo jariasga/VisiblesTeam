@@ -102,9 +102,9 @@ namespace InkaArt.Business.Warehouse
             string fidStr = fisico.ToString();
             table = getData();
             updateQuery = "UPDATE inkaart.\"RawMaterial-Warehouse\" SET ";
-            updateQuery = updateQuery + "\"currentStock\"= " + logStr + ", ";
+            updateQuery = updateQuery + "\"currentStock\" = " + logStr + ", ";
             updateQuery = updateQuery + "\"virtualStock\" = " + fidStr;
-            updateQuery = updateQuery + " WHERE \"idWarehouse\"= " + idWh + " AND \"idRawMaterial\"= " + idRm + " AND state = 'Activo'"+" ;";
+            updateQuery = updateQuery + " WHERE \"idWarehouse\" = " + idWh + " AND \"idRawMaterial\" = " + idRm + " AND state = 'Activo'"+" ;";
             rmWarehouse.execute(updateQuery);
 
         }
