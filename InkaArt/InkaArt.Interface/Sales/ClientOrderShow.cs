@@ -104,6 +104,14 @@ namespace InkaArt.Interface.Sales
                 textbox_igv_todoc.Text = orderController.getPolishedIGV(toFacAmount);
                 textbox_total_todoc.Text = orderController.getPolishedTotal(toFacAmount);
             }
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[6].Value.ToString()))
+                {
+                    return;
+                }
+            }
+            button_fac.Visible = false;
         }
 
         private DataTable parseDataGrid(DataGridView grid_orderline)
@@ -148,13 +156,49 @@ namespace InkaArt.Interface.Sales
         }
         private string validateDataGrid()
         {
-            int numZeros = 0;
+            int numZeros = 0, curToFac = 0;
+            int[] cant = new int[3];
+            bool fail = false;
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                switch (int.Parse(gridRow.Cells[0].Value.ToString()))
+                {
+                    case 1:
+                        cant[0] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        break;
+                    case 2:
+                        cant[1] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        break;
+                    case 3:
+                        cant[2] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        break;
+                }
+            }
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
                     return "La cantidad a facturar supera a la cantidad disponible, por favor corriga los datos.";
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[4].Value.ToString()))
+                    return "La cantidad a facturar supera a la cantidad que se ha pedido, por favor corriga los datos.";
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
                     numZeros++;
+                curToFac = int.Parse(gridRow.Cells[5].Value.ToString());
+                switch (int.Parse(gridRow.Cells[0].Value.ToString()))
+                {
+                    case 1:
+                        cant[0] -= curToFac;
+                        if (cant[0] < 0) fail = true;
+                        break;
+                    case 2:
+                        cant[1] -= curToFac;
+                        if (cant[1] < 0) fail = true;
+                        break;
+                    case 3:
+                        cant[2] -= curToFac;
+                        if (cant[2] < 0) fail = true;
+                        break;
+                }
+                if (fail) return "La cantidad total a facturar de un producto supera a la cantidad disponible, por favor corriga los datos.";
             }
             if (numZeros > 1) return "Por favor ingrese una cantidad a facturar en la columna 'A Facturar'.";
             return "OK";
@@ -176,7 +220,7 @@ namespace InkaArt.Interface.Sales
                     }
                 }
                 orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray());
-                MessageBox.Show("Se ha generado una nota de crédito exitosamente.", "Éxito", MessageBoxButtons.OK);
+                MessageBox.Show("Se ha generado el documento de venta exitosamente.", "Éxito", MessageBoxButtons.OK);
                 Close();
             }
             else
