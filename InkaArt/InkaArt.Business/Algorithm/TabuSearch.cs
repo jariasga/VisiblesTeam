@@ -15,11 +15,12 @@ namespace InkaArt.Business.Algorithm
     {
         private Simulation simulation;
         private IndexController indexes;
-        private int limitDayTime;
+        private int limit_day_time;
+        private int start_time;
 
         // reactive tabu list
-        private int tabu_list_length;
-        private double tabu_list_growth;
+        private int list_length;
+        private double list_growth;
         private int max_no_growth;
 
         // neighbor
@@ -42,7 +43,8 @@ namespace InkaArt.Business.Algorithm
             loadParameters();            
             this.simulation = simulation;
             this.indexes = indexes;
-            this.limitDayTime = (Simulation.LimitTime - elapsed_time) / simulation.Days;
+            this.start_time = elapsed_time;
+            this.limit_day_time = (Simulation.LimitTime - elapsed_time) / simulation.Days;
             this.initial_solution = solution;
             this.best_solution = new List<Assignment>();
         }
@@ -65,18 +67,18 @@ namespace InkaArt.Business.Algorithm
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TabuParameters\"", connection);
             NpgsqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (reader.Read() && !read)
             {
                 // reactive tabu list
-                this.tabu_list_length = reader.GetInt32(0);    // largo inicial
-                this.tabu_list_growth = reader.GetDouble(1);   // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
-                this.max_no_growth = reader.GetInt32(2);       // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
+                this.list_length = Convert.ToInt16(reader["list_length"]);    // largo inicial
+                this.list_growth = Convert.ToDouble(reader["list_growth"]);   // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
+                this.max_no_growth = Convert.ToInt16(reader["max_no_growth"]);       // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
 
                 // solutions
-                this.max_iterations = reader.GetInt32(3);      // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
+                this.max_iterations = Convert.ToInt16(reader["max_iterations"]);      // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
 
                 // neighbor
-                this.neighbor_checks = reader.GetInt32(4);     // cantidad maxima de vecinos a evaluar                
+                this.neighbor_checks = Convert.ToInt16(reader["neighbor_checks"]);     // cantidad maxima de vecinos a evaluar                
                 read = true; 
             }
             connection.Close();
@@ -104,7 +106,7 @@ namespace InkaArt.Business.Algorithm
                     //Leer cada línea de asignación de la matriz y ver que no esté repetida
                     AssignmentLine assignment_line = assignment[worker_index, miniturn_index];
                     if (assignment_line == null) continue;
-                    if (!current_assignment_line.Equals(assignment_line)) current_assignment_line = assignment_line;
+                    if (current_assignment_line == null || !current_assignment_line.Equals(assignment_line)) current_assignment_line = assignment_line;
                     //Aumentar el fitness total y la cantidad de trabajadores asignados
                     assigned_workers++;
                     fitness += assignment_line.LossIndex;
@@ -279,7 +281,7 @@ namespace InkaArt.Business.Algorithm
             int iter_count = 0;
 
             // lista tabu
-            TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
+            TabuQueue tabu_list = new TabuQueue(list_length, list_growth);
             int no_growth_count = 0;
 
             // fitness
@@ -290,7 +292,7 @@ namespace InkaArt.Business.Algorithm
 
             // inicio
             // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (elapsed_time < limitDayTime && iter_count < max_iterations)
+            while (elapsed_time < start_time + (day + 1) * limit_day_time && iter_count < max_iterations)
             {
                 int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 
