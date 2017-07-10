@@ -110,8 +110,9 @@ namespace InkaArt.Data.Algorithm
 
         public int Insert(NpgsqlConnection connection, int id_asignment)
         {
-            string command_line = "INSERT INTO inkaart.\"AssignmentLine\" (id_worker, id_job, id_recipe, produced, miniturn_start, miniturns_used) ";
-            command_line += "VALUES (:id_worker, :id_job, :id_recipe, :produced, :miniturn_start, :miniturns_used)";
+            string command_line = "INSERT INTO inkaart.\"AssignmentLine\" (id_assignment, id_worker, id_job, id_recipe, produced, " + 
+                                  "miniturn_start, miniturns_used) ";
+            command_line += "VALUES (:id_assignment, :id_worker, :id_job, :id_recipe, :produced, :miniturn_start, :miniturns_used)";
             NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
 
             command.Parameters.AddWithValue("id_assignment", NpgsqlDbType.Integer, id_asignment);

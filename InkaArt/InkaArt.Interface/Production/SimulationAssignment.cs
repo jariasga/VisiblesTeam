@@ -39,16 +39,16 @@ namespace InkaArt.Interface.Production
                 this.recipes.Load();
                 this.orders.Load(recipes);
                 this.simulations.Load(workers, orders, recipes);
+
+                combo_simulations.DataSource = simulations.BindingList();
+                combo_simulations.DisplayMember = "Name";
+                combo_simulations.SelectedItem = null;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error grave al cargar de base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LogHandler.WriteLine("Error grave al cargar de base de datos: " + ex.ToString());
-            }            
-
-            combo_simulations.DataSource = simulations.BindingList();
-            combo_simulations.DisplayMember = "Name";
-            combo_simulations.SelectedItem = null;
+            }
         }
 
         private void ButtonConfigClick(object sender, EventArgs e)
@@ -69,14 +69,15 @@ namespace InkaArt.Interface.Production
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            /*SimulationReport simulation_report = new SimulationReport(current_simulation);
-            simulation_report.Show();*/
+            if (current_simulation == null) return;
+            SimulationReport simulation_report = new SimulationReport(current_simulation);
+            simulation_report.Show();
         }
 
         private void ButtonDeleteClick(object sender, EventArgs e)
         {
             //general_grid.Rows.Clear();
-            //summary_grid.Rows.Clear();            
+            //summary_grid.Rows.Clear();
             
             if (simulations.Delete(current_simulation))
                 MessageBox.Show("Simulación eliminada", "Eliminar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
