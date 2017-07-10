@@ -86,7 +86,7 @@ namespace InkaArt.Business.Sales
                 int quantity = int.Parse(orderline["quantity"].ToString());
                 int finished = int.Parse(orderline["quantityProduced"].ToString());
                 int invoiced = int.Parse(orderline["quantityInvoiced"].ToString());
-                bool lineComplete = quantity == invoiced;
+                bool lineComplete = quantity == finished + invoiced;
                 if (lineComplete) invoicedNumber++;
                 int toAdd;
                 if (orderType == 1) toAdd = quantity;

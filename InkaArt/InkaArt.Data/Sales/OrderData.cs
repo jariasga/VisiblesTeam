@@ -177,6 +177,11 @@ namespace InkaArt.Data.Sales
         public void updateOrderStatus(string orderId, string orderStatus)
         {
             NpgsqlDataAdapter myAdap = orderAdapter();
+            myAdap.SelectCommand.CommandText += " WHERE \"idOrder\" = :idOrder;";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = orderId;
             DataSet myData = getData(myAdap, "Order");
             table = myData.Tables["Order"];
             for (int i = 0; i < table.Rows.Count; i++)
@@ -184,6 +189,8 @@ namespace InkaArt.Data.Sales
                 if (string.Compare(table.Rows[i]["idOrder"].ToString(), orderId) == 0)
                 {
                     table.Rows[i]["orderStatus"] = orderStatus;
+                    table.Rows[i]["reason"] = "";
+                    table.Rows[i]["totaldev"] = 0.0;
                     break;
                 }
             }
