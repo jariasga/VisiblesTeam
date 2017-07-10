@@ -82,7 +82,7 @@ namespace InkaArt.Business.Algorithm
                 Assignment assignment = this.ExecuteGraspConstructionPhase(day, iteration, orders, ref elapsed_time);
 
                 //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día por la nueva asignación generada
-                if (this.HasTime(ref elapsed_time, day)) day_assignments.AddAssignment(assignment, orders);
+                day_assignments.AddAssignment(assignment, orders);
             }
 
             return day_assignments.GetBestAssignment(ref this.original_orders);
@@ -346,7 +346,10 @@ namespace InkaArt.Business.Algorithm
             {
                 int worker_index = simulation.SelectedWorkers.GetIndex(current_product[i].Worker.ID);
                 for (int j = 0; j < current_product[i].MiniturnsUsed; j++)
-                    assignment[worker_index, current_product[i].MiniturnStart + j] = current_product[i];
+                {
+                    int miniturn_index = current_product[i].MiniturnStart + j;
+                    if (miniturn_index < simulation.TotalMiniturns) assignment[worker_index, miniturn_index] = current_product[i];
+                }
             }
             //Actualizar la asignación: función objetivo y cantidad producida en el día
             LogHandler.WriteLine("Función objetivo antigua: {0}", assignment.ObjectiveFunction);
