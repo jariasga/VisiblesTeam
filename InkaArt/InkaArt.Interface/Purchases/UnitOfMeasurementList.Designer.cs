@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,6 +41,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.dataGridView_unitOfMeasurement = new System.Windows.Forms.DataGridView();
+            this.id_unitM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.abreviatura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
@@ -165,14 +171,68 @@
             this.dataGridView_unitOfMeasurement.AllowUserToAddRows = false;
             this.dataGridView_unitOfMeasurement.AllowUserToDeleteRows = false;
             this.dataGridView_unitOfMeasurement.AllowUserToResizeRows = false;
+            this.dataGridView_unitOfMeasurement.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_unitOfMeasurement.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_unitOfMeasurement.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_unitOfMeasurement.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_unitOfMeasurement.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_unitM,
+            this.nameUnit,
+            this.abreviatura,
+            this.status,
             this.Eliminar});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_unitOfMeasurement.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView_unitOfMeasurement.Location = new System.Drawing.Point(21, 186);
             this.dataGridView_unitOfMeasurement.Name = "dataGridView_unitOfMeasurement";
             this.dataGridView_unitOfMeasurement.Size = new System.Drawing.Size(663, 184);
             this.dataGridView_unitOfMeasurement.TabIndex = 45;
             this.dataGridView_unitOfMeasurement.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.editUnitOfMeasurement);
+            // 
+            // id_unitM
+            // 
+            this.id_unitM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id_unitM.FillWeight = 110F;
+            this.id_unitM.HeaderText = "ID";
+            this.id_unitM.Name = "id_unitM";
+            this.id_unitM.ReadOnly = true;
+            // 
+            // nameUnit
+            // 
+            this.nameUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameUnit.FillWeight = 448.9796F;
+            this.nameUnit.HeaderText = "Nombre";
+            this.nameUnit.Name = "nameUnit";
+            this.nameUnit.ReadOnly = true;
+            // 
+            // abreviatura
+            // 
+            this.abreviatura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.abreviatura.FillWeight = 297.0068F;
+            this.abreviatura.HeaderText = "Abreviatura";
+            this.abreviatura.Name = "abreviatura";
+            this.abreviatura.ReadOnly = true;
+            // 
+            // status
+            // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.status.FillWeight = 150.0068F;
+            this.status.HeaderText = "Estatus";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
             // 
             // Eliminar
             // 
@@ -258,9 +318,13 @@
         private System.Windows.Forms.DataGridView dataGridView_unitOfMeasurement;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_cargamasiva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_unitM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameUnit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn abreviatura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
     }
 }

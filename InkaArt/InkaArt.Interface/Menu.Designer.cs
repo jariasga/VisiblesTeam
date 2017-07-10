@@ -39,6 +39,7 @@ namespace InkaArt.Interface
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.menu_strip = new System.Windows.Forms.MenuStrip();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parámetrosGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -351,6 +352,7 @@ namespace InkaArt.Interface
             // 
             // status_strip
             // 
+            this.status_strip.BackColor = System.Drawing.Color.White;
             this.status_strip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status_label,
@@ -381,6 +383,7 @@ namespace InkaArt.Interface
             // 
             // splitter1
             // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.Control;
             this.splitter1.Location = new System.Drawing.Point(0, 25);
             this.splitter1.Margin = new System.Windows.Forms.Padding(4);
             this.splitter1.Name = "splitter1";
@@ -393,16 +396,22 @@ namespace InkaArt.Interface
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackgroundImage = global::InkaArt.Interface.Properties.Resources.logo;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1362, 739);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.status_strip);
             this.Controls.Add(this.menu_strip);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menu_strip;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
+            this.TransparencyKey = System.Drawing.Color.WhiteSmoke;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Menu_FormClosed);
             this.Load += new System.EventHandler(this.Menu_Load);

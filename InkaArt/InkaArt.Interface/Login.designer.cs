@@ -28,31 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_title = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.label_user = new System.Windows.Forms.Label();
             this.label_password = new System.Windows.Forms.Label();
             this.textbox_user = new System.Windows.Forms.TextBox();
             this.textbox_password = new System.Windows.Forms.TextBox();
             this.label_forgot = new System.Windows.Forms.Label();
             this.button_Login = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label_title
-            // 
-            this.label_title.AutoSize = true;
-            this.label_title.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_title.Location = new System.Drawing.Point(45, 44);
-            this.label_title.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_title.Name = "label_title";
-            this.label_title.Size = new System.Drawing.Size(238, 27);
-            this.label_title.TabIndex = 0;
-            this.label_title.Text = "Bienvenido a Inka Art";
             // 
             // label_user
             // 
             this.label_user.AutoSize = true;
             this.label_user.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_user.Location = new System.Drawing.Point(47, 119);
+            this.label_user.Location = new System.Drawing.Point(47, 179);
             this.label_user.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_user.Name = "label_user";
             this.label_user.Size = new System.Drawing.Size(66, 18);
@@ -63,7 +54,7 @@
             // 
             this.label_password.AutoSize = true;
             this.label_password.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_password.Location = new System.Drawing.Point(47, 168);
+            this.label_password.Location = new System.Drawing.Point(47, 227);
             this.label_password.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_password.Name = "label_password";
             this.label_password.Size = new System.Drawing.Size(93, 18);
@@ -73,7 +64,7 @@
             // textbox_user
             // 
             this.textbox_user.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_user.Location = new System.Drawing.Point(161, 117);
+            this.textbox_user.Location = new System.Drawing.Point(161, 177);
             this.textbox_user.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_user.Name = "textbox_user";
             this.textbox_user.Size = new System.Drawing.Size(122, 24);
@@ -82,7 +73,7 @@
             // textbox_password
             // 
             this.textbox_password.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_password.Location = new System.Drawing.Point(161, 166);
+            this.textbox_password.Location = new System.Drawing.Point(161, 225);
             this.textbox_password.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_password.Name = "textbox_password";
             this.textbox_password.PasswordChar = '*';
@@ -94,7 +85,7 @@
             this.label_forgot.AutoSize = true;
             this.label_forgot.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_forgot.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label_forgot.Location = new System.Drawing.Point(88, 211);
+            this.label_forgot.Location = new System.Drawing.Point(88, 268);
             this.label_forgot.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_forgot.Name = "label_forgot";
             this.label_forgot.Size = new System.Drawing.Size(150, 15);
@@ -107,7 +98,7 @@
             this.button_Login.BackColor = System.Drawing.Color.SteelBlue;
             this.button_Login.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_Login.ForeColor = System.Drawing.Color.White;
-            this.button_Login.Location = new System.Drawing.Point(117, 242);
+            this.button_Login.Location = new System.Drawing.Point(119, 299);
             this.button_Login.Margin = new System.Windows.Forms.Padding(2);
             this.button_Login.Name = "button_Login";
             this.button_Login.Size = new System.Drawing.Size(92, 39);
@@ -116,38 +107,48 @@
             this.button_Login.UseVisualStyleBackColor = false;
             this.button_Login.Click += new System.EventHandler(this.button_Login_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::InkaArt.Interface.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(64, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(206, 156);
+            this.pictureBox1.TabIndex = 46;
+            this.pictureBox1.TabStop = false;
+            // 
             // Login
             // 
             this.AcceptButton = this.button_Login;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(325, 313);
+            this.ClientSize = new System.Drawing.Size(329, 352);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button_Login);
             this.Controls.Add(this.label_forgot);
             this.Controls.Add(this.textbox_password);
             this.Controls.Add(this.textbox_user);
             this.Controls.Add(this.label_password);
             this.Controls.Add(this.label_user);
-            this.Controls.Add(this.label_title);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.Label label_user;
         private System.Windows.Forms.Label label_password;
         private System.Windows.Forms.TextBox textbox_user;
         private System.Windows.Forms.TextBox textbox_password;
         private System.Windows.Forms.Label label_forgot;
         private System.Windows.Forms.Button button_Login;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

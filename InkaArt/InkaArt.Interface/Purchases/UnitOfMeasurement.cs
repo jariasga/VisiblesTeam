@@ -60,10 +60,10 @@ namespace InkaArt.Interface.Purchases
             isInEditMode = false;
             controlForm = control;
             InitializeComponent();
-            textBox_id.Text = currentUnitOfMeasurement.Cells[1].Value.ToString();
-            textBox_nameUnit.Text = currentUnitOfMeasurement.Cells[2].Value.ToString();
-            textBox_abbreviation.Text = currentUnitOfMeasurement.Cells[3].Value.ToString();
-            comboBox_status.Text = currentUnitOfMeasurement.Cells[4].Value.ToString();
+            textBox_id.Text = currentUnitOfMeasurement.Cells[0].Value.ToString();
+            textBox_nameUnit.Text = currentUnitOfMeasurement.Cells[1].Value.ToString();
+            textBox_abbreviation.Text = currentUnitOfMeasurement.Cells[2].Value.ToString();
+            comboBox_status.Text = currentUnitOfMeasurement.Cells[3].Value.ToString();
             textBox_abbreviation.Enabled = false;
             textBox_nameUnit.Enabled = false;
             comboBox_status.Enabled = false;

@@ -78,9 +78,9 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(25, 21);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(526, 180);
             this.groupBox2.TabIndex = 55;
             this.groupBox2.TabStop = false;
@@ -89,11 +89,11 @@
             // 
             // textbox_date
             // 
-            this.textbox_date.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_date.BackColor = System.Drawing.Color.White;
             this.textbox_date.Enabled = false;
             this.textbox_date.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_date.Location = new System.Drawing.Point(17, 92);
-            this.textbox_date.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_date.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_date.Name = "textbox_date";
             this.textbox_date.ReadOnly = true;
             this.textbox_date.Size = new System.Drawing.Size(237, 24);
@@ -101,11 +101,11 @@
             // 
             // textbox_doc_number
             // 
-            this.textbox_doc_number.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_doc_number.BackColor = System.Drawing.Color.White;
             this.textbox_doc_number.Enabled = false;
             this.textbox_doc_number.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_doc_number.Location = new System.Drawing.Point(270, 141);
-            this.textbox_doc_number.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_doc_number.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_doc_number.Name = "textbox_doc_number";
             this.textbox_doc_number.ReadOnly = true;
             this.textbox_doc_number.Size = new System.Drawing.Size(237, 24);
@@ -229,9 +229,9 @@
             this.groupBox_item.Controls.Add(this.label8);
             this.groupBox_item.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_item.Location = new System.Drawing.Point(25, 388);
-            this.groupBox_item.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_item.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_item.Name = "groupBox_item";
-            this.groupBox_item.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_item.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox_item.Size = new System.Drawing.Size(526, 89);
             this.groupBox_item.TabIndex = 56;
             this.groupBox_item.TabStop = false;
@@ -239,11 +239,11 @@
             // 
             // textbox_quantity
             // 
-            this.textbox_quantity.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_quantity.BackColor = System.Drawing.Color.White;
             this.textbox_quantity.Enabled = false;
             this.textbox_quantity.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_quantity.Location = new System.Drawing.Point(268, 47);
-            this.textbox_quantity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_quantity.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_quantity.Name = "textbox_quantity";
             this.textbox_quantity.ReadOnly = true;
             this.textbox_quantity.Size = new System.Drawing.Size(237, 24);
@@ -251,11 +251,11 @@
             // 
             // textbox_item_name
             // 
-            this.textbox_item_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_item_name.BackColor = System.Drawing.Color.White;
             this.textbox_item_name.Enabled = false;
             this.textbox_item_name.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_item_name.Location = new System.Drawing.Point(17, 47);
-            this.textbox_item_name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_item_name.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_item_name.Name = "textbox_item_name";
             this.textbox_item_name.ReadOnly = true;
             this.textbox_item_name.Size = new System.Drawing.Size(237, 24);
@@ -288,9 +288,9 @@
             this.groupBox_origen.Controls.Add(this.textbox_warehouse_idO);
             this.groupBox_origen.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_origen.Location = new System.Drawing.Point(25, 226);
-            this.groupBox_origen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_origen.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_origen.Name = "groupBox_origen";
-            this.groupBox_origen.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_origen.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox_origen.Size = new System.Drawing.Size(254, 133);
             this.groupBox_origen.TabIndex = 38;
             this.groupBox_origen.TabStop = false;
@@ -318,11 +318,11 @@
             // 
             // textbox_warehouse_nameO
             // 
-            this.textbox_warehouse_nameO.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_warehouse_nameO.BackColor = System.Drawing.Color.White;
             this.textbox_warehouse_nameO.Enabled = false;
             this.textbox_warehouse_nameO.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_warehouse_nameO.Location = new System.Drawing.Point(13, 93);
-            this.textbox_warehouse_nameO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_warehouse_nameO.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_warehouse_nameO.Name = "textbox_warehouse_nameO";
             this.textbox_warehouse_nameO.ReadOnly = true;
             this.textbox_warehouse_nameO.Size = new System.Drawing.Size(229, 24);
@@ -330,11 +330,11 @@
             // 
             // textbox_warehouse_idO
             // 
-            this.textbox_warehouse_idO.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_warehouse_idO.BackColor = System.Drawing.Color.White;
             this.textbox_warehouse_idO.Enabled = false;
             this.textbox_warehouse_idO.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_warehouse_idO.Location = new System.Drawing.Point(13, 43);
-            this.textbox_warehouse_idO.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_warehouse_idO.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_warehouse_idO.Name = "textbox_warehouse_idO";
             this.textbox_warehouse_idO.ReadOnly = true;
             this.textbox_warehouse_idO.Size = new System.Drawing.Size(229, 24);
@@ -348,9 +348,9 @@
             this.groupBox_destino.Controls.Add(this.textbox_warehouse_nameD);
             this.groupBox_destino.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_destino.Location = new System.Drawing.Point(295, 226);
-            this.groupBox_destino.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_destino.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox_destino.Name = "groupBox_destino";
-            this.groupBox_destino.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_destino.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox_destino.Size = new System.Drawing.Size(256, 133);
             this.groupBox_destino.TabIndex = 39;
             this.groupBox_destino.TabStop = false;
@@ -368,11 +368,11 @@
             // 
             // textbox_warehouse_idD
             // 
-            this.textbox_warehouse_idD.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_warehouse_idD.BackColor = System.Drawing.Color.White;
             this.textbox_warehouse_idD.Enabled = false;
             this.textbox_warehouse_idD.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_warehouse_idD.Location = new System.Drawing.Point(14, 43);
-            this.textbox_warehouse_idD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_warehouse_idD.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_warehouse_idD.Name = "textbox_warehouse_idD";
             this.textbox_warehouse_idD.ReadOnly = true;
             this.textbox_warehouse_idD.Size = new System.Drawing.Size(224, 24);
@@ -390,11 +390,11 @@
             // 
             // textbox_warehouse_nameD
             // 
-            this.textbox_warehouse_nameD.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_warehouse_nameD.BackColor = System.Drawing.Color.White;
             this.textbox_warehouse_nameD.Enabled = false;
             this.textbox_warehouse_nameD.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textbox_warehouse_nameD.Location = new System.Drawing.Point(14, 93);
-            this.textbox_warehouse_nameD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textbox_warehouse_nameD.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_warehouse_nameD.Name = "textbox_warehouse_nameD";
             this.textbox_warehouse_nameD.ReadOnly = true;
             this.textbox_warehouse_nameD.Size = new System.Drawing.Size(222, 24);
