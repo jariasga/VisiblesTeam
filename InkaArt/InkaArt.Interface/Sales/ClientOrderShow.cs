@@ -153,6 +153,8 @@ namespace InkaArt.Interface.Sales
             {
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
                     return "La cantidad a facturar supera a la cantidad disponible, por favor corriga los datos.";
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[4].Value.ToString()))
+                    return "La cantidad a facturar supera a la cantidad que se ha pedido, por favor corriga los datos.";
                 if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
                     numZeros++;
             }
