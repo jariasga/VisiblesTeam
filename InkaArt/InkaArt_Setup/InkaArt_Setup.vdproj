@@ -16,7 +16,7 @@
         "Entry"
         {
         "MsmKey" = "8:_02C772C25EE28029B35252C72FF7098E"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -28,7 +28,7 @@
         "Entry"
         {
         "MsmKey" = "8:_11E4D04F7389F0D2F9BAA7914C832DA3"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,14 +39,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1A4050CA0C7C48DF93900E4EA71AEE01"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_3BC62136DF777C913787BDA7EFA080A2"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3BC62136DF777C913787BDA7EFA080A2"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "MsmKey" = "8:_56970E22C8104A868C9AA3ADD2637F0A"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_668DEC9C80FECC7DB4B311038D5B9199"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -71,6 +71,12 @@
         {
         "MsmKey" = "8:_668DEC9C80FECC7DB4B311038D5B9199"
         "OwnerKey" = "8:_B0C7D8A22D2BFD16B1CC6F9AC7797D10"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,7 +100,7 @@
         "Entry"
         {
         "MsmKey" = "8:_B0C7D8A22D2BFD16B1CC6F9AC7797D10"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,19 +118,13 @@
         "Entry"
         {
         "MsmKey" = "8:_BDE5B715387B0A3B1FDB16A0E2BDBDCC"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_BEDBA2F5C99F4EC2FA79442B240AC604"
         "OwnerKey" = "8:_668DEC9C80FECC7DB4B311038D5B9199"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -136,7 +136,7 @@
         "Entry"
         {
         "MsmKey" = "8:_F1E44607EF0867BF0B6519413403A8E2"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -154,7 +154,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+        "OwnerKey" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -411,26 +411,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A4050CA0C7C48DF93900E4EA71AEE01"
-            {
-            "SourcePath" = "8:..\\InkaArt.Libraries\\ico.ico"
-            "TargetName" = "8:ico.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_0AC23B3B332E46419561EEC4D3C86D79"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3BC62136DF777C913787BDA7EFA080A2"
             {
             "AssemblyRegister" = "3:1"
@@ -462,6 +442,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56970E22C8104A868C9AA3ADD2637F0A"
+            {
+            "SourcePath" = "8:..\\InkaArt.Interface\\Resources\\logo2.ico"
+            "TargetName" = "8:logo2.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_0AC23B3B332E46419561EEC4D3C86D79"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_668DEC9C80FECC7DB4B311038D5B9199"
             {
             "AssemblyRegister" = "3:1"
@@ -491,6 +491,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6BE5DD14216C4EF68428844C3B3B73FC"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:InkaArt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_6BE5DD14216C4EF68428844C3B3B73FC"
+                    {
+                    "Name" = "8:InkaArt.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\InkaArt.Interface\\bin\\Debug\\InkaArt.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0AC23B3B332E46419561EEC4D3C86D79"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9408468BFAF93C7C232552F154CEC5D8"
@@ -710,37 +741,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E0A0A920D8A24929BE1FD8A246EC12F0"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:InkaArt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_E0A0A920D8A24929BE1FD8A246EC12F0"
-                    {
-                    "Name" = "8:InkaArt.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\InkaArt.Interface\\bin\\Debug\\InkaArt.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0AC23B3B332E46419561EEC4D3C86D79"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F1E44607EF0867BF0B6519413403A8E2"
             {
             "AssemblyRegister" = "3:1"
@@ -829,7 +829,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:InkaArt"
         "ProductCode" = "8:{620D742D-5818-42F5-849F-2D66C00E9184}"
-        "PackageCode" = "8:{25498D90-7A89-4EDC-A535-0D4D9A335D38}"
+        "PackageCode" = "8:{5E2C2CD7-B60D-4355-A05E-04D94352A725}"
         "UpgradeCode" = "8:{194BB57A-A433-402A-9336-E5C695DD2B21}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -960,21 +960,21 @@
             "Target" = "8:_E530F7CED9554D47A1C311C36319D629"
             "Folder" = "8:_E530F7CED9554D47A1C311C36319D629"
             "WorkingFolder" = "8:_E530F7CED9554D47A1C311C36319D629"
-            "Icon" = "8:"
+            "Icon" = "8:_56970E22C8104A868C9AA3ADD2637F0A"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_08543126F37B42A596235212453C237F"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B69F95292ED54E8AAF87342E538AD27A"
             {
-            "Name" = "8:Inka Art"
+            "Name" = "8:InkaArt.exe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_E0A0A920D8A24929BE1FD8A246EC12F0"
+            "Target" = "8:_6BE5DD14216C4EF68428844C3B3B73FC"
             "Folder" = "8:_C32F5C6C3ABA41A5AA8EFC9BE23552E9"
             "WorkingFolder" = "8:_0AC23B3B332E46419561EEC4D3C86D79"
-            "Icon" = "8:_1A4050CA0C7C48DF93900E4EA71AEE01"
+            "Icon" = "8:_56970E22C8104A868C9AA3ADD2637F0A"
             "Feature" = "8:"
             }
         }
