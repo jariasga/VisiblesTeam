@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_state = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -41,12 +42,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.checkBox_newVer = new System.Windows.Forms.CheckBox();
             this.dataGridView_rawMaterial = new System.Windows.Forms.DataGridView();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_add = new System.Windows.Forms.Button();
             this.comboBox_rawMaterial = new System.Windows.Forms.ComboBox();
             this.numericUpDown_count = new System.Windows.Forms.NumericUpDown();
@@ -59,6 +54,12 @@
             this.massive_recipe = new System.Windows.Forms.Button();
             this.massive_details = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Borrar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_rawMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_count)).BeginInit();
@@ -87,7 +88,7 @@
             // 
             // textBox_state
             // 
-            this.textBox_state.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox_state.BackColor = System.Drawing.Color.White;
             this.textBox_state.Enabled = false;
             this.textBox_state.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_state.Location = new System.Drawing.Point(21, 167);
@@ -131,7 +132,7 @@
             // 
             // textBox_product
             // 
-            this.textBox_product.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox_product.BackColor = System.Drawing.Color.White;
             this.textBox_product.Enabled = false;
             this.textBox_product.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_product.Location = new System.Drawing.Point(21, 110);
@@ -165,7 +166,7 @@
             // 
             // textBox_id
             // 
-            this.textBox_id.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_id.Location = new System.Drawing.Point(21, 49);
@@ -208,8 +209,8 @@
             // 
             this.dataGridView_rawMaterial.AllowUserToAddRows = false;
             this.dataGridView_rawMaterial.AllowUserToDeleteRows = false;
-            this.dataGridView_rawMaterial.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_rawMaterial.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rawMaterial.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_rawMaterial.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_rawMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_rawMaterial.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -218,52 +219,20 @@
             this.Unidad,
             this.Estado,
             this.Borrar});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_rawMaterial.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_rawMaterial.Location = new System.Drawing.Point(19, 84);
             this.dataGridView_rawMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_rawMaterial.Name = "dataGridView_rawMaterial";
             this.dataGridView_rawMaterial.Size = new System.Drawing.Size(615, 286);
             this.dataGridView_rawMaterial.TabIndex = 17;
             this.dataGridView_rawMaterial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // Unidad
-            // 
-            this.Unidad.HeaderText = "Unidad";
-            this.Unidad.Name = "Unidad";
-            this.Unidad.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
-            // Borrar
-            // 
-            this.Borrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Borrar.HeaderText = "Borrar";
-            this.Borrar.Name = "Borrar";
-            this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Borrar.Width = 70;
             // 
             // button_add
             // 
@@ -281,13 +250,14 @@
             // 
             // comboBox_rawMaterial
             // 
+            this.comboBox_rawMaterial.BackColor = System.Drawing.Color.White;
+            this.comboBox_rawMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_rawMaterial.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_rawMaterial.FormattingEnabled = true;
             this.comboBox_rawMaterial.Location = new System.Drawing.Point(19, 45);
             this.comboBox_rawMaterial.Name = "comboBox_rawMaterial";
             this.comboBox_rawMaterial.Size = new System.Drawing.Size(214, 25);
             this.comboBox_rawMaterial.TabIndex = 22;
-            this.comboBox_rawMaterial.Text = "Piedra";
             this.comboBox_rawMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBox_rawMaterial_SelectedIndexChanged);
             // 
             // numericUpDown_count
@@ -380,12 +350,12 @@
             this.massive_recipe.BackColor = System.Drawing.Color.SteelBlue;
             this.massive_recipe.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.massive_recipe.ForeColor = System.Drawing.Color.White;
-            this.massive_recipe.Location = new System.Drawing.Point(629, 424);
+            this.massive_recipe.Location = new System.Drawing.Point(613, 424);
             this.massive_recipe.Margin = new System.Windows.Forms.Padding(2);
             this.massive_recipe.Name = "massive_recipe";
-            this.massive_recipe.Size = new System.Drawing.Size(142, 39);
+            this.massive_recipe.Size = new System.Drawing.Size(146, 39);
             this.massive_recipe.TabIndex = 29;
-            this.massive_recipe.Text = "⬆ Carga Recetas";
+            this.massive_recipe.Text = "⬆ Cargar Recetas";
             this.massive_recipe.UseVisualStyleBackColor = false;
             this.massive_recipe.Click += new System.EventHandler(this.massive_recipe_Click);
             // 
@@ -394,12 +364,12 @@
             this.massive_details.BackColor = System.Drawing.Color.SteelBlue;
             this.massive_details.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.massive_details.ForeColor = System.Drawing.Color.White;
-            this.massive_details.Location = new System.Drawing.Point(775, 424);
+            this.massive_details.Location = new System.Drawing.Point(763, 424);
             this.massive_details.Margin = new System.Windows.Forms.Padding(2);
             this.massive_details.Name = "massive_details";
-            this.massive_details.Size = new System.Drawing.Size(133, 39);
+            this.massive_details.Size = new System.Drawing.Size(145, 39);
             this.massive_details.TabIndex = 30;
-            this.massive_details.Text = "⬆ Carga Detalles";
+            this.massive_details.Text = "⬆ Cargar Detalles";
             this.massive_details.UseVisualStyleBackColor = false;
             this.massive_details.Click += new System.EventHandler(this.massive_details_Click);
             // 
@@ -413,6 +383,53 @@
             this.label8.Size = new System.Drawing.Size(122, 18);
             this.label8.TabIndex = 31;
             this.label8.Text = "Cargas Masivas";
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.FillWeight = 80F;
+            this.Producto.HeaderText = "ID";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cantidad.FillWeight = 90F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // Unidad
+            // 
+            this.Unidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Unidad.HeaderText = "Unidad";
+            this.Unidad.Name = "Unidad";
+            this.Unidad.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // Borrar
+            // 
+            this.Borrar.FillWeight = 70F;
+            this.Borrar.HeaderText = "Borrar";
+            this.Borrar.Name = "Borrar";
+            this.Borrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Borrar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Borrar.Width = 70;
             // 
             // Recipe
             // 
@@ -472,12 +489,12 @@
         private System.Windows.Forms.Button massive_details;
         private System.Windows.Forms.TextBox textBox_state;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Borrar;
-        private System.Windows.Forms.Label label8;
     }
 }

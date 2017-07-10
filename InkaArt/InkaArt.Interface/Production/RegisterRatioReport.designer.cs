@@ -28,16 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_save = new System.Windows.Forms.Button();
             this.grid_reports = new System.Windows.Forms.DataGridView();
-            this.grid_column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_column_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_column_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.grid_column_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.grid_column_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_delete = new System.Windows.Forms.Button();
             this.button_add = new System.Windows.Forms.Button();
             this.label_date = new System.Windows.Forms.Label();
@@ -60,6 +53,14 @@
             this.button_load = new System.Windows.Forms.Button();
             this.open_file_dialog = new System.Windows.Forms.OpenFileDialog();
             this.label_grid = new System.Windows.Forms.Label();
+            this.grid_column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_worker = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_job = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_recipe = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.grid_column_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_broken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grid_column_produced = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_reports)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -80,7 +81,8 @@
             // grid_reports
             // 
             this.grid_reports.AllowUserToDeleteRows = false;
-            this.grid_reports.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.grid_reports.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_reports.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_reports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_reports.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.grid_column_id,
@@ -91,6 +93,14 @@
             this.grid_column_end,
             this.grid_column_broken,
             this.grid_column_produced});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_reports.DefaultCellStyle = dataGridViewCellStyle1;
             this.grid_reports.Location = new System.Drawing.Point(22, 245);
             this.grid_reports.Name = "grid_reports";
             this.grid_reports.Size = new System.Drawing.Size(939, 223);
@@ -98,60 +108,6 @@
             this.grid_reports.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_reports_CellValueChanged);
             this.grid_reports.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.grid_reports_EditingControlShowing);
             this.grid_reports.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.grid_reports_RowsAdded);
-            // 
-            // grid_column_id
-            // 
-            this.grid_column_id.HeaderText = "ID";
-            this.grid_column_id.Name = "grid_column_id";
-            this.grid_column_id.ReadOnly = true;
-            this.grid_column_id.Visible = false;
-            this.grid_column_id.Width = 50;
-            // 
-            // grid_column_worker
-            // 
-            this.grid_column_worker.HeaderText = "Trabajador";
-            this.grid_column_worker.Name = "grid_column_worker";
-            this.grid_column_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grid_column_worker.Width = 180;
-            // 
-            // grid_column_job
-            // 
-            this.grid_column_job.HeaderText = "Puesto de trabajo";
-            this.grid_column_job.Name = "grid_column_job";
-            this.grid_column_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_job.Width = 180;
-            // 
-            // grid_column_recipe
-            // 
-            this.grid_column_recipe.HeaderText = "Receta";
-            this.grid_column_recipe.Name = "grid_column_recipe";
-            this.grid_column_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.grid_column_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grid_column_recipe.Width = 150;
-            // 
-            // grid_column_start
-            // 
-            this.grid_column_start.HeaderText = "Hora inicio";
-            this.grid_column_start.Name = "grid_column_start";
-            this.grid_column_start.Width = 110;
-            // 
-            // grid_column_end
-            // 
-            this.grid_column_end.HeaderText = "Hora fin";
-            this.grid_column_end.Name = "grid_column_end";
-            // 
-            // grid_column_broken
-            // 
-            this.grid_column_broken.HeaderText = "Rotos";
-            this.grid_column_broken.Name = "grid_column_broken";
-            this.grid_column_broken.Width = 80;
-            // 
-            // grid_column_produced
-            // 
-            this.grid_column_produced.HeaderText = "Terminados";
-            this.grid_column_produced.Name = "grid_column_produced";
-            this.grid_column_produced.Width = 95;
             // 
             // button_delete
             // 
@@ -391,6 +347,67 @@
             this.label_grid.Size = new System.Drawing.Size(230, 18);
             this.label_grid.TabIndex = 67;
             this.label_grid.Text = "Jornadas de trabajo registradas";
+            // 
+            // grid_column_id
+            // 
+            this.grid_column_id.HeaderText = "ID";
+            this.grid_column_id.Name = "grid_column_id";
+            this.grid_column_id.ReadOnly = true;
+            this.grid_column_id.Visible = false;
+            this.grid_column_id.Width = 50;
+            // 
+            // grid_column_worker
+            // 
+            this.grid_column_worker.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_worker.FillWeight = 180F;
+            this.grid_column_worker.HeaderText = "Trabajador";
+            this.grid_column_worker.Name = "grid_column_worker";
+            this.grid_column_worker.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_worker.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // grid_column_job
+            // 
+            this.grid_column_job.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_job.FillWeight = 180F;
+            this.grid_column_job.HeaderText = "Puesto de trabajo";
+            this.grid_column_job.Name = "grid_column_job";
+            this.grid_column_job.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // grid_column_recipe
+            // 
+            this.grid_column_recipe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_recipe.FillWeight = 150F;
+            this.grid_column_recipe.HeaderText = "Receta";
+            this.grid_column_recipe.Name = "grid_column_recipe";
+            this.grid_column_recipe.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid_column_recipe.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // grid_column_start
+            // 
+            this.grid_column_start.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_start.FillWeight = 110F;
+            this.grid_column_start.HeaderText = "Hora inicio";
+            this.grid_column_start.Name = "grid_column_start";
+            // 
+            // grid_column_end
+            // 
+            this.grid_column_end.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_end.HeaderText = "Hora fin";
+            this.grid_column_end.Name = "grid_column_end";
+            // 
+            // grid_column_broken
+            // 
+            this.grid_column_broken.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_broken.FillWeight = 80F;
+            this.grid_column_broken.HeaderText = "Rotos";
+            this.grid_column_broken.Name = "grid_column_broken";
+            // 
+            // grid_column_produced
+            // 
+            this.grid_column_produced.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.grid_column_produced.FillWeight = 95F;
+            this.grid_column_produced.HeaderText = "Terminados";
+            this.grid_column_produced.Name = "grid_column_produced";
             // 
             // RegisterRatioReport
             // 

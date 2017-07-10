@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_finalProductList = new System.Windows.Forms.DataGridView();
             this.button_batch = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,7 +46,8 @@
             // 
             this.dataGridView_finalProductList.AllowUserToAddRows = false;
             this.dataGridView_finalProductList.AllowUserToDeleteRows = false;
-            this.dataGridView_finalProductList.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_finalProductList.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_finalProductList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_finalProductList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_finalProductList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -56,7 +58,15 @@
             this.Stock,
             this.Detalles,
             this.Receta});
-            this.dataGridView_finalProductList.Location = new System.Drawing.Point(33, 36);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_finalProductList.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView_finalProductList.Location = new System.Drawing.Point(33, 34);
             this.dataGridView_finalProductList.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_finalProductList.Name = "dataGridView_finalProductList";
             this.dataGridView_finalProductList.Size = new System.Drawing.Size(836, 242);
@@ -78,50 +88,59 @@
             // 
             // Id
             // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Id.FillWeight = 80F;
             this.Id.HeaderText = "Id";
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
             this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Id.Width = 80;
             // 
             // Nombre
             // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.FillWeight = 120F;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
             // PrecioLocal
             // 
+            this.PrecioLocal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.PrecioLocal.HeaderText = "Precio Local";
             this.PrecioLocal.Name = "PrecioLocal";
             this.PrecioLocal.ReadOnly = true;
             // 
             // PrecioExportacion
             // 
+            this.PrecioExportacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.PrecioExportacion.HeaderText = "Precio Exportación";
             this.PrecioExportacion.Name = "PrecioExportacion";
             this.PrecioExportacion.ReadOnly = true;
             // 
             // PrecioBase
             // 
+            this.PrecioBase.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.PrecioBase.HeaderText = "Precio Base";
             this.PrecioBase.Name = "PrecioBase";
             this.PrecioBase.ReadOnly = true;
             // 
             // Stock
             // 
+            this.Stock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Stock.HeaderText = "Stock";
             this.Stock.Name = "Stock";
             this.Stock.ReadOnly = true;
             // 
             // Detalles
             // 
+            this.Detalles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Detalles.HeaderText = "Detalles";
             this.Detalles.Name = "Detalles";
             this.Detalles.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Receta
             // 
+            this.Receta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Receta.HeaderText = "Receta";
             this.Receta.Name = "Receta";
             // 

@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grid_clients = new System.Windows.Forms.DataGridView();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,11 +50,11 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_clients.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -68,11 +69,19 @@
             this.Column1,
             this.Column2,
             this.Column3});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid_clients.DefaultCellStyle = dataGridViewCellStyle3;
             this.grid_clients.Location = new System.Drawing.Point(27, 29);
             this.grid_clients.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.grid_clients.Name = "grid_clients";
             this.grid_clients.ReadOnly = true;
-            this.grid_clients.Size = new System.Drawing.Size(667, 376);
+            this.grid_clients.Size = new System.Drawing.Size(665, 376);
             this.grid_clients.TabIndex = 28;
             this.grid_clients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentClick);
             this.grid_clients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_clients_CellContentDoubleClick);
@@ -143,7 +152,7 @@
             // 
             // button_cancel
             // 
-            this.button_cancel.BackColor = System.Drawing.Color.Gray;
+            this.button_cancel.BackColor = System.Drawing.Color.Firebrick;
             this.button_cancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cancel.ForeColor = System.Drawing.Color.White;
             this.button_cancel.Location = new System.Drawing.Point(364, 417);

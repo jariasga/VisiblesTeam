@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Interface Layer", "1 Interface Layer", "{0B2F5818-90C6-43BC-9068-FF0AE9E9E1B5}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Interface", "InkaArt.Interface\InkaArt.Interface.csproj", "{E76AEA59-7E54-4515-8A8C-EA035816AEA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InkaArt.Business", "InkaArt.Business\InkaArt.Business.csproj", "{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InkaArt_Setup", "InkaArt_Setup\InkaArt_Setup.vdproj", "{371A4B21-67A9-4385-B32E-48605F5A1DE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,8 @@ Global
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9131DF99-7B6D-4A26-B0B6-769604E8C5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{371A4B21-67A9-4385-B32E-48605F5A1DE7}.Debug|Any CPU.ActiveCfg = Release
+		{371A4B21-67A9-4385-B32E-48605F5A1DE7}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
