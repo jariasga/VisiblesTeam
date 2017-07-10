@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Production
 {
-    partial class WorkersAssignment
+    partial class SimulationAssignment
     {
         /// <summary>
         /// Required designer variable.

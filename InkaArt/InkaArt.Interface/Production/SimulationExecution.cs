@@ -87,12 +87,12 @@ namespace InkaArt.Interface.Production
                 //Algoritmo de Búsqueda Tabú
 
                 TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
-                for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+                /*for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
                 {
                     if (background_worker.CancellationPending && (e.Cancel = true)) return;
                     tabu.run(ref elapsed_seconds, day);
                     background_worker.ReportProgress(0, null);
-                }
+                }*/
 
                 if (background_worker.CancellationPending && (e.Cancel = true)) return;
                 simulation.Assignments = tabu.BestSolutionToList();

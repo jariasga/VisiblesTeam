@@ -65,13 +65,14 @@ namespace InkaArt.Business.Algorithm
         public void Load(WorkerController workers, OrderController orders, RecipeController recipes)
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-
             connection.Open();
+
             loadSimulations(connection);
             List<Assignment> all_assignments = loadAssignments(connection);
             loadAssignmentLines(connection, all_assignments, workers, recipes);
             loadSelectedWorkers(connection, workers);
             loadSelectedOrders(connection, orders);
+
             connection.Close();
         }
 

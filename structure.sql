@@ -103,15 +103,12 @@ CREATE TABLE "Assignment" (
 CREATE TABLE "AssignmentLine" (
     id_assignment_line integer NOT NULL,
     id_assignment integer NOT NULL,
-    date date NOT NULL,
     id_worker integer NOT NULL,
     id_job integer NOT NULL,
     id_recipe integer NOT NULL,
-    start_time time(0) without time zone,
-    end_time time(0) without time zone,
     produced integer NOT NULL,
-    total_miniturns integer NOT NULL,
-    miniturn_start integer NOT NULL
+    miniturn_start integer NOT NULL,
+    miniturns_used integer NOT NULL
 );
 
 CREATE SEQUENCE "Assignment_id_assignment_seq"
@@ -1079,12 +1076,7 @@ CREATE TABLE "Simulation" (
     huaco_weight real NOT NULL,
     huamanga_weight real NOT NULL,
     altarpiece_weight real NOT NULL,
-    limit_time integer NOT NULL,
-    miniturns integer,
-    huaco_produced integer DEFAULT 0 NOT NULL,
-    huamanga_produced integer DEFAULT 0 NOT NULL,
-    altarpiece_produced integer DEFAULT 0 NOT NULL,
-    created_at date DEFAULT ('now'::text)::date NOT NULL,
+    created_at date DEFAULT ('now'::text)::date,
     status boolean DEFAULT true NOT NULL
 );
 
@@ -1097,18 +1089,6 @@ COMMENT ON COLUMN "Simulation".name IS 'Nombre dado a la simulación';
 -- Dependencies: 282
 -- Name: COLUMN "Simulation".limit_time; Type: COMMENT; Schema: inkaart; Owner: admin
 --
-
-COMMENT ON COLUMN "Simulation".limit_time IS 'Tiempo maximo del algoritmo en milisegundos';
-
-
---
--- TOC entry 2697 (class 0 OID 0)
--- Dependencies: 282
--- Name: COLUMN "Simulation".miniturns; Type: COMMENT; Schema: inkaart; Owner: admin
---
-
-COMMENT ON COLUMN "Simulation".miniturns IS 'Numero de miniturnos en un turno para la ejecucion de los algoritmos';
-
 
 --
 -- TOC entry 2698 (class 0 OID 0)

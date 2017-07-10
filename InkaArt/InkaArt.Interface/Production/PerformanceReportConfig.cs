@@ -13,14 +13,14 @@ using System.Windows.Forms;
 
 namespace InkaArt.Interface.Production
 {
-    public partial class GeneratePerformanceReport : Form
+    public partial class PerformanceReportConfig : Form
     {
         private WorkerController workers;
 
         /// <summary>
         /// Constructor del formulario para generar el reporte de productividad de los trabajadores.
         /// </summary>
-        public GeneratePerformanceReport()
+        public PerformanceReportConfig()
         {
             InitializeComponent();
 
