@@ -119,8 +119,10 @@ namespace InkaArt.Business.Algorithm
             get { return total_miniturns; }
             set { total_miniturns = value; }
         }
-
-        /********** Constructor para nueva simulación de asignación de trabajadores **********/
+        
+        /// <summary>
+        /// Constructor para una nueva simulación de asignación de trabajadores.
+        /// </summary>
         public Simulation(string name, DateTime date_start, DateTime date_end, int days, double breakage_weight,
             double time_weight, double huaco_weight, double huamanga_weight, double retable_weight, WorkerController selected_workers,
             OrderController selected_orders)
@@ -140,8 +142,10 @@ namespace InkaArt.Business.Algorithm
             this.assignments = new List<Assignment>();
         }
 
-        /********** Constructor para lectura de base de datos **********/
-        public Simulation(int id_simulation, string name, DateTime date_start, DateTime date_end, int number_of_days, int limit_time,
+        /// <summary>
+        /// Constructor para lectura de base de datos.
+        /// </summary>
+        public Simulation(int id_simulation, string name, DateTime date_start, DateTime date_end, int number_of_days,
             double breakage_weight, double time_weight, double huaco_weight, double huamanga_weight, double retable_weight)
         {
             this.id_simulation = id_simulation;
@@ -149,7 +153,6 @@ namespace InkaArt.Business.Algorithm
             this.date_start = date_start;
             this.date_end = date_end;
             this.days = number_of_days;
-            this.Time = limit_time;
 
             this.breakage_weight = breakage_weight;
             this.time_weight = time_weight;

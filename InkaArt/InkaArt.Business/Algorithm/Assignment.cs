@@ -70,7 +70,7 @@ namespace InkaArt.Business.Algorithm
             get { return this.assignment_lines[worker_index, miniturn_index]; }
             set { this.assignment_lines[worker_index, miniturn_index] = value; }
         }
-        
+
         /// <summary>
         /// Constructor utilizado en el algoritmo GRASP.
         /// </summary>
@@ -96,7 +96,7 @@ namespace InkaArt.Business.Algorithm
         {
             this.date = assignment.date;
             this.objective_function_value = assignment.objective_function_value;
-            this.assignment_lines = (AssignmentLine[,]) assignment.assignment_lines.Clone();
+            this.assignment_lines = (AssignmentLine[,])assignment.assignment_lines.Clone();
             this.huacos_produced = assignment.huacos_produced;
             this.huamanga_produced = assignment.huamanga_produced;
             this.altarpiece_produced = assignment.altarpiece_produced;
@@ -154,6 +154,9 @@ namespace InkaArt.Business.Algorithm
             return list;
         }
 
+        /// <summary>
+        /// Inserta una asignación de una simulación de asignaciones de trabajadores en la base de datos.
+        /// </summary>
         public bool Insert(Simulation simulation, NpgsqlConnection connection)
         {
             string command_line = "INSERT INTO inkaart.\"Assignment\" (id_simulation, date, objective_function_value, tabu_iterations, " +
@@ -180,6 +183,71 @@ namespace InkaArt.Business.Algorithm
                 if (assignment_lines[i].Insert(connection, this.id_assignment) <= 0) return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// Obtiene una lista de asignaciones desde base de datos para una simulación específica.
+        /// </summary>
+        public static List<Assignment> Load(NpgsqlConnection connection, Simulation simulation, RecipeController recipes, JobController jobs)
+        {
+            List<Assignment> assignments = new List<Assignment>();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Assignment\" WHERE id_simulation = :id_simulation", connection);
+            command.Parameters.AddWithValue("id_simulation", NpgsqlDbType.Integer, simulation.ID);
+            NpgsqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int id_assignment = int.Parse(reader["id_assignment"].ToString());
+                DateTime date = Convert.ToDateTime(reader["date"]);
+                double objective_function_value = double.Parse(reader["objective_function_value"].ToString());
+                int tabu_iterations = int.Parse(reader["tabu_iterations"].ToString());
+                int huamanga_produced = int.Parse(reader["huamanga_produced"].ToString());
+                int huacos_produced = int.Parse(reader["huacos_produced"].ToString());
+                int altarpiece_produced = int.Parse(reader["altarpiece_produced"].ToString());
+
+                Assignment assignment = new Assignment(id_assignment, date, objective_function_value, tabu_iterations, huamanga_produced,
+                    huacos_produced, altarpiece_produced);
+
+                assignments.Add(assignment);
+            }
+            reader.Close();
+
+            for (int i = 0; i < assignments.Count; i++)
+                assignments[i].AssignmentLinesList = LoadAssignmentLines(connection, simulation, assignments[i], recipes, jobs);
+
+            return assignments;
+        }
+
+        private static List<AssignmentLine> LoadAssignmentLines(NpgsqlConnection connection, Simulation simulation, Assignment assignment,
+            RecipeController recipes, JobController jobs)
+        {
+            List<AssignmentLine> assignment_lines = new List<AssignmentLine>();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"AssignmentLine\" WHERE id_assignment = :id_assignment", connection);
+            command.Parameters.AddWithValue("id_assignment", NpgsqlDbType.Integer, assignment.ID);
+
+            NpgsqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id_assignment = int.Parse(reader["id_assignment"].ToString());
+                int id_worker = int.Parse(reader["id_worker"].ToString());
+                int id_job = int.Parse(reader["id_job"].ToString());
+                int id_recipe = int.Parse(reader["id_recipe"].ToString());
+                int miniturn_start = int.Parse(reader["miniturn_start"].ToString());
+                int miniturns_used = int.Parse(reader["miniturns_used"].ToString());
+                int produced = int.Parse(reader["produced"].ToString());
+
+                Worker worker = simulation.SelectedWorkers.GetByID(id_worker);
+                Recipe recipe = recipes.GetByID(id_recipe);
+                Job job = jobs.GetByID(id_job);
+                if (worker == null || recipe == null || job == null) continue;
+                AssignmentLine line = new AssignmentLine(worker, job, recipe, miniturn_start, miniturns_used, produced);
+                assignment_lines.Add(line);
+            }
+            reader.Close();
+
+            return assignment_lines;
         }
     }
 }
