@@ -237,7 +237,7 @@ namespace InkaArt.Interface.Sales
             if (combo_product.SelectedItem != null) selectedProduct = combo_product.SelectedItem.ToString();
             else return "OK";
             int attemps = 0;
-            string selectedVersion = combo_quality.SelectedItem.ToString(), message = "OK";
+            string selectedVersion = combo_quality.SelectedItem.ToString(), message = "";
             foreach (DataRow row in orderLine.Rows)
             {
                 string cellProduct = row["idProduct"].ToString();
@@ -263,7 +263,7 @@ namespace InkaArt.Interface.Sales
                 }
                 if (message.Equals("OK")) break;
             }
-            if (attemps > 0) return "No puede agregar un producto que no ha pedido.";
+            if (!message.Equals("OK") && attemps > 0) return "No puede agregar un producto o version que no ha pedido.";
             return message;
         }
         
