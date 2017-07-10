@@ -262,11 +262,13 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        public void BestSolutionToList()
+        public List<Assignment> BestSolutionToList()
         {
-            if (best_solution.Count <= 0) best_solution = initial_solution;
-            foreach (Assignment assignment_day in best_solution)
-                assignment_day.AssignmentLinesList = assignment_day.MatrixToList(simulation);
+            if (best_solution == null || best_solution.Count <= 0) best_solution = initial_solution;
+            for (int i = 0; i < best_solution.Count; i++)
+                if (best_solution[i] != null) best_solution[i].AssignmentLinesList = best_solution[i].MatrixToList(simulation);
+
+            return best_solution;
         }
 
         /* Flujo del algoritmo */

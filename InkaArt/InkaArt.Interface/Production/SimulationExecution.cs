@@ -90,9 +90,10 @@ namespace InkaArt.Interface.Production
                 if (background_worker.CancellationPending && (e.Cancel = true)) return;
                 PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pudo guardar el Excel de los resultados del algoritmo GRASP.");
+                MessageBox.Show("No se pudo guardar el Excel de los resultados del algoritmo GRASP. " + ex.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
 
             background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
@@ -107,57 +108,49 @@ namespace InkaArt.Interface.Production
                 background_worker.ReportProgress(0, null);
             }
 
-            tabu.BestSolutionToList();
-            simulation.Assignments = tabu.BestSolution;
-
             if (background_worker.CancellationPending && (e.Cancel = true)) return;
-            simulation.Assignments = new List<Assignment>();
+            simulation.Assignments = tabu.BestSolutionToList();
         }
 
         private void PrintGraspResults(List<Assignment> assignments, int total_miniturns)
         {
             Excel.Application app = new Excel.Application();
-            if (app == null) return;
             Excel.Workbook workbook = app.Workbooks.Add(Missing.Value);
 
             for (int day = 0; day < simulation.Days; day++)
             {
                 Excel.Worksheet worksheet;
                 if (day <= 0) worksheet = (Excel.Worksheet)workbook.Worksheets.Item[day + 1];
-                else worksheet = (Excel.Worksheet)workbook.Worksheets.Add(workbook.Worksheets[1]);
+                else worksheet = (Excel.Worksheet)workbook.Worksheets.Add(Missing.Value, workbook.Worksheets[day]);
 
                 worksheet.Name = "Día " + (day + 1);
                 if (assignments[day] == null) worksheet.Cells[1, 1] = "Nada registrado para dicho día.";
                 else
                 {
-                    worksheet.Cells[1, 1] = "Valor de la función objetivo";
-                    worksheet.Cells[1, 2] = assignments[day].ObjectiveFunction;
-                    worksheet.Cells[2, 1] = "Huacos producidos";
-                    worksheet.Cells[2, 2] = assignments[day].HuacosProduced;
-                    worksheet.Cells[3, 1] = "Piedras de Huamanga producidas";
-                    worksheet.Cells[3, 2] = assignments[day].HuamangaProduced;
-                    worksheet.Cells[4, 1] = "Retablos producidos";
-                    worksheet.Cells[4, 2] = assignments[day].AltarpieceProduced;
+                    worksheet.Cells[1, 1] = "Fecha:";
+                    worksheet.Cells[1, 2] = "Valor de la función objetivo";
+                    worksheet.Cells[1, 3] = "Huacos producidos";
+                    worksheet.Cells[1, 4] = "Piedras producidas";
+                    worksheet.Cells[1, 5] = "Retablos producidos";
+                    worksheet.Cells[2, 1] = simulation.StartDate.AddDays(day).ToString("dd/MM/yyyy");
+                    worksheet.Cells[2, 2] = assignments[day].ObjectiveFunction;
+                    worksheet.Cells[2, 3] = assignments[day].HuacosProduced;
+                    worksheet.Cells[2, 4] = assignments[day].HuamangaProduced;
+                    worksheet.Cells[2, 5] = assignments[day].AltarpieceProduced;
 
                     for (int w = 0; w < simulation.SelectedWorkers.NumberOfWorkers; w++)
                     {
-                        worksheet.Cells[5, w + 1] = simulation.SelectedWorkers[w].FullName;
+                        worksheet.Cells[4, w + 1] = simulation.SelectedWorkers[w].FullName;
                         for (int m = 0; m < simulation.TotalMiniturns; m++)
                         {
                             AssignmentLine line = assignments[day][w, m];
-                            worksheet.Cells[m + 6, w + 1] = (line == null) ? "Nada" : line.ToString();
+                            worksheet.Cells[m + 5, w + 1] = (line == null) ? "Nada" : line.ToString();
                         }
                     }
                 }
-
-                Marshal.ReleaseComObject(worksheet);
             }
-            workbook.SaveAs("GraspResults.xlsx", Excel.XlFileFormat.xlWorkbookDefault);
-            workbook.Close(true, Missing.Value, Missing.Value);
-            app.Quit();
-
-            Marshal.ReleaseComObject(workbook);
-            Marshal.ReleaseComObject(app);
+            
+            app.Visible = true;
         }
         
         private void background_simulation_ProgressChanged(object sender, ProgressChangedEventArgs e)
