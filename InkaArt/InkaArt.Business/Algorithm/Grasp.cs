@@ -47,7 +47,6 @@ namespace InkaArt.Business.Algorithm
 
             //Líneas de ordenes original
             this.original_orders = simulation.SelectedOrders.Orders;
-            this.original_orders = original_orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
             //Número de puestos de trabajo para cada proceso
             Production.ProcessController process_controller = new Production.ProcessController();
             this.processes = process_controller.getData();
@@ -62,9 +61,11 @@ namespace InkaArt.Business.Algorithm
 
             for (int iteration = 0; this.HasTime(ref elapsed_time, day) && iteration < this.NumberOfIterations; iteration++)
             {
-                //Crear una COPIA PROFUNDA de la lista de órdenes
+                //Crear una COPIA PROFUNDA ordenada de la lista de órdenes
                 List<Order> orders = new List<Order>();
                 for (int i = 0; i < original_orders.Count; i++) orders.Add(new Order(simulation.SelectedOrders[i]));
+                orders = orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
+
                 for (int i = 0; i < orders.Count; i++)
                 {
                     LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, orders[i].ID, orders[i].Description);
