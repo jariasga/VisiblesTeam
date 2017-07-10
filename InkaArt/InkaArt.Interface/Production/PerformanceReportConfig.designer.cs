@@ -1,6 +1,6 @@
 ﻿namespace InkaArt.Interface.Production
 {
-    partial class GeneratePerformanceReport
+    partial class PerformanceReportConfig
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GeneratePerformanceReport));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PerformanceReportConfig));
             this.groupbox_parameters = new System.Windows.Forms.GroupBox();
             this.groupbox_dates = new System.Windows.Forms.GroupBox();
             this.checkbox_dates = new System.Windows.Forms.CheckBox();

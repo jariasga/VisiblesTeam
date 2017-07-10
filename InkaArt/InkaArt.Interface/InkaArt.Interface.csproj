@@ -113,11 +113,11 @@
     <Compile Include="Production\FinalProducts.designer.cs">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\GeneratePerformanceReport.cs">
+    <Compile Include="Production\PerformanceReportConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\GeneratePerformanceReport.designer.cs">
-      <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
+    <Compile Include="Production\PerformanceReportConfig.designer.cs">
+      <DependentUpon>PerformanceReportConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\JobDetails.cs">
       <SubType>Form</SubType>
@@ -179,11 +179,11 @@
     <Compile Include="Production\TurnManagement.designer.cs">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\WorkersAssignment.cs">
+    <Compile Include="Production\SimulationAssignment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\WorkersAssignment.designer.cs">
-      <DependentUpon>WorkersAssignment.cs</DependentUpon>
+    <Compile Include="Production\SimulationAssignment.designer.cs">
+      <DependentUpon>SimulationAssignment.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -553,8 +553,8 @@
     <EmbeddedResource Include="Production\FinalProducts.resx">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\GeneratePerformanceReport.resx">
-      <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
+    <EmbeddedResource Include="Production\PerformanceReportConfig.resx">
+      <DependentUpon>PerformanceReportConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
@@ -586,8 +586,8 @@
     <EmbeddedResource Include="Production\TurnManagement.resx">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\WorkersAssignment.resx">
-      <DependentUpon>WorkersAssignment.cs</DependentUpon>
+    <EmbeddedResource Include="Production\SimulationAssignment.resx">
+      <DependentUpon>SimulationAssignment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

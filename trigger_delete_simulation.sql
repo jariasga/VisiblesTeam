@@ -1,3 +1,7 @@
+---------------------------------------------------------------------------------------------
+-- Este trigger NO se esta usando, favor de no agregarlo a structure.sql
+---------------------------------------------------------------------------------------------
+
 CREATE OR REPLACE FUNCTION inkaart.SoftDeleteAssignments() RETURNS TRIGGER AS $soft_delete_assignments$
 DECLARE
   assignment RECORD;

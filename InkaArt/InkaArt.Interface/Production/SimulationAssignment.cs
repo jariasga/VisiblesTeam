@@ -1,4 +1,5 @@
 ﻿using InkaArt.Business.Algorithm;
+using InkaArt.Classes;
 using InkaArt.Data.Algorithm;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace InkaArt.Interface.Production
 {
-    public partial class WorkersAssignment : Form
+    public partial class SimulationAssignment : Form
     {
         private SimulationController simulations;
         private Simulation current_simulation = null;
@@ -20,7 +21,7 @@ namespace InkaArt.Interface.Production
         private RecipeController recipes;
         private OrderController orders;
 
-        public WorkersAssignment()
+        public SimulationAssignment()
         {
             InitializeComponent();
 
@@ -32,14 +33,22 @@ namespace InkaArt.Interface.Production
 
         private void WorkersAssignment_Load(object sender, EventArgs e)
         {
-            this.workers.Load();
-            this.recipes.Load();
-            this.orders.Load(recipes);
-            this.simulations.Load(workers, orders, recipes);
+            try
+            {
+                this.workers.Load();
+                this.recipes.Load();
+                this.orders.Load(recipes);
+                this.simulations.Load(workers, orders, recipes);
 
-            combo_simulations.DataSource = simulations.BindingList();
-            combo_simulations.DisplayMember = "Name";
-            combo_simulations.SelectedItem = null;
+                combo_simulations.DataSource = simulations.BindingList();
+                combo_simulations.DisplayMember = "Name";
+                combo_simulations.SelectedItem = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error grave al cargar de base de datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogHandler.WriteLine("Error grave al cargar de base de datos: " + ex.ToString());
+            }
         }
 
         private void ButtonConfigClick(object sender, EventArgs e)
@@ -60,20 +69,21 @@ namespace InkaArt.Interface.Production
 
         private void ButtonReportClick(object sender, EventArgs e)
         {
-            /*SimulationReport simulation_report = new SimulationReport(current_simulation);
-            simulation_report.Show();*/
+            if (current_simulation == null) return;
+            SimulationReport simulation_report = new SimulationReport(current_simulation);
+            simulation_report.Show();
         }
 
         private void ButtonDeleteClick(object sender, EventArgs e)
         {
             //general_grid.Rows.Clear();
-            simulation_grid.Rows.Clear();
-            //summary_grid.Rows.Clear();            
+            //summary_grid.Rows.Clear();
             
             if (simulations.Delete(current_simulation))
                 MessageBox.Show("Simulación eliminada", "Eliminar Simulación", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             else
                 MessageBox.Show("No se logró eliminar la simulación correctamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            simulation_grid.Rows.Clear();
 
             combo_simulations.DataSource = simulations.BindingList();
             combo_simulations.SelectedItem = null;
@@ -96,7 +106,7 @@ namespace InkaArt.Interface.Production
             {
                 button_config.Text = "Ver detalles de asignación";
                 button_config.BackColor = Color.Gray;
-                button_save.Enabled = (current_simulation.ID == 0); // solo se puede guardar si es nueva
+                button_save.Enabled = (current_simulation.ID <= 0); // solo se puede guardar si es nueva
                 button_delete.Enabled = true;
                 button_report.Enabled = true;              
             }

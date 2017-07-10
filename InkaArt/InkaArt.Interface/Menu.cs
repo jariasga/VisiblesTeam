@@ -148,7 +148,7 @@ namespace InkaArt.Interface
 
         private void asignaciónDeTrabajadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form workers_assignment = new WorkersAssignment();
+            Form workers_assignment = new SimulationAssignment();
             workers_assignment.MdiParent = this;
             workers_assignment.Show();
         }
@@ -335,7 +335,7 @@ namespace InkaArt.Interface
 
         private void generarReporteDeProductividadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form performance_report = new GeneratePerformanceReport();
+            Form performance_report = new PerformanceReportConfig();
             performance_report.MdiParent = this;
             performance_report.Show();
         }
