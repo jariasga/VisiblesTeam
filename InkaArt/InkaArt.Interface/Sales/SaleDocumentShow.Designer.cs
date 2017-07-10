@@ -78,7 +78,6 @@
             this.grid_documents.RowTemplate.Height = 24;
             this.grid_documents.Size = new System.Drawing.Size(667, 324);
             this.grid_documents.TabIndex = 2;
-            this.grid_documents.UseWaitCursor = true;
             this.grid_documents.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_documents_CellDoubleClick);
             // 
             // Column1
@@ -123,7 +122,6 @@
             this.button_cancel.TabIndex = 32;
             this.button_cancel.Text = "🗙 Cancelar";
             this.button_cancel.UseVisualStyleBackColor = false;
-            this.button_cancel.UseWaitCursor = true;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // button_see
@@ -138,7 +136,6 @@
             this.button_see.TabIndex = 31;
             this.button_see.Text = "🔍 Ver";
             this.button_see.UseVisualStyleBackColor = false;
-            this.button_see.UseWaitCursor = true;
             this.button_see.Click += new System.EventHandler(this.button_see_Click);
             // 
             // SaleDocumentShow
@@ -150,12 +147,12 @@
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.button_see);
             this.Controls.Add(this.grid_documents);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SaleDocumentShow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Documentos de Venta";
-            this.UseWaitCursor = true;
             this.Load += new System.EventHandler(this.SaleDocumentShow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid_documents)).EndInit();
             this.ResumeLayout(false);
