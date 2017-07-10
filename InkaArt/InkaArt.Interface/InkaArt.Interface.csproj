@@ -815,9 +815,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\logo1.png" />
   </ItemGroup>
   <ItemGroup>

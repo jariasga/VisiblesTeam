@@ -201,7 +201,7 @@
             // grid_clients
             // 
             this.grid_clients.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
             this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_clients.BackgroundColor = System.Drawing.Color.WhiteSmoke;

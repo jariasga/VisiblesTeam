@@ -136,7 +136,7 @@ namespace InkaArt.Interface.Warehouse
                 
         private void updateDevolution()
         {   
-            DataRow[] rows = table_devolution.Select("lineStatus != 'devuelto'");
+            DataRow[] rows = table_devolution.Select("lineStatus <> 'devuelto'");
             int pending = rows.Sum(r => r.Field<int>("product_stock"));
             control_order.updateDevolution(devolution, pending);
 

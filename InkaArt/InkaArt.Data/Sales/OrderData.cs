@@ -286,7 +286,7 @@ namespace InkaArt.Data.Sales
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             string query = "SELECT pr.\"name\", l.*, coalesce(pw.\"idWarehouse\", -1) as id_warehouse, coalesce(pw.\"currentStock\", -1) as current_stock, coalesce(pw.\"maximunStock\", -1) as max_stock, coalesce(pw.\"minimunStock\", -1) as min_stock, coalesce(sd.\"id\", -1) as id_stock, coalesce(sd.product_stock, l.quantity) as product_stock " +
                 "FROM inkaart.\"Product\" pr, inkaart.\"LineItem\" l " +
-                "LEFT JOIN inkaart.\"Product-Warehouse\" pw on l.\"idProduct\" = pw.\"idProduct\"  AND pw.\"idWarehouse\" = :id_warehouse " +
+                "INNER JOIN inkaart.\"Product-Warehouse\" pw on l.\"idProduct\" = pw.\"idProduct\"  AND pw.\"idWarehouse\" = :id_warehouse " +
                 "LEFT JOIN inkaart.\"StockDocument\" sd on l.\"idOrder\" = sd.\"idDocument\" AND sd.\"documentType\" = 'VENTA'  AND sd.product_id = l.\"idProduct\" " +
                 "WHERE l.\"idOrder\" = :id_order " +
                 "AND l.\"idProduct\" = pr.\"idProduct\" ";
