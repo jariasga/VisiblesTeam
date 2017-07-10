@@ -16,6 +16,8 @@ namespace InkaArt.Business.Warehouse
     public class WarehouseCrud
     {
         private WarehouseData warehouseData;
+        private MovementController movementController = new MovementController();
+        private MovementData movement_data = new MovementData();
 
         public WarehouseCrud()
         {
@@ -256,6 +258,41 @@ namespace InkaArt.Business.Warehouse
         {
 
         }
+
+        public void insertProductWarehouse(string idProduct, string idWarehouse, string actStock, string minStock, string maxStock, string state)
+        {
+            string query = "";
+
+            query = "insert into inkaart.\"Product-Warehouse\" (\"idProduct\", \"idWarehouse\", \"currentStock\", \"minimunStock\", \"maximunStock\", \"state\") values(" + idProduct + ", " + idWarehouse + ", " + actStock + ", " + minStock + ", " + maxStock + ", '" + state + "')";
+
+            movement_data.updateData(query);
+        }
+
+        public int massiveUploadProducts(string filename)
+        {
+            using (var fs = File.OpenRead(filename))
+            using (var reader = new StreamReader(fs))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+
+                    // creamos almacen
+                    try
+                    {
+                        insertProductWarehouse(values[0], values[1], values[2], values[3], values[4], values[5]);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("El archivo de carga contiene errores", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return 1;
+                    }
+                }
+                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            }
+            return 0;
+        }        
 
         public int massiveUpload(string filename)
         {

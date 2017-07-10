@@ -58,7 +58,8 @@ namespace InkaArt.Interface.Warehouse
             foreach (DataRow row in warehouseList.Rows)
             {
                 string status = row["state"].ToString();
-                if (status.Equals("Activo")) dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["description"], row["address"]);
+                //if (status.Equals("Activo"))
+                dataGridView1.Rows.Add(row["idWarehouse"], row["name"], row["description"], row["address"]);
             }
         }
 
@@ -111,6 +112,16 @@ namespace InkaArt.Interface.Warehouse
             {
                 if (rmw_control.massiveUpload(dialog2.FileName) != 0) return;
             }
+
+            WarehouseCrud movimientos2 = new WarehouseCrud();
+            OpenFileDialog dialog3 = new OpenFileDialog();
+            dialog3.Title = "Open Product File";
+            dialog3.Filter = "CSV files|*.csv";
+            if (dialog3.ShowDialog() == DialogResult.OK)
+            {
+                if (movimientos2.massiveUploadProducts(dialog3.FileName) != 0) return;
+            }
+
             realizarBusqueda();
         }
 

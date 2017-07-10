@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.text_id_warehouse = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -60,11 +59,11 @@
             this.groupBox3.Controls.Add(this.text_name_warehouse);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(16, 20);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Location = new System.Drawing.Point(21, 25);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(890, 104);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(1187, 128);
             this.groupBox3.TabIndex = 35;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Almacén";
@@ -73,20 +72,19 @@
             // 
             this.text_id_warehouse.BackColor = System.Drawing.Color.White;
             this.text_id_warehouse.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_id_warehouse.Location = new System.Drawing.Point(23, 54);
-            this.text_id_warehouse.Margin = new System.Windows.Forms.Padding(2);
+            this.text_id_warehouse.Location = new System.Drawing.Point(31, 66);
+            this.text_id_warehouse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.text_id_warehouse.Name = "text_id_warehouse";
             this.text_id_warehouse.ReadOnly = true;
-            this.text_id_warehouse.Size = new System.Drawing.Size(174, 24);
+            this.text_id_warehouse.Size = new System.Drawing.Size(231, 29);
             this.text_id_warehouse.TabIndex = 33;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 33);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(27, 41);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 18);
+            this.label5.Size = new System.Drawing.Size(30, 23);
             this.label5.TabIndex = 32;
             this.label5.Text = "ID";
             // 
@@ -94,20 +92,19 @@
             // 
             this.text_name_warehouse.BackColor = System.Drawing.Color.White;
             this.text_name_warehouse.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_name_warehouse.Location = new System.Drawing.Point(229, 54);
-            this.text_name_warehouse.Margin = new System.Windows.Forms.Padding(2);
+            this.text_name_warehouse.Location = new System.Drawing.Point(305, 66);
+            this.text_name_warehouse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.text_name_warehouse.Name = "text_name_warehouse";
             this.text_name_warehouse.ReadOnly = true;
-            this.text_name_warehouse.Size = new System.Drawing.Size(638, 24);
+            this.text_name_warehouse.Size = new System.Drawing.Size(849, 29);
             this.text_name_warehouse.TabIndex = 29;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(225, 33);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Location = new System.Drawing.Point(300, 41);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(64, 18);
+            this.label9.Size = new System.Drawing.Size(79, 23);
             this.label9.TabIndex = 28;
             this.label9.Text = "Nombre";
             // 
@@ -116,9 +113,10 @@
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(393, 428);
+            this.button_save.Location = new System.Drawing.Point(524, 527);
+            this.button_save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_save.Name = "button_save";
-            this.button_save.Size = new System.Drawing.Size(138, 39);
+            this.button_save.Size = new System.Drawing.Size(184, 48);
             this.button_save.TabIndex = 55;
             this.button_save.Text = "🖫 Guardar";
             this.button_save.UseVisualStyleBackColor = false;
@@ -131,11 +129,11 @@
             this.groupBox2.Controls.Add(this.text_lote);
             this.groupBox2.Controls.Add(this.grid_lote);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(16, 139);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(21, 171);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(890, 284);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Size = new System.Drawing.Size(1187, 350);
             this.groupBox2.TabIndex = 36;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lote de Producción";
@@ -145,10 +143,10 @@
             this.button1.BackColor = System.Drawing.Color.Gray;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(822, 23);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(1096, 28);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 31);
+            this.button1.Size = new System.Drawing.Size(60, 38);
             this.button1.TabIndex = 57;
             this.button1.Text = "🔎 Buscar";
             this.button1.UseVisualStyleBackColor = false;
@@ -157,20 +155,19 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(550, 29);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(733, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 18);
+            this.label3.Size = new System.Drawing.Size(145, 23);
             this.label3.TabIndex = 34;
             this.label3.Text = "Número de lote";
             // 
             // text_lote
             // 
             this.text_lote.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_lote.Location = new System.Drawing.Point(675, 27);
-            this.text_lote.Margin = new System.Windows.Forms.Padding(2);
+            this.text_lote.Location = new System.Drawing.Point(900, 33);
+            this.text_lote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.text_lote.Name = "text_lote";
-            this.text_lote.Size = new System.Drawing.Size(142, 24);
+            this.text_lote.Size = new System.Drawing.Size(188, 29);
             this.text_lote.TabIndex = 34;
             this.text_lote.TextChanged += new System.EventHandler(this.textLoteTextChanged);
             // 
@@ -189,24 +186,17 @@
             this.CurrentCant,
             this.MovCant,
             this.Modificar});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grid_lote.DefaultCellStyle = dataGridViewCellStyle3;
-            this.grid_lote.Location = new System.Drawing.Point(23, 68);
-            this.grid_lote.Margin = new System.Windows.Forms.Padding(2);
+            this.grid_lote.Location = new System.Drawing.Point(31, 84);
+            this.grid_lote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grid_lote.Name = "grid_lote";
-            this.grid_lote.Size = new System.Drawing.Size(844, 187);
+            this.grid_lote.Size = new System.Drawing.Size(1125, 230);
             this.grid_lote.TabIndex = 57;
             this.grid_lote.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridLoteCellValueChanged);
             // 
             // nroLote
             // 
             this.nroLote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nroLote.DataPropertyName = "id_lote";
             this.nroLote.FillWeight = 70F;
             this.nroLote.HeaderText = "Lote";
             this.nroLote.Name = "nroLote";
@@ -215,6 +205,7 @@
             // idProduct
             // 
             this.idProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idProduct.DataPropertyName = "id_product";
             this.idProduct.FillWeight = 80F;
             this.idProduct.HeaderText = "ID";
             this.idProduct.Name = "idProduct";
@@ -223,16 +214,16 @@
             // ProductName
             // 
             this.ProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ProductName.FillWeight = 120F;
             this.ProductName.DataPropertyName = "name";
+            this.ProductName.FillWeight = 120F;
             this.ProductName.HeaderText = "Producto";
             this.ProductName.Name = "ProductName";
             this.ProductName.ReadOnly = true;
             // 
             // Cant
             // 
-            this.Cant.DataPropertyName = "produced";
             this.Cant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cant.DataPropertyName = "produced";
             this.Cant.FillWeight = 90F;
             this.Cant.HeaderText = "Cantidad Total";
             this.Cant.Name = "Cant";
@@ -240,8 +231,8 @@
             // 
             // stockWarehouse
             // 
-            this.stockWarehouse.DataPropertyName = "currentStock";
             this.stockWarehouse.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.stockWarehouse.DataPropertyName = "currentStock";
             this.stockWarehouse.FillWeight = 90F;
             this.stockWarehouse.HeaderText = "Stock en almacén";
             this.stockWarehouse.Name = "stockWarehouse";
@@ -250,8 +241,8 @@
             // CurrentCant
             // 
             this.CurrentCant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CurrentCant.FillWeight = 105F;
             this.CurrentCant.DataPropertyName = "product_stock";
+            this.CurrentCant.FillWeight = 105F;
             this.CurrentCant.HeaderText = "Cantidad por mover";
             this.CurrentCant.Name = "CurrentCant";
             this.CurrentCant.ReadOnly = true;
@@ -271,15 +262,15 @@
             // 
             // ProductionMovement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(920, 479);
+            this.ClientSize = new System.Drawing.Size(1227, 590);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ProductionMovement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movimiento de producción";
