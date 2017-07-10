@@ -59,6 +59,15 @@ namespace InkaArt.Interface.Sales
                     grid_orderline.Rows.Add(productId,name, orderline["quality"], pu, orderline["quantity"], 0, cantMoved, orderline["quantityInvoiced"]);
                 }
             }
+
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[6].Value.ToString()))
+                {
+                    return;
+                }
+            }
+            button_fac.Visible = false;
         }
 
         private void button_delete_Click(object sender, EventArgs e)
