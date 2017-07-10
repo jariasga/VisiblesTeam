@@ -284,7 +284,6 @@
             this.cantMovement.FillWeight = 95F;
             this.cantMovement.HeaderText = "Cantidad a Mover";
             this.cantMovement.Name = "cantMovement";
-            this.cantMovement.ReadOnly = true;
             // 
             // NroFactura
             // 
