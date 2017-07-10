@@ -321,10 +321,12 @@ namespace InkaArt.Interface.Production
                     string[] values = line.Split(';');
                     if (values == null || values.Count() != 8)
                     {
-                        MessageBox.Show("No se pueden leer los datos de la línea " + line_index + ".", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        result = MessageBox.Show("No se pueden leer los datos de la línea " + line_index + "." + Environment.NewLine +
+                            Environment.NewLine + "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.",
+                            "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                         success = false;
-                        continue;
+                        if (result == DialogResult.OK) continue;
+                        if (result == DialogResult.Cancel) break;
                     }
                     //Formatear los datos a ingresar
                     DateTime date;

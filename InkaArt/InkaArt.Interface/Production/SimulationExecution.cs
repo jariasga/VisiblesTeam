@@ -43,73 +43,66 @@ namespace InkaArt.Interface.Production
 
         private void background_simulation_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker background_worker = sender as BackgroundWorker;
-            background_worker.ReportProgress(0, "Estado de la simulación: Cargando datos...");
-
-            //Carga de controladores
-
-            if (background_worker.CancellationPending && (e.Cancel = true)) return;
-            JobController jobs = new JobController();
-            jobs.Load();
-            RecipeController recipes = new RecipeController();
-            recipes.Load();
-            IndexController indexes = new IndexController(workers, jobs, recipes);
-            indexes.Load();
-            indexes.CalculateIndexes(simulation);
-
-            for (int i = 0; i < simulation.SelectedOrders.NumberOfOrders; i++)
-            {
-                LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, simulation.SelectedOrders[i].ID, simulation.SelectedOrders[i].Description);
-                for (int j = 0; j < simulation.SelectedOrders[i].NumberOfLineItems; j++)
-                    LogHandler.WriteLine("- Linea de orden #{0}-{1}: {2}", i + 1, j + 1, simulation.SelectedOrders[i][j].ToString());
-            }
-
-            //Temporal: Determinar el tiempo total del turno y los miniturnos
-            if (background_worker.CancellationPending && (e.Cancel = true)) return;
-            Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
-            for (int i = 0; i < workers.NumberOfWorkers; i++)
-                if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
-            simulation.TotalMiniturns = turn.TotalMinutes / Simulation.MiniturnLength;
-
-            background_worker.ReportProgress(0, "Estado de la simulación: Asignando trabajadores...");
-
-            //Algoritmo GRASP
-
-            Grasp grasp = new Grasp(simulation, jobs, recipes, indexes);
-            List<Assignment> initial_assignments = new List<Assignment>();
-
-            for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
-            {
-                if (background_worker.CancellationPending && (e.Cancel = true)) return;
-                initial_assignments.Add(grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds));
-                background_worker.ReportProgress(0, null);
-            }
-
             try
             {
+                BackgroundWorker background_worker = sender as BackgroundWorker;
+                background_worker.ReportProgress(0, "Estado de la simulación: Cargando datos...");
+
                 if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                //Carga de controladores
+                JobController jobs = new JobController();
+                jobs.Load();
+                RecipeController recipes = new RecipeController();
+                recipes.Load();
+                IndexController indexes = new IndexController(workers, jobs, recipes);
+                indexes.Load();
+                indexes.CalculateIndexes(simulation);
+
+                //Temporal: Determinar el tiempo total del turno y los miniturnos
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                Turn turn = new Turn(1, TimeSpan.Parse("8:00"), TimeSpan.Parse("15:00"), null);
+                for (int i = 0; i < workers.NumberOfWorkers; i++)
+                    if (workers[i].Turn.ID == 1) turn = workers[i].Turn;
+                simulation.TotalMiniturns = turn.TotalMinutes / Simulation.MiniturnLength;
+
+                background_worker.ReportProgress(0, "Estado de la simulación: Asignando trabajadores...");
+
+                //Algoritmo GRASP
+
+                Grasp grasp = new Grasp(simulation, jobs, recipes, indexes);
+                List<Assignment> initial_assignments = new List<Assignment>();
+
+                for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+                {
+                    if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                    Assignment grasp_assignment = grasp.ExecuteGraspAlgorithm(day, ref elapsed_seconds);
+                    if (grasp_assignment != null) initial_assignments.Add(grasp_assignment);
+                    background_worker.ReportProgress(0, null);
+                }
+
                 PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
+
+                background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
+
+                //Algoritmo de Búsqueda Tabú
+
+                TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
+                /*for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
+                {
+                    if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                    tabu.run(ref elapsed_seconds, day);
+                    background_worker.ReportProgress(0, null);
+                }*/
+
+                if (background_worker.CancellationPending && (e.Cancel = true)) return;
+                simulation.Assignments = tabu.BestSolutionToList();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo guardar el Excel de los resultados del algoritmo GRASP. " + ex.Message, "Error", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogHandler.WriteLine(ex.ToString());
+                e.Cancel = true;
             }
-
-            background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
-
-            //Algoritmo de Búsqueda Tabú
-
-            TabuSearch tabu = new TabuSearch(simulation, indexes, initial_assignments, elapsed_seconds);
-            /*for (int day = 0; elapsed_seconds < Simulation.LimitTime && day < simulation.Days; day++)
-            {
-                if (background_worker.CancellationPending && (e.Cancel = true)) return;
-                tabu.run(ref elapsed_seconds, day);
-                background_worker.ReportProgress(0, null);
-            }*/
-
-            if (background_worker.CancellationPending && (e.Cancel = true)) return;
-            simulation.Assignments = tabu.BestSolutionToList();
         }
 
         private void PrintGraspResults(List<Assignment> assignments, int total_miniturns)
