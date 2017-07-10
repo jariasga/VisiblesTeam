@@ -46,11 +46,21 @@ namespace InkaArt.Interface.Warehouse
             combobox_dev.DataSource = table_devolutions;
             combobox_dev.ValueMember = "idOrder";
         }
-
+        private DataTable filter_tableDevolution()
+        {
+            DataRow[] rows;
+            DataTable auxiliarGrid= control_order.GetDevolutionLines(this.devolution, this.warehouse);
+            rows = auxiliarGrid.Select("lineStatus NOT LIKE 'devuelto'");
+            if (rows.Any()) auxiliarGrid = rows.CopyToDataTable();
+            else auxiliarGrid.Rows.Clear();
+            return auxiliarGrid;
+        }
         private void fillGrids()
         {
-            table_devolution = control_order.GetDevolutionLines(this.devolution, this.warehouse);
+            //table_devolution = control_order.GetDevolutionLines(this.devolution, this.warehouse);
             table_devolution_detail = control_order.GetDevolutionDetail(this.devolution);
+
+            table_devolution=filter_tableDevolution();
 
             grid_devolution_detail.DataSource = table_devolution_detail;
             grid_devolution.DataSource = table_devolution;
