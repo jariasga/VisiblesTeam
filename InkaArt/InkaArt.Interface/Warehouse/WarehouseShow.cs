@@ -28,17 +28,32 @@ namespace InkaArt.Interface.Warehouse
             idWarehouse = id;
             RawMaterialController controlRM = new RawMaterialController();
             DataTable rmList = controlRM.getData();
-            for (int i = 0; i< rmList.Rows.Count; i++)
+            int i = 0;
+            for (i = 0; i< rmList.Rows.Count; i++)
             {
                 if(rmList.Rows[i]["status"].ToString()=="Activo")
                     combo_rm.Items.Add(rmList.Rows[i]["name"]);
             }
-            combo_rm.SelectedIndex = 1;
+            if (i > 0)
+            {
+                combo_rm.SelectedIndex = 1;
+            }
+            else
+            {
+                combo_rm.SelectedIndex = -1;
+            }
             FinalProductController controlP = new FinalProductController();
             DataTable pList = controlP.getData();
-            for (int i = 0; i < pList.Rows.Count; i++)
+            for (i = 0; i < pList.Rows.Count; i++)
                 comboBox_Producto.Items.Add(pList.Rows[i]["name"]);
-            comboBox_Producto.SelectedIndex = 1;
+            if (i > 0)
+            {
+                comboBox_Producto.SelectedIndex = 1;
+            }
+            else
+            {
+                comboBox_Producto.SelectedIndex = -1;
+            }            
             fillGridRawMaterial();
             fillGridProduct();
             enableDisableFields(false);
