@@ -46,7 +46,14 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (all_materials.Rows[j]["id_raw_material"].ToString() == warehouse_materials.Rows[i]["idRawMaterial"].ToString())
                         {
-                            materials.Add(all_materials.Rows[j]["id_raw_material"].ToString(), all_materials.Rows[j]["name"].ToString());
+                            try
+                            {
+                                materials.Add(all_materials.Rows[j]["id_raw_material"].ToString(), all_materials.Rows[j]["name"].ToString());
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
                             break;
                         }
                     }
@@ -70,7 +77,14 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (string.Compare(all_products.Rows[j]["idProduct"].ToString(), warehouse_products.Rows[i]["idProduct"].ToString()) == 0)
                         {
-                            products.Add(all_products.Rows[j]["idProduct"].ToString(), all_products.Rows[j]["name"].ToString());
+                            try
+                            {
+                                products.Add(all_products.Rows[j]["idProduct"].ToString(), all_products.Rows[j]["name"].ToString());
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
                             break;
                         }
                     }
