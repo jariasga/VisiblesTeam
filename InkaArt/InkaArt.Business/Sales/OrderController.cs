@@ -17,7 +17,7 @@ namespace InkaArt.Business.Sales
             orderData = new OrderData();
         }
 
-        public int AddSaleDocumentW(int orderId, int[] idProd, int[] quantity, int orderType = 0)
+        public int AddSaleDocumentW(int orderId, int[] idProd, int[] quantity, int[] idVer, int orderType = 0)
         {
             int clientId = getClientID(orderId);
             string clientDoc = getClientDoc(clientId.ToString());
@@ -44,15 +44,17 @@ namespace InkaArt.Business.Sales
                     if (idProd[i] == 0 && quantity[i] == 0) break;
                     foreach (DataRow row in orderLines.Rows)
                     {
-                        if (row["idProduct"].ToString().Equals(idProd[i].ToString()))
+                        if (row["idProduct"].ToString().Equals(idProd[i].ToString()) && row["idRecipe"].ToString().Equals(idVer[i].ToString()))
                         {
                             row["quantityProduced"] = quantity[i];
                         }
                     }
                 }
+                int updated = 0;
                 for (int i = 0; i < idProd.Length && i < quantity.Length; i++)
                 {
-                    orderData.updateStockDocumentLine(orderId,idProd[i],quantity[i]);
+                    int cantMoved = int.Parse(getStockDocumentParam(orderId, idProd[i].ToString(), "cantmoved"));
+                    updated += orderData.updateStockDocumentLine(orderId,idProd[i],quantity[i], cantMoved);
                 }
                 string pamount = getPolishedAmount(amount);
                 string igv = getPolishedIGV(amount);
@@ -224,6 +226,11 @@ namespace InkaArt.Business.Sales
         {
             if (row["type"].ToString().Equals("pedido")) return float.Parse(row["totalAmount"].ToString());
             else return float.Parse(row["totalDev"].ToString());
+        }
+
+        public int getVersionId(string name)
+        {
+            return orderData.getVersionId(name);
         }
 
         public DataTable GetDocumentTypes()
