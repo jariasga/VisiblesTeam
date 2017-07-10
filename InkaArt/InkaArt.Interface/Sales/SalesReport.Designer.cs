@@ -39,11 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label_todaydate = new System.Windows.Forms.Label();
             this.grid_salesReport = new System.Windows.Forms.DataGridView();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.client = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.label_product = new System.Windows.Forms.Label();
             this.label_iniDate = new System.Windows.Forms.Label();
@@ -51,6 +46,11 @@
             this.button_pdf = new System.Windows.Forms.Button();
             this.label_total = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.client = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.monto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grid_salesReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,11 +117,11 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_salesReport.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_salesReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_salesReport.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_salesReport.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_salesReport.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_salesReport.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -136,7 +136,7 @@
             this.monto});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -158,31 +158,6 @@
             this.grid_salesReport.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grid_salesReport.Size = new System.Drawing.Size(803, 247);
             this.grid_salesReport.TabIndex = 28;
-            // 
-            // date
-            // 
-            this.date.HeaderText = "Fecha";
-            this.date.Name = "date";
-            // 
-            // client
-            // 
-            this.client.HeaderText = "Cliente";
-            this.client.Name = "client";
-            // 
-            // TipoCliente
-            // 
-            this.TipoCliente.HeaderText = "Tipo de Cliente";
-            this.TipoCliente.Name = "TipoCliente";
-            // 
-            // amount
-            // 
-            this.amount.HeaderText = "Cantidad";
-            this.amount.Name = "amount";
-            // 
-            // monto
-            // 
-            this.monto.HeaderText = "Monto (S/.)";
-            this.monto.Name = "monto";
             // 
             // label4
             // 
@@ -259,6 +234,36 @@
             this.label5.TabIndex = 40;
             this.label5.Text = "Monto Total (S/.):";
             // 
+            // date
+            // 
+            this.date.FillWeight = 80F;
+            this.date.HeaderText = "Fecha";
+            this.date.Name = "date";
+            // 
+            // client
+            // 
+            this.client.FillWeight = 150F;
+            this.client.HeaderText = "Cliente";
+            this.client.Name = "client";
+            // 
+            // TipoCliente
+            // 
+            this.TipoCliente.FillWeight = 90F;
+            this.TipoCliente.HeaderText = "Tipo de Cliente";
+            this.TipoCliente.Name = "TipoCliente";
+            // 
+            // amount
+            // 
+            this.amount.FillWeight = 70F;
+            this.amount.HeaderText = "Cantidad";
+            this.amount.Name = "amount";
+            // 
+            // monto
+            // 
+            this.monto.FillWeight = 70F;
+            this.monto.HeaderText = "Monto (S/.)";
+            this.monto.Name = "monto";
+            // 
             // SalesReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,13 +305,13 @@
         public System.Windows.Forms.Label label_product;
         public System.Windows.Forms.Label label_iniDate;
         public System.Windows.Forms.Label label_finDate;
+        private System.Windows.Forms.Button button_pdf;
+        private System.Windows.Forms.Label label_total;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn client;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn monto;
-        private System.Windows.Forms.Button button_pdf;
-        private System.Windows.Forms.Label label_total;
-        private System.Windows.Forms.Label label5;
     }
 }

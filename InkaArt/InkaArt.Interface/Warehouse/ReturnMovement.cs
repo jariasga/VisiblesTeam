@@ -101,9 +101,9 @@ namespace InkaArt.Interface.Warehouse
             {
                 MessageBox.Show("Se actualizaron: " + id_products.Count + " Registros.");                
                 fillGrids();
-                id_products.Add(0);
-                quantities.Add(0);                
-                control_order.AddSaleDocumentW(devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
+                //id_products.Add(0);
+                //quantities.Add(0);                
+                //control_order.AddSaleDocumentW(devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
                 updateDevolution();
 
                 this.Close();
@@ -160,7 +160,7 @@ namespace InkaArt.Interface.Warehouse
             if (!int.TryParse(str_value, out int_value))
                 MessageBox.Show("Fila " + row + ": Favor de ingresar un valor entero");
             else if (int_value <= 0)
-                MessageBox.Show("Fila " + row + ": Favor de ingresar un valor positivo mayor a cero");
+                MessageBox.Show("Fila " + row + ": Favor de ingresar un valor positivo");
             else if (int_value > pending)
                 MessageBox.Show("Fila " + row + ": Favor de ingresar una cantidad menor o igual a la pendiente de devolución");
             else

@@ -83,7 +83,7 @@ namespace InkaArt.Business.Algorithm
             ratio.AverageValues(out average_breakage, out average_time);
 
             return Index.Update(ratio, average_breakage, average_time);
-        }
+        } 
 
         public string UpdateOrDelete(Ratio ratio)
         {

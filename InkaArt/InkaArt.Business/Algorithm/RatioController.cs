@@ -241,7 +241,7 @@ namespace InkaArt.Business.Algorithm
                 message += indexes.UpdateOrDelete(old_ratio);
                 if (old_ratio.Job.ID == 3 || old_ratio.Job.ID == 4 || old_ratio.Job.ID == 6)
                     message += ratios_per_day.UpdateOrDelete(old_ratio);
-
+                 
                 message += indexes.InsertOrUpdate(ratio, initial_count_ratios);
                 if (ratio.Job.ID == 3 || ratio.Job.ID == 4 || ratio.Job.ID == 6)
                     message += ratios_per_day.InsertOrUpdate(ratio);

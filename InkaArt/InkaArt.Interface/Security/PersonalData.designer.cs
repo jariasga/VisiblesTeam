@@ -75,9 +75,9 @@
             this.groupBox1.Controls.Add(this.buttonSave);
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Location = new System.Drawing.Point(18, 16);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(600, 294);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -85,7 +85,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.BackColor = System.Drawing.Color.Gray;
+            this.buttonCancel.BackColor = System.Drawing.Color.Firebrick;
             this.buttonCancel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Location = new System.Drawing.Point(471, 240);
@@ -93,7 +93,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(99, 35);
             this.buttonCancel.TabIndex = 4;
-            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.Text = "🗙 Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = false;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -118,7 +118,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(99, 35);
             this.buttonSave.TabIndex = 3;
-            this.buttonSave.Text = "Guardar";
+            this.buttonSave.Text = "🖫 Guardar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -128,7 +128,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(15, 28);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(429, 246);
@@ -150,9 +150,9 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(421, 215);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Info. Personal";
@@ -160,20 +160,20 @@
             // 
             // textBoxAddress
             // 
-            this.textBoxAddress.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxAddress.BackColor = System.Drawing.Color.White;
             this.textBoxAddress.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAddress.Location = new System.Drawing.Point(16, 128);
-            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(388, 24);
             this.textBoxAddress.TabIndex = 5;
             // 
             // textBoxPhone
             // 
-            this.textBoxPhone.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxPhone.BackColor = System.Drawing.Color.White;
             this.textBoxPhone.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPhone.Location = new System.Drawing.Point(218, 77);
-            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxPhone.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPhone.MaxLength = 9;
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(185, 24);
@@ -182,20 +182,20 @@
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxEmail.BackColor = System.Drawing.Color.White;
             this.textBoxEmail.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxEmail.Location = new System.Drawing.Point(15, 178);
-            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(388, 24);
             this.textBoxEmail.TabIndex = 6;
             // 
             // textBoxDNI
             // 
-            this.textBoxDNI.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxDNI.BackColor = System.Drawing.Color.White;
             this.textBoxDNI.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDNI.Location = new System.Drawing.Point(15, 77);
-            this.textBoxDNI.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxDNI.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxDNI.MaxLength = 8;
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(185, 24);
@@ -204,20 +204,20 @@
             // 
             // textBoxLastName
             // 
-            this.textBoxLastName.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxLastName.BackColor = System.Drawing.Color.White;
             this.textBoxLastName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxLastName.Location = new System.Drawing.Point(217, 27);
-            this.textBoxLastName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxLastName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(185, 24);
             this.textBoxLastName.TabIndex = 2;
             // 
             // textBoxName
             // 
-            this.textBoxName.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxName.BackColor = System.Drawing.Color.White;
             this.textBoxName.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxName.Location = new System.Drawing.Point(15, 27);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(185, 24);
             this.textBoxName.TabIndex = 1;
@@ -302,9 +302,9 @@
             this.tabPage2.Controls.Add(this.labelUsuario);
             this.tabPage2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(421, 215);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Info. Usuario";
@@ -312,31 +312,31 @@
             // 
             // textBoxIDRol
             // 
-            this.textBoxIDRol.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxIDRol.BackColor = System.Drawing.Color.White;
             this.textBoxIDRol.Enabled = false;
             this.textBoxIDRol.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxIDRol.Location = new System.Drawing.Point(208, 130);
-            this.textBoxIDRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxIDRol.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxIDRol.Name = "textBoxIDRol";
             this.textBoxIDRol.Size = new System.Drawing.Size(50, 24);
             this.textBoxIDRol.TabIndex = 21;
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxDescription.BackColor = System.Drawing.Color.White;
             this.textBoxDescription.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDescription.Location = new System.Drawing.Point(14, 182);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(185, 24);
             this.textBoxDescription.TabIndex = 10;
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBoxUsername.BackColor = System.Drawing.Color.White;
             this.textBoxUsername.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxUsername.Location = new System.Drawing.Point(14, 27);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(185, 24);
             this.textBoxUsername.TabIndex = 7;
@@ -371,7 +371,7 @@
             this.comboBoxRoles.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxRoles.FormattingEnabled = true;
             this.comboBoxRoles.Location = new System.Drawing.Point(14, 130);
-            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxRoles.Name = "comboBoxRoles";
             this.comboBoxRoles.Size = new System.Drawing.Size(185, 25);
             this.comboBoxRoles.TabIndex = 9;
@@ -400,7 +400,7 @@
             "Activo",
             "Cesado"});
             this.comboBoxUserStatus.Location = new System.Drawing.Point(15, 77);
-            this.comboBoxUserStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxUserStatus.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxUserStatus.Name = "comboBoxUserStatus";
             this.comboBoxUserStatus.Size = new System.Drawing.Size(185, 25);
             this.comboBoxUserStatus.TabIndex = 8;
@@ -472,7 +472,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "PersonalData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

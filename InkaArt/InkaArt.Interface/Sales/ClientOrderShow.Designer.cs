@@ -44,14 +44,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textbox_igv = new System.Windows.Forms.TextBox();
             this.grid_orderline = new System.Windows.Forms.DataGridView();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toFacColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textbox_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -67,6 +59,14 @@
             this.button_delete = new System.Windows.Forms.Button();
             this.button_seedoc = new System.Windows.Forms.Button();
             this.button_fac = new System.Windows.Forms.Button();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toFacColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -81,9 +81,9 @@
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.grid_orderline);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox2.Location = new System.Drawing.Point(345, 24);
+            this.groupBox2.Location = new System.Drawing.Point(304, 19);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(566, 422);
+            this.groupBox2.Size = new System.Drawing.Size(685, 422);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Productos";
@@ -96,11 +96,11 @@
             this.groupBox5.Controls.Add(this.textbox_total_todoc);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label5);
-            this.groupBox5.Location = new System.Drawing.Point(289, 201);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Location = new System.Drawing.Point(350, 201);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox5.Size = new System.Drawing.Size(254, 196);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox5.Size = new System.Drawing.Size(310, 209);
             this.groupBox5.TabIndex = 36;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "A Facturar";
@@ -116,41 +116,41 @@
             // 
             // textbox_amount_todoc
             // 
-            this.textbox_amount_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_amount_todoc.BackColor = System.Drawing.Color.White;
             this.textbox_amount_todoc.Enabled = false;
             this.textbox_amount_todoc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_amount_todoc.Location = new System.Drawing.Point(20, 51);
             this.textbox_amount_todoc.Name = "textbox_amount_todoc";
-            this.textbox_amount_todoc.Size = new System.Drawing.Size(214, 24);
+            this.textbox_amount_todoc.Size = new System.Drawing.Size(271, 24);
             this.textbox_amount_todoc.TabIndex = 36;
             this.textbox_amount_todoc.Text = "S/.  0.00";
             // 
             // textbox_igv_todoc
             // 
-            this.textbox_igv_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_igv_todoc.BackColor = System.Drawing.Color.White;
             this.textbox_igv_todoc.Enabled = false;
             this.textbox_igv_todoc.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_igv_todoc.Location = new System.Drawing.Point(20, 101);
+            this.textbox_igv_todoc.Location = new System.Drawing.Point(20, 105);
             this.textbox_igv_todoc.Name = "textbox_igv_todoc";
-            this.textbox_igv_todoc.Size = new System.Drawing.Size(214, 24);
+            this.textbox_igv_todoc.Size = new System.Drawing.Size(271, 24);
             this.textbox_igv_todoc.TabIndex = 38;
             this.textbox_igv_todoc.Text = "S/.  0.00";
             // 
             // textbox_total_todoc
             // 
-            this.textbox_total_todoc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_total_todoc.BackColor = System.Drawing.Color.White;
             this.textbox_total_todoc.Enabled = false;
             this.textbox_total_todoc.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_total_todoc.Location = new System.Drawing.Point(18, 150);
+            this.textbox_total_todoc.Location = new System.Drawing.Point(18, 161);
             this.textbox_total_todoc.Name = "textbox_total_todoc";
-            this.textbox_total_todoc.Size = new System.Drawing.Size(214, 24);
+            this.textbox_total_todoc.Size = new System.Drawing.Size(273, 24);
             this.textbox_total_todoc.TabIndex = 40;
             this.textbox_total_todoc.Text = "S/.  0.00";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 129);
+            this.label8.Location = new System.Drawing.Point(16, 141);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(87, 18);
             this.label8.TabIndex = 39;
@@ -159,7 +159,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 80);
+            this.label5.Location = new System.Drawing.Point(16, 84);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 18);
             this.label5.TabIndex = 37;
@@ -174,10 +174,10 @@
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.textbox_igv);
             this.groupBox4.Location = new System.Drawing.Point(20, 201);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(254, 196);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(310, 209);
             this.groupBox4.TabIndex = 35;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Pedido";
@@ -193,30 +193,30 @@
             // 
             // textbox_amount
             // 
-            this.textbox_amount.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_amount.BackColor = System.Drawing.Color.White;
             this.textbox_amount.Enabled = false;
             this.textbox_amount.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_amount.Location = new System.Drawing.Point(20, 51);
             this.textbox_amount.Name = "textbox_amount";
-            this.textbox_amount.Size = new System.Drawing.Size(214, 24);
+            this.textbox_amount.Size = new System.Drawing.Size(272, 24);
             this.textbox_amount.TabIndex = 30;
             this.textbox_amount.Text = "S/.  0.00";
             // 
             // textbox_total
             // 
-            this.textbox_total.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_total.BackColor = System.Drawing.Color.White;
             this.textbox_total.Enabled = false;
             this.textbox_total.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_total.Location = new System.Drawing.Point(19, 150);
+            this.textbox_total.Location = new System.Drawing.Point(20, 161);
             this.textbox_total.Name = "textbox_total";
-            this.textbox_total.Size = new System.Drawing.Size(214, 24);
+            this.textbox_total.Size = new System.Drawing.Size(272, 24);
             this.textbox_total.TabIndex = 34;
             this.textbox_total.Text = "S/.  0.00";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(17, 80);
+            this.label9.Location = new System.Drawing.Point(17, 84);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(34, 18);
             this.label9.TabIndex = 31;
@@ -225,7 +225,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 129);
+            this.label10.Location = new System.Drawing.Point(17, 141);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 18);
             this.label10.TabIndex = 33;
@@ -233,12 +233,12 @@
             // 
             // textbox_igv
             // 
-            this.textbox_igv.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_igv.BackColor = System.Drawing.Color.White;
             this.textbox_igv.Enabled = false;
             this.textbox_igv.Font = new System.Drawing.Font("Arial", 11F);
-            this.textbox_igv.Location = new System.Drawing.Point(20, 101);
+            this.textbox_igv.Location = new System.Drawing.Point(20, 105);
             this.textbox_igv.Name = "textbox_igv";
-            this.textbox_igv.Size = new System.Drawing.Size(214, 24);
+            this.textbox_igv.Size = new System.Drawing.Size(272, 24);
             this.textbox_igv.TabIndex = 32;
             this.textbox_igv.Text = "S/.  0.00";
             // 
@@ -246,8 +246,8 @@
             // 
             this.grid_orderline.AllowUserToAddRows = false;
             this.grid_orderline.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_orderline.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_orderline.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_orderline.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grid_orderline.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_orderline.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
@@ -258,67 +258,13 @@
             this.toFacColumn,
             this.Column3,
             this.Column4});
-            this.grid_orderline.Location = new System.Drawing.Point(20, 26);
+            this.grid_orderline.Location = new System.Drawing.Point(10, 26);
             this.grid_orderline.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.grid_orderline.Name = "grid_orderline";
             this.grid_orderline.RowHeadersVisible = false;
-            this.grid_orderline.Size = new System.Drawing.Size(523, 165);
+            this.grid_orderline.Size = new System.Drawing.Size(667, 165);
             this.grid_orderline.TabIndex = 22;
             this.grid_orderline.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grid_orderline_KeyUp);
-            // 
-            // Column5
-            // 
-            this.Column5.FillWeight = 30F;
-            this.Column5.HeaderText = "Id";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Producto
-            // 
-            this.Producto.FillWeight = 150F;
-            this.Producto.HeaderText = "Producto";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Calidad";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 40F;
-            this.Column2.HeaderText = "PU";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Cantidad
-            // 
-            this.Cantidad.FillWeight = 50F;
-            this.Cantidad.HeaderText = "Cantidad";
-            this.Cantidad.Name = "Cantidad";
-            this.Cantidad.ReadOnly = true;
-            // 
-            // toFacColumn
-            // 
-            this.toFacColumn.FillWeight = 50F;
-            this.toFacColumn.HeaderText = "A Facturar";
-            this.toFacColumn.Name = "toFacColumn";
-            // 
-            // Column3
-            // 
-            this.Column3.FillWeight = 50F;
-            this.Column3.HeaderText = "Disponible";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.FillWeight = 50F;
-            this.Column4.HeaderText = "Facturado";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -327,21 +273,21 @@
             this.groupBox1.Controls.Add(this.textbox_ruc);
             this.groupBox1.Controls.Add(this.label_doc);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(28, 313);
+            this.groupBox1.Location = new System.Drawing.Point(12, 308);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(311, 177);
+            this.groupBox1.Size = new System.Drawing.Size(277, 177);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cliente";
             // 
             // textbox_name
             // 
-            this.textbox_name.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_name.BackColor = System.Drawing.Color.White;
             this.textbox_name.Enabled = false;
             this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(17, 124);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(276, 24);
+            this.textbox_name.Size = new System.Drawing.Size(243, 24);
             this.textbox_name.TabIndex = 19;
             // 
             // label2
@@ -355,12 +301,12 @@
             // 
             // textbox_ruc
             // 
-            this.textbox_ruc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textbox_ruc.BackColor = System.Drawing.Color.White;
             this.textbox_ruc.Enabled = false;
             this.textbox_ruc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_ruc.Location = new System.Drawing.Point(18, 62);
             this.textbox_ruc.Name = "textbox_ruc";
-            this.textbox_ruc.Size = new System.Drawing.Size(276, 24);
+            this.textbox_ruc.Size = new System.Drawing.Size(242, 24);
             this.textbox_ruc.TabIndex = 17;
             // 
             // label_doc
@@ -381,9 +327,9 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 12F);
-            this.groupBox3.Location = new System.Drawing.Point(28, 24);
+            this.groupBox3.Location = new System.Drawing.Point(12, 19);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(311, 281);
+            this.groupBox3.Size = new System.Drawing.Size(277, 281);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pedido";
@@ -391,6 +337,7 @@
             // combo_doc
             // 
             this.combo_doc.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.combo_doc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_doc.Enabled = false;
             this.combo_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_doc.FormattingEnabled = true;
@@ -399,7 +346,7 @@
             "Factura"});
             this.combo_doc.Location = new System.Drawing.Point(17, 136);
             this.combo_doc.Name = "combo_doc";
-            this.combo_doc.Size = new System.Drawing.Size(277, 25);
+            this.combo_doc.Size = new System.Drawing.Size(243, 25);
             this.combo_doc.TabIndex = 36;
             // 
             // label7
@@ -414,6 +361,7 @@
             // combo_orderstatus
             // 
             this.combo_orderstatus.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.combo_orderstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combo_orderstatus.Enabled = false;
             this.combo_orderstatus.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_orderstatus.FormattingEnabled = true;
@@ -423,7 +371,7 @@
             "Entregado"});
             this.combo_orderstatus.Location = new System.Drawing.Point(18, 210);
             this.combo_orderstatus.Name = "combo_orderstatus";
-            this.combo_orderstatus.Size = new System.Drawing.Size(277, 25);
+            this.combo_orderstatus.Size = new System.Drawing.Size(242, 25);
             this.combo_orderstatus.TabIndex = 14;
             // 
             // date_deliverydate
@@ -434,7 +382,7 @@
             this.date_deliverydate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date_deliverydate.Location = new System.Drawing.Point(17, 63);
             this.date_deliverydate.Name = "date_deliverydate";
-            this.date_deliverydate.Size = new System.Drawing.Size(277, 24);
+            this.date_deliverydate.Size = new System.Drawing.Size(243, 24);
             this.date_deliverydate.TabIndex = 12;
             // 
             // label6
@@ -461,7 +409,7 @@
             this.button_delete.BackColor = System.Drawing.Color.Firebrick;
             this.button_delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_delete.ForeColor = System.Drawing.Color.White;
-            this.button_delete.Location = new System.Drawing.Point(718, 451);
+            this.button_delete.Location = new System.Drawing.Point(740, 451);
             this.button_delete.Name = "button_delete";
             this.button_delete.Size = new System.Drawing.Size(107, 39);
             this.button_delete.TabIndex = 38;
@@ -474,8 +422,8 @@
             this.button_seedoc.BackColor = System.Drawing.Color.Gray;
             this.button_seedoc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_seedoc.ForeColor = System.Drawing.Color.White;
-            this.button_seedoc.Location = new System.Drawing.Point(530, 451);
-            this.button_seedoc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_seedoc.Location = new System.Drawing.Point(552, 451);
+            this.button_seedoc.Margin = new System.Windows.Forms.Padding(2);
             this.button_seedoc.Name = "button_seedoc";
             this.button_seedoc.Size = new System.Drawing.Size(183, 39);
             this.button_seedoc.TabIndex = 40;
@@ -488,21 +436,84 @@
             this.button_fac.BackColor = System.Drawing.Color.Gray;
             this.button_fac.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_fac.ForeColor = System.Drawing.Color.White;
-            this.button_fac.Location = new System.Drawing.Point(404, 451);
-            this.button_fac.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_fac.Location = new System.Drawing.Point(441, 451);
+            this.button_fac.Margin = new System.Windows.Forms.Padding(2);
             this.button_fac.Name = "button_fac";
-            this.button_fac.Size = new System.Drawing.Size(122, 39);
+            this.button_fac.Size = new System.Drawing.Size(107, 39);
             this.button_fac.TabIndex = 41;
             this.button_fac.Text = "🗀 Facturar";
             this.button_fac.UseVisualStyleBackColor = false;
             this.button_fac.Click += new System.EventHandler(this.button_fac_Click);
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.FillWeight = 50F;
+            this.Column5.HeaderText = "ID";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.FillWeight = 130F;
+            this.Producto.HeaderText = "Producto";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 80F;
+            this.Column1.HeaderText = "Versión";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.FillWeight = 70F;
+            this.Column2.HeaderText = "PU";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cantidad.FillWeight = 70F;
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.ReadOnly = true;
+            // 
+            // toFacColumn
+            // 
+            this.toFacColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.toFacColumn.FillWeight = 70F;
+            this.toFacColumn.HeaderText = "A facturar";
+            this.toFacColumn.Name = "toFacColumn";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.FillWeight = 70F;
+            this.Column3.HeaderText = "Disponible";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.FillWeight = 75F;
+            this.Column4.HeaderText = "Facturado";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // ClientOrderShow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(936, 515);
+            this.ClientSize = new System.Drawing.Size(1001, 515);
             this.Controls.Add(this.button_fac);
             this.Controls.Add(this.button_seedoc);
             this.Controls.Add(this.button_delete);

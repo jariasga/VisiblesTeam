@@ -47,6 +47,8 @@
             // 
             this.dataGridViewUserMaintenance.AllowUserToAddRows = false;
             this.dataGridViewUserMaintenance.AllowUserToDeleteRows = false;
+            this.dataGridViewUserMaintenance.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridViewUserMaintenance.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewUserMaintenance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewUserMaintenance.Location = new System.Drawing.Point(23, 149);
             this.dataGridViewUserMaintenance.MultiSelect = false;

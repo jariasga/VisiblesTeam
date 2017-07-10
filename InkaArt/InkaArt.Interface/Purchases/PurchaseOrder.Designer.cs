@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView_purchaseOrder = new System.Windows.Forms.DataGridView();
@@ -87,8 +88,8 @@
             this.dataGridView_purchaseOrder.AllowUserToAddRows = false;
             this.dataGridView_purchaseOrder.AllowUserToDeleteRows = false;
             this.dataGridView_purchaseOrder.AllowUserToResizeRows = false;
-            this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_purchaseOrder.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_purchaseOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_purchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_purchaseOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_order,
@@ -99,6 +100,14 @@
             this.status,
             this.id_supplier,
             this.Eliminar});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_purchaseOrder.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_purchaseOrder.Location = new System.Drawing.Point(23, 186);
             this.dataGridView_purchaseOrder.Name = "dataGridView_purchaseOrder";
             this.dataGridView_purchaseOrder.Size = new System.Drawing.Size(774, 272);
@@ -107,23 +116,26 @@
             // 
             // id_order
             // 
+            this.id_order.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.id_order.HeaderText = "ID";
             this.id_order.Name = "id_order";
             this.id_order.ReadOnly = true;
             // 
             // suppName
             // 
+            this.suppName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.suppName.FillWeight = 250F;
             this.suppName.HeaderText = "Proveedor";
             this.suppName.Name = "suppName";
             this.suppName.ReadOnly = true;
-            this.suppName.Width = 250;
             // 
             // creation_date
             // 
+            this.creation_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.creation_date.FillWeight = 140F;
             this.creation_date.HeaderText = "Fecha de emisión";
             this.creation_date.Name = "creation_date";
             this.creation_date.ReadOnly = true;
-            this.creation_date.Width = 140;
             // 
             // delivery_date
             // 
@@ -134,16 +146,18 @@
             // 
             // total
             // 
+            this.total.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.total.HeaderText = "Total";
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
             // status
             // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.status.FillWeight = 80F;
             this.status.HeaderText = "Estado";
             this.status.Name = "status";
             this.status.ReadOnly = true;
-            this.status.Width = 80;
             // 
             // id_supplier
             // 

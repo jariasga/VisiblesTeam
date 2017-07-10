@@ -57,24 +57,26 @@ namespace InkaArt.Data.Sales
             return rowsAffected;
         }
 
-        public void updateStockDocumentLine(int orderId, int productId, int quantity)
+        public int updateStockDocumentLine(int orderId, int productId, int quantity, int cantmoved)
         {
-            NpgsqlDataAdapter myAdap = stockDocumentAdapter();
+            int result = 0;
+            NpgsqlDataAdapter myAdap = updateStockDocumentAdapter(orderId, productId);
             DataSet myData = getData(myAdap, "StockDocument");
-            table = myData.Tables["StockDocument"];
-            for (int i = 0; i < table.Rows.Count; i++)
+            DataTable myTable = myData.Tables["StockDocument"];        
+            for (int i = 0; i < myTable.Rows.Count; i++)
             {
-                if (string.Compare(table.Rows[i]["idDocument"].ToString(), orderId.ToString()) == 0 &&
-                    string.Compare(table.Rows[i]["product_id"].ToString(), productId.ToString()) == 0)
+                if (string.Compare(myTable.Rows[i]["idDocument"].ToString(), orderId.ToString()) == 0 &&
+                    string.Compare(myTable.Rows[i]["product_id"].ToString(), productId.ToString()) == 0)
                 {
-                    int result;
-                    table.Rows[i]["documentType"] = "VENTAS";
-                    result = int.Parse(table.Rows[i]["cantMoved"].ToString()) - quantity;
-                    table.Rows[i]["cantMoved"] = result < 0 ? 0 : result;
+                    myTable.Rows[i]["documentType"] = "VENTAS";
+                    myTable.Rows[i]["fecha"] = DateTime.Now;
+                    result = cantmoved - quantity;
+                    if (result < 0) result = 0;
+                    myTable.Rows[i]["cantmoved"] = result;
                     break;
                 }
             }
-            updateData(myData, myAdap, "Order");
+            return updateData(myData, myAdap, "StockDocument");
         }
 
         public DataTable GetInvoice(int salesDocumentId)
@@ -155,6 +157,20 @@ namespace InkaArt.Data.Sales
         {
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
             adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"StockDocument\"", Connection);
+            return adapter;
+        }
+        private NpgsqlDataAdapter updateStockDocumentAdapter(int idDocument, int product_id)
+        {
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+            adapter.SelectCommand = new NpgsqlCommand("SELECT * FROM inkaart.\"StockDocument\" WHERE \"idDocument\" = :idDocument AND product_id = :product_id;", Connection);
+            adapter.SelectCommand.Parameters.Add(new NpgsqlParameter("idDocument", DbType.Int32));
+            adapter.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters[0].SourceColumn = "idDocument";
+            adapter.SelectCommand.Parameters[0].NpgsqlValue = idDocument;
+            adapter.SelectCommand.Parameters.Add(new NpgsqlParameter("product_id", DbType.Int32));
+            adapter.SelectCommand.Parameters[1].Direction = ParameterDirection.Input;
+            adapter.SelectCommand.Parameters[1].SourceColumn = "product_id";
+            adapter.SelectCommand.Parameters[1].NpgsqlValue = product_id;
             return adapter;
         }
 
@@ -268,12 +284,12 @@ namespace InkaArt.Data.Sales
         public DataTable GetDevolutionLines(int id_order, int id_warehouse)
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
-            string query = "SELECT pr.\"name\", l.*, coalesce(pw.\"idWarehouse\", -1) as id_warehouse, coalesce(pw.\"currentStock\", -1) as current_stock, coalesce(pw.\"maximunStock\", -1) as max_stock, coalesce(pw.\"minimunStock\", -1) as min_stock, coalesce(sd.\"id\", -1) as id_stock, coalesce(sd.product_stock, -1) as product_stock " +
-                "from inkaart.\"Product\" pr, inkaart.\"LineItem\" l " +
-                "left join inkaart.\"Product-Warehouse\" pw on l.\"idProduct\" = pw.\"idProduct\"  AND pw.\"idWarehouse\" = :id_warehouse " +
-                "left join inkaart.\"StockDocument\" sd on l.\"idOrder\" = sd.\"idDocument\" " +
-                "where l.\"idOrder\" = :id_order " +
-                "and l.\"idProduct\" = pr.\"idProduct\" ";
+            string query = "SELECT pr.\"name\", l.*, coalesce(pw.\"idWarehouse\", -1) as id_warehouse, coalesce(pw.\"currentStock\", -1) as current_stock, coalesce(pw.\"maximunStock\", -1) as max_stock, coalesce(pw.\"minimunStock\", -1) as min_stock, coalesce(sd.\"id\", -1) as id_stock, coalesce(sd.product_stock, l.quantity) as product_stock " +
+                "FROM inkaart.\"Product\" pr, inkaart.\"LineItem\" l " +
+                "LEFT JOIN inkaart.\"Product-Warehouse\" pw on l.\"idProduct\" = pw.\"idProduct\"  AND pw.\"idWarehouse\" = :id_warehouse " +
+                "LEFT JOIN inkaart.\"StockDocument\" sd on l.\"idOrder\" = sd.\"idDocument\" AND sd.\"documentType\" = 'VENTA'  AND sd.product_id = l.\"idProduct\" " +
+                "WHERE l.\"idOrder\" = :id_order " +
+                "AND l.\"idProduct\" = pr.\"idProduct\" ";
             NpgsqlCommand command = new NpgsqlCommand(query, connection);
             command.Parameters.AddWithValue("id_order", NpgsqlDbType.Integer, id_order);
             command.Parameters.AddWithValue("id_warehouse", NpgsqlDbType.Integer, id_warehouse);
@@ -600,7 +616,7 @@ namespace InkaArt.Data.Sales
             return updateData(myData, myAdap, "Product");
         }
 
-        private int getVersionId(string versionName)
+        public int getVersionId(string versionName)
         {
             DataSet myData = new DataSet();
             NpgsqlDataAdapter myAdap = recipeAdapter();
