@@ -41,11 +41,11 @@
             this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_create_dev = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkbox_enabledate = new System.Windows.Forms.CheckBox();
+            this.date_deliveryDate_ini = new System.Windows.Forms.DateTimePicker();
             this.date_deliveryDate_end = new System.Windows.Forms.DateTimePicker();
+            this.checkbox_enabledate = new System.Windows.Forms.CheckBox();
             this.combo_type = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.date_deliveryDate_ini = new System.Windows.Forms.DateTimePicker();
             this.combo_orderStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textbox_name = new System.Windows.Forms.TextBox();
@@ -65,11 +65,11 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F);
             this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_orders.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_orders.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -86,7 +86,7 @@
             this.deleteColumn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -181,17 +181,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
-            // checkbox_enabledate
+            // date_deliveryDate_ini
             // 
-            this.checkbox_enabledate.AutoSize = true;
-            this.checkbox_enabledate.Location = new System.Drawing.Point(226, 88);
-            this.checkbox_enabledate.Margin = new System.Windows.Forms.Padding(2);
-            this.checkbox_enabledate.Name = "checkbox_enabledate";
-            this.checkbox_enabledate.Size = new System.Drawing.Size(152, 22);
-            this.checkbox_enabledate.TabIndex = 29;
-            this.checkbox_enabledate.Text = "Fecha de Entrega";
-            this.checkbox_enabledate.UseVisualStyleBackColor = true;
-            this.checkbox_enabledate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.date_deliveryDate_ini.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.date_deliveryDate_ini.Enabled = false;
+            this.date_deliveryDate_ini.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliveryDate_ini.Location = new System.Drawing.Point(226, 111);
+            this.date_deliveryDate_ini.Name = "date_deliveryDate_ini";
+            this.date_deliveryDate_ini.Size = new System.Drawing.Size(104, 24);
+            this.date_deliveryDate_ini.TabIndex = 23;
             // 
             // date_deliveryDate_end
             // 
@@ -203,6 +202,18 @@
             this.date_deliveryDate_end.Name = "date_deliveryDate_end";
             this.date_deliveryDate_end.Size = new System.Drawing.Size(102, 24);
             this.date_deliveryDate_end.TabIndex = 28;
+            // 
+            // checkbox_enabledate
+            // 
+            this.checkbox_enabledate.AutoSize = true;
+            this.checkbox_enabledate.Location = new System.Drawing.Point(226, 88);
+            this.checkbox_enabledate.Margin = new System.Windows.Forms.Padding(2);
+            this.checkbox_enabledate.Name = "checkbox_enabledate";
+            this.checkbox_enabledate.Size = new System.Drawing.Size(152, 22);
+            this.checkbox_enabledate.TabIndex = 29;
+            this.checkbox_enabledate.Text = "Fecha de Entrega";
+            this.checkbox_enabledate.UseVisualStyleBackColor = true;
+            this.checkbox_enabledate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // combo_type
             // 
@@ -225,17 +236,6 @@
             this.label5.Size = new System.Drawing.Size(38, 18);
             this.label5.TabIndex = 25;
             this.label5.Text = "Tipo";
-            // 
-            // date_deliveryDate_ini
-            // 
-            this.date_deliveryDate_ini.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.date_deliveryDate_ini.Enabled = false;
-            this.date_deliveryDate_ini.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_deliveryDate_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliveryDate_ini.Location = new System.Drawing.Point(226, 111);
-            this.date_deliveryDate_ini.Name = "date_deliveryDate_ini";
-            this.date_deliveryDate_ini.Size = new System.Drawing.Size(104, 24);
-            this.date_deliveryDate_ini.TabIndex = 23;
             // 
             // combo_orderStatus
             // 
