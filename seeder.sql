@@ -94,3 +94,7 @@ TRUNCATE inkaart."PurchaseOrderDetail" CASCADE;
 TRUNCATE inkaart."PurchaseDocument" CASCADE;
 TRUNCATE inkaart."PurcharseOrder" CASCADE;
 TRUNCATE inkaart."Movement" CASCADE;
+
+INSERT INTO "inkaart"."DocumentType" VALUES ('1', 'Boleta', 'Documento para personas naturales');
+INSERT INTO "inkaart"."DocumentType" VALUES ('2', 'Factura', 'Documento para personas jurídicas');
+INSERT INTO "inkaart"."DocumentType" VALUES ('6', 'Nota de crédito', 'Documento para devoluciones');
