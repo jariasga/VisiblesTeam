@@ -297,7 +297,7 @@ namespace InkaArt.Business.Warehouse
                         return 1;
                     }
                 }
-                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                MessageBox.Show("La carga de almacenes se realizó con éxito", "Cargar Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return 0;
         }        
