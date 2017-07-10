@@ -69,7 +69,7 @@ namespace InkaArt.Business.Algorithm
                 command.CommandText = "UPDATE inkaart.\"RatioPerDay\" SET produced = produced + :produced " +
                     "WHERE date = :date AND id_product = :id_product RETURNING id_lote";
                 command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, ratio.FinalProduced);
-                Object result = command.ExecuteScalar();
+                object result = command.ExecuteScalar();
 
                 if (result == null) return "Error al intentar actualizar en la tabla de ratios por día. ";
 

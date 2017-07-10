@@ -80,7 +80,7 @@ namespace InkaArt.Interface.Production
                     background_worker.ReportProgress(0, null);
                 }
 
-                PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
+                //PrintGraspResults(initial_assignments, simulation.TotalMiniturns);
 
                 background_worker.ReportProgress(0, "Estado de la simulación: Optimizando la asignación de trabajadores...");
 
