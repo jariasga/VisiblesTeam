@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using Excel = Microsoft.Office.Interop.Excel;
 using InkaArt.Business.Algorithm;
 using InkaArt.Data.Algorithm;
 using InkaArt.Classes;
@@ -137,8 +138,7 @@ namespace InkaArt.Interface.Production
             //Verificar que los datos fueron ingresados correctamente
             string message = "Ok";
             if (ratios.Verify(0, date_picker.Value, combobox_worker.Text, combobox_job.Text, combobox_recipe.Text,
-                textbox_start.Text, textbox_end.Text, textbox_broken.Text, textbox_produced.Text, workers, jobs,
-                recipes, ref message) == null)
+                textbox_start.Text, textbox_end.Text, textbox_broken.Text, textbox_produced.Text, ref message) == null)
             {
                 MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -200,7 +200,7 @@ namespace InkaArt.Interface.Production
 
                 string message = "Ok";
                 int result = ratios.VerifyAndSave(id_ratio, date_picker.Value, worker, job, recipe, start, end,
-                    broken, produced, workers, jobs, recipes, ref message);
+                    broken, produced, ref message);
 
                 if (result <= 0)
                 {
@@ -256,6 +256,112 @@ namespace InkaArt.Interface.Production
                 MessageBoxIcon.Information);
         }
 
+        private void button_load_Click(object sender, EventArgs e)
+        {
+            if (open_file_dialog.ShowDialog() != DialogResult.OK) return;
+            
+            try
+            {
+                Excel.Application excel = new Excel.Application();
+                Excel.Workbook workbook = excel.Workbooks.Open(open_file_dialog.FileName, 0, true);
+                Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Worksheets.Item[1];
+
+                bool success = true;
+                string error_request = Environment.NewLine + Environment.NewLine + "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.";
+                for (int row = 2; row <= worksheet.UsedRange.Count; row++)
+                {
+                    Excel.Range range = (Excel.Range)worksheet.Cells[row, 1];
+                    if (range.Value2 == null) break;
+                    if (!(range.Value is DateTime))
+                    {
+                        DialogResult result = MessageBox.Show("La fecha colocada en el ratio de la línea " + row + " no es válida. Asegúrese de que la fecha esté en el formato dd/MM/yyyy."
+                            + error_request, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        success = false;
+                        if (result == DialogResult.OK) continue;
+                        if (result == DialogResult.Cancel) break;
+                    }
+                    DateTime date = range.Value;
+
+                    string worker = worksheet.Cells[row, 2].Value.ToString();
+                    string job = worksheet.Cells[row, 3].Value.ToString();
+                    string recipe = worksheet.Cells[row, 4].Value.ToString();
+
+                    string start = "", end = "";
+                    try
+                    {
+                        this.GetStringFromTimeSpan(worksheet, row, out start, out end);
+                    }
+                    catch (Exception)
+                    {
+                        DialogResult result = MessageBox.Show("Las horas colocadas en el ratio de la línea " + row + " no son válidas. Asegúrese de que las horas estén en el formato hh:mm o hh:mm:ss."
+                            + error_request, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        success = false;
+                        if (result == DialogResult.OK) continue;
+                        if (result == DialogResult.Cancel) break;
+                    }                    
+
+                    string broken = worksheet.Cells[row, 7].Value.ToString();
+                    string produced = worksheet.Cells[row, 8].Value.ToString();
+
+                    string message = "";
+                    int id_ratio = this.ratios.VerifyAndSave(0, date, worker, job, recipe, start, end, broken, produced, ref message);
+                    LogHandler.WriteLine(message);
+
+                    if (id_ratio <= 0)
+                    {
+                        DialogResult result = MessageBox.Show("Error en el ratio leído en la línea " + row + ": " + message + error_request,
+                            "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        success = false;
+                        if (result == DialogResult.OK) continue;
+                        if (result == DialogResult.Cancel) break;
+                    }
+                }
+
+                workbook.Close(false);
+                excel.Quit();
+
+                //Actualizar la lista de ratios de la fecha seleccionada actualmente
+                if (success) MessageBox.Show("Datos leídos correctamente.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show("Hubieron errores al leer los datos.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                //Actualizar la lista de ratios de la fecha especificada
+                date_picker_ValueChanged(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió una excepción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogHandler.WriteLine(ex.ToString());
+            }
+        }
+
+        private void GetStringFromTimeSpan(Excel.Worksheet worksheet, int row, out string start, out string end)
+        {
+            //Hora inicial
+            Excel.Range range = (Excel.Range)worksheet.Cells[row, 5];
+            double start_value = range.Value;
+            DateTime start_time = DateTime.FromOADate(start_value);
+            start = start_time.TimeOfDay.ToString();
+            //Hora final
+            range = (Excel.Range)worksheet.Cells[row, 6];
+            double end_value = range.Value;
+            DateTime end_time = DateTime.FromOADate(end_value);
+            end = end_time.TimeOfDay.ToString();
+        }
+
+        private void RegisterRatioReport_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (grid_modified_items.Count <= 0) return;
+
+            DialogResult result = MessageBox.Show("Hay datos modificados en la grilla de informes de turno." + Environment.NewLine + Environment.NewLine +
+                    "¿Desea guardarlos antes de salir?", "Inka Art", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+
+            //Si el usuario colocó "Cancelar" cancelar el cierre del formulario.
+            if (result == DialogResult.Cancel) e.Cancel = true;
+            //Si el usuario colocó "Sí", guardar las filas y salir. Si ocurre un problema, cancelar el cierre del formulario.
+            if (result == DialogResult.Yes && !SaveGridRows()) e.Cancel = true;
+            //Si el usuario colocó "No" no hacer nada.
+        }
+
         /************************* EVENTOS PROPIOS DEL FORMULARIO *************************/
 
         private void textbox_hour_KeyPress(object sender, KeyPressEventArgs e)
@@ -301,86 +407,6 @@ namespace InkaArt.Interface.Production
         {
             if (this.grid_reports[0, e.RowIndex].Value == null)
                 this.grid_reports[0, e.RowIndex].Value = "0";
-        }
-
-        private void button_load_Click(object sender, EventArgs e)
-        {
-            DialogResult result = open_file_dialog.ShowDialog();
-            if (result != DialogResult.OK) return;
-
-            bool success = true;
-
-            try
-            {
-                //Leer los datos del archivo
-                StreamReader reader = new StreamReader(open_file_dialog.FileName);
-                if (!reader.EndOfStream) reader.ReadLine();
-                for (int line_index = 2; !reader.EndOfStream; line_index++)
-                {
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(';');
-                    if (values == null || values.Count() != 8)
-                    {
-                        result = MessageBox.Show("No se pueden leer los datos de la línea " + line_index + "." + Environment.NewLine +
-                            Environment.NewLine + "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.",
-                            "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        success = false;
-                        if (result == DialogResult.OK) continue;
-                        if (result == DialogResult.Cancel) break;
-                    }
-                    //Formatear los datos a ingresar
-                    DateTime date;
-                    if (!DateTime.TryParseExact(values[0], "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                    {
-                        result = MessageBox.Show("La fecha colocada en el ratio de la línea " + line_index + " no es válida. Asegúrese de que la fecha esté en el formato dd/MM/yyyy."
-                            + Environment.NewLine + Environment.NewLine + "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.",
-                            "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        success = false;
-                        if (result == DialogResult.OK) continue;
-                        if (result == DialogResult.Cancel) break;
-                    }
-
-                    string message = "";
-                    int id_ratio = ratios.VerifyAndSave(0, date, values[1], values[2], values[3], values[4], values[5], values[6], values[7], workers, jobs, recipes, ref message);
-
-                    LogHandler.WriteLine(message);
-                    if (id_ratio <= 0)
-                    {
-                        result = MessageBox.Show("Error en el ratio leído en la línea " + line_index + ": " + message + Environment.NewLine + Environment.NewLine +
-                            "Presione Aceptar para seguir leyendo el archivo, o Cancelar para abortar la carga masiva.", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                        success = false;
-                        if (result == DialogResult.OK) continue;
-                        if (result == DialogResult.Cancel) break;
-                    }
-                }
-                reader.Close();
-
-                //Actualizar la lista de ratios de la fecha seleccionada actualmente
-                if (success) MessageBox.Show("Datos leídos correctamente.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                else MessageBox.Show("Hubieron errores al leer los datos.", "Inka Art", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                //Actualizar la lista de ratios de la fecha especificada
-                date_picker_ValueChanged(sender, e);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocurrió una excepción: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LogHandler.WriteLine(ex.ToString());
-            }
-        }
-
-        private void RegisterRatioReport_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (grid_modified_items.Count <= 0) return;
-
-            DialogResult result = MessageBox.Show("Hay datos modificados en la grilla de informes de turno." + Environment.NewLine + Environment.NewLine +
-                    "¿Desea guardarlos antes de salir?", "Inka Art", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
-
-            //Si el usuario colocó "Cancelar" cancelar el cierre del formulario.
-            if (result == DialogResult.Cancel) e.Cancel = true;
-            //Si el usuario colocó "Sí", guardar las filas y salir. Si ocurre un problema, cancelar el cierre del formulario.
-            if (result == DialogResult.Yes && !SaveGridRows()) e.Cancel = true;
-            //Si el usuario colocó "No" no hacer nada.
         }
     }
 }

@@ -376,7 +376,10 @@
             // 
             // open_file_dialog
             // 
-            this.open_file_dialog.Filter = "Hojas de estilo en cascada|*.csv|Archivos de texto|*.txt|Todos los archivos|*.*";
+            this.open_file_dialog.Filter = "Hoja de cálculo de Microsoft Excel|*.xlsx|Hoja de cálculo de Microsoft Excel 97-2" +
+    "003|*.xls|Hoja de cálculo habilitada para macros de Microsoft Excel|*.xlsm|Hoja " +
+    "de estilo en cascada|*.csv";
+            this.open_file_dialog.FilterIndex = 3;
             this.open_file_dialog.Title = "Seleccione un archivo...";
             // 
             // label_grid
