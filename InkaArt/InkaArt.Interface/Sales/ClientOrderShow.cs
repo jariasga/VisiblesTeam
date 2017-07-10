@@ -200,7 +200,7 @@ namespace InkaArt.Interface.Sales
                 }
                 if (fail) return "La cantidad total a facturar de un producto supera a la cantidad disponible, por favor corriga los datos.";
             }
-            if (numZeros > 1) return "Por favor ingrese una cantidad a facturar en la columna 'A Facturar'.";
+            if (numZeros > 1) return "Por favor ingrese una cantidad a facturar válida en la columna 'A Facturar'.";
             return "OK";
         }
 
