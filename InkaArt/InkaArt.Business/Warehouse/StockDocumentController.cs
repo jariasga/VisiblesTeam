@@ -59,12 +59,11 @@ namespace InkaArt.Business.Warehouse
             stockDocument.execute(updateQuery);
         }
 
-        public void updateReturn(int id_stock, int pending)
+        public void updateReturn(int id_stock, int pending, int cantMoved)
         {
             string updateQuery;
             table = getData();
-            updateQuery = "UPDATE inkaart.\"StockDocument\" SET product_stock = " + pending +
-                " WHERE id = " + id_stock + ";";
+            updateQuery = "UPDATE inkaart.\"StockDocument\" SET product_stock = " + pending + ", \"cantmoved\" = " + cantMoved + " WHERE id = " + id_stock + " and \"documentType\" = 'DEVOLUCION';";
             stockDocument.execute(updateQuery);
         }
 
@@ -107,7 +106,7 @@ namespace InkaArt.Business.Warehouse
         {
             int pending = total - to_return;
             if (id_stock > 0)
-                updateReturn(id_stock, pending);
+                updateReturn(id_stock, pending,to_return);
             else
                 insertReturn(id_devolution.ToString(), id_product.ToString(), pending);
         }
