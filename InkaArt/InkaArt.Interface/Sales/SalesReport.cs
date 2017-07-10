@@ -90,7 +90,19 @@ namespace InkaArt.Interface.Sales
         private void button_pdf_Click(object sender, EventArgs e)
         {
             DateTime date = DateTime.ParseExact(label_todaydate.Text, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            FileStream fs = new FileStream("ReporteVentas-" + date.ToString("dd-MM-yyyy") + ".pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            SaveFileDialog dialogo = new SaveFileDialog();
+            string x = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string titulo= "ReporteVentas-" + date.ToString("dd-MM-yyyy") + ".pdf";
+            dialogo.Title = "Guardar reporte";
+            dialogo.InitialDirectory = x;
+            dialogo.FileName = titulo;
+            dialogo.Filter = "Pdf Files|*.pdf";
+            if (dialogo.ShowDialog() == DialogResult.OK)
+            {
+                titulo = dialogo.FileName;
+            }
+            else return;
+            FileStream fs = new FileStream(titulo, FileMode.Create, FileAccess.Write, FileShare.None);
             Document document = new Document(PageSize.A4);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();

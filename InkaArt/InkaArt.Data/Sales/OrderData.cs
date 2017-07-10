@@ -113,9 +113,9 @@ namespace InkaArt.Data.Sales
                 if (i < idProd.Length - 1)
                 {
                     if (idProd[i+1] == 0) curAdap.SelectCommand.CommandText += ":idProduct";
-                    else curAdap.SelectCommand.CommandText += ":idProduct,";
-                }else curAdap.SelectCommand.CommandText += ":idProduct";
-                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct", DbType.Int32));
+                    else curAdap.SelectCommand.CommandText += ":idProduct"+i+",";
+                }else curAdap.SelectCommand.CommandText += ":idProduct"+i;
+                curAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idProduct"+i, DbType.Int32));
                 curAdap.SelectCommand.Parameters[i + 1].Direction = ParameterDirection.Input;
                 curAdap.SelectCommand.Parameters[i + 1].SourceColumn = "idProduct";
                 curAdap.SelectCommand.Parameters[i + 1].NpgsqlValue = idProd[i];
@@ -177,6 +177,11 @@ namespace InkaArt.Data.Sales
         public void updateOrderStatus(string orderId, string orderStatus)
         {
             NpgsqlDataAdapter myAdap = orderAdapter();
+            myAdap.SelectCommand.CommandText += " WHERE \"idOrder\" = :idOrder;";
+            myAdap.SelectCommand.Parameters.Add(new NpgsqlParameter("idOrder", DbType.Int32));
+            myAdap.SelectCommand.Parameters[0].Direction = ParameterDirection.Input;
+            myAdap.SelectCommand.Parameters[0].SourceColumn = "idOrder";
+            myAdap.SelectCommand.Parameters[0].NpgsqlValue = orderId;
             DataSet myData = getData(myAdap, "Order");
             table = myData.Tables["Order"];
             for (int i = 0; i < table.Rows.Count; i++)
@@ -184,6 +189,8 @@ namespace InkaArt.Data.Sales
                 if (string.Compare(table.Rows[i]["idOrder"].ToString(), orderId) == 0)
                 {
                     table.Rows[i]["orderStatus"] = orderStatus;
+                    table.Rows[i]["reason"] = "";
+                    table.Rows[i]["totaldev"] = 0.0;
                     break;
                 }
             }
