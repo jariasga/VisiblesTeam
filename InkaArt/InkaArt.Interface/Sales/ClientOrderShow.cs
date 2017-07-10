@@ -100,9 +100,6 @@ namespace InkaArt.Interface.Sales
                 }
                 if (totalInvoiced > 0) button_seedoc.Visible = true;
                 else button_seedoc.Visible = true;
-                textbox_amount_todoc.Text = orderController.getPolishedAmount(toFacAmount);
-                textbox_igv_todoc.Text = orderController.getPolishedIGV(toFacAmount);
-                textbox_total_todoc.Text = orderController.getPolishedTotal(toFacAmount);
             }
             foreach (DataGridViewRow gridRow in grid_orderline.Rows)
             {
@@ -211,6 +208,23 @@ namespace InkaArt.Interface.Sales
             }
             if (numValid == 0) return "Por favor ingrese una cantidad a facturar válida en la columna 'A Facturar'.";
             return "OK";
+        }
+
+        private void button_calculate_Click(object sender, EventArgs e)
+        {
+            double amount = 0;
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                int toFacCant = int.Parse(gridRow.Cells[5].Value.ToString());
+                if (toFacCant > 0)
+                {
+                    float price = int.Parse(gridRow.Cells[3].Value.ToString());
+                    amount = orderController.updateAmount(amount, price,decimal.Parse(toFacCant.ToString()));
+                }
+            }
+            textbox_amount_todoc.Text = orderController.getPolishedAmount(amount);
+            textbox_igv_todoc.Text = orderController.getPolishedIGV(amount);
+            textbox_total_todoc.Text = orderController.getPolishedTotal(amount);
         }
 
         private void button_fac_Click(object sender, EventArgs e)
