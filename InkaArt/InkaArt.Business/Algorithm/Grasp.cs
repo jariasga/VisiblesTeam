@@ -61,10 +61,17 @@ namespace InkaArt.Business.Algorithm
 
             for (int iteration = 0; this.HasTime(ref elapsed_time, day) && iteration < this.NumberOfIterations; iteration++)
             {
-                //Crear una COPIA PROFUNDA de la lista de órdenes
+                //Crear una COPIA PROFUNDA ordenada de la lista de órdenes
                 List<Order> orders = new List<Order>();
                 for (int i = 0; i < original_orders.Count; i++) orders.Add(new Order(simulation.SelectedOrders[i]));
                 orders = orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
+
+                for (int i = 0; i < orders.Count; i++)
+                {
+                    LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, orders[i].ID, orders[i].Description);
+                    for (int j = 0; j < orders[i].NumberOfLineItems; j++)
+                        LogHandler.WriteLine("- Linea de orden #{0}-{1}: {2}", i + 1, j + 1, orders[i][j].ToString());
+                }
 
                 //Obtener el índice de órdenes con el cual trabajar y la lista de líneas de orden para asignar
                 if (orders.Count <= 0)
