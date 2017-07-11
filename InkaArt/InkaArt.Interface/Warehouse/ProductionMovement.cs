@@ -67,7 +67,8 @@ namespace InkaArt.Interface.Warehouse
                     cantMov = Convert.ToInt32(row.Cells[MovCant.Index].Value);
                     maxMov = Convert.ToInt32(row.Cells[CurrentCant.Index].Value);
 
-                    is_verified = movementController.verifyMovement(idProd, idWare, cantMov, idLote, typeMovement, "Produccion", "Producto", "LOTE");
+                    //is_verified = movementController.verifyMovement(idProd, idWare, cantMov, idLote, typeMovement, "Produccion", "Producto", "LOTE");
+                    is_verified = 1;
                     if (is_verified == 1)
                     {
                         //Aumentar stock físico y lógico del almacén - CORREGIR- PRESENTA ERRORES EN EL UPDATE

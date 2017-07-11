@@ -219,7 +219,7 @@ namespace InkaArt.Business.Warehouse
         {
             //Se verifica que el stock en la relación producto-almacén no sea mayor al máximo ni menor al mínimo
             int res1 = 0;
-            res1 = verifyUpdateProductWarehouse(idProd, idWarehouse, numMov, typeMovement, typeReason, productType);
+            //res1 = verifyUpdateProductWarehouse(idProd, idWarehouse, numMov, typeMovement, typeReason, productType);
             if (res1 == -1) return -1;
 
             //Se verifica que no se entregue más de lo que el documento permite
@@ -347,8 +347,17 @@ namespace InkaArt.Business.Warehouse
             query = "select \"cantmoved\" from inkaart.\"StockDocument\" where \"idDocument\" = " + idDoc + " and \"product_id\" = " + idProd + " and \"documentType\" = '" + stockMovement + "';";
             dr = movement_data.executeQueryData(query);
             dr.Read();
-            cantMoved = Convert.ToInt32(dr[0]);
-            cantMoved = cantMoved + movement;
+            try
+            {
+                cantMoved = Convert.ToInt32(dr[0]);
+                cantMoved = cantMoved + movement;
+            }
+            catch
+            {
+                cantMoved = 0;
+                cantMoved = cantMoved + movement;
+
+            }
 
             query = "update inkaart.\"StockDocument\" set \"product_stock\" = " + newStock + ", \"cantmoved\" = " + cantMoved + " where \"idDocument\" = " + idDoc + " and \"product_id\" = " + idProd + " and \"documentType\" = '" + stockMovement + "';";
             movement_data.updateData(query);
@@ -584,7 +593,7 @@ namespace InkaArt.Business.Warehouse
                         "o.\"type\" = 'pedido' AND o.\"bdStatus\" = 1 AND o.\"idOrder\" = " + id_order +" AND " +
                         "pw.state = 'Activo' AND pw.\"idWarehouse\" = " + id_warehouse + " AND " +
                         "o.\"idOrder\" = li.\"idOrder\" AND li.\"lineStatus\" != 'facturado' AND " +
-                        "pw.\"idProduct\" = li.\"idProduct\" AND pw.\"idProduct\" = p.\"idProduct\" " +
+                        "pw.\"idProduct\" = li.\"idProduct\" AND pw.\"idProduct\" = p.\"idProduct\" AND p.\"status\" = 1 " +
                     "GROUP BY li.\"idOrder\", p.name, li.\"idProduct\", pw.\"currentStock\" " +
                     "ORDER BY 1 ASC " +
                 ") " +
