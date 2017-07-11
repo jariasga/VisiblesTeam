@@ -43,7 +43,7 @@ namespace InkaArt.Business.Algorithm
             //Parámetros de GRASP
             this.NumberOfIterations = 100;
             this.Alpha = 0.2;
-            this.LimitTime = (Simulation.LimitTime * 2) / (5 * simulation.Days); //Tiempo: 120 segundos / # de días
+            this.LimitTime = (Simulation.LimitTime * 5) / (5 * simulation.Days); //Tiempo: 300 segundos (antes 120 segundos / # de días)
 
             //Líneas de ordenes original
             this.original_orders = simulation.SelectedOrders.Orders;
@@ -66,12 +66,12 @@ namespace InkaArt.Business.Algorithm
                 for (int i = 0; i < original_orders.Count; i++) orders.Add(new Order(simulation.SelectedOrders[i]));
                 orders = orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
 
-                /*for (int i = 0; i < orders.Count; i++)
+                for (int i = 0; i < orders.Count; i++)
                 {
                     LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, orders[i].ID, orders[i].Description);
                     for (int j = 0; j < orders[i].NumberOfLineItems; j++)
                         LogHandler.WriteLine("- Linea de orden #{0}-{1}: {2}", i + 1, j + 1, orders[i][j].ToString());
-                }*/
+                }
 
                 //Obtener el índice de órdenes con el cual trabajar y la lista de líneas de orden para asignar
                 if (orders.Count <= 0)

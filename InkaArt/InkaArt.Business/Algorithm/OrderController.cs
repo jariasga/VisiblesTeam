@@ -56,7 +56,7 @@ namespace InkaArt.Business.Algorithm
             // cantidad faltante = solicitada - facturada
             foreach (Order order in orders)
             {                
-                command = new NpgsqlCommand("SELECT * FROM inkaart.\"LineItem\" WHERE \"idOrder\" = :idOrder AND \"quantity\" > \"quantityProduced\"", connection);
+                command = new NpgsqlCommand("SELECT * FROM inkaart.\"LineItem\" WHERE \"idOrder\" = :idOrder", connection);
                 command.Parameters.AddWithValue("idOrder", NpgsqlDbType.Integer, order.ID);
 
                 reader = command.ExecuteReader();
