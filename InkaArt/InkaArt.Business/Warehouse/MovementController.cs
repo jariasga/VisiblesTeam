@@ -219,7 +219,7 @@ namespace InkaArt.Business.Warehouse
         {
             //Se verifica que el stock en la relación producto-almacén no sea mayor al máximo ni menor al mínimo
             int res1 = 0;
-            res1 = verifyUpdateProductWarehouse(idProd, idWarehouse, numMov, typeMovement, typeReason, productType);
+            //res1 = verifyUpdateProductWarehouse(idProd, idWarehouse, numMov, typeMovement, typeReason, productType);
             if (res1 == -1) return -1;
 
             //Se verifica que no se entregue más de lo que el documento permite
