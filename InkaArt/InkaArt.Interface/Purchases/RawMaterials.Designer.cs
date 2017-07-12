@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_rawMaterialsList = new System.Windows.Forms.DataGridView();
             this.id_raw_material = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,8 +58,8 @@
             this.dataGridView_rawMaterialsList.AllowUserToAddRows = false;
             this.dataGridView_rawMaterialsList.AllowUserToDeleteRows = false;
             this.dataGridView_rawMaterialsList.AllowUserToResizeRows = false;
-            this.dataGridView_rawMaterialsList.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_rawMaterialsList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_rawMaterialsList.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_rawMaterialsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_rawMaterialsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_rawMaterialsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_raw_material,
@@ -69,6 +70,14 @@
             this.average_price,
             this.unit,
             this.Eliminar});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_rawMaterialsList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_rawMaterialsList.Location = new System.Drawing.Point(15, 185);
             this.dataGridView_rawMaterialsList.MultiSelect = false;
             this.dataGridView_rawMaterialsList.Name = "dataGridView_rawMaterialsList";
@@ -78,30 +87,40 @@
             // 
             // id_raw_material
             // 
+            this.id_raw_material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id_raw_material.FillWeight = 70F;
             this.id_raw_material.HeaderText = "ID";
             this.id_raw_material.Name = "id_raw_material";
             this.id_raw_material.ReadOnly = true;
             // 
             // name
             // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.FillWeight = 125F;
             this.name.HeaderText = "Nombre";
             this.name.Name = "name";
             this.name.ReadOnly = true;
             // 
             // description
             // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.FillWeight = 180F;
             this.description.HeaderText = "Descripción";
             this.description.Name = "description";
             this.description.ReadOnly = true;
             // 
             // unitName
             // 
+            this.unitName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.unitName.FillWeight = 80F;
             this.unitName.HeaderText = "Unidad";
             this.unitName.Name = "unitName";
             this.unitName.ReadOnly = true;
             // 
             // status
             // 
+            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.status.FillWeight = 85F;
             this.status.HeaderText = "Estado";
             this.status.Name = "status";
             this.status.ReadOnly = true;
@@ -254,9 +273,9 @@
             this.buttonCargaMasiva.Location = new System.Drawing.Point(415, 414);
             this.buttonCargaMasiva.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCargaMasiva.Name = "buttonCargaMasiva";
-            this.buttonCargaMasiva.Size = new System.Drawing.Size(124, 39);
+            this.buttonCargaMasiva.Size = new System.Drawing.Size(129, 39);
             this.buttonCargaMasiva.TabIndex = 46;
-            this.buttonCargaMasiva.Text = "Carga masiva";
+            this.buttonCargaMasiva.Text = "⬆ Carga masiva";
             this.buttonCargaMasiva.UseVisualStyleBackColor = false;
             this.buttonCargaMasiva.Click += new System.EventHandler(this.button_cargamasivaclic);
             // 

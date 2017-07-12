@@ -185,7 +185,7 @@ namespace InkaArt.Interface.Sales
 
         private void button_add_Click(object sender, EventArgs e)
         {
-            if (isProductAdded()) MessageBox.Show(this, "Este producto ya ha sido agregado.", "Producto", MessageBoxButtons.OK);
+            if (isVersionAdded()) MessageBox.Show(this, "Esa versión ya ha sido agregada.", "Versión", MessageBoxButtons.OK);
             else
             {
                 string resp = isQuantityBelow();
@@ -237,27 +237,50 @@ namespace InkaArt.Interface.Sales
             if (combo_product.SelectedItem != null) selectedProduct = combo_product.SelectedItem.ToString();
             else return "OK";
             int attemps = 0;
-            string selectedVersion = combo_quality.SelectedItem.ToString();
+            string selectedVersion = combo_quality.SelectedItem.ToString(), message = "";
             foreach (DataRow row in orderLine.Rows)
             {
                 string cellProduct = row["idProduct"].ToString();
                 string cellVersion = row["idRecipe"].ToString();
                 foreach (DataRow irow in invoicedLine.Rows)
                 {
-                    if (irow["idLineItem"].Equals(row["idLineItem"]))
+                    if (selectedProduct.Contains(cellProduct))
                     {
-                        if (selectedProduct.Contains(cellProduct))
+                        int cellQuantity = int.Parse(irow["finished"].ToString());
+                        if (cellQuantity < quantity) return "No puede agregar más de lo que pidió.";
+                        if (!selectedVersion.Contains(cellVersion))
                         {
-                            int cellQuantity = int.Parse(irow["finished"].ToString());
-                            if (cellQuantity < quantity) return "No puede agregar más de lo que pidió.";
-                            if (!selectedVersion.Contains(cellVersion)) return "No puede seleccionar una versión diferente de la que pidió";
+                            message = "No puede seleccionar una versión diferente de la que pidió";
+                            break;
                         }
-                        else attemps++;
+                        else
+                        {
+                            message = "OK";
+                            break;
+                        }
                     }
+                    else attemps++;
+                }
+                if (message.Equals("OK")) break;
+            }
+            if (!message.Equals("OK") && attemps > 0) return "No puede agregar un producto o version que no ha pedido.";
+            return message;
+        }
+        
+        private bool isVersionAdded()
+        {
+            string selectedProduct = combo_product.SelectedItem.ToString();
+            string selectedVersion = combo_quality.SelectedItem.ToString();
+            foreach (DataGridViewRow row in grid_orderline.Rows)
+            {
+                string cellProduct = row.Cells[0].Value.ToString();
+                if (selectedProduct.Contains(cellProduct))
+                {
+                    string cellVersion = row.Cells[1].Value.ToString();
+                    if (selectedVersion.Contains(cellVersion)) return true;
                 }
             }
-            if (attemps > 0) return "No puede agregar un producto que no ha pedido.";
-            return "OK";
+            return false;
         }
 
         private bool isProductAdded()

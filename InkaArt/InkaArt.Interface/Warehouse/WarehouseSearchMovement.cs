@@ -25,6 +25,7 @@ namespace InkaArt.Interface.Warehouse
         public WarehouseSearchMovement()
         {
             InitializeComponent();
+            realizandoBusqueda();
         }
 
         public WarehouseSearchMovement(TextBox text1, TextBox text2)
@@ -32,6 +33,7 @@ namespace InkaArt.Interface.Warehouse
             idWarehouse = text1;
             nameWarehouse = text2;
             InitializeComponent();
+            realizandoBusqueda();
         }
 
         public WarehouseSearchMovement(TextBox text1, TextBox text2, int prohibitWare)
@@ -40,6 +42,7 @@ namespace InkaArt.Interface.Warehouse
             nameWarehouse = text2;
             prohibitedWarehouse = prohibitWare;
             InitializeComponent();
+            realizandoBusqueda();
         }
 
         private void populateDataGridWarehouseMovement(NpgsqlDataReader listRows)
@@ -78,16 +81,21 @@ namespace InkaArt.Interface.Warehouse
             } return valor;
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
+        public void realizandoBusqueda()
         {
-            NpgsqlDataReader  warehouseList;
+            NpgsqlDataReader warehouseList;
             int idWarehouse = 0;
 
             idWarehouse = validarEnteroPositivo(textBox_id.Text);
             if (idWarehouse == -1) return;
 
-            warehouseList = movementController.GetWarehouseList(idWarehouse, textBox_name.Text, textBox_address.Text,prohibitedWarehouse);
+            warehouseList = movementController.GetWarehouseList(idWarehouse, textBox_name.Text, textBox_address.Text, prohibitedWarehouse);
             populateDataGridWarehouseMovement(warehouseList);
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            realizandoBusqueda();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)

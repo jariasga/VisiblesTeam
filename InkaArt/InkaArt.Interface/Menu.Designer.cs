@@ -39,6 +39,7 @@ namespace InkaArt.Interface
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.menu_strip = new System.Windows.Forms.MenuStrip();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parámetrosGeneralesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +61,7 @@ namespace InkaArt.Interface
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.asignaciónDeTrabajadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informeDeTurnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.generarReporteDeProductividadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,7 @@ namespace InkaArt.Interface
             this.almacénToolStripMenuItem});
             this.menu_strip.Location = new System.Drawing.Point(0, 0);
             this.menu_strip.Name = "menu_strip";
-            this.menu_strip.Size = new System.Drawing.Size(1377, 25);
+            this.menu_strip.Size = new System.Drawing.Size(1362, 25);
             this.menu_strip.TabIndex = 1;
             this.menu_strip.Text = "Menú";
             // 
@@ -207,7 +208,7 @@ namespace InkaArt.Interface
             this.toolStripSeparator4,
             this.asignaciónDeTrabajadoresToolStripMenuItem,
             this.informeDeTurnoToolStripMenuItem,
-            this.toolStripSeparator5,
+            this.toolStripSeparator3,
             this.generarReporteDeProductividadToolStripMenuItem});
             this.producciónToolStripMenuItem.Font = new System.Drawing.Font("Arial", 11F);
             this.producciónToolStripMenuItem.Name = "producciónToolStripMenuItem";
@@ -218,54 +219,54 @@ namespace InkaArt.Interface
             // 
             this.listaDeProductosToolStripMenuItem.Font = new System.Drawing.Font("Arial", 11F);
             this.listaDeProductosToolStripMenuItem.Name = "listaDeProductosToolStripMenuItem";
-            this.listaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
+            this.listaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
             this.listaDeProductosToolStripMenuItem.Text = "Productos Finales";
             this.listaDeProductosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProductosToolStripMenuItem_Click);
             // 
             // listaDeProcesosDeProducciónToolStripMenuItem
             // 
             this.listaDeProcesosDeProducciónToolStripMenuItem.Name = "listaDeProcesosDeProducciónToolStripMenuItem";
-            this.listaDeProcesosDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
+            this.listaDeProcesosDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
             this.listaDeProcesosDeProducciónToolStripMenuItem.Text = "Procesos de Producción";
             this.listaDeProcesosDeProducciónToolStripMenuItem.Click += new System.EventHandler(this.listaDeProcesosDeProducciónToolStripMenuItem_Click);
             // 
             // listaDeTurnosToolStripMenuItem
             // 
             this.listaDeTurnosToolStripMenuItem.Name = "listaDeTurnosToolStripMenuItem";
-            this.listaDeTurnosToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
+            this.listaDeTurnosToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
             this.listaDeTurnosToolStripMenuItem.Text = "Turnos de Producción";
             this.listaDeTurnosToolStripMenuItem.Click += new System.EventHandler(this.listaDeTurnosToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(286, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(306, 6);
             // 
             // asignaciónDeTrabajadoresToolStripMenuItem
             // 
             this.asignaciónDeTrabajadoresToolStripMenuItem.Name = "asignaciónDeTrabajadoresToolStripMenuItem";
-            this.asignaciónDeTrabajadoresToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
+            this.asignaciónDeTrabajadoresToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
             this.asignaciónDeTrabajadoresToolStripMenuItem.Text = "Asignación de Trabajadores";
             this.asignaciónDeTrabajadoresToolStripMenuItem.Click += new System.EventHandler(this.asignaciónDeTrabajadoresToolStripMenuItem_Click);
             // 
             // informeDeTurnoToolStripMenuItem
             // 
             this.informeDeTurnoToolStripMenuItem.Name = "informeDeTurnoToolStripMenuItem";
-            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
-            this.informeDeTurnoToolStripMenuItem.Text = "Informe de Turno";
+            this.informeDeTurnoToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.informeDeTurnoToolStripMenuItem.Text = "Jornadas de Trabajo";
             this.informeDeTurnoToolStripMenuItem.Click += new System.EventHandler(this.informeDeTurnoToolStripMenuItem_Click);
             // 
-            // toolStripSeparator5
+            // toolStripSeparator3
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(286, 6);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(306, 6);
             // 
             // generarReporteDeProductividadToolStripMenuItem
             // 
             this.generarReporteDeProductividadToolStripMenuItem.Name = "generarReporteDeProductividadToolStripMenuItem";
-            this.generarReporteDeProductividadToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
-            this.generarReporteDeProductividadToolStripMenuItem.Text = "Generar Reporte de Desempeño";
-            this.generarReporteDeProductividadToolStripMenuItem.Click += new System.EventHandler(this.productividadToolStripMenuItem_Click);
+            this.generarReporteDeProductividadToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
+            this.generarReporteDeProductividadToolStripMenuItem.Text = "Generar Reporte de Productividad...";
+            this.generarReporteDeProductividadToolStripMenuItem.Click += new System.EventHandler(this.generarReporteDeProductividadToolStripMenuItem_Click);
             // 
             // ventasToolStripMenuItem
             // 
@@ -351,6 +352,7 @@ namespace InkaArt.Interface
             // 
             // status_strip
             // 
+            this.status_strip.BackColor = System.Drawing.Color.White;
             this.status_strip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.status_strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.status_label,
@@ -358,7 +360,7 @@ namespace InkaArt.Interface
             this.toolStripStatusLabelPingStatus});
             this.status_strip.Location = new System.Drawing.Point(0, 717);
             this.status_strip.Name = "status_strip";
-            this.status_strip.Size = new System.Drawing.Size(1377, 22);
+            this.status_strip.Size = new System.Drawing.Size(1362, 22);
             this.status_strip.TabIndex = 2;
             this.status_strip.Text = "Estado";
             // 
@@ -381,6 +383,7 @@ namespace InkaArt.Interface
             // 
             // splitter1
             // 
+            this.splitter1.BackColor = System.Drawing.SystemColors.Control;
             this.splitter1.Location = new System.Drawing.Point(0, 25);
             this.splitter1.Margin = new System.Windows.Forms.Padding(4);
             this.splitter1.Name = "splitter1";
@@ -393,18 +396,25 @@ namespace InkaArt.Interface
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1377, 739);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackgroundImage = global::InkaArt.Interface.Properties.Resources.logo;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(1362, 739);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.status_strip);
             this.Controls.Add(this.menu_strip);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menu_strip;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inka Art";
+            this.TransparencyKey = System.Drawing.Color.WhiteSmoke;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Menu_FormClosed);
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.menu_strip.ResumeLayout(false);
             this.menu_strip.PerformLayout();
             this.status_strip.ResumeLayout(false);
@@ -437,8 +447,6 @@ namespace InkaArt.Interface
         private System.Windows.Forms.ToolStripMenuItem listaDeProductosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeProcesosDeProducciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripMenuItem generarReporteDeProductividadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listaDeTurnosToolStripMenuItem;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -455,5 +463,7 @@ namespace InkaArt.Interface
         private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBarPing;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelPingStatus;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem generarReporteDeProductividadToolStripMenuItem;
     }
 }

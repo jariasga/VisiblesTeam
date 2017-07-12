@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView_process = new System.Windows.Forms.DataGridView();
+            this.button_refresh = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioExportacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detalles = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button_refresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_process)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,14 +42,22 @@
             // 
             this.dataGridView_process.AllowUserToAddRows = false;
             this.dataGridView_process.AllowUserToDeleteRows = false;
-            this.dataGridView_process.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_process.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_process.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_process.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_process.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_process.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.PrecioLocal,
             this.PrecioExportacion,
             this.Detalles});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_process.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_process.Location = new System.Drawing.Point(26, 23);
             this.dataGridView_process.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_process.Name = "dataGridView_process";
@@ -56,31 +65,6 @@
             this.dataGridView_process.TabIndex = 7;
             this.dataGridView_process.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_process_CellContentClick);
             this.dataGridView_process.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // PrecioLocal
-            // 
-            this.PrecioLocal.HeaderText = "Proceso";
-            this.PrecioLocal.Name = "PrecioLocal";
-            this.PrecioLocal.ReadOnly = true;
-            // 
-            // PrecioExportacion
-            // 
-            this.PrecioExportacion.HeaderText = "Cantidad de puestos";
-            this.PrecioExportacion.Name = "PrecioExportacion";
-            this.PrecioExportacion.ReadOnly = true;
-            // 
-            // Detalles
-            // 
-            this.Detalles.HeaderText = "Detalles";
-            this.Detalles.Name = "Detalles";
-            this.Detalles.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Detalles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button_refresh
             // 
@@ -95,12 +79,43 @@
             this.button_refresh.UseVisualStyleBackColor = false;
             this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
+            // Id
+            // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Id.FillWeight = 80F;
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // PrecioLocal
+            // 
+            this.PrecioLocal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PrecioLocal.FillWeight = 120F;
+            this.PrecioLocal.HeaderText = "Proceso";
+            this.PrecioLocal.Name = "PrecioLocal";
+            this.PrecioLocal.ReadOnly = true;
+            // 
+            // PrecioExportacion
+            // 
+            this.PrecioExportacion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PrecioExportacion.FillWeight = 110F;
+            this.PrecioExportacion.HeaderText = "Cantidad de puestos";
+            this.PrecioExportacion.Name = "PrecioExportacion";
+            this.PrecioExportacion.ReadOnly = true;
+            // 
+            // Detalles
+            // 
+            this.Detalles.HeaderText = "Detalles";
+            this.Detalles.Name = "Detalles";
+            this.Detalles.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Detalles.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // Jobs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(500, 335);
+            this.ClientSize = new System.Drawing.Size(497, 327);
             this.Controls.Add(this.button_refresh);
             this.Controls.Add(this.dataGridView_process);
             this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

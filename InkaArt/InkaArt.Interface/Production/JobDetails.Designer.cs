@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_process = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -37,9 +38,9 @@
             this.textBox_id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView_products = new System.Windows.Forms.DataGridView();
+            this.button_save = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_save = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_products)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             // textBox_process
             // 
-            this.textBox_process.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox_process.BackColor = System.Drawing.Color.White;
             this.textBox_process.Enabled = false;
             this.textBox_process.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_process.Location = new System.Drawing.Point(21, 118);
@@ -82,7 +83,7 @@
             // 
             // textBox_count
             // 
-            this.textBox_count.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_count.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_count.Location = new System.Drawing.Point(22, 183);
             this.textBox_count.Name = "textBox_count";
             this.textBox_count.Size = new System.Drawing.Size(219, 24);
@@ -110,7 +111,7 @@
             // 
             // textBox_id
             // 
-            this.textBox_id.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox_id.BackColor = System.Drawing.Color.White;
             this.textBox_id.Enabled = false;
             this.textBox_id.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_id.Location = new System.Drawing.Point(23, 58);
@@ -123,7 +124,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(306, 31);
+            this.label5.Location = new System.Drawing.Point(318, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(156, 18);
             this.label5.TabIndex = 16;
@@ -133,35 +134,32 @@
             // 
             this.dataGridView_products.AllowUserToAddRows = false;
             this.dataGridView_products.AllowUserToDeleteRows = false;
-            this.dataGridView_products.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView_products.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_products.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
             this.Nombre});
-            this.dataGridView_products.Location = new System.Drawing.Point(307, 53);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_products.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView_products.Location = new System.Drawing.Point(321, 53);
             this.dataGridView_products.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView_products.Name = "dataGridView_products";
-            this.dataGridView_products.Size = new System.Drawing.Size(268, 220);
+            this.dataGridView_products.Size = new System.Drawing.Size(321, 220);
             this.dataGridView_products.TabIndex = 17;
-            // 
-            // Producto
-            // 
-            this.Producto.HeaderText = "Id";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            // 
-            // Nombre
-            // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
             // 
             // button_save
             // 
             this.button_save.BackColor = System.Drawing.Color.SteelBlue;
             this.button_save.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_save.ForeColor = System.Drawing.Color.White;
-            this.button_save.Location = new System.Drawing.Point(236, 290);
+            this.button_save.Location = new System.Drawing.Point(254, 290);
             this.button_save.Name = "button_save";
             this.button_save.Size = new System.Drawing.Size(134, 42);
             this.button_save.TabIndex = 18;
@@ -169,12 +167,28 @@
             this.button_save.UseVisualStyleBackColor = false;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Producto.FillWeight = 80F;
+            this.Producto.HeaderText = "Id";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nombre.FillWeight = 150F;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            // 
             // JobDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(607, 360);
+            this.ClientSize = new System.Drawing.Size(669, 344);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.dataGridView_products);
             this.Controls.Add(this.label5);

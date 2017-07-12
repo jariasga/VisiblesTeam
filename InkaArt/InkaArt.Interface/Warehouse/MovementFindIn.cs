@@ -46,7 +46,14 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (all_materials.Rows[j]["id_raw_material"].ToString() == warehouse_materials.Rows[i]["idRawMaterial"].ToString())
                         {
-                            materials.Add(all_materials.Rows[j]["id_raw_material"].ToString(), all_materials.Rows[j]["name"].ToString());
+                            try
+                            {
+                                materials.Add(all_materials.Rows[j]["id_raw_material"].ToString(), all_materials.Rows[j]["name"].ToString());
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
                             break;
                         }
                     }
@@ -70,7 +77,14 @@ namespace InkaArt.Interface.Warehouse
                     {
                         if (string.Compare(all_products.Rows[j]["idProduct"].ToString(), warehouse_products.Rows[i]["idProduct"].ToString()) == 0)
                         {
-                            products.Add(all_products.Rows[j]["idProduct"].ToString(), all_products.Rows[j]["name"].ToString());
+                            try
+                            {
+                                products.Add(all_products.Rows[j]["idProduct"].ToString(), all_products.Rows[j]["name"].ToString());
+                            }
+                            catch (Exception m)
+                            {
+                                Console.WriteLine("{0} error", m);
+                            }
                             break;
                         }
                     }
@@ -120,6 +134,7 @@ namespace InkaArt.Interface.Warehouse
         {
             ProductWarehouseController control = new ProductWarehouseController();
             RawMaterialWarehouseController controlRm = new RawMaterialWarehouseController();
+            FinalProductController controlP = new FinalProductController();
             ProductionMovementMovementController controlM = new ProductionMovementMovementController();
 
             DataTable pwhList = control.getData();
@@ -151,7 +166,7 @@ namespace InkaArt.Interface.Warehouse
                             {
                                 aIngresar = int.Parse(textBox6.Text);
                                 int quantity = maxStock- currentStock -aIngresar;
-                                if (quantity > 0)
+                                if (quantity >= 0)
                                 {
                                     encontrado = 1;
                                     //update d la tabla
@@ -207,13 +222,15 @@ namespace InkaArt.Interface.Warehouse
                             {
                                 aIngresar = int.Parse(textBox6.Text);
                                 int quantity = maxStock-currentStock - aIngresar;
-                                if (quantity > 0)
+                                if (quantity >= 0)
                                 {
                                     encontrado = 1;
                                     //update d la tabla
                                     try
                                     {
                                         control.updateStock(warehouse_id, item_id, currentStock + aIngresar, currentLogical + aIngresar);
+                                        //update en product
+                                        controlP.updateStockOnlyOne(item_id, aIngresar, 0);
                                         controlM.insertBrokenFindMovement(2, warehouse_id, 7, DateTime.Now.ToShortDateString(), item_id, 1, aIngresar);
                                     }
                                     catch (Exception m)

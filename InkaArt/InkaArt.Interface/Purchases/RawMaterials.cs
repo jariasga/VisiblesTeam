@@ -158,13 +158,20 @@ namespace InkaArt.Interface.Purchases
 
         private void button_cargamasivaclic(object sender, EventArgs e)
         {
+            
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Raw Materials File";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK) {
-                if (control.massiveUpload(dialog.FileName) == 1)
+                int resultado = control.massiveUpload(dialog.FileName);
+                if (resultado == 1)
                 {
                     MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (resultado == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque estas materias primas ya existen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);

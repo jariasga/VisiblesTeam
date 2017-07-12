@@ -41,11 +41,11 @@
             this.deleteColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button_create_dev = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkbox_enabledate = new System.Windows.Forms.CheckBox();
+            this.date_deliveryDate_ini = new System.Windows.Forms.DateTimePicker();
             this.date_deliveryDate_end = new System.Windows.Forms.DateTimePicker();
+            this.checkbox_enabledate = new System.Windows.Forms.CheckBox();
             this.combo_type = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.date_deliveryDate_ini = new System.Windows.Forms.DateTimePicker();
             this.combo_orderStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textbox_name = new System.Windows.Forms.TextBox();
@@ -62,14 +62,14 @@
             // grid_orders
             // 
             this.grid_orders.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
             this.grid_orders.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_orders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_orders.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_orders.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_orders.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -86,7 +86,7 @@
             this.deleteColumn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -151,7 +151,7 @@
             this.button_create_dev.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create_dev.ForeColor = System.Drawing.Color.White;
             this.button_create_dev.Location = new System.Drawing.Point(295, 424);
-            this.button_create_dev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_create_dev.Margin = new System.Windows.Forms.Padding(2);
             this.button_create_dev.Name = "button_create_dev";
             this.button_create_dev.Size = new System.Drawing.Size(122, 39);
             this.button_create_dev.TabIndex = 23;
@@ -161,11 +161,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkbox_enabledate);
+            this.groupBox1.Controls.Add(this.date_deliveryDate_ini);
             this.groupBox1.Controls.Add(this.date_deliveryDate_end);
+            this.groupBox1.Controls.Add(this.checkbox_enabledate);
             this.groupBox1.Controls.Add(this.combo_type);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.date_deliveryDate_ini);
             this.groupBox1.Controls.Add(this.combo_orderStatus);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textbox_name);
@@ -181,11 +181,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // date_deliveryDate_ini
+            // 
+            this.date_deliveryDate_ini.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
+            this.date_deliveryDate_ini.Enabled = false;
+            this.date_deliveryDate_ini.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliveryDate_ini.Location = new System.Drawing.Point(226, 111);
+            this.date_deliveryDate_ini.Name = "date_deliveryDate_ini";
+            this.date_deliveryDate_ini.Size = new System.Drawing.Size(104, 24);
+            this.date_deliveryDate_ini.TabIndex = 23;
+            // 
+            // date_deliveryDate_end
+            // 
+            this.date_deliveryDate_end.Enabled = false;
+            this.date_deliveryDate_end.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.date_deliveryDate_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_deliveryDate_end.Location = new System.Drawing.Point(335, 111);
+            this.date_deliveryDate_end.Margin = new System.Windows.Forms.Padding(2);
+            this.date_deliveryDate_end.Name = "date_deliveryDate_end";
+            this.date_deliveryDate_end.Size = new System.Drawing.Size(102, 24);
+            this.date_deliveryDate_end.TabIndex = 28;
+            // 
             // checkbox_enabledate
             // 
             this.checkbox_enabledate.AutoSize = true;
-            this.checkbox_enabledate.Location = new System.Drawing.Point(237, 86);
-            this.checkbox_enabledate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkbox_enabledate.Location = new System.Drawing.Point(226, 88);
+            this.checkbox_enabledate.Margin = new System.Windows.Forms.Padding(2);
             this.checkbox_enabledate.Name = "checkbox_enabledate";
             this.checkbox_enabledate.Size = new System.Drawing.Size(152, 22);
             this.checkbox_enabledate.TabIndex = 29;
@@ -193,27 +215,17 @@
             this.checkbox_enabledate.UseVisualStyleBackColor = true;
             this.checkbox_enabledate.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // date_deliveryDate_end
-            // 
-            this.date_deliveryDate_end.Enabled = false;
-            this.date_deliveryDate_end.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_deliveryDate_end.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliveryDate_end.Location = new System.Drawing.Point(346, 110);
-            this.date_deliveryDate_end.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.date_deliveryDate_end.Name = "date_deliveryDate_end";
-            this.date_deliveryDate_end.Size = new System.Drawing.Size(102, 26);
-            this.date_deliveryDate_end.TabIndex = 28;
-            // 
             // combo_type
             // 
             this.combo_type.BackColor = System.Drawing.Color.White;
+            this.combo_type.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_type.FormattingEnabled = true;
             this.combo_type.Items.AddRange(new object[] {
             "Pedido",
             "Devolucion"});
             this.combo_type.Location = new System.Drawing.Point(24, 50);
             this.combo_type.Name = "combo_type";
-            this.combo_type.Size = new System.Drawing.Size(192, 26);
+            this.combo_type.Size = new System.Drawing.Size(174, 25);
             this.combo_type.TabIndex = 27;
             // 
             // label5
@@ -225,20 +237,10 @@
             this.label5.TabIndex = 25;
             this.label5.Text = "Tipo";
             // 
-            // date_deliveryDate_ini
-            // 
-            this.date_deliveryDate_ini.CalendarMonthBackground = System.Drawing.SystemColors.InactiveBorder;
-            this.date_deliveryDate_ini.Enabled = false;
-            this.date_deliveryDate_ini.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.date_deliveryDate_ini.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_deliveryDate_ini.Location = new System.Drawing.Point(237, 110);
-            this.date_deliveryDate_ini.Name = "date_deliveryDate_ini";
-            this.date_deliveryDate_ini.Size = new System.Drawing.Size(104, 26);
-            this.date_deliveryDate_ini.TabIndex = 23;
-            // 
             // combo_orderStatus
             // 
             this.combo_orderStatus.BackColor = System.Drawing.Color.White;
+            this.combo_orderStatus.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_orderStatus.FormattingEnabled = true;
             this.combo_orderStatus.Items.AddRange(new object[] {
             "Registrado",
@@ -248,7 +250,7 @@
             "Entregado"});
             this.combo_orderStatus.Location = new System.Drawing.Point(24, 110);
             this.combo_orderStatus.Name = "combo_orderStatus";
-            this.combo_orderStatus.Size = new System.Drawing.Size(192, 26);
+            this.combo_orderStatus.Size = new System.Drawing.Size(174, 25);
             this.combo_orderStatus.TabIndex = 22;
             // 
             // label3
@@ -263,9 +265,10 @@
             // textbox_name
             // 
             this.textbox_name.BackColor = System.Drawing.Color.White;
+            this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(466, 50);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(192, 26);
+            this.textbox_name.Size = new System.Drawing.Size(192, 24);
             this.textbox_name.TabIndex = 19;
             this.textbox_name.TextChanged += new System.EventHandler(this.textbox_name_TextChanged);
             // 
@@ -281,15 +284,16 @@
             // textbox_doc
             // 
             this.textbox_doc.BackColor = System.Drawing.Color.White;
-            this.textbox_doc.Location = new System.Drawing.Point(237, 50);
+            this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
+            this.textbox_doc.Location = new System.Drawing.Point(226, 50);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(211, 26);
+            this.textbox_doc.Size = new System.Drawing.Size(211, 24);
             this.textbox_doc.TabIndex = 17;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(234, 29);
+            this.label1.Location = new System.Drawing.Point(223, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 18);
             this.label1.TabIndex = 16;
@@ -300,8 +304,8 @@
             this.button_search.BackColor = System.Drawing.Color.Gray;
             this.button_search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_search.ForeColor = System.Drawing.Color.White;
-            this.button_search.Location = new System.Drawing.Point(520, 97);
-            this.button_search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_search.Location = new System.Drawing.Point(520, 96);
+            this.button_search.Margin = new System.Windows.Forms.Padding(2);
             this.button_search.Name = "button_search";
             this.button_search.Size = new System.Drawing.Size(88, 39);
             this.button_search.TabIndex = 15;
@@ -328,7 +332,7 @@
             this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create.ForeColor = System.Drawing.Color.White;
             this.button_create.Location = new System.Drawing.Point(149, 424);
-            this.button_create.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_create.Margin = new System.Windows.Forms.Padding(2);
             this.button_create.Name = "button_create";
             this.button_create.Size = new System.Drawing.Size(122, 39);
             this.button_create.TabIndex = 38;

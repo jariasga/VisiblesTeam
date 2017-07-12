@@ -17,6 +17,7 @@ namespace InkaArt.Interface.Sales
         private int orderId;
         private int clientId;
         OrderController orderController;
+        private List<int> idProd = new List<int>(), quantity = new List<int>(), idVer = new List<int>();
         public DevolutionShow(string id)
         {
             InitializeComponent();
@@ -53,9 +54,20 @@ namespace InkaArt.Interface.Sales
                 {
                     string productId = orderline["idProduct"].ToString();
                     string name = orderController.getProductName(productId), pu = orderController.getProductPU(productId, row["idClient"].ToString());
-                    grid_orderline.Rows.Add(name, orderline["quality"], pu, orderline["quantity"]);
+                    string cantMoved = orderController.getStockDocumentParam(orderId, productId, "cantMoved");
+                    if (cantMoved.Equals("") || int.Parse(cantMoved) < 0) cantMoved = "0";
+                    grid_orderline.Rows.Add(productId,name, orderline["quality"], pu, orderline["quantity"], 0, cantMoved, orderline["quantityInvoiced"]);
                 }
             }
+
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                if (int.Parse(gridRow.Cells[7].Value.ToString()) < int.Parse(gridRow.Cells[4].Value.ToString()))
+                {
+                    return;
+                }
+            }
+            button_fac.Visible = false;
         }
 
         private void button_delete_Click(object sender, EventArgs e)
@@ -69,20 +81,90 @@ namespace InkaArt.Interface.Sales
 
         private void button_fac_Click(object sender, EventArgs e)
         {
-            DataTable orderLines = orderController.getOrderLines(orderId.ToString());
-            int response = orderController.AddSaleDocument(ID_NCREDIT, textbox_devamount.Text, textbox_igv.Text, textbox_devtotal.Text, orderId, orderLines, clientId,1);
-            if (response >= 0)
-            {
-                MessageBox.Show(this, "Se ha generado la nota de crédito exitosamente", "Nota de crédito", MessageBoxButtons.OK);
-                DataTable orderObject = orderController.GetOrders(orderId, clientId);
-                populateFields(orderObject);
-            }
+
         }
 
         private void button_seedoc_Click(object sender, EventArgs e)
         {
             SaleDocumentShow form = new SaleDocumentShow(orderId, clientId);
             form.Show();
+        }
+
+        private void button_fac_Click_1(object sender, EventArgs e)
+        {
+            string response = validateDataGrid();
+            if (response.Equals("OK"))
+            {
+                for (int i = 0; i < grid_orderline.Rows.Count; i++)
+                {
+                    int curProductId = int.Parse(grid_orderline.Rows[i].Cells[0].Value.ToString());
+                    int curQuantity = int.Parse(grid_orderline.Rows[i].Cells[5].Value.ToString());
+                    int curVersionId = orderController.getVersionId(grid_orderline.Rows[i].Cells[2].Value.ToString());
+                    if (curQuantity != 0)
+                    {
+                        idProd.Add(curProductId);
+                        quantity.Add(curQuantity);
+                        idVer.Add(curVersionId);
+                    }
+                }
+                orderController.AddSaleDocumentW(orderId, idProd.ToArray(), quantity.ToArray(), idVer.ToArray(), 1);
+                MessageBox.Show("Se ha generado la nota de crédito exitosamente.", "Éxito", MessageBoxButtons.OK);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show(response, "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private string validateDataGrid()
+        {
+            int numZeros = 0, curToFac = 0;
+            int[] cant = new int[3];
+            bool fail = false;
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                switch (int.Parse(gridRow.Cells[0].Value.ToString()))
+                {
+                    case 1:
+                        cant[0] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        break;
+                    case 2:
+                        cant[1] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        break;
+                    case 3:
+                        cant[2] = int.Parse(gridRow.Cells[6].Value.ToString());
+                        break;
+                }
+            }
+            foreach (DataGridViewRow gridRow in grid_orderline.Rows)
+            {
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[6].Value.ToString()))
+                    return "La cantidad a devolver supera a la cantidad disponible, por favor corriga los datos.";
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) > int.Parse(gridRow.Cells[4].Value.ToString()))
+                    return "La cantidad a devolver supera a la cantidad que se ha solicitado devolver, por favor corriga los datos.";
+                if (int.Parse(gridRow.Cells[5].Value.ToString()) <= 0)
+                    numZeros++;
+                curToFac = int.Parse(gridRow.Cells[5].Value.ToString());
+                switch (int.Parse(gridRow.Cells[0].Value.ToString()))
+                {
+                    case 1:
+                        cant[0] -= curToFac;
+                        if (cant[0] < 0) fail = true;
+                        break;
+                    case 2:
+                        cant[1] -= curToFac;
+                        if (cant[1] < 0) fail = true;
+                        break;
+                    case 3:
+                        cant[2] -= curToFac;
+                        if (cant[2] < 0) fail = true;
+                        break;
+                }
+                if (fail) return "La cantidad total a devolver de un producto supera a la cantidad disponible, por favor corriga los datos.";
+            }
+            if (numZeros > 1) return "Por favor ingrese una cantidad a devolver válida en la columna 'A Devolver'.";
+            return "OK";
         }
     }
 }

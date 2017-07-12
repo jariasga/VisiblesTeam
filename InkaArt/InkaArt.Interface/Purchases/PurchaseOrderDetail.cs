@@ -457,7 +457,7 @@ namespace InkaArt.Interface.Purchases
                     return;
                 }
 
-                buttonSave.Text = "Editar";
+                buttonSave.Text = "🖉 Editar";
                 buttonExport.Visible = false;
                 mode = 2;
                 isInEditMode = false;
@@ -489,7 +489,7 @@ namespace InkaArt.Interface.Purchases
                 {
                     return;
                 }
-                buttonSave.Text = "Editar";
+                buttonSave.Text = "🖉 Editar";
                 isInEditMode = false;
                 comboBox_supplier.Enabled = false;
                 dateTimePicker_creation.Enabled = false;
@@ -656,9 +656,23 @@ namespace InkaArt.Interface.Purchases
         
         private void generarOrdenDoc(object sender, EventArgs e)
         {
-            if(mode==2 && string.Compare(comboBox_status.Text, "Eliminado") != 0)
+            
+            if (mode==2 && string.Compare(comboBox_status.Text, "Eliminado") != 0)
             {
-                FileStream fs = new FileStream("OrdenPrueba.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+                SaveFileDialog dialogo = new SaveFileDialog();
+                string x = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string titulo= "Orden" + textBox_id.Text + ".pdf"; ;
+                dialogo.Title = "Guardar orden";
+                dialogo.InitialDirectory = x;
+                dialogo.FileName = titulo;
+                dialogo.Filter = "Pdf Files|*.pdf";
+                if (dialogo.ShowDialog() == DialogResult.OK)
+                {
+                    titulo = dialogo.FileName;
+                }
+                else return;
+                //titulo = "Orden" + textBox_id.Text + ".pdf";
+                FileStream fs = new FileStream(titulo, FileMode.Create, FileAccess.Write, FileShare.None);
                 Document document = new Document(PageSize.A4);
                 PdfWriter writer = PdfWriter.GetInstance(document, fs);
                 document.Open();

@@ -54,7 +54,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F);
-            this.label1.Location = new System.Drawing.Point(37, 123);
+            this.label1.Location = new System.Drawing.Point(37, 134);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 18);
@@ -64,18 +64,18 @@
             // textBox6
             // 
             this.textBox6.BackColor = System.Drawing.Color.White;
-            this.textBox6.Font = new System.Drawing.Font("Arial", 12F);
-            this.textBox6.Location = new System.Drawing.Point(40, 144);
+            this.textBox6.Font = new System.Drawing.Font("Arial", 11F);
+            this.textBox6.Location = new System.Drawing.Point(40, 155);
             this.textBox6.Margin = new System.Windows.Forms.Padding(2);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(208, 26);
+            this.textBox6.Size = new System.Drawing.Size(208, 24);
             this.textBox6.TabIndex = 37;
             // 
             // label_item
             // 
             this.label_item.AutoSize = true;
             this.label_item.Font = new System.Drawing.Font("Arial", 12F);
-            this.label_item.Location = new System.Drawing.Point(37, 73);
+            this.label_item.Location = new System.Drawing.Point(37, 78);
             this.label_item.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_item.Name = "label_item";
             this.label_item.Size = new System.Drawing.Size(64, 18);
@@ -84,11 +84,11 @@
             // 
             // combo_item
             // 
-            this.combo_item.Font = new System.Drawing.Font("Arial", 12F);
+            this.combo_item.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_item.FormattingEnabled = true;
-            this.combo_item.Location = new System.Drawing.Point(40, 94);
+            this.combo_item.Location = new System.Drawing.Point(40, 99);
             this.combo_item.Name = "combo_item";
-            this.combo_item.Size = new System.Drawing.Size(208, 26);
+            this.combo_item.Size = new System.Drawing.Size(208, 25);
             this.combo_item.TabIndex = 35;
             // 
             // label3
@@ -104,11 +104,11 @@
             // 
             // combo_type
             // 
-            this.combo_type.Font = new System.Drawing.Font("Arial", 12F);
+            this.combo_type.Font = new System.Drawing.Font("Arial", 11F);
             this.combo_type.FormattingEnabled = true;
             this.combo_type.Location = new System.Drawing.Point(40, 44);
             this.combo_type.Name = "combo_type";
-            this.combo_type.Size = new System.Drawing.Size(208, 26);
+            this.combo_type.Size = new System.Drawing.Size(208, 25);
             this.combo_type.TabIndex = 33;
             this.combo_type.SelectedValueChanged += new System.EventHandler(this.combo_type_SelectedValueChanged);
             // 

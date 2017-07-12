@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button_export = new System.Windows.Forms.Button();
             this.dataGridView_movements = new System.Windows.Forms.DataGridView();
+            this.label_todaydate = new System.Windows.Forms.Label();
+            this.button_pdf = new System.Windows.Forms.Button();
             this.Producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoMov = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,40 +44,40 @@
             this.nombAlm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Item = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cant = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label_todaydate = new System.Windows.Forms.Label();
-            this.button_pdf = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_movements)).BeginInit();
             this.SuspendLayout();
             // 
             // button_export
             // 
             this.button_export.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_export.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_export.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_export.ForeColor = System.Drawing.Color.White;
-            this.button_export.Location = new System.Drawing.Point(350, 435);
+            this.button_export.Location = new System.Drawing.Point(319, 403);
             this.button_export.Margin = new System.Windows.Forms.Padding(2);
             this.button_export.Name = "button_export";
             this.button_export.Size = new System.Drawing.Size(187, 41);
             this.button_export.TabIndex = 18;
-            this.button_export.Text = "Exportar a Excel";
+            this.button_export.Text = "🗀 Exportar a Excel";
             this.button_export.UseVisualStyleBackColor = false;
             this.button_export.Click += new System.EventHandler(this.button_export_Click);
             // 
             // dataGridView_movements
             // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView_movements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView_movements.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView_movements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView_movements.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_movements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_movements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView_movements.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_movements.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_movements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView_movements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_movements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Producto,
@@ -85,82 +87,36 @@
             this.nombAlm,
             this.Item,
             this.cant});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_movements.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView_movements.Location = new System.Drawing.Point(61, 91);
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_movements.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridView_movements.Location = new System.Drawing.Point(22, 84);
             this.dataGridView_movements.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.dataGridView_movements.Name = "dataGridView_movements";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_movements.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView_movements.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_movements.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView_movements.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView_movements.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView_movements.Size = new System.Drawing.Size(986, 302);
             this.dataGridView_movements.TabIndex = 25;
-            // 
-            // Producto
-            // 
-            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Producto.FillWeight = 568.528F;
-            this.Producto.HeaderText = "Fecha";
-            this.Producto.Name = "Producto";
-            this.Producto.ReadOnly = true;
-            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Producto.Width = 200;
-            // 
-            // idMov
-            // 
-            this.idMov.FillWeight = 21.912F;
-            this.idMov.HeaderText = "ID Movimiento";
-            this.idMov.Name = "idMov";
-            // 
-            // TipoMov
-            // 
-            this.TipoMov.FillWeight = 21.912F;
-            this.TipoMov.HeaderText = "Tipo de Movimiento";
-            this.TipoMov.Name = "TipoMov";
-            // 
-            // Reason
-            // 
-            this.Reason.FillWeight = 21.912F;
-            this.Reason.HeaderText = "Razón";
-            this.Reason.Name = "Reason";
-            // 
-            // nombAlm
-            // 
-            this.nombAlm.FillWeight = 21.912F;
-            this.nombAlm.HeaderText = "Almacén";
-            this.nombAlm.Name = "nombAlm";
-            // 
-            // Item
-            // 
-            this.Item.FillWeight = 21.912F;
-            this.Item.HeaderText = "Item";
-            this.Item.Name = "Item";
-            // 
-            // cant
-            // 
-            this.cant.FillWeight = 21.912F;
-            this.cant.HeaderText = "Cantidad";
-            this.cant.Name = "cant";
             // 
             // label_todaydate
             // 
             this.label_todaydate.AutoSize = true;
             this.label_todaydate.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_todaydate.Location = new System.Drawing.Point(954, 9);
+            this.label_todaydate.Location = new System.Drawing.Point(916, 45);
             this.label_todaydate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_todaydate.Name = "label_todaydate";
             this.label_todaydate.Size = new System.Drawing.Size(0, 18);
@@ -169,23 +125,89 @@
             // button_pdf
             // 
             this.button_pdf.BackColor = System.Drawing.Color.SteelBlue;
-            this.button_pdf.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_pdf.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_pdf.ForeColor = System.Drawing.Color.White;
-            this.button_pdf.Location = new System.Drawing.Point(556, 435);
+            this.button_pdf.Location = new System.Drawing.Point(523, 403);
             this.button_pdf.Margin = new System.Windows.Forms.Padding(2);
             this.button_pdf.Name = "button_pdf";
             this.button_pdf.Size = new System.Drawing.Size(187, 41);
             this.button_pdf.TabIndex = 40;
-            this.button_pdf.Text = "Exportar a PDF";
+            this.button_pdf.Text = "🗀 Exportar a PDF";
             this.button_pdf.UseVisualStyleBackColor = false;
             this.button_pdf.Click += new System.EventHandler(this.button_pdf_Click);
+            // 
+            // Producto
+            // 
+            this.Producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Producto.HeaderText = "Fecha";
+            this.Producto.Name = "Producto";
+            this.Producto.ReadOnly = true;
+            this.Producto.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // idMov
+            // 
+            this.idMov.FillWeight = 158.1869F;
+            this.idMov.HeaderText = "ID Movimiento";
+            this.idMov.Name = "idMov";
+            // 
+            // TipoMov
+            // 
+            this.TipoMov.FillWeight = 158.6413F;
+            this.TipoMov.HeaderText = "Tipo de Movimiento";
+            this.TipoMov.Name = "TipoMov";
+            // 
+            // Reason
+            // 
+            this.Reason.FillWeight = 259.9847F;
+            this.Reason.HeaderText = "Razón";
+            this.Reason.Name = "Reason";
+            // 
+            // nombAlm
+            // 
+            this.nombAlm.FillWeight = 200.8978F;
+            this.nombAlm.HeaderText = "Almacén";
+            this.nombAlm.Name = "nombAlm";
+            // 
+            // Item
+            // 
+            this.Item.FillWeight = 200.8978F;
+            this.Item.HeaderText = "Item";
+            this.Item.Name = "Item";
+            // 
+            // cant
+            // 
+            this.cant.FillWeight = 127.8978F;
+            this.cant.HeaderText = "Cantidad";
+            this.cant.Name = "cant";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(18, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 31);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Reporte Kardex";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(751, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(160, 18);
+            this.label2.TabIndex = 42;
+            this.label2.Text = "Fecha de elaboración";
             // 
             // KardexReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1091, 500);
+            this.ClientSize = new System.Drawing.Size(1027, 458);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button_pdf);
             this.Controls.Add(this.label_todaydate);
             this.Controls.Add(this.dataGridView_movements);
@@ -205,6 +227,7 @@
         private System.Windows.Forms.Button button_export;
         private System.Windows.Forms.DataGridView dataGridView_movements;
         public System.Windows.Forms.Label label_todaydate;
+        private System.Windows.Forms.Button button_pdf;
         private System.Windows.Forms.DataGridViewTextBoxColumn Producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMov;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoMov;
@@ -212,6 +235,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nombAlm;
         private System.Windows.Forms.DataGridViewTextBoxColumn Item;
         private System.Windows.Forms.DataGridViewTextBoxColumn cant;
-        private System.Windows.Forms.Button button_pdf;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

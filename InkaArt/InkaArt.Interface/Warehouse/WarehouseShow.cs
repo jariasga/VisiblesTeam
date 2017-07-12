@@ -17,7 +17,6 @@ namespace InkaArt.Interface.Warehouse
     public partial class WarehouseShow : Form
     {
         int warehouseId;
-        bool first;
         WarehouseCrud warehouseController;
         string idWarehouse;
 
@@ -25,24 +24,39 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
             warehouseId = int.Parse(id);
-            first = true;
             warehouseController = new WarehouseCrud();
             idWarehouse = id;
             RawMaterialController controlRM = new RawMaterialController();
             DataTable rmList = controlRM.getData();
-            for (int i = 0; i< rmList.Rows.Count; i++)
+            int i = 0;
+            for (i = 0; i< rmList.Rows.Count; i++)
             {
                 if(rmList.Rows[i]["status"].ToString()=="Activo")
-                    comboBox_RM.Items.Add(rmList.Rows[i]["name"]);
+                    combo_rm.Items.Add(rmList.Rows[i]["name"]);
             }
-            comboBox_RM.SelectedIndex = 1;
+            if (i > 0)
+            {
+                combo_rm.SelectedIndex = 1;
+            }
+            else
+            {
+                combo_rm.SelectedIndex = -1;
+            }
             FinalProductController controlP = new FinalProductController();
             DataTable pList = controlP.getData();
-            for (int i = 0; i < pList.Rows.Count; i++)
+            for (i = 0; i < pList.Rows.Count; i++)
                 comboBox_Producto.Items.Add(pList.Rows[i]["name"]);
-            comboBox_Producto.SelectedIndex = 1;
+            if (i > 0)
+            {
+                comboBox_Producto.SelectedIndex = 1;
+            }
+            else
+            {
+                comboBox_Producto.SelectedIndex = -1;
+            }            
             fillGridRawMaterial();
             fillGridProduct();
+            enableDisableFields(false);
         }
 
         public void fillGridRawMaterial()
@@ -54,7 +68,7 @@ namespace InkaArt.Interface.Warehouse
             DataTable rmList = controlRM.getData();
 
             string name = "";
-            dataGridView_RawMaterial.Rows.Clear();
+            grid_rm.Rows.Clear();
 
             for (int i = 0; i < rmWarehouseList.Rows.Count; i++)
             {
@@ -68,7 +82,7 @@ namespace InkaArt.Interface.Warehouse
                             break;
                         }
                     }
-                    dataGridView_RawMaterial.Rows.Add(rmWarehouseList.Rows[i]["idRawMaterial"],
+                    grid_rm.Rows.Add(rmWarehouseList.Rows[i]["idRawMaterial"],
                         name,
                         rmWarehouseList.Rows[i]["currentStock"],
                         rmWarehouseList.Rows[i]["virtualStock"],
@@ -88,7 +102,7 @@ namespace InkaArt.Interface.Warehouse
             DataTable pList = controlP.getData();
 
             string name = "";
-            dataGridView_Product.Rows.Clear();
+            grid_product.Rows.Clear();
 
             for(int i = 0; i < pWarehouseList.Rows.Count; i++)
             {
@@ -103,7 +117,7 @@ namespace InkaArt.Interface.Warehouse
                             break;
                         }
                     }
-                    dataGridView_Product.Rows.Add(pWarehouseList.Rows[i]["idProduct"],
+                    grid_product.Rows.Add(pWarehouseList.Rows[i]["idProduct"],
                         name,
                         pWarehouseList.Rows[i]["currentStock"],
                         pWarehouseList.Rows[i]["virtualStock"],
@@ -130,17 +144,17 @@ namespace InkaArt.Interface.Warehouse
             }
         }
 
-        private void button_edit_Click(object sender, EventArgs e)
+        private void buttonEditSaveClick(object sender, EventArgs e)
         {
-            if (first)
+            if (!textBox_name.Enabled)
             {
-                enableFields();
+                enableDisableFields(true);
                 button_edit.Text = "🖫 Guardar";
             }
             else
             {
                 int response = warehouseController.updateWarehouse(warehouseId.ToString(), textBox_name.Text, textBox_description.Text, textBox_address.Text);
-                if (response >= 0)
+                if (updateProducts() && updateRM() && response >= 0)
                 {
                     MessageBox.Show(this, "El almacén ha sido actualizado correctamente.", "Editar almacén", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
@@ -148,22 +162,31 @@ namespace InkaArt.Interface.Warehouse
                 }
             }
         }
-
-        private void enableFields()
+        
+        private void enableDisableFields(bool enabled)
         {
-            first = false;
-            textBox_name.Enabled = true;
-            textBox_description.Enabled = true;
-            textBox_address.Enabled = true;
-            comboBox_RM.Enabled = true;
-            comboBox_Producto.Enabled = true;
-            numericUpDown1.Enabled = true;
-            numericUpDown2.Enabled = true;
-            numericUpDown3.Enabled = true;
-            numericUpDown4.Enabled = true;
+            textBox_name.Enabled = enabled;
+            textBox_description.Enabled = enabled;
+            textBox_address.Enabled = enabled;
+
+            combo_rm.Enabled = enabled;
+            num_rm_min.Enabled = enabled;
+            num_rm_max.Enabled = enabled;
+            button_add_rm.Enabled = enabled;
+            button_delete_rm.Visible = enabled;
+            grid_rm.Columns["rm_stock_min"].ReadOnly = !enabled;
+            grid_rm.Columns["rm_stock_max"].ReadOnly = !enabled;
+
+            num_product_max.Enabled = enabled;
+            num_product_min.Enabled = enabled;
+            comboBox_Producto.Enabled = enabled;
+            button_add_product.Enabled = enabled;
+            button_delete_product.Visible = enabled;
+            grid_product.Columns["pr_stock_min"].ReadOnly = !enabled;
+            grid_product.Columns["pr_stock_max"].ReadOnly = !enabled;
         }
 
-        private void buttonAdd_RawMaterial_Click(object sender, EventArgs e)
+        private void buttonAddRMClick(object sender, EventArgs e)
         {
             RawMaterialController controlRM = new RawMaterialController();
             DataTable rmList = controlRM.getData();
@@ -171,12 +194,12 @@ namespace InkaArt.Interface.Warehouse
             RawMaterialWarehouseController control = new RawMaterialWarehouseController();
             DataTable rmWarehouseList = control.getData();
 
-            string name = comboBox_RM.SelectedItem.ToString();
+            string name = combo_rm.SelectedItem.ToString();
             string idRM = "";
             //validar que no esté en la lista
             int valido = 0;
-            for (int i = 0; i < dataGridView_RawMaterial.Rows.Count; i++)
-                if (dataGridView_RawMaterial.Rows[i].Cells[1].Value.ToString() == name)
+            for (int i = 0; i < grid_rm.Rows.Count; i++)
+                if (grid_rm.Rows[i].Cells[1].Value.ToString() == name)
                     valido = 1;
 
             if (valido == 0)
@@ -192,10 +215,10 @@ namespace InkaArt.Interface.Warehouse
                 }
                 int min, max;
                 min = max = 0;
-                if (int.TryParse(numericUpDown1.Value.ToString(), out min) && int.TryParse(numericUpDown2.Value.ToString(), out max))
+                if (int.TryParse(num_rm_min.Value.ToString(), out min) && int.TryParse(num_rm_max.Value.ToString(), out max))
                 {
-                    min = int.Parse(numericUpDown1.Value.ToString());
-                    max = int.Parse(numericUpDown2.Value.ToString());
+                    min = int.Parse(num_rm_min.Value.ToString());
+                    max = int.Parse(num_rm_max.Value.ToString());
 
                     if (min >= 0 && max != 0)
                     {
@@ -203,7 +226,7 @@ namespace InkaArt.Interface.Warehouse
                         {
                             try
                             {
-                                control.insertData(idWarehouse, idRM, name, numericUpDown1.Value.ToString(), numericUpDown2.Value.ToString());
+                                control.insertData(idWarehouse, idRM, name, num_rm_min.Value.ToString(), num_rm_max.Value.ToString());
                                 MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             catch (Exception m)
@@ -231,7 +254,7 @@ namespace InkaArt.Interface.Warehouse
 
         }
 
-        private void buttonAdd_Product_Click(object sender, EventArgs e)
+        private void buttonAddProductClick(object sender, EventArgs e)
         {
             FinalProductController controlP = new FinalProductController();
             DataTable pList = controlP.getData();
@@ -243,8 +266,8 @@ namespace InkaArt.Interface.Warehouse
             string idP = "";
             //validar que no esté en la lista
             int valido = 0;
-            for (int i = 0; i < dataGridView_Product.Rows.Count; i++)
-                if (dataGridView_Product.Rows[i].Cells[1].Value.ToString() == name)
+            for (int i = 0; i < grid_product.Rows.Count; i++)
+                if (grid_product.Rows[i].Cells[1].Value.ToString() == name)
                     valido = 1;
 
 
@@ -260,11 +283,11 @@ namespace InkaArt.Interface.Warehouse
                 }
                 int min, max;
                 min = max = 0;
-                if (int.TryParse(numericUpDown3.Value.ToString(), out min) && int.TryParse(numericUpDown4.Value.ToString(), out max))
+                if (int.TryParse(num_product_max.Value.ToString(), out min) && int.TryParse(num_product_min.Value.ToString(), out max))
                 {
 
-                    min = int.Parse(numericUpDown4.Value.ToString());
-                    max = int.Parse(numericUpDown3.Value.ToString());
+                    min = int.Parse(num_product_min.Value.ToString());
+                    max = int.Parse(num_product_max.Value.ToString());
 
                     if (min >= 0 && max != 0)
                     {
@@ -272,7 +295,7 @@ namespace InkaArt.Interface.Warehouse
                         {
                             try
                             {
-                                control.insertData(idWarehouse, idP, numericUpDown4.Value.ToString(), numericUpDown3.Value.ToString());
+                                control.insertData(idWarehouse, idP, num_product_min.Value.ToString(), num_product_max.Value.ToString());
                                 MessageBox.Show("Se guardaron los cambios.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             catch (Exception m)
@@ -300,18 +323,18 @@ namespace InkaArt.Interface.Warehouse
 
         }
 
-        private void buttonDelete_RawMaterial_Click(object sender, EventArgs e)
+        private void buttonDeleteRMClick(object sender, EventArgs e)
         {
             RawMaterialWarehouseController rwWarehouseController = new RawMaterialWarehouseController();
 
-            int registros = dataGridView_RawMaterial.Rows.Count;
+            int registros = grid_rm.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                string ide = dataGridView_RawMaterial.Rows[i].Cells[6].Value.ToString();
-                string name = dataGridView_RawMaterial.Rows[i].Cells[1].Value.ToString();
-                if (Convert.ToBoolean(dataGridView_RawMaterial.Rows[i].Cells[6].Value) == true)
+                string ide = grid_rm.Rows[i].Cells[6].Value.ToString();
+                string name = grid_rm.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(grid_rm.Rows[i].Cells[6].Value) == true)
                 {
-                    string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
+                    string id = grid_rm.Rows[i].Cells[7].Value.ToString();
                     //Debug.WriteLine(id);
                     try
                     {
@@ -333,18 +356,18 @@ namespace InkaArt.Interface.Warehouse
 
         }
 
-        private void buttonDelete_Product_Click(object sender, EventArgs e)
+        private void buttonDeleteProductClick(object sender, EventArgs e)
         {
             ProductWarehouseController pWarehouseController = new ProductWarehouseController();
 
-            int registros = dataGridView_Product.Rows.Count;
+            int registros = grid_product.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                string ide = dataGridView_Product.Rows[i].Cells[6].Value.ToString();
-                string name = dataGridView_Product.Rows[i].Cells[1].Value.ToString();
-                if (Convert.ToBoolean(dataGridView_Product.Rows[i].Cells[6].Value) == true)
+                string ide = grid_product.Rows[i].Cells[6].Value.ToString();
+                string name = grid_product.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(grid_product.Rows[i].Cells[6].Value) == true)
                 {
-                    string id = dataGridView_Product.Rows[i].Cells[7].Value.ToString();
+                    string id = grid_product.Rows[i].Cells[7].Value.ToString();
                     //Debug.WriteLine(id);
                     try
                     {
@@ -360,33 +383,30 @@ namespace InkaArt.Interface.Warehouse
             MessageBox.Show("Productos eliminados", "Eliminar Producto.", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             fillGridProduct();
         }
-
-        private void button_updateProduct_Click(object sender, EventArgs e)
+        
+        private bool updateProducts()
         {
             ProductWarehouseController pWarehouseController = new ProductWarehouseController();
 
-            int registros = dataGridView_Product.Rows.Count;
+            int registros = grid_product.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                string ide = dataGridView_Product.Rows[i].Cells[6].Value.ToString();
-                string name = dataGridView_Product.Rows[i].Cells[1].Value.ToString();
-                if (Convert.ToBoolean(dataGridView_Product.Rows[i].Cells[6].Value) == true)
+                string ide = grid_product.Rows[i].Cells[6].Value.ToString();
+                string name = grid_product.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(grid_product.Rows[i].Cells[6].Value) == true)
                 {
                     int min, max;
                     min = max = 0;
                     //validacion que los valores max y min sean numeros
-                    if (int.TryParse(dataGridView_Product.Rows[i].Cells[4].Value.ToString(), out min) &&
-                        int.TryParse(dataGridView_Product.Rows[i].Cells[5].Value.ToString(), out max))
+                    if (int.TryParse(grid_product.Rows[i].Cells[4].Value.ToString(), out min) &&
+                        int.TryParse(grid_product.Rows[i].Cells[5].Value.ToString(), out max))
                     {
-                        min = int.Parse(dataGridView_Product.Rows[i].Cells[4].Value.ToString());
-                        max = int.Parse(dataGridView_Product.Rows[i].Cells[5].Value.ToString());
-
-                        if (min >=0 && max != 0)
+                        if (min >= 0 && max >= 0)
                         {
                             if (max > min)
                             {
 
-                                string id = dataGridView_Product.Rows[i].Cells[7].Value.ToString();
+                                string id = grid_product.Rows[i].Cells[7].Value.ToString();
                                 //update de valores maximos y minimos
                                 try
                                 {
@@ -400,53 +420,55 @@ namespace InkaArt.Interface.Warehouse
                                 //fillGridProduct();
                             }
                             else
+                            {
                                 MessageBox.Show("El valor máximo no puede ser menor al minimo, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                                return false;
+                            }
                         }
                         else
+                        {
                             MessageBox.Show("Los valores maximo y minimo no pueden ser cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                            return false;
+                        }
                     }
                     else
+                    {
                         MessageBox.Show("Los valores maximos o minimos a ingresar no son válidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        return false;
+                    }
                 }
             }
             fillGridProduct();
+            return true;
         }
 
-        private void button_updateRm_Click(object sender, EventArgs e)
+        private bool updateRM()
         {
             RawMaterialWarehouseController rmWarehouseController = new RawMaterialWarehouseController();
 
-            int registros = dataGridView_RawMaterial.Rows.Count;
-            int seActualizoAlguno = 0;
+            int registros = grid_rm.Rows.Count;
             for (int i = 0; i < registros; i++)
             {
-                string ide = dataGridView_RawMaterial.Rows[i].Cells[6].Value.ToString();
-                string name = dataGridView_RawMaterial.Rows[i].Cells[1].Value.ToString();
-                if (Convert.ToBoolean(dataGridView_RawMaterial.Rows[i].Cells[6].Value) == true)
+                string ide = grid_rm.Rows[i].Cells[6].Value.ToString();
+                string name = grid_rm.Rows[i].Cells[1].Value.ToString();
+                if (Convert.ToBoolean(grid_rm.Rows[i].Cells[6].Value) == true)
                 {
                     int min, max;
                     min = max = 0;
                     //validacion que los valores max y min sean numeros
-                    if (int.TryParse(dataGridView_RawMaterial.Rows[i].Cells[4].Value.ToString(), out min) &&
-                        int.TryParse(dataGridView_RawMaterial.Rows[i].Cells[5].Value.ToString(), out max))
+                    if (int.TryParse(grid_rm.Rows[i].Cells[4].Value.ToString(), out min) &&
+                        int.TryParse(grid_rm.Rows[i].Cells[5].Value.ToString(), out max))
                     {
-                        min = int.Parse(dataGridView_RawMaterial.Rows[i].Cells[4].Value.ToString());
-                        max = int.Parse(dataGridView_RawMaterial.Rows[i].Cells[5].Value.ToString());
-
                         if (min >= 0 && max != 0)
                         {
                             if (max > min)
                             {
 
-                                string id = dataGridView_RawMaterial.Rows[i].Cells[7].Value.ToString();
+                                string id = grid_rm.Rows[i].Cells[7].Value.ToString();
                                 //update de valores maximos y minimos
                                 try
                                 {
                                     rmWarehouseController.updateMinMax(id, min, max);
-                                    seActualizoAlguno = 1;
                                     //MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                                 catch (Exception m)
@@ -456,21 +478,31 @@ namespace InkaArt.Interface.Warehouse
                                 //fillGridRawMaterial();
                             }
                             else
+                            {
                                 MessageBox.Show("El valor máximo no puede ser menor al minimo, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return false;
+                            }
 
                         }
                         else
+                        {
                             MessageBox.Show("Los valores maximo y minimo no pueden ser cero, por favor ingrese un nuevo valor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
 
                     }
                     else
+                    {
                         MessageBox.Show("Los valores maximos o minimos a ingresar no son válidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        return false;
+                    }
                 }
             }
-            if(seActualizoAlguno==1)
-                MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (seActualizoAlguno == 1)
+                //MessageBox.Show("Se actualizaron los valores.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             fillGridRawMaterial();
+            return true;
         }
+
     }
 }

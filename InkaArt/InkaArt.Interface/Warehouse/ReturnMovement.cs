@@ -15,11 +15,11 @@ namespace InkaArt.Interface.Warehouse
 {
     public partial class ReturnMovement : Form
     {
-        int id_warehouse;
-        DataTable devolutions;
-        DataTable devolution_lines;
-        int id_devolution;
-
+        int warehouse;
+        DataTable table_devolutions;
+        DataTable table_devolution;
+        DataTable table_devolution_detail;
+        int devolution;
 
         ProductWarehouseController control_pwh = new ProductWarehouseController();
         StockDocumentController control_stock = new StockDocumentController();
@@ -30,11 +30,11 @@ namespace InkaArt.Interface.Warehouse
         {
             InitializeComponent();
 
-            int.TryParse(idWarehouse, out id_warehouse);
-            grid_devolution.AutoGenerateColumns = false;
-            grid_devolution.Rows.Clear();
-            grid_dev_detail.AutoGenerateColumns = false;
-            grid_dev_detail.Rows.Clear();
+            if (!int.TryParse(idWarehouse, out warehouse))
+                this.Close();
+
+            grid_devolution.AutoGenerateColumns = false;            
+            grid_devolution_detail.AutoGenerateColumns = false;
             fillCombo();
         }        
 
@@ -42,43 +42,32 @@ namespace InkaArt.Interface.Warehouse
 
         private void fillCombo()
         {
-            OrderController control = new OrderController();
-
-            devolutions = control.GetDevolutions();            
-            combobox_dev.DataSource = devolutions;
+            table_devolutions = control_order.GetDevolutions();            
+            combobox_dev.DataSource = table_devolutions;
             combobox_dev.ValueMember = "idOrder";
         }
-
-        private void fillDetailGrid()
+        private DataTable filter_tableDevolution()
         {
-            OrderController order_controller = new OrderController();
-            devolution_lines = order_controller.GetDevolutionLines(id_devolution);
-            grid_dev_detail.DataSource = devolution_lines;
+            DataRow[] rows;
+            DataTable auxiliarGrid= control_order.GetDevolutionLines(this.devolution, this.warehouse);
+            rows = auxiliarGrid.Select("lineStatus NOT LIKE 'devuelto'");
+            if (rows.Any()) auxiliarGrid = rows.CopyToDataTable();
+            else auxiliarGrid.Rows.Clear();
+            return auxiliarGrid;
         }
-
-        private void fillDevolutionGrid()
+        private void fillGrids()
         {
-            grid_devolution.DataSource = devolution_lines;
+            //table_devolution = control_order.GetDevolutionLines(this.devolution, this.warehouse);
+            table_devolution_detail = control_order.GetDevolutionDetail(this.devolution);
 
-            foreach (DataGridViewRow row in grid_devolution.Rows)
-            {
-                if (row.Cells[idWarehouse.Index].Value == null || row.Cells[product_stock.Index].Value == null)
-                    continue;
+            table_devolution=filter_tableDevolution();
 
-                if (row.Cells[idWarehouse.Index].Value.ToString() != id_warehouse.ToString())
-                {
-                    grid_devolution.Rows.Remove(row);
-                }
-                else if((int) row.Cells[product_stock.Index].Value < 0)
-                {
-                    row.Cells[product_stock.Index].Value = row.Cells[total_quantity.Index].Value;
-                }
-            }
-
+            grid_devolution_detail.DataSource = table_devolution_detail;
+            grid_devolution.DataSource = table_devolution;
             if (grid_devolution.Rows.Count <= 0)
                 MessageBox.Show("No hay productos que este almacén pueda devolver para la devolución ingresada.");
         }
-
+        
         // eventos
 
         private void buttonCancelClick(object sender, EventArgs e)
@@ -88,48 +77,43 @@ namespace InkaArt.Interface.Warehouse
 
         private void buttonSaveClick(object sender, EventArgs e)
         {
-            int id, quantity, max, current, pending, stock_id;
-            int num_rows = 0;
+            int product, line, quantity, max, current, pending, stock_id;
             List<int> id_products = new List<int>();
             List<int> quantities = new List<int>();
 
             foreach (DataGridViewRow row in grid_devolution.Rows)
             {
-                num_rows++;
-                if (!Convert.ToBoolean(row.Cells[update.Index].Value) || row.Cells[to_return.Index].Value == null)
+                if (row.Cells[to_return.Index].Value == null || int.Parse(row.Cells[to_return.Index].Value.ToString()) <= 0)
                     continue;
 
-                id = Convert.ToInt32(row.Cells[id_product.Index].Value);
-                max = Convert.ToInt32(row.Cells[max_stock.Index].Value);
-                current = Convert.ToInt32(row.Cells[current_stock.Index].Value);
-                quantity = Convert.ToInt32(row.Cells[to_return.Index].Value);
-                stock_id = (int) row.Cells[id_stock.Index].Value;
-                pending = Convert.ToInt32(row.Cells[product_stock.Index].Value);
-                pending = pending < 0 ? 0 : pending;                          
+                product     = (int) row.Cells[id_product.Index].Value;
+                line        = (int) row.Cells[id_line.Index].Value;
+                max         = (int) row.Cells[max_stock.Index].Value;
+                current     = (int) row.Cells[current_stock.Index].Value;
+                quantity    = int.Parse(row.Cells[to_return.Index].Value.ToString());
+                stock_id    = (int) row.Cells[id_stock.Index].Value;
+                pending     = (int) row.Cells[product_stock.Index].Value;
 
-                if (quantity <= Math.Min(max, pending))
-                {
-                    // tabla Product-Warehouse: Aumentar stock logico y fisico
-                    control_pwh.updateOnlyPhStock(id_warehouse.ToString(), id.ToString(), current + quantity);
-                    // tabla StockDocument: Reducir por devolver
-                    control_stock.updateInsertDevolution(stock_id, id_devolution, id, quantity, pending);
-                    // tabla Movement: Insertar                    
-                    control_mov.insertMovDev(id_devolution, 2, id_warehouse, 8, 8, id.ToString(), 1, quantity);
+                // tabla LineItem
+                control_order.updateDevolutionLine(line, pending, quantity);
+                // tabla Product-Warehouse: Aumentar stock logico y fisico
+                control_pwh.updateWarehouseStock(warehouse.ToString(), product.ToString(), quantity);
+                // tabla StockDocument: Reducir por devolver
+                control_stock.updateInsertDevolution(stock_id, devolution, product, quantity, pending);
+                // tabla Movement: Insertar                    
+                control_mov.insertMovDev(devolution, 2, warehouse, 8, 8, product.ToString(), 1, quantity);
 
-                    id_products.Add(id);
-                    quantities.Add(quantity);
-                }
-                else
-                    MessageBox.Show("Error en la fila " + num_rows + ": Para el producto:" + row.Cells[name.Index].Value.ToString() + ". Solo se puede quitar " + Math.Min(max, pending) + " items.");
+                id_products.Add(product);
+                quantities.Add(quantity);
             }
 
             if (id_products.Count > 0)
             {
                 MessageBox.Show("Se actualizaron: " + id_products.Count + " Registros.");                
-                fillDevolutionGrid();
-                id_products.Add(0);
-                quantities.Add(0);                
-                control_order.AddSaleDocumentW(id_devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
+                fillGrids();
+                //id_products.Add(0);
+                //quantities.Add(0);                
+                //control_order.AddSaleDocumentW(devolution, id_products.ToArray(), quantities.ToArray(), 1);                                
                 updateDevolution();
 
                 this.Close();
@@ -142,7 +126,10 @@ namespace InkaArt.Interface.Warehouse
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0 || grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value == null)
                 return;
-            if(!validatePositiveInt(grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value.ToString()))
+
+            string quantity = grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value.ToString();
+            int pending = int.Parse(grid_devolution.Rows[e.RowIndex].Cells[product_stock.Index].Value.ToString());
+            if (!validateQuantity(e.RowIndex + 1, quantity, pending))
                 grid_devolution.Rows[e.RowIndex].Cells[to_return.Index].Value = null;
         }
         
@@ -151,41 +138,45 @@ namespace InkaArt.Interface.Warehouse
             DataRow devolution = ((DataRowView) combobox_dev.SelectedItem).Row;
             date_dev.Value = DateTime.Parse(devolution["deliveryDate"].ToString()); // formato
             textbox_client.Text = devolution["name"].ToString();
-            id_devolution = int.Parse(devolution["idOrder"].ToString()); ;
-
-            fillDetailGrid();
-            fillDevolutionGrid();
+            this.devolution = int.Parse(devolution["idOrder"].ToString());
+            fillGrids();
         }
 
         // otros 
                 
         private void updateDevolution()
-        {       
-            bool completed = true;
+        {   
+            DataRow[] rows = table_devolution.Select("lineStatus <> 'devuelto'");
+            int pending = rows.Sum(r => r.Field<int>("product_stock"));
+            control_order.updateDevolution(devolution, pending);
 
-            foreach(DataGridViewRow row in grid_devolution.Rows)
-            {
-                if (row.Cells[product_stock.Index].Value == null)
-                    continue;
+            //bool completed = true;
+            //grid_devolution.Columns[product_stock.Index].
 
-                completed &= (int)row.Cells[product_stock.Index].Value == 0;
-                if ((int) row.Cells[product_stock.Index].Value == 0)
-                    control_order.updateDevolutionLine((int)row.Cells[id_line.Index].Value);
-            }
-            if (completed)
-                control_order.updateDevolution(id_devolution);
+            //foreach(DataGridViewRow row in grid_devolution.Rows)
+            //{
+            //    if (row.Cells[product_stock.Index].Value == null)
+            //        continue;
+            //    completed &= (int)row.Cells[product_stock.Index].Value == 0;
+            //}
+            //if (completed)
+            //    control_order.updateDevolution(devolution);
         }
 
-        private bool validatePositiveInt(string str_value)
+        private bool validateQuantity(int row, string str_value, int pending)
         {
             int int_value;
 
             if (!int.TryParse(str_value, out int_value))
-                MessageBox.Show("Favor de ingresar un valor entero");
+                MessageBox.Show("Fila " + row + ": Favor de ingresar un valor entero");
             else if (int_value <= 0)
-                MessageBox.Show("Favor de ingresar un valor positivo mayor a cero");
+                MessageBox.Show("Fila " + row + ": Favor de ingresar un valor positivo");
+            else if (int_value > pending)
+                MessageBox.Show("Fila " + row + ": Favor de ingresar una cantidad menor o igual a la pendiente de devolución");
+            else
+                return true;
 
-            return int_value > 0;
+            return false;
         }
 
     }

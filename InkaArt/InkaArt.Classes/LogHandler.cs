@@ -13,9 +13,11 @@ namespace InkaArt.Classes
         {
             try
             {
-                StreamWriter stream = new StreamWriter("Log.txt", true);
+                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter stream = new StreamWriter(file);
                 stream.Write(text);
                 stream.Close();
+                file.Close();
                 return true;
             }
             catch (Exception)
@@ -28,9 +30,11 @@ namespace InkaArt.Classes
         {
             try
             {
-                StreamWriter stream = new StreamWriter("Log.txt", true);
+                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter stream = new StreamWriter(file);
                 stream.Write(text, parameters);
                 stream.Close();
+                file.Close();
                 return true;
             }
             catch (Exception)
@@ -43,9 +47,11 @@ namespace InkaArt.Classes
         {
             try
             {
-                StreamWriter stream = new StreamWriter("Log.txt", true);
+                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter stream = new StreamWriter(file);
                 stream.WriteLine();
                 stream.Close();
+                file.Close();
                 return true;
             }
             catch (Exception)
@@ -58,9 +64,11 @@ namespace InkaArt.Classes
         {
             try
             {
-                StreamWriter stream = new StreamWriter("Log.txt", true);
+                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter stream = new StreamWriter(file);
                 stream.WriteLine(text);
                 stream.Close();
+                file.Close();
                 return true;
             }
             catch (Exception)
@@ -73,9 +81,11 @@ namespace InkaArt.Classes
         {
             try
             {
-                StreamWriter stream = new StreamWriter("Log.txt", true);
+                FileStream file = new FileStream("Log.txt", FileMode.Append, FileAccess.Write, FileShare.Write);
+                StreamWriter stream = new StreamWriter(file);
                 stream.WriteLine(text, parameters);
                 stream.Close();
+                file.Close();
                 return true;
             }
             catch (Exception)

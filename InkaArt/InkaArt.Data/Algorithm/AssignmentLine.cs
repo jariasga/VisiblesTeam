@@ -1,5 +1,6 @@
 ﻿using InkaArt.Data.Algorithm;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,30 +108,22 @@ namespace InkaArt.Data.Algorithm
             this.produced = produced;
         }
 
-        public bool Equals(AssignmentLine other)
+        public int Insert(NpgsqlConnection connection, int id_asignment)
         {
-            if (this == null || other == null || this.worker == null || other.worker == null || this.job == null || other.job == null
-                || this.recipe == null || other.recipe == null) return false;
-            
-            return (this.worker.ID == other.worker.ID && this.job.ID == other.job.ID && this.recipe.ID == other.recipe.ID &&
-                this.miniturn_start == other.miniturn_start && this.miniturns_used == other.miniturns_used
-                && this.produced == other.produced);
-        }
+            string command_line = "INSERT INTO inkaart.\"AssignmentLine\" (id_assignment, id_worker, id_job, id_recipe, produced, " + 
+                                  "miniturn_start, miniturns_used) ";
+            command_line += "VALUES (:id_assignment, :id_worker, :id_job, :id_recipe, :produced, :miniturn_start, :miniturns_used)";
+            NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
 
-        public void save(int id_assignment, NpgsqlConnection connection)
-        {
-            NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"AssignmentLine\" " +
-                "(id_assignment, id_worker, id_job, id_recipe, produced, total_miniturns) " +
-                "values (:id_assignment, :id_worker, :id_job, :id_recipe, :produced, :total_miniturns)", connection);
+            command.Parameters.AddWithValue("id_assignment", NpgsqlDbType.Integer, id_asignment);
+            command.Parameters.AddWithValue("id_worker", NpgsqlDbType.Integer, this.worker.ID);
+            command.Parameters.AddWithValue("id_job", NpgsqlDbType.Integer, this.job.ID);
+            command.Parameters.AddWithValue("id_recipe", NpgsqlDbType.Integer, this.recipe.ID);
+            command.Parameters.AddWithValue("produced", NpgsqlDbType.Integer, this.produced);
+            command.Parameters.AddWithValue("miniturn_start", NpgsqlDbType.Integer, this.miniturn_start);
+            command.Parameters.AddWithValue("miniturns_used", NpgsqlDbType.Integer, this.miniturns_used);
 
-            command.Parameters.Add(new NpgsqlParameter("id_assignment", id_assignment));
-            command.Parameters.Add(new NpgsqlParameter("id_worker", this.Worker.ID));
-            command.Parameters.Add(new NpgsqlParameter("id_job", this.Job.ID));
-            command.Parameters.Add(new NpgsqlParameter("id_recipe", this.Recipe.ID));
-            command.Parameters.Add(new NpgsqlParameter("produced", this.Produced));
-            command.Parameters.Add(new NpgsqlParameter("total_miniturns", this.MiniturnsUsed));
-
-            command.ExecuteNonQuery();
+            return command.ExecuteNonQuery();
         }
         
         /* Funciones auxiliares */

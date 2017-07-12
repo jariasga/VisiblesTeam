@@ -43,7 +43,7 @@ namespace InkaArt.Business.Algorithm
             //Parámetros de GRASP
             this.NumberOfIterations = 100;
             this.Alpha = 0.2;
-            this.LimitTime = (Simulation.LimitTime * 2) / (5 * simulation.Days); //Tiempo: 120 segundos / # de días
+            this.LimitTime = (Simulation.LimitTime * 5) / (5 * simulation.Days); //Tiempo: 300 segundos (antes 120 segundos / # de días)
 
             //Líneas de ordenes original
             this.original_orders = simulation.SelectedOrders.Orders;
@@ -61,15 +61,22 @@ namespace InkaArt.Business.Algorithm
 
             for (int iteration = 0; this.HasTime(ref elapsed_time, day) && iteration < this.NumberOfIterations; iteration++)
             {
-                //Crear una COPIA PROFUNDA de la lista de órdenes
+                //Crear una COPIA PROFUNDA ordenada de la lista de órdenes
                 List<Order> orders = new List<Order>();
                 for (int i = 0; i < original_orders.Count; i++) orders.Add(new Order(simulation.SelectedOrders[i]));
                 orders = orders.OrderBy(order => order.DeliveryDate).ThenBy(order => order.Client.Priority).ToList();
 
+                for (int i = 0; i < orders.Count; i++)
+                {
+                    LogHandler.WriteLine("Orden de compra #{0}: ID={1}, Descripcion={2}", i + 1, orders[i].ID, orders[i].Description);
+                    for (int j = 0; j < orders[i].NumberOfLineItems; j++)
+                        LogHandler.WriteLine("- Linea de orden #{0}-{1}: {2}", i + 1, j + 1, orders[i][j].ToString());
+                }
+
                 //Obtener el índice de órdenes con el cual trabajar y la lista de líneas de orden para asignar
                 if (orders.Count <= 0)
                 {
-                    LogHandler.WriteLine("¡Acabamos las ordenes antes de terminarse el algoritmo! :D");
+                    //LogHandler.WriteLine("¡Acabamos las ordenes antes de terminarse el algoritmo! :D");
                     return day_assignments.GetBestAssignment(ref this.original_orders);
                 }
 
@@ -82,7 +89,7 @@ namespace InkaArt.Business.Algorithm
                 Assignment assignment = this.ExecuteGraspConstructionPhase(day, iteration, orders, ref elapsed_time);
 
                 //Si se logró minimizar la función objetivo, se reemplaza la mejor asignación del día por la nueva asignación generada
-                if (this.HasTime(ref elapsed_time, day)) day_assignments.AddAssignment(assignment, orders);
+                day_assignments.AddAssignment(assignment, orders);
             }
 
             return day_assignments.GetBestAssignment(ref this.original_orders);
@@ -106,7 +113,7 @@ namespace InkaArt.Business.Algorithm
 
             for (int construction = 1; this.HasTime(ref elapsed_time, day) && orders.Count > 0 && candidates.Count > 0; construction++)
             {
-                LogHandler.WriteLine("Iteración GRASP #{0}, current_product = {1}", construction, current_product != null);
+                //LogHandler.WriteLine("Iteración GRASP #{0}, current_product = {1}", construction, current_product != null);
 
                 //Actualizar la función de costo para los candidatos restantes.
                 for (int i = 0; i < candidates.Count; i++)
@@ -115,7 +122,7 @@ namespace InkaArt.Business.Algorithm
                     candidates[i].NextCostValue(assignment.ObjectiveFunction, product_objective_function, construction);
                 }
 
-                PrintIndexes(candidates, "Inicio de iteración de construcción #" + construction);
+                //PrintIndexes(candidates, "Inicio de iteración de construcción #" + construction);
 
                 //Obtener una lista de los trabajadores más eficientes.
                 List<Index> rcl = this.GenerateRestrictedCandidateList(orders);
@@ -159,8 +166,8 @@ namespace InkaArt.Business.Algorithm
                 }
 
                 //Revisar estado de la matriz
-                PrintAssignmentMatrix(assignment, "Estado de la matriz al final de la iteración de construcción " + construction);
-                PrintCurrentProduct(current_product, "Estado del producto actual al final de la iteración de construcción " + construction);
+                //PrintAssignmentMatrix(assignment, "Estado de la matriz al final de la iteración de construcción " + construction);
+                //PrintCurrentProduct(current_product, "Estado del producto actual al final de la iteración de construcción " + construction);
             }
 
             return assignment;
@@ -195,7 +202,7 @@ namespace InkaArt.Business.Algorithm
 
             if (rcl.Count <= 0) return null; //No se encontraron candidatos
 
-            PrintIndexes(rcl, "RCL antes del filtrado");
+            //PrintIndexes(rcl, "RCL antes del filtrado");
 
             //Calcular el máximo y el mínimo costo de los candidatos que podrían pertenecer al RCL
             double min = double.MaxValue;
@@ -206,14 +213,14 @@ namespace InkaArt.Business.Algorithm
                 if (candidates[i].CostValue > max) max = candidates[i].CostValue;
             }
             double max_rcl = min + Alpha * (max - min);
-            LogHandler.WriteLine("Minimo = {0}, Maximo = {1}, Rango = [{0}, {2}]", min, max, max_rcl);
-            LogHandler.WriteLine();
+            //LogHandler.WriteLine("Minimo = {0}, Maximo = {1}, Rango = [{0}, {2}]", min, max, max_rcl);
+            //LogHandler.WriteLine();
 
             //Obtener el rango del RCL y quitar los índices del RCL que no estén en el rango
             for (int i = rcl.Count - 1; i >= 0; i--)
                 if (candidates[i].CostValue < min || candidates[i].CostValue > max_rcl) rcl.RemoveAt(i);
 
-            PrintIndexes(rcl, "RCL despues del filtrado");
+            //PrintIndexes(rcl, "RCL despues del filtrado");
 
             if (rcl.Count <= 0) return null; //No se encontraron candidatos
             return rcl;
@@ -228,13 +235,13 @@ namespace InkaArt.Business.Algorithm
 
         private bool RemoveOrderLines(List<Order> orders, List<Index> current_deleted_indexes, ref int construction)
         {
-            LogHandler.WriteLine("RCL salió nulo, actualizando líneas de orden");
+            //LogHandler.WriteLine("RCL salió nulo, actualizando líneas de orden");
 
             //Si no se pudo encontrar ningun candidato cuya receta esté en alguna línea de orden, pasamos a la siguiente orden.
             if (this.current_product == null)
             {
-                LogHandler.WriteLine("RCL: No se pudo encontrar ningun candidato cuya receta esté en alguna línea de orden,");
-                LogHandler.WriteLine("así que pasamos al siguiente.");
+                //LogHandler.WriteLine("RCL: No se pudo encontrar ningun candidato cuya receta esté en alguna línea de orden,");
+                //LogHandler.WriteLine("así que pasamos al siguiente.");
                 orders.RemoveAt(0); //Pasar a la siguiente orden
                 construction--; //Continuar con el mismo número de construcción
             }
@@ -242,8 +249,8 @@ namespace InkaArt.Business.Algorithm
             //quitamos la línea de orden con la receta.
             else
             {
-                LogHandler.WriteLine("RCL: Estábamos preparando un producto y a la mitad de prepararlo nos quedamos sin candidatos.");
-                LogHandler.WriteLine("Entonces, se quitará la línea de orden con la receta.");
+                //LogHandler.WriteLine("RCL: Estábamos preparando un producto y a la mitad de prepararlo nos quedamos sin candidatos.");
+                //LogHandler.WriteLine("Entonces, se quitará la línea de orden con la receta.");
                 for (int i = orders[0].NumberOfLineItems - 1; i >= 0; i--)
                     if (orders[0][i].Recipe.ID == current_product.CurrentRecipe.ID) orders[0].RemoveLineItem(i);
                 //Deshacer el producto y actualizar el número de construcción
@@ -260,8 +267,8 @@ namespace InkaArt.Business.Algorithm
             //Escoger un candidato al azar.
             int random_index = Randomizer.NextNumber(0, rcl.Count - 1);
             this.chosen_candidate = rcl[random_index];
-            LogHandler.WriteLine("Se está intentando escoger el índice {0};{1}", random_index + 1, chosen_candidate.ToString());
-            LogHandler.WriteLine("GetNextAssignmentLine();worker_index;simulation;miniturn_start;miniturns_used;products");
+            //LogHandler.WriteLine("Se está intentando escoger el índice {0};{1}", random_index + 1, chosen_candidate.ToString());
+            //LogHandler.WriteLine("GetNextAssignmentLine();worker_index;simulation;miniturn_start;miniturns_used;products");
 
             //Intentar incorporar al candidato seleccionado en la lista temporal
             int worker_index = simulation.SelectedWorkers.GetIndex(chosen_candidate.Worker.ID); //Índice del trabajador
@@ -271,20 +278,18 @@ namespace InkaArt.Business.Algorithm
             while (miniturn_start > 0 && assignment[worker_index, miniturn_start - 1] == null) miniturn_start--;
 
             
-            LogHandler.Write("Valores;{0};Total={1},Length={2};{3}", worker_index, simulation.TotalMiniturns, Simulation.MiniturnLength,
-                miniturn_start);
+            //LogHandler.Write("Valores;{0};Total={1},Length={2};{3}", worker_index, simulation.TotalMiniturns, Simulation.MiniturnLength, miniturn_start);
 
             if (miniturn_start >= simulation.TotalMiniturns) return null;
 
             AssignmentLine assignment_line = new AssignmentLine(chosen_candidate, miniturn_start, Simulation.MiniturnLength,
                 simulation.TotalMiniturns);
 
-            LogHandler.WriteLine(";{0};{0}*{1}/{2:0.0000}={3:0.0000}", assignment_line.MiniturnsUsed, Simulation.MiniturnLength,
-                assignment_line.AverageTime, assignment_line.Produced);
+            //LogHandler.WriteLine(";{0};{0}*{1}/{2:0.0000}={3:0.0000}", assignment_line.MiniturnsUsed, Simulation.MiniturnLength, assignment_line.AverageTime, assignment_line.Produced);
             
             if (assignment_line.Produced <= 0) return null;
-            LogHandler.WriteLine("Aceptado!");
-            LogHandler.WriteLine();
+            //LogHandler.WriteLine("Aceptado!");
+            //LogHandler.WriteLine();
 
             return assignment_line;
         }
@@ -324,42 +329,45 @@ namespace InkaArt.Business.Algorithm
 
         private bool AddAssignmentLines(Assignment assignment, ProcessTuple[] remaining_processes, List<Order> orders)
         {
-            LogHandler.WriteLine("Función AddAssignmentLines():");
-            LogHandler.WriteLine("- La linea de orden escogida es orders[0][{1}] = {2}", order_line_index, orders[0][order_line_index].ToString());
+            //LogHandler.WriteLine("Función AddAssignmentLines():");
+            //LogHandler.WriteLine("- La linea de orden escogida es orders[0][{1}] = {2}", order_line_index, orders[0][order_line_index].ToString());
 
             int quantity_needed = orders[0][order_line_index].Quantity - orders[0][order_line_index].Produced;
-            LogHandler.WriteLine("- Esta linea de orden necesita que se fabriquen {0} productos.", quantity_needed);
+            //LogHandler.WriteLine("- Esta linea de orden necesita que se fabriquen {0} productos.", quantity_needed);
             
-            Grasp.PrintCurrentProduct(current_product, "Estado inicial de las asignaciones temporales del producto escogido");
-            LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
+            //Grasp.PrintCurrentProduct(current_product, "Estado inicial de las asignaciones temporales del producto escogido");
+            //LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
 
             //Recalcular los tiempos de proceso (inicio de miniturno y total de miniturnos)
             quantity_needed = current_product.GetLowestQuantity(quantity_needed, simulation.TotalMiniturns);
-            LogHandler.WriteLine("- Con las asignaciones seleccionadas, se fabricarán {0} productos.", quantity_needed);
+            //LogHandler.WriteLine("- Con las asignaciones seleccionadas, se fabricarán {0} productos.", quantity_needed);
 
             if (quantity_needed <= 0) return false;
 
-            PrintCurrentProduct(current_product, "Producto actual justo antes de la asignación a la matriz de asignaciones");
+            //PrintCurrentProduct(current_product, "Producto actual justo antes de la asignación a la matriz de asignaciones");
 
             //Colocar en la matriz las líneas de asignación.
             for (int i = 0; i < current_product.NumberOfTuples; i++)
             {
                 int worker_index = simulation.SelectedWorkers.GetIndex(current_product[i].Worker.ID);
                 for (int j = 0; j < current_product[i].MiniturnsUsed; j++)
-                    assignment[worker_index, current_product[i].MiniturnStart + j] = current_product[i];
+                {
+                    int miniturn_index = current_product[i].MiniturnStart + j;
+                    if (miniturn_index < simulation.TotalMiniturns) assignment[worker_index, miniturn_index] = current_product[i];
+                }
             }
             //Actualizar la asignación: función objetivo y cantidad producida en el día
-            LogHandler.WriteLine("Función objetivo antigua: {0}", assignment.ObjectiveFunction);
+            //LogHandler.WriteLine("Función objetivo antigua: {0}", assignment.ObjectiveFunction);
             assignment.ObjectiveFunction += current_product.ObjectiveFunction;
-            LogHandler.WriteLine("Función objetivo actual: {0}", assignment.ObjectiveFunction);
+            //LogHandler.WriteLine("Función objetivo actual: {0}", assignment.ObjectiveFunction);
             if (current_product.CurrentRecipe.Product == 1) assignment.HuacosProduced += quantity_needed;
             if (current_product.CurrentRecipe.Product == 2) assignment.HuamangaProduced += quantity_needed;
             if (current_product.CurrentRecipe.Product == 3) assignment.AltarpieceProduced += quantity_needed;
 
             //Actualizar las líneas de orden
-            LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
+            //LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
             orders[0][order_line_index].Produced += quantity_needed;
-            LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
+            //LogHandler.WriteLine("orders[0][{0}] = {1}", order_line_index, orders[0][order_line_index].Produced);
 
             if (orders[0][order_line_index].Produced >= orders[0][order_line_index].Quantity) orders[0].RemoveLineItem(order_line_index);
             if (orders[0].NumberOfLineItems <= 0) orders.RemoveAt(0);
@@ -396,7 +404,7 @@ namespace InkaArt.Business.Algorithm
 
         /*************************************** FUNCIONES DE IMPRESIÓN *******************************************/
 
-        private void PrintIndexes(List<Index> indexes, string title)
+        /*private void PrintIndexes(List<Index> indexes, string title)
         {
             LogHandler.WriteLine(title);
             LogHandler.WriteLine("ID;Trabajador;Receta;Puesto de trabajo;Rotura promedio;Tiempo promedio;Indice de rotura;Función de costo");
@@ -438,7 +446,7 @@ namespace InkaArt.Business.Algorithm
                     LogHandler.WriteLine("{0}", (current_product[i] == null) ? "Nada" : current_product[i].ToString());
             }
             LogHandler.WriteLine();
-        }
+        } */
 
     }
 }

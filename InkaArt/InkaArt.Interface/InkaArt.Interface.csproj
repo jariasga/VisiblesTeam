@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InkaArt.Interface</RootNamespace>
-    <AssemblyName>InkaArt.Interface</AssemblyName>
+    <AssemblyName>InkaArt</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,6 +49,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>InkaArt.Interface.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GMap.NET.Core">
@@ -110,11 +113,11 @@
     <Compile Include="Production\FinalProducts.designer.cs">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\GeneratePerformanceReport.cs">
+    <Compile Include="Production\PerformanceReportConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\GeneratePerformanceReport.designer.cs">
-      <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
+    <Compile Include="Production\PerformanceReportConfig.designer.cs">
+      <DependentUpon>PerformanceReportConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Production\JobDetails.cs">
       <SubType>Form</SubType>
@@ -176,11 +179,11 @@
     <Compile Include="Production\TurnManagement.designer.cs">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Production\WorkersAssignment.cs">
+    <Compile Include="Production\SimulationAssignment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Production\WorkersAssignment.designer.cs">
-      <DependentUpon>WorkersAssignment.cs</DependentUpon>
+    <Compile Include="Production\SimulationAssignment.designer.cs">
+      <DependentUpon>SimulationAssignment.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -496,11 +499,11 @@
     <Compile Include="Warehouse\ReturnMovement.Designer.cs">
       <DependentUpon>ReturnMovement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Warehouse\SaleMovementcs.cs">
+    <Compile Include="Warehouse\SaleMovement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Warehouse\SaleMovementcs.Designer.cs">
-      <DependentUpon>SaleMovementcs.cs</DependentUpon>
+    <Compile Include="Warehouse\SaleMovement.Designer.cs">
+      <DependentUpon>SaleMovement.cs</DependentUpon>
     </Compile>
     <Compile Include="Warehouse\SalesOut.cs">
       <SubType>Form</SubType>
@@ -550,8 +553,8 @@
     <EmbeddedResource Include="Production\FinalProducts.resx">
       <DependentUpon>FinalProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\GeneratePerformanceReport.resx">
-      <DependentUpon>GeneratePerformanceReport.cs</DependentUpon>
+    <EmbeddedResource Include="Production\PerformanceReportConfig.resx">
+      <DependentUpon>PerformanceReportConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Production\JobDetails.resx">
       <DependentUpon>JobDetails.cs</DependentUpon>
@@ -583,8 +586,8 @@
     <EmbeddedResource Include="Production\TurnManagement.resx">
       <DependentUpon>TurnManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production\WorkersAssignment.resx">
-      <DependentUpon>WorkersAssignment.cs</DependentUpon>
+    <EmbeddedResource Include="Production\SimulationAssignment.resx">
+      <DependentUpon>SimulationAssignment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -752,8 +755,8 @@
     <EmbeddedResource Include="Warehouse\ReturnMovement.resx">
       <DependentUpon>ReturnMovement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Warehouse\SaleMovementcs.resx">
-      <DependentUpon>SaleMovementcs.cs</DependentUpon>
+    <EmbeddedResource Include="Warehouse\SaleMovement.resx">
+      <DependentUpon>SaleMovement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warehouse\SalesOut.resx">
       <DependentUpon>SalesOut.cs</DependentUpon>
@@ -810,6 +813,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logo2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

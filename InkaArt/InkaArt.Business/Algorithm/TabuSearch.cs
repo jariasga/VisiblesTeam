@@ -15,11 +15,12 @@ namespace InkaArt.Business.Algorithm
     {
         private Simulation simulation;
         private IndexController indexes;
-        private int limitDayTime;
+        private int limit_day_time;
+        private int start_time;
 
         // reactive tabu list
-        private int tabu_list_length;
-        private double tabu_list_growth;
+        private int list_length;
+        private double list_growth;
         private int max_no_growth;
 
         // neighbor
@@ -42,7 +43,8 @@ namespace InkaArt.Business.Algorithm
             loadParameters();            
             this.simulation = simulation;
             this.indexes = indexes;
-            this.limitDayTime = (Simulation.LimitTime - elapsed_time) / simulation.Days;
+            this.start_time = elapsed_time;
+            this.limit_day_time = (Simulation.LimitTime - elapsed_time) / simulation.Days;
             this.initial_solution = solution;
             this.best_solution = new List<Assignment>();
         }
@@ -65,48 +67,52 @@ namespace InkaArt.Business.Algorithm
             NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"TabuParameters\"", connection);
             NpgsqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (reader.Read() && !read)
             {
                 // reactive tabu list
-                this.tabu_list_length = reader.GetInt32(0);    // largo inicial
-                this.tabu_list_growth = reader.GetDouble(1);   // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
-                this.max_no_growth = reader.GetInt32(2);       // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
+                this.list_length = Convert.ToInt16(reader["list_length"]);    // largo inicial
+                this.list_growth = Convert.ToDouble(reader["list_growth"]);   // porcentaje de crecimiento, alfa ( cuando crece: tama;o * (1 + tabu_list_growth) )
+                this.max_no_growth = Convert.ToInt16(reader["max_no_growth"]);       // numero de iteraciones maximas sin alargar la lista, superado esto se reduce el largo
 
                 // solutions
-                this.max_iterations = reader.GetInt32(3);      // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
+                this.max_iterations = Convert.ToInt16(reader["max_iterations"]);      // condicion de meseta: cantidad maxima de iteraciones sin una mejora en la mejor solucion
 
                 // neighbor
-                this.neighbor_checks = reader.GetInt32(4);     // cantidad maxima de vecinos a evaluar                
+                this.neighbor_checks = Convert.ToInt16(reader["neighbor_checks"]);     // cantidad maxima de vecinos a evaluar                
                 read = true; 
             }
             connection.Close();
 
             return read;
         }
-                
-        public double getFitness(Assignment solution)
+
+        /// <summary>
+        /// Calcula la función objetivo de la asignación promediando los índices de pérdida de cada línea de asignación.
+        /// </summary>
+        public double GetFitness(Assignment assignment)
         {
-            /* Busca el indice de cada trabajadorxprocesoxproducto, calcula el indice de perdida y lo suma 
+            /* 
              * Indice de perdida: (peso_rotura*rotura + peso_tiempo*tiempo)/peso_producto para cada trabajadorxprocesoxproducto
              */
 
             double fitness = 0;
             int assigned_workers = 0;
-            AssignmentLine current_assignment = null;
 
             for (int worker_index = 0; worker_index < simulation.SelectedWorkers.NumberOfWorkers; worker_index++)
             {
+                AssignmentLine current_assignment_line = null;
                 for (int miniturn_index = 0; miniturn_index < simulation.TotalMiniturns; miniturn_index++)
                 {
-                    AssignmentLine assignment = solution[worker_index, miniturn_index];
-                    if (assignment == null || assignment.Equals(current_assignment)) continue;
-                    Index index = indexes.FindByWorkerJobAndRecipe(assignment.Worker, assignment.Job, assignment.Recipe);
-                    if (index == null) continue;
+                    //Leer cada línea de asignación de la matriz y ver que no esté repetida
+                    AssignmentLine assignment_line = assignment[worker_index, miniturn_index];
+                    if (assignment_line == null) continue;
+                    if (current_assignment_line == null || !current_assignment_line.Equals(assignment_line)) current_assignment_line = assignment_line;
+                    //Aumentar el fitness total y la cantidad de trabajadores asignados
                     assigned_workers++;
-                    fitness += index.LossIndex;
+                    fitness += assignment_line.LossIndex;
                 }
             }
-            if (assigned_workers == 0) assigned_workers++;
+            if (assigned_workers <= 0) assigned_workers = 1;
 
             //Dividimos lo acumulado solo entre los trabajadores asignados
             return fitness / assigned_workers;
@@ -256,14 +262,13 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        public void bestSolutionToList()
+        public List<Assignment> BestSolutionToList()
         {
-            if (BestSolution.Count == 0)
-                BestSolution = initial_solution;
-            foreach(Assignment day in BestSolution)
-            {
-                day.AssignmentLinesList = day.toList(simulation);
-            }
+            if (best_solution == null || best_solution.Count <= 0) best_solution = initial_solution;
+            for (int i = 0; i < best_solution.Count; i++)
+                if (best_solution[i] != null) best_solution[i].AssignmentLinesList = best_solution[i].MatrixToList(simulation);
+
+            return best_solution;
         }
 
         /* Flujo del algoritmo */
@@ -278,18 +283,18 @@ namespace InkaArt.Business.Algorithm
             int iter_count = 0;
 
             // lista tabu
-            TabuQueue tabu_list = new TabuQueue(tabu_list_length, tabu_list_growth);
+            TabuQueue tabu_list = new TabuQueue(list_length, list_growth);
             int no_growth_count = 0;
 
             // fitness
-            double initial_fitness = getFitness(current_solution);
+            double initial_fitness = GetFitness(current_solution);
             double current_fitness = initial_fitness;
             double neighbor_fitness = 0;
             best_fitness = current_fitness;
 
             // inicio
             // condiciones de salida: tiempo && meseta (que no se supere max_iterations sin actualizar la mejor solucion)
-            while (elapsed_time < limitDayTime && iter_count < max_iterations)
+            while (elapsed_time < start_time + (day + 1) * limit_day_time && iter_count < max_iterations)
             {
                 int neighbor_count = 0;         // cuenta de vecinos evaluados
                 iter_count++;                   // condicion de meseta: contara iteraciones 
@@ -309,7 +314,7 @@ namespace InkaArt.Business.Algorithm
                     {
                         success = true;
                         // evalua el vecindario con la funcion objetivo
-                        neighbor_fitness = getFitness(neighbor);
+                        neighbor_fitness = GetFitness(neighbor);
                         // best improved: a penas encuentre un vecino que supere a la solucion actual, salimos
                         if (current_fitness > neighbor_fitness)
                             break;

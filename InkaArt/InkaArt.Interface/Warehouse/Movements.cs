@@ -44,7 +44,7 @@ namespace InkaArt.Interface.Warehouse
             nameWarehouseOrigin = text_warehouse.Text;
             idWarehouesOrigin = text_warehouse_id.Text;
 
-            if (reason == "Produccion")
+            if (reason == "Producción")
             {
                 if(idWarehouesOrigin == "")
                 {
@@ -53,7 +53,7 @@ namespace InkaArt.Interface.Warehouse
                 }
                 if(combobox_type.Text == "")
                 {
-                    MessageBox.Show("Por favor ingrese un tpo de movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Por favor ingrese un tipo de movimiento.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 if (combobox_type.Text == "Entrada")
@@ -85,7 +85,7 @@ namespace InkaArt.Interface.Warehouse
                 {
                     if (reason == "Venta")
                     {
-                        Form formView = new InkaArt.Interface.Warehouse.SaleMovementcs(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
+                        Form formView = new InkaArt.Interface.Warehouse.SaleMovement(idWarehouesOrigin, nameWarehouseOrigin, combobox_type.Text);
                         formView.Show();
                     }
                     else
@@ -177,7 +177,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 combobox_reason.Items.Clear();
                 combobox_reason.Items.Add("Compra");
-                combobox_reason.Items.Add("Produccion");
+                combobox_reason.Items.Add("Producción");
                 combobox_reason.Items.Add("Hallazgo");
                 combobox_reason.Items.Add("Devolución");
                 combobox_reason.Items.Add("Diferencia de stock");
@@ -186,7 +186,7 @@ namespace InkaArt.Interface.Warehouse
             {
                 combobox_reason.Items.Clear();
                 combobox_reason.Items.Add("Venta");
-                combobox_reason.Items.Add("Produccion");
+                combobox_reason.Items.Add("Producción");
                 combobox_reason.Items.Add("Rotura");
                 combobox_reason.Items.Add("Diferencia de stock");
             }

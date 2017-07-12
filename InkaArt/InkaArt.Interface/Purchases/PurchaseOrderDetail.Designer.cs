@@ -273,6 +273,7 @@
             // 
             // textBox_igv
             // 
+            this.textBox_igv.BackColor = System.Drawing.Color.White;
             this.textBox_igv.Enabled = false;
             this.textBox_igv.Font = new System.Drawing.Font("Arial", 11F);
             this.textBox_igv.Location = new System.Drawing.Point(295, 111);
@@ -284,6 +285,7 @@
             // 
             // textBox_idrm
             // 
+            this.textBox_idrm.BackColor = System.Drawing.Color.White;
             this.textBox_idrm.Enabled = false;
             this.textBox_idrm.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_idrm.Location = new System.Drawing.Point(16, 54);
@@ -314,6 +316,7 @@
             // 
             // idUnit
             // 
+            this.idUnit.BackColor = System.Drawing.Color.White;
             this.idUnit.Enabled = false;
             this.idUnit.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.idUnit.Location = new System.Drawing.Point(427, 54);
@@ -323,6 +326,7 @@
             // 
             // unitAbrev
             // 
+            this.unitAbrev.BackColor = System.Drawing.Color.White;
             this.unitAbrev.Enabled = false;
             this.unitAbrev.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitAbrev.Location = new System.Drawing.Point(505, 54);
@@ -362,6 +366,7 @@
             // 
             // textBox_cantidad
             // 
+            this.textBox_cantidad.BackColor = System.Drawing.Color.White;
             this.textBox_cantidad.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_cantidad.Location = new System.Drawing.Point(16, 111);
             this.textBox_cantidad.Name = "textBox_cantidad";
@@ -405,8 +410,8 @@
             this.dataGridView_pedidos.AllowUserToAddRows = false;
             this.dataGridView_pedidos.AllowUserToDeleteRows = false;
             this.dataGridView_pedidos.AllowUserToResizeRows = false;
-            this.dataGridView_pedidos.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.dataGridView_pedidos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dataGridView_pedidos.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView_pedidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView_pedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_pedidos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_detail,
@@ -427,6 +432,7 @@
             // 
             // id_detail
             // 
+            this.id_detail.FillWeight = 70F;
             this.id_detail.HeaderText = "ID Detail";
             this.id_detail.Name = "id_detail";
             this.id_detail.ReadOnly = true;
@@ -435,50 +441,59 @@
             // 
             // idRawMat
             // 
+            this.idRawMat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.idRawMat.FillWeight = 65F;
             this.idRawMat.HeaderText = "ID Mat.";
             this.idRawMat.Name = "idRawMat";
             this.idRawMat.ReadOnly = true;
-            this.idRawMat.Width = 65;
             // 
             // Nombre
             // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
             // Cantidad
             // 
+            this.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Cantidad.FillWeight = 80F;
             this.Cantidad.HeaderText = "Cantidad";
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.ReadOnly = true;
-            this.Cantidad.Width = 80;
             // 
             // Subtotal
             // 
+            this.Subtotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Subtotal.FillWeight = 75F;
             this.Subtotal.HeaderText = "Subtotal";
             this.Subtotal.Name = "Subtotal";
             this.Subtotal.ReadOnly = true;
-            this.Subtotal.Width = 75;
             // 
             // Igv
             // 
+            this.Igv.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Igv.FillWeight = 75F;
             this.Igv.HeaderText = "Igv";
             this.Igv.Name = "Igv";
             this.Igv.ReadOnly = true;
-            this.Igv.Width = 75;
             // 
             // Factura
             // 
+            this.Factura.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Factura.FillWeight = 75F;
             this.Factura.HeaderText = "Factura";
             this.Factura.MaxInputLength = 9;
             this.Factura.Name = "Factura";
-            this.Factura.Width = 75;
+            this.Factura.ReadOnly = true;
             // 
             // Estado
             // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Estado.FillWeight = 80F;
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
-            this.Estado.Width = 80;
+            this.Estado.ReadOnly = true;
             // 
             // Eliminar
             // 
@@ -550,7 +565,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(104, 42);
             this.buttonSave.TabIndex = 23;
-            this.buttonSave.Text = "Editar";
+            this.buttonSave.Text = "🖉 Editar";
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.button_save);
             // 

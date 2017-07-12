@@ -1,14 +1,14 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
+using InkaArt.Classes;
+using InkaArt.Data.Algorithm;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using InkaArt.Classes;
-using InkaArt.Data.Algorithm;
-using System.IO;
 
 namespace InkaArt.Business.Algorithm
 {
@@ -29,25 +29,12 @@ namespace InkaArt.Business.Algorithm
             this.recipes = recipes;
         }
 
-        public IndexController()
-        {
-            this.indexes = new List<Index>();
-
-            this.workers = new WorkerController();
-            this.workers.Load();
-            this.jobs = new JobController();
-            this.jobs.Load();
-            this.recipes = new RecipeController();
-            this.recipes.Load();
-        }
-
         public void Load()
         {
             NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
             connection.Open();
             
-            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = :status ORDER BY id_index ASC", connection);
-            command.Parameters.AddWithValue("status", NpgsqlDbType.Boolean, true);
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = TRUE ORDER BY id_index ASC", connection);
             
             NpgsqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
@@ -66,6 +53,24 @@ namespace InkaArt.Business.Algorithm
             connection.Close();
         }
 
+        /// <summary>
+        /// Obtiene un <see cref="DataTable"/> con los índices de la base de datos.
+        /// </summary>
+        public DataTable GetDataTable()
+        {
+            NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
+            connection.Open();
+
+            NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM inkaart.\"Index\" WHERE status = TRUE ORDER BY id_index ASC", connection);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+            DataSet data_set = new DataSet();
+            adapter.Fill(data_set);
+
+            connection.Close();
+
+            return data_set.Tables[0];
+        }
+
         /************************ INSERTAR O ACTUALIZAR EN LAS TABLAS INDEX Y RATIOPERDAY ************************/
 
         public string InsertOrUpdate(Ratio ratio, int initial_count_ratios)
@@ -78,7 +83,7 @@ namespace InkaArt.Business.Algorithm
             ratio.AverageValues(out average_breakage, out average_time);
 
             return Index.Update(ratio, average_breakage, average_time);
-        }
+        } 
 
         public string UpdateOrDelete(Ratio ratio)
         {
@@ -123,15 +128,15 @@ namespace InkaArt.Business.Algorithm
             //Calcular los promedios de AverageBreakage y AverageTime
             for (int r = 0; r < recipes.NumberOfRecipes; r++)
             {
-                LogHandler.Write("{0}", recipes[r].Version);
+                //LogHandler.Write("{0}", recipes[r].Version);
                 for (int j = 0; j < jobs.NumberOfJobs; j++)
                 {
-                    LogHandler.Write(";{0},{1:0.0000},{2:0.0000}", average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
+                    //LogHandler.Write(";{0},{1:0.0000},{2:0.0000}", average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
                     average_breakage_mean[r, j] = average_breakage_mean[r, j] / average_mean_count[r, j];
                     average_time_mean[r, j] = average_time_mean[r, j] / average_mean_count[r, j];
-                    LogHandler.Write(",{0:0.0000},{1:0.0000}", average_breakage_mean[r, j], average_time_mean[r, j]);
+                    //LogHandler.Write(",{0:0.0000},{1:0.0000}", average_breakage_mean[r, j], average_time_mean[r, j]);
                 }
-                LogHandler.WriteLine();
+                //LogHandler.WriteLine();
             }
 
             //Calcular el BreakageIndex, TimeIndex y LossIndex
@@ -161,13 +166,13 @@ namespace InkaArt.Business.Algorithm
                         {
                             index.BreakageIndex = index.AverageBreakage / average_breakage_mean[r, j];
                             index.TimeIndex = index.AverageTime / average_time_mean[r, j];
-                            LogHandler.Write("{0};{1};{2};{3:0.0000} / [{4},{5}]={6:0.0000} = {7:0.0000};{8:0.0000} / [{4},{5}]={9:0.0000} = {10:0.0000};",
-                                   index.Worker.FullName, index.Recipe.Version, index.Job.Name, index.AverageBreakage, r + 1, j + 1, average_breakage_mean[r, j],
-                                   index.BreakageIndex, index.AverageTime, average_time_mean[r, j], index.TimeIndex);
+                            //LogHandler.Write("{0};{1};{2};{3:0.0000} / [{4},{5}]={6:0.0000} = {7:0.0000};{8:0.0000} / [{4},{5}]={9:0.0000} = {10:0.0000};",
+                            //       index.Worker.FullName, index.Recipe.Version, index.Job.Name, index.AverageBreakage, r + 1, j + 1, average_breakage_mean[r, j],
+                            //       index.BreakageIndex, index.AverageTime, average_time_mean[r, j], index.TimeIndex);
                             index.LossIndex = (index.BreakageIndex * simulation.BreakageWeight + index.TimeIndex * simulation.TimeWeight) / product_weight;
                             index.CostValue = index.LossIndex;
-                            LogHandler.WriteLine("({0:0.0000}*{1:0.0000} + {2:0.0000}*{3:0.0000}) / {4:0.0000} = {5:0.0000};{6:0.0000}", index.BreakageIndex,
-                                simulation.BreakageWeight, index.TimeIndex, simulation.TimeWeight, product_weight, index.LossIndex, index.CostValue);
+                            //LogHandler.WriteLine("({0:0.0000}*{1:0.0000} + {2:0.0000}*{3:0.0000}) / {4:0.0000} = {5:0.0000};{6:0.0000}", index.BreakageIndex,
+                            //    simulation.BreakageWeight, index.TimeIndex, simulation.TimeWeight, product_weight, index.LossIndex, index.CostValue);
                             continue;
                         }
                         //Si el índice es nulo, crear un índice ficticio para el trabajador
@@ -175,10 +180,9 @@ namespace InkaArt.Business.Algorithm
                         indexes.Add(new Index(simulation.SelectedWorkers[w], jobs[j], recipes[r], average_breakage_mean[r, j],
                             average_time_mean[r, j], loss_index));
                     }
-                    LogHandler.WriteLine("Terminado el puesto de trabajo {0} para la receta {1} (count={2}, breakage={3}, mean={4})",
-                        jobs[j].Name, recipes[r].Version, average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
+                    //LogHandler.WriteLine("Terminado el puesto de trabajo {0} para la receta {1} (count={2}, breakage={3}, mean={4})", jobs[j].Name, recipes[r].Version, average_mean_count[r, j], average_breakage_mean[r, j], average_time_mean[r, j]);
                 }
-                LogHandler.WriteLine("Terminada la receta {0}", recipes[r].Version);
+                //LogHandler.WriteLine("Terminada la receta {0}", recipes[r].Version);
             }
         }
 

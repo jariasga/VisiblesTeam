@@ -103,15 +103,12 @@ CREATE TABLE "Assignment" (
 CREATE TABLE "AssignmentLine" (
     id_assignment_line integer NOT NULL,
     id_assignment integer NOT NULL,
-    date date NOT NULL,
     id_worker integer NOT NULL,
     id_job integer NOT NULL,
     id_recipe integer NOT NULL,
-    start_time time(0) without time zone,
-    end_time time(0) without time zone,
     produced integer NOT NULL,
-    total_miniturns integer NOT NULL,
-    miniturn_start integer NOT NULL
+    miniturn_start integer NOT NULL,
+    miniturns_used integer NOT NULL
 );
 
 CREATE SEQUENCE "Assignment_id_assignment_seq"
@@ -1079,12 +1076,7 @@ CREATE TABLE "Simulation" (
     huaco_weight real NOT NULL,
     huamanga_weight real NOT NULL,
     altarpiece_weight real NOT NULL,
-    limit_time integer NOT NULL,
-    miniturns integer,
-    huaco_produced integer DEFAULT 0 NOT NULL,
-    huamanga_produced integer DEFAULT 0 NOT NULL,
-    altarpiece_produced integer DEFAULT 0 NOT NULL,
-    created_at date DEFAULT ('now'::text)::date NOT NULL,
+    created_at date DEFAULT ('now'::text)::date,
     status boolean DEFAULT true NOT NULL
 );
 
@@ -1097,18 +1089,6 @@ COMMENT ON COLUMN "Simulation".name IS 'Nombre dado a la simulación';
 -- Dependencies: 282
 -- Name: COLUMN "Simulation".limit_time; Type: COMMENT; Schema: inkaart; Owner: admin
 --
-
-COMMENT ON COLUMN "Simulation".limit_time IS 'Tiempo maximo del algoritmo en milisegundos';
-
-
---
--- TOC entry 2697 (class 0 OID 0)
--- Dependencies: 282
--- Name: COLUMN "Simulation".miniturns; Type: COMMENT; Schema: inkaart; Owner: admin
---
-
-COMMENT ON COLUMN "Simulation".miniturns IS 'Numero de miniturnos en un turno para la ejecucion de los algoritmos';
-
 
 --
 -- TOC entry 2698 (class 0 OID 0)
@@ -1198,6 +1178,8 @@ CREATE TABLE "StockDocument" (
     product_stock integer,
     fecha date,
     product_type text,
+    cantmoved INTEGER,
+    cantmov INTEGER,
     vez integer DEFAULT 0
 );
 
@@ -2759,7 +2741,7 @@ INSERT INTO "Turn" ("idTurn", start, "end", description) VALUES (1, '08:00:00', 
 
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (1, 'Compra');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (2, 'Venta');
-INSERT INTO inkaart."MovementName" ("idMovName", description)VALUES (3, 'Produccion');
+INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (3, 'Produccion');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (4, 'Rotura');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (5, 'Traslado');
 INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (7, 'Hallazgo');
@@ -2770,3 +2752,29 @@ INSERT INTO inkaart."MovementName" ("idMovName", description) VALUES (10, 'Factu
 INSERT INTO inkaart."MovementType" ("idMovementType", description) VALUES (1, 'Entrada/Salida');
 INSERT INTO inkaart."MovementType" ("idMovementType", description) VALUES (2, 'Entrada');
 INSERT INTO inkaart."MovementType" ("idMovementType", description) VALUES (13, 'Salida');
+
+CREATE OR REPLACE FUNCTION inkaart.GetIDLote() RETURNS TRIGGER AS $get_id_lote$
+DECLARE
+  max_id_lote integer;
+BEGIN
+  -- Buscar si ya existe el valor de id_lote
+  SELECT MAX(id_lote) INTO max_id_lote FROM inkaart."RatioPerDay" WHERE date = NEW.date;
+  -- Si es nulo, se generará uno nuevo
+  IF (max_id_lote IS NULL) THEN
+    SELECT MAX(id_lote) INTO max_id_lote FROM inkaart."RatioPerDay";
+    IF (max_id_lote IS NULL) THEN
+      max_id_lote = 1;
+    ELSE
+      max_id_lote = max_id_lote + 1;
+    END IF;
+  END IF;
+  -- Actualizar la fila para colocar el id_lote
+  UPDATE inkaart."RatioPerDay" SET id_lote = max_id_lote WHERE id_ratioperday = NEW.id_ratioperday;
+  -- Devolver el trigger
+  RETURN NEW;
+END;    
+$get_id_lote$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS ratio_per_day_tr ON inkaart."RatioPerDay";
+CREATE TRIGGER ratio_per_day_tr AFTER INSERT ON inkaart."RatioPerDay"
+FOR EACH ROW EXECUTE PROCEDURE inkaart.GetIDLote();

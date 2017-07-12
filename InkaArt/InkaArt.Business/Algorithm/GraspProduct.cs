@@ -108,8 +108,8 @@ namespace InkaArt.Business.Algorithm
                 if (current_line.Produced < quantity_needed) quantity_needed = current_line.Produced;
             }
 
-            Grasp.PrintCurrentProduct(this, "Estado intermedio de las asignaciones temporales: se determinó el inicio ordenado de cada línea");
-            LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
+            //Grasp.PrintCurrentProduct(this, "Estado intermedio de las asignaciones temporales: se determinó el inicio ordenado de cada línea");
+            //LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
 
             //Actualizar la cantidad de miniturnos y la cantidad producida
             for (int i = 0; i < temporal_assignments.Count; i++)
@@ -122,8 +122,8 @@ namespace InkaArt.Business.Algorithm
                     MessageBox.Show("GRASP: Nos pasamos de la cantidad de miniturnos :(");
             }
 
-            Grasp.PrintCurrentProduct(this, "Estado final de las asignaciones temporales del producto escogido");
-            LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
+            //Grasp.PrintCurrentProduct(this, "Estado final de las asignaciones temporales del producto escogido");
+            //LogHandler.WriteLine("Cantidad requerida = {0}", quantity_needed);
 
             return quantity_needed;
         }

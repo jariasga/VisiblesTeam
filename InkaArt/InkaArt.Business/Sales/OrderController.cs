@@ -17,7 +17,7 @@ namespace InkaArt.Business.Sales
             orderData = new OrderData();
         }
 
-        public int AddSaleDocumentW(int orderId, int[] idProd, int[] quantity, int orderType = 0)
+        public int AddSaleDocumentW(int orderId, int[] idProd, int[] quantity, int[] idVer, int orderType = 0)
         {
             int clientId = getClientID(orderId);
             string clientDoc = getClientDoc(clientId.ToString());
@@ -44,11 +44,17 @@ namespace InkaArt.Business.Sales
                     if (idProd[i] == 0 && quantity[i] == 0) break;
                     foreach (DataRow row in orderLines.Rows)
                     {
-                        if (row["idProduct"].ToString().Equals(idProd[i].ToString()))
+                        if (row["idProduct"].ToString().Equals(idProd[i].ToString()) && row["idRecipe"].ToString().Equals(idVer[i].ToString()))
                         {
                             row["quantityProduced"] = quantity[i];
                         }
                     }
+                }
+                int updated = 0;
+                for (int i = 0; i < idProd.Length && i < quantity.Length; i++)
+                {
+                    int cantMoved = int.Parse(getStockDocumentParam(orderId, idProd[i].ToString(), "cantmoved"));
+                    updated += orderData.updateStockDocumentLine(orderId,idProd[i],quantity[i], cantMoved);
                 }
                 string pamount = getPolishedAmount(amount);
                 string igv = getPolishedIGV(amount);
@@ -80,7 +86,7 @@ namespace InkaArt.Business.Sales
                 int quantity = int.Parse(orderline["quantity"].ToString());
                 int finished = int.Parse(orderline["quantityProduced"].ToString());
                 int invoiced = int.Parse(orderline["quantityInvoiced"].ToString());
-                bool lineComplete = quantity == invoiced;
+                bool lineComplete = quantity == finished + invoiced;
                 if (lineComplete) invoicedNumber++;
                 int toAdd;
                 if (orderType == 1) toAdd = quantity;
@@ -95,6 +101,11 @@ namespace InkaArt.Business.Sales
         public string getCurrentStock(string productId)
         {
             return orderData.getProductLogicalStock(int.Parse(productId));
+        }
+
+        public string getStockDocumentParam(int orderId, string productId, string paramName)
+        {
+            return orderData.getStockDocumentParam(orderId, int.Parse(productId), paramName);
         }
 
         public bool verifyStock(int natType, string strStock, string strQuantity)
@@ -132,30 +143,36 @@ namespace InkaArt.Business.Sales
 
         public DataTable GetDevolutions()
         {
-            // activas y sin completar
+            // devoluciones activas y sin completar
             return orderData.GetDevolutions();
         }
 
-        public DataTable GetDevolutionLines(int id_devolution)
+        public DataTable GetDevolutionLines(int id_devolution, int id_warehouse)
         {
             // activas y sin completar
-            return orderData.GetDevolutionLines(id_devolution);
+            return orderData.GetDevolutionLines(id_devolution, id_warehouse);
         }
 
-        public void updateDevolution(int id_order)
+        public DataTable GetDevolutionDetail(int id_devolution)
+        {
+            // activas y sin completar
+            return orderData.GetDevolutionDetail(id_devolution);
+        }
+
+        public void updateDevolution(int id_order, int pending)
         {
             DataTable table = GetOrders();
+            string status = pending > 0 ? "parcial" : "devuelto";
             string updateQuery = "UPDATE inkaart.\"Order\" SET \"orderStatus\" = 'devuelto' " + 
                 "WHERE \"idOrder\" = " + id_order + ";";
             orderData.execute(updateQuery);
         }
 
-
-
-        public void updateDevolutionLine(int id_line)
+        public void updateDevolutionLine(int id_line, int pending, int quantity)
         {
             DataTable table = GetOrders();
-            string updateQuery = "UPDATE inkaart.\"LineItem\" SET \"lineStatus\" = 'devuelto' " +
+            string status = pending - quantity > 0 ? "parcial" : "devuelto";            
+            string updateQuery = "UPDATE inkaart.\"LineItem\" SET \"lineStatus\" = '" + status + "' " +
                 "WHERE \"idLineItem\" = " + id_line + ";";
             orderData.execute(updateQuery);
         }
@@ -209,6 +226,11 @@ namespace InkaArt.Business.Sales
         {
             if (row["type"].ToString().Equals("pedido")) return float.Parse(row["totalAmount"].ToString());
             else return float.Parse(row["totalDev"].ToString());
+        }
+
+        public int getVersionId(string name)
+        {
+            return orderData.getVersionId(name);
         }
 
         public DataTable GetDocumentTypes()

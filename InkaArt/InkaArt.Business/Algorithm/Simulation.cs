@@ -119,8 +119,10 @@ namespace InkaArt.Business.Algorithm
             get { return total_miniturns; }
             set { total_miniturns = value; }
         }
-
-        /********** Constructor para nueva simulación de asignación de trabajadores **********/
+        
+        /// <summary>
+        /// Constructor para una nueva simulación de asignación de trabajadores.
+        /// </summary>
         public Simulation(string name, DateTime date_start, DateTime date_end, int days, double breakage_weight,
             double time_weight, double huaco_weight, double huamanga_weight, double retable_weight, WorkerController selected_workers,
             OrderController selected_orders)
@@ -140,8 +142,10 @@ namespace InkaArt.Business.Algorithm
             this.assignments = new List<Assignment>();
         }
 
-        /********** Constructor para lectura de base de datos **********/
-        public Simulation(int id_simulation, string name, DateTime date_start, DateTime date_end, int number_of_days, int limit_time,
+        /// <summary>
+        /// Constructor para lectura de base de datos.
+        /// </summary>
+        public Simulation(int id_simulation, string name, DateTime date_start, DateTime date_end, int number_of_days,
             double breakage_weight, double time_weight, double huaco_weight, double huamanga_weight, double retable_weight)
         {
             this.id_simulation = id_simulation;
@@ -149,7 +153,6 @@ namespace InkaArt.Business.Algorithm
             this.date_start = date_start;
             this.date_end = date_end;
             this.days = number_of_days;
-            this.Time = limit_time;
 
             this.breakage_weight = breakage_weight;
             this.time_weight = time_weight;
@@ -172,36 +175,39 @@ namespace InkaArt.Business.Algorithm
 
         /******************* GUARDADO EN BASE DE DATOS *******************/
 
-        public bool save()
+        public bool Insert()
         {
             try
             {
                 NpgsqlConnection connection = new NpgsqlConnection(BD_Connector.ConnectionString.ConnectionString);
                 connection.Open();
 
-                NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation\" " +
-                    "(name, start_date, end_date, number_of_days, breakage_weight, time_weight, huaco_weight, huamanga_weight, altarpiece_weight, limit_time) " +
-                    "values (:name, :start_date, :end_date, :days, :breakage_weight, :time_weight, :huaco_weight, :huamanga_stone_weight, :altarpiece_weight, :time) " +
-                    "returning inkaart.\"Simulation\".id_simulation", connection);
-
-                command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
+                string command_line = "INSERT INTO inkaart.\"Simulation\"(name, start_date, end_date, number_of_days, breakage_weight, " +
+                                      "time_weight, huaco_weight, huamanga_weight, altarpiece_weight) ";
+                command_line += "VALUES (:name, :start_date, :end_date, :number_of_days, :breakage_weight, :time_weight, " +
+                                ":huaco_weight, :huamanga_weight, :altarpiece_weight)";
+                command_line += "RETURNING inkaart.\"Simulation\".id_simulation";
+                NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
+                
                 command.Parameters.Add(new NpgsqlParameter("name", name));
                 command.Parameters.Add(new NpgsqlParameter("start_date", date_start));
                 command.Parameters.Add(new NpgsqlParameter("end_date", date_end));
-                command.Parameters.Add(new NpgsqlParameter("days", days));
+                command.Parameters.Add(new NpgsqlParameter("number_of_days", days));
                 command.Parameters.Add(new NpgsqlParameter("breakage_weight", breakage_weight));
                 command.Parameters.Add(new NpgsqlParameter("time_weight", time_weight));
                 command.Parameters.Add(new NpgsqlParameter("huaco_weight", huaco_weight));
-                command.Parameters.Add(new NpgsqlParameter("huamanga_stone_weight", huamanga_stone_weight));
+                command.Parameters.Add(new NpgsqlParameter("huamanga_weight", huamanga_stone_weight));
                 command.Parameters.Add(new NpgsqlParameter("altarpiece_weight", retable_weight));
-                command.Parameters.Add(new NpgsqlParameter("time", LimitTime));
-                this.id_simulation = int.Parse(command.ExecuteScalar().ToString());
 
-                bool save_workers = saveSelectedWorkers(connection);
-                bool save_orders = saveSelectedOrders(connection);
+                object result = command.ExecuteScalar();
+                this.id_simulation = Convert.ToInt32(result);
+
+                bool save_workers = this.SaveSelectedWorkers(connection);
+                bool save_orders = this.SaveSelectedOrders(connection);
+
                 bool save_assignments = true;
-                foreach (Assignment day in assignments)
-                    save_assignments &= day.save(this, connection);
+                for (int i = 0; i < assignments.Count; i++)
+                    save_assignments &= assignments[i].Insert(this, connection);
 
                 connection.Close();
                 return save_workers && save_orders && save_assignments;
@@ -213,51 +219,50 @@ namespace InkaArt.Business.Algorithm
             }
         }
 
-        private bool saveSelectedOrders(NpgsqlConnection connection)
+        private bool SaveSelectedOrders(NpgsqlConnection connection)
         {
-            foreach (Order order in selected_orders.Orders)
+            try
             {
-                try
-                {                
-                    NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation-Order\" " +
-                    "(id_simulation, id_order) values (:id_simulation, :id_order) ", connection);
+                for (int i = 0; i < selected_orders.NumberOfOrders; i++)
+                {
+                    string command_line = "INSERT INTO inkaart.\"Simulation-Order\" (id_simulation, id_order) VALUES (:id_simulation, :id_order)";
+                    NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
 
                     command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
-                    command.Parameters.Add(new NpgsqlParameter("id_order", order.ID));
+                    command.Parameters.Add(new NpgsqlParameter("id_order", selected_orders[i].ID));
+
                     command.ExecuteNonQuery();
                 }
-                catch (Exception e)
-                {
-                    LogHandler.WriteLine("Excepción al intentar guardar órdenes de simulación: " + e.ToString());
-                    return false;
-                }
-
+                return true;
             }
-
-            return true;                        
+            catch (Exception e)
+            {
+                LogHandler.WriteLine("Excepción al intentar guardar las órdenes seleccionadas para la simulación: " + e.ToString());
+                return false;
+            }
         }
 
-        private bool saveSelectedWorkers(NpgsqlConnection connection)
+        private bool SaveSelectedWorkers(NpgsqlConnection connection)
         {
-            foreach (Worker worker in selected_workers.Workers)
+            try
             {
-                try
+                for (int i = 0; i < selected_workers.NumberOfWorkers; i++)
                 {
-                    NpgsqlCommand command = new NpgsqlCommand("insert into inkaart.\"Simulation-Worker\" " +
-                    "(id_simulation, id_worker) values (:id_simulation, :id_worker) ", connection);
+                    string command_line = "INSERT INTO inkaart.\"Simulation-Worker\" (id_simulation, id_worker) VALUES (:id_simulation, :id_worker)";
+                    NpgsqlCommand command = new NpgsqlCommand(command_line, connection);
 
                     command.Parameters.Add(new NpgsqlParameter("id_simulation", id_simulation));
-                    command.Parameters.Add(new NpgsqlParameter("id_worker", worker.ID));
+                    command.Parameters.Add(new NpgsqlParameter("id_worker", selected_workers[i].ID));
+
                     command.ExecuteNonQuery();
                 }
-                catch (Exception e)
-                {
-                    LogHandler.WriteLine("Excepción al intentar guardar trabajadores de simulación: " + e.ToString());
-                    return false;
-                }
+                return true;
             }
-
-            return true;
+            catch (Exception e)
+            {
+                LogHandler.WriteLine("Excepción al intentar guardar los trabajadores seleccionados para la simulación: " + e.ToString());
+                return false;
+            }
         }
 
         public string updateName()

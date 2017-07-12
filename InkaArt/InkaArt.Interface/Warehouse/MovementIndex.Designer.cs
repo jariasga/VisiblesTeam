@@ -28,15 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.data_grid_movements = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.datetime_movement = new System.Windows.Forms.DateTimePicker();
             this.combobox_reason = new System.Windows.Forms.ComboBox();
@@ -51,6 +47,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.data_grid_movements)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -86,8 +88,16 @@
             // 
             this.data_grid_movements.AllowUserToAddRows = false;
             this.data_grid_movements.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.data_grid_movements.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.data_grid_movements.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.data_grid_movements.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.data_grid_movements.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.data_grid_movements.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.data_grid_movements.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.data_grid_movements.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -96,49 +106,19 @@
             this.Almacen,
             this.Fecha,
             this.Eliminar});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.data_grid_movements.DefaultCellStyle = dataGridViewCellStyle2;
             this.data_grid_movements.Location = new System.Drawing.Point(24, 254);
             this.data_grid_movements.Name = "data_grid_movements";
             this.data_grid_movements.Size = new System.Drawing.Size(680, 199);
             this.data_grid_movements.TabIndex = 49;
             this.data_grid_movements.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridMovementsCellContentDoubleClick);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // type
-            // 
-            this.type.HeaderText = "Tipo";
-            this.type.Name = "type";
-            this.type.ReadOnly = true;
-            // 
-            // reason
-            // 
-            this.reason.HeaderText = "Razón";
-            this.reason.Name = "reason";
-            this.reason.ReadOnly = true;
-            // 
-            // Almacen
-            // 
-            this.Almacen.HeaderText = "Almacén";
-            this.Almacen.Name = "Almacen";
-            this.Almacen.ReadOnly = true;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.ReadOnly = true;
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // groupBox1
             // 
@@ -165,11 +145,12 @@
             // 
             // datetime_movement
             // 
+            this.datetime_movement.Font = new System.Drawing.Font("Arial", 11F);
             this.datetime_movement.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.datetime_movement.Location = new System.Drawing.Point(240, 109);
             this.datetime_movement.Name = "datetime_movement";
             this.datetime_movement.ShowCheckBox = true;
-            this.datetime_movement.Size = new System.Drawing.Size(193, 26);
+            this.datetime_movement.Size = new System.Drawing.Size(193, 24);
             this.datetime_movement.TabIndex = 37;
             this.datetime_movement.ValueChanged += new System.EventHandler(this.datetimeMovementValueChanged);
             // 
@@ -300,6 +281,50 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.ButtonSearchClick);
             // 
+            // Id
+            // 
+            this.Id.FillWeight = 75.43789F;
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // type
+            // 
+            this.type.FillWeight = 90.35075F;
+            this.type.HeaderText = "Tipo";
+            this.type.Name = "type";
+            this.type.ReadOnly = true;
+            // 
+            // reason
+            // 
+            this.reason.FillWeight = 137.0678F;
+            this.reason.HeaderText = "Razón";
+            this.reason.Name = "reason";
+            this.reason.ReadOnly = true;
+            // 
+            // Almacen
+            // 
+            this.Almacen.FillWeight = 112.4357F;
+            this.Almacen.HeaderText = "Almacén";
+            this.Almacen.Name = "Almacen";
+            this.Almacen.ReadOnly = true;
+            // 
+            // Fecha
+            // 
+            this.Fecha.FillWeight = 85.65482F;
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.FillWeight = 80.05309F;
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.ReadOnly = true;
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // MovementIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,12 +364,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox combobox_reason;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker datetime_movement;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn reason;
         private System.Windows.Forms.DataGridViewTextBoxColumn Almacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Eliminar;
-        private System.Windows.Forms.DateTimePicker datetime_movement;
     }
 }

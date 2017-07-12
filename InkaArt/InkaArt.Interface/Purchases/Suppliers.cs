@@ -211,25 +211,37 @@ namespace InkaArt.Interface.Purchases
         private void cargaMasiva(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Open Suppliers File";
+            dialog.Title = "Seleccione el archivo de proveedores";
             dialog.Filter = "CSV files|*.csv";
             if (dialog.ShowDialog() == DialogResult.OK) {
-                if (control.massiveUpload(dialog.FileName) == 1)
+                int resultado1 = control.massiveUpload(dialog.FileName);
+                if (resultado1 == 1)
                 {
                     MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                else if (resultado1 == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque estos proveedores ya existen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //return;
+                }
                 else MessageBox.Show("Se realizó la carga masiva de proveedores de manera exitosa", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             OpenFileDialog dialog2 = new OpenFileDialog();
-            dialog2.Title = "Open Raw materials offered by suppliers File";
+            dialog2.Title = "Seleccione el archivo con las materias primas ofrecidas";
             dialog2.Filter = "CSV files|*.csv";
             if (dialog2.ShowDialog() == DialogResult.OK)
             {
                 RawMaterial_SupplierController control_rm=new RawMaterial_SupplierController();
-                if (control_rm.massiveUpload(dialog2.FileName) == 1)
+                int resultado2 = control_rm.massiveUpload(dialog2.FileName);
+                if (resultado2 == 1)
                 {
                     MessageBox.Show("No se pudo cargar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (resultado2 == 2)
+                {
+                    MessageBox.Show("No se realizó la carga porque los registros ya existen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else MessageBox.Show("Se realizó la carga masiva de manera exitosa", "Carga exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);

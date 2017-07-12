@@ -81,6 +81,7 @@
             // combobox_priority
             // 
             this.combobox_priority.BackColor = System.Drawing.Color.White;
+            this.combobox_priority.Font = new System.Drawing.Font("Arial", 11F);
             this.combobox_priority.FormattingEnabled = true;
             this.combobox_priority.Items.AddRange(new object[] {
             "Nivel 1",
@@ -95,15 +96,16 @@
             "Nivel 10"});
             this.combobox_priority.Location = new System.Drawing.Point(232, 110);
             this.combobox_priority.Name = "combobox_priority";
-            this.combobox_priority.Size = new System.Drawing.Size(177, 26);
+            this.combobox_priority.Size = new System.Drawing.Size(177, 25);
             this.combobox_priority.TabIndex = 27;
             // 
             // textbox_id
             // 
             this.textbox_id.BackColor = System.Drawing.Color.White;
+            this.textbox_id.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_id.Location = new System.Drawing.Point(35, 50);
             this.textbox_id.Name = "textbox_id";
-            this.textbox_id.Size = new System.Drawing.Size(177, 26);
+            this.textbox_id.Size = new System.Drawing.Size(177, 24);
             this.textbox_id.TabIndex = 26;
             // 
             // label5
@@ -127,13 +129,14 @@
             // combobox_state
             // 
             this.combobox_state.BackColor = System.Drawing.Color.White;
+            this.combobox_state.Font = new System.Drawing.Font("Arial", 11F);
             this.combobox_state.FormattingEnabled = true;
             this.combobox_state.Items.AddRange(new object[] {
             "Inactivo",
             "Activo"});
             this.combobox_state.Location = new System.Drawing.Point(34, 110);
             this.combobox_state.Name = "combobox_state";
-            this.combobox_state.Size = new System.Drawing.Size(177, 26);
+            this.combobox_state.Size = new System.Drawing.Size(177, 25);
             this.combobox_state.TabIndex = 22;
             // 
             // label3
@@ -148,9 +151,10 @@
             // textbox_name
             // 
             this.textbox_name.BackColor = System.Drawing.Color.White;
+            this.textbox_name.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_name.Location = new System.Drawing.Point(429, 50);
             this.textbox_name.Name = "textbox_name";
-            this.textbox_name.Size = new System.Drawing.Size(177, 26);
+            this.textbox_name.Size = new System.Drawing.Size(177, 24);
             this.textbox_name.TabIndex = 19;
             // 
             // label2
@@ -165,9 +169,10 @@
             // textbox_doc
             // 
             this.textbox_doc.BackColor = System.Drawing.Color.White;
+            this.textbox_doc.Font = new System.Drawing.Font("Arial", 11F);
             this.textbox_doc.Location = new System.Drawing.Point(233, 50);
             this.textbox_doc.Name = "textbox_doc";
-            this.textbox_doc.Size = new System.Drawing.Size(177, 26);
+            this.textbox_doc.Size = new System.Drawing.Size(177, 24);
             this.textbox_doc.TabIndex = 17;
             // 
             // label1
@@ -185,7 +190,7 @@
             this.button_search.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_search.ForeColor = System.Drawing.Color.White;
             this.button_search.Location = new System.Drawing.Point(476, 97);
-            this.button_search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_search.Margin = new System.Windows.Forms.Padding(2);
             this.button_search.Name = "button_search";
             this.button_search.Size = new System.Drawing.Size(88, 39);
             this.button_search.TabIndex = 15;
@@ -196,14 +201,14 @@
             // grid_clients
             // 
             this.grid_clients.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 11F);
             this.grid_clients.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grid_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_clients.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.grid_clients.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.grid_clients.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -219,7 +224,7 @@
             this.deleteColumn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 11F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -275,7 +280,7 @@
             this.button_create.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_create.ForeColor = System.Drawing.Color.White;
             this.button_create.Location = new System.Drawing.Point(120, 428);
-            this.button_create.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_create.Margin = new System.Windows.Forms.Padding(2);
             this.button_create.Name = "button_create";
             this.button_create.Size = new System.Drawing.Size(150, 39);
             this.button_create.TabIndex = 26;
@@ -306,7 +311,7 @@
             this.button_cargamasiva.Name = "button_cargamasiva";
             this.button_cargamasiva.Size = new System.Drawing.Size(135, 39);
             this.button_cargamasiva.TabIndex = 51;
-            this.button_cargamasiva.Text = "Carga masiva";
+            this.button_cargamasiva.Text = "⬆ Carga masiva";
             this.button_cargamasiva.UseVisualStyleBackColor = false;
             this.button_cargamasiva.Click += new System.EventHandler(this.button_cargamasiva_Click);
             // 
