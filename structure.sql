@@ -1178,6 +1178,8 @@ CREATE TABLE "StockDocument" (
     product_stock integer,
     fecha date,
     product_type text,
+    cantmoved INTEGER,
+    cantmov INTEGER,
     vez integer DEFAULT 0
 );
 
